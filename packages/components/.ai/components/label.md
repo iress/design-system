@@ -13,6 +13,23 @@ import { IressLabel } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=label&title=[Label]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=label,enhancement&title=[Label]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| readOnly | `locked`, boolean  | — | Renders the label in a read-only state. Use `'locked'` to show a lock indicator when the related field is permission-locked. |
+| required | `boolean` | — | When set to true, the 'required asterisk (*)' is displayed next to the label text. |
+| append | `ReactNode` | — | Content to be appended to the label. This is not affected by the `hiddenLabel` prop. |
+| hiddenLabel | `boolean` | — | Visually hides the label text, but still available to screen readers. |
+| htmlFor | `string` | — | Used to connect it to the input element, it should be the input's id. If provided, the label will be rendered as a `<label>` element, otherwise it will be rendered as a `<strong>` element.  [Learn more](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/for) |
+
+📄 [Full type definition](../../dist/components/Label/Label.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 Use the IressLabel component when building bespoke form inputs and IressField is too restrictive.
 
 ```tsx

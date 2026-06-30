@@ -13,6 +13,20 @@ import { IressBreadcrumbs } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=breadcrumbs&title=[Breadcrumbs]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=breadcrumbs,enhancement&title=[Breadcrumbs]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| **items** | `BreadcrumbItem<C, THref>[]` | — | Array of breadcrumb items defining the navigation path, in hierarchical order. The last item is automatically treated as the current page. |
+| limit | `number` | `5` | Maximum number of items to show before collapsing with overflow. Set to 0 to show all items without overflow. |
+| overflowProps | `Omit<[IressPopoverProps](../../dist/components/Popover/Popover.d.ts), 'activator'>` | — | Additional props to pass to the overflow popover, such as `aria-label` for accessibility. This is only applicable when `limit` is set to a value less than the number of items. |
+
+📄 [Full type definition](../../dist/patterns/Breadcrumbs/Breadcrumbs.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 Breadcrumbs are a secondary navigation aid that helps users understand their current location within the site hierarchy and provides a simple way to navigate back to higher-level pages.
 
 ```tsx

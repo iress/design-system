@@ -8,7 +8,7 @@ import { type ReactNode, useRef, useState, useCallback, useMemo } from 'react';
 import { table } from './Table.styles';
 import { cx } from '@/styled-system/css';
 import { styled } from '@/styled-system/jsx';
-import { type TableColumn } from './helpers/composeTableColumnDefs';
+import { type IressTableColumn } from './helpers/composeTableColumnDefs';
 import { type IressStyledProps } from '@/types';
 import { GlobalCSSClass } from '@/enums';
 import type { UIEvent } from 'react';
@@ -67,7 +67,7 @@ export type IressTableProps<
    * A mapping of columns to be displayed in the table.
    * If not provided, it will be automatically regenerated from the row data.
    */
-  columns?: TableColumn<TRow, TVal>[];
+  columns?: IressTableColumn<TRow, TVal>[];
 
   /**
    * Compact view of the table, used for tables with a lot of data.

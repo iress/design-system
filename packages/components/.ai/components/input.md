@@ -13,6 +13,35 @@ import { IressInput } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=input&title=[Input]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=input,enhancement&title=[Input]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| rows | `number` | — | Number of rows in the `textarea` (when set the component renders a textarea element) |
+| actions | `Omit<[IressButtonProps](../../dist/components/Button/Button.d.ts), "status" | "mode">[]` | — | Actions to display in the input field, rendered inside the input on the right. These will be rendered with opinionated styling. If you want to use custom buttons or controls, use the `append` prop instead. |
+| alignRight | `boolean` | `false` | Set input content align to right, useful for numeric inputs. |
+| append | `ReactNode` | — | Content to append to the input field, usually a button or icon. |
+| defaultValue | `[FormControlValue](../../dist/types.d.ts)` | — | The value of the input. Can be a string or a number. Use for uncontrolled inputs. |
+| formatter | `((value?: T) => string | number)` | — | Bring your own formatter that will be used to format the value when the input is not focused, allowing you to display the value in a different format. e.g. User type in value="dsf 987kkk123" => result after formatter: $987,123 (string) |
+| inline | `boolean` | — | Make prepend/append element closer to the input content. |
+| loading | `boolean, string ` | — | The loading states of the input field. If provided a string, will use that text as the loading message. |
+| onChange | `((e: ChangeEvent<InputBaseElement<TRows>, Element>, value?: T) => void)` | — | Emitted when the input value changes with the new changed value. |
+| onClear | `((e: ChangeEvent<InputBaseElement<TRows>, Element>) => void)` | — | Emitted when the input is manually cleared. |
+| prepend | `ReactNode` | — | Content to prepended to the input field, usually an icon. |
+| readOnly | `[FormControlReadOnly](../../dist/types.d.ts)` | — | Renders the input as read-only. Use `'locked'` when the value is read-only because of permissions. |
+| value | `[FormControlValue](../../dist/types.d.ts)` | — | The value of the input. Can be a string or a number. Use for controlled inputs. |
+| width | `any` | — | The width of the input. |
+| clearable | boolean _(Only when rows is not set)_ | — | If true, the user can clear the value of the input. |
+| variant | 'search' _(Only when rows is not set)_ | — | The variant of the input. The search variant applies different styles for the clear button and loading spinner. |
+| autoGrow | boolean | number _(Only when rows is set)_ | `false` | Enables auto-grow for textarea. Set to true for default max 5 rows, or a number for custom max rows. |
+
+📄 [Full type definition](../../dist/components/Input/Input.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 Inputs allow a user to input and interact with data. This component should be used as a child of the IressField component to ensure the correct placement of elements like label, error & hint text.
 
 ```tsx
@@ -190,7 +219,7 @@ Set the `rows` prop to render a `textarea` instead of an `input`.
 
 Content (typically icons) can be added via the `prepend` and `append` props on `IressInput`.
 
-> **⚠️ Do not use `slot` attributes on children** (e.g. `<IressIcon slot="start" />`). The `slot` attribute is a legacy v4 pattern that is no longer supported. Always use the `prepend` and `append` props.
+> ⚠️ **Do not use `slot` attributes on children** (e.g. `<IressIcon slot="start" />`). The `slot` attribute is a legacy v4 pattern that is no longer supported. Always use the `prepend` and `append` props.
 
 ```tsx
 import { IressIcon, IressInput, IressStack } from '@iress-oss/ids-components';

@@ -13,6 +13,28 @@ import { IressShadow } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=shadow&title=[Shadow]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=shadow,enhancement&title=[Shadow]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| children | `ReactNode` | — | Children to be rendered inside the shadow DOM |
+| fontFaceUrls | `string[]` | `[...defaultFonts]` | Optional array of font URLs to be included in the parent document head. By default it will include the default fonts from `@iress-oss/ids-tokens` (e.g., ['https://fonts.googleapis.com/css?family=Roboto'] |
+| stylesheetContents | `Record<string, string>` | `{}` | Optional array of stylesheet contents to be included in the shadow DOM (e.g. { styleId: '.my-class { color: red; }' }) |
+| stylesheetUrls | `string[]` | `[]` | Optional array of stylesheet URLs to be included in the shadow DOM (e.g., ['https://example.com/style.css']) |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| position | `bottom-center` , `bottom-end` , `bottom-start` , `top-center`, `top-end` , `top-start`  | `top-end` | The position on the screen where the toast will appear. |
+| noIconProvider | `boolean` | `false` | Disable the built-in IconProvider. When true, no IconProvider is rendered, allowing you to provide your own icon loading mechanism (e.g. hiding the app until the Material Symbols font is fully loaded). |
+| noSubsetting | `boolean` | `false` | Disable automatic font subsetting via Google Fonts CDN When false, only icons actually used in the component tree are loaded When true, the full Material Symbols font is loaded Ignored when `noIconProvider` is true. |
+| popoverContainer | `container` , [FloatingUIContainer](../../dist/types.d.ts) | — | Container to render popovers into. By default, popovers render where their parent is rendered (no portal).  Set to `"container"` to reuse the same container as the `container` prop (useful when you want modals, slideouts, toasts **and** popovers in the same DOM node).  Individual popovers can still override this by setting their own `container` prop. |
+| zIndexOffset | `number` | — | A value added to every IDS z-index layer via `calc()`. Use this when your application has a navigation element with a high z-index and IDS overlays (modal, slideout, toast) appear behind it. @example // Navbar sits at z-index 995 — shift IDS layers above it: <IressProvider zIndexOffset={1000}>...</IressProvider> // Modal → 1400, Toast → 1500, Tooltip → 1600 |
+| toasterOffset | `string` | — | Offsets the toaster from the viewport edge (block axis). Useful when a fixed navbar would overlap the toaster. Accepts any valid CSS length value (e.g. `'60px'`, `'4rem'`). @example <IressProvider toasterOffset="60px">...</IressProvider> |
+
+📄 [Full type definition](../../dist/patterns/Shadow/Shadow.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 The shadow pattern allows you to wrap your content in the shadow DOM, allowing you to isolate your styles from the rest of the application. This is useful when you want to create a component that has its own styles, without affecting the rest of the application (such as microfrontends).
 
 ```tsx

@@ -13,6 +13,41 @@ import { IressSelect } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=select&title=[Select]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=select,enhancement&title=[Select]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| align | `[FloatingUIAligns](../../dist/types.d.ts)` | `bottom-start` | Sets the alignment of the dropdown relative to the activator element. |
+| autoHighlight | `boolean` | `true` | By default, the Select will automatically highlight the first option in the list when it is opened. Set this to false to disable that behaviour. |
+| disabled | `boolean` | — |  |
+| defaultValue | `any` | — | Value of selected option for uncontrolled select. |
+| multiSelect | `boolean` | — | Set to true if the user can select multiple options. |
+| multiSelectLimit | `number` | `5` | Limits the number of selected value tags shown before the rest are collapsed into a summary tag (e.g. "+3 more"). Only applies when `multiSelect` is `true`. This is not for validation — it only controls how many tags are visibly rendered. |
+| name | `string` | — | Name of the select. Used to pass data when submitted within a form. |
+| native | `any` | — | If `true`, the select will render a native select element instead of the custom select. This is for use in contexts where the select's popover may not work, such as within modals or tables, or when you want to use the native select's features such as optgroups. |
+| onBlur | `((event: Event , FocusEvent<HTMLElement, Element>) => void)` | — | Callback fired when the user has completely blurred away from the Select. This is to kill the blur event bubbling. (component is no longer in focus and popover is closed). |
+| onChange | `any` | — | Emitted when the value changes. Required for integration with `IressForm`. When using custom `renderOptions`, pass `handleMenuChange` to your menu's `onChange` to ensure this callback fires. |
+| **options** | `FormattedLabelValueMeta<[FormControlValue](../../dist/types.d.ts)>[] , ((query: string) => Promise<[LabelValueMeta](../../dist/interfaces.d.ts)<[FormControlValue](../../dist/types.d.ts)>[]>)` | — | The available options that the user can select from. |
+| placeholder | `any` | — | Placeholder, shown when there is nothing selected. |
+| readOnly | `[FormControlReadOnly](../../dist/types.d.ts)` | — | Renders the select as read-only. |
+| renderHiddenInput | `((props: SelectHiddenInputRenderProps<TMultiple>) => ReactNode)` | — | Completely customise the rendering of the hidden input. |
+| renderLabel | `((props: SelectLabelRenderProps<TMultiple>) => ReactElement>)` | — | Completely customise the rendering of the select label. |
+| renderOptions | `((props: SelectOptionsRenderProps<TMultiple>) => ReactNode)` | — | Completely customise the rendering of the select options. |
+| required | `boolean` | — | Whether its required. Will be passed to the hidden input. |
+| type | `dialog` , `grid` , `listbox`, `menu` , `tree`  | — |  |
+| value | `any` | — | Value of selected option for controlled select. |
+| virtualFocus | `boolean` | — |  |
+| header | `ReactNode` | — | Header showed in option panel when expanded. |
+| footer | `ReactNode` | — | Footer showed in option panel when expanded. |
+| width | `any` | — | The width of the select. |
+| matchActivatorWidth | `boolean` | `true` | Whether the popover should match the width of the activator element. When true, the dropdown will have the same width as the select input. When false, the dropdown will size based on its content. |
+
+📄 [Full type definition](../../dist/components/Select/Select.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 Renders a dropdown select input for choosing one option from a list.
 
 ```tsx

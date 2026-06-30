@@ -23,7 +23,7 @@ describe('composeTableColumnDefs', () => {
     ]);
   });
 
-  it('generates the columns from TableColumn[]', () => {
+  it('generates the columns from IressTableColumn[]', () => {
     const columnDefs = composeTableColumnDefs(
       [{ test: 'test' }],
       [

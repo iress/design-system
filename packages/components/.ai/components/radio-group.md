@@ -13,6 +13,26 @@ import { IressRadioGroup } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=radio-group&title=[RadioGroup]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=radio-group,enhancement&title=[RadioGroup]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| children | `ReactNode` | — | Content of the radio group, usually multiple `IressRadio` components. |
+| layout | `'block' , 'inline' , 'inlineEqualWidth', 'inlineFlex' , 'stack' ` | `'stack'` | Sets which of the block / inline layout options apply. |
+| name | `string` | — | Name to be applied to all radios in the group. |
+| onChange | `(e: ChangeEvent<HTMLInputElement>, value?: T) => void` | — | Called when a user selects one of its children radio buttons. If you pass in a non-string value, you can access it using the second parameter of the function. |
+| required | `boolean` | — | When true, marks the field as required |
+| defaultValue | `T` | — | Initial value of radio group when in uncontrolled mode. |
+| readOnly | `[FormControlReadOnly](../../dist/types.d.ts)` | — | Renders a readOnly radio group. |
+| value | `T` | — | Value of radio group when in controlled mode. |
+| variant | `CheckboxVariants` | — | The visual variant of the radios in the group. This is passed down to child radios, but can be overridden at the individual radio level. - `card`: Provides a larger, card-like style with a heading slot. - `touch`: Provides a larger, button-like style, great for mobile devices. - `undefined`: The default radio style. |
+
+📄 [Full type definition](../../dist/components/RadioGroup/RadioGroup.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 A radio group is a group of radio buttons that allows the user to select one option from multiple options, where all options are visible.
 
 ```tsx

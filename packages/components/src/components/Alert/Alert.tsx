@@ -72,9 +72,7 @@ export interface IressAlertProps extends Omit<IressTextProps, 'element'> {
   multiLine?: boolean;
 
   /**
-   * Icon to display in the alert.
-   * If set to `false`, no icon will be displayed.
-   * If not provided, the icon will be determined by the `status` prop.
+   * Emitted when the alert is dismissed by the user via the close button.
    **/
   onClose?: (e?: MouseEvent<HTMLButtonElement>) => void;
 

@@ -13,6 +13,23 @@ import { IressProgress } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=progress&title=[Progress]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=progress,enhancement&title=[Progress]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| backgroundImage | `string` | — | A background image URL to be used as the background of the progress bar. |
+| borderRadius | `RadiusToken` | — | The **`border-radius`** CSS property rounds the corners of an element's outer border edge using the radius tokens in the design system. @see https://developer.mozilla.org/docs/Web/CSS/border-radius |
+| min | `number` | `0` | The minimum value of the progress indicator. If `min` is set, the progress indicator will render as a `<meter />` element instead of a `<progress />` element, thereby changing its role to `meter` instead of `progressbar`. |
+| sectionTitle | `string` | `Progress is {{current}} of {{max}}` | The text that is announced by the screen reader. Should contain a description of the section the progress is being measured for. You can use {{current}} and {{max}} as string replacers for the current value and maximum value respectively. |
+| value | `number` | `0` | The current value of the progress indicator. |
+
+📄 [Full type definition](../../dist/components/Progress/Progress.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 A progress component is used to indicate to a user the completion of a set of tasks or a process.
 
 ```tsx

@@ -13,6 +13,25 @@ import { IressToggle } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=toggle&title=[Toggle]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=toggle,enhancement&title=[Toggle]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| checked | `boolean` | — | If true, the toggle on. Please use this when are rendering the toggle in controlled mode, meaning it will not change unless you explicitly set the value using `onChange` and `checked`. |
+| **children** | `ReactNode` | — | Provides the label for the Toggle. |
+| defaultChecked | `boolean` | — | If true, the toggle will be initially rendered as off. Please use this when are rendering the toggle in uncontrolled mode, meaning the value will change automatically when the user interacts with the toggle. |
+| disabled | `boolean` | — | If true, the toggle is disabled and cannot be interacted with. |
+| hiddenLabel | `boolean` | — | Hides the label if true (label will still be read out by screen readers). |
+| layout | `inline-between` , `inline-reverse`, `inline` , `stack`  | `inline` | Determines the layout of the label with respect to the control. |
+| onChange | `((checked: boolean, event: MouseEvent<HTMLButtonElement, MouseEvent>) => void)` | — | Emitted when the checked state changes. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Toggle/Toggle.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 Toggles allow users to turn things on or off. When toggled, the associated change happens straight away.
 
 ```tsx

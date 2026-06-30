@@ -13,6 +13,33 @@ import { IressSideNav } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=side-nav&title=[Side Nav]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=side-nav,enhancement&title=[Side Nav]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| activeItemKey | `string` | — | Key of the active rail item. Sets the initial selection and can be updated externally. Rail clicks update the internal active item automatically. Key of the active rail item. Optional when sideMenuItems is provided — used only for rail highlighting. |
+| sideMenuItems | `[IressSideNavPanelItem](../../dist/patterns/SideNav/SideNav.d.ts)[]` | — | Override: content to display in the side panel instead of `items[activeItemKey].children`. Can be flat items, groups, or a mix. |
+| **items** | `[IressSideNavItem](../../dist/patterns/SideNav/SideNav.d.ts)[]` | — | Array of navigation items defining the rail icons. |
+| onActiveItemKeyChange | `((key: string) => void)` | — | Callback fired when the active item changes via a rail click. |
+| sideMenuLabel | `ReactNode` | — | Override: label displayed at the top of the side panel. When provided alongside sideMenuItems, this replaces the active item's label. |
+| expanded | `boolean` | — | Whether the side panel is expanded (controlled). |
+| defaultExpanded | `boolean` | `false` | Default expanded state (uncontrolled). |
+| onExpandedChange | `((expanded: boolean) => void)` | — | Callback when the expanded state changes. |
+| numbered | `boolean` | `false` | Whether to show numbered headers in the expanded side menu. |
+| header | `ReactNode` | — | Content rendered at the top of the expanded side panel. |
+| footer | `ReactNode` | — | Content rendered at the bottom of the expanded side panel. |
+| aria-label | `string` | `Side navigation` | Accessible label for the navigation landmark. |
+| expandLabel | `string` | `Expand navigation` | Label text for the expand button (accessibility). |
+| collapseLabel | `string` | `Collapse navigation` | Label text for the collapse button (accessibility). |
+| width | `number, string ` | `'250px'` | Width of the side panel when expanded. Can be a CSS length value or number (pixels). |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/patterns/SideNav/SideNav.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 A side navigation pattern that combines a rail (icon-only bar) with an expandable side menu panel. Provides a data-driven API where items are passed as an array, with the rail acting as the main navigation and the side menu showcasing children under each navigation group.
 
 ```tsx

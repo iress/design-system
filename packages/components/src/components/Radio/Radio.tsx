@@ -24,11 +24,11 @@ import { IressRadioMark } from '@/components/RadioMark';
 import { getRadioGroupContext } from '../RadioGroup';
 import { splitCssProps, styled } from '@/styled-system/jsx';
 import { IressText } from '../Text';
-import type { CheckboxVariants } from '../Checkbox';
+import type { IressCheckboxVariants } from '../Checkbox';
 
 export interface IressRadioProps<
   T = FormControlValue,
-  TVariant extends CheckboxVariants = undefined,
+  TVariant extends IressCheckboxVariants = undefined,
 > extends Omit<
   IressStyledProps<'input'>,
   'defaultValue' | 'readOnly' | 'value'
@@ -92,7 +92,7 @@ export interface IressRadioProps<
 
 const Radio = <
   T = FormControlValue,
-  TVariant extends CheckboxVariants = undefined,
+  TVariant extends IressCheckboxVariants = undefined,
 >(
   {
     checked: controlledChecked,
@@ -221,7 +221,7 @@ const Radio = <
  */
 export const IressRadio = forwardRef(Radio) as (<
   T = FormControlValue,
-  TVariant extends CheckboxVariants = undefined,
+  TVariant extends IressCheckboxVariants = undefined,
 >(
   props: IressRadioProps<T, TVariant> & { ref?: Ref<HTMLInputElement> },
 ) => ReactElement) & {

@@ -13,6 +13,25 @@ import { IressCheckboxGroup } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=checkbox-group&title=[CheckboxGroup]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=checkbox-group,enhancement&title=[CheckboxGroup]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| children | `ReactNode` | — | Content to be displayed inside the group, usually multiple `IressCheckbox`. |
+| defaultValue | `T , T[]` | — | Value of checkbox group when in uncontrolled mode. |
+| layout | `'block' , 'inline', 'stack' ` | `'stack'` | Sets which of the block / inline layout options apply. |
+| name | `string` | — | Name to be applied to all checkboxes in the group. |
+| onChange | `(value?: T[]) => void` | — | Called with collated new value when a user toggles one of its children checkboxes. |
+| readOnly | `[FormControlReadOnly](../../dist/types.d.ts)` | — | Renders the group in a read-only state. |
+| value | `T , T[]` | — | Value of checkbox group when in controlled mode. |
+| variant | `CheckboxVariants` | — | The visual variant of the checkboxes in the group. This is passed down to child checkboxes, but can be overridden at the individual checkbox level. - `card`: Provides a larger, card-like style with a heading slot. - `touch`: Provides a larger, button-like style, great for mobile devices. - `undefined`: The default checkbox style. |
+
+📄 [Full type definition](../../dist/components/CheckboxGroup/CheckboxGroup.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 Checkbox groups allow users to make more than one choice in a set of related options.
 
 ```tsx

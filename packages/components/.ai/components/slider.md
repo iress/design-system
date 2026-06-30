@@ -13,6 +13,29 @@ import { IressSlider } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=slider&title=[Slider]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=slider,enhancement&title=[Slider]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| defaultValue | `number` | — | Initial value of the slider. Used for uncontrolled sliders. |
+| formatValue | `((value: number, tick?: SliderTickLabelValue, readOnly?: [FormControlReadOnly](../../dist/types.d.ts)) => ReactNode) | undefined` | — | Format the changed value. |
+| hiddenValueTooltip | `boolean` | — | If `true`, the value tooltip will be hidden. |
+| max | `number` | `10` | Set the maximum value for the slider. |
+| min | `number` | `0` | Sets minimum value for the slider. |
+| name | `string` | — | The name of the control, which is submitted with the form data. |
+| onChange | `((e: ChangeEvent<HTMLInputElement, Element>, value?: number) => void)` | — | Emitted when the slider value changes. |
+| readOnly | `[FormControlReadOnly](../../dist/types.d.ts)` | — | If `true`, the user cannot modify the value. |
+| step | `number` | `1` | Sets the step value of the slider. |
+| tickLabels | `boolean , SliderTickLabel[]` | — | List of labels to be displayed. |
+| value | `number` | — | Value of the slider. Used for controlled sliders. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Slider/Slider.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 Sliders provide a visual indication of adjustable content, where the user can select a value from a range usually represented on a horizontal track.
 
 ```tsx

@@ -13,6 +13,26 @@ import { IressLink } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=link&title=[Link]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=link,enhancement&title=[Link]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| active | `boolean` | — | Sets the active state of the link, usually used to indicate the link has activated a modal, popover or slideout. |
+| append | `ReactNode` | — | Content for the append slot. |
+| children | `ReactNode` | — | Content is placed between prepend and append if provided. Used to describe the expected intention of this link. |
+| element | `ElementType` | — | Change the component that will be rendered as the link, used for third-party libraries that require a specific element type. By default, it will render a button or an anchor tag based on the `href` prop. |
+| href | `string` | — | Contains a URL or a URL fragment that the hyperlink points to. If this property is set, an anchor tag will be rendered. |
+| loading | `boolean, string ` | `false` | When true, button is in loading state. If provided a string, will be used as the loading text for screen readers. |
+| onClick | `MouseEventHandler<Exclude<Parameters<Exclude<ButtonRef<C, THref>, undefined>>[0], null>>` | — | Emitted when the menu item is clicked. |
+| prepend | `ReactNode` | — | Content for the prepend slot. |
+
+📄 [Full type definition](../../dist/components/Link/Link.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 A link is used to navigate to another page or location.
 
 ```tsx
@@ -95,7 +115,7 @@ Use the `prepend` and `append` props to correctly position icons or badges insid
 - **`prepend`** — Places the element before the link text
 - **`append`** — Places the element after the link text
 
-> **⚠️ Do not use `slot` attributes on children** (e.g. `<IressIcon slot="start" />`). The `slot` attribute is a legacy v4 pattern that is no longer supported. Always use the `prepend` and `append` props.
+> ⚠️ **Do not use `slot` attributes on children** (e.g. `<IressIcon slot="start" />`). The `slot` attribute is a legacy v4 pattern that is no longer supported. Always use the `prepend` and `append` props.
 
 ```tsx
 <IressInline gap="md">

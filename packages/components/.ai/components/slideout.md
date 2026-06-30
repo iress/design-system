@@ -13,6 +13,34 @@ import { IressSlideout } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=slideout&title=[Slideout]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=slideout,enhancement&title=[Slideout]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| children | `ReactNode` | — | Content to be displayed within the slideout. |
+| closeText | `string` | `Close` | Screenreader text for close button. |
+| container | `[FloatingUIContainer](../../dist/types.d.ts)` | — | The container element to render the slideout into. By default, the slideout will render at the end of the document body. |
+| defaultShow | `boolean` | `false` | When set to `true` the slideout will be visible. Use for uncontrolled slideouts. |
+| eleToPush | `string , HTMLElement , MutableRefObject<HTMLElement | null>` | — | The element that needs to be pushed relative to the slideout. This can be a string selector to match an existing element in the DOM, a html element, or a React reference. Will be ignored if `mode` is not set to `push` or if element does not exist. |
+| footer | `ReactNode` | — | Panel to place slideout controls. |
+| heading | `ReactElement>, string ` | — | Sets the heading for the slideout. If passed an element, it will render the element with an id, to ensure its connection to the slideout. |
+| id | `string` | — | Unique ID for the slideout. Use if you would like to open this slideout from anywhere in your app using the `useSlideout` hook. |
+| mode | `overlay`, `push`  | `overlay` | Sets how the Slideout interacts with the content of the page. `overlay` overlays the page content, obscuring the content below. `push` will push the element (specified by `eleToPush`) across the page. `push` will revert back to `overlay` if `eleToPush` is not specified or if the screen size < 1200px. |
+| onShowChange | `((show: boolean, reason?: OpenChangeReason) => void)` | — | Emitted when the slideout has opened or closed internally. Use for controlled slideouts. |
+| onStatus | ((status: `close` , `initial` , `open` , `unmounted`) => void) | — | Emitted when the slideout has mounted, unmounted, opened or closed. Open and close occur before animation begins. |
+| onEntered | `(() => void)` | — | Emitted when the slideout has opened. |
+| onExited | `(() => void)` | — | Emitted when the slideout has closed. |
+| position | `left` , `right` | `right` | Position of the slideout relative to the page. `left` or `right`. |
+| show | `boolean` | — | When set to `true` the slideout will be visible. Use for controlled slideouts. |
+| size | `md`, `sm`  | `sm` | Accepts a single `SlideoutSize`. Slideouts will display at 100% for mobile screens (<576px). |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Slideout/Slideout.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 Slideouts are used to show additional information or to allow users to perform secondary tasks without leaving their normal workflow.
 
 ```tsx
@@ -326,8 +354,8 @@ import {
   IressButton,
   IressInline,
   IressSlideout,
+  useSlideout,
 } from '@iress-oss/ids-components';
-import { useSlideout } from '../hooks/useSlideout';
 
 const SLIDEOUT_ID = 'slideout-footer';
 

@@ -1,7 +1,7 @@
 import {
   IressTable,
   IressTableFormattedValue,
-  type TableColumn,
+  type IressTableColumn,
 } from '@/main';
 
 interface Row {
@@ -12,7 +12,7 @@ interface Row {
   totalPercentage: number;
 }
 
-const columns: TableColumn<Row>[] = [
+const columns: IressTableColumn<Row>[] = [
   {
     key: 'investment_name',
     label: 'Investment',

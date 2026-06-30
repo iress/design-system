@@ -13,6 +13,27 @@ import { IressTag } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=tag&title=[Tag]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=tag,enhancement&title=[Tag]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| children | `ReactNode` | — | Contents of the tag. |
+| compact | `boolean` | — | If true, reduces the padding and height of the tag. Useful when used inside an input component. |
+| deleteButton | `ReactNode` | — | You can completely replace the delete button to provide your own functionality. When this is provided, `deleteButtonText` will not be used and `onDelete` and `onDeleteButtonBlur` will not be called. |
+| deleteButtonText | `string` | `Delete` | Screen reader text for delete button |
+| element | `ElementType` | `'span'` | Element type to render the Tag as. |
+| mode | `10` , `20` , `30` , `40` , `50` , `60` , `70` , `80` , `90`, `danger` , `info` , `success` , `warning` , 10 , 20 , 30 , 40 , 50 , 60 , 70 , 80 , 90  | — | Style of the tag, based on the data colour palette (10-90) or system status colours (danger, info, success, warning). Can be a number (10-90), a string ('10'-'90'), or a system status ('danger', 'info', 'success', 'warning'). |
+| bordered | `boolean` | `false` | When true, renders the tag with a visible border instead of a filled background. |
+| onDelete | `((children: string, e: SyntheticEvent<HTMLButtonElement, Event>) => void)` | — | Callback triggered when the tag is deleted |
+| onDeleteButtonBlur | `((e: FocusEvent<HTMLButtonElement, Element>) => void)` | — | Callback triggered when the close button is blurred |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Tag/Tag.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 Tags represent individual units in a group of selected items.
 
 ```tsx

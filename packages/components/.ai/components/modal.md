@@ -13,6 +13,37 @@ import { IressModal } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=modal&title=[Modal]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=modal,enhancement&title=[Modal]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| actions | `[IressAlertButtonProps](../../dist/components/Modal/Modal.d.ts)[]` | — | Opinionated action buttons rendered in the modal footer. Each action is rendered as an `IressButton` with the modal's status automatically applied. |
+| children | `ReactNode` | — | Text to be displayed inside the modal. |
+| closeText | `string` | `Close` | Screenreader text for close button. |
+| container | `[FloatingUIContainer](../../dist/types.d.ts)` | — | The container element to render the modal into. By default, the modal will render at the end of the document body. |
+| defaultShow | `boolean` | `false` | When set to `true` the modal will be visible by default. Use for uncontrolled modals. |
+| disableBackdropClick | `boolean` | — | When set to `true`, users cannot exit the modal by clicking the backdrop or using the escape key. |
+| fixedFooter | `boolean` | — | When set to `true` the modal's footer will always be visible and fixed to the bottom of the modal. |
+| footer | `ReactNode` | — | Content to be rendered in the modal footer. If `actions` are also provided, this content will be rendered below the actions. |
+| heading | `ReactElement>, string ` | — | Sets the heading for the modal. If passed an element, it will render the element with an id, to ensure its connection to the modal. |
+| id | `string` | — | Unique ID for the modal. Use if you would like to open this modal from anywhere in your app using the `useModal` hook. |
+| noCloseButton | `boolean` | — | When set to `true`, no close button will be rendered. You must add your own closing mechanism to ensure accessibility. |
+| onShowChange | `((show: boolean) => void)` | — | Emitted when the modal has opened or closed internally. Use for controlled modals. |
+| onStatus | ((status: `close` , `initial` , `open` , `unmounted`) => void) | — | Emitted when the modal has mounted, unmounted, opened or closed. Open and close occur before animation begins. |
+| onEntered | `(() => void)` | — | Emitted when the modal has opened. |
+| onExited | `(() => void)` | — | Emitted when the modal has closed. |
+| show | `boolean` | — | When set to `true` the modal will be visible. Use for controlled modals. |
+| size | `lg`, `md` , `sm`  | — | Size of the modal: - `sm`: Small modals communicate the outcome of an irreversible action. They should be concise and straightforward, containing a single action and, in some cases, a single input field. - `md`: Medium modals provide optional supporting information to help users understand the context of a word or screen. They may contain a single action and, in some cases, a larger input such as a textarea. - `lg`: Large modals are used for more complex tasks that require multiple steps or a lot of information as well as media such as video and PDF documents. They can contain multiple actions, inputs, and supporting information.  If status is set, size can only be `sm` or `md`, and will default to `sm`. If status is not set, size can be `sm`, `md` or `lg`, and will default to `md`. |
+| static | `boolean` | — | When set to `true`, the modal will act like a static element when open. This means it will not lock scroll or focus within the modal. Note: This is used internally to display modals in Styler. It is not recommended to use this prop in your own applications. |
+| status | `ModalStatus` | — | Sets the status style of the modal with an accompanying status icon. Use status modals for communicating outcomes of actions. - `danger`: Communicates destructive or critical action outcomes. - `success`: Communicates successful completions. - `warning`: Communicates important cautions before proceeding. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Modal/Modal.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 Modals gather information, complete a subtask, or provide additional information without losing the context of an underlying page.
 
 ```tsx
@@ -190,8 +221,7 @@ The `heading` prop sets a heading for the modal, rendered in the header and anno
 Use the `footer` prop to place content underneath the main content, usually for buttons.
 
 ```tsx
-import { IressButton, IressModal } from '@iress-oss/ids-components';
-import { useModal } from '../hooks/useModal';
+import { IressButton, IressModal, useModal } from '@iress-oss/ids-components';
 
 const MODAL_ID = 'storybook-modal';
 
@@ -225,8 +255,12 @@ The `fixedFooter` prop fixes the footer to the bottom of the modal, useful when 
 > a modal without a fixed footer if you encounter these issues.
 
 ```tsx
-import { IressButton, IressModal, IressText } from '@iress-oss/ids-components';
-import { useModal } from '../hooks/useModal';
+import {
+  IressButton,
+  IressModal,
+  IressText,
+  useModal,
+} from '@iress-oss/ids-components';
 
 const MODAL_ID = 'fixed-footer-modal';
 
@@ -627,8 +661,7 @@ export const ModalSizes = () => (
 Use the `width` styling prop for responsive sizes. The modal becomes full width on screens smaller than the specified value.
 
 ```tsx
-import { IressButton, IressModal } from '@iress-oss/ids-components';
-import { useModal } from '../hooks/useModal';
+import { IressButton, IressModal, useModal } from '@iress-oss/ids-components';
 
 const MODAL_ID = 'responsive-modal';
 
@@ -712,8 +745,12 @@ export function ModalStatuses() {
 Use `disableBackdropClick` and/or `noCloseButton` when you require the user to complete the task before closing. Ensure you provide an alternative way to close.
 
 ```tsx
-import { IressButton, IressModal, IressStack } from '@iress-oss/ids-components';
-import { useModal } from '../hooks/useModal';
+import {
+  IressButton,
+  IressModal,
+  IressStack,
+  useModal,
+} from '@iress-oss/ids-components';
 
 export function ModalDisableClosing() {
   const { showModal } = useModal();

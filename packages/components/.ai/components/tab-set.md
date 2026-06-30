@@ -13,6 +13,27 @@ import { IressTabSet } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=tab-set&title=[TabSet]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=tab-set,enhancement&title=[TabSet]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| append | `ReactNode` | — | Content rendered alongside the tablist in the tab bar row, but outside the tablist itself. Useful for placing action buttons (e.g. "Add tab") at the end of the tab bar. |
+| children | `ReactNode` | — | Content to be displayed inside the IressTabs, usually multiple `IressTab`. |
+| defaultSelected | `[FormControlValue](../../dist/types.d.ts)` | — | Set the selected tab for uncontrolled tabs. If the `IressTab` does not have a `value` prop, it will match by index. |
+| layout | `top-center` , `top-left` , `top-right` | `top-left` | Layout options for the positioning of tabs. |
+| onChange | `((event: [IressTabSetChangedEventDetail](../../dist/components/TabSet/TabSet.d.ts)) => void)` | — | Emitted when a tab changes. |
+| panelStyle | `[IressCustomiseSlot](../../dist/interfaces.d.ts)` | — | Custom style for the panel (the area that contains the tab content). |
+| selected | `[FormControlValue](../../dist/types.d.ts)` | — | Set the selected tab for controlled tabs. If the `IressTab` does not have a `value` prop, it will match by index. |
+| tabHolderStyle | `[IressCustomiseSlot](../../dist/interfaces.d.ts)` | — | Custom style for the tab holder (the area that contains the tabs). |
+| type | `primary` , `secondary` | `'primary'` | The type of the tabs, which determines their styling. - `primary`: The default tab style, which is more prominent and suitable for main navigation. - `secondary`: A more subdued tab style, suitable for secondary level of tabs (within expanders) |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/TabSet/TabSet.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 Tabs are used to display modular pieces of related data that do not need to be compared or accessed simultaneously.
 
 ```tsx

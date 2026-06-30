@@ -13,7 +13,7 @@ import { formatObjectKey } from '@helpers/formatting/formatObjectKey';
 import type { IressCSSProps } from '@/interfaces';
 import type { ReactNode } from 'react';
 
-export interface TableColumnFilter<TRow extends object> {
+export interface IressTableColumnFilter<TRow extends object> {
   /**
    * Pre-filters the column with these values on initial render.
    * Provide an array of values to filter on, matching the raw cell values.
@@ -73,18 +73,23 @@ export interface TableColumnFilter<TRow extends object> {
 }
 
 /**
- * Normalizes the `filter` column option into a `TableColumnFilter` object.
+ * @deprecated Use `IressTableColumnFilter` instead. This type will be removed in a future release.
+ */
+export type TableColumnFilter<TRow extends object> =  IressTableColumnFilter<TRow>;
+
+/**
+ * Normalizes the `filter` column option into an `IressTableColumnFilter` object.
  * Returns `undefined` if filtering is not enabled.
  */
 export const normalizeColumnFilter = <TRow extends object>(
-  filter?: boolean | TableColumnFilter<TRow>,
-): TableColumnFilter<TRow> | undefined => {
+  filter?: boolean | IressTableColumnFilter<TRow>,
+): IressTableColumnFilter<TRow> | undefined => {
   if (!filter) return undefined;
   if (filter === true) return {};
   return filter;
 };
 
-export interface TableColumn<TRow extends object, TVal = never> extends Pick<
+export interface IressTableColumn<TRow extends object, TVal = never> extends Pick<
   IressCSSProps,
   'bg' | 'color' | 'noGutter' | 'srOnly' | 'textAlign' | 'textStyle'
 > {
@@ -101,12 +106,12 @@ export interface TableColumn<TRow extends object, TVal = never> extends Pick<
 
   /**
    * Enables column filtering. Set to `true` to enable with defaults, or pass
-   * a `TableColumnFilter` object to configure filtering options.
+   * an `IressTableColumnFilter` object to configure filtering options.
    *
    * When enabled, a filter icon will appear in the column header, and clicking
    * it will open a panel showing unique column values as checkboxes.
    */
-  filter?: boolean | TableColumnFilter<TRow>;
+  filter?: boolean | IressTableColumnFilter<TRow>;
 
   /**
    * Formats the cell content.
@@ -158,6 +163,11 @@ export interface TableColumn<TRow extends object, TVal = never> extends Pick<
 }
 
 /**
+ * @deprecated Use `IressTableColumn` instead. This type will be removed in a future release.
+ */
+export type TableColumn<TRow extends object, TVal = never> = IressTableColumn<TRow, TVal>;
+
+/**
  * Filter function that checks if the cell value is included in the array of selected filter values.
  */
 export const tableInArrayFilterFn = <TRow extends object>(
@@ -171,7 +181,7 @@ export const tableInArrayFilterFn = <TRow extends object>(
 
 export const composeTableColumnDefs = <TRow extends object, TVal = never>(
   rows: TRow[],
-  columns?: TableColumn<TRow, TVal>[],
+  columns?: IressTableColumn<TRow, TVal>[],
 ) => {
   const columnHelper = createColumnHelper<TRow>();
 
@@ -187,7 +197,7 @@ export const composeTableColumnDefs = <TRow extends object, TVal = never>(
     );
   }
 
-  const columnEntries = columns.map<[string, TableColumn<TRow, TVal>]>(
+  const columnEntries = columns.map<[string, IressTableColumn<TRow, TVal>]>(
     (column) => [column.key, column],
   );
 

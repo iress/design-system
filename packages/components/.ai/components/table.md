@@ -13,6 +13,31 @@ import { IressTable } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=table&title=[Table]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=table,enhancement&title=[Table]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| alternate | `boolean` | `false` | If set to true, the table will have alternating row colors. This is useful for improving readability in tables with many rows. |
+| **caption** | `ReactNode` | — | Caption that describes the data in the table, required for accessibility. |
+| columns | `[IressTableColumn](../../dist/components/Table/Table.d.ts)<TRow, TVal>[]` | — | A mapping of columns to be displayed in the table. If not provided, it will be automatically regenerated from the row data. |
+| compact | `boolean` | `false` | Compact view of the table, used for tables with a lot of data. |
+| empty | `ReactNode` | — | Content to be show when there is no rowData (columns must also be provided). |
+| hiddenCaption | `boolean` | — | When set to true, the table caption will be visually hidden. |
+| hiddenHeader | `boolean` | — | When set to true, the table header (`<thead></thead>`) will be not be rendered. Only use with very simple tables. |
+| hover | `boolean` | — | When set to true, hovering over a row will trigger a UI change. |
+| removeRowBorders | `boolean` | `false` | If set to true, the table will not have borders between rows. This is useful for simpler tables where the row borders are not needed. |
+| rowProps | `[IressStyledProps](../../dist/components/Styled/Styled.d.ts)<"tr"> , ((row: Row<TRow>) => [IressStyledProps](../../dist/components/Styled/Styled.d.ts)<"tr">)` | — | Add additional props to the row element. Can be a props map or a function that returns an props map. The function is called with the row data. |
+| rows | `TRow[]` | `[]` | Each object in the array contains the data for a row. |
+| scope | `col`, `row`  | `'row'` | Defaults to 'row' - the first cell in the row is a `<th>`, otherwise it's a `<td>`. |
+| virtualise | `boolean , TableVirtualiseOptions` | — | Enable row virtualisation for large datasets. Only visible rows (plus overscan) are rendered to the DOM. Requires a fixed height on the table container. Pass `true` for defaults, or an options object to configure. |
+
+📄 [Full type definition](../../dist/components/Table/Table.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 Data driven component for displaying tabular data.
 
 ```tsx
@@ -333,7 +358,7 @@ Use `sortFn` for custom sort — pass a built-in name or a custom comparison fun
 import {
   IressTable,
   IressTableFormattedValue,
-  type TableColumn,
+  type IressTableColumn,
 } from '@iress-oss/ids-components';
 
 interface Row {
@@ -344,7 +369,7 @@ interface Row {
   totalPercentage: number;
 }
 
-const columns: TableColumn<Row>[] = [
+const columns: IressTableColumn<Row>[] = [
   {
     key: 'investment_name',
     label: 'Investment',
@@ -1081,7 +1106,7 @@ import {
   IressTable,
   IressText,
   IressToggle,
-  type TableColumn,
+  type IressTableColumn,
 } from '@iress-oss/ids-components';
 
 interface Row {
@@ -1101,7 +1126,7 @@ const generateRows = (count: number): Row[] =>
     status: 'pending' as const,
   }));
 
-const columns: TableColumn<Row, string>[] = [
+const columns: IressTableColumn<Row, string>[] = [
   { key: 'name', label: 'Name', width: '35%' },
   { key: 'value', label: 'Value', width: '35%' },
   {
@@ -1179,7 +1204,7 @@ import {
   IressIcon,
   IressTable,
   IressTableBody,
-  type TableColumn,
+  type IressTableColumn,
 } from '@iress-oss/ids-components';
 
 interface Liability {
@@ -1248,7 +1273,7 @@ const contingentLiabilities = [
   },
 ];
 
-const columns: TableColumn<Liability>[] = [
+const columns: IressTableColumn<Liability>[] = [
   {
     key: 'owner',
     label: 'Owner',

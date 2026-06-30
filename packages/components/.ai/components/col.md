@@ -13,6 +13,22 @@ import { IressCol } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=col&title=[Col]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=col,enhancement&title=[Col]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| alignSelf | `center`, `end` , `start` , `stretch`  | — | Individual alignment of column |
+| children | `ReactNode` | — | Any content you would like to be contained in a column. |
+| offset | `[ResponsiveProp](../../dist/types.d.ts)<0 | 4 | "1" | 6 | 1 | "0" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | 2 | 3 | 5 | 7 | 8 | 9 | 10 | 11>` | — | Number of columns to offset. |
+| span | `[ResponsiveProp](../../dist/types.d.ts)<4 | "1" | "auto" | 12 | 6 | 1 | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | 2 | 3 | 5 | 7 | 8 | 9 | 10 | 11 | "12">` | `auto` | Number of columns to span. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Col/Col.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 Used in conjunction with the IressRow component to layout page content.
 
 ```tsx

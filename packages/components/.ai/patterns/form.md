@@ -13,6 +13,113 @@ import { IressForm } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=form&title=[Form]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=form,enhancement&title=[Form]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| actions | `ReactNode` | — | The actions to be displayed at the top right of the form. The actions to be displayed at the bottom left of the form. |
+| footer | `ReactNode` | — | Footer to be displayed at the bottom of the form. This can be used for additional information, links, or actions that are relevant to the form but not part of the main content. |
+| heading | `ReactNode` | — | Title displayed at the top of the form, usually the purpose of the form. |
+| mode | `all` , `onBlur` , `onChange` , `onSubmit` , `onTouched` | `'onBlur' 'onSubmit'` | Configure the validation strategy **before** a user submits the form the first time. For long forms, it is recommended to use `onBlur` to avoid overwhelming the user with validation errors. This means that validation will occur when the user leaves a field, rather than on every change. Configure the validation strategy **before** a user submits the form the first time. For short forms, it is recommended to use `onSubmit`, as the data is normally familiar to the user (eg. login). @see https://react-hook-form.com/docs/useform#mode @see https://react-hook-form.com/docs/useform#mode |
+| panelStyle | `[IressPanelProps](../../dist/components/Panel/Panel.d.ts)` | `{ bg: "alt" }` | Style the panel that wraps the form fields. |
+| pattern | `long` , `short` | — | Use `pattern="long"` for the following use cases: - Forms that are used for data entry, such as creating or updating large datasets. - Forms that are longer than the viewport (usually more than 8-9 fields). Use `pattern="short"` for the following use cases: - Login forms, or similar forms that requires data familiar to the users - Forms that fit the length of a single screen (less than 8-9 fields) |
+| reValidateMode | `onBlur` , `onChange` , `onSubmit` | `'onChange' 'onChange'` | Configure the validation strategy **after** a user submits the form the first time. During this phase, it is recommended to use `onChange` to provide immediate feedback on field changes so users can correct errors as they go. @see https://react-hook-form.com/docs/useform#reValidateMode @see https://react-hook-form.com/docs/useform#reValidateMode |
+| sticky | `boolean` | — | If set to `true`, the form will have a sticky header that remains at the top of the viewport when scrolling. This is useful for long forms where you want the header to always be visible. |
+| children | `ReactNode` | — | The content of the form, usually multiple `IressFormField` or `IressFormFieldset` components. |
+| onSubmit | `((data: T) => void)` | — | Handler for when the submit method on the form is called after validation is passed. @see https://react-hook-form.com/docs/useform/handlesubmit |
+| onError | `SubmitErrorHandler<T>` | — | Emitted when any field has an error. Called after the first submit if any errors are recorded, and from then on when any value changes. @see https://react-hook-form.com/docs/useform/handlesubmit |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| alert | `ReactNode` | `<IressFormValidationSummary srOnly />` | The content of the alert section. |
+| onValidChange | `((isValid: boolean) => void)` | — | Emitted when the form state is valid. @see https://react-hook-form.com/docs/useform/formstate |
+| updateErrorSummaryOnSubmit | `boolean` | `false` | If set to `true`, the summary will only update when the form is submitted, not on every field change. This is useful for performance reasons, especially in large forms. |
+| context | `object` | — | This context object is mutable and will be injected into the `resolver`'s second argument (eg. [Yup](https://github.com/jquense/yup) validation's context object). @see https://react-hook-form.com/docs/useform#context |
+| criteriaMode | `CriteriaMode` | — | Display all validation errors or one at a time. @see https://react-hook-form.com/docs/useform#criteriaMode |
+| defaultValues | `((BrowserNativeObject , { [x: string]: any; }, { [x: string]: any; } , NestedValue) & FieldValues) ` | — | Default values to be passed through when an input is unset. @see https://react-hook-form.com/docs/useform#defaultValues |
+| delayError | `number` | — | Delay error from appearing instantly. @see https://react-hook-form.com/docs/useform#delayError |
+| progressive | `boolean` | — | Progressive Enhancement only applicable for SSR framework. @see https://react-hook-form.com/docs/useform |
+| resetOptions | `Partial<{ keepDirtyValues: boolean; keepErrors: boolean; keepDirty: boolean; keepValues: boolean; keepDefaultValues: boolean; keepIsSubmitted: boolean; keepIsSubmitSuccessful: boolean; keepTouched: boolean; keepIsValidating: boolean; keepIsValid: boolean; keepSubmitCount: boolean; keepFieldsRef: boolean; }> , undefi...` | — | This property is related to value update behaviors. @see https://react-hook-form.com/docs/useform#resetOptions |
+| resolver | `Resolver<T, object, T>` | — | This function allows you to use any external validation library such as Yup, Zod, Joi, Vest, Ajv and many others. @see https://react-hook-form.com/docs/useform#resolver |
+| shouldUseNativeValidation | `boolean` | — | This config will enable browser native validation. It will also enable CSS selectors :valid and:invalid making styling inputs easier. @see https://react-hook-form.com/docs/useform#shouldUseNativeValidation |
+| shouldUnregister | `boolean` | — | By default, an input value will be retained when input is removed. However, you can set `shouldUnregister` to `true` to `unregister` input during unmount. @see https://react-hook-form.com/docs/useform#shouldUnregister |
+| values | `FieldValues` | — | The values prop will react to changes and update the form values, which is useful when your form needs to be updated by external state or server data. @see https://react-hook-form.com/docs/useform#values |
+
+📄 [Full type definition](../../dist/patterns/Form/Form.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
+### IressFormField Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| control | `Control<T>` | — | React Hook Form control object. It is used to register the field with the form. It is automatically provided when used inside an `IressForm`, but it can be overridden if you are using a custom form control. @see https://react-hook-form.com/ts#Control |
+| defaultValue | `any` | — | A default value for the field. Although this is provided here as it is part of the React Hook Form API, it is recommended to set the default value in the form's `defaultValues` prop, to ensure the form is correctly initialised. |
+| **name** | `string` | — | Name of the field. It is used to identify the field in the form. It must be unique within the form. |
+| **render** | `(field: FormFieldRenderProps<T>, state: FormFieldRenderState<T>) => ReactNode` | — | Render function to provide the control for the field. To ensure the field is correctly registered with the form, the control must be passed as props to the rendered component. (eg. `render={field => <IressInput {...field} />}`) |
+| renderSupplementary | `((field: FormFieldRenderProps<T>, state: FormFieldRenderState<T>) => ReactNode)` | — | Render function to allow you to render supplementary content alongside the field, with access to the field props and state. This can be useful for rendering custom components that need to interact with the form state, such as character counters, password strength meters, or custom validation messages. (eg. `renderSupplementary={{ value } => <CharCount value={value} />}`) |
+| rules | `CustomRules<T>` | — | Validation rules, including: required, min, max, minLength, maxLength, pattern, validate @see https://react-hook-form.com/api/useform/register) |
+| shouldUnregister | `boolean` | — | Input will be unregistered after unmount and defaultValues will be removed as well (it will not be stored in the form state). @see https://react-hook-form.com/docs/usecontroller |
+| readOnly | `[FormControlReadOnly](../../dist/types.d.ts)` | — | Renders the field in a read-only state, replacing the input with a static display of the current value. Validation rules are skipped. Use `'locked'` when the field is read-only due to permissions. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| error | `ReactNode` | — | Validation error to be displayed above the field. |
+| **label** | `ReactNode` | — | Text to be displayed in the label. |
+| hint | `ReactNode` | — | Text to be displayed as supporting field description. |
+| horizontal | `boolean` | — | Displays the label and input field inline instead of stacked vertically. |
+| hiddenLabel | `boolean` | — | Visually hides the label text, but still available to screen readers. |
+| errorMessages | `[ValidationMessageObj](../../dist/interfaces.d.ts)[]` | — | Validation errors to be displayed above the field, an array of validation messages to be displayed in `IressValidationSummary`. |
+| labelWidth | `string` | — | Controls the width of the label container when in horizontal mode. Can be any valid CSS width value (e.g., '200px', '20%', 'auto'). Only applies when `horizontal` is true. |
+| removeErrorMargin | `boolean` | — | Removes the reserved space for error messages, allowing fields to stack with narrower gaps. When true, no margin is reserved for potential error messages. |
+| supplementary | `ReactNode` | — | Supplementary content to be displayed below the field. Is only shown when the field is not in an error state. |
+
+📄 [Full type definition](../../dist/patterns/FormField/FormField.d.ts)
+
+### IressFormFieldset Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| control | `Control<TFieldValues>` | — | React Hook Form control object. It is used to register the field with the form. It is automatically provided when used inside an `IressForm`, but it can be overridden if you are using a custom form control. @see https://react-hook-form.com/ts#Control |
+| defaultValue | `any` | — | A default value for the field. Although this is provided here as it is part of the React Hook Form API, it is recommended to set the default value in the form's `defaultValues` prop, to ensure the form is correctly initialised. |
+| **name** | `string` | — | Name of the field. It is used to identify the field in the form. It must be unique within the form. |
+| **render** | `(field: FormFieldRenderProps<TFieldValues>) => ReactNode` | — | Render function to provide the control for the field. |
+| rules | `CustomRules<TFieldValues>` | — | Validation rules, including: required, min, max, minLength, maxLength, pattern, validate @see https://react-hook-form.com/api/useform/register |
+| shouldUnregister | `boolean` | — | Input will be unregistered after unmount and defaultValues will be removed as well (it will not be stored in the form state). @see https://react-hook-form.com/docs/usecontroller |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| error | `ReactNode` | — | Validation error to be displayed above the field. |
+| **label** | `ReactNode` | — | Text to be displayed in the label. |
+| hint | `ReactNode` | — | Text to be displayed as supporting field description. |
+| horizontal | `boolean` | — | Displays the label and input field inline instead of stacked vertically. |
+| readOnly | `[FormControlReadOnly](../../dist/types.d.ts)` | — | Renders the group in a read-only state (no asterisk symbol). Use `'locked'` when the control is read-only due to permissions. |
+| hiddenLabel | `boolean` | — | Visually hides the label text, but still available to screen readers. |
+| errorMessages | `[ValidationMessageObj](../../dist/interfaces.d.ts)[]` | — | Validation errors to be displayed above the field, an array of validation messages to be displayed in `IressValidationSummary`. |
+| labelWidth | `string` | — | Controls the width of the label container when in horizontal mode. Can be any valid CSS width value (e.g., '200px', '20%', 'auto'). Only applies when `horizontal` is true. |
+| removeErrorMargin | `boolean` | — | Removes the reserved space for error messages, allowing fields to stack with narrower gaps. When true, no margin is reserved for potential error messages. |
+| supplementary | `ReactNode` | — | Supplementary content to be displayed below the field. Is only shown when the field is not in an error state. |
+
+📄 [Full type definition](../../dist/patterns/FormFieldset/FormFieldset.d.ts)
+
+### IressFormValidationSummary Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| status | `danger` , `info` , `success`, `warning`  | — | Status for all child ValidationMessage components |
+| linkToTarget | `string` | — | Renders validation messages as links pointing at the field it relates to, specified as a string Only works when used with the `messages` prop. |
+| visiblePrefix | `boolean` | — | If set to true, the prefix will be visually displayed (default is only available to screen readers) |
+| itemStyle | `[IressCustomiseSlot](../../dist/interfaces.d.ts)` | — | Add additional styles to each item in the list. |
+| actions | `[IressAlertButtonProps](../../dist/patterns/FormValidationSummary/FormValidationSummary.d.ts)[]` | — | Actions to display in the alert. These will be rendered as buttons with opinionated styling. If you want to use custom buttons, use the `footer` prop instead. |
+| defaultClosed | `boolean` | — | If true, the alert will be dismissed and unrendered from the DOM. Use for uncontrolled dismissal of the alert, where the component manages its own dismissed state internally. |
+| closed | `boolean` | — | If true, the alert will be dismissed and unrendered from the DOM. Use for controlled dismissal of the alert, where the parent component manages the dismissed state and passes it down via this prop. |
+| closeLabel | `string` | — | Optional override for the default close button label "Close". |
+| footer | `ReactNode` | — | Buttons and controls for the alert. @deprecated Use `actions` instead for buttons with opinionated styling. If you need other footer content, use the `children` prop instead. |
+| heading | `ReactNode` | `<h3>There was a problem submitting this form</h3>` | Text for alert heading. If a string, it will use a heading with level 2. |
+| icon | [MaterialSymbol](https://fonts.google.com/icons?icon.set=Material+Symbols) | — | Icon to display in the alert. If set to `false`, no icon will be displayed. If not provided, the icon will be determined by the `status` prop. |
+| multiLine | `boolean` | — | If true, the alert will have a layout that supports longer content, with increased spacing and the icon aligned to the top of the alert instead of centered. Should be used when the content of the alert is more than a couple of sentences. |
+| onClose | `((e?: MouseEvent<HTMLButtonElement, MouseEvent>) => void)` | — | Icon to display in the alert. If set to `false`, no icon will be displayed. If not provided, the icon will be determined by the `status` prop. |
+| variant | `full-width`, `sidebar`  | — | Variants of the alert, allowing it to be styled differently based on where its used in the application. - Sidebar: The icon will be aligned to the heading, and the text will appear below the icon. - Full-width: The border will be removed, except for the bottom border. |
+
+📄 [Full type definition](../../dist/patterns/FormValidationSummary/FormValidationSummary.d.ts)
+
 Use the IressForm component when you want to request, validate and process data from the user.
 
 ```tsx

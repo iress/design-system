@@ -6,7 +6,7 @@ const columnApiRows = [
   { prop: 'format', type: "'string' | 'number' | 'date' | 'currency' | 'percent' | (value, row) => ReactNode", description: 'Formats cell content. Use built-in formatters or a custom render function.' },
   { prop: 'sort', type: "boolean | 'asc' | 'desc'", description: 'Enable sorting. Set to asc/desc for initial sort direction.' },
   { prop: 'sortFn', type: 'SortingFnOption', description: 'Custom sorting function (TanStack Table API).' },
-  { prop: 'filter', type: 'boolean | TableColumnFilter', description: 'Enable column filtering with checkbox panel.' },
+  { prop: 'filter', type: 'boolean | IressTableColumnFilter', description: 'Enable column filtering with checkbox panel.' },
   { prop: 'width', type: 'string', description: 'Column width (e.g. "200px", "25%").' },
   { prop: 'divider', type: 'boolean', description: 'Render a divider after this column.' },
   { prop: 'noWrap', type: 'boolean', description: 'Prevent text wrapping in cells. Default: true.' },
@@ -18,7 +18,7 @@ const columnApiRows = [
 export function TableColumnReference() {
   return (
     <IressTable
-      caption="TableColumn interface"
+      caption="IressTableColumn interface"
       hiddenCaption
       compact
       columns={[

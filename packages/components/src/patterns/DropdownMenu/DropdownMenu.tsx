@@ -140,7 +140,7 @@ export interface IressDropdownMenuProps<TMultiple extends boolean = false>
   /**
    * Text displayed next to label when two or more options are selected.
    * It supports `{{numOptions}}` as a placeholder for the number of options selected.
-   * @default {{numOptions}} selected
+   * @default ' ({{numOptions}})'
    */
   selectedOptionsText?: string;
 

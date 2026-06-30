@@ -13,6 +13,22 @@ import { IressSkeleton } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=skeleton&title=[Skeleton]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=skeleton,enhancement&title=[Skeleton]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| height | `string` | — | Sets the height of the skeleton bones. If no unit is specified it will default to pixels. Not allowed when in `text` mode. |
+| mode | `SkeletonMode` | `text` | Mode of the skeleton. `rect` and `circle` must have `width` and `height` specified. `text` works with `textStyle`. |
+| textStyle | ... 9 more ..., `inherit` , `typography.body.sm.regular` , `typography.body.sm` , `typography.heading.1` , `typography.heading.2` , `typography.heading.3` , `typography.heading.4` , `typography.heading.5`  | — | Use `textStyle` to specify what the Skeleton should emulate. If set to `h1` a non-break space with the same font-size and line-height of a h1 will be rendered. |
+| width | `string` | — | Sets the width of the skeleton bones. If no unit is specified it will default to pixels. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Skeleton/Skeleton.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 Skeletons can increase perceived performance for users. As opposed to spinners, skeletons make it feel as though things are happening immediately, then the information is incrementally displayed on the screen.
 
 ```tsx
@@ -50,7 +66,7 @@ export function SkeletonMode() {
 | ✅ Do | ❌ Don't |
 |-------|----------|
 | Match the skeleton shape to the actual content layout | Use a single generic rectangle for all loading states |
-| Use `text` mode with matching `textVariant` for text content | Show skeletons for longer than 3 seconds without explanation |
+| Use `text` mode with matching `textStyle` for text content | Show skeletons for longer than 3 seconds without explanation |
 | Transition smoothly from skeleton to real content | Animate skeletons with jarring effects |
 | Keep skeleton layouts stable to avoid layout shift | Change layout dimensions when real content appears |
 
@@ -100,7 +116,7 @@ export function SkeletonMode() {
 
 #### Text
 
-`text` mode works in place of `IressText`, matching sizing via the `textVariant` prop. Accepts `width` but not `height` (determined by font size and line height).
+`text` mode works in place of `IressText`, matching sizing via the `textStyle` prop. Accepts `width` but not `height` (determined by font size and line height).
 
 ```tsx
 import { useState } from 'react';

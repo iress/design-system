@@ -13,6 +13,23 @@ import { IressRow } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=row&title=[Row]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=row,enhancement&title=[Row]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| children | `ReactNode` | — | Any content you would like to be contained. Best used with `IressCol`. |
+| gutter | `[ResponsiveProp](../../dist/types.d.ts)<[PositiveSpacingToken](../../dist/types.d.ts)>` | — | Sets the gap between the children `<IressCol />` components. |
+| horizontalAlign | `any` | `left` | Horizontal alignment, follows flexbox justify-content |
+| rowGap | `[ResponsiveProp](../../dist/types.d.ts)<[PositiveSpacingToken](../../dist/types.d.ts)>` | — | Sets the size of the top and bottom gap between direct children when they begin to wrap. @see https://developer.mozilla.org/docs/Web/CSS/row-gap |
+| verticalAlign | `any` | `top` | Vertical alignment, follows flexbox align-items |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Row/Row.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 Used in conjunction with the IressCol component to lay out page content.
 
 ```tsx

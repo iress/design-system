@@ -13,10 +13,31 @@ import { IressRadio } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=radio&title=[Radio]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=radio,enhancement&title=[Radio]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| checked | `boolean` | — | Sets the checked state of the radio. If it is within a radio group, it will be overridden by the radio group's value and whether it matches this radio's value. |
+| children | `ReactNode` | — | Label of the radio |
+| heading | `ReactNode` | — | Sets the heading for the radio when using the `card` variant |
+| name | `string` | — | Sets the name attribute on the radio input. If it is within a radio group, it will be overridden with the radio group's name. |
+| onChange | `((e: ChangeEvent<HTMLInputElement, Element>, value?: T) => void)` | — | Handles the onChange event of the radio input. If you pass in a non-string value, you can access it using the second parameter of the function. |
+| required | `boolean` | — | If `true`, the radio is a required field and will be validated as such. If it is within a radio group, it will be overridden with the radio group's required state. |
+| readOnly | `[FormControlReadOnly](../../dist/types.d.ts)` | — | Renders the radio as read-only. Use `'locked'` when the value is read-only because of permissions. |
+| value | `T` | — | The value which is submitted with the form data when this radio button is checked. To set this radio as checked by default, use the `checked` property. |
+| variant | `[IressCheckboxVariants](../../dist/components/Checkbox/Checkbox.d.ts)` | — | The visual variant of the radio. - `card`: Provides a larger, card-like style with a heading slot. - `touch`: Provides a larger, button-like style, great for mobile devices. - `undefined`: The default radio style. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Radio/Radio.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 A radio is a single option presented with a radio button. It is used to select a single option from multiple options. It is typically used in an IressRadioGroup.
 
 ```tsx
-<IressRadio defaultChecked>Checked radio button</IressRadio>;
+<IressRadio checked>Checked radio button</IressRadio>;
 ```
 
 ## Design
@@ -57,7 +78,7 @@ You can set the radio to `checked` by default. This is useful when you want to p
 **Note:** If you are using an `IressRadioGroup`, you should use the `value` prop on the `IressRadioGroup` to set the checked state of its `<IressRadio />` children, as the `checked` prop will be ignored.
 
 ```tsx
-<IressRadio defaultChecked>Checked radio button</IressRadio>;
+<IressRadio checked>Checked radio button</IressRadio>;
 ```
 
 #### Read only
@@ -72,7 +93,7 @@ import { IressRadio, IressStack } from '@iress-oss/ids-components';
 export function RadioReadOnly() {
   return (
     <IressStack gap="sm">
-      <IressRadio readOnly defaultChecked>
+      <IressRadio readOnly checked>
         Radio button
       </IressRadio>
       <IressRadio readOnly>Radio button</IressRadio>

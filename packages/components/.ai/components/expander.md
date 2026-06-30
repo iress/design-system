@@ -13,6 +13,24 @@ import { IressExpander } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=expander&title=[Expander]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=expander,enhancement&title=[Expander]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| **activator** | `ReactNode` | — | The element used to activate the expandable container. |
+| activatorStyle | `[IressCustomiseSlot](../../dist/interfaces.d.ts)` | `{}` | This allows you to customise the content styling specifically, which is the floating element. It accepts an object with any of the styling properties available on `IressCSSProps`, as well as `className` and `style`. |
+| children | `ReactNode` | — | Contents that will be expanded/collapsed when the expander is activated. |
+| onChange | `((newValue: boolean) => void)` | — | Emitted when the open state changes. |
+| mode | `link` , `section` | `section` | Controls the display mode of the activator element. Can be Section, Heading or Link. |
+| open | `boolean` | `false` | When true the expandable container will be visible and the activator will display as open. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Expander/Expander.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 Expanders are commonly used to reveal more information or details about an element or content on a page.
 
 ```tsx

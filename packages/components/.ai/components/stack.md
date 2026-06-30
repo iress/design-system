@@ -13,6 +13,22 @@ import { IressStack } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=stack&title=[Stack]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=stack,enhancement&title=[Stack]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| element | `keyof IntrinsicElements` | `'div'` | The HTML element that should be rendered. |
+| gap | `[ResponsiveProp](../../dist/types.d.ts)<[PositiveSpacingToken](../../dist/types.d.ts)>` | — | Sets the gap between direct children. @see https://developer.mozilla.org/docs/Web/CSS/gap |
+| horizontalAlign | `any` | — | Sets the horizontal alignment of the stack content. |
+| verticalAlign | `any` | — | Sets the vertical alignment of the stack content. |
+
+📄 [Full type definition](../../dist/components/Stack/Stack.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 Use IressStack to control vertical spacing between content with consistent preset values.
 
 ```tsx

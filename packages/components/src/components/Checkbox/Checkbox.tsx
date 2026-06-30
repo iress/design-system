@@ -31,11 +31,16 @@ import { splitCssProps, styled } from '@/styled-system/jsx';
 import { IressText } from '../Text';
 import { useNoDefaultValueInForms } from '@/patterns/Form/hooks/useNoDefaultValueInForms';
 
-export type CheckboxVariants = 'card' | 'touch' | undefined;
+export type IressCheckboxVariants = 'card' | 'touch' | undefined;
+
+/**
+ * @deprecated Use `IressCheckboxVariants` instead. This type will be removed in a future release.
+ */
+export type CheckboxVariants = IressCheckboxVariants;
 
 export interface IressCheckboxProps<
   T = FormControlValue,
-  TVariant extends CheckboxVariants = undefined,
+  TVariant extends IressCheckboxVariants = undefined,
 > extends Omit<
   IressStyledProps<'input'>,
   'defaultValue' | 'readOnly' | 'value'
@@ -126,7 +131,7 @@ export interface IressCheckboxProps<
 
 const Checkbox = <
   T = FormControlValue,
-  TVariant extends CheckboxVariants = undefined,
+  TVariant extends IressCheckboxVariants = undefined,
 >(
   {
     checked: checkedProp,
@@ -303,7 +308,7 @@ const Checkbox = <
  */
 export const IressCheckbox = forwardRef(Checkbox) as (<
   T = FormControlValue,
-  TVariant extends CheckboxVariants = undefined,
+  TVariant extends IressCheckboxVariants = undefined,
 >(
   props: IressCheckboxProps<T, TVariant> & {
     ref?: ForwardedRef<ReactHookFormCompatibleRef<HTMLInputElement>>;

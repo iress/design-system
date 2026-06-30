@@ -13,6 +13,19 @@ import { IressText } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=text&title=[Text]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=text,enhancement&title=[Text]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| element | `[IressTextElements](../../dist/components/Text/Text.d.ts)` | — | The HTML element that should be rendered. |
+
+📄 [Full type definition](../../dist/components/Text/Text.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 The IressText component allows you to set typographic styles either on one element, or a block of HTML elements.
 
 ```tsx
@@ -133,7 +146,7 @@ The `textStyle` prop (previously `variant`) allows you alter the default styling
 
 For example, in order to maintain the semantic structure of headings, you may need to style a `h2` element like a `h4`. Or you may want to style your heading using one of our display text formats.
 
-> **⚠️ Do not add `textStyle` when the `element` already provides the correct styling.** For example, `element="h1"` already renders with `typography.heading.1` styling — adding `textStyle="typography.heading.1"` is redundant. Only use `textStyle` to intentionally override the default visual treatment (e.g. `element="h2" textStyle="typography.heading.4"` to make an h2 visually smaller), or when a designer has specified a different visual hierarchy in a Figma file.
+> ⚠️ **Do not add `textStyle` when the `element` already provides the correct styling.** For example, `element="h1"` already renders with `typography.heading.1` styling — adding `textStyle="typography.heading.1"` is redundant. Only use `textStyle` to intentionally override the default visual treatment (e.g. `element="h2" textStyle="typography.heading.4"` to make an h2 visually smaller), or when a designer has specified a different visual hierarchy in a Figma file.
 
 ```tsx
 import { IressStack, IressText } from '@iress-oss/ids-components';

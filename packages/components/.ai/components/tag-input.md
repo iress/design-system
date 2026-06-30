@@ -13,6 +13,38 @@ import { IressTagInput } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=tag-input&title=[TagInput]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=tag-input,enhancement&title=[TagInput]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| defaultValue | `string[]` | — | Tags to display (uncontrolled) |
+| onChange | `((e?: SyntheticEvent<HTMLInputElement, Event>, value?: string[]) => void) | undefined` | — | Emitted when the value changes. |
+| onExistingTag | `((tag: string) => void)` | — | Emitted when the user attempts to add a tag that already exists. |
+| onTagDelete | `((children: string, e: SyntheticEvent<HTMLButtonElement, Event>) => void)` | — | Emitted when a tag is deleted |
+| onTagDeleteAll | `((children: string, e: SyntheticEvent<HTMLButtonElement, Event>) => void)` | — | Emitted when the combined tag delete button is clicked |
+| onTagDeleteButtonBlur | `((e: FocusEvent<HTMLButtonElement, Element>) => void)` | — | Emitted when a tag's delete button is blurred |
+| selectedOptionsTagText | `string` | `selected` | Text displayed next to tag count in tag when tag limit is exceeded |
+| tagLimit | `number` | `5` | Limit of tags to display before shortening to `selectedOptionsTagText` |
+| value | `string[]` | — | Tags to display (controlled) |
+| actions | `Omit<[IressButtonProps](../../dist/components/Button/Button.d.ts), "status" | "mode">[]` | — | Actions to display in the input field, rendered inside the input on the right. These will be rendered with opinionated styling. If you want to use custom buttons or controls, use the `append` prop instead. |
+| width | `any` | `100%` | The width of the input. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| variant | `search` | — | The variant of the input, which will apply different styles to the input. The `search` variant is designed for search inputs and will have a different style for the clear button and loading spinner. |
+| inline | `boolean` | — | Make prepend/append element closer to the input content. |
+| readOnly | `[FormControlReadOnly](../../dist/types.d.ts)` | — | Renders the input as read-only. Use `'locked'` when the value is read-only because of permissions. |
+| append | `ReactNode` | — | Content to append to the input field, usually a button or icon. |
+| loading | `boolean, string ` | — | The loading states of the input field. If provided a string, will use that text as the loading message. |
+| alignRight | `boolean` | `false` | Set input content align to right, useful for numeric inputs. |
+| formatter | `((value?: string) => string | number)` | — | Bring your own formatter that will be used to format the value when the input is not focused, allowing you to display the value in a different format. e.g. User type in value="dsf 987kkk123" => result after formatter: $987,123 (string) |
+| onClear | `((e: ChangeEvent<HTMLInputElement, Element>) => void)` | — | Emitted when the input is manually cleared. |
+| clearable | `boolean` | `false` | If `true`, then user can clear the value of the input. |
+
+📄 [Full type definition](../../dist/components/TagInput/TagInput.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 A form control that allows users to enter and manage a collection of tags via keyboard input.
 
 ```tsx

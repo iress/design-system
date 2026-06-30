@@ -43,4 +43,22 @@ export interface ComponentMeta {
   guidelines?: string;
   /** Figma design file URL */
   figma?: string;
+  /**
+   * Sub-components whose props should be included in this component's AI documentation.
+   * Each entry is the exported component name (e.g. 'IressFormField', 'IressFormFieldset').
+   * The translate pipeline will extract and append their props tables to the parent doc.
+   */
+  subComponents?: string[];
+  /**
+   * Additional props that react-docgen-typescript can't resolve (e.g. conditional/discriminated union props).
+   * These are appended to the generated props table.
+   */
+  additionalProps?: Array<{
+    name: string;
+    type: string;
+    required?: boolean;
+    default?: string;
+    description: string;
+    condition?: string;
+  }>;
 }

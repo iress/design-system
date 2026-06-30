@@ -35,7 +35,7 @@ export interface IressExpanderProps extends Omit<
   onChange?: (newValue: boolean) => void;
 
   /**
-   * Controls the display mode of the activator element. Can be Section, Heading or Link.
+   * Controls the display mode of the activator element. Can be Section or Link.
    */
   mode?: 'section' | 'link';
 

@@ -13,6 +13,53 @@ import { IressDropdownMenu } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=dropdown-menu&title=[Filter]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=dropdown-menu,enhancement&title=[Filter]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| activatorStyle | `[IressCustomiseSlot](../../dist/interfaces.d.ts)` | `{}` | Customisation options for the dropdown menu activator button.  Accepts any styling properties available on `IressCSSProps`, as well as `className`, `style`, and `data-testid`. @example ```tsx <IressDropdownMenu   activatorStyle={{ 'data-testid': 'my-activator', p: 'spacing.2' }} /> ``` |
+| defaultSelected | `FormattedLabelValueMeta<[FormControlValue](../../dist/types.d.ts)> , FormattedLabelValueMeta<[FormControlValue](../../dist/types.d.ts)>[]` | — | The current value of the dropdown menu. Use this in uncontrolled mode when you want to set an initial value that can be changed internally by the component. For a controlled dropdown menu, use the `selected` prop instead. |
+| footer | `ReactNode` | — | Footer showed in option panel when expanded. |
+| header | `ReactNode` | — | Header showed in option panel when expanded. |
+| inputProps | `Pick<[IressInputProps](../../dist/components/Input/Input.d.ts), "placeholder" | "append" | "prepend" | "clearable">` | `{ clearable: true, prepend: <IressIcon name="search" />, }` | Customise the searchable `IressInput` props for your needs. |
+| **label** | `ReactNode` | — | The label is a description of the dropdown menu's purpose. |
+| multiSelect | `boolean` | — | Multi-select mode. When `true`, multiple options can be selected. |
+| onChange | `((selected: [ControlledValue](../../dist/hooks/useControlledState.d.ts)<[LabelValueMeta](../../dist/interfaces.d.ts)<[FormControlValue](../../dist/types.d.ts)>, TMultiple>) => void)` | — | Emitted when the value changes. |
+| onReset | `(() => void)` | — | Emitted when the value is reset. |
+| searchable | `boolean` | — | When `true` a search field is shown to search for specific filter option(s). |
+| searchNoResultsText | `ReactNode` | — | Text to be displayed when no results are found from search. Ignored when `searchable` is `false` |
+| selected | `FormattedLabelValueMeta<[FormControlValue](../../dist/types.d.ts)> , FormattedLabelValueMeta<[FormControlValue](../../dist/types.d.ts)>[]` | — | The current value of the dropdown menu. Use this in controlled mode when you want to manage the selected value from a parent component. For an uncontrolled dropdown menu, use the `defaultSelected` prop instead. |
+| selectedOptionsText | `string` | `({{numOptions}})` | Text displayed next to label when two or more options are selected. It supports `{{numOptions}}` as a placeholder for the number of options selected. |
+| visibleResetButton | `boolean, string ` | — | When `true`, a reset button will be shown above the options. If provided a string, it will be used as the reset button label. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| fluid | `boolean` | — | Popovers can be fluid, meaning they will take up the full width of their container. |
+| type | `dialog` , `grid` , `listbox`, `menu` , `tree`  | — | Describes the type of content contained in the popover. |
+| align | `[FloatingUIAligns](../../dist/types.d.ts)` | `bottom-start` | Sets the alignment of the popover relative to the activator element. |
+| container | `[FloatingUIContainer](../../dist/types.d.ts)` | — | The container element to render the popover into. By default, the popover will render where its parent is rendered.  **Note:** If the `container` doesn’t exist when the popover is mounted, ensure you pass an element directly (not a ref) and specify null as the default value before it is set. This lets it wait for the root to be available. For example, if you reference the parent element of a popover. |
+| contentStyle | `[IressCustomiseSlot](../../dist/interfaces.d.ts)` | — | This allows you to customise the content styling specifically, which is the floating element. It accepts an object with any of the styling properties available on `IressCSSProps`, as well as `className` and `style`. |
+| displayMode | `inline` , `overlay` | `overlay` | Sets the display mode of popover. |
+| offset | `OffsetOptions` | `5` | The offset of the popover from its default position. This can be a number or an object with `mainAxis` and `crossAxis` properties, which specify the offset in pixels along the main axis (the axis along which the popover is aligned) and the cross axis (the perpendicular axis). |
+| matchActivatorWidth | `boolean` | — | Sets the popover to match the width of the activator. Note: This only works when `displayMode="overlay"`. |
+| virtualFocus | `boolean` | `false` | Whether the focus is virtual (using `aria-activedescendant`). Use this if you need focus to remain on the reference element (such as an input), but allow arrow keys to navigate items. Note: This is only applicable when type is set to: `listbox` or `menu`, and only works out of the box with `IressMenu` and its subcomponents. |
+| focusStartIndex | `number` | — | Which index to start the focus on when the popover is opened. Only works with `type` listbox and menu. Note: The index must exist in the list of items, otherwise it will not work. |
+| onActivated | `((e?: Event, reason?: OpenChangeReason, activeIndex?: number , null , undefined) => void) | undefined` | — | Is called when popover is activated. |
+| onDeactivated | `((e?: Event, reason?: OpenChangeReason, activeIndex?: number , null , undefined) => void) | undefined` | — | Is called when popover is deactivated. |
+| onNavigate | `((activeIndex: number , null) => void)` | — | Is called when registered popover items are navigated using arrow keys. Only works with `type` listbox and menu. |
+| nested | `boolean` | — | Whether this popover uses nested navigation (ArrowRight to open, ArrowLeft to close). When not set, this is auto-detected based on whether the popover is inside another popover. |
+| disabled | `boolean` | `false` | Disables the hook from running any effects or search operations. When disabled, the hook returns empty results and default state. |
+| debounceThreshold | `number` | `500` | Time in milliseconds to wait for before performing result search. Only applies to searchable options (function). |
+| initialOptions | `[LabelValueMeta](../../dist/interfaces.d.ts)<[FormControlValue](../../dist/types.d.ts)>[]` | — | Initial options data set, shown when the input is empty. |
+| minSearchLength | `number` | `1` | Minimum number of characters required before triggering async search. Only applies to searchable options (function). Below this threshold, no search will be triggered and no loading state will be shown. |
+| **options** | `[LabelValueMeta](../../dist/interfaces.d.ts)<[FormControlValue](../../dist/types.d.ts)>[] , ((query: string) => Promise<[LabelValueMeta](../../dist/interfaces.d.ts)<[FormControlValue](../../dist/types.d.ts)>[]>)` | — | Options data set, shown when the input is not empty. |
+| limitMobile | `number` | `6` | Maximum number of results displayed on mobile screen sizes (< 768). |
+| limitDesktop | `number` | `12` | Maximum number of results displayed on larger screen sizes (>= 768). |
+
+📄 [Full type definition](../../dist/patterns/DropdownMenu/DropdownMenu.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 A component designed to filter a section based on a list of options and quickly navigate to relevant content.
 
 ```tsx

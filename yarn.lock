@@ -1835,6 +1835,7 @@ __metadata:
     prettier: "npm:^3.8.2"
     puppeteer: "npm:24.43.0"
     react: "npm:^19.2.6"
+    react-docgen-typescript: "npm:^2.4.0"
     react-dom: "npm:^19.2.6"
     size-limit: "npm:12.1.0"
     storybook: "npm:10.3.6"
@@ -12466,7 +12467,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-docgen-typescript@npm:^2.2.2":
+"react-docgen-typescript@npm:^2.2.2, react-docgen-typescript@npm:^2.4.0":
   version: 2.4.0
   resolution: "react-docgen-typescript@npm:2.4.0"
   peerDependencies:

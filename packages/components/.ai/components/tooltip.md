@@ -13,6 +13,24 @@ import { IressTooltip } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=tooltip&title=[Tooltip]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=tooltip,enhancement&title=[Tooltip]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| align | `[FloatingUIAligns](../../dist/types.d.ts)` | `top` | Sets the alignment of the popover relative to the activator element. |
+| **children** | `ReactNode` | — | The element to add a tooltip to. |
+| container | `[FloatingUIContainer](../../dist/types.d.ts)` | — | The container element to render the tooltip into. Overrides the container set by `IressTooltipProvider`. |
+| delay | `number` | `500` | Sets the tooltip display delay in milliseconds. |
+| open | `boolean` | `false` | Only used for internal testing. |
+| **tooltipText** | `string , string[]` | — | Sets the tooltip text. Can accept a string or an array of strings - if given an array, will output each string on a new line. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Tooltip/Tooltip.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 A component that shows concise, informative text about an element when focussed upon, hovered over or on a long touch.
 
 ```tsx

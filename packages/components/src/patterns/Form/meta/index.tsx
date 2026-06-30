@@ -23,4 +23,5 @@ export default {
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-form--docs',
   guidelines:
     'https://iress.github.io/design-system/#/patterns/form',
+  subComponents: ['IressFormField', 'IressFormFieldset', 'IressFormValidationSummary'],
 } satisfies ComponentMeta;

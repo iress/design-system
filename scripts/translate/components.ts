@@ -10,6 +10,7 @@ import { join, basename, relative } from 'path';
 import { stripMdx } from './helpers/strip-mdx';
 import { resolveStoryEmbeds } from './helpers/resolve-stories';
 import { formatCodeBlocks } from './helpers/format-code';
+import { extractProps, renderPropsTable } from './helpers/extract-props';
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 
@@ -91,6 +92,8 @@ async function buildDoc(file: string, type: string): Promise<{ slug: string; mar
   let description = '';
   let importStatement = '';
   let testMetaTable = '';
+  let subComponents: string[] = [];
+  let additionalProps: Array<{ name: string; type: string; required?: boolean; default?: string; description: string; condition?: string }> = [];
   const metaLinks: string[] = [];
 
   if (metaFile) {
@@ -103,6 +106,8 @@ async function buildDoc(file: string, type: string): Promise<{ slug: string; mar
       if (meta) {
         description = meta.description ?? '';
         importStatement = typeof meta.import === 'string' ? meta.import : '';
+        subComponents = meta.subComponents ?? [];
+        additionalProps = meta.additionalProps ?? [];
 
         if (meta.storybook) metaLinks.push(`- [Storybook](${meta.storybook})`);
         if (meta.github?.source) metaLinks.push(`- [Source](${meta.github.source})`);
@@ -138,6 +143,36 @@ async function buildDoc(file: string, type: string): Promise<{ slug: string; mar
 
     if (metaLinks.length > 0) {
       sections.push(metaLinks.join('\n') + '\n');
+    }
+
+    // Props table (from .d.ts)
+    const props = extractProps(`Iress${name}`, type as 'components' | 'patterns');
+    if (props || additionalProps.length > 0) {
+      const allProps = [
+        ...(props ?? []),
+        ...additionalProps.map((p) => ({
+          name: p.name,
+          type: p.type + (p.condition ? ` _(${p.condition})_` : ''),
+          required: p.required ?? false,
+          description: p.description,
+          defaultValue: p.default,
+        })),
+      ];
+      sections.push('## Props\n');
+      sections.push('> Required props are **bold**.\n');
+      sections.push(renderPropsTable(allProps, `Iress${name}`, type) + '\n');
+      sections.push('Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).\n');
+    }
+
+    // Sub-component props (declared in meta.subComponents)
+    if (subComponents.length > 0) {
+      for (const subName of subComponents) {
+        const subProps = extractProps(subName, type as 'components' | 'patterns');
+        if (subProps) {
+          sections.push(`### ${subName} Props\n`);
+          sections.push(renderPropsTable(subProps, subName, type) + '\n');
+        }
+      }
     }
   }
 

@@ -13,6 +13,24 @@ import { IressInline } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=inline&title=[Inline]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=inline,enhancement&title=[Inline]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| children | `ReactNode` | — | Content to be displayed inline. |
+| gap | `[ResponsiveProp](../../dist/types.d.ts)<[PositiveSpacingToken](../../dist/types.d.ts)>` | — | Sets the gap between direct children. @see https://developer.mozilla.org/docs/Web/CSS/gap |
+| horizontalAlign | `any` | — | Sets the horizontal alignment of the inline content. |
+| noWrap | `boolean` | — | Wraps content when stretches beyond container. |
+| rowGap | `[ResponsiveProp](../../dist/types.d.ts)<[PositiveSpacingToken](../../dist/types.d.ts)>` | — | Sets the size of the top and bottom gap between direct children when they begin to wrap. @see https://developer.mozilla.org/docs/Web/CSS/row-gap |
+| verticalAlign | `any` | — | Sets the vertical alignment of the inline content. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Inline/Inline.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 IressInline renders a set of components in a row with equal spacing around them, wrapping onto multiple lines when necessary.
 
 ```tsx

@@ -13,6 +13,31 @@ import { IressMenu } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=menu&title=[Menu]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=menu,enhancement&title=[Menu]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| changeOnBlur | `boolean` | — | If set to true, change event will be fired with the correctly selected value. |
+| children | `ReactNode` | — | Content of the menu, usually multiple `IressMenuItem`, `IressMenuHeading`, `IressMenuText` or `IressMenuDivider`. |
+| defaultSelected | `[ControlledValue](../../dist/hooks/useControlledState.d.ts)<T, TMultiple>` | — | Initially selected values of menu when `role` is listbox. Used for uncontrolled menus. |
+| fluid | `boolean` | — | If set to true, menu will fill the width of its container. |
+| id | `string` | — | Unique ID of the menu. If not provided, will be automatically generated. Used to add aria attributes for accessibility. |
+| layout | `inline-equal-width`, `inline` , `stack`  | `stack` | Sets whether the layout is vertical (stack) or horizontal (inline/inline-equal-width). |
+| multiSelect | `boolean` | — | If set to true, menu items will contain checkboxes. |
+| noWrap | `boolean` | — | If set to true, menu items will not wrap onto a separate line when space is exceeded. |
+| numbered | `boolean` | — | Add a numbered header style to the menu group. Only used when variant is 'side'. |
+| onChange | `((value?: [ControlledValue](../../dist/hooks/useControlledState.d.ts)<T, TMultiple> , null) => void)` | — | Emitted when the menu value changes |
+| selected | `[ControlledValue](../../dist/hooks/useControlledState.d.ts)<T, TMultiple>` | — | Selected values of menu when `role` is listbox. Used for controlled menus. |
+| role | `list` , `listbox`, `menu`  | `list` | Type of menu, corresponding to [aria-roles](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles). Will be set automatically when used inside popover or when the `multiSelect` prop is set to true. |
+| variant | `MenuVariants` | — | The variant of the menu, which determines some opinionated styles for the menu items |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Menu/Menu.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 A menu can display grouped action buttons, navigation items or headings.
 
 ```tsx

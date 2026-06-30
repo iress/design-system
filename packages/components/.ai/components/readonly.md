@@ -13,6 +13,30 @@ import { IressReadonly } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=readonly&title=[Readonly]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=readonly,enhancement&title=[Readonly]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| children | `ReactNode` | — | The formatted value. If not provided, the value will be displayed. |
+| inline | `boolean` | — | Make prepend/append element closer to the input content. |
+| variant | `[FormControlReadOnly](../../dist/types.d.ts)` | — | The readonly variant. - `'locked'`: Applies disabled-like styling (greyed out, `not-allowed`   cursor). The value is still submitted via a hidden input. |
+| actions | `Omit<[IressButtonProps](../../dist/components/Button/Button.d.ts), "status" | "mode">[]` | — | Actions to display in the input field, rendered inside the input on the right. These will be rendered with opinionated styling. If you want to use custom buttons or controls, use the `append` prop instead. |
+| width | `any` | — | The width of the input. |
+| defaultValue | `[FormControlValue](../../dist/types.d.ts)` | — | The value of the input. Can be a string or a number. Use for uncontrolled inputs. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| value | `[FormControlValue](../../dist/types.d.ts)` | — | The value of the input. Can be a string or a number. Use for controlled inputs. |
+| append | `ReactNode` | — | Content to append to the input field, usually a button or icon. |
+| loading | `boolean, string ` | — | The loading states of the input field. If provided a string, will use that text as the loading message. |
+| prepend | `ReactNode` | — | Content to prepended to the input field, usually an icon. |
+| alignRight | `boolean` | `false` | Set input content align to right, useful for numeric inputs. |
+| formatter | `((value?: T) => string | number)` | — | Bring your own formatter that will be used to format the value when the input is not focused, allowing you to display the value in a different format. e.g. User type in value="dsf 987kkk123" => result after formatter: $987,123 (string) |
+
+📄 [Full type definition](../../dist/components/Readonly/Readonly.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 Readonly displays a value that cannot be edited by the user. It renders a hidden input field to ensure the value is submitted with the form.
 
 ```tsx

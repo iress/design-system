@@ -13,6 +13,25 @@ import { IressButtonGroup } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=button-group&title=[ButtonGroup]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=button-group,enhancement&title=[ButtonGroup]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| children | `ReactNode` | — | Content of the button group, usually multiple `IressButton`. |
+| defaultSelected | `[ControlledValue](../../dist/hooks/useControlledState.d.ts)<T, TMultiple>` | — | Initially selected value, use for uncontrolled components. |
+| hiddenLabel | `boolean` | — | Hides the label if set; label will still be read out by screen readers. |
+| **label** | `ReactNode` | — | Sets the label text for the button group. If passed an element, it will render the element with an id, to ensure its connection to the button group. |
+| multiple | `boolean` | — | Allows multiple buttons to be selected. |
+| onChange | `((newValue?: [ControlledValue](../../dist/hooks/useControlledState.d.ts)<T, TMultiple>) => void)` | — | Called when a user activates one of its children buttons. |
+| selected | `[ControlledValue](../../dist/hooks/useControlledState.d.ts)<T, TMultiple>` | — | Selected value, use for controlled components. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/ButtonGroup/ButtonGroup.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 ButtonGroup allows users to switch between two or more possible states. ButtonGroups are only used for actions that occur immediately after the user "flips the switch".
 
 ```tsx

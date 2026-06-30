@@ -13,6 +13,23 @@ import { IressHide } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=hide&title=[Hide]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=hide,enhancement&title=[Hide]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| **children** | `ReactNode` | — | Content to hide. |
+| **hiddenOn** | `[ResponsiveProp](../../dist/types.d.ts)<boolean>` | — | Content will be hidden on any screen sizes that are set to true. |
+| visuallyHidden | `boolean` | — | If true, the content will not be visible, but will be available to screen readers |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Hide/Hide.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
+> ⚠️ **Deprecated:** `IressHide` has been deprecated. Use the `srOnly`, `hideFrom`, and `hideBelow` styling props instead. See [Styling Props — Accessibility](../styling-props/accessibility.md) for details.
+
 Makes it easier to create adaptive designs that show or hide content based on screen size.
 
 ```tsx

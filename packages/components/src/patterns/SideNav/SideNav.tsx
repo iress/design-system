@@ -27,7 +27,7 @@ import { IressText } from '@/components/Text';
 /**
  * A flat navigation item shown in the side panel.
  */
-export interface SideNavSubItem {
+export interface IressSideNavSubItem {
   /** Unique key for the item. */
   key: string;
 
@@ -48,9 +48,14 @@ export interface SideNavSubItem {
 }
 
 /**
+ * @deprecated Use `IressSideNavSubItem` instead. This type will be removed in a future release.
+ */
+export type SideNavSubItem = IressSideNavSubItem;
+
+/**
  * A group of sub-items displayed as an expandable drawer in the side panel.
  */
-export interface SideNavSideMenuGroup {
+export interface IressSideNavSideMenuGroup {
   /** Unique key for the group. */
   key: string;
 
@@ -58,7 +63,7 @@ export interface SideNavSideMenuGroup {
   label: ReactNode;
 
   /** Child items shown inside this drawer. */
-  children: SideNavSubItem[];
+  children: IressSideNavSubItem[];
 
   /** Whether this drawer is active/expanded. */
   active?: boolean;
@@ -74,17 +79,22 @@ export interface SideNavSideMenuGroup {
 }
 
 /**
+ * @deprecated Use `IressSideNavSideMenuGroup` instead. This type will be removed in a future release.
+ */
+export type SideNavSideMenuGroup = IressSideNavSideMenuGroup;
+
+/**
  * A panel content entry — either a flat item or a group of items.
  *
  * When mixing flat items and groups in a single array, ensure all `key` values
  * are unique across both types to avoid React reconciliation issues.
  */
-export type SideNavPanelItem = SideNavSubItem | SideNavSideMenuGroup;
+export type IressSideNavPanelItem = IressSideNavSubItem | IressSideNavSideMenuGroup;
 
 /**
  * A top-level navigation item with a rail icon and optional panel children.
  */
-export interface SideNavItem {
+export interface IressSideNavItem {
   /** Unique key for the item. */
   key: string;
 
@@ -101,7 +111,7 @@ export interface SideNavItem {
    * Content shown in the side panel when this item is active.
    * Can be flat sub-items, grouped sub-items, or a mix of both.
    */
-  children?: SideNavPanelItem[];
+  children?: IressSideNavPanelItem[];
 
   /** URL for navigation. */
   href?: string;
@@ -117,11 +127,16 @@ export interface SideNavItem {
 }
 
 /**
+ * @deprecated Use `IressSideNavItem` instead. This type will be removed in a future release.
+ */
+export type SideNavItem = IressSideNavItem;
+
+/**
  * Common props shared by all IressSideNav configurations.
  */
 interface IressSideNavBaseProps extends Omit<IressStyledProps<'nav'>, 'width'> {
   /** Array of navigation items defining the rail icons. */
-  items: SideNavItem[];
+  items: IressSideNavItem[];
 
   /** Callback fired when the active item changes via a rail click. */
   onActiveItemKeyChange?: (key: string) => void;
@@ -204,7 +219,7 @@ interface IressSideNavWithSideMenuItems extends IressSideNavBaseProps {
    * Override: content to display in the side panel instead of
    * `items[activeItemKey].children`. Can be flat items, groups, or a mix.
    */
-  sideMenuItems: SideNavPanelItem[];
+  sideMenuItems: IressSideNavPanelItem[];
 
   /**
    * Key of the active rail item.

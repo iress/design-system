@@ -5,7 +5,7 @@
 ## Import
 
 ```tsx
-import { IressToaster } from '@iress-oss/ids-components';
+import { IressToasterProvider, useToaster } from '@iress-oss/ids-components';
 ```
 
 - [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-toaster--docs)

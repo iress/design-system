@@ -819,6 +819,7 @@ enforces conventions and reduces boilerplate across all component/pattern story 
 - [ ] **Step 5:** Migrate all 54 primary story files to use the factory
 - [ ] **Step 6:** Add ESLint rule to enforce story meta quality: all story files must use `componentStoryMeta()` or include `idsConfig.testMeta`, `docs.description.component`, and `stylingProps` in argTypes. This guards the AI pipeline data quality.
 - [ ] **Step 7:** Add ESLint rule to ban `...OtherStory.args` spreads in P1 stories. Every story's `args` must be self-contained with literal values (no computed expressions, no spreads from other stories). This ensures the AI translate pipeline can extract complete code examples without runtime evaluation. P2/P3 stories (with `render` or `withSource`) are exempt.
+- [ ] **Step 8:** Add ESLint rule to enforce `Iress` prefix on exported component-specific types (e.g. `IressAlertButtonProps`, `IressCheckboxVariants`). Shared/utility types (`FormControlValue`, `LabelValueMeta`, `PositiveSpacingToken`, etc.) must NOT have the prefix. This convention allows the AI translate pipeline to distinguish component types (linked to component `.d.ts` files) from shared types (linked to `types.d.ts`/`interfaces.d.ts`).
 
 ---
 

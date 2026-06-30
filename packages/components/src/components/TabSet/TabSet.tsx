@@ -1,7 +1,7 @@
 import { Composite } from '@floating-ui/react';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import {
-  type TabSetChangedEventDetail,
+  type IressTabSetChangedEventDetail,
   TabSetContext,
   TabSetProvider,
 } from './TabSetProvider';
@@ -52,7 +52,7 @@ export interface IressTabSetProps extends Omit<IressStyledProps, 'onChange'> {
   /**
    * Emitted when a tab changes.
    */
-  onChange?: (event: TabSetChangedEventDetail) => void;
+  onChange?: (event: IressTabSetChangedEventDetail) => void;
 
   /**
    * Custom style for the panel (the area that contains the tab content).

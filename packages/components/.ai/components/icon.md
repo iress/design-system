@@ -13,6 +13,27 @@ import { IressIcon } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=icon&title=[Icon]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=icon,enhancement&title=[Icon]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| filled | `boolean` | `false` | Filled variant for Material Symbols When true, icon uses filled style (fill=1) Useful for active/selected states |
+| fixedWidth | `boolean` | — | Adds fixed width class for Font Awesome icons - fa-fw @deprecated Font Awesome specific. Material Symbols inherit text size automatically. |
+| **name** | [MaterialSymbol](https://fonts.google.com/icons?icon.set=Material+Symbols) | — | The name of the icon. Note: Font Awesome is deprecated. Please migrate to Material Symbols. |
+| screenreaderText | `string` | — | Adds screen reader text if the icon needs to be visible to screen reader users |
+| rotate | 180 , `270`, 90  | — | Amount of degrees to rotate the icon. |
+| flip | `both` , `horizontal` , `vertical` | — | Flip the icon horizontally, vertically or both axes. |
+| set | `fab`, `fal`  | `'fal'` | The icon set to be used (Font Awesome only): - `fal`: Font Awesome Light - `fab`: Font Awesome Brand @deprecated Font Awesome is deprecated. Please migrate to Material Symbols. |
+| spin | `half`, 1 , 2 , 3  | — | Accepts a numeric value for speed for one rotation. |
+| type | `IconType` | — | The icon provider to use Note: Font Awesome is deprecated. Please migrate to Material Symbols. |
+
+📄 [Full type definition](../../dist/components/Icon/Icon.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 Icons enhance experiences by visually communicating meaning, actions, status, and feedback.
 
 ```tsx

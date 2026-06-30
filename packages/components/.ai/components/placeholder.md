@@ -13,6 +13,23 @@ import { IressPlaceholder } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=placeholder&title=[Placeholder]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=placeholder,enhancement&title=[Placeholder]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| children | `ReactNode` | — | Description of the placeholder's envisioned contents. |
+| heading | `ReactNode` | — | Title for the placeholder content. |
+| height | `number, string ` | `auto` | Sets the height of the placeholder. |
+| stretch | `boolean` | — | Sets the placeholder to be full width if true. |
+| width | `number, string ` | `auto` | Sets the width of the placeholder. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Placeholder/Placeholder.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 A placeholder is a UI element that allows you to reserve space for content that has not been created yet, usually used for prototyping.
 
 ```tsx

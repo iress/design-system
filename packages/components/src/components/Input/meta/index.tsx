@@ -39,4 +39,25 @@ export default {
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-input--docs',
   guidelines:
     'https://iress.github.io/design-system/#/components/input',
+  additionalProps: [
+    {
+      name: 'clearable',
+      type: 'boolean',
+      description: 'If true, the user can clear the value of the input.',
+      condition: 'Only when rows is not set',
+    },
+    {
+      name: 'variant',
+      type: "'search'",
+      description: 'The variant of the input. The search variant applies different styles for the clear button and loading spinner.',
+      condition: 'Only when rows is not set',
+    },
+    {
+      name: 'autoGrow',
+      type: 'boolean | number',
+      default: 'false',
+      description: 'Enables auto-grow for textarea. Set to true for default max 5 rows, or a number for custom max rows.',
+      condition: 'Only when rows is set',
+    },
+  ],
 } satisfies ComponentMeta;

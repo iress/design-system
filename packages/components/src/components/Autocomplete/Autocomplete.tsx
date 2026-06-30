@@ -87,10 +87,10 @@ export interface IressAutocompleteProps<T extends FormControlValue = string>
   /**
    * Customise the IressInputPopover props for your needs.
    */
-  popoverProps?: AutocompletePopoverProps;
+  popoverProps?: IressAutocompletePopoverProps;
 }
 
-export interface AutocompletePopoverProps extends Pick<
+export interface IressAutocompletePopoverProps extends Pick<
   IressInputPopoverProps,
   | 'autoHighlight'
   | 'align'
@@ -104,6 +104,11 @@ export interface AutocompletePopoverProps extends Pick<
   append?: ReactNode;
   prepend?: ReactNode;
 }
+
+/**
+ * @deprecated Use `IressAutocompletePopoverProps` instead. This type will be removed in a future release.
+ */
+export type AutocompletePopoverProps = IressAutocompletePopoverProps;
 
 /**
  * Provides a text input with suggestions that filter as the user types.

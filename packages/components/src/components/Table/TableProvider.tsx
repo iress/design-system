@@ -18,20 +18,20 @@ import { composeTableInitialColumnFilters } from './helpers/composeTableInitialC
 import {
   composeTableColumnDefs,
   tableInArrayFilterFn,
-  type TableColumn,
+  type IressTableColumn,
 } from './helpers/composeTableColumnDefs';
 
 export interface TableProviderProps<
   TRow extends object,
   TVal = unknown,
 > extends PropsWithChildren {
-  columns?: TableColumn<TRow, TVal>[];
+  columns?: IressTableColumn<TRow, TVal>[];
   rows: TRow[];
 }
 
 export interface TableContextValue<TRow extends object, TVal = unknown> {
   api: Table<TRow>;
-  getColumnByKey: (key: string) => TableColumn<TRow, TVal> | undefined;
+  getColumnByKey: (key: string) => IressTableColumn<TRow, TVal> | undefined;
 }
 
 function createTableContext<TRow extends object, TVal = unknown>() {

@@ -13,6 +13,45 @@ import { IressAutocomplete } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=autocomplete&title=[Autocomplete]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=autocomplete,enhancement&title=[Autocomplete]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| alwaysShowOnFocus | `boolean` | — | Always shown on focus, even if the user has not interacted with the input. |
+| append | `ReactNode` | `<IressIcon name="search" />` | Append content. |
+| autoSelect | `boolean` | `true` | If true, the selected option becomes the value of the input when the autocomplete loses focus. |
+| clearable | `boolean` | `true` | If `true`, then user can clear the value of the input. |
+| errorText | `ReactNode` | `( <IressAlert status="danger" mb="none" borderRadius="radius.system.form"> An unknown error occurred. Please contact support if the error persists. </IressAlert> )` | Text to be displayed when the options function errors out. It is not used when the options are provided as an array. |
+| noResultsText | `ReactNode` | — | Text to be displayed when no results are found. |
+| onChange | `((e?: SyntheticEvent<HTMLInputElement, Event>, value?: string, option?: [LabelValueMeta](../../dist/interfaces.d.ts)<[FormControlValue](../../dist/types.d.ts)> , undefined) => void) | undefined` | — | Emitted when the user changes the input. The second and third arguments are only available when the options were selected from the `options` prop. |
+| popoverProps | `[IressAutocompletePopoverProps](../../dist/components/Autocomplete/Autocomplete.d.ts)` | `{}` | Customise the IressInputPopover props for your needs. |
+| actions | `Omit<[IressButtonProps](../../dist/components/Button/Button.d.ts), "status" | "mode">[]` | — | Actions to display in the input field, rendered inside the input on the right. These will be rendered with opinionated styling. If you want to use custom buttons or controls, use the `append` prop instead. |
+| width | `any` | — | The width of the input. |
+| defaultValue | `string` | — | The value of the input. Can be a string or a number. Use for uncontrolled inputs. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| variant | `search` | — | The variant of the input, which will apply different styles to the input. The `search` variant is designed for search inputs and will have a different style for the clear button and loading spinner. |
+| inline | `boolean` | — | Make prepend/append element closer to the input content. |
+| readOnly | `[FormControlReadOnly](../../dist/types.d.ts)` | — | Renders the input as read-only. Use `'locked'` when the value is read-only because of permissions. |
+| value | `string` | — | The value of the input. Can be a string or a number. Use for controlled inputs. |
+| rows | `undefined` | — | Number of rows in the `textarea` (when set the component renders a textarea element) |
+| loading | `boolean, string ` | — | The loading states of the input field. If provided a string, will use that text as the loading message. |
+| prepend | `ReactNode` | — | Content to prepended to the input field, usually an icon. |
+| alignRight | `boolean` | `false` | Set input content align to right, useful for numeric inputs. |
+| formatter | `((value?: string) => string | number)` | — | Bring your own formatter that will be used to format the value when the input is not focused, allowing you to display the value in a different format. e.g. User type in value="dsf 987kkk123" => result after formatter: $987,123 (string) |
+| onClear | `((e: ChangeEvent<HTMLInputElement, Element>) => void)` | — | Emitted when the input is manually cleared. |
+| debounceThreshold | `number` | `500` | Time in milliseconds to wait for before performing result search. Only applies to searchable options (function). |
+| initialOptions | `[LabelValueMeta](../../dist/interfaces.d.ts)<[FormControlValue](../../dist/types.d.ts)>[]` | — | Initial options data set, shown when the input is empty. |
+| minSearchLength | `number` | `1` | Minimum number of characters required before triggering async search. Only applies to searchable options (function). Below this threshold, no search will be triggered and no loading state will be shown. |
+| **options** | `[LabelValueMeta](../../dist/interfaces.d.ts)<[FormControlValue](../../dist/types.d.ts)>[] , ((query: string) => Promise<[LabelValueMeta](../../dist/interfaces.d.ts)<[FormControlValue](../../dist/types.d.ts)>[]>)` | — | Options data set, shown when the input is not empty. |
+| limitMobile | `number` | `6` | Maximum number of results displayed on mobile screen sizes (< 768). |
+| limitDesktop | `number` | `12` | Maximum number of results displayed on larger screen sizes (>= 768). |
+
+📄 [Full type definition](../../dist/components/Autocomplete/Autocomplete.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 Autocomplete allow for users to fill in their input by providing suggestions as they type.
 
 ```tsx

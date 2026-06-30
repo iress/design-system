@@ -71,4 +71,12 @@ export default {
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-select--docs',
   guidelines:
     'https://iress.github.io/design-system/#/components/select',
+  additionalProps: [
+    {
+      name: 'minSearchLength',
+      type: 'number',
+      description: 'Minimum number of characters required before search results are shown.',
+      condition: 'Only when options is a function (async)',
+    },
+  ],
 } satisfies ComponentMeta;

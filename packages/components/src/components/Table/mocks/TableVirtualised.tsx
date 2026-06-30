@@ -7,7 +7,7 @@ import {
   IressTable,
   IressText,
   IressToggle,
-  type TableColumn,
+  type IressTableColumn,
 } from '@/main';
 
 interface Row {
@@ -27,7 +27,7 @@ const generateRows = (count: number): Row[] =>
     status: 'pending' as const,
   }));
 
-const columns: TableColumn<Row, string>[] = [
+const columns: IressTableColumn<Row, string>[] = [
   { key: 'name', label: 'Name', width: '35%' },
   { key: 'value', label: 'Value', width: '35%' },
   {

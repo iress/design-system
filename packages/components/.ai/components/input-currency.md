@@ -13,6 +13,37 @@ import { IressInputCurrency } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=input-currency&title=[InputCurrency]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=input-currency,enhancement&title=[InputCurrency]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| alignRight | `boolean` | — | Set input content align to right. |
+| currencyCode | `string` | — | Set the currency symbol and appended currency code, default is `AUD`. |
+| formatOptions | `Omit<NumberFormatOptions, "currency">` | — | Pass additional number format options. @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat |
+| locale | `LocalesArgument` | — | Set the region of the currency, default is `en-AU`. |
+| withSymbol | `boolean` | — | Set the currency symbol. |
+| actions | `Omit<[IressButtonProps](../../dist/components/Button/Button.d.ts), "status" | "mode">[]` | — | Actions to display in the input field, rendered inside the input on the right. These will be rendered with opinionated styling. If you want to use custom buttons or controls, use the `append` prop instead. |
+| width | `any` | — | The width of the input. |
+| defaultValue | `null, number , string ` | — | The value of the input. Can be a string or a number. Use for uncontrolled inputs. |
+| onChange | `((e: ChangeEvent<HTMLInputElement, Element>, value?: T) => void)` | — | Emitted when the input value changes with the new changed value. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| variant | `search` | — | The variant of the input, which will apply different styles to the input. The `search` variant is designed for search inputs and will have a different style for the clear button and loading spinner. |
+| inline | `boolean` | — | Make prepend/append element closer to the input content. |
+| readOnly | `[FormControlReadOnly](../../dist/types.d.ts)` | — | Renders the input as read-only. Use `'locked'` when the value is read-only because of permissions. |
+| value | `null, number , string ` | — | The value of the input. Can be a string or a number. Use for controlled inputs. |
+| append | `ReactNode` | — | Content to append to the input field, usually a button or icon. |
+| loading | `boolean, string ` | — | The loading states of the input field. If provided a string, will use that text as the loading message. |
+| prepend | `ReactNode` | — | Content to prepended to the input field, usually an icon. |
+| formatter | `((value?: T) => string | number)` | — | Bring your own formatter that will be used to format the value when the input is not focused, allowing you to display the value in a different format. e.g. User type in value="dsf 987kkk123" => result after formatter: $987,123 (string) |
+| onClear | `((e: ChangeEvent<HTMLInputElement, Element>) => void)` | — | Emitted when the input is manually cleared. |
+| clearable | `boolean` | `false` | If `true`, then user can clear the value of the input. |
+
+📄 [Full type definition](../../dist/components/InputCurrency/InputCurrency.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 InputCurrency allows a user to input and interact with currency number. It works just like IressInput, with new props locale and currencyCode. This component meets ISO-4217 standard
 
 ```tsx

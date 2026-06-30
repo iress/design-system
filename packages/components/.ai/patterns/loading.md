@@ -13,6 +13,35 @@ import { IressLoading } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=loading&title=[Loading]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=loading,enhancement&title=[Loading]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| estimatedFinishTime | `number` | `3000 10000` | Estimated time in milliseconds for the loading to finish. |
+| loaded | `boolean` | — | If set to `true`, will start hiding the loading indicator. It is recommended to use this prop if you are using the `IressLoading.shouldRender` hook to achieve a smooth loading experience. If set to `true`, will hide the skeleton and display the chart. |
+| messageList | `Record<number, ReactNode>` | — | A message list to display while loading. The key is the time when you want the message to change to this message. If using a message list, the `children` will not be displayed. A checklist to display while loading. The key is the time when you want the item to be checked. |
+| pattern | `component` , `default` , `long` , `page` , `start-up`, `validate`  | — | Use `pattern="start-up"` for the following use cases: - Loading an application for the first time - Switching from a different application to a new application - Switching from a client's website to an Iress application - Switching themes Use `pattern="validate"` for the following use cases: - Submitting a form - Saving a record Use `pattern="page"` for the following use cases: - Detail page for a record - Form page - Article page Use `pattern="component"` for the following use cases: - Component that is expected to be slow to load, such as a chart, table or large graphic. - Component that can be refreshed/updated with new data. The long loading pattern will display a checklist of items that are being loaded.  Use `pattern="long"` for the following use cases: - Calling multiple slow APIs to load data - Loading results from AI - Processing a large amount of data as a queue (eg. bulk uploading or large media file uploads) Do not set the `pattern` prop when no other pattern can be applied. It will only show the loading message after a delay, and is intended for use when loading is not expected to take a long time. Example use cases: - Navigating between different routes - Calling an API within the page that does not require a loading state |
+| progress | `number` | — | If provided, will use this to set the `value` of the progress bar. If not provided, will use the `estimatedFinishTime` to calculate the progress. |
+| renderProgress | `((props: Pick<[IressProgressProps](../../dist/components/Progress/Progress.d.ts)<number>, "max" | "min" | "value" | "sectionTitle">) => ReactNode) | ((props: Pick<[IressProgressProps](../../dist/components/Progress/Progress.d.ts), "max" , ... 1 more ... , "sectionTitle">) => ReactNode)` | — | This is a render prop that allows you to override the default progress rendering. This is useful if you want to use a different progress component or if you want to add additional props to the progress bar. |
+| screenReaderText | `ReactNode` | `'Loading...' 'Loading...' 'Loading...' 'Loading...'` | Only screen readers will see this message, it is changed to the `children` message after the delay. Only screen readers will see this message. Only screen readers will see this message, it is changed to the `message` after the delay. |
+| startFrom | `number` | `0` | Set the start from timer, useful when stringing multiple loading patterns across different pages (eg. logging via a third-party authentication provider) |
+| timeout | `{ loaded?: number , { loaded?: number; message?: number; progress?: number , { skeleton?: number , number , undefined, undefined; } , undefined; } , undefined; } , undefined; message?: number , undefined; update?: number ` | `2500 500 3000` | Set the timeouts for showing the progress bar and message. The time in milliseconds before the loading message is displayed. Delay in milliseconds before the skeleton is displayed. Set the timeouts for showing the skeleton and update messages. Delay in milliseconds before the message is displayed. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| loading | `boolean, string ` | — | When true, button is in loading state. If provided a string, will be used as the loading text for screen readers. |
+| message | `ReactNode` | `'This is taking longer than expected...'` | Set the message to be displayed when the button is in the loading state. |
+| position | `bottom`, `right` , `top`  | — | This sets where the loading message will be displayed. - `bottom` - The loading message will be displayed below the button. It will be absolute positioned. - `top` - The loading message will be displayed above the button. It will be absolute positioned. - `right` - The loading message will be displayed to the right of the button. It will be inline positioned. |
+| renderButton | `((props: Pick<[IressButtonProps](../../dist/components/Button/Button.d.ts), "loading">) => ReactNode)` | — | This is a render prop that allows you to override the default button rendering. This is useful if you want to use a different button component or if you want to add additional props to the button. |
+| critical | `ReactNode` | — | If provided, will switch the skeleton to this template. Use when you have critical content that can be displayed while loading to allow the user to see some content while the rest is loading. |
+| error | `ReactNode` | — | An error to display if the loading fails. This will override the skeleton. An error to display if the loading fails. This will override the `messageList` and show an error message instead. |
+| template | `ReactNode` | `'page' 'chart'` | Which template to use as the skeleton, or you can use a ReactNode to customise the skeleton completely. |
+| update | `ReactNode` | — | Set the chart to be updated. If a `ReactNode` is provided, it will be displayed as the message. If set to `true`, will display the default message `Updating...`. |
+
+📄 [Full type definition](../../dist/patterns/Loading/Loading.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 The loading pattern is used to indicate that content is being loaded or processed consistently across Iress products.
 
 ```tsx

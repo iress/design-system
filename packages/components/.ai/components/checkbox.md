@@ -13,6 +13,32 @@ import { IressCheckbox } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=checkbox&title=[Checkbox]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=checkbox,enhancement&title=[Checkbox]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| checked | `boolean` | — | If true, the checkbox is selected. Please use this when rendering the checkbox in controlled mode. |
+| children | `ReactNode` | — | The checkbox content |
+| defaultChecked | `boolean` | — | If true, the checkbox will be initially rendered as selected. Please use this when rendering the checkbox in uncontrolled mode. |
+| heading | `ReactNode` | — | Sets the heading for the checkbox when using the `card` variant |
+| hiddenLabel | `boolean` | — | Visually hides the label (if set), label will still be read out by screenreaders. |
+| indeterminate | `boolean` | — | If true, the checkbox will visually appear as indeterminate. |
+| name | `string` | — | The name of the control, which is submitted with the form data. |
+| onBlur | `((e: FocusEvent<HTMLInputElement, Element>) => void)` | — | Emitted when the checkbox loses focus. |
+| onChange | `((e: ChangeEvent<HTMLInputElement, Element>, checked?: boolean, value?: T) => void) | undefined` | — | Emitted when the checkbox value changes. |
+| onFocus | `((e: FocusEvent<HTMLInputElement, Element>) => void)` | — | Emitted when the checkbox gains focus. |
+| required | `boolean` | — | If `true`, the checkbox is a required field and will be validated as such. |
+| readOnly | `[FormControlReadOnly](../../dist/types.d.ts)` | — | Renders the checkbox as read-only. Use `'locked'` when the value is read-only because of permissions. |
+| value | `T` | — | Value of the checkbox when used in a checkbox group. The checked state of the checkbox will be overridden based on this value if used inside a checkbox group. **Note:** - The value of the checkbox does not mean if its checked or not, use the checked property for that. - If the value of the checkbox is true/false, and checked is undefined and not inside a CheckboxGroup, it will use this as the checked value. This ensures out-of-the-box compatibility with React Hook Form. |
+| variant | `[IressCheckboxVariants](../../dist/components/Checkbox/Checkbox.d.ts)` | — | The visual variant of the checkbox. - `card`: Provides a larger, card-like style with a heading slot. - `touch`: Provides a larger, button-like style, great for mobile devices. - `undefined`: The default checkbox style. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Checkbox/Checkbox.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) (spacing, colour, layout, typography, radius).
+
 Checkboxes are used to let a user select one or more options for a limited number of choices. Also, works as a child of IressCheckboxGroup
 
 ```tsx
