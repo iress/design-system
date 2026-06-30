@@ -1,8 +1,10 @@
-import { execSync } from 'child_process';
-import { join } from 'path';
+/**
+ * --tokens subcommand
+ * Generates the token reference from the @iress-oss/ids-tokens schema.
+ */
 
-const ROOT = join(import.meta.dirname, '../..');
+import { generateTokenReference } from './helpers/generate-token-reference';
 
 export async function translateTokens() {
-  execSync('tsx ./scripts/generate-token-reference.ts', { cwd: ROOT, stdio: 'inherit' });
+  await generateTokenReference();
 }

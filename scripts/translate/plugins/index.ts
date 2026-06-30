@@ -127,7 +127,7 @@ export function getPlugin(componentName: string): StoryPlugin | undefined {
 // --- Story Override Plugins ---
 
 import { join } from 'path';
-import { readFileSync } from 'fs';
+import { readFileSync, existsSync } from 'fs';
 
 const ROOT = join(import.meta.dirname, '../../..');
 
@@ -366,7 +366,60 @@ const stylingPropsReferencePlugin: StoryOverridePlugin = {
   },
 };
 
-const overridePlugins: StoryOverridePlugin[] = [breakpointTablePlugin, faMigrationPlugin, iconBrowserPlugin, zIndexPlugin, feedbackPlugin, formPlugin, searchSelectionPlugin, stylingPropsReferencePlugin];
+const TOKEN_STORY_SECTIONS: Record<string, string> = {
+  'colour--neutral': '### Neutral',
+  'colour--primary': '### Primary',
+  'colour--accent': '### Accent',
+  'colour--success': '### System — Success',
+  'colour--danger': '### System — Danger',
+  'colour--warning': '### System — Warning',
+  'colour--info': '### System — Info',
+  'colour--data-subtle': '### Data — Subtle',
+  'colour--data-bold': '### Data — Bold',
+  'colour--global-interactions': '### GlobalInteractions',
+  'radius--radius': '### Scale Tokens',
+  'radius--system': '### System Tokens',
+  'spacing--spacing': '## Spacing Tokens',
+  'typography--base': '### Base',
+  'typography--headings': '### Headings',
+  'typography--body': '### Body',
+  'typography--code': '### Code',
+  'introduction--reference': '## Colour Tokens',
+};
+
+const tokenStoriesPlugin: StoryOverridePlugin = {
+  stories: Object.keys(TOKEN_STORY_SECTIONS),
+  render(storyId: string) {
+    const sectionHeading = TOKEN_STORY_SECTIONS[storyId];
+    if (!sectionHeading) return '';
+
+    const refPath = join(ROOT, 'packages/tokens/.ai/tokens-reference.md');
+    if (!existsSync(refPath)) return '';
+
+    const source = readFileSync(refPath, 'utf-8');
+    const headingLevel = sectionHeading.startsWith('## ') ? '## ' : '### ';
+    const nextHeadingRegex = new RegExp(`\n${headingLevel.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\S`);
+
+    const startIdx = source.indexOf(sectionHeading);
+    if (startIdx === -1) return '';
+
+    // Find the end: next heading at same level or end of file
+    const afterHeading = source.slice(startIdx + sectionHeading.length);
+    const endMatch = afterHeading.search(nextHeadingRegex);
+    const section = endMatch === -1
+      ? afterHeading.trim()
+      : afterHeading.slice(0, endMatch).trim();
+
+    // For the introduction--reference, just return the first section
+    if (storyId === 'introduction--reference') {
+      return 'See [tokens-reference.md](./tokens-reference.md) for the complete token reference.';
+    }
+
+    return section;
+  },
+};
+
+const overridePlugins: StoryOverridePlugin[] = [breakpointTablePlugin, faMigrationPlugin, iconBrowserPlugin, zIndexPlugin, feedbackPlugin, formPlugin, searchSelectionPlugin, stylingPropsReferencePlugin, tokenStoriesPlugin];
 
 const overrideMap = new Map<string, StoryOverridePlugin>();
 for (const plugin of overridePlugins) {

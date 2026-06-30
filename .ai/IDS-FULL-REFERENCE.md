@@ -1,6 +1,6 @@
 # IDS Full Reference
 
-> Auto-generated from 96 docs. Do not edit manually.
+> Auto-generated from 100 docs. Do not edit manually.
 
 ---
 
@@ -20,6 +20,30 @@ import { IressAlert } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Alert)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=alert&title=[Alert]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=alert,enhancement&title=[Alert]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| actions | `[IressAlertButtonProps](../../dist/components/Alert/Alert.d.ts)[]` | — | Actions to display in the alert. These will be rendered as buttons with opinionated styling. If you want to use custom buttons, use the `footer` prop instead. |
+| children | `ReactNode` | — | Contents of the alert. Is automatically wrapped in `<IressText />` and will inherit its styling. |
+| defaultClosed | `boolean` | — | If true, the alert will be dismissed and unrendered from the DOM. Use for uncontrolled dismissal of the alert, where the component manages its own dismissed state internally. |
+| closed | `boolean` | — | If true, the alert will be dismissed and unrendered from the DOM. Use for controlled dismissal of the alert, where the parent component manages the dismissed state and passes it down via this prop. |
+| closeLabel | `string` | — | Optional override for the default close button label "Close". |
+| footer | `ReactNode` | — | Buttons and controls for the alert. @deprecated Use `actions` instead for buttons with opinionated styling. If you need other footer content, use the `children` prop instead. |
+| heading | `ReactNode` | — | Text for alert heading. If a string, it will use a heading with level 2. |
+| icon | [MaterialSymbol](https://fonts.google.com/icons?icon.set=Material+Symbols) | — | Icon to display in the alert. If set to `false`, no icon will be displayed. If not provided, the icon will be determined by the `status` prop. |
+| multiLine | `boolean` | `false` | If true, the alert will have a layout that supports longer content, with increased spacing and the icon aligned to the top of the alert instead of centered. Should be used when the content of the alert is more than a couple of sentences. |
+| onClose | `((e?: MouseEvent<HTMLButtonElement, MouseEvent>) => void)` | — | Emitted when the alert is dismissed by the user via the close button. |
+| status | `danger` , `info` , `neutral`, `success` , `warning`  | `info` | Alert type - danger, info, success or warning. |
+| variant | `full-width`, `sidebar`  | — | Variants of the alert, allowing it to be styled differently based on where its used in the application. - Sidebar: The icon will be aligned to the heading, and the text will appear below the icon. - Full-width: The border will be removed, except for the bottom border. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Alert/Alert.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 An alert displays a short, important message in a way that attracts the user's attention without interrupting the user's task.
 
@@ -384,6 +408,45 @@ import { IressAutocomplete } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Autocomplete)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=autocomplete&title=[Autocomplete]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=autocomplete,enhancement&title=[Autocomplete]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| alwaysShowOnFocus | `boolean` | — | Always shown on focus, even if the user has not interacted with the input. |
+| append | `ReactNode` | `<IressIcon name="search" />` | Append content. |
+| autoSelect | `boolean` | `true` | If true, the selected option becomes the value of the input when the autocomplete loses focus. |
+| clearable | `boolean` | `true` | If `true`, then user can clear the value of the input. |
+| errorText | `ReactNode` | `( <IressAlert status="danger" mb="none" borderRadius="radius.system.form"> An unknown error occurred. Please contact support if the error persists. </IressAlert> )` | Text to be displayed when the options function errors out. It is not used when the options are provided as an array. |
+| noResultsText | `ReactNode` | — | Text to be displayed when no results are found. |
+| onChange | `((e?: SyntheticEvent<HTMLInputElement, Event>, value?: string, option?: [LabelValueMeta](../../dist/interfaces.d.ts)<[FormControlValue](../../dist/types.d.ts)> , undefined) => void) | undefined` | — | Emitted when the user changes the input. The second and third arguments are only available when the options were selected from the `options` prop. |
+| popoverProps | `[IressAutocompletePopoverProps](../../dist/components/Autocomplete/Autocomplete.d.ts)` | `{}` | Customise the IressInputPopover props for your needs. |
+| actions | `Omit<[IressButtonProps](../../dist/components/Button/Button.d.ts), "status" | "mode">[]` | — | Actions to display in the input field, rendered inside the input on the right. These will be rendered with opinionated styling. If you want to use custom buttons or controls, use the `append` prop instead. |
+| width | `any` | — | The width of the input. |
+| defaultValue | `string` | — | The value of the input. Can be a string or a number. Use for uncontrolled inputs. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| variant | `search` | — | The variant of the input, which will apply different styles to the input. The `search` variant is designed for search inputs and will have a different style for the clear button and loading spinner. |
+| inline | `boolean` | — | Make prepend/append element closer to the input content. |
+| readOnly | `[FormControlReadOnly](../../dist/types.d.ts)` | — | Renders the input as read-only. Use `'locked'` when the value is read-only because of permissions. |
+| value | `string` | — | The value of the input. Can be a string or a number. Use for controlled inputs. |
+| rows | `undefined` | — | Number of rows in the `textarea` (when set the component renders a textarea element) |
+| loading | `boolean, string ` | — | The loading states of the input field. If provided a string, will use that text as the loading message. |
+| prepend | `ReactNode` | — | Content to prepended to the input field, usually an icon. |
+| alignRight | `boolean` | `false` | Set input content align to right, useful for numeric inputs. |
+| formatter | `((value?: string) => string | number)` | — | Bring your own formatter that will be used to format the value when the input is not focused, allowing you to display the value in a different format. e.g. User type in value="dsf 987kkk123" => result after formatter: $987,123 (string) |
+| onClear | `((e: ChangeEvent<HTMLInputElement, Element>) => void)` | — | Emitted when the input is manually cleared. |
+| debounceThreshold | `number` | `500` | Time in milliseconds to wait for before performing result search. Only applies to searchable options (function). |
+| initialOptions | `[LabelValueMeta](../../dist/interfaces.d.ts)<[FormControlValue](../../dist/types.d.ts)>[]` | — | Initial options data set, shown when the input is empty. |
+| minSearchLength | `number` | `1` | Minimum number of characters required before triggering async search. Only applies to searchable options (function). Below this threshold, no search will be triggered and no loading state will be shown. |
+| **options** | `[LabelValueMeta](../../dist/interfaces.d.ts)<[FormControlValue](../../dist/types.d.ts)>[] , ((query: string) => Promise<[LabelValueMeta](../../dist/interfaces.d.ts)<[FormControlValue](../../dist/types.d.ts)>[]>)` | — | Options data set, shown when the input is not empty. |
+| limitMobile | `number` | `6` | Maximum number of results displayed on mobile screen sizes (< 768). |
+| limitDesktop | `number` | `12` | Maximum number of results displayed on larger screen sizes (>= 768). |
+
+📄 [Full type definition](../../dist/components/Autocomplete/Autocomplete.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 Autocomplete allow for users to fill in their input by providing suggestions as they type.
 
@@ -921,101 +984,67 @@ Storybook provides an interactive playground for testing different prop combinat
 
 [View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-autocomplete--docs)
 
----
+## Recipes
 
-<!-- components/avatar.md -->
-
-# Avatar
-
-Avatars display user initials in a circular frame, with optional badge indicators and multi-person layouts.
-
-> **Component:** `import { IressAvatar } from '@iress-oss/ids-components'`
-> **Storybook:** [Avatar in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-avatar--docs)
-
-## Quick Start
+### Search Table
 
 ```tsx
-import { IressAvatar } from '@iress-oss/ids-components';
+import {
+  IressInput,
+  IressStack,
+  IressTable,
+  useAutocompleteSearch,
+} from '@iress-oss/ids-components';
+import { useMemo, useState } from 'react';
 
-<IressAvatar initials="BC" badge variant="single" />
+const ALL_ROWS = [...Array(5).keys()].map((number) => ({
+  label: `Person ${number + 1}`,
+  gender: number % 2 ? 'Female' : 'Male',
+}));
+
+export const AutocompleteSearchTable = () => {
+  const [query, setQuery] = useState('');
+
+  const { debouncedQuery, loading, results } = useAutocompleteSearch({
+    initialOptions: ALL_ROWS,
+    options: ALL_ROWS,
+    query,
+  });
+
+  const caption = useMemo(() => {
+    if (debouncedQuery && !loading) {
+      return `Results matching ${debouncedQuery}`;
+    }
+
+    return loading ? 'Searching...' : '';
+  }, [debouncedQuery, loading]);
+
+  const columns = useMemo(() => {
+    const labelKey = debouncedQuery ? 'formattedLabel' : 'label';
+    return [
+      { key: labelKey, label: 'Name' },
+      { key: 'gender', label: 'Gender' },
+    ];
+  }, [debouncedQuery]);
+
+  return (
+    <IressStack gap="md">
+      <IressInput
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Search by name"
+      />
+      <IressTable
+        caption={caption}
+        columns={columns}
+        rows={loading ? [] : results}
+        empty={loading ? 'Loading...' : 'No results found'}
+        scope="col"
+      />
+    </IressStack>
+  );
+};
 ```
-
-## When to use
-
-Use avatars to **represent users or entities** in your interface:
-
-- Displaying user profile identity (initials-based)
-- Showing assignment or ownership of items
-- Indicating shared/joint entities with the multiple variant
-- Stacking multiple users in compact layouts (e.g., attendee lists)
-
-## Examples
-
-### No badge
-
-Set `badge={false}` to hide the status indicator.
-
-```tsx
-<IressAvatar initials="JD" badge={false} />
-```
-
-[View "NoBadge" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-avatar--no-badge)
-
-### Multiple persons
-
-Use `variant="multiple"` to show an overlapping dual-avatar layout representing shared or joint entities.
-
-```tsx
-<IressAvatar initials="BC" variant="multiple" badge={false} />
-```
-
-[View "MultiplePersons" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-avatar--multiple-persons)
-
-### Compact
-
-Set `compact={true}` for a smaller 32×32px avatar with a white stroke border, designed for stacking with negative margin.
-
-```tsx
-<IressAvatar initials="MT" compact />
-```
-
-[View "Compact" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-avatar--compact)
-
-### Compact group
-
-Multiple compact avatars can be stacked with negative margin to show a group of users.
-
-```tsx
-<div style={{ display: 'flex' }}>
-<IressAvatar initials="MT" compact />
-<IressAvatar initials="HM" compact style={{ marginLeft: '-16px' }} />
-<IressAvatar initials="TL" compact style={{ marginLeft: '-16px' }} />
-</div>
-```
-
-[View "CompactGroup" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-avatar--compact-group)
-
-## Testing
-
-Query avatars by their accessible role and label:
-
-```tsx
-const avatar = screen.getByRole('img', { name: 'Avatar: BC' });
-```
-
-## Props
-
-- **Type:** `IressAvatarProps`
-- **Type declarations:** `@iress-oss/ids-components/dist/components/Avatar/Avatar.d.ts`
-
-```typescript
-import type { IressAvatarProps } from '@iress-oss/ids-components';
-```
-
-
----
-
-*View interactive examples: [https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-avatar--docs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-avatar--docs)*
 
 
 ---
@@ -1036,6 +1065,25 @@ import { IressButtonGroup } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/ButtonGroup)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=button-group&title=[ButtonGroup]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=button-group,enhancement&title=[ButtonGroup]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| children | `ReactNode` | — | Content of the button group, usually multiple `IressButton`. |
+| defaultSelected | `[ControlledValue](../../dist/hooks/useControlledState.d.ts)<T, TMultiple>` | — | Initially selected value, use for uncontrolled components. |
+| hiddenLabel | `boolean` | — | Hides the label if set; label will still be read out by screen readers. |
+| **label** | `ReactNode` | — | Sets the label text for the button group. If passed an element, it will render the element with an id, to ensure its connection to the button group. |
+| multiple | `boolean` | — | Allows multiple buttons to be selected. |
+| onChange | `((newValue?: [ControlledValue](../../dist/hooks/useControlledState.d.ts)<T, TMultiple>) => void)` | — | Called when a user activates one of its children buttons. |
+| selected | `[ControlledValue](../../dist/hooks/useControlledState.d.ts)<T, TMultiple>` | — | Selected value, use for controlled components. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/ButtonGroup/ButtonGroup.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 ButtonGroup allows users to switch between two or more possible states. ButtonGroups are only used for actions that occur immediately after the user "flips the switch".
 
@@ -1320,6 +1368,33 @@ import { IressButton } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=button&title=[Button]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=button,enhancement&title=[Button]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| active | `boolean` | — | Sets the active state of the button, usually used to indicate the button has activated a modal, popover or slideout. |
+| append | `ReactNode` | — | Content for the append slot. |
+| children | `ReactNode` | — | Content is placed between prepend and append if provided. Used to describe the expected action of this button. |
+| compact | `boolean` | — | Makes the button more compact by reducing padding and font size. Used for buttons with icon only or when space is limited. |
+| element | `ElementType` | — | Change the component that will be rendered as the button, used for third-party libraries that require a specific element type. By default, it will render a button or an anchor tag based on the `href` prop. |
+| fluid | `any` | — | If `true`, the button will stretch to fill it's container. The prop is responsive, so you can set the breakpoint(s) at which the button will be fluid.  All breakpoints: `fluid={true}` Up to a specific breakpoint: `fluid="md"` |
+| href | `string` | — | Contains a URL or a URL fragment that the hyperlink points to. If this property is set, an anchor tag will be rendered. |
+| icon | [MaterialSymbol](https://fonts.google.com/icons?icon.set=Material+Symbols) | — | The icon to be displayed in the button. If provided, the icon will be displayed and the `children` will be used as screen reader text (although you can explicitly override this with `aria-label`) |
+| loading | `boolean, string ` | `false` | When true, button is in loading state. If provided a string, will be used as the loading text for screen readers. |
+| mode | `muted` , `primary` , `quaternary`, `secondary` , `tertiary`  | `secondary` | Style of the button. - Primary: Used for the main action on a page. Usually only used once per screen. - Secondary: Used for secondary actions on a page, often an action on multiple `IressPanel`s. Can used multiple times per screen. - Tertiary: Used for tertiary actions on a page, often the secondary action on multiple `IressPanel`s. Can used multiple times per screen. - Quaternary: Used for less prominent actions, often used for preference toggles (eg. Collapse all). - Muted: Used for less prominent actions, often used inline with headings. They are mainly used with icons only.  **Migrating to version 6** - `link` mode has been removed. If it is an action, use the `tertiary` mode. If it is a link inside a paragraph, use the new `IressLink` component instead. - `danger` has been removed. Please use the `status` prop instead. - `positive` and `success` have been removed. Please use the `status` prop instead. |
+| onClick | `MouseEventHandler<Exclude<Parameters<Exclude<ButtonRef<C, THref>, undefined>>[0], null>>` | — | Emitted when the menu item is clicked. |
+| prepend | `ReactNode` | — | Content for the prepend slot. |
+| noWrap | `boolean` | `false` | Prevents text wrapping if set to true. |
+| status | `danger` , `success` | — | An optional status to assign to the button. - `success`: Indicates a successful or positive action. - `danger`: Indicates a dangerous or potentially negative action. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| value | `[FormControlValue](../../dist/types.d.ts)` | — | The value of the button, when used in `IressButtonGroup`. |
+
+📄 [Full type definition](../../dist/components/Button/Button.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+
 A button is a clickable item used to perform an action.
 
 ```tsx
@@ -1556,7 +1631,6 @@ You can also use the link specific props `target` and `rel`.
 
 #### Delete confirmation
 
-> [!WARNING]
 > **Make sure that the user understands the consequences of clicking the button**
 >
 > You may want to add a confirmation step to prevent accidental data loss if the
@@ -1642,7 +1716,7 @@ Use the `prepend` and `append` props to correctly position icons or badges insid
 - **`append`** — Places the element after the button text
 - **`icon`** — Convenience prop for setting the icon name directly (useful for icon-only buttons)
 
-> **⚠️ Do not use `slot` attributes on children** (e.g. `<IressIcon slot="start" />`). The `slot` attribute is a legacy v4 pattern that is no longer supported. Always use the `prepend` and `append` props.
+> ⚠️ **Do not use `slot` attributes on children** (e.g. `<IressIcon slot="start" />`). The `slot` attribute is a legacy v4 pattern that is no longer supported. Always use the `prepend` and `append` props.
 
 ```tsx
 import {
@@ -1822,6 +1896,27 @@ import { IressCard } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Card)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=card&title=[Card]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=card,enhancement&title=[Card]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| children | `ReactNode` | — | Main body of the card |
+| element | `ElementType` | — | Element type to render the Card as. |
+| footer | `ReactNode` | — | Section that sticks to the bottom of the card |
+| heading | `ReactNode` | — | Heading slot. Often used for a title or description. |
+| media | `ReactNode` | — | Section (often for an image, table or chart) that appears before the heading |
+| noBorder | `boolean` | — | When set to true, the card will not have a border. This is useful to de-prioritise a card within another bordered container, such as a card within a sidebar. |
+| prepend | `ReactNode` | — | Slot to the left of card content. |
+| selected | `boolean` | — | When set to true, card appears selected. |
+| topRight | `ReactNode` | — | Slot positioned to the top right of the card, often used for an icon or action menu |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Card/Card.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 A container for grouping related content and actions with optional heading, footer, and media slots.
 
@@ -2065,6 +2160,25 @@ import { IressCheckboxGroup } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/CheckboxGroup)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=checkbox-group&title=[CheckboxGroup]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=checkbox-group,enhancement&title=[CheckboxGroup]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| children | `ReactNode` | — | Content to be displayed inside the group, usually multiple `IressCheckbox`. |
+| defaultValue | `T , T[]` | — | Value of checkbox group when in uncontrolled mode. |
+| layout | `'block' , 'inline', 'stack' ` | `'stack'` | Sets which of the block / inline layout options apply. |
+| name | `string` | — | Name to be applied to all checkboxes in the group. |
+| onChange | `(value?: T[]) => void` | — | Called with collated new value when a user toggles one of its children checkboxes. |
+| readOnly | `[FormControlReadOnly](../../dist/types.d.ts)` | — | Renders the group in a read-only state. |
+| value | `T , T[]` | — | Value of checkbox group when in controlled mode. |
+| variant | `CheckboxVariants` | — | The visual variant of the checkboxes in the group. This is passed down to child checkboxes, but can be overridden at the individual checkbox level. - `card`: Provides a larger, card-like style with a heading slot. - `touch`: Provides a larger, button-like style, great for mobile devices. - `undefined`: The default checkbox style. |
+
+📄 [Full type definition](../../dist/components/CheckboxGroup/CheckboxGroup.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 Checkbox groups allow users to make more than one choice in a set of related options.
 
@@ -2575,6 +2689,32 @@ import { IressCheckbox } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=checkbox&title=[Checkbox]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=checkbox,enhancement&title=[Checkbox]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| checked | `boolean` | — | If true, the checkbox is selected. Please use this when rendering the checkbox in controlled mode. |
+| children | `ReactNode` | — | The checkbox content |
+| defaultChecked | `boolean` | — | If true, the checkbox will be initially rendered as selected. Please use this when rendering the checkbox in uncontrolled mode. |
+| heading | `ReactNode` | — | Sets the heading for the checkbox when using the `card` variant |
+| hiddenLabel | `boolean` | — | Visually hides the label (if set), label will still be read out by screenreaders. |
+| indeterminate | `boolean` | — | If true, the checkbox will visually appear as indeterminate. |
+| name | `string` | — | The name of the control, which is submitted with the form data. |
+| onBlur | `((e: FocusEvent<HTMLInputElement, Element>) => void)` | — | Emitted when the checkbox loses focus. |
+| onChange | `((e: ChangeEvent<HTMLInputElement, Element>, checked?: boolean, value?: T) => void) | undefined` | — | Emitted when the checkbox value changes. |
+| onFocus | `((e: FocusEvent<HTMLInputElement, Element>) => void)` | — | Emitted when the checkbox gains focus. |
+| required | `boolean` | — | If `true`, the checkbox is a required field and will be validated as such. |
+| readOnly | `[FormControlReadOnly](../../dist/types.d.ts)` | — | Renders the checkbox as read-only. Use `'locked'` when the value is read-only because of permissions. |
+| value | `T` | — | Value of the checkbox when used in a checkbox group. The checked state of the checkbox will be overridden based on this value if used inside a checkbox group. **Note:** - The value of the checkbox does not mean if its checked or not, use the checked property for that. - If the value of the checkbox is true/false, and checked is undefined and not inside a CheckboxGroup, it will use this as the checked value. This ensures out-of-the-box compatibility with React Hook Form. |
+| variant | `[IressCheckboxVariants](../../dist/components/Checkbox/Checkbox.d.ts)` | — | The visual variant of the checkbox. - `card`: Provides a larger, card-like style with a heading slot. - `touch`: Provides a larger, button-like style, great for mobile devices. - `undefined`: The default checkbox style. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Checkbox/Checkbox.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+
 Checkboxes are used to let a user select one or more options for a limited number of choices. Also, works as a child of IressCheckboxGroup
 
 ```tsx
@@ -2840,6 +2980,52 @@ Storybook provides an interactive playground for testing different prop combinat
 
 [View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkbox--docs)
 
+## Recipes
+
+### With Table Data
+
+```tsx
+import { IressCheckbox, IressTable } from '@iress-oss/ids-components';
+
+export function CheckboxWithTable() {
+  return (
+    <IressTable
+      caption="List of investments"
+      columns={[
+        {
+          format: (value: boolean) => (
+            <IressCheckbox defaultChecked={value} hiddenLabel>
+              Toggle row
+            </IressCheckbox>
+          ),
+          key: 'select',
+          label: 'Select',
+          sort: true,
+        },
+        { key: 'name', label: 'Name' },
+        { key: 'date', label: 'Date' },
+        { key: 'cost', label: 'Cost' },
+      ]}
+      rows={[
+        {
+          select: false,
+          name: 'Artemis Fund Managers Limited',
+          date: '2019-09-23',
+          cost: 23898.12,
+        },
+        {
+          select: true,
+          name: 'CASH.CASH',
+          date: '2020-06-28',
+          cost: 49751.43,
+        },
+      ]}
+    />
+  );
+}
+```
+
+
 ---
 
 <!-- components/col.md -->
@@ -2858,6 +3044,22 @@ import { IressCol } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Col)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=col&title=[Col]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=col,enhancement&title=[Col]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| alignSelf | `center`, `end` , `start` , `stretch`  | — | Individual alignment of column |
+| children | `ReactNode` | — | Any content you would like to be contained in a column. |
+| offset | `[ResponsiveProp](../../dist/types.d.ts)<0 | 4 | "1" | 6 | 1 | "0" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | 2 | 3 | 5 | 7 | 8 | 9 | 10 | 11>` | — | Number of columns to offset. |
+| span | `[ResponsiveProp](../../dist/types.d.ts)<4 | "1" | "auto" | 12 | 6 | 1 | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | 2 | 3 | 5 | 7 | 8 | 9 | 10 | 11 | "12">` | `auto` | Number of columns to span. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Col/Col.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 Used in conjunction with the IressRow component to layout page content.
 
@@ -3209,6 +3411,20 @@ import { IressContainer } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=container&title=[Container]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=container,enhancement&title=[Container]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| children | `ReactNode` | — | Content to be contained, usually used with `IressRow` and `IressCol`. |
+| fluid | `boolean` | — | Container stretches to fill the width of the browser window if true. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Container/Container.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+
 IressContainer provides a means to center and horizontally pad your site's contents.
 
 ```tsx
@@ -3331,6 +3547,19 @@ import { IressDivider } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Divider)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=divider&title=[Divider]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=divider,enhancement&title=[Divider]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| vertical | `boolean` | — | Change to a vertical divider. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Divider/Divider.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 A divider is a UI element that separates content in lists and layouts.
 
@@ -3527,6 +3756,24 @@ import { IressExpander } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Expander)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=expander&title=[Expander]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=expander,enhancement&title=[Expander]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| **activator** | `ReactNode` | — | The element used to activate the expandable container. |
+| activatorStyle | `[IressCustomiseSlot](../../dist/interfaces.d.ts)` | `{}` | This allows you to customise the content styling specifically, which is the floating element. It accepts an object with any of the styling properties available on `IressCSSProps`, as well as `className` and `style`. |
+| children | `ReactNode` | — | Contents that will be expanded/collapsed when the expander is activated. |
+| onChange | `((newValue: boolean) => void)` | — | Emitted when the open state changes. |
+| mode | `link` , `section` | `section` | Controls the display mode of the activator element. Can be Section or Link. |
+| open | `boolean` | `false` | When true the expandable container will be visible and the activator will display as open. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Expander/Expander.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 Expanders are commonly used to reveal more information or details about an element or content on a page.
 
@@ -3767,6 +4014,33 @@ import { IressFieldGroup } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/FieldGroup)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=field-group&title=[FieldGroup]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=field-group,enhancement&title=[FieldGroup]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| children | `ReactNode` | — | Should contain multiple `IressField`, or other elements supported in field group such as `IressButton`. |
+| inline | `boolean` | — | Displays multiple children inline rather than stacked, with a small gap. |
+| join | `boolean` | — | Displays multiple children inline and removes column gap. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| required | `boolean` | — | When set to true, the 'required asterisk (*)' is displayed next to the label text. |
+| hiddenLabel | `boolean` | — | Visually hides the label text, but still available to screen readers. |
+| hint | `ReactNode` | — | Text to be displayed as supporting field description. |
+| horizontal | `boolean` | — | Displays the label and input field inline instead of stacked vertically. |
+| labelWidth | `string` | — | Controls the width of the label container when in horizontal mode. Can be any valid CSS width value (e.g., '200px', '20%', 'auto'). Only applies when `horizontal` is true. |
+| htmlFor | `undefined` | — | Used to connect it to the input element, it should be the input's id. If provided, the label will be rendered as a `<label>` element, otherwise it will be rendered as a `<strong>` element.  [Learn more](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/for) |
+| **label** | `ReactNode` | — | Text to be displayed in the label. |
+| error | `ReactNode` | — | Validation error to be displayed above the field. |
+| errorMessages | `[ValidationMessageObj](../../dist/interfaces.d.ts)[]` | — | Validation errors to be displayed above the field, an array of validation messages to be displayed in `IressValidationSummary`. |
+| readOnly | `[FormControlReadOnly](../../dist/types.d.ts)` | — | Renders the group in a read-only state (no asterisk symbol). Use `'locked'` when the control is read-only due to permissions. |
+| removeErrorMargin | `boolean` | — | Removes the reserved space for error messages, allowing fields to stack with narrower gaps. When true, no margin is reserved for potential error messages. |
+| supplementary | `ReactNode` | — | Supplementary content to be displayed below the field. Is only shown when the field is not in an error state. |
+
+📄 [Full type definition](../../dist/components/FieldGroup/FieldGroup.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 Groups multiple related fields together using a `fieldset` and `legend` for accessibility.
 
@@ -4012,6 +4286,30 @@ import { IressField } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Field)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=field&title=[Field]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=field,enhancement&title=[Field]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| required | `boolean` | — | When set to true, the 'required asterisk (*)' is displayed next to the label text. |
+| hiddenLabel | `boolean` | — | Visually hides the label text, but still available to screen readers. |
+| hint | `ReactNode` | — | Text to be displayed as supporting field description. |
+| horizontal | `boolean` | — | Displays the label and input field inline instead of stacked vertically. |
+| labelWidth | `string` | — | Controls the width of the label container when in horizontal mode. Can be any valid CSS width value (e.g., '200px', '20%', 'auto'). Only applies when `horizontal` is true. |
+| htmlFor | `string` | — | Used to connect it to the input element, it should be the input's id. If provided, the label will be rendered as a `<label>` element, otherwise it will be rendered as a `<strong>` element.  [Learn more](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/for) |
+| **label** | `ReactNode` | — | Text to be displayed in the label. |
+| error | `ReactNode` | — | Validation error to be displayed above the field. |
+| errorMessages | `[ValidationMessageObj](../../dist/interfaces.d.ts)[]` | — | Validation errors to be displayed above the field, an array of validation messages to be displayed in `IressValidationSummary`. |
+| readOnly | `[FormControlReadOnly](../../dist/types.d.ts)` | — | Renders the group in a read-only state (no asterisk symbol). Use `'locked'` when the control is read-only due to permissions. |
+| removeErrorMargin | `boolean` | `false` | Removes the reserved space for error messages, allowing fields to stack with narrower gaps. When true, no margin is reserved for potential error messages. |
+| supplementary | `ReactNode` | — | Supplementary content to be displayed below the field. Is only shown when the field is not in an error state. |
+
+📄 [Full type definition](../../dist/components/Field/Field.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 The field component is used to place label, hint and error information around form controls.
 
@@ -4448,6 +4746,23 @@ import { IressHide } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=hide&title=[Hide]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=hide,enhancement&title=[Hide]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| **children** | `ReactNode` | — | Content to hide. |
+| **hiddenOn** | `[ResponsiveProp](../../dist/types.d.ts)<boolean>` | — | Content will be hidden on any screen sizes that are set to true. |
+| visuallyHidden | `boolean` | — | If true, the content will not be visible, but will be available to screen readers |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Hide/Hide.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+
+> ⚠️ **Deprecated:** `IressHide` has been deprecated. Use the `srOnly`, `hideFrom`, and `hideBelow` styling props instead. See [Styling Props — Accessibility](../styling-props/accessibility.md) for details.
+
 Makes it easier to create adaptive designs that show or hide content based on screen size.
 
 ```tsx
@@ -4645,6 +4960,27 @@ import { IressIcon } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Icon)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=icon&title=[Icon]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=icon,enhancement&title=[Icon]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| filled | `boolean` | `false` | Filled variant for Material Symbols When true, icon uses filled style (fill=1) Useful for active/selected states |
+| fixedWidth | `boolean` | — | Adds fixed width class for Font Awesome icons - fa-fw @deprecated Font Awesome specific. Material Symbols inherit text size automatically. |
+| **name** | [MaterialSymbol](https://fonts.google.com/icons?icon.set=Material+Symbols) | — | The name of the icon. Note: Font Awesome is deprecated. Please migrate to Material Symbols. |
+| screenreaderText | `string` | — | Adds screen reader text if the icon needs to be visible to screen reader users |
+| rotate | 180 , `270`, 90  | — | Amount of degrees to rotate the icon. |
+| flip | `both` , `horizontal` , `vertical` | — | Flip the icon horizontally, vertically or both axes. |
+| set | `fab`, `fal`  | `'fal'` | The icon set to be used (Font Awesome only): - `fal`: Font Awesome Light - `fab`: Font Awesome Brand @deprecated Font Awesome is deprecated. Please migrate to Material Symbols. |
+| spin | `half`, 1 , 2 , 3  | — | Accepts a numeric value for speed for one rotation. |
+| type | `IconType` | — | The icon provider to use Note: Font Awesome is deprecated. Please migrate to Material Symbols. |
+
+📄 [Full type definition](../../dist/components/Icon/Icon.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 Icons enhance experiences by visually communicating meaning, actions, status, and feedback.
 
@@ -5108,6 +5444,21 @@ import { IressImage } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=image&title=[Image]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=image,enhancement&title=[Image]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| **alt** | `string` | — | The alternative text representation of the image. It is used by screen readers to describe the image. If the image is intended for decoration purposes only, make it an empty string. |
+| maxWidth | `number, string ` | `100%` | Override the maximum width of the image |
+| **src** | `string` | — | The address of the image |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Image/Image.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+
 IressImage renders an image that resizes based on the user's screen width. The component accepts standard image attributes like `src` and `alt`.
 
 ```tsx
@@ -5272,6 +5623,24 @@ import { IressInline } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Inline)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=inline&title=[Inline]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=inline,enhancement&title=[Inline]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| children | `ReactNode` | — | Content to be displayed inline. |
+| gap | `[ResponsiveProp](../../dist/types.d.ts)<[PositiveSpacingToken](../../dist/types.d.ts)>` | — | Sets the gap between direct children. @see https://developer.mozilla.org/docs/Web/CSS/gap |
+| horizontalAlign | `any` | — | Sets the horizontal alignment of the inline content. |
+| noWrap | `boolean` | — | Wraps content when stretches beyond container. |
+| rowGap | `[ResponsiveProp](../../dist/types.d.ts)<[PositiveSpacingToken](../../dist/types.d.ts)>` | — | Sets the size of the top and bottom gap between direct children when they begin to wrap. @see https://developer.mozilla.org/docs/Web/CSS/row-gap |
+| verticalAlign | `any` | — | Sets the vertical alignment of the inline content. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Inline/Inline.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 IressInline renders a set of components in a row with equal spacing around them, wrapping onto multiple lines when necessary.
 
@@ -5521,6 +5890,37 @@ import { IressInputCurrency } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/InputCurrency)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=input-currency&title=[InputCurrency]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=input-currency,enhancement&title=[InputCurrency]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| alignRight | `boolean` | — | Set input content align to right. |
+| currencyCode | `string` | — | Set the currency symbol and appended currency code, default is `AUD`. |
+| formatOptions | `Omit<NumberFormatOptions, "currency">` | — | Pass additional number format options. @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat |
+| locale | `LocalesArgument` | — | Set the region of the currency, default is `en-AU`. |
+| withSymbol | `boolean` | — | Set the currency symbol. |
+| actions | `Omit<[IressButtonProps](../../dist/components/Button/Button.d.ts), "status" | "mode">[]` | — | Actions to display in the input field, rendered inside the input on the right. These will be rendered with opinionated styling. If you want to use custom buttons or controls, use the `append` prop instead. |
+| width | `any` | — | The width of the input. |
+| defaultValue | `null, number , string ` | — | The value of the input. Can be a string or a number. Use for uncontrolled inputs. |
+| onChange | `((e: ChangeEvent<HTMLInputElement, Element>, value?: T) => void)` | — | Emitted when the input value changes with the new changed value. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| variant | `search` | — | The variant of the input, which will apply different styles to the input. The `search` variant is designed for search inputs and will have a different style for the clear button and loading spinner. |
+| inline | `boolean` | — | Make prepend/append element closer to the input content. |
+| readOnly | `[FormControlReadOnly](../../dist/types.d.ts)` | — | Renders the input as read-only. Use `'locked'` when the value is read-only because of permissions. |
+| value | `null, number , string ` | — | The value of the input. Can be a string or a number. Use for controlled inputs. |
+| append | `ReactNode` | — | Content to append to the input field, usually a button or icon. |
+| loading | `boolean, string ` | — | The loading states of the input field. If provided a string, will use that text as the loading message. |
+| prepend | `ReactNode` | — | Content to prepended to the input field, usually an icon. |
+| formatter | `((value?: T) => string | number)` | — | Bring your own formatter that will be used to format the value when the input is not focused, allowing you to display the value in a different format. e.g. User type in value="dsf 987kkk123" => result after formatter: $987,123 (string) |
+| onClear | `((e: ChangeEvent<HTMLInputElement, Element>) => void)` | — | Emitted when the input is manually cleared. |
+| clearable | `boolean` | `false` | If `true`, then user can clear the value of the input. |
+
+📄 [Full type definition](../../dist/components/InputCurrency/InputCurrency.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 InputCurrency allows a user to input and interact with currency number. It works just like IressInput, with new props locale and currencyCode. This component meets ISO-4217 standard
 
@@ -5833,6 +6233,99 @@ Storybook provides an interactive playground for testing different prop combinat
 
 [View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-inputcurrency--docs)
 
+## Recipes
+
+### Currency In Table Recipe
+
+```tsx
+import { IressTable } from '@iress-oss/ids-components';
+
+export const CurrencyInTable = () => {
+  return (
+    <IressTable
+      caption="My investments"
+      columns={[
+        {
+          key: 'investmentName',
+          label: 'Investment Name',
+          format: 'string',
+          width: '30%',
+        },
+        {
+          key: 'investmentDate',
+          label: 'Investment Date',
+          format: 'date',
+          width: '30%',
+        },
+        {
+          key: 'totalPercentage',
+          label: 'Total %',
+          format: 'percent',
+          width: '15%',
+        },
+        {
+          key: 'amount',
+          label: 'Investment Amount (AUD)',
+          format: 'currency',
+          currencyCode: '',
+          width: '25%',
+        },
+      ]}
+      rows={[
+        {
+          investmentName: 'US Stocks',
+          investmentDate: '2019-09-23',
+          totalPercentage: 24.8,
+          amount: 23898,
+        },
+        {
+          investmentName: 'US Bonds',
+          investmentDate: '2019-02-05',
+          totalPercentage: 26.2,
+          amount: 26382.456,
+        },
+        {
+          investmentName: 'AU Stocks',
+          investmentDate: '2019-02-05',
+          totalPercentage: 26.2,
+          amount: 9342.1569,
+        },
+        {
+          investmentName: 'UK Stocks',
+          investmentDate: '2020-06-28',
+          totalPercentage: 49,
+          amount: 49751.4,
+        },
+      ]}
+    />
+  );
+};
+```
+
+### Valid Value On Chage Recipe
+
+```tsx
+import { IressInputCurrency } from '@iress-oss/ids-components';
+import { useState } from 'react';
+
+export const ValidValueOnChage = () => {
+  const [value, setValue] = useState('');
+
+  return (
+    <IressInputCurrency
+      value={value}
+      onChange={(_e, value) => {
+        if (typeof value === 'string' && /^-?\d*(\.\d{0,2})?$/.test(value)) {
+          console.log('Valid value:', value);
+          setValue(value);
+        }
+      }}
+    />
+  );
+};
+```
+
+
 ---
 
 <!-- components/input.md -->
@@ -5851,6 +6344,35 @@ import { IressInput } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Input)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=input&title=[Input]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=input,enhancement&title=[Input]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| rows | `number` | — | Number of rows in the `textarea` (when set the component renders a textarea element) |
+| actions | `Omit<[IressButtonProps](../../dist/components/Button/Button.d.ts), "status" | "mode">[]` | — | Actions to display in the input field, rendered inside the input on the right. These will be rendered with opinionated styling. If you want to use custom buttons or controls, use the `append` prop instead. |
+| alignRight | `boolean` | `false` | Set input content align to right, useful for numeric inputs. |
+| append | `ReactNode` | — | Content to append to the input field, usually a button or icon. |
+| defaultValue | `[FormControlValue](../../dist/types.d.ts)` | — | The value of the input. Can be a string or a number. Use for uncontrolled inputs. |
+| formatter | `((value?: T) => string | number)` | — | Bring your own formatter that will be used to format the value when the input is not focused, allowing you to display the value in a different format. e.g. User type in value="dsf 987kkk123" => result after formatter: $987,123 (string) |
+| inline | `boolean` | — | Make prepend/append element closer to the input content. |
+| loading | `boolean, string ` | — | The loading states of the input field. If provided a string, will use that text as the loading message. |
+| onChange | `((e: ChangeEvent<InputBaseElement<TRows>, Element>, value?: T) => void)` | — | Emitted when the input value changes with the new changed value. |
+| onClear | `((e: ChangeEvent<InputBaseElement<TRows>, Element>) => void)` | — | Emitted when the input is manually cleared. |
+| prepend | `ReactNode` | — | Content to prepended to the input field, usually an icon. |
+| readOnly | `[FormControlReadOnly](../../dist/types.d.ts)` | — | Renders the input as read-only. Use `'locked'` when the value is read-only because of permissions. |
+| value | `[FormControlValue](../../dist/types.d.ts)` | — | The value of the input. Can be a string or a number. Use for controlled inputs. |
+| width | `any` | — | The width of the input. |
+| clearable | boolean _(Only when rows is not set)_ | — | If true, the user can clear the value of the input. |
+| variant | 'search' _(Only when rows is not set)_ | — | The variant of the input. The search variant applies different styles for the clear button and loading spinner. |
+| autoGrow | boolean | number _(Only when rows is set)_ | `false` | Enables auto-grow for textarea. Set to true for default max 5 rows, or a number for custom max rows. |
+
+📄 [Full type definition](../../dist/components/Input/Input.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 Inputs allow a user to input and interact with data. This component should be used as a child of the IressField component to ensure the correct placement of elements like label, error & hint text.
 
@@ -6029,7 +6551,7 @@ Set the `rows` prop to render a `textarea` instead of an `input`.
 
 Content (typically icons) can be added via the `prepend` and `append` props on `IressInput`.
 
-> **⚠️ Do not use `slot` attributes on children** (e.g. `<IressIcon slot="start" />`). The `slot` attribute is a legacy v4 pattern that is no longer supported. Always use the `prepend` and `append` props.
+> ⚠️ **Do not use `slot` attributes on children** (e.g. `<IressIcon slot="start" />`). The `slot` attribute is a legacy v4 pattern that is no longer supported. Always use the `prepend` and `append` props.
 
 ```tsx
 import { IressIcon, IressInput, IressStack } from '@iress-oss/ids-components';
@@ -6273,6 +6795,103 @@ Storybook provides an interactive playground for testing different prop combinat
 
 [View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-input--docs)
 
+## Recipes
+
+### React Hook Forms
+
+```tsx
+import {
+  type InputRef,
+  IressAlert,
+  IressButton,
+  IressInline,
+  IressInput,
+  IressLabel,
+  IressModal,
+  IressStack,
+  IressTable,
+} from '@iress-oss/ids-components';
+import { useState } from 'react';
+import {
+  Controller,
+  type UseFormRegisterReturn,
+  useForm,
+} from 'react-hook-form';
+
+const registerInnerElement = (register: UseFormRegisterReturn) => {
+  return {
+    ...register,
+    onClear: register.onChange,
+    ref: (ref: InputRef | null) => {
+      if (ref) {
+        register.ref(ref.input);
+      }
+    },
+  };
+};
+
+export const ReactHookFormsInput = () => {
+  const { register, handleSubmit, control } = useForm();
+  const [data, setData] = useState<Record<string, string> | undefined>();
+
+  return (
+    // eslint-disable-next-line sonarjs/void-use -- This is a mock form submission
+    <form onSubmit={void handleSubmit(setData)}>
+      <IressStack gap="md">
+        <IressAlert status="info">
+          Although you can use <code>IressInput</code> directly with React Hook
+          Forms, we recommend using <code>IressFormField</code> within{' '}
+          <code>IressForm</code> for a more integrated experience.
+        </IressAlert>
+        <IressInline gap="md" verticalAlign="middle">
+          <IressLabel htmlFor="Controller">
+            Input using <code>{`{ Controller } from 'react-hook-forms'`}</code>
+          </IressLabel>
+          <Controller
+            name="Controller"
+            control={control}
+            render={({ field }) => (
+              <IressInput
+                {...field}
+                clearable
+                onClear={field.onChange}
+                id="firstName"
+              />
+            )}
+          />
+        </IressInline>
+        <IressInline gap="md" verticalAlign="middle">
+          <IressLabel htmlFor="register">
+            Input using <code>{`{ register } = useForm()`}</code>
+          </IressLabel>
+          <IressInput
+            {...registerInnerElement(register('register'))}
+            clearable
+            id="register"
+          />
+        </IressInline>
+        <IressButton type="submit">Submit</IressButton>
+      </IressStack>
+      {data && (
+        <IressModal
+          show={!!data}
+          onShowChange={(show) => !show && setData(undefined)}
+        >
+          <IressTable
+            caption="Submitted details"
+            rows={Object.entries(data ?? {}).map((entry) => ({
+              name: entry[0],
+              value: JSON.stringify(entry[1], null, 2),
+            }))}
+          />
+        </IressModal>
+      )}
+    </form>
+  );
+};
+```
+
+
 ---
 
 <!-- components/label.md -->
@@ -6291,6 +6910,23 @@ import { IressLabel } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Label)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=label&title=[Label]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=label,enhancement&title=[Label]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| readOnly | `locked`, boolean  | — | Renders the label in a read-only state. Use `'locked'` to show a lock indicator when the related field is permission-locked. |
+| required | `boolean` | — | When set to true, the 'required asterisk (*)' is displayed next to the label text. |
+| append | `ReactNode` | — | Content to be appended to the label. This is not affected by the `hiddenLabel` prop. |
+| hiddenLabel | `boolean` | — | Visually hides the label text, but still available to screen readers. |
+| htmlFor | `string` | — | Used to connect it to the input element, it should be the input's id. If provided, the label will be rendered as a `<label>` element, otherwise it will be rendered as a `<strong>` element.  [Learn more](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/for) |
+
+📄 [Full type definition](../../dist/components/Label/Label.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 Use the IressLabel component when building bespoke form inputs and IressField is too restrictive.
 
@@ -6458,6 +7094,26 @@ import { IressLink } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=link&title=[Link]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=link,enhancement&title=[Link]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| active | `boolean` | — | Sets the active state of the link, usually used to indicate the link has activated a modal, popover or slideout. |
+| append | `ReactNode` | — | Content for the append slot. |
+| children | `ReactNode` | — | Content is placed between prepend and append if provided. Used to describe the expected intention of this link. |
+| element | `ElementType` | — | Change the component that will be rendered as the link, used for third-party libraries that require a specific element type. By default, it will render a button or an anchor tag based on the `href` prop. |
+| href | `string` | — | Contains a URL or a URL fragment that the hyperlink points to. If this property is set, an anchor tag will be rendered. |
+| loading | `boolean, string ` | `false` | When true, button is in loading state. If provided a string, will be used as the loading text for screen readers. |
+| onClick | `MouseEventHandler<Exclude<Parameters<Exclude<ButtonRef<C, THref>, undefined>>[0], null>>` | — | Emitted when the menu item is clicked. |
+| prepend | `ReactNode` | — | Content for the prepend slot. |
+
+📄 [Full type definition](../../dist/components/Link/Link.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+
 A link is used to navigate to another page or location.
 
 ```tsx
@@ -6540,7 +7196,7 @@ Use the `prepend` and `append` props to correctly position icons or badges insid
 - **`prepend`** — Places the element before the link text
 - **`append`** — Places the element after the link text
 
-> **⚠️ Do not use `slot` attributes on children** (e.g. `<IressIcon slot="start" />`). The `slot` attribute is a legacy v4 pattern that is no longer supported. Always use the `prepend` and `append` props.
+> ⚠️ **Do not use `slot` attributes on children** (e.g. `<IressIcon slot="start" />`). The `slot` attribute is a legacy v4 pattern that is no longer supported. Always use the `prepend` and `append` props.
 
 ```tsx
 <IressInline gap="md">
@@ -6792,6 +7448,31 @@ import { IressMenu } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Menu)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=menu&title=[Menu]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=menu,enhancement&title=[Menu]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| changeOnBlur | `boolean` | — | If set to true, change event will be fired with the correctly selected value. |
+| children | `ReactNode` | — | Content of the menu, usually multiple `IressMenuItem`, `IressMenuHeading`, `IressMenuText` or `IressMenuDivider`. |
+| defaultSelected | `[ControlledValue](../../dist/hooks/useControlledState.d.ts)<T, TMultiple>` | — | Initially selected values of menu when `role` is listbox. Used for uncontrolled menus. |
+| fluid | `boolean` | — | If set to true, menu will fill the width of its container. |
+| id | `string` | — | Unique ID of the menu. If not provided, will be automatically generated. Used to add aria attributes for accessibility. |
+| layout | `inline-equal-width`, `inline` , `stack`  | `stack` | Sets whether the layout is vertical (stack) or horizontal (inline/inline-equal-width). |
+| multiSelect | `boolean` | — | If set to true, menu items will contain checkboxes. |
+| noWrap | `boolean` | — | If set to true, menu items will not wrap onto a separate line when space is exceeded. |
+| numbered | `boolean` | — | Add a numbered header style to the menu group. Only used when variant is 'side'. |
+| onChange | `((value?: [ControlledValue](../../dist/hooks/useControlledState.d.ts)<T, TMultiple> , null) => void)` | — | Emitted when the menu value changes |
+| selected | `[ControlledValue](../../dist/hooks/useControlledState.d.ts)<T, TMultiple>` | — | Selected values of menu when `role` is listbox. Used for controlled menus. |
+| role | `list` , `listbox`, `menu`  | `list` | Type of menu, corresponding to [aria-roles](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles). Will be set automatically when used inside popover or when the `multiSelect` prop is set to true. |
+| variant | `MenuVariants` | — | The variant of the menu, which determines some opinionated styles for the menu items |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Menu/Menu.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 A menu can display grouped action buttons, navigation items or headings.
 
@@ -7476,6 +8157,37 @@ import { IressModal } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=modal&title=[Modal]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=modal,enhancement&title=[Modal]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| actions | `[IressAlertButtonProps](../../dist/components/Modal/Modal.d.ts)[]` | — | Opinionated action buttons rendered in the modal footer. Each action is rendered as an `IressButton` with the modal's status automatically applied. |
+| children | `ReactNode` | — | Text to be displayed inside the modal. |
+| closeText | `string` | `Close` | Screenreader text for close button. |
+| container | `[FloatingUIContainer](../../dist/types.d.ts)` | — | The container element to render the modal into. By default, the modal will render at the end of the document body. |
+| defaultShow | `boolean` | `false` | When set to `true` the modal will be visible by default. Use for uncontrolled modals. |
+| disableBackdropClick | `boolean` | — | When set to `true`, users cannot exit the modal by clicking the backdrop or using the escape key. |
+| fixedFooter | `boolean` | — | When set to `true` the modal's footer will always be visible and fixed to the bottom of the modal. |
+| footer | `ReactNode` | — | Content to be rendered in the modal footer. If `actions` are also provided, this content will be rendered below the actions. |
+| heading | `ReactElement>, string ` | — | Sets the heading for the modal. If passed an element, it will render the element with an id, to ensure its connection to the modal. |
+| id | `string` | — | Unique ID for the modal. Use if you would like to open this modal from anywhere in your app using the `useModal` hook. |
+| noCloseButton | `boolean` | — | When set to `true`, no close button will be rendered. You must add your own closing mechanism to ensure accessibility. |
+| onShowChange | `((show: boolean) => void)` | — | Emitted when the modal has opened or closed internally. Use for controlled modals. |
+| onStatus | ((status: `close` , `initial` , `open` , `unmounted`) => void) | — | Emitted when the modal has mounted, unmounted, opened or closed. Open and close occur before animation begins. |
+| onEntered | `(() => void)` | — | Emitted when the modal has opened. |
+| onExited | `(() => void)` | — | Emitted when the modal has closed. |
+| show | `boolean` | — | When set to `true` the modal will be visible. Use for controlled modals. |
+| size | `lg`, `md` , `sm`  | — | Size of the modal: - `sm`: Small modals communicate the outcome of an irreversible action. They should be concise and straightforward, containing a single action and, in some cases, a single input field. - `md`: Medium modals provide optional supporting information to help users understand the context of a word or screen. They may contain a single action and, in some cases, a larger input such as a textarea. - `lg`: Large modals are used for more complex tasks that require multiple steps or a lot of information as well as media such as video and PDF documents. They can contain multiple actions, inputs, and supporting information.  If status is set, size can only be `sm` or `md`, and will default to `sm`. If status is not set, size can be `sm`, `md` or `lg`, and will default to `md`. |
+| static | `boolean` | — | When set to `true`, the modal will act like a static element when open. This means it will not lock scroll or focus within the modal. Note: This is used internally to display modals in Styler. It is not recommended to use this prop in your own applications. |
+| status | `ModalStatus` | — | Sets the status style of the modal with an accompanying status icon. Use status modals for communicating outcomes of actions. - `danger`: Communicates destructive or critical action outcomes. - `success`: Communicates successful completions. - `warning`: Communicates important cautions before proceeding. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Modal/Modal.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+
 Modals gather information, complete a subtask, or provide additional information without losing the context of an underlying page.
 
 ```tsx
@@ -7653,8 +8365,7 @@ The `heading` prop sets a heading for the modal, rendered in the header and anno
 Use the `footer` prop to place content underneath the main content, usually for buttons.
 
 ```tsx
-import { IressButton, IressModal } from '@iress-oss/ids-components';
-import { useModal } from '../hooks/useModal';
+import { IressButton, IressModal, useModal } from '@iress-oss/ids-components';
 
 const MODAL_ID = 'storybook-modal';
 
@@ -7688,8 +8399,12 @@ The `fixedFooter` prop fixes the footer to the bottom of the modal, useful when 
 > a modal without a fixed footer if you encounter these issues.
 
 ```tsx
-import { IressButton, IressModal, IressText } from '@iress-oss/ids-components';
-import { useModal } from '../hooks/useModal';
+import {
+  IressButton,
+  IressModal,
+  IressText,
+  useModal,
+} from '@iress-oss/ids-components';
 
 const MODAL_ID = 'fixed-footer-modal';
 
@@ -8090,8 +8805,7 @@ export const ModalSizes = () => (
 Use the `width` styling prop for responsive sizes. The modal becomes full width on screens smaller than the specified value.
 
 ```tsx
-import { IressButton, IressModal } from '@iress-oss/ids-components';
-import { useModal } from '../hooks/useModal';
+import { IressButton, IressModal, useModal } from '@iress-oss/ids-components';
 
 const MODAL_ID = 'responsive-modal';
 
@@ -8175,8 +8889,12 @@ export function ModalStatuses() {
 Use `disableBackdropClick` and/or `noCloseButton` when you require the user to complete the task before closing. Ensure you provide an alternative way to close.
 
 ```tsx
-import { IressButton, IressModal, IressStack } from '@iress-oss/ids-components';
-import { useModal } from '../hooks/useModal';
+import {
+  IressButton,
+  IressModal,
+  IressStack,
+  useModal,
+} from '@iress-oss/ids-components';
 
 export function ModalDisableClosing() {
   const { showModal } = useModal();
@@ -8419,6 +9137,27 @@ import { IressPanel } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=panel&title=[Panel]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=panel,enhancement&title=[Panel]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| children | `ReactNode` | — | Main body of the card |
+| element | `div` | — | Element type to render the Card as. |
+| footer | `ReactNode` | — | Section that sticks to the bottom of the card |
+| heading | `ReactNode` | — | Heading slot. Often used for a title or description. |
+| media | `ReactNode` | — | Section (often for an image, table or chart) that appears before the heading |
+| noBorder | `boolean` | — | When set to true, the card will not have a border. This is useful to de-prioritise a card within another bordered container, such as a card within a sidebar. |
+| prepend | `ReactNode` | — | Slot to the left of card content. |
+| selected | `boolean` | — | When set to true, card appears selected. |
+| topRight | `ReactNode` | — | Slot positioned to the top right of the card, often used for an icon or action menu |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Panel/Panel.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+
 A panel is used to group related content.
 
 ```tsx
@@ -8506,6 +9245,20 @@ import { IressPill } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Pill)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=pill&title=[Pill]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=pill,enhancement&title=[Pill]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| children | `ReactNode` | — | Content of the badge. |
+| mode | `10` , `20` , `30` , `40` , `50` , `60` , `70` , `80` , `90`, `danger` , `info` , `success` , `warning` , 10 , 20 , 30 , 40 , 50 , 60 , 70 , 80 , 90  | `90` | Style of the badge, based on the data colour palette (10-90) or system status colours (danger, info, success, warning). Can be a number (10-90), a string ('10'-'90'), or a system status ('danger', 'info', 'success', 'warning'). |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Pill/Pill.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 Pills are used for status indicators and badges — primarily for status updates, notifications and counts.
 
@@ -8668,6 +9421,23 @@ import { IressPlaceholder } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=placeholder&title=[Placeholder]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=placeholder,enhancement&title=[Placeholder]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| children | `ReactNode` | — | Description of the placeholder's envisioned contents. |
+| heading | `ReactNode` | — | Title for the placeholder content. |
+| height | `number, string ` | `auto` | Sets the height of the placeholder. |
+| stretch | `boolean` | — | Sets the placeholder to be full width if true. |
+| width | `number, string ` | `auto` | Sets the width of the placeholder. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Placeholder/Placeholder.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+
 A placeholder is a UI element that allows you to reserve space for content that has not been created yet, usually used for prototyping.
 
 ```tsx
@@ -8757,6 +9527,37 @@ import { IressPopover } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Popover)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=popover&title=[Popover]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=popover,enhancement&title=[Popover]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| **activator** | `ReactElement> | undefined` | — | Content for an activator element, usually an `IressButton`. |
+| align | `[FloatingUIAligns](../../dist/types.d.ts)` | `auto` | Sets the alignment of the popover relative to the activator element. |
+| children | `ReactNode` | — | The content to render within the popover. |
+| container | `[FloatingUIContainer](../../dist/types.d.ts)` | — | The container element to render the popover into. By default, the popover will render where its parent is rendered.  **Note:** If the `container` doesn’t exist when the popover is mounted, ensure you pass an element directly (not a ref) and specify null as the default value before it is set. This lets it wait for the root to be available. For example, if you reference the parent element of a popover. |
+| contentClassName | `string` | — | Class name of the popover content. @deprecated Use `contentStyle` instead. |
+| contentStyle | `[IressCustomiseSlot](../../dist/interfaces.d.ts)` | `{}` | This allows you to customise the content styling specifically, which is the floating element. It accepts an object with any of the styling properties available on `IressCSSProps`, as well as `className` and `style`. |
+| defaultShow | `boolean` | — | When set to `true` the popover will be visible by default. Use for uncontrolled popovers. |
+| displayMode | `inline` , `overlay` | `overlay` | Sets the display mode of popover. |
+| fluid | `boolean` | — | Popovers can be fluid, meaning they will take up the full width of their container. |
+| focusStartIndex | `number` | — | Which index to start the focus on when the popover is opened. Only works with `type` listbox and menu. Note: The index must exist in the list of items, otherwise it will not work. |
+| matchActivatorWidth | `boolean` | — | Sets the popover to match the width of the activator. Note: This only works when `displayMode="overlay"`. |
+| offset | `OffsetOptions` | `5` | The offset of the popover from its default position. This can be a number or an object with `mainAxis` and `crossAxis` properties, which specify the offset in pixels along the main axis (the axis along which the popover is aligned) and the cross axis (the perpendicular axis). |
+| onActivated | `((e?: Event, reason?: OpenChangeReason, activeIndex?: number , null , undefined) => void) | undefined` | — | Is called when popover is activated. |
+| onDeactivated | `((e?: Event, reason?: OpenChangeReason, activeIndex?: number , null , undefined) => void) | undefined` | — | Is called when popover is deactivated. |
+| onNavigate | `((activeIndex: number , null) => void)` | — | Is called when registered popover items are navigated using arrow keys. Only works with `type` listbox and menu. |
+| show | `boolean` | — | When set to `true` the modal will be visible. Use for controlled popovers. |
+| type | `dialog` , `grid` , `listbox`, `menu` , `tree`  | — | Describes the type of content contained in the popover. |
+| virtualFocus | `boolean` | `false` | Whether the focus is virtual (using `aria-activedescendant`). Use this if you need focus to remain on the reference element (such as an input), but allow arrow keys to navigate items. Note: This is only applicable when type is set to: `listbox` or `menu`, and only works out of the box with `IressMenu` and its subcomponents. |
+| nested | `boolean` | — | Whether this popover uses nested navigation (ArrowRight to open, ArrowLeft to close). When not set, this is auto-detected based on whether the popover is inside another popover. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Popover/Popover.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 A popover is a panel that is toggled on/off by an activator button or text input. The panel is positioned relative to its activator element.
 
@@ -9212,6 +10013,91 @@ Storybook provides an interactive playground for testing different prop combinat
 
 [View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-popover--docs)
 
+## Recipes
+
+### Focusable Children
+
+```tsx
+import { useState } from 'react';
+import {
+  IressButton,
+  IressPopover,
+  usePopoverItem,
+} from '@iress-oss/ids-components';
+
+const CountButton = () => {
+  const [count, setCount] = useState(0);
+  const { isActiveInPopover, ...popoverItemProps } = usePopoverItem('Count', {
+    onKeyDown: (e) => {
+      if (e.key === '+') {
+        setCount(count + 1);
+      }
+    },
+  });
+
+  return (
+    <IressButton
+      {...popoverItemProps}
+      active={isActiveInPopover}
+      mode="tertiary"
+      fluid
+    >
+      Increase count using the + key: {count}
+    </IressButton>
+  );
+};
+
+export const UsePopoverExample = () => (
+  <IressPopover
+    activator={<IressButton>Toggle</IressButton>}
+    container={document.body}
+    type="listbox"
+    virtualFocus
+  >
+    <CountButton />
+    <CountButton />
+  </IressPopover>
+);
+```
+
+### With Listbox
+
+```tsx
+import { useState } from 'react';
+import {
+  IressButton,
+  IressMenu,
+  IressMenuItem,
+  IressPopover,
+} from '@iress-oss/ids-components';
+
+export function PopoverWithListbox() {
+  const [selected, setSelected] = useState<string | undefined>('aus');
+
+  return (
+    <IressPopover
+      activator={<IressButton>Select country</IressButton>}
+      container={document.body}
+      type="listbox"
+      contentStyle={{ p: 'none' }}
+    >
+      <IressMenu
+        role="listbox"
+        aria-label="Country"
+        selected={selected}
+        onChange={(value) => setSelected(value as string)}
+      >
+        <IressMenuItem value="aus">Australia</IressMenuItem>
+        <IressMenuItem value="nz">New Zealand</IressMenuItem>
+        <IressMenuItem value="uk">United Kingdom</IressMenuItem>
+        <IressMenuItem value="sg">Singapore</IressMenuItem>
+      </IressMenu>
+    </IressPopover>
+  );
+}
+```
+
+
 ---
 
 <!-- components/progress.md -->
@@ -9230,6 +10116,23 @@ import { IressProgress } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Progress)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=progress&title=[Progress]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=progress,enhancement&title=[Progress]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| backgroundImage | `string` | — | A background image URL to be used as the background of the progress bar. |
+| borderRadius | `RadiusToken` | — | The **`border-radius`** CSS property rounds the corners of an element's outer border edge using the radius tokens in the design system. @see https://developer.mozilla.org/docs/Web/CSS/border-radius |
+| min | `number` | `0` | The minimum value of the progress indicator. If `min` is set, the progress indicator will render as a `<meter />` element instead of a `<progress />` element, thereby changing its role to `meter` instead of `progressbar`. |
+| sectionTitle | `string` | `Progress is {{current}} of {{max}}` | The text that is announced by the screen reader. Should contain a description of the section the progress is being measured for. You can use {{current}} and {{max}} as string replacers for the current value and maximum value respectively. |
+| value | `number` | `0` | The current value of the progress indicator. |
+
+📄 [Full type definition](../../dist/components/Progress/Progress.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 A progress component is used to indicate to a user the completion of a set of tasks or a process.
 
@@ -9425,6 +10328,26 @@ import { IressProvider } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=provider&title=[Provider]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=provider,enhancement&title=[Provider]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| children | `ReactNode` | — | The contents of your application, and/or the components which will be calling slideouts, modals and toasts. |
+| container | `[FloatingUIContainer](../../dist/types.d.ts)` | — | Container to render modals, slideouts and toasts into. If not provided, will render into the body of the document.  **Note:** This does not affect popovers. Use `popoverContainer` to set a shared container for all nested popovers. |
+| noIconProvider | `boolean` | `false` | Disable the built-in IconProvider. When true, no IconProvider is rendered, allowing you to provide your own icon loading mechanism (e.g. hiding the app until the Material Symbols font is fully loaded). |
+| noSubsetting | `boolean` | `false` | Disable automatic font subsetting via Google Fonts CDN When false, only icons actually used in the component tree are loaded When true, the full Material Symbols font is loaded Ignored when `noIconProvider` is true. |
+| noDefaultFont | `boolean` | — | If you don't want to load the default Iress font from the CDN, set this to true. |
+| popoverContainer | `container` , [FloatingUIContainer](../../dist/types.d.ts) | — | Container to render popovers into. By default, popovers render where their parent is rendered (no portal).  Set to `"container"` to reuse the same container as the `container` prop (useful when you want modals, slideouts, toasts **and** popovers in the same DOM node).  Individual popovers can still override this by setting their own `container` prop. |
+| zIndexOffset | `number` | — | A value added to every IDS z-index layer via `calc()`. Use this when your application has a navigation element with a high z-index and IDS overlays (modal, slideout, toast) appear behind it. @example // Navbar sits at z-index 995 — shift IDS layers above it: <IressProvider zIndexOffset={1000}>...</IressProvider> // Modal → 1400, Toast → 1500, Tooltip → 1600 |
+| toasterOffset | `string` | — | Offsets the toaster from the viewport edge (block axis). Useful when a fixed navbar would overlap the toaster. Accepts any valid CSS length value (e.g. `'60px'`, `'4rem'`). @example <IressProvider toasterOffset="60px">...</IressProvider> |
+| position | `bottom-center` , `bottom-end` , `bottom-start` , `top-center`, `top-end` , `top-start`  | `top-end` | The position on the screen where the toast will appear. |
+
+📄 [Full type definition](../../dist/components/Provider/Provider.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+
 Provider is a component that sets up the Iress Design System for your application. It ensures that the design system is correctly configured and ready to use. It is required for Modal, Slideout, Toaster, and Tooltip to function correctly.
 
 ## Design
@@ -9552,6 +10475,26 @@ import { IressRadioGroup } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/RadioGroup)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=radio-group&title=[RadioGroup]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=radio-group,enhancement&title=[RadioGroup]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| children | `ReactNode` | — | Content of the radio group, usually multiple `IressRadio` components. |
+| layout | `'block' , 'inline' , 'inlineEqualWidth', 'inlineFlex' , 'stack' ` | `'stack'` | Sets which of the block / inline layout options apply. |
+| name | `string` | — | Name to be applied to all radios in the group. |
+| onChange | `(e: ChangeEvent<HTMLInputElement>, value?: T) => void` | — | Called when a user selects one of its children radio buttons. If you pass in a non-string value, you can access it using the second parameter of the function. |
+| required | `boolean` | — | When true, marks the field as required |
+| defaultValue | `T` | — | Initial value of radio group when in uncontrolled mode. |
+| readOnly | `[FormControlReadOnly](../../dist/types.d.ts)` | — | Renders a readOnly radio group. |
+| value | `T` | — | Value of radio group when in controlled mode. |
+| variant | `CheckboxVariants` | — | The visual variant of the radios in the group. This is passed down to child radios, but can be overridden at the individual radio level. - `card`: Provides a larger, card-like style with a heading slot. - `touch`: Provides a larger, button-like style, great for mobile devices. - `undefined`: The default radio style. |
+
+📄 [Full type definition](../../dist/components/RadioGroup/RadioGroup.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 A radio group is a group of radio buttons that allows the user to select one option from multiple options, where all options are visible.
 
@@ -9890,10 +10833,31 @@ import { IressRadio } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=radio&title=[Radio]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=radio,enhancement&title=[Radio]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| checked | `boolean` | — | Sets the checked state of the radio. If it is within a radio group, it will be overridden by the radio group's value and whether it matches this radio's value. |
+| children | `ReactNode` | — | Label of the radio |
+| heading | `ReactNode` | — | Sets the heading for the radio when using the `card` variant |
+| name | `string` | — | Sets the name attribute on the radio input. If it is within a radio group, it will be overridden with the radio group's name. |
+| onChange | `((e: ChangeEvent<HTMLInputElement, Element>, value?: T) => void)` | — | Handles the onChange event of the radio input. If you pass in a non-string value, you can access it using the second parameter of the function. |
+| required | `boolean` | — | If `true`, the radio is a required field and will be validated as such. If it is within a radio group, it will be overridden with the radio group's required state. |
+| readOnly | `[FormControlReadOnly](../../dist/types.d.ts)` | — | Renders the radio as read-only. Use `'locked'` when the value is read-only because of permissions. |
+| value | `T` | — | The value which is submitted with the form data when this radio button is checked. To set this radio as checked by default, use the `checked` property. |
+| variant | `[IressCheckboxVariants](../../dist/components/Checkbox/Checkbox.d.ts)` | — | The visual variant of the radio. - `card`: Provides a larger, card-like style with a heading slot. - `touch`: Provides a larger, button-like style, great for mobile devices. - `undefined`: The default radio style. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Radio/Radio.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+
 A radio is a single option presented with a radio button. It is used to select a single option from multiple options. It is typically used in an IressRadioGroup.
 
 ```tsx
-<IressRadio defaultChecked>Checked radio button</IressRadio>;
+<IressRadio checked>Checked radio button</IressRadio>;
 ```
 
 ## Design
@@ -9934,7 +10898,7 @@ You can set the radio to `checked` by default. This is useful when you want to p
 **Note:** If you are using an `IressRadioGroup`, you should use the `value` prop on the `IressRadioGroup` to set the checked state of its `<IressRadio />` children, as the `checked` prop will be ignored.
 
 ```tsx
-<IressRadio defaultChecked>Checked radio button</IressRadio>;
+<IressRadio checked>Checked radio button</IressRadio>;
 ```
 
 #### Read only
@@ -9949,7 +10913,7 @@ import { IressRadio, IressStack } from '@iress-oss/ids-components';
 export function RadioReadOnly() {
   return (
     <IressStack gap="sm">
-      <IressRadio readOnly defaultChecked>
+      <IressRadio readOnly checked>
         Radio button
       </IressRadio>
       <IressRadio readOnly>Radio button</IressRadio>
@@ -10064,6 +11028,30 @@ import { IressReadonly } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Readonly)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=readonly&title=[Readonly]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=readonly,enhancement&title=[Readonly]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| children | `ReactNode` | — | The formatted value. If not provided, the value will be displayed. |
+| inline | `boolean` | — | Make prepend/append element closer to the input content. |
+| variant | `[FormControlReadOnly](../../dist/types.d.ts)` | — | The readonly variant. - `'locked'`: Applies disabled-like styling (greyed out, `not-allowed`   cursor). The value is still submitted via a hidden input. |
+| actions | `Omit<[IressButtonProps](../../dist/components/Button/Button.d.ts), "status" | "mode">[]` | — | Actions to display in the input field, rendered inside the input on the right. These will be rendered with opinionated styling. If you want to use custom buttons or controls, use the `append` prop instead. |
+| width | `any` | — | The width of the input. |
+| defaultValue | `[FormControlValue](../../dist/types.d.ts)` | — | The value of the input. Can be a string or a number. Use for uncontrolled inputs. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| value | `[FormControlValue](../../dist/types.d.ts)` | — | The value of the input. Can be a string or a number. Use for controlled inputs. |
+| append | `ReactNode` | — | Content to append to the input field, usually a button or icon. |
+| loading | `boolean, string ` | — | The loading states of the input field. If provided a string, will use that text as the loading message. |
+| prepend | `ReactNode` | — | Content to prepended to the input field, usually an icon. |
+| alignRight | `boolean` | `false` | Set input content align to right, useful for numeric inputs. |
+| formatter | `((value?: T) => string | number)` | — | Bring your own formatter that will be used to format the value when the input is not focused, allowing you to display the value in a different format. e.g. User type in value="dsf 987kkk123" => result after formatter: $987,123 (string) |
+
+📄 [Full type definition](../../dist/components/Readonly/Readonly.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 Readonly displays a value that cannot be edited by the user. It renders a hidden input field to ensure the value is submitted with the form.
 
@@ -10297,6 +11285,23 @@ import { IressRow } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Row)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=row&title=[Row]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=row,enhancement&title=[Row]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| children | `ReactNode` | — | Any content you would like to be contained. Best used with `IressCol`. |
+| gutter | `[ResponsiveProp](../../dist/types.d.ts)<[PositiveSpacingToken](../../dist/types.d.ts)>` | — | Sets the gap between the children `<IressCol />` components. |
+| horizontalAlign | `any` | `left` | Horizontal alignment, follows flexbox justify-content |
+| rowGap | `[ResponsiveProp](../../dist/types.d.ts)<[PositiveSpacingToken](../../dist/types.d.ts)>` | — | Sets the size of the top and bottom gap between direct children when they begin to wrap. @see https://developer.mozilla.org/docs/Web/CSS/row-gap |
+| verticalAlign | `any` | `top` | Vertical alignment, follows flexbox align-items |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Row/Row.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 Used in conjunction with the IressCol component to lay out page content.
 
@@ -10708,6 +11713,41 @@ import { IressSelect } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Select)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=select&title=[Select]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=select,enhancement&title=[Select]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| align | `[FloatingUIAligns](../../dist/types.d.ts)` | `bottom-start` | Sets the alignment of the dropdown relative to the activator element. |
+| autoHighlight | `boolean` | `true` | By default, the Select will automatically highlight the first option in the list when it is opened. Set this to false to disable that behaviour. |
+| disabled | `boolean` | — |  |
+| defaultValue | `any` | — | Value of selected option for uncontrolled select. |
+| multiSelect | `boolean` | — | Set to true if the user can select multiple options. |
+| multiSelectLimit | `number` | `5` | Limits the number of selected value tags shown before the rest are collapsed into a summary tag (e.g. "+3 more"). Only applies when `multiSelect` is `true`. This is not for validation — it only controls how many tags are visibly rendered. |
+| name | `string` | — | Name of the select. Used to pass data when submitted within a form. |
+| native | `any` | — | If `true`, the select will render a native select element instead of the custom select. This is for use in contexts where the select's popover may not work, such as within modals or tables, or when you want to use the native select's features such as optgroups. |
+| onBlur | `((event: Event , FocusEvent<HTMLElement, Element>) => void)` | — | Callback fired when the user has completely blurred away from the Select. This is to kill the blur event bubbling. (component is no longer in focus and popover is closed). |
+| onChange | `any` | — | Emitted when the value changes. Required for integration with `IressForm`. When using custom `renderOptions`, pass `handleMenuChange` to your menu's `onChange` to ensure this callback fires. |
+| **options** | `FormattedLabelValueMeta<[FormControlValue](../../dist/types.d.ts)>[] , ((query: string) => Promise<[LabelValueMeta](../../dist/interfaces.d.ts)<[FormControlValue](../../dist/types.d.ts)>[]>)` | — | The available options that the user can select from. |
+| placeholder | `any` | — | Placeholder, shown when there is nothing selected. |
+| readOnly | `[FormControlReadOnly](../../dist/types.d.ts)` | — | Renders the select as read-only. |
+| renderHiddenInput | `((props: SelectHiddenInputRenderProps<TMultiple>) => ReactNode)` | — | Completely customise the rendering of the hidden input. |
+| renderLabel | `((props: SelectLabelRenderProps<TMultiple>) => ReactElement>)` | — | Completely customise the rendering of the select label. |
+| renderOptions | `((props: SelectOptionsRenderProps<TMultiple>) => ReactNode)` | — | Completely customise the rendering of the select options. |
+| required | `boolean` | — | Whether its required. Will be passed to the hidden input. |
+| type | `dialog` , `grid` , `listbox`, `menu` , `tree`  | — |  |
+| value | `any` | — | Value of selected option for controlled select. |
+| virtualFocus | `boolean` | — |  |
+| header | `ReactNode` | — | Header showed in option panel when expanded. |
+| footer | `ReactNode` | — | Footer showed in option panel when expanded. |
+| width | `any` | — | The width of the select. |
+| matchActivatorWidth | `boolean` | `true` | Whether the popover should match the width of the activator element. When true, the dropdown will have the same width as the select input. When false, the dropdown will size based on its content. |
+
+📄 [Full type definition](../../dist/components/Select/Select.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 Renders a dropdown select input for choosing one option from a list.
 
@@ -11579,6 +12619,22 @@ import { IressSkeleton } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=skeleton&title=[Skeleton]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=skeleton,enhancement&title=[Skeleton]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| height | `string` | — | Sets the height of the skeleton bones. If no unit is specified it will default to pixels. Not allowed when in `text` mode. |
+| mode | `SkeletonMode` | `text` | Mode of the skeleton. `rect` and `circle` must have `width` and `height` specified. `text` works with `textStyle`. |
+| textStyle | ... 9 more ..., `inherit` , `typography.body.sm.regular` , `typography.body.sm` , `typography.heading.1` , `typography.heading.2` , `typography.heading.3` , `typography.heading.4` , `typography.heading.5`  | — | Use `textStyle` to specify what the Skeleton should emulate. If set to `h1` a non-break space with the same font-size and line-height of a h1 will be rendered. |
+| width | `string` | — | Sets the width of the skeleton bones. If no unit is specified it will default to pixels. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Skeleton/Skeleton.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+
 Skeletons can increase perceived performance for users. As opposed to spinners, skeletons make it feel as though things are happening immediately, then the information is incrementally displayed on the screen.
 
 ```tsx
@@ -11616,7 +12672,7 @@ export function SkeletonMode() {
 | ✅ Do | ❌ Don't |
 |-------|----------|
 | Match the skeleton shape to the actual content layout | Use a single generic rectangle for all loading states |
-| Use `text` mode with matching `textVariant` for text content | Show skeletons for longer than 3 seconds without explanation |
+| Use `text` mode with matching `textStyle` for text content | Show skeletons for longer than 3 seconds without explanation |
 | Transition smoothly from skeleton to real content | Animate skeletons with jarring effects |
 | Keep skeleton layouts stable to avoid layout shift | Change layout dimensions when real content appears |
 
@@ -11666,7 +12722,7 @@ export function SkeletonMode() {
 
 #### Text
 
-`text` mode works in place of `IressText`, matching sizing via the `textVariant` prop. Accepts `width` but not `height` (determined by font size and line height).
+`text` mode works in place of `IressText`, matching sizing via the `textStyle` prop. Accepts `width` but not `height` (determined by font size and line height).
 
 ```tsx
 import { useState } from 'react';
@@ -11958,6 +13014,33 @@ import { IressSkipLink } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=skip-link&title=[SkipLink]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=skip-link,enhancement&title=[SkipLink]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| active | `boolean` | — | Sets the active state of the button, usually used to indicate the button has activated a modal, popover or slideout. |
+| append | `ReactNode` | — | Content for the append slot. |
+| children | `ReactNode` | `Skip to content` | Content is placed between prepend and append if provided. Used to describe the expected action of this button. Description of where the skip link jumps to. |
+| compact | `boolean` | — | Makes the button more compact by reducing padding and font size. Used for buttons with icon only or when space is limited. |
+| element | `ElementType` | — | Change the component that will be rendered as the button, used for third-party libraries that require a specific element type. By default, it will render a button or an anchor tag based on the `href` prop. |
+| fluid | `any` | — | If `true`, the button will stretch to fill it's container. The prop is responsive, so you can set the breakpoint(s) at which the button will be fluid.  All breakpoints: `fluid={true}` Up to a specific breakpoint: `fluid="md"` |
+| href | `string` | — | Contains a URL or a URL fragment that the hyperlink points to. If this property is set, an anchor tag will be rendered. Contains a URL or a URL fragment that the skip link points to. If this property is set, an anchor tag will be rendered. |
+| icon | [MaterialSymbol](https://fonts.google.com/icons?icon.set=Material+Symbols) | — | The icon to be displayed in the button. If provided, the icon will be displayed and the `children` will be used as screen reader text (although you can explicitly override this with `aria-label`) |
+| loading | `boolean, string ` | — | When true, button is in loading state. If provided a string, will be used as the loading text for screen readers. |
+| mode | `muted` , `primary` , `quaternary`, `secondary` , `tertiary`  | — | Style of the button. - Primary: Used for the main action on a page. Usually only used once per screen. - Secondary: Used for secondary actions on a page, often an action on multiple `IressPanel`s. Can used multiple times per screen. - Tertiary: Used for tertiary actions on a page, often the secondary action on multiple `IressPanel`s. Can used multiple times per screen. - Quaternary: Used for less prominent actions, often used for preference toggles (eg. Collapse all). - Muted: Used for less prominent actions, often used inline with headings. They are mainly used with icons only.  **Migrating to version 6** - `link` mode has been removed. If it is an action, use the `tertiary` mode. If it is a link inside a paragraph, use the new `IressLink` component instead. - `danger` has been removed. Please use the `status` prop instead. - `positive` and `success` have been removed. Please use the `status` prop instead. |
+| onClick | `MouseEventHandler<Exclude<Parameters<Exclude<ButtonRef<C, THref>, undefined>>[0], null>>` | — | Emitted when the menu item is clicked. |
+| prepend | `ReactNode` | — | Content for the prepend slot. |
+| noWrap | `boolean` | — | Prevents text wrapping if set to true. |
+| status | `danger` , `success` | — | An optional status to assign to the button. - `success`: Indicates a successful or positive action. - `danger`: Indicates a dangerous or potentially negative action. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| value | `[FormControlValue](../../dist/types.d.ts)` | — | The value of the button, when used in `IressButtonGroup`. |
+
+📄 [Full type definition](../../dist/components/SkipLink/SkipLink.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+
 The skip link component allows keyboard users to quickly bypass the top-level navigation links and jump to the main content on a page.
 
 ```tsx
@@ -12085,6 +13168,34 @@ import { IressSlideout } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Slideout)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=slideout&title=[Slideout]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=slideout,enhancement&title=[Slideout]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| children | `ReactNode` | — | Content to be displayed within the slideout. |
+| closeText | `string` | `Close` | Screenreader text for close button. |
+| container | `[FloatingUIContainer](../../dist/types.d.ts)` | — | The container element to render the slideout into. By default, the slideout will render at the end of the document body. |
+| defaultShow | `boolean` | `false` | When set to `true` the slideout will be visible. Use for uncontrolled slideouts. |
+| eleToPush | `string , HTMLElement , MutableRefObject<HTMLElement | null>` | — | The element that needs to be pushed relative to the slideout. This can be a string selector to match an existing element in the DOM, a html element, or a React reference. Will be ignored if `mode` is not set to `push` or if element does not exist. |
+| footer | `ReactNode` | — | Panel to place slideout controls. |
+| heading | `ReactElement>, string ` | — | Sets the heading for the slideout. If passed an element, it will render the element with an id, to ensure its connection to the slideout. |
+| id | `string` | — | Unique ID for the slideout. Use if you would like to open this slideout from anywhere in your app using the `useSlideout` hook. |
+| mode | `overlay`, `push`  | `overlay` | Sets how the Slideout interacts with the content of the page. `overlay` overlays the page content, obscuring the content below. `push` will push the element (specified by `eleToPush`) across the page. `push` will revert back to `overlay` if `eleToPush` is not specified or if the screen size < 1200px. |
+| onShowChange | `((show: boolean, reason?: OpenChangeReason) => void)` | — | Emitted when the slideout has opened or closed internally. Use for controlled slideouts. |
+| onStatus | ((status: `close` , `initial` , `open` , `unmounted`) => void) | — | Emitted when the slideout has mounted, unmounted, opened or closed. Open and close occur before animation begins. |
+| onEntered | `(() => void)` | — | Emitted when the slideout has opened. |
+| onExited | `(() => void)` | — | Emitted when the slideout has closed. |
+| position | `left` , `right` | `right` | Position of the slideout relative to the page. `left` or `right`. |
+| show | `boolean` | — | When set to `true` the slideout will be visible. Use for controlled slideouts. |
+| size | `md`, `sm`  | `sm` | Accepts a single `SlideoutSize`. Slideouts will display at 100% for mobile screens (<576px). |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Slideout/Slideout.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 Slideouts are used to show additional information or to allow users to perform secondary tasks without leaving their normal workflow.
 
@@ -12399,8 +13510,8 @@ import {
   IressButton,
   IressInline,
   IressSlideout,
+  useSlideout,
 } from '@iress-oss/ids-components';
-import { useSlideout } from '../hooks/useSlideout';
 
 const SLIDEOUT_ID = 'slideout-footer';
 
@@ -12579,6 +13690,389 @@ Storybook provides an interactive playground for testing different prop combinat
 
 [View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-slideout--docs)
 
+## Recipes
+
+### Microfrontend
+
+```tsx
+import {
+  createElement,
+  type ElementType,
+  Fragment,
+  useRef,
+  useState,
+} from 'react';
+import { createRoot, type Root } from 'react-dom/client';
+import IDS_CSS from '@iress-oss/ids-components/dist/style.css?raw';
+import {
+  IressButton,
+  IressForm,
+  IressFormField,
+  IressIcon,
+  IressInline,
+  IressPanel,
+  IressSelect,
+  IressSlideout,
+  IressSlideoutProvider,
+  IressStack,
+  IressText,
+  IressToggle,
+} from '@iress-oss/ids-components';
+import { searchStarWarsCharacters } from '@/mocks/starWars';
+
+/**
+ * This section creates a custom element that can be used in a microfrontend context.
+ * It is copied from the Frontrunner scaffolder, please use that instead.
+ */
+interface AppStyleProp {
+  uri?: string;
+  styleContent?: string;
+  importType?: 'link' | 'style';
+}
+
+class IressCustomElement extends HTMLElement {
+  protected AppContent: ElementType;
+  private rootId = '';
+  private appCssUrls: AppStyleProp[];
+
+  private appRootElement: HTMLElement | null = null;
+  private reactRoot: Root | null = null;
+
+  // Static property to hold shared styles
+  static readonly sharedStyles: HTMLStyleElement[] = [];
+
+  // Instance property to hold styles specific to this instance
+  private instanceStyles: HTMLStyleElement[] = [];
+
+  constructor() {
+    super();
+    this.AppContent = () => <Fragment />;
+    this.appCssUrls = [];
+    this.attachShadow({ mode: 'open' });
+  }
+
+  /**
+   * Define the React component and associated CSS URLs.
+   * @param AppContent - The React component to render.
+   * @param id - The id of the element where the React root will be attached
+   * @param appCssUrls - Array of CSS configurations.
+   */
+  defineElement(
+    AppContent: ElementType,
+    rootId: string,
+    appCssUrls?: AppStyleProp[],
+  ) {
+    this.AppContent = AppContent;
+    this.rootId = rootId;
+    this.appCssUrls = appCssUrls ?? [];
+    void this.loadStyles();
+  }
+
+  /**
+   * Lifecycle method called when the element is added to the DOM.
+   */
+  connectedCallback() {
+    this.renderComponent();
+  }
+
+  /**
+   * Lifecycle method called when the element is removed from the DOM.
+   */
+  disconnectedCallback() {
+    if (this.reactRoot && this.appRootElement) {
+      this.reactRoot.unmount();
+    }
+  }
+
+  /**
+   * Load and inject remote and local CSS into the Shadow DOM.
+   */
+  private async loadStyles(): Promise<void> {
+    try {
+      const styles = [
+        ...this.appCssUrls.map((style) =>
+          style.uri
+            ? this.createLinkElement(style.uri)
+            : this.createStyleElement(style.styleContent ?? ''),
+        ),
+      ];
+
+      for (const style of styles) {
+        await this.injectStyle(style);
+      }
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : 'Unknown error';
+      console.error(`Error loading styles: ${errorMessage}`);
+    }
+  }
+
+  importCssFile(url: string): AppStyleProp {
+    return {
+      uri: new URL(url, import.meta.url).href,
+      importType: 'link',
+    };
+  }
+
+  importCssStyle(styleContent: string): AppStyleProp {
+    return {
+      styleContent,
+      importType: 'style',
+    };
+  }
+
+  /**
+   * Create a link element for external CSS.
+   * @param href - The URL of the CSS file.
+   * @returns The created HTMLLinkElement.
+   */
+  private createLinkElement(href: string): HTMLLinkElement {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = href;
+    return link;
+  }
+
+  /**
+   * Create a style element for inline CSS.
+   * @param cssContent - The CSS content.
+   * @returns The created HTMLStyleElement.
+   */
+  private createStyleElement(cssContent: string): HTMLStyleElement {
+    const style = document.createElement('style');
+    style.textContent = cssContent;
+    return style;
+  }
+
+  /**
+   * Inject a style element into the Shadow DOM.
+   * @param style - The style element to inject.
+   */
+  private async injectStyle(
+    style: HTMLLinkElement | HTMLStyleElement,
+  ): Promise<void> {
+    if (style.tagName.toLowerCase() === 'link') {
+      // Wait for the stylesheet to load
+      await new Promise<void>((resolve, reject) => {
+        style.onload = () => resolve();
+        style.onerror = () =>
+          reject(
+            new Error(`Failed to load CSS: ${style.getAttribute('href')}`),
+          );
+        this.shadowRoot?.appendChild(style);
+      });
+    } else {
+      this.shadowRoot?.appendChild(style);
+    }
+
+    // Manage shared and instance-specific styles
+    if (!IressCustomElement.sharedStyles.includes(style)) {
+      IressCustomElement.sharedStyles.push(style);
+      this.instanceStyles.push(style);
+    }
+  }
+
+  /**
+   * Attach the Shadow DOM and render the React application.
+   */
+  private renderComponent() {
+    this.appRootElement = document.createElement('div');
+    this.appRootElement.setAttribute('id', this.rootId);
+    this.shadowRoot?.appendChild(this.appRootElement);
+    this.renderReactApp();
+  }
+
+  /**
+   * Render the React application within the Shadow DOM.
+   */
+  private renderReactApp() {
+    const props = {
+      ...this.getProps(this.attributes),
+    };
+
+    if (this.appRootElement) {
+      this.reactRoot = createRoot(this.appRootElement);
+      this.reactRoot.render(<this.AppContent {...props} />);
+    }
+  }
+
+  /**
+   * Extract props from the element's attributes.
+   * @param attributes - The attributes of the custom element.
+   * @returns An object containing the props.
+   */
+  private getProps(attributes: NamedNodeMap): Record<string, string> {
+    return Array.from(attributes)
+      .filter((attr) => attr.name !== 'style')
+      .reduce(
+        (props, attr) => {
+          const propName = attr.name.replace(/-([a-z])/g, (_, char: string) =>
+            char.toUpperCase(),
+          );
+          props[propName] = attr.value;
+          return props;
+        },
+        {} as Record<string, string>,
+      );
+  }
+}
+
+class MicrofrontendElement extends IressCustomElement {
+  constructor() {
+    super();
+    this.defineElement(MicrofrontendApp, 'microfrontend-app', [
+      this.importCssStyle(IDS_CSS),
+    ]);
+  }
+}
+
+/**
+ * This creates a parent custom element that has no style, essentially mocking
+ * a situation where the the microfrontend is rendered inside a parent application without IDS loaded.
+ */
+class ParentElement extends HTMLElement {
+  constructor() {
+    super();
+  }
+
+  connectedCallback() {
+    const shadow = this.attachShadow({ mode: 'open' });
+
+    const wrapper = document.createElement('div');
+    wrapper.setAttribute('id', 'parent-app');
+    wrapper.style.backgroundColor = 'lightgrey';
+    wrapper.style.padding = '20px';
+
+    const microfrontend = document.createElement('iress-microfrontend');
+
+    shadow.appendChild(wrapper);
+    wrapper.appendChild(microfrontend);
+  }
+}
+
+class GrandparentElement extends IressCustomElement {
+  constructor() {
+    super();
+    this.defineElement(GrandparentApp, 'grandparent-app', [
+      this.importCssStyle(IDS_CSS),
+    ]);
+  }
+}
+
+if (!customElements.get('iress-microfrontend')) {
+  customElements.define('iress-microfrontend', MicrofrontendElement);
+  customElements.define('iress-parent', ParentElement);
+  customElements.define('iress-grandparent', GrandparentElement);
+}
+
+/**
+ * Actual application component that will be rendered inside the custom element.
+ */
+const MicrofrontendApp = () => {
+  return (
+    <IressPanel>
+      <h3>Microfrontend form</h3>
+      <p>
+        This form is inside a microfrontend what is another microfrontend's
+        slideout.
+      </p>
+      <IressForm>
+        <IressStack gap="md">
+          <IressFormField
+            hint="Type to copy an existing character's name"
+            label="Asynchronous options"
+            name="star_wars_name"
+            render={(controlledProps) => (
+              <IressSelect
+                {...controlledProps}
+                options={searchStarWarsCharacters}
+              />
+            )}
+          />
+
+          <IressFormField
+            label="Static options"
+            name="gender"
+            render={(controlledProps) => (
+              <IressSelect
+                {...controlledProps}
+                options={[
+                  {
+                    label: 'Male',
+                    value: 'male',
+                    prepend: <IressIcon name="male" />,
+                  },
+                  {
+                    label: 'Female',
+                    value: 'female',
+                    prepend: <IressIcon name="female" />,
+                  },
+                  {
+                    label: 'Other',
+                    value: 'other',
+                    prepend: <IressIcon name="agender" />,
+                  },
+                ]}
+              />
+            )}
+          />
+
+          <IressButton mode="primary" type="submit">
+            Sign up
+          </IressButton>
+        </IressStack>
+      </IressForm>
+    </IressPanel>
+  );
+};
+
+/**
+ * Grandparent that has the slideout
+ */
+const GrandparentApp = () => {
+  const [show, setShow] = useState(true);
+  const [md, setMd] = useState(false);
+  const container = useRef<HTMLDivElement | null>(null);
+
+  return (
+    <IressSlideoutProvider container={container}>
+      <div ref={container} />
+      <IressPanel className="iress-m--lg">
+        <IressInline gap="sm" verticalAlign="middle">
+          <IressButton onClick={() => setShow(!show)}>
+            Toggle Slideout
+          </IressButton>
+          <IressToggle onChange={setMd}>Medium size</IressToggle>
+        </IressInline>
+      </IressPanel>
+      <IressSlideout
+        show={show}
+        onShowChange={setShow}
+        eleToPush="#grandparent-app"
+        mode="push"
+        size={md ? 'md' : 'sm'}
+      >
+        <IressText>
+          <h2>Microfrontend slideout</h2>
+          <p>
+            This is a slideout that is inside a microfrontend, and its contents
+            are another microfrontend.
+          </p>
+        </IressText>
+        {createElement('iress-parent')}
+      </IressSlideout>
+    </IressSlideoutProvider>
+  );
+};
+
+export function SlideoutMicrofrontend() {
+  // To avoid typescript issues, we have done it this way
+  // But in your html it should be used as `<iress-microfrontend></iress-microfrontend>`
+  return createElement('iress-grandparent');
+}
+```
+
+
 ---
 
 <!-- components/slider.md -->
@@ -12597,6 +14091,29 @@ import { IressSlider } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Slider)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=slider&title=[Slider]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=slider,enhancement&title=[Slider]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| defaultValue | `number` | — | Initial value of the slider. Used for uncontrolled sliders. |
+| formatValue | `((value: number, tick?: SliderTickLabelValue, readOnly?: [FormControlReadOnly](../../dist/types.d.ts)) => ReactNode) | undefined` | — | Format the changed value. |
+| hiddenValueTooltip | `boolean` | — | If `true`, the value tooltip will be hidden. |
+| max | `number` | `10` | Set the maximum value for the slider. |
+| min | `number` | `0` | Sets minimum value for the slider. |
+| name | `string` | — | The name of the control, which is submitted with the form data. |
+| onChange | `((e: ChangeEvent<HTMLInputElement, Element>, value?: number) => void)` | — | Emitted when the slider value changes. |
+| readOnly | `[FormControlReadOnly](../../dist/types.d.ts)` | — | If `true`, the user cannot modify the value. |
+| step | `number` | `1` | Sets the step value of the slider. |
+| tickLabels | `boolean , SliderTickLabel[]` | — | List of labels to be displayed. |
+| value | `number` | — | Value of the slider. Used for controlled sliders. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Slider/Slider.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 Sliders provide a visual indication of adjustable content, where the user can select a value from a range usually represented on a horizontal track.
 
@@ -12867,6 +14384,27 @@ import { IressSpinner } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=spinner&title=[Spinner]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=spinner,enhancement&title=[Spinner]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| flip | `both` , `horizontal` , `vertical` | — | Flip the icon horizontally, vertically or both axes. |
+| type | `material` | — | The icon provider to use Note: Font Awesome is deprecated. Please migrate to Material Symbols. |
+| set | `undefined` | `'fal'` | The icon set to be used (Font Awesome only): - `fal`: Font Awesome Light - `fab`: Font Awesome Brand @deprecated Font Awesome is deprecated. Please migrate to Material Symbols. |
+| screenreaderText | `string` | — | Adds screen reader text if the icon needs to be visible to screen reader users Screen reader text for the chatty spinner. |
+| rotate | 180 , `270`, 90  | — | Amount of degrees to rotate the icon. |
+| spin | `half`, 1 , 2 , 3  | `half` | Accepts a numeric value for speed for one rotation. Spin speed of spinner. |
+| filled | `boolean` | `false` | Filled variant for Material Symbols When true, icon uses filled style (fill=1) Useful for active/selected states |
+| fixedWidth | `undefined` | — | Adds fixed width class for Font Awesome icons - fa-fw @deprecated Font Awesome specific. Material Symbols inherit text size automatically. |
+| variant | `chatty`, `default`  | — | Variant of spinner. - 'default': Standard rotating spinner Variant of spinner. - 'chatty': Animated dots for chatting/typing indicator |
+
+📄 [Full type definition](../../dist/components/Spinner/Spinner.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+
 Spinners notify the user that a task is being processed. They indicate that the app is busy, and should be used when the user has to wait for more than a few seconds.
 
 ```tsx
@@ -13026,6 +14564,22 @@ import { IressStack } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Stack)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=stack&title=[Stack]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=stack,enhancement&title=[Stack]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| element | `keyof IntrinsicElements` | `'div'` | The HTML element that should be rendered. |
+| gap | `[ResponsiveProp](../../dist/types.d.ts)<[PositiveSpacingToken](../../dist/types.d.ts)>` | — | Sets the gap between direct children. @see https://developer.mozilla.org/docs/Web/CSS/gap |
+| horizontalAlign | `any` | — | Sets the horizontal alignment of the stack content. |
+| verticalAlign | `any` | — | Sets the vertical alignment of the stack content. |
+
+📄 [Full type definition](../../dist/components/Stack/Stack.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 Use IressStack to control vertical spacing between content with consistent preset values.
 
@@ -13209,6 +14763,20 @@ import { IressStyled } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Styled)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=styled&title=[Styled]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=styled,enhancement&title=[Styled]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| children | `ReactNode` | — | Content to be styled. |
+| element | `ElementType` | — | The HTML element or custom component to render. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Styled/Styled.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 The IressStyled component is a utility for applying design tokens to any element. It provides an unopinionated wrapper that gives you direct access to all supported styling properties without creating a dedicated component or writing custom CSS.
 
@@ -13466,6 +15034,27 @@ import { IressTabSet } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/TabSet)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=tab-set&title=[TabSet]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=tab-set,enhancement&title=[TabSet]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| append | `ReactNode` | — | Content rendered alongside the tablist in the tab bar row, but outside the tablist itself. Useful for placing action buttons (e.g. "Add tab") at the end of the tab bar. |
+| children | `ReactNode` | — | Content to be displayed inside the IressTabs, usually multiple `IressTab`. |
+| defaultSelected | `[FormControlValue](../../dist/types.d.ts)` | — | Set the selected tab for uncontrolled tabs. If the `IressTab` does not have a `value` prop, it will match by index. |
+| layout | `top-center` , `top-left` , `top-right` | `top-left` | Layout options for the positioning of tabs. |
+| onChange | `((event: [IressTabSetChangedEventDetail](../../dist/components/TabSet/TabSet.d.ts)) => void)` | — | Emitted when a tab changes. |
+| panelStyle | `[IressCustomiseSlot](../../dist/interfaces.d.ts)` | — | Custom style for the panel (the area that contains the tab content). |
+| selected | `[FormControlValue](../../dist/types.d.ts)` | — | Set the selected tab for controlled tabs. If the `IressTab` does not have a `value` prop, it will match by index. |
+| tabHolderStyle | `[IressCustomiseSlot](../../dist/interfaces.d.ts)` | — | Custom style for the tab holder (the area that contains the tabs). |
+| type | `primary` , `secondary` | `'primary'` | The type of the tabs, which determines their styling. - `primary`: The default tab style, which is more prominent and suitable for main navigation. - `secondary`: A more subdued tab style, suitable for secondary level of tabs (within expanders) |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/TabSet/TabSet.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 Tabs are used to display modular pieces of related data that do not need to be compared or accessed simultaneously.
 
@@ -13876,6 +15465,31 @@ import { IressTable } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=table&title=[Table]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=table,enhancement&title=[Table]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| alternate | `boolean` | `false` | If set to true, the table will have alternating row colors. This is useful for improving readability in tables with many rows. |
+| **caption** | `ReactNode` | — | Caption that describes the data in the table, required for accessibility. |
+| columns | `[IressTableColumn](../../dist/components/Table/Table.d.ts)<TRow, TVal>[]` | — | A mapping of columns to be displayed in the table. If not provided, it will be automatically regenerated from the row data. |
+| compact | `boolean` | `false` | Compact view of the table, used for tables with a lot of data. |
+| empty | `ReactNode` | — | Content to be show when there is no rowData (columns must also be provided). |
+| hiddenCaption | `boolean` | — | When set to true, the table caption will be visually hidden. |
+| hiddenHeader | `boolean` | — | When set to true, the table header (`<thead></thead>`) will be not be rendered. Only use with very simple tables. |
+| hover | `boolean` | — | When set to true, hovering over a row will trigger a UI change. |
+| removeRowBorders | `boolean` | `false` | If set to true, the table will not have borders between rows. This is useful for simpler tables where the row borders are not needed. |
+| rowProps | `[IressStyledProps](../../dist/components/Styled/Styled.d.ts)<"tr"> , ((row: Row<TRow>) => [IressStyledProps](../../dist/components/Styled/Styled.d.ts)<"tr">)` | — | Add additional props to the row element. Can be a props map or a function that returns an props map. The function is called with the row data. |
+| rows | `TRow[]` | `[]` | Each object in the array contains the data for a row. |
+| scope | `col`, `row`  | `'row'` | Defaults to 'row' - the first cell in the row is a `<th>`, otherwise it's a `<td>`. |
+| virtualise | `boolean , TableVirtualiseOptions` | — | Enable row virtualisation for large datasets. Only visible rows (plus overscan) are rendered to the DOM. Requires a fixed height on the table container. Pass `true` for defaults, or an options object to configure. |
+
+📄 [Full type definition](../../dist/components/Table/Table.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+
 Data driven component for displaying tabular data.
 
 ```tsx
@@ -14196,7 +15810,7 @@ Use `sortFn` for custom sort — pass a built-in name or a custom comparison fun
 import {
   IressTable,
   IressTableFormattedValue,
-  type TableColumn,
+  type IressTableColumn,
 } from '@iress-oss/ids-components';
 
 interface Row {
@@ -14207,7 +15821,7 @@ interface Row {
   totalPercentage: number;
 }
 
-const columns: TableColumn<Row>[] = [
+const columns: IressTableColumn<Row>[] = [
   {
     key: 'investment_name',
     label: 'Investment',
@@ -14944,7 +16558,7 @@ import {
   IressTable,
   IressText,
   IressToggle,
-  type TableColumn,
+  type IressTableColumn,
 } from '@iress-oss/ids-components';
 
 interface Row {
@@ -14964,7 +16578,7 @@ const generateRows = (count: number): Row[] =>
     status: 'pending' as const,
   }));
 
-const columns: TableColumn<Row, string>[] = [
+const columns: IressTableColumn<Row, string>[] = [
   { key: 'name', label: 'Name', width: '35%' },
   { key: 'value', label: 'Value', width: '35%' },
   {
@@ -15042,7 +16656,7 @@ import {
   IressIcon,
   IressTable,
   IressTableBody,
-  type TableColumn,
+  type IressTableColumn,
 } from '@iress-oss/ids-components';
 
 interface Liability {
@@ -15111,7 +16725,7 @@ const contingentLiabilities = [
   },
 ];
 
-const columns: TableColumn<Liability>[] = [
+const columns: IressTableColumn<Liability>[] = [
   {
     key: 'owner',
     label: 'Owner',
@@ -15324,6 +16938,153 @@ Storybook provides an interactive playground for testing different prop combinat
 
 [View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-table--docs)
 
+## Recipes
+
+### Server Side Filtering
+
+```tsx
+import { useState, useCallback, useRef } from 'react';
+import { IressTable } from '@iress-oss/ids-components';
+import { IressPill } from '@/components/Pill';
+import { IressLoading } from '@/patterns/Loading';
+
+const STATUS_MODES: Record<string, 'success' | 'info' | 'warning' | 'danger'> =
+  {
+    Current: 'success',
+    Proposed: 'info',
+    Alternative: 'warning',
+    Archived: 'danger',
+  };
+
+const ALL_ROWS = [
+  {
+    investment_name: 'Artemis Fund Managers Limited',
+    status: 'Current',
+    cost: 23898,
+    investmentDate: '2019-09-23',
+    totalPercentage: 24.8,
+  },
+  {
+    investment_name: 'CASH.CASH',
+    status: 'Proposed',
+    cost: 49751.4,
+    investmentDate: '2020-06-28',
+    totalPercentage: 49,
+  },
+  {
+    investment_name: 'VODAFONE GRP',
+    status: 'Alternative',
+    cost: 26382.456,
+    investmentDate: '2019-02-05',
+    totalPercentage: 26.2,
+  },
+  {
+    investment_name: 'APPLE INC',
+    status: 'Archived',
+    cost: 12000,
+    investmentDate: '2021-11-15',
+    totalPercentage: 12.1,
+  },
+];
+
+/**
+ * Simulates a server-side fetch with a delay. In a real application,
+ * replace this with an actual API call.
+ */
+const simulateServerFetch = (statusFilter: string[]): Promise<object[]> =>
+  new Promise((resolve) => {
+    setTimeout(() => {
+      const filtered =
+        statusFilter.length === 0
+          ? ALL_ROWS
+          : ALL_ROWS.filter((row) => statusFilter.includes(row.status));
+      resolve(filtered);
+    }, 800);
+  });
+
+export function TableFilteringServerSide() {
+  const [rows, setRows] = useState<object[]>(ALL_ROWS);
+  const [loaded, setLoaded] = useState(true);
+  const [updating, setUpdating] = useState(false);
+  const latestRequest = useRef(0);
+
+  const handleStatusFilter = useCallback(async (selectedValues: string[]) => {
+    const requestId = ++latestRequest.current;
+    setUpdating(true);
+    const data = await simulateServerFetch(selectedValues);
+    // Only apply the result if this is still the latest request
+    if (requestId === latestRequest.current) {
+      setRows(data);
+      setUpdating(false);
+      setLoaded(true);
+    }
+  }, []);
+
+  return (
+    <IressLoading
+      pattern="component"
+      loaded={loaded}
+      update={updating}
+      width="12/12"
+    >
+      <IressTable<object>
+        caption="My investments"
+        compact
+        rows={rows}
+        columns={[
+          {
+            key: 'investment_name',
+            label: 'Investment',
+            divider: true,
+          },
+          {
+            key: 'status',
+            label: 'Status',
+            filter: {
+              // Provide all possible values so the dropdown is always complete,
+              // even when the current rows are already filtered server-side.
+              values: Object.keys(STATUS_MODES),
+              // Disable client-side filtering — the server controls which rows
+              // are shown.
+              filterFn: false,
+              // Fetch new data when the user changes the filter selection.
+              onChange: (values: string[]) => void handleStatusFilter(values),
+              format: (value: string) => (
+                <IressPill mode={STATUS_MODES[value] ?? 'info'}>
+                  {value}
+                </IressPill>
+              ),
+            },
+            format: (value: string) => (
+              <IressPill mode={STATUS_MODES[value] ?? 'info'}>
+                {value}
+              </IressPill>
+            ),
+          },
+          {
+            key: 'investmentDate',
+            label: 'Date',
+            format: 'date',
+          },
+          {
+            key: 'totalPercentage',
+            label: 'Share',
+            format: 'percent',
+          },
+          {
+            key: 'cost',
+            label: 'Cost',
+            textAlign: 'right',
+            format: 'currency',
+          },
+        ]}
+      />
+    </IressLoading>
+  );
+}
+```
+
+
 ---
 
 <!-- components/tag-input.md -->
@@ -15342,6 +17103,38 @@ import { IressTagInput } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/TagInput)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=tag-input&title=[TagInput]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=tag-input,enhancement&title=[TagInput]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| defaultValue | `string[]` | — | Tags to display (uncontrolled) |
+| onChange | `((e?: SyntheticEvent<HTMLInputElement, Event>, value?: string[]) => void) | undefined` | — | Emitted when the value changes. |
+| onExistingTag | `((tag: string) => void)` | — | Emitted when the user attempts to add a tag that already exists. |
+| onTagDelete | `((children: string, e: SyntheticEvent<HTMLButtonElement, Event>) => void)` | — | Emitted when a tag is deleted |
+| onTagDeleteAll | `((children: string, e: SyntheticEvent<HTMLButtonElement, Event>) => void)` | — | Emitted when the combined tag delete button is clicked |
+| onTagDeleteButtonBlur | `((e: FocusEvent<HTMLButtonElement, Element>) => void)` | — | Emitted when a tag's delete button is blurred |
+| selectedOptionsTagText | `string` | `selected` | Text displayed next to tag count in tag when tag limit is exceeded |
+| tagLimit | `number` | `5` | Limit of tags to display before shortening to `selectedOptionsTagText` |
+| value | `string[]` | — | Tags to display (controlled) |
+| actions | `Omit<[IressButtonProps](../../dist/components/Button/Button.d.ts), "status" | "mode">[]` | — | Actions to display in the input field, rendered inside the input on the right. These will be rendered with opinionated styling. If you want to use custom buttons or controls, use the `append` prop instead. |
+| width | `any` | `100%` | The width of the input. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| variant | `search` | — | The variant of the input, which will apply different styles to the input. The `search` variant is designed for search inputs and will have a different style for the clear button and loading spinner. |
+| inline | `boolean` | — | Make prepend/append element closer to the input content. |
+| readOnly | `[FormControlReadOnly](../../dist/types.d.ts)` | — | Renders the input as read-only. Use `'locked'` when the value is read-only because of permissions. |
+| append | `ReactNode` | — | Content to append to the input field, usually a button or icon. |
+| loading | `boolean, string ` | — | The loading states of the input field. If provided a string, will use that text as the loading message. |
+| alignRight | `boolean` | `false` | Set input content align to right, useful for numeric inputs. |
+| formatter | `((value?: string) => string | number)` | — | Bring your own formatter that will be used to format the value when the input is not focused, allowing you to display the value in a different format. e.g. User type in value="dsf 987kkk123" => result after formatter: $987,123 (string) |
+| onClear | `((e: ChangeEvent<HTMLInputElement, Element>) => void)` | — | Emitted when the input is manually cleared. |
+| clearable | `boolean` | `false` | If `true`, then user can clear the value of the input. |
+
+📄 [Full type definition](../../dist/components/TagInput/TagInput.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 A form control that allows users to enter and manage a collection of tags via keyboard input.
 
@@ -15466,6 +17259,27 @@ import { IressTag } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Tag)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=tag&title=[Tag]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=tag,enhancement&title=[Tag]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| children | `ReactNode` | — | Contents of the tag. |
+| compact | `boolean` | — | If true, reduces the padding and height of the tag. Useful when used inside an input component. |
+| deleteButton | `ReactNode` | — | You can completely replace the delete button to provide your own functionality. When this is provided, `deleteButtonText` will not be used and `onDelete` and `onDeleteButtonBlur` will not be called. |
+| deleteButtonText | `string` | `Delete` | Screen reader text for delete button |
+| element | `ElementType` | `'span'` | Element type to render the Tag as. |
+| mode | `10` , `20` , `30` , `40` , `50` , `60` , `70` , `80` , `90`, `danger` , `info` , `success` , `warning` , 10 , 20 , 30 , 40 , 50 , 60 , 70 , 80 , 90  | — | Style of the tag, based on the data colour palette (10-90) or system status colours (danger, info, success, warning). Can be a number (10-90), a string ('10'-'90'), or a system status ('danger', 'info', 'success', 'warning'). |
+| bordered | `boolean` | `false` | When true, renders the tag with a visible border instead of a filled background. |
+| onDelete | `((children: string, e: SyntheticEvent<HTMLButtonElement, Event>) => void)` | — | Callback triggered when the tag is deleted |
+| onDeleteButtonBlur | `((e: FocusEvent<HTMLButtonElement, Element>) => void)` | — | Callback triggered when the close button is blurred |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Tag/Tag.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 Tags represent individual units in a group of selected items.
 
@@ -15852,6 +17666,19 @@ import { IressText } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=text&title=[Text]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=text,enhancement&title=[Text]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| element | `[IressTextElements](../../dist/components/Text/Text.d.ts)` | — | The HTML element that should be rendered. |
+
+📄 [Full type definition](../../dist/components/Text/Text.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+
 The IressText component allows you to set typographic styles either on one element, or a block of HTML elements.
 
 ```tsx
@@ -15972,7 +17799,7 @@ The `textStyle` prop (previously `variant`) allows you alter the default styling
 
 For example, in order to maintain the semantic structure of headings, you may need to style a `h2` element like a `h4`. Or you may want to style your heading using one of our display text formats.
 
-> **⚠️ Do not add `textStyle` when the `element` already provides the correct styling.** For example, `element="h1"` already renders with `typography.heading.1` styling — adding `textStyle="typography.heading.1"` is redundant. Only use `textStyle` to intentionally override the default visual treatment (e.g. `element="h2" textStyle="typography.heading.4"` to make an h2 visually smaller), or when a designer has specified a different visual hierarchy in a Figma file.
+> ⚠️ **Do not add `textStyle` when the `element` already provides the correct styling.** For example, `element="h1"` already renders with `typography.heading.1` styling — adding `textStyle="typography.heading.1"` is redundant. Only use `textStyle` to intentionally override the default visual treatment (e.g. `element="h2" textStyle="typography.heading.4"` to make an h2 visually smaller), or when a designer has specified a different visual hierarchy in a Figma file.
 
 ```tsx
 import { IressStack, IressText } from '@iress-oss/ids-components';
@@ -16161,7 +17988,7 @@ Storybook provides an interactive playground for testing different prop combinat
 ## Import
 
 ```tsx
-import { IressToaster } from '@iress-oss/ids-components';
+import { IressToasterProvider, useToaster } from '@iress-oss/ids-components';
 ```
 
 - [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-toaster--docs)
@@ -16660,6 +18487,25 @@ import { IressToggle } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=toggle&title=[Toggle]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=toggle,enhancement&title=[Toggle]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| checked | `boolean` | — | If true, the toggle on. Please use this when are rendering the toggle in controlled mode, meaning it will not change unless you explicitly set the value using `onChange` and `checked`. |
+| **children** | `ReactNode` | — | Provides the label for the Toggle. |
+| defaultChecked | `boolean` | — | If true, the toggle will be initially rendered as off. Please use this when are rendering the toggle in uncontrolled mode, meaning the value will change automatically when the user interacts with the toggle. |
+| disabled | `boolean` | — | If true, the toggle is disabled and cannot be interacted with. |
+| hiddenLabel | `boolean` | — | Hides the label if true (label will still be read out by screen readers). |
+| layout | `inline-between` , `inline-reverse`, `inline` , `stack`  | `inline` | Determines the layout of the label with respect to the control. |
+| onChange | `((checked: boolean, event: MouseEvent<HTMLButtonElement, MouseEvent>) => void)` | — | Emitted when the checked state changes. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Toggle/Toggle.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+
 Toggles allow users to turn things on or off. When toggled, the associated change happens straight away.
 
 ```tsx
@@ -16880,6 +18726,24 @@ import { IressTooltip } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Tooltip)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=tooltip&title=[Tooltip]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=tooltip,enhancement&title=[Tooltip]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| align | `[FloatingUIAligns](../../dist/types.d.ts)` | `top` | Sets the alignment of the popover relative to the activator element. |
+| **children** | `ReactNode` | — | The element to add a tooltip to. |
+| container | `[FloatingUIContainer](../../dist/types.d.ts)` | — | The container element to render the tooltip into. Overrides the container set by `IressTooltipProvider`. |
+| delay | `number` | `500` | Sets the tooltip display delay in milliseconds. |
+| open | `boolean` | `false` | Only used for internal testing. |
+| **tooltipText** | `string , string[]` | — | Sets the tooltip text. Can accept a string or an array of strings - if given an array, will output each string on a new line. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/Tooltip/Tooltip.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 A component that shows concise, informative text about an element when focussed upon, hovered over or on a long touch.
 
@@ -17132,6 +18996,23 @@ import { IressValidationMessage } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/ValidationMessage)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=validation-message&title=[ValidationMessage]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=validation-message,enhancement&title=[ValidationMessage]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| element | `a`, `div`  | — | The HTML element that should be rendered. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| linkToTarget | `string` | — | ID of element the message is describing. If nothing is supplied a link will not render. |
+| prefix | `ReactNode` | — | Prefix to the validation message. Will be `status` prop if nothing is provided. |
+| status | `danger` , `info` , `success`, `warning`  | `danger` | Whether message is danger, warning, success or info. **Note**: danger is translated to Error when used as the prefix. |
+| visiblePrefix | `boolean` | `false` | If set to true, the prefix will be visually displayed (default is only available to screen readers) |
+
+📄 [Full type definition](../../dist/components/ValidationMessage/ValidationMessage.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 A validation message is used to inform the user of the status of a form input. If there are multiple messages, they can be combined using the IressValidationSummary component.
 
@@ -20330,6 +22211,20 @@ import { IressBreadcrumbs } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=breadcrumbs&title=[Breadcrumbs]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=breadcrumbs,enhancement&title=[Breadcrumbs]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| **items** | `BreadcrumbItem<C, THref>[]` | — | Array of breadcrumb items defining the navigation path, in hierarchical order. The last item is automatically treated as the current page. |
+| limit | `number` | `5` | Maximum number of items to show before collapsing with overflow. Set to 0 to show all items without overflow. |
+| overflowProps | `Omit<[IressPopoverProps](../../dist/components/Popover/Popover.d.ts), 'activator'>` | — | Additional props to pass to the overflow popover, such as `aria-label` for accessibility. This is only applicable when `limit` is set to a value less than the number of items. |
+
+📄 [Full type definition](../../dist/patterns/Breadcrumbs/Breadcrumbs.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+
 Breadcrumbs are a secondary navigation aid that helps users understand their current location within the site hierarchy and provides a simple way to navigate back to higher-level pages.
 
 ```tsx
@@ -20552,6 +22447,41 @@ import { IressContextualMenu } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/patterns/ContextualMenu)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=contextual-menu&title=[Contextual Menu]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=contextual-menu,enhancement&title=[Contextual Menu]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| items | `[IressContextualMenuItem](../../dist/patterns/ContextualMenu/ContextualMenu.d.ts)[]` | — | The items rendered in the contextual menu. |
+| size | `medium` , `small` | `small` | Size for the menu trigger. |
+| bordered | `boolean` | `false` | Adds a border around the trigger. |
+| theme | `dark`, `light`  | `light` | Visual theme for the trigger treatment. |
+| ariaLabel | `string` | `More options` | Accessible label for the menu trigger button. |
+| onAction | `((item: [IressContextualMenuItem](../../dist/patterns/ContextualMenu/ContextualMenu.d.ts)) => void)` | — | Emitted when a menu item is clicked. Receives the clicked item as an argument. |
+| children | `ReactNode` | — | The content to render within the popover. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| fluid | `boolean` | — | Popovers can be fluid, meaning they will take up the full width of their container. |
+| show | `boolean` | — | When set to `true` the modal will be visible. Use for controlled popovers. |
+| align | `[FloatingUIAligns](../../dist/types.d.ts)` | `bottom-end` | Sets the alignment of the popover relative to the activator element. |
+| container | `[FloatingUIContainer](../../dist/types.d.ts)` | — | The container element to render the popover into. By default, the popover will render where its parent is rendered.  **Note:** If the `container` doesn’t exist when the popover is mounted, ensure you pass an element directly (not a ref) and specify null as the default value before it is set. This lets it wait for the root to be available. For example, if you reference the parent element of a popover. |
+| contentClassName | `string` | — | Class name of the popover content. @deprecated Use `contentStyle` instead. |
+| contentStyle | `[IressCustomiseSlot](../../dist/interfaces.d.ts)` | — | This allows you to customise the content styling specifically, which is the floating element. It accepts an object with any of the styling properties available on `IressCSSProps`, as well as `className` and `style`. |
+| displayMode | `inline` , `overlay` | `overlay` | Sets the display mode of popover. |
+| offset | `OffsetOptions` | `{ mainAxis: -6, crossAxis: 0 }` | The offset of the popover from its default position. This can be a number or an object with `mainAxis` and `crossAxis` properties, which specify the offset in pixels along the main axis (the axis along which the popover is aligned) and the cross axis (the perpendicular axis). |
+| matchActivatorWidth | `boolean` | — | Sets the popover to match the width of the activator. Note: This only works when `displayMode="overlay"`. |
+| virtualFocus | `boolean` | `false` | Whether the focus is virtual (using `aria-activedescendant`). Use this if you need focus to remain on the reference element (such as an input), but allow arrow keys to navigate items. Note: This is only applicable when type is set to: `listbox` or `menu`, and only works out of the box with `IressMenu` and its subcomponents. |
+| defaultShow | `boolean` | — | When set to `true` the popover will be visible by default. Use for uncontrolled popovers. |
+| focusStartIndex | `number` | — | Which index to start the focus on when the popover is opened. Only works with `type` listbox and menu. Note: The index must exist in the list of items, otherwise it will not work. |
+| onActivated | `((e?: Event, reason?: OpenChangeReason, activeIndex?: number , null , undefined) => void) | undefined` | — | Is called when popover is activated. |
+| onDeactivated | `((e?: Event, reason?: OpenChangeReason, activeIndex?: number , null , undefined) => void) | undefined` | — | Is called when popover is deactivated. |
+| onNavigate | `((activeIndex: number , null) => void)` | — | Is called when registered popover items are navigated using arrow keys. Only works with `type` listbox and menu. |
+| nested | `boolean` | — | Whether this popover uses nested navigation (ArrowRight to open, ArrowLeft to close). When not set, this is auto-detected based on whether the popover is inside another popover. |
+
+📄 [Full type definition](../../dist/patterns/ContextualMenu/ContextualMenu.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 A compact overflow action pattern that surfaces contextual actions in a popover menu. Use this pattern for row-level or card-level secondary actions where space is constrained.
 
@@ -20875,6 +22805,53 @@ import { IressDropdownMenu } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/patterns/DropdownMenu)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=dropdown-menu&title=[Filter]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=dropdown-menu,enhancement&title=[Filter]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| activatorStyle | `[IressCustomiseSlot](../../dist/interfaces.d.ts)` | `{}` | Customisation options for the dropdown menu activator button.  Accepts any styling properties available on `IressCSSProps`, as well as `className`, `style`, and `data-testid`. @example ```tsx <IressDropdownMenu   activatorStyle={{ 'data-testid': 'my-activator', p: 'spacing.2' }} /> ``` |
+| defaultSelected | `FormattedLabelValueMeta<[FormControlValue](../../dist/types.d.ts)> , FormattedLabelValueMeta<[FormControlValue](../../dist/types.d.ts)>[]` | — | The current value of the dropdown menu. Use this in uncontrolled mode when you want to set an initial value that can be changed internally by the component. For a controlled dropdown menu, use the `selected` prop instead. |
+| footer | `ReactNode` | — | Footer showed in option panel when expanded. |
+| header | `ReactNode` | — | Header showed in option panel when expanded. |
+| inputProps | `Pick<[IressInputProps](../../dist/components/Input/Input.d.ts), "placeholder" | "append" | "prepend" | "clearable">` | `{ clearable: true, prepend: <IressIcon name="search" />, }` | Customise the searchable `IressInput` props for your needs. |
+| **label** | `ReactNode` | — | The label is a description of the dropdown menu's purpose. |
+| multiSelect | `boolean` | — | Multi-select mode. When `true`, multiple options can be selected. |
+| onChange | `((selected: [ControlledValue](../../dist/hooks/useControlledState.d.ts)<[LabelValueMeta](../../dist/interfaces.d.ts)<[FormControlValue](../../dist/types.d.ts)>, TMultiple>) => void)` | — | Emitted when the value changes. |
+| onReset | `(() => void)` | — | Emitted when the value is reset. |
+| searchable | `boolean` | — | When `true` a search field is shown to search for specific filter option(s). |
+| searchNoResultsText | `ReactNode` | — | Text to be displayed when no results are found from search. Ignored when `searchable` is `false` |
+| selected | `FormattedLabelValueMeta<[FormControlValue](../../dist/types.d.ts)> , FormattedLabelValueMeta<[FormControlValue](../../dist/types.d.ts)>[]` | — | The current value of the dropdown menu. Use this in controlled mode when you want to manage the selected value from a parent component. For an uncontrolled dropdown menu, use the `defaultSelected` prop instead. |
+| selectedOptionsText | `string` | `({{numOptions}})` | Text displayed next to label when two or more options are selected. It supports `{{numOptions}}` as a placeholder for the number of options selected. |
+| visibleResetButton | `boolean, string ` | — | When `true`, a reset button will be shown above the options. If provided a string, it will be used as the reset button label. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| fluid | `boolean` | — | Popovers can be fluid, meaning they will take up the full width of their container. |
+| type | `dialog` , `grid` , `listbox`, `menu` , `tree`  | — | Describes the type of content contained in the popover. |
+| align | `[FloatingUIAligns](../../dist/types.d.ts)` | `bottom-start` | Sets the alignment of the popover relative to the activator element. |
+| container | `[FloatingUIContainer](../../dist/types.d.ts)` | — | The container element to render the popover into. By default, the popover will render where its parent is rendered.  **Note:** If the `container` doesn’t exist when the popover is mounted, ensure you pass an element directly (not a ref) and specify null as the default value before it is set. This lets it wait for the root to be available. For example, if you reference the parent element of a popover. |
+| contentStyle | `[IressCustomiseSlot](../../dist/interfaces.d.ts)` | — | This allows you to customise the content styling specifically, which is the floating element. It accepts an object with any of the styling properties available on `IressCSSProps`, as well as `className` and `style`. |
+| displayMode | `inline` , `overlay` | `overlay` | Sets the display mode of popover. |
+| offset | `OffsetOptions` | `5` | The offset of the popover from its default position. This can be a number or an object with `mainAxis` and `crossAxis` properties, which specify the offset in pixels along the main axis (the axis along which the popover is aligned) and the cross axis (the perpendicular axis). |
+| matchActivatorWidth | `boolean` | — | Sets the popover to match the width of the activator. Note: This only works when `displayMode="overlay"`. |
+| virtualFocus | `boolean` | `false` | Whether the focus is virtual (using `aria-activedescendant`). Use this if you need focus to remain on the reference element (such as an input), but allow arrow keys to navigate items. Note: This is only applicable when type is set to: `listbox` or `menu`, and only works out of the box with `IressMenu` and its subcomponents. |
+| focusStartIndex | `number` | — | Which index to start the focus on when the popover is opened. Only works with `type` listbox and menu. Note: The index must exist in the list of items, otherwise it will not work. |
+| onActivated | `((e?: Event, reason?: OpenChangeReason, activeIndex?: number , null , undefined) => void) | undefined` | — | Is called when popover is activated. |
+| onDeactivated | `((e?: Event, reason?: OpenChangeReason, activeIndex?: number , null , undefined) => void) | undefined` | — | Is called when popover is deactivated. |
+| onNavigate | `((activeIndex: number , null) => void)` | — | Is called when registered popover items are navigated using arrow keys. Only works with `type` listbox and menu. |
+| nested | `boolean` | — | Whether this popover uses nested navigation (ArrowRight to open, ArrowLeft to close). When not set, this is auto-detected based on whether the popover is inside another popover. |
+| disabled | `boolean` | `false` | Disables the hook from running any effects or search operations. When disabled, the hook returns empty results and default state. |
+| debounceThreshold | `number` | `500` | Time in milliseconds to wait for before performing result search. Only applies to searchable options (function). |
+| initialOptions | `[LabelValueMeta](../../dist/interfaces.d.ts)<[FormControlValue](../../dist/types.d.ts)>[]` | — | Initial options data set, shown when the input is empty. |
+| minSearchLength | `number` | `1` | Minimum number of characters required before triggering async search. Only applies to searchable options (function). Below this threshold, no search will be triggered and no loading state will be shown. |
+| **options** | `[LabelValueMeta](../../dist/interfaces.d.ts)<[FormControlValue](../../dist/types.d.ts)>[] , ((query: string) => Promise<[LabelValueMeta](../../dist/interfaces.d.ts)<[FormControlValue](../../dist/types.d.ts)>[]>)` | — | Options data set, shown when the input is not empty. |
+| limitMobile | `number` | `6` | Maximum number of results displayed on mobile screen sizes (< 768). |
+| limitDesktop | `number` | `12` | Maximum number of results displayed on larger screen sizes (>= 768). |
+
+📄 [Full type definition](../../dist/patterns/DropdownMenu/DropdownMenu.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 A component designed to filter a section based on a list of options and quickly navigate to relevant content.
 
@@ -21611,189 +23588,6 @@ Modals block interaction with the underlying page. Avoid using them for simple m
 
 ---
 
-<!-- patterns/form-recipes.md -->
-
-# Recipes
-Form pattern documentation.
-> **Storybook:** [Recipes in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs)## With readonly data
-
-You can use `IressForm` with readonly data by setting the `readOnly` prop to `true` on controlled elements. This will disable those form controls, but will include the values in the form submission.
-
-Please take note of the following when displaying read only data.
-
-- It is best to keep readonly data in a separate section of the form, to further avoid confusion with editable fields.
-
-```tsx
-<WithReadonlyDataForm />
-```
-
-[View "WithReadonlyData" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form--with-readonly-data)
-
-## Switching between readonly and edit modes
-
-It is recommended to use a button to toggle between read-only and editable input modes.
-
-Please take note of the following when switching between modes:
-
-- Switching is done on a per-section basis, not on a per-field basis.
-- When the user saves the data, it should switch back to read-only mode to avoid any confusion about whether the changes have been saved.
-
-```tsx
-<SwitchEditReadonlyForm />
-```
-
-[View "SwitchEditReadonly" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form--switch-edit-readonly)
-
-## Alternative form validation
-
-`IressForm` is always recommended for all validation, as it is the cleanest way (least code) to provide the best form user experience for your users. Please visit the [`IressForm` documentation](/docs/components-form--docs) for different validation examples.
-
-However, if you have more complex requirements and you find `IressForm` too opinionated for your needs, you can always bring your own form validation using a native `form` element and the other IDS components such as `IressField`.
-
-Here is an example showcasing a form using the native form constraints API to achieve validation using IDS components. There are other libraries such as: [Yup](https://github.com/jquense/yup), [Joi](https://github.com/hapijs/joi) or [Zod](https://zod.dev/)) which can improve scalability, with the downside being you will have to maintain all validation yourself.
-
-```tsx
-<NativeValidationForm />
-```
-
-[View "NativeValidation" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form--native-validation)
-
-## Nested forms
-
-Unfortunately, it is [forbidden to nest form elements as per the HTML specifications](https://developer.mozilla.org/en-US/docs/Learn/Forms/How_to_structure_a_web_form).
-
-To achieve a similar effect, you can use multiple `IressForm` components, and trigger validation in multiple ways:
-
-1. You can trigger specific forms using the `form` attribute of `IressButton`. The [`form` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#form) allows you to specify the form ID to submit when the button is clicked, which can be any form on the page, and will take precedence over the parent form of a button.
-2. If you need to trigger multiple forms, you can use the [`requestSubmit` method](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/requestSubmit) on the form element to trigger the validation of multiple forms.
-3. If you only want to trigger validation and not trigger submission even if the validation passes, you can use the `ref` attribute of `IressForm` and trigger validation manually using `ref.current?.api.trigger()`, which is based on the [React Hook Form API](https://react-hook-form.com/docs/useform/trigger).
-
-The example here showcases triggering validation using the `form` attribute of `IressButton` and the `requestSubmit` method on the form element.
-
-```tsx
-<NestedFormsExample />
-```
-
-[View "NestedForms" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form--nested-forms)
-
-## Form Groups
-
-Powered by [React Hook Form](https://react-hook-form.com/docs/usefieldarray)'s `useFieldArray`, this example allows you add/edit/delete multiple children sections within ONE form (not nested form).
-
-```tsx
-<FormGroupsExample />
-```
-
-[View "FormGroups" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form--form-groups)
-
-## Forms in expanders (lazy loading)
-
-If you are using forms in expanders, or in other scenarios when the loading of the form may be delayed, it is recommended to only load the form when it is required. This will improve performance of your application, and make it more predictable. It may also fix act warnings in tests if you are seeing some appearing due to conditionally loaded `IressForm` elements.
-
-```tsx
-<FormExpanders />
-```
-
-[View "FormsInExpanders" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form--forms-in-expanders)
-
-## Conditional fields (`useWatch`)
-
-When you have fields that are conditionally shown, you can use the `useWatch` hook to watch the value of another field and conditionally render the field.
-
-**Notes:**
-
-- You can use the `api.watch` method on the `IressForm`'s ref to watch the value of a field, but it is recommended to use the hook for better performance by isolating re-rendering at the component level.
-
-```tsx
-<UseWatchForm />
-```
-
-[View "UseWatch" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form--use-watch)
-
-## Hidden inputs
-
-You can use hidden inputs to store data that you do not want to display to the user, but still need to include in the form submission. This is useful for storing metadata or other information that is not editable by the user.
-
-> [!WARNING]
-> **Warning**
->
-> This is not a recommended practice, as it can lead to security issues if
->   sensitive data is stored in hidden inputs. It is better to use a variable to
->   store your data, and include it in the form submission using the `onSubmit`
->   handler.
-
-```tsx
-<HiddenInputsForm />
-```
-
-[View "HiddenInputs" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form--hidden-inputs)
-
-## Validation depend on other fields
-
-This example shows how to validate one field based on another field's value.
-
-The budget amount input validates against the selected budget range using the custom `validateBudgetInput` rules.
-
-```tsx
-<ValidationDependOnOtherFieldsExample />
-```
-
-[View "ValidationDependOnOtherFields" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form--validation-depend-on-other-fields)
-
-## Custom form field components
-
-You can integrate custom components within `IressFormField` to create enhanced form experiences.
-
-This demo showcases how to embed a custom `TranscriptTextBox` component into `IressFormField` while leveraging its built-in validation rules, error handling, and state management without additional implementation.
-
-**Reminder:** When building custom form components, avoid managing error message state internally. This helps maintain the IressForm as the single source of truth and ensures consistent, predictable UI behavior.
-
-Key features demonstrated:
-
-- **Universal Integration Pattern**: Shows how any custom component can be embedded in IressFormField
-- **Built-in Validation**: Leverages IressFormField's validation rules with custom validation logic
-- **Multiple Error Messages**: Displays simultaneous validation errors (e.g., wrong file type AND too large)
-- **Drag & Drop**: Files can be dragged and dropped directly onto the textarea
-- **File Upload Button**: Traditional file selection via button click
-- **Visual Feedback**: UI changes during drag operations with border and background updates
-- **Form State Management**: Automatically integrates with form context using controlled props
-- **File Management**: Display uploaded files with remove functionality using `IressPanel`
-
-```tsx
-<CustomFormFieldComponentsExample />
-```
-
-[View "CustomFormFieldComponents" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form--custom-form-field-components)
-
-## Sanitising input
-
-When sending user input to a server or third-party API, it is important to
-sanitise the data to prevent cross-site scripting (XSS) attacks. This example
-uses [DOMPurify](https://github.com/cure53/DOMPurify) to recursively strip
-malicious HTML from all string values in the form data before submission.
-
-Install DOMPurify in your project:
-
-```bash
-npm install dompurify
-npm install --save-dev @types/dompurify
-```
-
-```tsx
-<IressLoadingSuspense>
-<SanitisedInputForm />
-</IressLoadingSuspense>
-```
-
-[View "SanitisingInput" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_patterns-form--sanitising-input)
-
----
-
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs)
-
-
----
-
 <!-- patterns/form.md -->
 
 # Form
@@ -21810,6 +23604,113 @@ import { IressForm } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/patterns/Form)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=form&title=[Form]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=form,enhancement&title=[Form]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| actions | `ReactNode` | — | The actions to be displayed at the top right of the form. The actions to be displayed at the bottom left of the form. |
+| footer | `ReactNode` | — | Footer to be displayed at the bottom of the form. This can be used for additional information, links, or actions that are relevant to the form but not part of the main content. |
+| heading | `ReactNode` | — | Title displayed at the top of the form, usually the purpose of the form. |
+| mode | `all` , `onBlur` , `onChange` , `onSubmit` , `onTouched` | `'onBlur' 'onSubmit'` | Configure the validation strategy **before** a user submits the form the first time. For long forms, it is recommended to use `onBlur` to avoid overwhelming the user with validation errors. This means that validation will occur when the user leaves a field, rather than on every change. Configure the validation strategy **before** a user submits the form the first time. For short forms, it is recommended to use `onSubmit`, as the data is normally familiar to the user (eg. login). @see https://react-hook-form.com/docs/useform#mode @see https://react-hook-form.com/docs/useform#mode |
+| panelStyle | `[IressPanelProps](../../dist/components/Panel/Panel.d.ts)` | `{ bg: "alt" }` | Style the panel that wraps the form fields. |
+| pattern | `long` , `short` | — | Use `pattern="long"` for the following use cases: - Forms that are used for data entry, such as creating or updating large datasets. - Forms that are longer than the viewport (usually more than 8-9 fields). Use `pattern="short"` for the following use cases: - Login forms, or similar forms that requires data familiar to the users - Forms that fit the length of a single screen (less than 8-9 fields) |
+| reValidateMode | `onBlur` , `onChange` , `onSubmit` | `'onChange' 'onChange'` | Configure the validation strategy **after** a user submits the form the first time. During this phase, it is recommended to use `onChange` to provide immediate feedback on field changes so users can correct errors as they go. @see https://react-hook-form.com/docs/useform#reValidateMode @see https://react-hook-form.com/docs/useform#reValidateMode |
+| sticky | `boolean` | — | If set to `true`, the form will have a sticky header that remains at the top of the viewport when scrolling. This is useful for long forms where you want the header to always be visible. |
+| children | `ReactNode` | — | The content of the form, usually multiple `IressFormField` or `IressFormFieldset` components. |
+| onSubmit | `((data: T) => void)` | — | Handler for when the submit method on the form is called after validation is passed. @see https://react-hook-form.com/docs/useform/handlesubmit |
+| onError | `SubmitErrorHandler<T>` | — | Emitted when any field has an error. Called after the first submit if any errors are recorded, and from then on when any value changes. @see https://react-hook-form.com/docs/useform/handlesubmit |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| alert | `ReactNode` | `<IressFormValidationSummary srOnly />` | The content of the alert section. |
+| onValidChange | `((isValid: boolean) => void)` | — | Emitted when the form state is valid. @see https://react-hook-form.com/docs/useform/formstate |
+| updateErrorSummaryOnSubmit | `boolean` | `false` | If set to `true`, the summary will only update when the form is submitted, not on every field change. This is useful for performance reasons, especially in large forms. |
+| context | `object` | — | This context object is mutable and will be injected into the `resolver`'s second argument (eg. [Yup](https://github.com/jquense/yup) validation's context object). @see https://react-hook-form.com/docs/useform#context |
+| criteriaMode | `CriteriaMode` | — | Display all validation errors or one at a time. @see https://react-hook-form.com/docs/useform#criteriaMode |
+| defaultValues | `((BrowserNativeObject , { [x: string]: any; }, { [x: string]: any; } , NestedValue) & FieldValues) ` | — | Default values to be passed through when an input is unset. @see https://react-hook-form.com/docs/useform#defaultValues |
+| delayError | `number` | — | Delay error from appearing instantly. @see https://react-hook-form.com/docs/useform#delayError |
+| progressive | `boolean` | — | Progressive Enhancement only applicable for SSR framework. @see https://react-hook-form.com/docs/useform |
+| resetOptions | `Partial<{ keepDirtyValues: boolean; keepErrors: boolean; keepDirty: boolean; keepValues: boolean; keepDefaultValues: boolean; keepIsSubmitted: boolean; keepIsSubmitSuccessful: boolean; keepTouched: boolean; keepIsValidating: boolean; keepIsValid: boolean; keepSubmitCount: boolean; keepFieldsRef: boolean; }> , undefi...` | — | This property is related to value update behaviors. @see https://react-hook-form.com/docs/useform#resetOptions |
+| resolver | `Resolver<T, object, T>` | — | This function allows you to use any external validation library such as Yup, Zod, Joi, Vest, Ajv and many others. @see https://react-hook-form.com/docs/useform#resolver |
+| shouldUseNativeValidation | `boolean` | — | This config will enable browser native validation. It will also enable CSS selectors :valid and:invalid making styling inputs easier. @see https://react-hook-form.com/docs/useform#shouldUseNativeValidation |
+| shouldUnregister | `boolean` | — | By default, an input value will be retained when input is removed. However, you can set `shouldUnregister` to `true` to `unregister` input during unmount. @see https://react-hook-form.com/docs/useform#shouldUnregister |
+| values | `FieldValues` | — | The values prop will react to changes and update the form values, which is useful when your form needs to be updated by external state or server data. @see https://react-hook-form.com/docs/useform#values |
+
+📄 [Full type definition](../../dist/patterns/Form/Form.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+
+### IressFormField Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| control | `Control<T>` | — | React Hook Form control object. It is used to register the field with the form. It is automatically provided when used inside an `IressForm`, but it can be overridden if you are using a custom form control. @see https://react-hook-form.com/ts#Control |
+| defaultValue | `any` | — | A default value for the field. Although this is provided here as it is part of the React Hook Form API, it is recommended to set the default value in the form's `defaultValues` prop, to ensure the form is correctly initialised. |
+| **name** | `string` | — | Name of the field. It is used to identify the field in the form. It must be unique within the form. |
+| **render** | `(field: FormFieldRenderProps<T>, state: FormFieldRenderState<T>) => ReactNode` | — | Render function to provide the control for the field. To ensure the field is correctly registered with the form, the control must be passed as props to the rendered component. (eg. `render={field => <IressInput {...field} />}`) |
+| renderSupplementary | `((field: FormFieldRenderProps<T>, state: FormFieldRenderState<T>) => ReactNode)` | — | Render function to allow you to render supplementary content alongside the field, with access to the field props and state. This can be useful for rendering custom components that need to interact with the form state, such as character counters, password strength meters, or custom validation messages. (eg. `renderSupplementary={{ value } => <CharCount value={value} />}`) |
+| rules | `CustomRules<T>` | — | Validation rules, including: required, min, max, minLength, maxLength, pattern, validate @see https://react-hook-form.com/api/useform/register) |
+| shouldUnregister | `boolean` | — | Input will be unregistered after unmount and defaultValues will be removed as well (it will not be stored in the form state). @see https://react-hook-form.com/docs/usecontroller |
+| readOnly | `[FormControlReadOnly](../../dist/types.d.ts)` | — | Renders the field in a read-only state, replacing the input with a static display of the current value. Validation rules are skipped. Use `'locked'` when the field is read-only due to permissions. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| error | `ReactNode` | — | Validation error to be displayed above the field. |
+| **label** | `ReactNode` | — | Text to be displayed in the label. |
+| hint | `ReactNode` | — | Text to be displayed as supporting field description. |
+| horizontal | `boolean` | — | Displays the label and input field inline instead of stacked vertically. |
+| hiddenLabel | `boolean` | — | Visually hides the label text, but still available to screen readers. |
+| errorMessages | `[ValidationMessageObj](../../dist/interfaces.d.ts)[]` | — | Validation errors to be displayed above the field, an array of validation messages to be displayed in `IressValidationSummary`. |
+| labelWidth | `string` | — | Controls the width of the label container when in horizontal mode. Can be any valid CSS width value (e.g., '200px', '20%', 'auto'). Only applies when `horizontal` is true. |
+| removeErrorMargin | `boolean` | — | Removes the reserved space for error messages, allowing fields to stack with narrower gaps. When true, no margin is reserved for potential error messages. |
+| supplementary | `ReactNode` | — | Supplementary content to be displayed below the field. Is only shown when the field is not in an error state. |
+
+📄 [Full type definition](../../dist/patterns/FormField/FormField.d.ts)
+
+### IressFormFieldset Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| control | `Control<TFieldValues>` | — | React Hook Form control object. It is used to register the field with the form. It is automatically provided when used inside an `IressForm`, but it can be overridden if you are using a custom form control. @see https://react-hook-form.com/ts#Control |
+| defaultValue | `any` | — | A default value for the field. Although this is provided here as it is part of the React Hook Form API, it is recommended to set the default value in the form's `defaultValues` prop, to ensure the form is correctly initialised. |
+| **name** | `string` | — | Name of the field. It is used to identify the field in the form. It must be unique within the form. |
+| **render** | `(field: FormFieldRenderProps<TFieldValues>) => ReactNode` | — | Render function to provide the control for the field. |
+| rules | `CustomRules<TFieldValues>` | — | Validation rules, including: required, min, max, minLength, maxLength, pattern, validate @see https://react-hook-form.com/api/useform/register |
+| shouldUnregister | `boolean` | — | Input will be unregistered after unmount and defaultValues will be removed as well (it will not be stored in the form state). @see https://react-hook-form.com/docs/usecontroller |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| error | `ReactNode` | — | Validation error to be displayed above the field. |
+| **label** | `ReactNode` | — | Text to be displayed in the label. |
+| hint | `ReactNode` | — | Text to be displayed as supporting field description. |
+| horizontal | `boolean` | — | Displays the label and input field inline instead of stacked vertically. |
+| readOnly | `[FormControlReadOnly](../../dist/types.d.ts)` | — | Renders the group in a read-only state (no asterisk symbol). Use `'locked'` when the control is read-only due to permissions. |
+| hiddenLabel | `boolean` | — | Visually hides the label text, but still available to screen readers. |
+| errorMessages | `[ValidationMessageObj](../../dist/interfaces.d.ts)[]` | — | Validation errors to be displayed above the field, an array of validation messages to be displayed in `IressValidationSummary`. |
+| labelWidth | `string` | — | Controls the width of the label container when in horizontal mode. Can be any valid CSS width value (e.g., '200px', '20%', 'auto'). Only applies when `horizontal` is true. |
+| removeErrorMargin | `boolean` | — | Removes the reserved space for error messages, allowing fields to stack with narrower gaps. When true, no margin is reserved for potential error messages. |
+| supplementary | `ReactNode` | — | Supplementary content to be displayed below the field. Is only shown when the field is not in an error state. |
+
+📄 [Full type definition](../../dist/patterns/FormFieldset/FormFieldset.d.ts)
+
+### IressFormValidationSummary Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| status | `danger` , `info` , `success`, `warning`  | — | Status for all child ValidationMessage components |
+| linkToTarget | `string` | — | Renders validation messages as links pointing at the field it relates to, specified as a string Only works when used with the `messages` prop. |
+| visiblePrefix | `boolean` | — | If set to true, the prefix will be visually displayed (default is only available to screen readers) |
+| itemStyle | `[IressCustomiseSlot](../../dist/interfaces.d.ts)` | — | Add additional styles to each item in the list. |
+| actions | `[IressAlertButtonProps](../../dist/patterns/FormValidationSummary/FormValidationSummary.d.ts)[]` | — | Actions to display in the alert. These will be rendered as buttons with opinionated styling. If you want to use custom buttons, use the `footer` prop instead. |
+| defaultClosed | `boolean` | — | If true, the alert will be dismissed and unrendered from the DOM. Use for uncontrolled dismissal of the alert, where the component manages its own dismissed state internally. |
+| closed | `boolean` | — | If true, the alert will be dismissed and unrendered from the DOM. Use for controlled dismissal of the alert, where the parent component manages the dismissed state and passes it down via this prop. |
+| closeLabel | `string` | — | Optional override for the default close button label "Close". |
+| footer | `ReactNode` | — | Buttons and controls for the alert. @deprecated Use `actions` instead for buttons with opinionated styling. If you need other footer content, use the `children` prop instead. |
+| heading | `ReactNode` | `<h3>There was a problem submitting this form</h3>` | Text for alert heading. If a string, it will use a heading with level 2. |
+| icon | [MaterialSymbol](https://fonts.google.com/icons?icon.set=Material+Symbols) | — | Icon to display in the alert. If set to `false`, no icon will be displayed. If not provided, the icon will be determined by the `status` prop. |
+| multiLine | `boolean` | — | If true, the alert will have a layout that supports longer content, with increased spacing and the icon aligned to the top of the alert instead of centered. Should be used when the content of the alert is more than a couple of sentences. |
+| onClose | `((e?: MouseEvent<HTMLButtonElement, MouseEvent>) => void)` | — | Emitted when the alert is dismissed by the user via the close button. |
+| variant | `full-width`, `sidebar`  | — | Variants of the alert, allowing it to be styled differently based on where its used in the application. - Sidebar: The icon will be aligned to the heading, and the text will appear below the icon. - Full-width: The border will be removed, except for the bottom border. |
+
+📄 [Full type definition](../../dist/patterns/FormValidationSummary/FormValidationSummary.d.ts)
 
 Use the IressForm component when you want to request, validate and process data from the user.
 
@@ -24548,6 +26449,206 @@ Automated validation is now solely contained in `IressForm` and `IressFormField`
 
 [View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-form--docs)
 
+## Recipes
+
+### Native Validation
+
+```tsx
+import {
+  IressInput,
+  IressButton,
+  IressField,
+  IressAlert,
+  type InputBaseElement,
+} from '@iress-oss/ids-components';
+import { useState } from 'react';
+
+export const NativeValidationForm = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+  });
+  const [errors, setErrors] = useState<Record<string, boolean>>({
+    name: false,
+    email: false,
+  });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const hasErrors = Object.values(errors).some((error) => !!error);
+
+  const handleInputChange = (e: React.ChangeEvent<InputBaseElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrors({
+      ...errors,
+      [e.target.name]: !e.currentTarget.reportValidity(),
+    });
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    setIsSubmitted(true);
+
+    if (!form.checkValidity()) {
+      const fieldData = Object.fromEntries(new FormData(form).entries());
+      const fieldNames = Object.keys(fieldData);
+
+      setErrors(
+        fieldNames.reduce(
+          (newErrors, fieldName) => {
+            newErrors[fieldName] = !form
+              .querySelector<HTMLInputElement>(`[name=${fieldName}]`)
+              ?.checkValidity();
+            return newErrors;
+          },
+          {} as Record<string, boolean>,
+        ),
+      );
+    }
+
+    console.log(formData);
+  };
+
+  return (
+    <form onSubmit={handleSubmit} noValidate>
+      {isSubmitted && hasErrors && (
+        <IressAlert status="danger">
+          There's a problem with your submission.
+        </IressAlert>
+      )}
+      <IressField
+        label="Name"
+        error={errors.name && 'Name is required'}
+        required
+      >
+        <IressInput name="name" onChange={handleInputChange} required />
+      </IressField>
+      <IressField
+        label="Email address"
+        error={errors.email && 'Email is required'}
+        required
+      >
+        <IressInput name="email" onChange={handleInputChange} required />
+      </IressField>
+      <IressButton mode="primary" type="submit">
+        Sign up
+      </IressButton>
+    </form>
+  );
+};
+```
+
+### Forms In Expanders
+
+```tsx
+import {
+  IressExpander,
+  IressForm,
+  IressFormField,
+  IressInput,
+  IressStack,
+} from '@iress-oss/ids-components';
+import { useState } from 'react';
+
+const Form = () => (
+  <IressForm>
+    <IressFormField
+      label="Name"
+      name="name"
+      render={(controlledProps) => <IressInput {...controlledProps} />}
+      rules={{
+        required: 'Name is required',
+      }}
+    />
+    <IressFormField
+      label="Email address"
+      name="email"
+      render={(controlledProps) => <IressInput {...controlledProps} />}
+      rules={{
+        minLength: {
+          message: 'Use a longer email address',
+          value: 6,
+        },
+        required: 'Email is required',
+      }}
+    />
+  </IressForm>
+);
+
+export function FormExpanders() {
+  const [expander, setExpander] = useState('');
+
+  const isOpen = (name: string) => expander === name;
+
+  return (
+    <IressStack gap="sm">
+      <IressExpander
+        activator="Sender"
+        open={isOpen('Sender')}
+        onChange={(open) => open && setExpander('Sender')}
+      >
+        {isOpen('Sender') && <Form />}
+      </IressExpander>
+      <IressExpander
+        activator="Recipient"
+        open={isOpen('Recipient')}
+        onChange={(open) => open && setExpander('Recipient')}
+      >
+        {isOpen('Recipient') && <Form />}
+      </IressExpander>
+    </IressStack>
+  );
+}
+```
+
+### Hidden Inputs
+
+```tsx
+import {
+  IressButton,
+  IressFormField,
+  IressHookForm,
+  IressInput,
+} from '@iress-oss/ids-components';
+import { useForm } from 'react-hook-form';
+
+export const HiddenInputsForm = () => {
+  const form = useForm();
+  const { register } = form;
+
+  // This is a hidden input field that the user cannot see or interact with.
+  // This is the recommended way to handle hidden inputs in Iress forms.
+  const hiddenInputStoredInVariable = 'hiddenValue';
+
+  return (
+    <IressHookForm
+      form={form}
+      onSubmit={(data) => {
+        console.log('Form submitted with data:', {
+          ...data,
+          hiddenInputStoredInVariable,
+        });
+      }}
+    >
+      <IressFormField
+        label="Visible Input"
+        name="visibleInput"
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+      />
+
+      {/* Hidden field - NOT RECOMMENDED */}
+      <input
+        type="hidden"
+        {...register('hiddenField')} // Manually register the hidden field with react-hook-form
+        value="hiddenValue"
+      />
+
+      <IressButton type="submit">Submit</IressButton>
+    </IressHookForm>
+  );
+};
+```
+
+
 ---
 
 <!-- patterns/loading.md -->
@@ -24566,6 +26667,35 @@ import { IressLoading } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/patterns/Loading)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=loading&title=[Loading]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=loading,enhancement&title=[Loading]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| estimatedFinishTime | `number` | `3000 10000` | Estimated time in milliseconds for the loading to finish. |
+| loaded | `boolean` | — | If set to `true`, will start hiding the loading indicator. It is recommended to use this prop if you are using the `IressLoading.shouldRender` hook to achieve a smooth loading experience. If set to `true`, will hide the skeleton and display the chart. |
+| messageList | `Record<number, ReactNode>` | — | A message list to display while loading. The key is the time when you want the message to change to this message. If using a message list, the `children` will not be displayed. A checklist to display while loading. The key is the time when you want the item to be checked. |
+| pattern | `component` , `default` , `long` , `page` , `start-up`, `validate`  | — | Use `pattern="start-up"` for the following use cases: - Loading an application for the first time - Switching from a different application to a new application - Switching from a client's website to an Iress application - Switching themes Use `pattern="validate"` for the following use cases: - Submitting a form - Saving a record Use `pattern="page"` for the following use cases: - Detail page for a record - Form page - Article page Use `pattern="component"` for the following use cases: - Component that is expected to be slow to load, such as a chart, table or large graphic. - Component that can be refreshed/updated with new data. The long loading pattern will display a checklist of items that are being loaded.  Use `pattern="long"` for the following use cases: - Calling multiple slow APIs to load data - Loading results from AI - Processing a large amount of data as a queue (eg. bulk uploading or large media file uploads) Do not set the `pattern` prop when no other pattern can be applied. It will only show the loading message after a delay, and is intended for use when loading is not expected to take a long time. Example use cases: - Navigating between different routes - Calling an API within the page that does not require a loading state |
+| progress | `number` | — | If provided, will use this to set the `value` of the progress bar. If not provided, will use the `estimatedFinishTime` to calculate the progress. |
+| renderProgress | `((props: Pick<[IressProgressProps](../../dist/components/Progress/Progress.d.ts)<number>, "max" | "min" | "value" | "sectionTitle">) => ReactNode) | ((props: Pick<[IressProgressProps](../../dist/components/Progress/Progress.d.ts), "max" , ... 1 more ... , "sectionTitle">) => ReactNode)` | — | This is a render prop that allows you to override the default progress rendering. This is useful if you want to use a different progress component or if you want to add additional props to the progress bar. |
+| screenReaderText | `ReactNode` | `'Loading...' 'Loading...' 'Loading...' 'Loading...'` | Only screen readers will see this message, it is changed to the `children` message after the delay. Only screen readers will see this message. Only screen readers will see this message, it is changed to the `message` after the delay. |
+| startFrom | `number` | `0` | Set the start from timer, useful when stringing multiple loading patterns across different pages (eg. logging via a third-party authentication provider) |
+| timeout | `{ loaded?: number , { loaded?: number; message?: number; progress?: number , { skeleton?: number , number , undefined, undefined; } , undefined; } , undefined; } , undefined; message?: number , undefined; update?: number ` | `2500 500 3000` | Set the timeouts for showing the progress bar and message. The time in milliseconds before the loading message is displayed. Delay in milliseconds before the skeleton is displayed. Set the timeouts for showing the skeleton and update messages. Delay in milliseconds before the message is displayed. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| loading | `boolean, string ` | — | When true, button is in loading state. If provided a string, will be used as the loading text for screen readers. |
+| message | `ReactNode` | `'This is taking longer than expected...'` | Set the message to be displayed when the button is in the loading state. |
+| position | `bottom`, `right` , `top`  | — | This sets where the loading message will be displayed. - `bottom` - The loading message will be displayed below the button. It will be absolute positioned. - `top` - The loading message will be displayed above the button. It will be absolute positioned. - `right` - The loading message will be displayed to the right of the button. It will be inline positioned. |
+| renderButton | `((props: Pick<[IressButtonProps](../../dist/components/Button/Button.d.ts), "loading">) => ReactNode)` | — | This is a render prop that allows you to override the default button rendering. This is useful if you want to use a different button component or if you want to add additional props to the button. |
+| critical | `ReactNode` | — | If provided, will switch the skeleton to this template. Use when you have critical content that can be displayed while loading to allow the user to see some content while the rest is loading. |
+| error | `ReactNode` | — | An error to display if the loading fails. This will override the skeleton. An error to display if the loading fails. This will override the `messageList` and show an error message instead. |
+| template | `ReactNode` | `'page' 'chart'` | Which template to use as the skeleton, or you can use a ReactNode to customise the skeleton completely. |
+| update | `ReactNode` | — | Set the chart to be updated. If a `ReactNode` is provided, it will be displayed as the message. If set to `true`, will display the default message `Updating...`. |
+
+📄 [Full type definition](../../dist/patterns/Loading/Loading.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 The loading pattern is used to indicate that content is being loaded or processed consistently across Iress products.
 
@@ -25297,6 +27427,28 @@ import { IressShadow } from '@iress-oss/ids-components';
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=shadow&title=[Shadow]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=shadow,enhancement&title=[Shadow]+Feature:+)
 
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| children | `ReactNode` | — | Children to be rendered inside the shadow DOM |
+| fontFaceUrls | `string[]` | `[...defaultFonts]` | Optional array of font URLs to be included in the parent document head. By default it will include the default fonts from `@iress-oss/ids-tokens` (e.g., ['https://fonts.googleapis.com/css?family=Roboto'] |
+| stylesheetContents | `Record<string, string>` | `{}` | Optional array of stylesheet contents to be included in the shadow DOM (e.g. { styleId: '.my-class { color: red; }' }) |
+| stylesheetUrls | `string[]` | `[]` | Optional array of stylesheet URLs to be included in the shadow DOM (e.g., ['https://example.com/style.css']) |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| position | `bottom-center` , `bottom-end` , `bottom-start` , `top-center`, `top-end` , `top-start`  | `top-end` | The position on the screen where the toast will appear. |
+| noIconProvider | `boolean` | `false` | Disable the built-in IconProvider. When true, no IconProvider is rendered, allowing you to provide your own icon loading mechanism (e.g. hiding the app until the Material Symbols font is fully loaded). |
+| noSubsetting | `boolean` | `false` | Disable automatic font subsetting via Google Fonts CDN When false, only icons actually used in the component tree are loaded When true, the full Material Symbols font is loaded Ignored when `noIconProvider` is true. |
+| popoverContainer | `container` , [FloatingUIContainer](../../dist/types.d.ts) | — | Container to render popovers into. By default, popovers render where their parent is rendered (no portal).  Set to `"container"` to reuse the same container as the `container` prop (useful when you want modals, slideouts, toasts **and** popovers in the same DOM node).  Individual popovers can still override this by setting their own `container` prop. |
+| zIndexOffset | `number` | — | A value added to every IDS z-index layer via `calc()`. Use this when your application has a navigation element with a high z-index and IDS overlays (modal, slideout, toast) appear behind it. @example // Navbar sits at z-index 995 — shift IDS layers above it: <IressProvider zIndexOffset={1000}>...</IressProvider> // Modal → 1400, Toast → 1500, Tooltip → 1600 |
+| toasterOffset | `string` | — | Offsets the toaster from the viewport edge (block axis). Useful when a fixed navbar would overlap the toaster. Accepts any valid CSS length value (e.g. `'60px'`, `'4rem'`). @example <IressProvider toasterOffset="60px">...</IressProvider> |
+
+📄 [Full type definition](../../dist/patterns/Shadow/Shadow.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+
 The shadow pattern allows you to wrap your content in the shadow DOM, allowing you to isolate your styles from the rest of the application. This is useful when you want to create a component that has its own styles, without affecting the rest of the application (such as microfrontends).
 
 ```tsx
@@ -25387,6 +27539,33 @@ import { IressSideNav } from '@iress-oss/ids-components';
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/patterns/SideNav)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=side-nav&title=[Side Nav]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=side-nav,enhancement&title=[Side Nav]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| activeItemKey | `string` | — | Key of the active rail item. Sets the initial selection and can be updated externally. Rail clicks update the internal active item automatically. Key of the active rail item. Optional when sideMenuItems is provided — used only for rail highlighting. |
+| sideMenuItems | `[IressSideNavPanelItem](../../dist/patterns/SideNav/SideNav.d.ts)[]` | — | Override: content to display in the side panel instead of `items[activeItemKey].children`. Can be flat items, groups, or a mix. |
+| **items** | `[IressSideNavItem](../../dist/patterns/SideNav/SideNav.d.ts)[]` | — | Array of navigation items defining the rail icons. |
+| onActiveItemKeyChange | `((key: string) => void)` | — | Callback fired when the active item changes via a rail click. |
+| sideMenuLabel | `ReactNode` | — | Override: label displayed at the top of the side panel. When provided alongside sideMenuItems, this replaces the active item's label. |
+| expanded | `boolean` | — | Whether the side panel is expanded (controlled). |
+| defaultExpanded | `boolean` | `false` | Default expanded state (uncontrolled). |
+| onExpandedChange | `((expanded: boolean) => void)` | — | Callback when the expanded state changes. |
+| numbered | `boolean` | `false` | Whether to show numbered headers in the expanded side menu. |
+| header | `ReactNode` | — | Content rendered at the top of the expanded side panel. |
+| footer | `ReactNode` | — | Content rendered at the bottom of the expanded side panel. |
+| aria-label | `string` | `Side navigation` | Accessible label for the navigation landmark. |
+| expandLabel | `string` | `Expand navigation` | Label text for the expand button (accessibility). |
+| collapseLabel | `string` | `Collapse navigation` | Label text for the collapse button (accessibility). |
+| width | `number, string ` | `'250px'` | Width of the side panel when expanded. Can be a CSS length value or number (pixels). |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/patterns/SideNav/SideNav.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
 
 A side navigation pattern that combines a rail (icon-only bar) with an expandable side menu panel. Provides a data-driven API where items are passed as an array, with the rail acting as the main navigation and the side menu showcasing children under each navigation group.
 
@@ -33052,7 +35231,7 @@ The `borderRadius` prop allows you to change the border radius of any component.
 
 ```tsx
 <IressInput
-  borderRadius={borderRadius}
+  borderRadius="radius.system.layout"
   px="spacing.4"
   py="spacing.2"
   placeholder="Search everything"
@@ -33064,7 +35243,7 @@ The `borderRadius` prop allows you to change the border radius of any component.
 In some cases you may need to remove the border-radius to achieve design requirements. This can be done using `radius.000` or `none`.
 
 ```tsx
-<IressPanel borderRadius={borderRadius} bg="alt">
+<IressPanel borderRadius="none" bg="alt">
   No radius here
 </IressPanel>;
 ```
@@ -33132,12 +35311,8 @@ Overlay widths are sizes that define the width of overlay components such as Mod
 - `overlay.lg`: 800px
 
 ```tsx
-<IressContainer bg="alt" fluid maxWidth={maxWidth} width={width} p="lg">
-  This container is extra readable cause its maxWidth is set to:{' '}
-  <code>
-    {typeof maxWidth === 'object' ? JSON.stringify(maxWidth) : maxWidth}
-  </code>
-  .
+<IressContainer maxWidth="overlay.lg" bg="alt" fluid p="lg">
+  This container has maxWidth set to <code>overlay.lg</code>.
 </IressContainer>;
 ```
 
@@ -33280,13 +35455,13 @@ The `noGutter` prop removes the bottom margin of the last direct child of a comp
 
 ```tsx
 <IressPanel bg="alt" noGutter>
-      {children ?? (
-        <ul>
-          <li>
-            {args.noGutter ? (
-              <>
-                Margin is removed due to <code>noGutter</code>
-              </>
+  <ul>
+    <li>
+      Margin is removed due to <code>noGutter</code>
+    </li>
+    <li>Last child has no bottom margin</li>
+  </ul>
+</IressPanel>;
 ```
 
 ---
@@ -33563,3 +35738,707 @@ Typography tokens include font family, size, weight, and line height specificati
 ---
 
 [View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-typography--docs)
+
+---
+
+<!-- tokens/colour.md -->
+
+# Colour Tokens
+
+Colour tokens are a set of predefined colour values that can be used throughout the design system to ensure consistency and accessibility. They are categorized based on their usage and purpose, such as neutral, primary, accent, system status colours, data colours, and global interaction colours.
+
+## Design
+
+These are all the colour tokens available in the design system, grouped by their respective categories. For each token, we provide the hex value, CSS variable, and AA-compliant pairings to ensure accessibility.
+
+### Neutral
+
+Neutral colours apply to most backgrounds, text, and shapes in our experiences. They do not typically have a meaning associated with them, though they can imply things like disabled states. **Note:** There are some colour contrasts that are AA Large and are used for placeholders. If WCAG compliance is necessary for your application, please avoid using placeholders to meet this requirement.
+
+| Token | CSS Variable | Value | Description | Aliases | AA-Compliant Pairings |
+| --- | --- | --- | --- | --- | --- |
+| `colour.neutral.10` | `--iress-colour-neutral-10` | `#FFFFFF` | Used as the default background colour for most components. For tooltips, it is used as the foreground colour for the tooltip content. | `page` | neutral.70, neutral.80, neutral.90 |
+| `colour.neutral.20` | `--iress-colour-neutral-20` | `#F5F6F8` | Used as the alternating background colour for components such as tables. Used as the background colour behind panels and cards for highly interactive screens. | `alt` | neutral.70, neutral.80, neutral.90 |
+| `colour.neutral.30` | `--iress-colour-neutral-30` | `#E2E6EA` | Used as the border colour for dividers, and the default divider colour for components with in-built headers and footers such as cards. | — | neutral.80, neutral.90 |
+| `colour.neutral.40` | `--iress-colour-neutral-40` | `#CFD5DA` | Used for borders in subtle interactive components, such as checkboxes and radios with hidden controls and the progress bar. | — | neutral.80, neutral.90 |
+| `colour.neutral.50` | `--iress-colour-neutral-50` | `#A8B2BB` | Used as the background colour for interactive components such as the slider. | — | neutral.90 |
+| `colour.neutral.60` | `--iress-colour-neutral-60` | `#828F9D` | Used for placeholder text in form controls and disabled states. | — | neutral.90 |
+| `colour.neutral.70` | `--iress-colour-neutral-70` | `#5D6C7E` | Used for muted text such as hints and descriptions to allow for content hierarchy. | `muted` | neutral.10, neutral.20 |
+| `colour.neutral.80` | `--iress-colour-neutral-80` | `#384666` | Used as the default text colour for most components. For tooltips, it is used as the background colour. | `text` | neutral.10, neutral.20, neutral.30, neutral.40 |
+| `colour.neutral.90` | `--iress-colour-neutral-90` | `#141F4D` | Used for very dark text or UI elements requiring maximum contrast. | — | neutral.10, neutral.20, neutral.30, neutral.40 |
+
+### Primary
+
+The primary colour is your "brand" colour, and is used across all interactive elements such as buttons, links, inputs, etc. This colour can define the overall feel and can elicit emotion.
+
+| Token | CSS Variable | Value | Description | AA-Compliant Pairings |
+| --- | --- | --- | --- | --- |
+| `colour.primary.fill` | `--iress-colour-primary-fill` | `#003271` | Used for primary buttons and the active state of form controls such as checkboxes and radio buttons. Also used for the border of tags when they have a custom button. | primary.onFill |
+| `colour.primary.fillHover` | `--iress-colour-primary-fill-hover` | `#002352` | Used for the hover state of primary buttons as well as hovering over active form controls. | primary.onFill |
+| `colour.primary.onFill` | `--iress-colour-primary-on-fill` | `#FFFFFF` | Used as the foreground colour on primary buttons and active form controls. | primary.fill |
+| `colour.primary.surface` | `--iress-colour-primary-surface` | `#EBF3FF` | Used as the background colour for secondary buttons and the focused state of menu and tab items. Also used as the background colour of active buttons. | primary.text, neutral.80 |
+| `colour.primary.surfaceHover` | `--iress-colour-primary-surface-hover` | `#DCEAFE` | Used for the hover state of secondary buttons, form controls and hovering over focused menu and tab items. Also used when hovering over table rows. | primary.text, neutral.80 |
+| `colour.primary.text` | `--iress-colour-primary-text` | `#003271` | Used for text on primary buttons, active form controls and focused tab and menu items. Also used for the link text colour and tertiary buttons. | primary.surface |
+
+### Accent
+
+The accent colour is a colour used to emphasise key parts of the UI. These act as "secondary" or "supporting" colours to your primary colour. The brand accent is useful for grabbing attention or to support your primary/brand colour.
+
+| Token | CSS Variable | Value | Description | AA-Compliant Pairings |
+| --- | --- | --- | --- | --- |
+| `colour.accent.fill` | `--iress-colour-accent-fill` | `#C26EF4` | Used in illustrations to support the primary colour and to add visual interest to the UI. | accent.onFill |
+| `colour.accent.fillHover` | `--iress-colour-accent-fill-hover` | `#A855D9` | Used in illustrations to support the primary colour and to add visual interest to the UI when hovered. | accent.onFill |
+| `colour.accent.onFill` | `--iress-colour-accent-on-fill` | `#1F0032` | Used in illustrations to support the primary colour and to add visual interest to the UI when used as a foreground colour. | accent.fill |
+| `colour.accent.surface` | `--iress-colour-accent-surface` | `#E0BDF5` | Used to highlight a selected row in a table. | accent.text, neutral.80 |
+| `colour.accent.surfaceHover` | `--iress-colour-accent-surface-hover` | `#D4A6F2` | Used for the hover state of a highlighted row in a table to provide additional emphasis on hover. | accent.text, neutral.80 |
+| `colour.accent.text` | `--iress-colour-accent-text` | `#1F0032` | Used for text on top of accent surfaces (such as highlighted table rows). | accent.surface |
+
+### System — Success
+
+Communicates that an action has been successful and inform a user that the action is a positive action.
+
+| Token | CSS Variable | Value | Description | AA-Compliant Pairings |
+| --- | --- | --- | --- | --- |
+| `colour.system.success.fill` | `--iress-colour-system-success-fill` | `#37C49C` | Used for the background colour of primary success buttons, as well as the border of alerts and badges. It is also used for the foreground colour of icons inside toasts and alerts. | system.success.onFill |
+| `colour.system.success.fillHover` | `--iress-colour-system-success-fill-hover` | `#2DAB88` | Used for the hover state of primary success buttons. | system.success.onFill |
+| `colour.system.success.onFill` | `--iress-colour-system-success-on-fill` | `#0A2E25` | Used for the foreground colour of primary success buttons and badges. | system.success.fill |
+| `colour.system.success.surface` | `--iress-colour-system-success-surface` | `#EBF9F5` | Used for the background colour of success alerts and toasts, and the background of secondary success buttons. | system.success.text, neutral.90 |
+| `colour.system.success.surfaceHover` | `--iress-colour-system-success-surface-hover` | `#D7F3EB` | Used for the hover state of secondary success buttons. | system.success.text, neutral.90 |
+| `colour.system.success.text` | `--iress-colour-system-success-text` | `#006b44` | Used for the text colour of success alerts and toasts, and success tertiary buttons. | system.success.surface |
+
+### System — Danger
+
+Communicates something went wrong or prevents the user from moving forward with their task, as well as inform a potential action is destructive/negative.
+
+| Token | CSS Variable | Value | Description | AA-Compliant Pairings |
+| --- | --- | --- | --- | --- |
+| `colour.system.danger.fill` | `--iress-colour-system-danger-fill` | `#c21010` | Used for the background colour of primary danger buttons, as well as the border of alerts and badges. It is also used for the foreground colour of icons inside toasts and alerts. | system.danger.onFill |
+| `colour.system.danger.fillHover` | `--iress-colour-system-danger-fill-hover` | `#B32727` | Used for the hover state of primary danger buttons. | system.danger.onFill |
+| `colour.system.danger.onFill` | `--iress-colour-system-danger-on-fill` | `#FFF4F3` | Used for the foreground colour of primary danger buttons and badges. | system.danger.fill |
+| `colour.system.danger.surface` | `--iress-colour-system-danger-surface` | `#FFEDEC` | Used for the background colour of danger alerts and toasts, and the background of secondary danger buttons. | system.danger.text, neutral.90 |
+| `colour.system.danger.surfaceHover` | `--iress-colour-system-danger-surface-hover` | `#FFD9D6` | Used for the hover state of secondary danger buttons. | system.danger.text, neutral.90 |
+| `colour.system.danger.text` | `--iress-colour-system-danger-text` | `#c21010` | Used for the text colour of danger alerts and toasts, and danger tertiary buttons. | system.danger.surface |
+
+### System — Warning
+
+Communicates attention required but does not prevent the user from moving forward with their task.
+
+| Token | CSS Variable | Value | Description | AA-Compliant Pairings |
+| --- | --- | --- | --- | --- |
+| `colour.system.warning.fill` | `--iress-colour-system-warning-fill` | `#F0AD03` | Used for the border of warning alerts and the background of warning badges. | system.warning.onFill |
+| `colour.system.warning.fillHover` | `--iress-colour-system-warning-fill-hover` | `#DA9D00` | Used for the hover state of primary warning buttons. | system.warning.onFill |
+| `colour.system.warning.onFill` | `--iress-colour-system-warning-on-fill` | `#2B1F00` | Used for the foreground colour of warning badges. | system.warning.fill |
+| `colour.system.warning.surface` | `--iress-colour-system-warning-surface` | `#FFF8E6` | Used for the background colour of warning alerts. | system.warning.text, neutral.90 |
+| `colour.system.warning.surfaceHover` | `--iress-colour-system-warning-surface-hover` | `#FFEAA0` | Used for the hover state of secondary warning buttons. | system.warning.text, neutral.90 |
+| `colour.system.warning.text` | `--iress-colour-system-warning-text` | `#825400` | Used for the text colour of warning alerts. | system.warning.surface |
+
+### System — Info
+
+Provides additional helpful context.
+
+| Token | CSS Variable | Value | Description | AA-Compliant Pairings |
+| --- | --- | --- | --- | --- |
+| `colour.system.info.fill` | `--iress-colour-system-info-fill` | `#669AFF` | Used for the border of info alerts and toasts and the background of info badges. | system.info.onFill |
+| `colour.system.info.fillHover` | `--iress-colour-system-info-fill-hover` | `#5685E1` | Used for the hover state of primary info buttons. | system.info.onFill |
+| `colour.system.info.onFill` | `--iress-colour-system-info-on-fill` | `#121D33` | Used for the foreground colour of info badges. | system.info.fill |
+| `colour.system.info.surface` | `--iress-colour-system-info-surface` | `#E5EEFF` | Used for the background colour of info alerts and toasts. | system.info.text, neutral.90 |
+| `colour.system.info.surfaceHover` | `--iress-colour-system-info-surface-hover` | `#CCDEFF` | Used for the hover state of secondary info buttons. | system.info.text, neutral.90 |
+| `colour.system.info.text` | `--iress-colour-system-info-text` | `#0047ab` | Used for the text colour of info alerts and toasts. | system.info.surface |
+
+### Data — Subtle
+
+Subtle data colours provide softer contrast for backgrounds and less prominent data visualisations.
+
+| Token | CSS Variable | Value | Description | AA-Compliant Pairings |
+| --- | --- | --- | --- | --- |
+| `colour.data.subtle.10` | `--iress-colour-data-subtle-10` | `#FFE6F2` | First data visualisation colour in the subtle palette. | data.bold.10, neutral.90 |
+| `colour.data.subtle.20` | `--iress-colour-data-subtle-20` | `#FEEAFF` | Second data visualisation colour in the subtle palette. | data.bold.20, neutral.90 |
+| `colour.data.subtle.30` | `--iress-colour-data-subtle-30` | `#F1E6FF` | Third data visualisation colour in the subtle palette. | data.bold.30, neutral.90 |
+| `colour.data.subtle.40` | `--iress-colour-data-subtle-40` | `#E5F5FF` | Fourth data visualisation colour in the subtle palette. | data.bold.40, neutral.90 |
+| `colour.data.subtle.50` | `--iress-colour-data-subtle-50` | `#E6EEFF` | Fifth data visualisation colour in the subtle palette. | data.bold.50, neutral.90 |
+| `colour.data.subtle.60` | `--iress-colour-data-subtle-60` | `#C8D7FF` | Sixth data visualisation colour in the subtle palette. | data.bold.60, neutral.90 |
+| `colour.data.subtle.70` | `--iress-colour-data-subtle-70` | `#E4FFFD` | Seventh data visualisation colour in the subtle palette. | data.bold.70, neutral.90 |
+| `colour.data.subtle.80` | `--iress-colour-data-subtle-80` | `#BADFD4` | Eighth data visualisation colour in the subtle palette. | data.bold.80, neutral.90 |
+| `colour.data.subtle.90` | `--iress-colour-data-subtle-90` | `#ECECEC` | Ninth data visualisation colour in the subtle palette. | data.bold.90, neutral.90 |
+
+### Data — Bold
+
+Bold data colours provide strong contrast for foregrounds and prominent data visualisations.
+
+| Token | CSS Variable | Value | Description | AA-Compliant Pairings |
+| --- | --- | --- | --- | --- |
+| `colour.data.bold.10` | `--iress-colour-data-bold-10` | `#AC2C6A` | First data visualisation colour in the bold palette. | data.subtle.10, neutral.10 |
+| `colour.data.bold.20` | `--iress-colour-data-bold-20` | `#AA20AF` | Second data visualisation colour in the bold palette. | data.subtle.20, neutral.10 |
+| `colour.data.bold.30` | `--iress-colour-data-bold-30` | `#7E38D7` | Third data visualisation colour in the bold palette. | data.subtle.30, neutral.10 |
+| `colour.data.bold.40` | `--iress-colour-data-bold-40` | `#006EB8` | Fourth data visualisation colour in the bold palette. | data.subtle.40, neutral.10 |
+| `colour.data.bold.50` | `--iress-colour-data-bold-50` | `#0055FF` | Fifth data visualisation colour in the bold palette. | data.subtle.50, neutral.10 |
+| `colour.data.bold.60` | `--iress-colour-data-bold-60` | `#0032B2` | Sixth data visualisation colour in the bold palette. | data.subtle.60, neutral.10 |
+| `colour.data.bold.70` | `--iress-colour-data-bold-70` | `#1D7C73` | Seventh data visualisation colour in the bold palette. | data.subtle.70, neutral.10 |
+| `colour.data.bold.80` | `--iress-colour-data-bold-80` | `#124E3D` | Eighth data visualisation colour in the bold palette. | data.subtle.80, neutral.10 |
+| `colour.data.bold.90` | `--iress-colour-data-bold-90` | `#384666` | Ninth data visualisation colour in the bold palette. | data.subtle.90, neutral.10 |
+
+### Global interactions
+
+These tokens govern the interface's behavior during user engagement, ensuring clear visual hierarchy and accessible navigation across all components.
+
+| Token | CSS Variable | Value | Description | AA-Compliant Pairings |
+| --- | --- | --- | --- | --- |
+| `colour.globalInteractions.backdrop` | `--iress-colour-global-interactions-backdrop` | `#61656bcc` | By dimming the underlying interface, the Backdrop reduces cognitive load and establishes a clear depth of field, signalling that the user's attention is required exclusively on the foreground element. | neutral.10 |
+| `colour.globalInteractions.focusRing` | `--iress-colour-global-interactions-focus-ring` | `#005BFF` | A high-contrast "halo" used to identify the currently active element during keyboard navigation. Applied with a 2px width and 2px offset to ensure the indicator remains distinct from the component border, satisfying WCAG 2.4.7 for visibility. | neutral.10 |
+
+## Spacing Tokens
+
+Base unit: `0.25rem` (4px). Values range from 0–8 and 10 (no 9).
+
+| Token | CSS Variable | Value | Description | Aliases |
+| --- | --- | --- | --- | --- |
+| `spacing.0` | `--iress-spacing-0` | `0rem` | No spacing | `none` |
+| `spacing.1` | `--iress-spacing-1` | `.25rem` | The base unit for spacing | `xs` |
+| `spacing.2` | `--iress-spacing-2` | `calc(2 * {spacing.100 || .25rem})` | 2x spacing | `sm` |
+| `spacing.3` | `--iress-spacing-3` | `calc(3 * {spacing.100 || .25rem})` | 3x spacing | — |
+| `spacing.4` | `--iress-spacing-4` | `calc(4 * {spacing.100 || .25rem})` | 4x spacing | `md` |
+| `spacing.5` | `--iress-spacing-5` | `calc(5 * {spacing.100 || .25rem})` | 5x spacing | — |
+| `spacing.6` | `--iress-spacing-6` | `calc(6 * {spacing.100 || .25rem})` | 6x spacing | `lg` |
+| `spacing.7` | `--iress-spacing-7` | `calc(7 * {spacing.100 || .25rem})` | 7x spacing | — |
+| `spacing.8` | `--iress-spacing-8` | `calc(8 * {spacing.100 || .25rem})` | 8x spacing | — |
+| `spacing.10` | `--iress-spacing-10` | `calc(10 * {spacing.100 || .25rem})` | 10x spacing | `xl` |
+
+## Radius Tokens
+
+Border radius scale based on `0.25rem` (4px) base unit.
+
+## Develop
+
+You can use these tokens in your applications in three ways: via component props, CSS variables, or CSS-in-JS using the `cssVars` export from the `@iress-oss/ids-tokens` package.
+
+### Via component props
+
+```tsx
+import { IressStack } from '@iress-oss/ids-components';
+
+<IressStack bg="colour.neutral.20" color="colour.neutral.80">
+  Content with themed background and text
+</IressStack>;
+```
+
+### Via CSS variables
+
+```css
+.custom-card {
+  background: var(--colour-neutral-20);
+  color: var(--colour-neutral-80);
+}
+```
+
+### Via cssVars (CSS-in-JS)
+
+```tsx
+import { cssVars } from '@iress-oss/ids-tokens';
+
+<div style={{ background: cssVars.colour.neutral[20] }}>Themed</div>;
+```
+
+---
+
+<!-- tokens/overview.md -->
+
+# Tokens
+
+Design tokens are an integral part of the design system. They help us create consistency across components by sharing common design decisions and simplify our theming ecosystem.
+
+## What are tokens?
+
+Tokens are a set of variables that define the design properties of a component. They are used to define the visual properties of a component, such as colours, typography, spacing, and more.
+
+See [tokens-reference.md](./tokens-reference.md) for the complete token reference.
+
+---
+
+<!-- tokens/radius.md -->
+
+# Radius Tokens
+
+Border radius tokens for consistent rounded corners across components.
+
+## Design
+
+Border radius scale based on `0.25rem` (4px) base unit.
+
+### Scale Tokens
+
+| Token | CSS Variable | Value | Description |
+| --- | --- | --- | --- |
+| `radius.0` | `--iress-radius-0` | `0px` | No radius |
+| `radius.1` | `--iress-radius-1` | `0.25rem` | The base unit for radius |
+| `radius.2` | `--iress-radius-2` | `calc(2 * {radius.1 || 0.25rem})` | 2x radius |
+| `radius.3` | `--iress-radius-3` | `calc(3 * {radius.1 || 0.25rem})` | 3x radius |
+| `radius.4` | `--iress-radius-4` | `calc(4 * {radius.1 || 0.25rem})` | 4x radius |
+
+### System Tokens
+
+Component-specific radius tokens that can be overridden for branding.
+
+Component-specific radius tokens that can be overridden for branding.
+
+| Token | CSS Variable | Value | Description |
+| --- | --- | --- | --- |
+| `radius.system.button` | `--iress-radius-system-button` | `{radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem}` | Applies to buttons and other interactive elements such as the hover state of links. |
+| `radius.system.form` | `--iress-radius-system-form` | `{radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem}` | Applies to form inputs and alerts. |
+| `radius.system.layout` | `--iress-radius-system-layout` | `{radius.3 || calc(3 * 0.25rem)} {radius.3 || calc(3 * 0.25rem)} {radius.3 || calc(3 * 0.25rem)} {radius.3 || calc(3 * 0.25rem)}` | Applies to panels, modals and slideouts. |
+| `radius.system.pill` | `--iress-radius-system-pill` | `{radius.4 || calc(4 * 0.25rem)} {radius.4 || calc(4 * 0.25rem)} {radius.4 || calc(4 * 0.25rem)} {radius.4 || calc(4 * 0.25rem)}` | Applies to pills. |
+| `radius.system.tag` | `--iress-radius-system-tag` | `{radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem}` | Applies to tags. |
+
+## Typography Tokens
+
+## Develop
+
+You can use these tokens in your applications in three ways: via component props, CSS variables, or CSS-in-JS using the `cssVars` export from the `@iress-oss/ids-tokens` package.
+
+> **Note:** Most IDS components already have correct border radius built in.
+> Only use radius tokens when building custom layout elements.
+
+### Via component props
+
+```tsx
+import { IressStack } from '@iress-oss/ids-components';
+
+<IressStack borderRadius="radius.3">Rounded container</IressStack>;
+```
+
+### Via CSS variables
+
+```css
+.card { border-radius: var(--radius-3); }
+```
+
+---
+
+<!-- tokens/spacing.md -->
+
+# Spacing Tokens
+
+The spacing scale based on a 4px (0.25rem) base unit, used for gaps, padding, and margins.
+
+## Design
+
+Base unit: `0.25rem` (4px). Values range from 0–8 and 10 (no 9).
+
+Base unit: `0.25rem` (4px). Values range from 0–8 and 10 (no 9).
+
+| Token | CSS Variable | Value | Description | Aliases |
+| --- | --- | --- | --- | --- |
+| `spacing.0` | `--iress-spacing-0` | `0rem` | No spacing | `none` |
+| `spacing.1` | `--iress-spacing-1` | `.25rem` | The base unit for spacing | `xs` |
+| `spacing.2` | `--iress-spacing-2` | `calc(2 * {spacing.100 || .25rem})` | 2x spacing | `sm` |
+| `spacing.3` | `--iress-spacing-3` | `calc(3 * {spacing.100 || .25rem})` | 3x spacing | — |
+| `spacing.4` | `--iress-spacing-4` | `calc(4 * {spacing.100 || .25rem})` | 4x spacing | `md` |
+| `spacing.5` | `--iress-spacing-5` | `calc(5 * {spacing.100 || .25rem})` | 5x spacing | — |
+| `spacing.6` | `--iress-spacing-6` | `calc(6 * {spacing.100 || .25rem})` | 6x spacing | `lg` |
+| `spacing.7` | `--iress-spacing-7` | `calc(7 * {spacing.100 || .25rem})` | 7x spacing | — |
+| `spacing.8` | `--iress-spacing-8` | `calc(8 * {spacing.100 || .25rem})` | 8x spacing | — |
+| `spacing.10` | `--iress-spacing-10` | `calc(10 * {spacing.100 || .25rem})` | 10x spacing | `xl` |
+
+## Develop
+
+You can use these tokens in your applications in three ways: via component props, CSS variables, or CSS-in-JS using the `cssVars` export from the `@iress-oss/ids-tokens` package.
+
+### Via component props
+
+```tsx
+import { IressStack, IressText } from '@iress-oss/ids-components';
+
+<IressStack gap="spacing.4" p="spacing.6">
+  <IressText>Spaced content</IressText>
+</IressStack>;
+
+{
+  /* Or use aliases */
+}
+<IressStack gap="md" p="lg">
+  <IressText>Spaced content</IressText>
+</IressStack>;
+```
+
+### Responsive spacing
+
+```tsx
+import { IressStack } from '@iress-oss/ids-components';
+
+<IressStack gap={{ base: 'sm', md: 'md', lg: 'lg' }}>
+  Responsive gaps
+</IressStack>;
+```
+
+### Via CSS variables
+
+```css
+.card { padding: var(--spacing-4); gap: var(--spacing-2); }
+```
+
+---
+
+<!-- tokens/tokens-reference.md -->
+
+<!-- AUTO-GENERATED by scripts/generate-token-reference.ts — DO NOT EDIT -->
+
+# Design Token Reference
+
+Complete enumeration of all IDS design tokens with values, descriptions, aliases, and accessibility pairings.
+
+> **Package:** `@iress-oss/ids-tokens`
+> **CSS Stylesheet:** `@import '@iress-oss/ids-tokens/build/css-vars.css'`
+> **JS Object:** `import { cssVars } from '@iress-oss/ids-tokens'`
+
+---
+
+## Colour Tokens
+
+### Neutral
+
+Neutral colours apply to most backgrounds, text, and shapes in our experiences. They do not typically have a meaning associated with them, though they can imply things like disabled states. **Note:** There are some colour contrasts that are AA Large and are used for placeholders. If WCAG compliance is necessary for your application, please avoid using placeholders to meet this requirement.
+
+| Token | CSS Variable | Value | Description | Aliases | AA-Compliant Pairings |
+| --- | --- | --- | --- | --- | --- |
+| `colour.neutral.10` | `--iress-colour-neutral-10` | `#FFFFFF` | Used as the default background colour for most components. For tooltips, it is used as the foreground colour for the tooltip content. | `page` | neutral.70, neutral.80, neutral.90 |
+| `colour.neutral.20` | `--iress-colour-neutral-20` | `#F5F6F8` | Used as the alternating background colour for components such as tables. Used as the background colour behind panels and cards for highly interactive screens. | `alt` | neutral.70, neutral.80, neutral.90 |
+| `colour.neutral.30` | `--iress-colour-neutral-30` | `#E2E6EA` | Used as the border colour for dividers, and the default divider colour for components with in-built headers and footers such as cards. | — | neutral.80, neutral.90 |
+| `colour.neutral.40` | `--iress-colour-neutral-40` | `#CFD5DA` | Used for borders in subtle interactive components, such as checkboxes and radios with hidden controls and the progress bar. | — | neutral.80, neutral.90 |
+| `colour.neutral.50` | `--iress-colour-neutral-50` | `#A8B2BB` | Used as the background colour for interactive components such as the slider. | — | neutral.90 |
+| `colour.neutral.60` | `--iress-colour-neutral-60` | `#828F9D` | Used for placeholder text in form controls and disabled states. | — | neutral.90 |
+| `colour.neutral.70` | `--iress-colour-neutral-70` | `#5D6C7E` | Used for muted text such as hints and descriptions to allow for content hierarchy. | `muted` | neutral.10, neutral.20 |
+| `colour.neutral.80` | `--iress-colour-neutral-80` | `#384666` | Used as the default text colour for most components. For tooltips, it is used as the background colour. | `text` | neutral.10, neutral.20, neutral.30, neutral.40 |
+| `colour.neutral.90` | `--iress-colour-neutral-90` | `#141F4D` | Used for very dark text or UI elements requiring maximum contrast. | — | neutral.10, neutral.20, neutral.30, neutral.40 |
+
+### Primary
+
+The primary colour is your "brand" colour, and is used across all interactive elements such as buttons, links, inputs, etc. This colour can define the overall feel and can elicit emotion.
+
+| Token | CSS Variable | Value | Description | AA-Compliant Pairings |
+| --- | --- | --- | --- | --- |
+| `colour.primary.fill` | `--iress-colour-primary-fill` | `#003271` | Used for primary buttons and the active state of form controls such as checkboxes and radio buttons. Also used for the border of tags when they have a custom button. | primary.onFill |
+| `colour.primary.fillHover` | `--iress-colour-primary-fill-hover` | `#002352` | Used for the hover state of primary buttons as well as hovering over active form controls. | primary.onFill |
+| `colour.primary.onFill` | `--iress-colour-primary-on-fill` | `#FFFFFF` | Used as the foreground colour on primary buttons and active form controls. | primary.fill |
+| `colour.primary.surface` | `--iress-colour-primary-surface` | `#EBF3FF` | Used as the background colour for secondary buttons and the focused state of menu and tab items. Also used as the background colour of active buttons. | primary.text, neutral.80 |
+| `colour.primary.surfaceHover` | `--iress-colour-primary-surface-hover` | `#DCEAFE` | Used for the hover state of secondary buttons, form controls and hovering over focused menu and tab items. Also used when hovering over table rows. | primary.text, neutral.80 |
+| `colour.primary.text` | `--iress-colour-primary-text` | `#003271` | Used for text on primary buttons, active form controls and focused tab and menu items. Also used for the link text colour and tertiary buttons. | primary.surface |
+
+### Accent
+
+The accent colour is a colour used to emphasise key parts of the UI. These act as "secondary" or "supporting" colours to your primary colour. The brand accent is useful for grabbing attention or to support your primary/brand colour.
+
+| Token | CSS Variable | Value | Description | AA-Compliant Pairings |
+| --- | --- | --- | --- | --- |
+| `colour.accent.fill` | `--iress-colour-accent-fill` | `#C26EF4` | Used in illustrations to support the primary colour and to add visual interest to the UI. | accent.onFill |
+| `colour.accent.fillHover` | `--iress-colour-accent-fill-hover` | `#A855D9` | Used in illustrations to support the primary colour and to add visual interest to the UI when hovered. | accent.onFill |
+| `colour.accent.onFill` | `--iress-colour-accent-on-fill` | `#1F0032` | Used in illustrations to support the primary colour and to add visual interest to the UI when used as a foreground colour. | accent.fill |
+| `colour.accent.surface` | `--iress-colour-accent-surface` | `#E0BDF5` | Used to highlight a selected row in a table. | accent.text, neutral.80 |
+| `colour.accent.surfaceHover` | `--iress-colour-accent-surface-hover` | `#D4A6F2` | Used for the hover state of a highlighted row in a table to provide additional emphasis on hover. | accent.text, neutral.80 |
+| `colour.accent.text` | `--iress-colour-accent-text` | `#1F0032` | Used for text on top of accent surfaces (such as highlighted table rows). | accent.surface |
+
+### System — Success
+
+Communicates that an action has been successful and inform a user that the action is a positive action.
+
+| Token | CSS Variable | Value | Description | AA-Compliant Pairings |
+| --- | --- | --- | --- | --- |
+| `colour.system.success.fill` | `--iress-colour-system-success-fill` | `#37C49C` | Used for the background colour of primary success buttons, as well as the border of alerts and badges. It is also used for the foreground colour of icons inside toasts and alerts. | system.success.onFill |
+| `colour.system.success.fillHover` | `--iress-colour-system-success-fill-hover` | `#2DAB88` | Used for the hover state of primary success buttons. | system.success.onFill |
+| `colour.system.success.onFill` | `--iress-colour-system-success-on-fill` | `#0A2E25` | Used for the foreground colour of primary success buttons and badges. | system.success.fill |
+| `colour.system.success.surface` | `--iress-colour-system-success-surface` | `#EBF9F5` | Used for the background colour of success alerts and toasts, and the background of secondary success buttons. | system.success.text, neutral.90 |
+| `colour.system.success.surfaceHover` | `--iress-colour-system-success-surface-hover` | `#D7F3EB` | Used for the hover state of secondary success buttons. | system.success.text, neutral.90 |
+| `colour.system.success.text` | `--iress-colour-system-success-text` | `#006b44` | Used for the text colour of success alerts and toasts, and success tertiary buttons. | system.success.surface |
+
+### System — Danger
+
+Communicates something went wrong or prevents the user from moving forward with their task, as well as inform a potential action is destructive/negative.
+
+| Token | CSS Variable | Value | Description | AA-Compliant Pairings |
+| --- | --- | --- | --- | --- |
+| `colour.system.danger.fill` | `--iress-colour-system-danger-fill` | `#c21010` | Used for the background colour of primary danger buttons, as well as the border of alerts and badges. It is also used for the foreground colour of icons inside toasts and alerts. | system.danger.onFill |
+| `colour.system.danger.fillHover` | `--iress-colour-system-danger-fill-hover` | `#B32727` | Used for the hover state of primary danger buttons. | system.danger.onFill |
+| `colour.system.danger.onFill` | `--iress-colour-system-danger-on-fill` | `#FFF4F3` | Used for the foreground colour of primary danger buttons and badges. | system.danger.fill |
+| `colour.system.danger.surface` | `--iress-colour-system-danger-surface` | `#FFEDEC` | Used for the background colour of danger alerts and toasts, and the background of secondary danger buttons. | system.danger.text, neutral.90 |
+| `colour.system.danger.surfaceHover` | `--iress-colour-system-danger-surface-hover` | `#FFD9D6` | Used for the hover state of secondary danger buttons. | system.danger.text, neutral.90 |
+| `colour.system.danger.text` | `--iress-colour-system-danger-text` | `#c21010` | Used for the text colour of danger alerts and toasts, and danger tertiary buttons. | system.danger.surface |
+
+### System — Warning
+
+Communicates attention required but does not prevent the user from moving forward with their task.
+
+| Token | CSS Variable | Value | Description | AA-Compliant Pairings |
+| --- | --- | --- | --- | --- |
+| `colour.system.warning.fill` | `--iress-colour-system-warning-fill` | `#F0AD03` | Used for the border of warning alerts and the background of warning badges. | system.warning.onFill |
+| `colour.system.warning.fillHover` | `--iress-colour-system-warning-fill-hover` | `#DA9D00` | Used for the hover state of primary warning buttons. | system.warning.onFill |
+| `colour.system.warning.onFill` | `--iress-colour-system-warning-on-fill` | `#2B1F00` | Used for the foreground colour of warning badges. | system.warning.fill |
+| `colour.system.warning.surface` | `--iress-colour-system-warning-surface` | `#FFF8E6` | Used for the background colour of warning alerts. | system.warning.text, neutral.90 |
+| `colour.system.warning.surfaceHover` | `--iress-colour-system-warning-surface-hover` | `#FFEAA0` | Used for the hover state of secondary warning buttons. | system.warning.text, neutral.90 |
+| `colour.system.warning.text` | `--iress-colour-system-warning-text` | `#825400` | Used for the text colour of warning alerts. | system.warning.surface |
+
+### System — Info
+
+Provides additional helpful context.
+
+| Token | CSS Variable | Value | Description | AA-Compliant Pairings |
+| --- | --- | --- | --- | --- |
+| `colour.system.info.fill` | `--iress-colour-system-info-fill` | `#669AFF` | Used for the border of info alerts and toasts and the background of info badges. | system.info.onFill |
+| `colour.system.info.fillHover` | `--iress-colour-system-info-fill-hover` | `#5685E1` | Used for the hover state of primary info buttons. | system.info.onFill |
+| `colour.system.info.onFill` | `--iress-colour-system-info-on-fill` | `#121D33` | Used for the foreground colour of info badges. | system.info.fill |
+| `colour.system.info.surface` | `--iress-colour-system-info-surface` | `#E5EEFF` | Used for the background colour of info alerts and toasts. | system.info.text, neutral.90 |
+| `colour.system.info.surfaceHover` | `--iress-colour-system-info-surface-hover` | `#CCDEFF` | Used for the hover state of secondary info buttons. | system.info.text, neutral.90 |
+| `colour.system.info.text` | `--iress-colour-system-info-text` | `#0047ab` | Used for the text colour of info alerts and toasts. | system.info.surface |
+
+### Data — Subtle
+
+Subtle data colours provide softer contrast for backgrounds and less prominent data visualisations.
+
+| Token | CSS Variable | Value | Description | AA-Compliant Pairings |
+| --- | --- | --- | --- | --- |
+| `colour.data.subtle.10` | `--iress-colour-data-subtle-10` | `#FFE6F2` | First data visualisation colour in the subtle palette. | data.bold.10, neutral.90 |
+| `colour.data.subtle.20` | `--iress-colour-data-subtle-20` | `#FEEAFF` | Second data visualisation colour in the subtle palette. | data.bold.20, neutral.90 |
+| `colour.data.subtle.30` | `--iress-colour-data-subtle-30` | `#F1E6FF` | Third data visualisation colour in the subtle palette. | data.bold.30, neutral.90 |
+| `colour.data.subtle.40` | `--iress-colour-data-subtle-40` | `#E5F5FF` | Fourth data visualisation colour in the subtle palette. | data.bold.40, neutral.90 |
+| `colour.data.subtle.50` | `--iress-colour-data-subtle-50` | `#E6EEFF` | Fifth data visualisation colour in the subtle palette. | data.bold.50, neutral.90 |
+| `colour.data.subtle.60` | `--iress-colour-data-subtle-60` | `#C8D7FF` | Sixth data visualisation colour in the subtle palette. | data.bold.60, neutral.90 |
+| `colour.data.subtle.70` | `--iress-colour-data-subtle-70` | `#E4FFFD` | Seventh data visualisation colour in the subtle palette. | data.bold.70, neutral.90 |
+| `colour.data.subtle.80` | `--iress-colour-data-subtle-80` | `#BADFD4` | Eighth data visualisation colour in the subtle palette. | data.bold.80, neutral.90 |
+| `colour.data.subtle.90` | `--iress-colour-data-subtle-90` | `#ECECEC` | Ninth data visualisation colour in the subtle palette. | data.bold.90, neutral.90 |
+
+### Data — Bold
+
+Bold data colours provide strong contrast for foregrounds and prominent data visualisations.
+
+| Token | CSS Variable | Value | Description | AA-Compliant Pairings |
+| --- | --- | --- | --- | --- |
+| `colour.data.bold.10` | `--iress-colour-data-bold-10` | `#AC2C6A` | First data visualisation colour in the bold palette. | data.subtle.10, neutral.10 |
+| `colour.data.bold.20` | `--iress-colour-data-bold-20` | `#AA20AF` | Second data visualisation colour in the bold palette. | data.subtle.20, neutral.10 |
+| `colour.data.bold.30` | `--iress-colour-data-bold-30` | `#7E38D7` | Third data visualisation colour in the bold palette. | data.subtle.30, neutral.10 |
+| `colour.data.bold.40` | `--iress-colour-data-bold-40` | `#006EB8` | Fourth data visualisation colour in the bold palette. | data.subtle.40, neutral.10 |
+| `colour.data.bold.50` | `--iress-colour-data-bold-50` | `#0055FF` | Fifth data visualisation colour in the bold palette. | data.subtle.50, neutral.10 |
+| `colour.data.bold.60` | `--iress-colour-data-bold-60` | `#0032B2` | Sixth data visualisation colour in the bold palette. | data.subtle.60, neutral.10 |
+| `colour.data.bold.70` | `--iress-colour-data-bold-70` | `#1D7C73` | Seventh data visualisation colour in the bold palette. | data.subtle.70, neutral.10 |
+| `colour.data.bold.80` | `--iress-colour-data-bold-80` | `#124E3D` | Eighth data visualisation colour in the bold palette. | data.subtle.80, neutral.10 |
+| `colour.data.bold.90` | `--iress-colour-data-bold-90` | `#384666` | Ninth data visualisation colour in the bold palette. | data.subtle.90, neutral.10 |
+
+### GlobalInteractions
+
+These tokens govern the interface's behavior during user engagement, ensuring clear visual hierarchy and accessible navigation across all components.
+
+| Token | CSS Variable | Value | Description | AA-Compliant Pairings |
+| --- | --- | --- | --- | --- |
+| `colour.globalInteractions.backdrop` | `--iress-colour-global-interactions-backdrop` | `#61656bcc` | By dimming the underlying interface, the Backdrop reduces cognitive load and establishes a clear depth of field, signalling that the user's attention is required exclusively on the foreground element. | neutral.10 |
+| `colour.globalInteractions.focusRing` | `--iress-colour-global-interactions-focus-ring` | `#005BFF` | A high-contrast "halo" used to identify the currently active element during keyboard navigation. Applied with a 2px width and 2px offset to ensure the indicator remains distinct from the component border, satisfying WCAG 2.4.7 for visibility. | neutral.10 |
+
+## Spacing Tokens
+
+Base unit: `0.25rem` (4px). Values range from 0–8 and 10 (no 9).
+
+| Token | CSS Variable | Value | Description | Aliases |
+| --- | --- | --- | --- | --- |
+| `spacing.0` | `--iress-spacing-0` | `0rem` | No spacing | `none` |
+| `spacing.1` | `--iress-spacing-1` | `.25rem` | The base unit for spacing | `xs` |
+| `spacing.2` | `--iress-spacing-2` | `calc(2 * {spacing.100 || .25rem})` | 2x spacing | `sm` |
+| `spacing.3` | `--iress-spacing-3` | `calc(3 * {spacing.100 || .25rem})` | 3x spacing | — |
+| `spacing.4` | `--iress-spacing-4` | `calc(4 * {spacing.100 || .25rem})` | 4x spacing | `md` |
+| `spacing.5` | `--iress-spacing-5` | `calc(5 * {spacing.100 || .25rem})` | 5x spacing | — |
+| `spacing.6` | `--iress-spacing-6` | `calc(6 * {spacing.100 || .25rem})` | 6x spacing | `lg` |
+| `spacing.7` | `--iress-spacing-7` | `calc(7 * {spacing.100 || .25rem})` | 7x spacing | — |
+| `spacing.8` | `--iress-spacing-8` | `calc(8 * {spacing.100 || .25rem})` | 8x spacing | — |
+| `spacing.10` | `--iress-spacing-10` | `calc(10 * {spacing.100 || .25rem})` | 10x spacing | `xl` |
+
+## Radius Tokens
+
+Border radius scale based on `0.25rem` (4px) base unit.
+
+### Scale Tokens
+
+| Token | CSS Variable | Value | Description |
+| --- | --- | --- | --- |
+| `radius.0` | `--iress-radius-0` | `0px` | No radius |
+| `radius.1` | `--iress-radius-1` | `0.25rem` | The base unit for radius |
+| `radius.2` | `--iress-radius-2` | `calc(2 * {radius.1 || 0.25rem})` | 2x radius |
+| `radius.3` | `--iress-radius-3` | `calc(3 * {radius.1 || 0.25rem})` | 3x radius |
+| `radius.4` | `--iress-radius-4` | `calc(4 * {radius.1 || 0.25rem})` | 4x radius |
+
+### System Tokens
+
+Component-specific radius tokens that can be overridden for branding.
+
+| Token | CSS Variable | Value | Description |
+| --- | --- | --- | --- |
+| `radius.system.button` | `--iress-radius-system-button` | `{radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem}` | Applies to buttons and other interactive elements such as the hover state of links. |
+| `radius.system.form` | `--iress-radius-system-form` | `{radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem}` | Applies to form inputs and alerts. |
+| `radius.system.layout` | `--iress-radius-system-layout` | `{radius.3 || calc(3 * 0.25rem)} {radius.3 || calc(3 * 0.25rem)} {radius.3 || calc(3 * 0.25rem)} {radius.3 || calc(3 * 0.25rem)}` | Applies to panels, modals and slideouts. |
+| `radius.system.pill` | `--iress-radius-system-pill` | `{radius.4 || calc(4 * 0.25rem)} {radius.4 || calc(4 * 0.25rem)} {radius.4 || calc(4 * 0.25rem)} {radius.4 || calc(4 * 0.25rem)}` | Applies to pills. |
+| `radius.system.tag` | `--iress-radius-system-tag` | `{radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem}` | Applies to tags. |
+
+## Typography Tokens
+
+### Base
+
+| Token | CSS Variable | Value | Description |
+| --- | --- | --- | --- |
+| `typography.base.size` | `--iress-typography-base-size` | `.875rem` | This is the base font size, and is used to calculate the font sizes of each token. |
+| `typography.base.headingFont` | `--iress-typography-base-heading-font` | `Ubuntu, Helvetica, sans-serif` | This is the base font family for headings, used for heading tokens. |
+| `typography.base.bodyFont` | `--iress-typography-base-body-font` | `Inter, Helvetica, sans-serif` | This is the base font family for body, used for body tokens. |
+
+### Headings
+
+| Token | CSS Variable | Value | Description |
+| --- | --- | --- | --- |
+| `typography.heading.1` | `--iress-typography-heading-1` | `500 calc({typography.base.size || .875rem} * (24 / 14))/1.33 {typography.base.headingFont || Ubuntu, Helvetica, sans-serif}` | Use for the main page title to establish a clear hierarchy. There is only one H1 per screen, emphasising the primary purpose or context of the page. |
+| `typography.heading.2` | `--iress-typography-heading-2` | `500 calc({typography.base.size || .875rem} * (20 / 14))/1.4 {typography.base.headingFont || Ubuntu, Helvetica, sans-serif}` | Use for **primary section headings** within a page to organise content and guide the user through key areas. Also suitable for large components—such as modals—where space allows and where it pairs well with: body.md. |
+| `typography.heading.3` | `--iress-typography-heading-3` | `500 calc({typography.base.size || .875rem} * (18 / 14))/1.5 {typography.base.headingFont || Ubuntu, Helvetica, sans-serif}` | Use for: sub-sections under H2s to further structure content and maintain a clear visual hierarchy. Ideal for breaking down complex sections into manageable parts. |
+| `typography.heading.4` | `--iress-typography-heading-4` | `500 calc({typography.base.size || .875rem} * (16 / 14))/1.42 {typography.base.headingFont || Ubuntu, Helvetica, sans-serif}` | Use for: supporting headings within content blocks or small components where space is limited—such as table headers, cards, or side panels. Provides structure without overwhelming the layout. |
+| `typography.heading.5` | `--iress-typography-heading-5` | `400 calc({typography.base.size || .875rem} * (16 / 14))/1.42 {typography.base.headingFont || Ubuntu, Helvetica, sans-serif}` | Use for: minor labels or titles in compact UI elements, such as cards, sidebars, or inline labels. Best used to emphasise supplementary information without drawing too much attention. Works well with body.sm and is ideal for subtle content like fine print. Use sparingly to preserve typographic hierarchy. |
+
+### Body — Small (`body.sm`)
+
+| Token | CSS Variable | Value | Description |
+| --- | --- | --- | --- |
+| `typography.body.sm.regular` | `--iress-typography-body-sm-regular` | `400 calc({typography.base.size || .875rem} * (12 / 14))/1.5 {typography.base.bodyFont || Inter, Helvetica, sans-serif}` | The default small text, most commonly used to display text in small components and compact tables and lists. |
+| `typography.body.sm.medium` | `--iress-typography-body-sm-medium` | `500 calc({typography.base.size || .875rem} * (12 / 14))/1.5 {typography.base.bodyFont || Inter, Helvetica, sans-serif}` | Medium text is used to indicate text is interactive, such as a button or a link. |
+| `typography.body.sm.strong` | `--iress-typography-body-sm-strong` | `600 calc({typography.base.size || .875rem} * (12 / 14))/1.5 {typography.base.bodyFont || Inter, Helvetica, sans-serif}` | Strong text is used to highlight important information in a paragraph of text. |
+| `typography.body.sm.em` | `--iress-typography-body-sm-em` | `500 italic calc({typography.base.size || .875rem} * (12 / 14))/1.5 {typography.base.bodyFont || Inter, Helvetica, sans-serif}` | Emphasised text is used to highlight a term or definition in a paragraph of text. It is used sparingly, usually for legal purposes. |
+
+### Body — Medium (`body.md`)
+
+| Token | CSS Variable | Value | Description |
+| --- | --- | --- | --- |
+| `typography.body.md.regular` | `--iress-typography-body-md-regular` | `400 {typography.base.size || .875rem}/1.5 {typography.base.bodyFont || Inter, Helvetica, sans-serif}` | The default text, most commonly used to display text across all products. |
+| `typography.body.md.medium` | `--iress-typography-body-md-medium` | `500 {typography.base.size || .875rem}/1.5 {typography.base.bodyFont || Inter, Helvetica, sans-serif}` | Medium text is used to indicate text is interactive, such as a button or a link. |
+| `typography.body.md.strong` | `--iress-typography-body-md-strong` | `600 {typography.base.size || .875rem}/1.5 {typography.base.bodyFont || Inter, Helvetica, sans-serif}` | Strong text is used to highlight important information in a paragraph of text. |
+| `typography.body.md.em` | `--iress-typography-body-md-em` | `500 italic {typography.base.size || .875rem}/1.5 {typography.base.bodyFont || Inter, Helvetica, sans-serif}` | Emphasised text is used to highlight a term or definition in a paragraph of text. It is used sparingly, usually for legal purposes. |
+
+### Code
+
+| Token | CSS Variable | Value | Description |
+| --- | --- | --- | --- |
+| `typography.code` | `--iress-typography-code` | `400 calc({typography.base.size || .875rem} * (16 / 14))/1.6 Space, monospace` | Used to display code snippets in the product, such as in the API documentation. |
+
+---
+
+## Quick Reference: Token Path → CSS Variable
+
+```
+token.path.name → --iress-token-path-name
+```
+
+Examples:
+- `colour.primary.fill` → `--iress-colour-primary-fill`
+- `spacing.4` → `--iress-spacing-4`
+- `radius.system.button` → `--iress-radius-system-button`
+- `typography.heading.1` → `--iress-typography-heading-1`
+- `typography.body.md.regular` → `--iress-typography-body-md-regular`
+
+## Quick Reference: `cssVars` Usage
+
+```tsx
+import { cssVars } from '@iress-oss/ids-tokens';
+
+cssVars.colour.primary.fill        // 'var(--iress-colour-primary-fill, ...)'
+cssVars.colour.neutral[80]         // 'var(--iress-colour-neutral-80, ...)'
+cssVars.spacing[4]                 // 'var(--iress-spacing-4, ...)'
+cssVars.radius[2]                  // 'var(--iress-radius-2, ...)'
+cssVars.typography.heading[1]      // 'var(--iress-typography-heading-1, ...)'
+cssVars.typography.body.md.regular // 'var(--iress-typography-body-md-regular, ...)'
+```
+
+
+---
+
+<!-- tokens/typography.md -->
+
+# Typography Tokens
+
+Font families, sizes, weights, and line heights for headings, body text, and code.
+
+## Design
+
+Typography tokens include font family, size, weight, and line height specifications for headings, body text, and code. They are designed to create a clear typographic hierarchy and ensure consistency across products.
+
+### Base
+
+| Token | CSS Variable | Value | Description |
+| --- | --- | --- | --- |
+| `typography.base.size` | `--iress-typography-base-size` | `.875rem` | This is the base font size, and is used to calculate the font sizes of each token. |
+| `typography.base.headingFont` | `--iress-typography-base-heading-font` | `Ubuntu, Helvetica, sans-serif` | This is the base font family for headings, used for heading tokens. |
+| `typography.base.bodyFont` | `--iress-typography-base-body-font` | `Inter, Helvetica, sans-serif` | This is the base font family for body, used for body tokens. |
+
+### Headings
+
+| Token | CSS Variable | Value | Description |
+| --- | --- | --- | --- |
+| `typography.heading.1` | `--iress-typography-heading-1` | `500 calc({typography.base.size || .875rem} * (24 / 14))/1.33 {typography.base.headingFont || Ubuntu, Helvetica, sans-serif}` | Use for the main page title to establish a clear hierarchy. There is only one H1 per screen, emphasising the primary purpose or context of the page. |
+| `typography.heading.2` | `--iress-typography-heading-2` | `500 calc({typography.base.size || .875rem} * (20 / 14))/1.4 {typography.base.headingFont || Ubuntu, Helvetica, sans-serif}` | Use for **primary section headings** within a page to organise content and guide the user through key areas. Also suitable for large components—such as modals—where space allows and where it pairs well with: body.md. |
+| `typography.heading.3` | `--iress-typography-heading-3` | `500 calc({typography.base.size || .875rem} * (18 / 14))/1.5 {typography.base.headingFont || Ubuntu, Helvetica, sans-serif}` | Use for: sub-sections under H2s to further structure content and maintain a clear visual hierarchy. Ideal for breaking down complex sections into manageable parts. |
+| `typography.heading.4` | `--iress-typography-heading-4` | `500 calc({typography.base.size || .875rem} * (16 / 14))/1.42 {typography.base.headingFont || Ubuntu, Helvetica, sans-serif}` | Use for: supporting headings within content blocks or small components where space is limited—such as table headers, cards, or side panels. Provides structure without overwhelming the layout. |
+| `typography.heading.5` | `--iress-typography-heading-5` | `400 calc({typography.base.size || .875rem} * (16 / 14))/1.42 {typography.base.headingFont || Ubuntu, Helvetica, sans-serif}` | Use for: minor labels or titles in compact UI elements, such as cards, sidebars, or inline labels. Best used to emphasise supplementary information without drawing too much attention. Works well with body.sm and is ideal for subtle content like fine print. Use sparingly to preserve typographic hierarchy. |
+
+### Body
+
+— Small (`body.sm`)
+
+| Token | CSS Variable | Value | Description |
+| --- | --- | --- | --- |
+| `typography.body.sm.regular` | `--iress-typography-body-sm-regular` | `400 calc({typography.base.size || .875rem} * (12 / 14))/1.5 {typography.base.bodyFont || Inter, Helvetica, sans-serif}` | The default small text, most commonly used to display text in small components and compact tables and lists. |
+| `typography.body.sm.medium` | `--iress-typography-body-sm-medium` | `500 calc({typography.base.size || .875rem} * (12 / 14))/1.5 {typography.base.bodyFont || Inter, Helvetica, sans-serif}` | Medium text is used to indicate text is interactive, such as a button or a link. |
+| `typography.body.sm.strong` | `--iress-typography-body-sm-strong` | `600 calc({typography.base.size || .875rem} * (12 / 14))/1.5 {typography.base.bodyFont || Inter, Helvetica, sans-serif}` | Strong text is used to highlight important information in a paragraph of text. |
+| `typography.body.sm.em` | `--iress-typography-body-sm-em` | `500 italic calc({typography.base.size || .875rem} * (12 / 14))/1.5 {typography.base.bodyFont || Inter, Helvetica, sans-serif}` | Emphasised text is used to highlight a term or definition in a paragraph of text. It is used sparingly, usually for legal purposes. |
+
+### Code
+
+| Token | CSS Variable | Value | Description |
+| --- | --- | --- | --- |
+| `typography.code` | `--iress-typography-code` | `400 calc({typography.base.size || .875rem} * (16 / 14))/1.6 Space, monospace` | Used to display code snippets in the product, such as in the API documentation. |
+
+---
+
+## Quick Reference: Token Path → CSS Variable
+
+```
+token.path.name → --iress-token-path-name
+```
+
+Examples:
+- `colour.primary.fill` → `--iress-colour-primary-fill`
+- `spacing.4` → `--iress-spacing-4`
+- `radius.system.button` → `--iress-radius-system-button`
+- `typography.heading.1` → `--iress-typography-heading-1`
+- `typography.body.md.regular` → `--iress-typography-body-md-regular`
+
+## Quick Reference: `cssVars` Usage
+
+```tsx
+import { cssVars } from '@iress-oss/ids-tokens';
+
+cssVars.colour.primary.fill; // 'var(--iress-colour-primary-fill, ...)'
+cssVars.colour.neutral[80]; // 'var(--iress-colour-neutral-80, ...)'
+cssVars.spacing[4]; // 'var(--iress-spacing-4, ...)'
+cssVars.radius[2]; // 'var(--iress-radius-2, ...)'
+cssVars.typography.heading[1]; // 'var(--iress-typography-heading-1, ...)'
+cssVars.typography.body.md.regular; // 'var(--iress-typography-body-md-regular, ...)'
+```
+
+## Develop
+
+You can use these tokens in your applications in three ways: via component props, CSS variables, or CSS-in-JS using the `cssVars` export from the `@iress-oss/ids-tokens` package.
+
+> **Note:** Always use `IressText` for text rendering. It applies the correct
+> typography tokens automatically based on the `element` prop.
+
+### Via IressText (recommended)
+
+```tsx
+import { IressText } from '@iress-oss/ids-components';
+
+<IressText element="h1">Page Title</IressText>
+<IressText>Body paragraph</IressText>
+<IressText textStyle="typography.body.sm.strong">Small bold</IressText>
+```
+
+### Via CSS variables
+
+```css
+.heading { font: var(--typography-heading-1); }
+.body { font: var(--typography-body-md-regular); }
+```

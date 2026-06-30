@@ -22,7 +22,7 @@ import { designTokens, type IressDesignToken } from '@iress-oss/ids-tokens';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const ROOT = path.resolve(__dirname, '..');
+const ROOT = path.resolve(__dirname, '../../..');
 
 const OUTPUT_AI = path.join(ROOT, 'packages/tokens/.ai/tokens-reference.md');
 const OUTPUT_SKILL = path.join(
@@ -456,7 +456,7 @@ function generateFullReference(
 
 // ─── Main ────────────────────────────────────────────────────
 
-async function main() {
+export async function generateTokenReference() {
   console.log('🔄 Generating token reference from schema...\n');
 
   if (DRY_RUN) {
@@ -506,7 +506,4 @@ async function main() {
   }
 }
 
-main().catch((err) => {
-  console.error('Token reference generation failed:', err);
-  process.exit(1);
-});
+

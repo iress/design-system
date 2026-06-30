@@ -28,16 +28,25 @@ interface ResolvedStory {
   name: string;
 }
 
-function findStoriesFile(storyId: string): string | null {
+function findStoriesFile(storyId: string, storyType?: string): string | null {
   const parts = storyId.split('--');
   const prefix = parts[0];
 
-  // Map prefix to directory and component name
-  // "components-alert" -> components/Alert
-  // "patterns-form" -> patterns/Form
-  // "styling-props-layout" -> styling-props (flat, numbered files)
-  // "components-button-closebutton" -> components/Button/CloseButton
+  // Token stories live in packages/tokens/src/schema/
+  if (storyType === 'tokens') {
+    const TOKENS_SRC = join(ROOT, 'packages/tokens/src/schema');
+    if (existsSync(TOKENS_SRC)) {
+      // e.g. "colour--neutral" -> look for Colour.stories.tsx
+      const name = prefix.charAt(0).toUpperCase() + prefix.slice(1);
+      const file = readdirSync(TOKENS_SRC).find(
+        (f) => f.toLowerCase().startsWith(prefix) && f.endsWith('.stories.tsx'),
+      );
+      if (file) return join(TOKENS_SRC, file);
+    }
+    return null;
+  }
 
+  // Map prefix to directory and component name
   const searchDirs: Array<{ dir: string; prefix: string }> = [
     { dir: join(COMPONENTS_SRC, 'components'), prefix: 'components-' },
     { dir: join(COMPONENTS_SRC, 'patterns'), prefix: 'patterns-' },
@@ -556,8 +565,8 @@ function stripArgSpreads(jsx: string): string {
  */
 export function resolveStoryEmbeds(markdown: string): string {
   return markdown.replace(
-    /<StoryEmbed\s+id="([^"]+)"[^/]*\/>/g,
-    (match, storyId: string) => {
+    /<StoryEmbed\s+id="([^"]+)"([^/]*)\/>/g,
+    (match, storyId: string, attrs: string) => {
       // Check override plugins first
       const override = getOverridePlugin(storyId);
       if (override) {
@@ -567,11 +576,15 @@ export function resolveStoryEmbeds(markdown: string): string {
         } catch { /* fall through to normal extraction */ }
       }
 
+      // Detect type="tokens" attribute
+      const typeMatch = attrs.match(/type="([^"]+)"/);
+      const storyType = typeMatch?.[1];
+
       const parts = storyId.split('--');
       if (parts.length < 2) return match;
 
       const storySlug = parts[1];
-      const storiesFile = findStoriesFile(storyId);
+      const storiesFile = findStoriesFile(storyId, storyType);
       if (!storiesFile) return match;
 
       const resolved = resolveStoryToCode(storiesFile, storySlug);

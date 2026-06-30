@@ -5,7 +5,7 @@
  * from guidelines MDX + component meta + testMeta.
  */
 
-import { readdirSync, readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
+import { readdirSync, readFileSync, writeFileSync, mkdirSync, existsSync, statSync } from 'fs';
 import { join, basename, relative } from 'path';
 import { stripMdx } from './helpers/strip-mdx';
 import { resolveStoryEmbeds } from './helpers/resolve-stories';
@@ -22,6 +22,10 @@ const OUTPUT_DIR = join(ROOT, 'packages/components/.ai');
 interface DocEntry {
   slug: string;
   type: string;
+  name?: string;
+  description?: string;
+  import?: string;
+  path: string;
 }
 
 function getGuidelineFiles(type: string): string[] {
@@ -71,7 +75,7 @@ function findMeta(name: string, type: string): string | null {
 }
 
 
-async function buildDoc(file: string, type: string): Promise<{ slug: string; markdown: string } | null> {
+async function buildDoc(file: string, type: string): Promise<{ slug: string; markdown: string; description: string; importStatement: string; name?: string } | null> {
   const slug = basename(file, '.mdx');
   const name = slugToName(slug);
   const isComponent = type === 'components' || type === 'patterns';
@@ -206,7 +210,7 @@ async function buildDoc(file: string, type: string): Promise<{ slug: string; mar
     }
   }
 
-  return { slug, markdown: sections.join('\n') };
+  return { slug, markdown: sections.join('\n'), description, importStatement, name: isComponent ? `Iress${name}` : undefined };
 }
 
 interface RecipeEntry {
@@ -274,7 +278,13 @@ function getUnreferencedRecipes(componentName: string, type: string, resolvedPro
 export async function translateComponents() {
   const index: DocEntry[] = [];
 
-  for (const type of ['components', 'patterns', 'foundations', 'get-started', 'migration', 'styling-props']) {
+  // Scan all directories in apps/guidelines/content/
+  const contentDir = join(ROOT, 'apps/guidelines/content');
+  const contentTypes = readdirSync(contentDir).filter(
+    (d) => statSync(join(contentDir, d)).isDirectory(),
+  );
+
+  for (const type of contentTypes) {
     const files = getGuidelineFiles(type);
     const outDir = join(OUTPUT_DIR, type);
     mkdirSync(outDir, { recursive: true });
@@ -286,11 +296,27 @@ export async function translateComponents() {
       if (!doc) continue;
       const formatted = await formatCodeBlocks(doc.markdown);
       writeFileSync(join(outDir, `${doc.slug}.md`), formatted);
-      index.push({ slug: doc.slug, type });
+      index.push({
+        slug: doc.slug,
+        type,
+        name: doc.name,
+        description: doc.description || undefined,
+        import: doc.importStatement || undefined,
+        path: `${type}/${doc.slug}.md`,
+      });
     }
   }
 
   // Write index.json
   writeFileSync(join(OUTPUT_DIR, 'index.json'), JSON.stringify(index, null, 2));
+
+  // Copy tokens-reference.md into components .ai for co-location
+  const tokensRef = join(ROOT, 'packages/tokens/.ai/tokens-reference.md');
+  const tokensOutDir = join(OUTPUT_DIR, 'tokens');
+  mkdirSync(tokensOutDir, { recursive: true });
+  if (existsSync(tokensRef)) {
+    writeFileSync(join(tokensOutDir, 'tokens-reference.md'), readFileSync(tokensRef, 'utf-8'));
+  }
+
   console.log(`  \u2713 ${index.length} component/pattern docs written`);
 }

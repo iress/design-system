@@ -1,354 +1,644 @@
 [
   {
     "slug": "alert",
-    "type": "components"
+    "type": "components",
+    "name": "IressAlert",
+    "description": "Communicates important information inline with page content, such as validation errors, warnings, or status messages.",
+    "import": "import { IressAlert } from '@iress-oss/ids-components';",
+    "path": "components/alert.md"
   },
   {
     "slug": "autocomplete",
-    "type": "components"
+    "type": "components",
+    "name": "IressAutocomplete",
+    "description": "Provides a text input with suggestions that filter as the user types.",
+    "import": "import { IressAutocomplete } from '@iress-oss/ids-components';",
+    "path": "components/autocomplete.md"
   },
   {
     "slug": "button-group",
-    "type": "components"
+    "type": "components",
+    "name": "IressButtonGroup",
+    "description": "Groups related buttons together with consistent spacing and alignment.",
+    "import": "import { IressButtonGroup } from '@iress-oss/ids-components';",
+    "path": "components/button-group.md"
   },
   {
     "slug": "button",
-    "type": "components"
+    "type": "components",
+    "name": "IressButton",
+    "description": "A clickable element used to perform an action.",
+    "import": "import { IressButton } from '@iress-oss/ids-components';",
+    "path": "components/button.md"
   },
   {
     "slug": "card",
-    "type": "components"
+    "type": "components",
+    "name": "IressCard",
+    "description": "Groups related content and actions into a contained, visually distinct surface.",
+    "import": "import { IressCard } from '@iress-oss/ids-components';",
+    "path": "components/card.md"
   },
   {
     "slug": "checkbox-group",
-    "type": "components"
+    "type": "components",
+    "name": "IressCheckboxGroup",
+    "description": "Groups related checkboxes so users can select multiple options from a set.",
+    "import": "import { IressCheckboxGroup } from '@iress-oss/ids-components';",
+    "path": "components/checkbox-group.md"
   },
   {
     "slug": "checkbox",
-    "type": "components"
+    "type": "components",
+    "name": "IressCheckbox",
+    "description": "Renders a checkbox input for toggling a boolean value.",
+    "import": "import { IressCheckbox } from '@iress-oss/ids-components';",
+    "path": "components/checkbox.md"
   },
   {
     "slug": "col",
-    "type": "components"
+    "type": "components",
+    "name": "IressCol",
+    "description": "Defines a column within a grid row layout.",
+    "import": "import { IressCol } from '@iress-oss/ids-components';",
+    "path": "components/col.md"
   },
   {
     "slug": "container",
-    "type": "components"
+    "type": "components",
+    "name": "IressContainer",
+    "description": "Provides a max-width wrapper to constrain content within a page layout.",
+    "import": "import { IressContainer } from '@iress-oss/ids-components';",
+    "path": "components/container.md"
   },
   {
     "slug": "divider",
-    "type": "components"
+    "type": "components",
+    "name": "IressDivider",
+    "description": "Renders a horizontal or vertical line to visually separate content.",
+    "import": "import { IressDivider } from '@iress-oss/ids-components';",
+    "path": "components/divider.md"
   },
   {
     "slug": "expander",
-    "type": "components"
+    "type": "components",
+    "name": "IressExpander",
+    "description": "Reveals or hides a section of content with an expand/collapse toggle.",
+    "import": "import { IressExpander } from '@iress-oss/ids-components';",
+    "path": "components/expander.md"
   },
   {
     "slug": "field-group",
-    "type": "components"
+    "type": "components",
+    "name": "IressFieldGroup",
+    "description": "Groups related form fields together with a shared legend, description, and validation message.",
+    "import": "import { IressFieldGroup } from '@iress-oss/ids-components';",
+    "path": "components/field-group.md"
   },
   {
     "slug": "field",
-    "type": "components"
+    "type": "components",
+    "name": "IressField",
+    "description": "Wraps a form control with its label, description, and validation message.",
+    "import": "import { IressField } from '@iress-oss/ids-components';",
+    "path": "components/field.md"
   },
   {
     "slug": "hide",
-    "type": "components"
+    "type": "components",
+    "name": "IressHide",
+    "description": "Conditionally hides content based on responsive breakpoints.",
+    "import": "import { IressHide } from '@iress-oss/ids-components';",
+    "path": "components/hide.md"
   },
   {
     "slug": "icon",
-    "type": "components"
+    "type": "components",
+    "name": "IressIcon",
+    "description": "Renders an SVG icon from the design system icon set.",
+    "import": "import { IressIcon } from '@iress-oss/ids-components';",
+    "path": "components/icon.md"
   },
   {
     "slug": "image",
-    "type": "components"
+    "type": "components",
+    "name": "IressImage",
+    "description": "Renders a responsive image with optional fallback and loading behaviour.",
+    "import": "import { IressImage } from '@iress-oss/ids-components';",
+    "path": "components/image.md"
   },
   {
     "slug": "inline",
-    "type": "components"
+    "type": "components",
+    "name": "IressInline",
+    "description": "Lays out children horizontally with consistent spacing between items.",
+    "import": "import { IressInline } from '@iress-oss/ids-components';",
+    "path": "components/inline.md"
   },
   {
     "slug": "input-currency",
-    "type": "components"
+    "type": "components",
+    "name": "IressInputCurrency",
+    "description": "Provides a text input formatted for entering monetary values.",
+    "import": "import { IressInputCurrency } from '@iress-oss/ids-components';",
+    "path": "components/input-currency.md"
   },
   {
     "slug": "input",
-    "type": "components"
+    "type": "components",
+    "name": "IressInput",
+    "description": "Renders a single-line text input for capturing user data.",
+    "import": "import { IressInput } from '@iress-oss/ids-components';",
+    "path": "components/input.md"
   },
   {
     "slug": "label",
-    "type": "components"
+    "type": "components",
+    "name": "IressLabel",
+    "description": "Provides an accessible text label for a form control.",
+    "import": "import { IressLabel } from '@iress-oss/ids-components';",
+    "path": "components/label.md"
   },
   {
     "slug": "link",
-    "type": "components"
+    "type": "components",
+    "name": "IressLink",
+    "description": "Renders a navigational anchor styled consistently with the design system.",
+    "import": "import { IressLink } from '@iress-oss/ids-components';",
+    "path": "components/link.md"
   },
   {
     "slug": "menu",
-    "type": "components"
+    "type": "components",
+    "name": "IressMenu",
+    "description": "Displays a list of navigational or actionable items.",
+    "import": "import { IressMenu } from '@iress-oss/ids-components';",
+    "path": "components/menu.md"
   },
   {
     "slug": "modal",
-    "type": "components"
+    "type": "components",
+    "name": "IressModal",
+    "description": "Displays content in a focused overlay dialog that requires user interaction.",
+    "import": "import { IressModal } from '@iress-oss/ids-components';",
+    "path": "components/modal.md"
   },
   {
     "slug": "overview",
-    "type": "components"
+    "type": "components",
+    "name": "IressOverview",
+    "path": "components/overview.md"
   },
   {
     "slug": "panel",
-    "type": "components"
+    "type": "components",
+    "name": "IressPanel",
+    "description": "Provides a sectioned container for grouping related content with an optional heading.",
+    "import": "import { IressPanel } from '@iress-oss/ids-components';",
+    "path": "components/panel.md"
   },
   {
     "slug": "pill",
-    "type": "components"
+    "type": "components",
+    "name": "IressPill",
+    "description": "Displays a small, rounded badge for categorisation or status indication.",
+    "import": "import { IressPill } from '@iress-oss/ids-components';",
+    "path": "components/pill.md"
   },
   {
     "slug": "placeholder",
-    "type": "components"
+    "type": "components",
+    "name": "IressPlaceholder",
+    "description": "Renders a visual placeholder to represent future or missing content.",
+    "import": "import { IressPlaceholder } from '@iress-oss/ids-components';",
+    "path": "components/placeholder.md"
   },
   {
     "slug": "popover",
-    "type": "components"
+    "type": "components",
+    "name": "IressPopover",
+    "description": "Displays floating content anchored to a trigger element.",
+    "import": "import { IressPopover } from '@iress-oss/ids-components';",
+    "path": "components/popover.md"
   },
   {
     "slug": "progress",
-    "type": "components"
+    "type": "components",
+    "name": "IressProgress",
+    "description": "Visualises the completion status of a task or process as a progress bar.",
+    "import": "import { IressProgress } from '@iress-oss/ids-components';",
+    "path": "components/progress.md"
   },
   {
     "slug": "provider",
-    "type": "components"
+    "type": "components",
+    "name": "IressProvider",
+    "description": "Application-level wrapper that provides shared context for Modal, Slideout, Toaster, Tooltip, and Popover components.",
+    "import": "import { IressProvider } from '@iress-oss/ids-components';",
+    "path": "components/provider.md"
   },
   {
     "slug": "radio-group",
-    "type": "components"
+    "type": "components",
+    "name": "IressRadioGroup",
+    "description": "Groups related radio buttons so users can select one option from a set.",
+    "import": "import { IressRadioGroup } from '@iress-oss/ids-components';",
+    "path": "components/radio-group.md"
   },
   {
     "slug": "radio",
-    "type": "components"
+    "type": "components",
+    "name": "IressRadio",
+    "description": "Renders a single radio button for use within a group of mutually exclusive options.",
+    "import": "import { IressRadio } from '@iress-oss/ids-components';",
+    "path": "components/radio.md"
   },
   {
     "slug": "readonly",
-    "type": "components"
+    "type": "components",
+    "name": "IressReadonly",
+    "description": "Displays a form value in a non-editable, read-only format.",
+    "import": "import { IressReadonly } from '@iress-oss/ids-components';",
+    "path": "components/readonly.md"
   },
   {
     "slug": "row",
-    "type": "components"
+    "type": "components",
+    "name": "IressRow",
+    "description": "Arranges children in a horizontal row within a grid or flex layout.",
+    "import": "import { IressRow } from '@iress-oss/ids-components';",
+    "path": "components/row.md"
   },
   {
     "slug": "select",
-    "type": "components"
+    "type": "components",
+    "name": "IressSelect",
+    "description": "Renders a dropdown select input for choosing one option from a list.",
+    "import": "import { IressSelect } from '@iress-oss/ids-components';",
+    "path": "components/select.md"
   },
   {
     "slug": "skeleton",
-    "type": "components"
+    "type": "components",
+    "name": "IressSkeleton",
+    "description": "Renders placeholder shapes to indicate content is loading.",
+    "import": "import { IressSkeleton } from '@iress-oss/ids-components';",
+    "path": "components/skeleton.md"
   },
   {
     "slug": "skip-link",
-    "type": "components"
+    "type": "components",
+    "name": "IressSkipLink",
+    "description": "Provides a keyboard-accessible link to skip to the main content area.",
+    "import": "import { IressSkipLink } from '@iress-oss/ids-components';",
+    "path": "components/skip-link.md"
   },
   {
     "slug": "slideout",
-    "type": "components"
+    "type": "components",
+    "name": "IressSlideout",
+    "description": "Displays supplementary content in a panel that slides in from the edge of the viewport.",
+    "import": "import { IressSlideout } from '@iress-oss/ids-components';",
+    "path": "components/slideout.md"
   },
   {
     "slug": "slider",
-    "type": "components"
+    "type": "components",
+    "name": "IressSlider",
+    "description": "Allows users to select a value from a range by dragging a handle.",
+    "import": "import { IressSlider } from '@iress-oss/ids-components';",
+    "path": "components/slider.md"
   },
   {
     "slug": "spinner",
-    "type": "components"
+    "type": "components",
+    "name": "IressSpinner",
+    "description": "Displays an animated loading indicator to signal an ongoing process.",
+    "import": "import { IressSpinner } from '@iress-oss/ids-components';",
+    "path": "components/spinner.md"
   },
   {
     "slug": "stack",
-    "type": "components"
+    "type": "components",
+    "name": "IressStack",
+    "description": "Lays out children vertically with consistent spacing between items.",
+    "import": "import { IressStack } from '@iress-oss/ids-components';",
+    "path": "components/stack.md"
   },
   {
     "slug": "styled",
-    "type": "components"
+    "type": "components",
+    "name": "IressStyled",
+    "description": "A polymorphic utility component that applies design tokens and styling props to any HTML element or custom component.",
+    "import": "import { IressStyled } from '@iress-oss/ids-components';",
+    "path": "components/styled.md"
   },
   {
     "slug": "tab-set",
-    "type": "components"
+    "type": "components",
+    "name": "IressTabSet",
+    "description": "Organises content into tabbed panels, showing one panel at a time.",
+    "import": "import { IressTabSet } from '@iress-oss/ids-components';",
+    "path": "components/tab-set.md"
   },
   {
     "slug": "table",
-    "type": "components"
+    "type": "components",
+    "name": "IressTable",
+    "description": "Displays structured data in rows and columns.",
+    "import": "import { IressTable } from '@iress-oss/ids-components';",
+    "path": "components/table.md"
   },
   {
     "slug": "tag-input",
-    "type": "components"
+    "type": "components",
+    "name": "IressTagInput",
+    "description": "A form control that allows users to enter and manage a collection of tags via keyboard input.",
+    "import": "import { IressTagInput } from '@iress-oss/ids-components';",
+    "path": "components/tag-input.md"
   },
   {
     "slug": "tag",
-    "type": "components"
+    "type": "components",
+    "name": "IressTag",
+    "description": "Displays a compact label for categorisation, filtering, or metadata.",
+    "import": "import { IressTag } from '@iress-oss/ids-components';",
+    "path": "components/tag.md"
   },
   {
     "slug": "text",
-    "type": "components"
+    "type": "components",
+    "name": "IressText",
+    "description": "Renders styled text with consistent typography from the design system.",
+    "import": "import { IressText } from '@iress-oss/ids-components';",
+    "path": "components/text.md"
   },
   {
     "slug": "toaster",
-    "type": "components"
+    "type": "components",
+    "name": "IressToaster",
+    "description": "Manages and displays temporary toast notifications to the user.",
+    "import": "import { IressToasterProvider, useToaster } from '@iress-oss/ids-components';",
+    "path": "components/toaster.md"
   },
   {
     "slug": "toggle",
-    "type": "components"
+    "type": "components",
+    "name": "IressToggle",
+    "description": "Renders a switch control for toggling between on and off states.",
+    "import": "import { IressToggle } from '@iress-oss/ids-components';",
+    "path": "components/toggle.md"
   },
   {
     "slug": "tooltip",
-    "type": "components"
+    "type": "components",
+    "name": "IressTooltip",
+    "description": "Shows additional contextual information on hover or focus of a trigger element.",
+    "import": "import { IressTooltip } from '@iress-oss/ids-components';",
+    "path": "components/tooltip.md"
   },
   {
     "slug": "validation-message",
-    "type": "components"
-  },
-  {
-    "slug": "breadcrumbs",
-    "type": "patterns"
-  },
-  {
-    "slug": "contextual-menu",
-    "type": "patterns"
-  },
-  {
-    "slug": "dropdown-menu",
-    "type": "patterns"
-  },
-  {
-    "slug": "feedback",
-    "type": "patterns"
-  },
-  {
-    "slug": "form",
-    "type": "patterns"
-  },
-  {
-    "slug": "loading",
-    "type": "patterns"
-  },
-  {
-    "slug": "overview",
-    "type": "patterns"
-  },
-  {
-    "slug": "search-selection",
-    "type": "patterns"
-  },
-  {
-    "slug": "shadow",
-    "type": "patterns"
-  },
-  {
-    "slug": "side-nav",
-    "type": "patterns"
+    "type": "components",
+    "name": "IressValidationMessage",
+    "description": "Displays a validation error or helper message associated with a form field.",
+    "import": "import { IressValidationMessage } from '@iress-oss/ids-components';",
+    "path": "components/validation-message.md"
   },
   {
     "slug": "accessibility",
-    "type": "foundations"
+    "type": "foundations",
+    "path": "foundations/accessibility.md"
   },
   {
     "slug": "iconography",
-    "type": "foundations"
+    "type": "foundations",
+    "path": "foundations/iconography.md"
   },
   {
     "slug": "overview",
-    "type": "foundations"
+    "type": "foundations",
+    "path": "foundations/overview.md"
   },
   {
     "slug": "principles",
-    "type": "foundations"
+    "type": "foundations",
+    "path": "foundations/principles.md"
   },
   {
     "slug": "responsive-layout",
-    "type": "foundations"
+    "type": "foundations",
+    "path": "foundations/responsive-layout.md"
   },
   {
     "slug": "user-experience",
-    "type": "foundations"
+    "type": "foundations",
+    "path": "foundations/user-experience.md"
   },
   {
     "slug": "using-components-consistently",
-    "type": "foundations"
+    "type": "foundations",
+    "path": "foundations/using-components-consistently.md"
   },
   {
     "slug": "visual-design-standards",
-    "type": "foundations"
+    "type": "foundations",
+    "path": "foundations/visual-design-standards.md"
   },
   {
     "slug": "z-index-stacking",
-    "type": "foundations"
+    "type": "foundations",
+    "path": "foundations/z-index-stacking.md"
   },
   {
     "slug": "ai",
-    "type": "get-started"
+    "type": "get-started",
+    "path": "get-started/ai.md"
   },
   {
     "slug": "common-mistakes",
-    "type": "get-started"
+    "type": "get-started",
+    "path": "get-started/common-mistakes.md"
   },
   {
     "slug": "content-security-policy",
-    "type": "get-started"
+    "type": "get-started",
+    "path": "get-started/content-security-policy.md"
   },
   {
     "slug": "design",
-    "type": "get-started"
+    "type": "get-started",
+    "path": "get-started/design.md"
   },
   {
     "slug": "develop",
-    "type": "get-started"
+    "type": "get-started",
+    "path": "get-started/develop.md"
   },
   {
     "slug": "faq",
-    "type": "get-started"
+    "type": "get-started",
+    "path": "get-started/faq.md"
   },
   {
     "slug": "versions",
-    "type": "get-started"
+    "type": "get-started",
+    "path": "get-started/versions.md"
   },
   {
     "slug": "from-oui-to-v6",
-    "type": "migration"
+    "type": "migration",
+    "path": "migration/from-oui-to-v6.md"
   },
   {
     "slug": "from-v5-to-v6",
-    "type": "migration"
+    "type": "migration",
+    "path": "migration/from-v5-to-v6.md"
   },
   {
     "slug": "migration-from-v4-to-v5",
-    "type": "migration"
+    "type": "migration",
+    "path": "migration/migration-from-v4-to-v5.md"
   },
   {
-    "slug": "accessibility",
-    "type": "styling-props"
+    "slug": "breadcrumbs",
+    "type": "patterns",
+    "name": "IressBreadcrumbs",
+    "description": "Shows the current location within a navigational hierarchy.",
+    "import": "import { IressBreadcrumbs } from '@iress-oss/ids-components';",
+    "path": "patterns/breadcrumbs.md"
   },
   {
-    "slug": "colour",
-    "type": "styling-props"
+    "slug": "contextual-menu",
+    "type": "patterns",
+    "name": "IressContextualMenu",
+    "description": "Displays a context-sensitive menu of actions triggered by user interaction.",
+    "import": "import { IressContextualMenu } from '@iress-oss/ids-components';",
+    "path": "patterns/contextual-menu.md"
   },
   {
-    "slug": "layout",
-    "type": "styling-props"
+    "slug": "dropdown-menu",
+    "type": "patterns",
+    "name": "IressDropdownMenu",
+    "description": "Presents a list of actions or options revealed by a trigger button.",
+    "import": "import { IressDropdownMenu } from '@iress-oss/ids-components';",
+    "path": "patterns/dropdown-menu.md"
+  },
+  {
+    "slug": "feedback",
+    "type": "patterns",
+    "name": "IressFeedback",
+    "description": "Displays transient feedback messages to communicate the result of an action.",
+    "path": "patterns/feedback.md"
+  },
+  {
+    "slug": "form",
+    "type": "patterns",
+    "name": "IressForm",
+    "description": "Manages form state, validation, and submission for a group of input fields.",
+    "import": "import { IressForm } from '@iress-oss/ids-components';",
+    "path": "patterns/form.md"
+  },
+  {
+    "slug": "loading",
+    "type": "patterns",
+    "name": "IressLoading",
+    "description": "Displays a loading state to indicate content is being fetched or processed.",
+    "import": "import { IressLoading } from '@iress-oss/ids-components';",
+    "path": "patterns/loading.md"
   },
   {
     "slug": "overview",
-    "type": "styling-props"
+    "type": "patterns",
+    "name": "IressOverview",
+    "path": "patterns/overview.md"
+  },
+  {
+    "slug": "search-selection",
+    "type": "patterns",
+    "name": "IressSearchSelection",
+    "description": "Decision guide for choosing between Autocomplete, Select, DropdownMenu, InputPopover, and Popover.",
+    "path": "patterns/search-selection.md"
+  },
+  {
+    "slug": "shadow",
+    "type": "patterns",
+    "name": "IressShadow",
+    "description": "Applies an elevated shadow effect to visually separate content layers.",
+    "import": "import { IressShadow } from '@iress-oss/ids-components';",
+    "path": "patterns/shadow.md"
+  },
+  {
+    "slug": "side-nav",
+    "type": "patterns",
+    "name": "IressSideNav",
+    "description": "Provides a vertical navigation menu typically used in application sidebars.",
+    "import": "import { IressSideNav } from '@iress-oss/ids-components';",
+    "path": "patterns/side-nav.md"
+  },
+  {
+    "slug": "accessibility",
+    "type": "styling-props",
+    "path": "styling-props/accessibility.md"
+  },
+  {
+    "slug": "colour",
+    "type": "styling-props",
+    "path": "styling-props/colour.md"
+  },
+  {
+    "slug": "layout",
+    "type": "styling-props",
+    "path": "styling-props/layout.md"
+  },
+  {
+    "slug": "overview",
+    "type": "styling-props",
+    "path": "styling-props/overview.md"
   },
   {
     "slug": "radius",
-    "type": "styling-props"
+    "type": "styling-props",
+    "path": "styling-props/radius.md"
   },
   {
     "slug": "sizing",
-    "type": "styling-props"
+    "type": "styling-props",
+    "path": "styling-props/sizing.md"
   },
   {
     "slug": "spacing",
-    "type": "styling-props"
+    "type": "styling-props",
+    "path": "styling-props/spacing.md"
   },
   {
     "slug": "typography",
-    "type": "styling-props"
+    "type": "styling-props",
+    "path": "styling-props/typography.md"
+  },
+  {
+    "slug": "colour",
+    "type": "tokens",
+    "path": "tokens/colour.md"
+  },
+  {
+    "slug": "overview",
+    "type": "tokens",
+    "path": "tokens/overview.md"
+  },
+  {
+    "slug": "radius",
+    "type": "tokens",
+    "path": "tokens/radius.md"
+  },
+  {
+    "slug": "spacing",
+    "type": "tokens",
+    "path": "tokens/spacing.md"
+  },
+  {
+    "slug": "typography",
+    "type": "tokens",
+    "path": "tokens/typography.md"
   }
 ]

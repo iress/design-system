@@ -13,7 +13,7 @@
 | Pipeline unification | ✅ Done | Single `--components` pass over all `apps/guidelines/content/` dirs. `--guides` is now an alias. |
 | Phase D: Props extraction | ✅ Done | react-docgen-typescript + .d.ts fallback, type linking, MaterialSymbol detection, enum expansion, subComponents, additionalProps, CI check planned |
 | Phase E: Append unreferenced recipes + cleanup | ✅ Done | Recipe stories appended to form/popover; stale files deleted |
-| Phase F: Composition + styling props | ❌ Not started | |
+| Phase F: Composition + styling props | ✅ Done | Styling props linked (overview + type def + token values); composition documented in prose; full-reference working |
 | Phase G: Wire into build + cleanup | ❌ Not started | Includes CI prop table validation |
 
 ### Future Phases

@@ -1,0 +1,126 @@
+# @iress-oss/ids-components
+
+> React component library for the Iress Design System
+
+## Components
+
+### Components
+
+- [IressAlert](.ai/components/alert.md) — Communicates important information inline with page content, such as validation errors, warnings, or status messages.
+- [IressAutocomplete](.ai/components/autocomplete.md) — Provides a text input with suggestions that filter as the user types.
+- [IressButtonGroup](.ai/components/button-group.md) — Groups related buttons together with consistent spacing and alignment.
+- [IressButton](.ai/components/button.md) — A clickable element used to perform an action.
+- [IressCard](.ai/components/card.md) — Groups related content and actions into a contained, visually distinct surface.
+- [IressCheckboxGroup](.ai/components/checkbox-group.md) — Groups related checkboxes so users can select multiple options from a set.
+- [IressCheckbox](.ai/components/checkbox.md) — Renders a checkbox input for toggling a boolean value.
+- [IressCol](.ai/components/col.md) — Defines a column within a grid row layout.
+- [IressContainer](.ai/components/container.md) — Provides a max-width wrapper to constrain content within a page layout.
+- [IressDivider](.ai/components/divider.md) — Renders a horizontal or vertical line to visually separate content.
+- [IressExpander](.ai/components/expander.md) — Reveals or hides a section of content with an expand/collapse toggle.
+- [IressFieldGroup](.ai/components/field-group.md) — Groups related form fields together with a shared legend, description, and validation message.
+- [IressField](.ai/components/field.md) — Wraps a form control with its label, description, and validation message.
+- [IressHide](.ai/components/hide.md) — Conditionally hides content based on responsive breakpoints.
+- [IressIcon](.ai/components/icon.md) — Renders an SVG icon from the design system icon set.
+- [IressImage](.ai/components/image.md) — Renders a responsive image with optional fallback and loading behaviour.
+- [IressInline](.ai/components/inline.md) — Lays out children horizontally with consistent spacing between items.
+- [IressInputCurrency](.ai/components/input-currency.md) — Provides a text input formatted for entering monetary values.
+- [IressInput](.ai/components/input.md) — Renders a single-line text input for capturing user data.
+- [IressLabel](.ai/components/label.md) — Provides an accessible text label for a form control.
+- [IressLink](.ai/components/link.md) — Renders a navigational anchor styled consistently with the design system.
+- [IressMenu](.ai/components/menu.md) — Displays a list of navigational or actionable items.
+- [IressModal](.ai/components/modal.md) — Displays content in a focused overlay dialog that requires user interaction.
+- [IressOverview](.ai/components/overview.md)
+- [IressPanel](.ai/components/panel.md) — Provides a sectioned container for grouping related content with an optional heading.
+- [IressPill](.ai/components/pill.md) — Displays a small, rounded badge for categorisation or status indication.
+- [IressPlaceholder](.ai/components/placeholder.md) — Renders a visual placeholder to represent future or missing content.
+- [IressPopover](.ai/components/popover.md) — Displays floating content anchored to a trigger element.
+- [IressProgress](.ai/components/progress.md) — Visualises the completion status of a task or process as a progress bar.
+- [IressProvider](.ai/components/provider.md) — Application-level wrapper that provides shared context for Modal, Slideout, Toaster, Tooltip, and Popover components.
+- [IressRadioGroup](.ai/components/radio-group.md) — Groups related radio buttons so users can select one option from a set.
+- [IressRadio](.ai/components/radio.md) — Renders a single radio button for use within a group of mutually exclusive options.
+- [IressReadonly](.ai/components/readonly.md) — Displays a form value in a non-editable, read-only format.
+- [IressRow](.ai/components/row.md) — Arranges children in a horizontal row within a grid or flex layout.
+- [IressSelect](.ai/components/select.md) — Renders a dropdown select input for choosing one option from a list.
+- [IressSkeleton](.ai/components/skeleton.md) — Renders placeholder shapes to indicate content is loading.
+- [IressSkipLink](.ai/components/skip-link.md) — Provides a keyboard-accessible link to skip to the main content area.
+- [IressSlideout](.ai/components/slideout.md) — Displays supplementary content in a panel that slides in from the edge of the viewport.
+- [IressSlider](.ai/components/slider.md) — Allows users to select a value from a range by dragging a handle.
+- [IressSpinner](.ai/components/spinner.md) — Displays an animated loading indicator to signal an ongoing process.
+- [IressStack](.ai/components/stack.md) — Lays out children vertically with consistent spacing between items.
+- [IressStyled](.ai/components/styled.md) — A polymorphic utility component that applies design tokens and styling props to any HTML element or custom component.
+- [IressTabSet](.ai/components/tab-set.md) — Organises content into tabbed panels, showing one panel at a time.
+- [IressTable](.ai/components/table.md) — Displays structured data in rows and columns.
+- [IressTagInput](.ai/components/tag-input.md) — A form control that allows users to enter and manage a collection of tags via keyboard input.
+- [IressTag](.ai/components/tag.md) — Displays a compact label for categorisation, filtering, or metadata.
+- [IressText](.ai/components/text.md) — Renders styled text with consistent typography from the design system.
+- [IressToaster](.ai/components/toaster.md) — Manages and displays temporary toast notifications to the user.
+- [IressToggle](.ai/components/toggle.md) — Renders a switch control for toggling between on and off states.
+- [IressTooltip](.ai/components/tooltip.md) — Shows additional contextual information on hover or focus of a trigger element.
+- [IressValidationMessage](.ai/components/validation-message.md) — Displays a validation error or helper message associated with a form field.
+
+### Foundations
+
+- [accessibility](.ai/foundations/accessibility.md)
+- [iconography](.ai/foundations/iconography.md)
+- [overview](.ai/foundations/overview.md)
+- [principles](.ai/foundations/principles.md)
+- [responsive-layout](.ai/foundations/responsive-layout.md)
+- [user-experience](.ai/foundations/user-experience.md)
+- [using-components-consistently](.ai/foundations/using-components-consistently.md)
+- [visual-design-standards](.ai/foundations/visual-design-standards.md)
+- [z-index-stacking](.ai/foundations/z-index-stacking.md)
+
+### Get-started
+
+- [ai](.ai/get-started/ai.md)
+- [common-mistakes](.ai/get-started/common-mistakes.md)
+- [content-security-policy](.ai/get-started/content-security-policy.md)
+- [design](.ai/get-started/design.md)
+- [develop](.ai/get-started/develop.md)
+- [faq](.ai/get-started/faq.md)
+- [versions](.ai/get-started/versions.md)
+
+### Migration
+
+- [from-oui-to-v6](.ai/migration/from-oui-to-v6.md)
+- [from-v5-to-v6](.ai/migration/from-v5-to-v6.md)
+- [migration-from-v4-to-v5](.ai/migration/migration-from-v4-to-v5.md)
+
+### Patterns
+
+- [IressBreadcrumbs](.ai/patterns/breadcrumbs.md) — Shows the current location within a navigational hierarchy.
+- [IressContextualMenu](.ai/patterns/contextual-menu.md) — Displays a context-sensitive menu of actions triggered by user interaction.
+- [IressDropdownMenu](.ai/patterns/dropdown-menu.md) — Presents a list of actions or options revealed by a trigger button.
+- [IressFeedback](.ai/patterns/feedback.md) — Displays transient feedback messages to communicate the result of an action.
+- [IressForm](.ai/patterns/form.md) — Manages form state, validation, and submission for a group of input fields.
+- [IressLoading](.ai/patterns/loading.md) — Displays a loading state to indicate content is being fetched or processed.
+- [IressOverview](.ai/patterns/overview.md)
+- [IressSearchSelection](.ai/patterns/search-selection.md) — Decision guide for choosing between Autocomplete, Select, DropdownMenu, InputPopover, and Popover.
+- [IressShadow](.ai/patterns/shadow.md) — Applies an elevated shadow effect to visually separate content layers.
+- [IressSideNav](.ai/patterns/side-nav.md) — Provides a vertical navigation menu typically used in application sidebars.
+
+### Styling-props
+
+- [accessibility](.ai/styling-props/accessibility.md)
+- [colour](.ai/styling-props/colour.md)
+- [layout](.ai/styling-props/layout.md)
+- [overview](.ai/styling-props/overview.md)
+- [radius](.ai/styling-props/radius.md)
+- [sizing](.ai/styling-props/sizing.md)
+- [spacing](.ai/styling-props/spacing.md)
+- [typography](.ai/styling-props/typography.md)
+
+### Tokens
+
+- [colour](.ai/tokens/colour.md)
+- [overview](.ai/tokens/overview.md)
+- [radius](.ai/tokens/radius.md)
+- [spacing](.ai/tokens/spacing.md)
+- [typography](.ai/tokens/typography.md)
+
+## Skills
+
+- [figma-to-ids](.ai/skills/figma-to-ids.md)
+- [ui-doctor](.ai/skills/ui-doctor.md)
+- [ui-translation](.ai/skills/ui-translation.md)
+- [version-migration](.ai/skills/version-migration.md)

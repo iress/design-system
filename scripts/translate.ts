@@ -36,7 +36,7 @@ async function main() {
 
   const selected = args.length
     ? args.filter((a) => a in commands)
-    : ['--components', '--tokens', '--skills', '--llms-txt', '--full-reference'];
+    : ['--tokens', '--components', '--skills', '--llms-txt', '--full-reference'];
 
   if (selected.length === 0) {
     console.error('Unknown command. Available:', Object.keys(commands).join(', '));
