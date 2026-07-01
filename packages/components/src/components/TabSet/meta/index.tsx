@@ -53,4 +53,5 @@ export default {
   guidelines:
     'https://iress.github.io/design-system/#/components/tab-set',
   subComponents: ['IressTab'],
+  figma: 'https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-28714',
 } satisfies ComponentMeta;

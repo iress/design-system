@@ -60,4 +60,5 @@ export default {
       condition: 'Only when rows is set',
     },
   ],
+  figma: 'https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=6201-23',
 } satisfies ComponentMeta;

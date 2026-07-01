@@ -66,5 +66,19 @@ if [ -n "$AI_RELEVANT" ]; then
   echo "✅ .ai/ docs are up to date"
 fi
 
+# Check docs/ has been rebuilt when guidelines source changes
+GUIDELINES_CHANGED=$(echo "$CHANGED_FILES" | grep -E '^apps/guidelines/' || true)
+DOCS_CHANGED=$(echo "$CHANGED_FILES" | grep -E '^docs/' || true)
+if [ -n "$GUIDELINES_CHANGED" ] && [ -z "$DOCS_CHANGED" ]; then
+  echo ""
+  echo "❌ apps/guidelines/ has changes but docs/ has not been updated."
+  echo "   Run 'yarn workspace @iress/ids-guidelines run build' and commit docs/."
+  echo ""
+  exit 1
+fi
+if [ -n "$GUIDELINES_CHANGED" ] && [ -n "$DOCS_CHANGED" ]; then
+  echo "✅ docs/ has been updated alongside guidelines changes"
+fi
+
 # Check there are no commits with secrets before pushing
 ggshield secret scan pre-push "$@"

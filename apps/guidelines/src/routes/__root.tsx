@@ -18,6 +18,7 @@ import {
 } from '@iress-oss/ids-components';
 import { Search } from '../components/Search';
 import { AiPanel } from '../components/AiPanel';
+import { TableOfContents } from '../components/TableOfContents';
 import { NAV_ITEMS } from '../nav';
 import {
   Component,
@@ -120,23 +121,26 @@ function RootLayout() {
       <IressInline noWrap style={{ height: `calc(100vh - ${navHeight}px)` }}>
         <IressSideNav items={navItems} activeItemKey={activeKey} defaultExpanded />
         <IressContainer py="md" flex="1" scrollable="y">
-          <IressStyled
-            element="main"
-            id="main-content"
-            flex="1"
-            focusable="true"
-            data-pagefind-body
-            tabIndex={-1}
-            p="sm"
-            mx="-sm"
-            borderRadius="radius.system.button"
-          >
-            <IressText>
-              <ErrorBoundary>
-                <Outlet />
-              </ErrorBoundary>
-            </IressText>
-          </IressStyled>
+          <IressInline noWrap gap="md" verticalAlign="top">
+            <IressStyled
+              element="main"
+              id="main-content"
+              flex="1"
+              focusable="true"
+              data-pagefind-body
+              tabIndex={-1}
+              p="sm"
+              mx="-sm"
+              borderRadius="radius.system.button"
+            >
+              <IressText>
+                <ErrorBoundary>
+                  <Outlet />
+                </ErrorBoundary>
+              </IressText>
+            </IressStyled>
+            <TableOfContents />
+          </IressInline>
         </IressContainer>
       </IressInline>
     </>

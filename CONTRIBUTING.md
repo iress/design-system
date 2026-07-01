@@ -48,8 +48,11 @@ Full reference: `.github/instructions/story-patterns.instructions.md`
 
 ### Styling
 
-- Use Panda CSS recipes/styles files, not inline styles
-- Use IDS tokens for all spacing, colours, radius, typography
+- Use proper IDS components (`IressStack`, `IressText`, `IressInline`, etc.) — not `IressStyled` with inline styles
+- `IressStyled` is an escape hatch for one-off semantic elements (e.g. `<IressStyled element="nav">`) — don't use it as a div-with-props replacement
+- Put custom styles in CSS files, not inline `style={{}}` objects
+- Use IDS tokens via CSS variables (`var(--iress-spacing-4)`) in CSS files
+- Use Panda CSS recipes/styles for component-level styling in the library itself
 - Mock components (in `mocks/` dirs) must NOT use `styled` from `@/styled-system/jsx`
 - Mock components import IDS from `@/main` (build replaces with `@iress-oss/ids-components`)
 

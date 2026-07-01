@@ -79,4 +79,5 @@ export default {
       condition: 'Only when options is a function (async)',
     },
   ],
+  figma: 'https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-23433',
 } satisfies ComponentMeta;

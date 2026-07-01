@@ -23,4 +23,5 @@ export default {
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-side-nav--docs',
   guidelines:
     'https://iress.github.io/design-system/#/patterns/side-nav',
+  figma: 'https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=6201-24',
 } satisfies ComponentMeta;

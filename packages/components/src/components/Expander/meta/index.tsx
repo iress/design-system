@@ -49,4 +49,5 @@ export default {
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-expander--docs',
   guidelines:
     'https://iress.github.io/design-system/#/components/expander',
+  figma: 'https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-30530',
 } satisfies ComponentMeta;

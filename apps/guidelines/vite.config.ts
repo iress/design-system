@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 import mdx from '@mdx-js/rollup';
 import remarkGfm from 'remark-gfm';
 import rehypePrism from 'rehype-prism-plus';
+import rehypeSlug from 'rehype-slug';
 import { tanstackRouter } from '@tanstack/router-plugin/vite';
 import { resolve } from 'path';
 import { execSync } from 'child_process';
@@ -22,7 +23,7 @@ export default defineConfig({
     tanstackRouter(),
     mdx({
       remarkPlugins: [remarkGfm],
-      rehypePlugins: [[rehypePrism, { ignoreMissing: true }]],
+      rehypePlugins: [rehypeSlug, [rehypePrism, { ignoreMissing: true }]],
       providerImportSource: '@mdx-js/react',
     }),
     react(),

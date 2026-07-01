@@ -5,6 +5,8 @@ import {
   IressText,
   IressStack,
   IressButton,
+  IressTooltip,
+  IressStyled,
 } from '@iress-oss/ids-components';
 
 interface MetadataProps {
@@ -20,9 +22,16 @@ export function Metadata({ meta }: MetadataProps) {
       {meta.import && (
         <IressInline gap="sm" verticalAlign="middle" pb="spacing.1">
             <IressText element="strong" color="muted" width="input.4">Import</IressText>
-            <IressText element="code">
-                {meta.import}
-            </IressText>
+            <IressInline verticalAlign="middle" gap="spacing.1">
+                <IressText element="code" maxWidth="overlay.md" scrollable="x" style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    <IressStyled py="spacing.1">
+                        {meta.import}
+                    </IressStyled>
+                </IressText>
+                <IressTooltip tooltipText="Copy to clickboard">
+                    <IressButton mode="muted" icon="content_copy" onClick={() => navigator.clipboard.writeText(meta.import)} />
+                </IressTooltip>
+            </IressInline>
         </IressInline>
       )}
       {meta.github && (
