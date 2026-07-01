@@ -1,6 +1,5 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressButton, IressPanel } from '@/main';
-import { DiffViewer } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressPanel>;
 
@@ -79,16 +78,6 @@ export const responsivePadding: Story = {
       'A panel that has extra large padding on small screens and no padding on large screens.',
     p: { base: 'xl', lg: 'none' },
   },
-};
-
-export const MigratingPadding: Story = {
-  render: (_args) => (
-    <DiffViewer
-      oldValue={`<IressPanel p={{ t: 'xl', b: 'xl' }} />`}
-      newValue={`<IressPanel pt="xl" pb="xl"  />`}
-    />
-  ),
-  tags: ['migration'],
 };
 
 export const responsiveVariablePadding: Story = {

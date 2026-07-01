@@ -1,9 +1,5 @@
 import { IressLink } from '@/components/Link';
 import { IressPill, IressIcon, IressInline, IressTable } from '@/main';
-import {
-  DiffViewer,
-  type DiffViewerProps,
-} from '@iress-oss/ids-storybook-config';
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { stylingPropsReference } from './stylingPropsReference';
 
@@ -84,25 +80,3 @@ export default {
 type Story = StoryObj<typeof IressTable>;
 
 export const Reference: Story = {};
-
-export const MigratingFromUtilities = {
-  render: (args: DiffViewerProps) => (
-    <DiffViewer
-      {...args}
-      oldValue={`<IressPanel className="iress-m--sm" />`}
-      newValue={`<IressPanel m="sm" />`}
-    />
-  ),
-  tags: ['migration'],
-};
-
-export const MigratingFromInternalTokens = {
-  render: (args: DiffViewerProps) => (
-    <DiffViewer
-      {...args}
-      oldValue={`<IressPanel style={{ '--iress-background-color': 'var(--iress-g-success-color)' }} />`}
-      newValue={`<IressPanel bg="colour.system.success.fill" />`}
-    />
-  ),
-  tags: ['migration'],
-};

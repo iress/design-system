@@ -718,8 +718,8 @@ Performed after Phases 7, 9, 10, and 11.3 are complete:
 - [x] **Step 6:** Remove `packages/*/.ai/*` ignore from `.gitignore`
 - [ ] **Step 7:** Verify CI builds pass
 - [x] **Step 8:** Verify `yarn dev` watcher correctly updates `.ai/` on content/story changes
-- [ ] **Step 9:** Remove deprecated `withCustomSource` / `withTransformedRawSource` exports (replaced by `withSource`)
-- [ ] **Step 10:** Remove old `withCustomSource.test.ts`
+- [x] **Step 9:** Remove deprecated `withCustomSource` / `withTransformedRawSource` exports (replaced by `withSource`)
+- [x] **Step 10:** Remove old `withCustomSource.test.ts`
 
 ### Task 12.4: Update `IDS-FULL-REFERENCE.md` generation
 
@@ -821,10 +821,10 @@ enforces conventions and reduces boilerplate across all component/pattern story 
 - [x] **Step 3:** Enforce `description` as required in `ComponentMeta` (already done)
 - [~] **Step 4:** Title remains a static string (Storybook indexer limitation) — factory sets everything else
 - [~] **Step 5:** Migrate all 54 primary story files to use the factory
-- [ ] **Step 6:** Add ESLint rule to enforce story meta quality: all story files must use `componentStoryMeta()` or include `idsConfig.testMeta`, `docs.description.component`, and `stylingProps` in argTypes. This guards the AI pipeline data quality.
-- [ ] **Step 7:** Add ESLint rule to ban `...OtherStory.args` spreads in P1 stories. Every story's `args` must be self-contained with literal values (no computed expressions, no spreads from other stories). This ensures the AI translate pipeline can extract complete code examples without runtime evaluation. P2/P3 stories (with `render` or `withSource`) are exempt.
-- [ ] **Step 8:** Add ESLint rule to enforce `Iress` prefix on exported component-specific types (e.g. `IressAlertButtonProps`, `IressCheckboxVariants`). Shared/utility types (`FormControlValue`, `LabelValueMeta`, `PositiveSpacingToken`, etc.) must NOT have the prefix. This convention allows the AI translate pipeline to distinguish component types (linked to component `.d.ts` files) from shared types (linked to `types.d.ts`/`interfaces.d.ts`).
-- [ ] **Step 9:** Remove `tags: ['migration']` stories from Storybook. Migration content is already documented in `apps/guidelines/content/migration/*.mdx` using markdown diff code blocks, which are easier for both AI and developers to understand than the DiffViewer React component. Remove the migration-tagged stories and their DiffViewer dependencies.
+- [x] **Step 6:** Add ESLint rule to enforce story meta quality: all story files must use `componentStoryMeta()` or include `idsConfig.testMeta`, `docs.description.component`, and `stylingProps` in argTypes. This guards the AI pipeline data quality.
+- [x] **Step 7:** Add ESLint rule to ban `...OtherStory.args` spreads in P1 stories. Every story's `args` must be self-contained with literal values (no computed expressions, no spreads from other stories). This ensures the AI translate pipeline can extract complete code examples without runtime evaluation. P2/P3 stories (with `render` or `withSource`) are exempt.
+- [x] **Step 8:** Add ESLint rule to enforce `Iress` prefix on exported component-specific types (e.g. `IressAlertButtonProps`, `IressCheckboxVariants`). Shared/utility types (`FormControlValue`, `LabelValueMeta`, `PositiveSpacingToken`, etc.) must NOT have the prefix. This convention allows the AI translate pipeline to distinguish component types (linked to component `.d.ts` files) from shared types (linked to `types.d.ts`/`interfaces.d.ts`).
+- [x] **Step 9:** Remove `tags: ['migration']` stories from Storybook. Migration content is already documented in `apps/guidelines/content/migration/*.mdx` using markdown diff code blocks, which are easier for both AI and developers to understand than the DiffViewer React component. Remove the migration-tagged stories and their DiffViewer dependencies.
 - [ ] **Step 10:** Add CI validation script for `.ai/` prop tables. Cross-references generated prop tables against exported TypeScript interfaces to catch drift (missing props, incorrect types, stale descriptions). Run as part of `yarn test:ci`. Flags regressions when component interfaces change without regenerating docs.
 
 ---
@@ -1125,14 +1125,14 @@ Verify the published package structure makes type lookup easy:
 | — | Phase 1–11 (site, MDX, search, AI panel, deploy, stories, dogfood, tokens, autodocs, embeds, JSDoc) | ✅ Done | — |
 | 5 | Phase 12 remaining | ❌ | — |
 |   | — Bundle size / code splitting (Task 12.2) | ❌ | — |
-|   | — Remove `withCustomSource` export + test (Task 12.4 Steps 9-10) | ❌ | — |
+|   | — Remove `withCustomSource` export + test (Task 12.4 Steps 9-10) | ✅ Done | — |
 |   | — Re-upload IDS-FULL-REFERENCE to Gemini Gem (Task 12.4) | ❌ | — |
 |   | — Architecture diagrams (Task 12.5) | ❌ | — |
 |   | — Documentation: CONTRIBUTING.md, README updates (Tasks 12.6, 12.8) | ❌ | — |
 |   | — Sub-navigation and anchor link search (Task 12.7) | ❌ | — |
 |   | — createMeta factory migration to all 54 files (Task 12.10 Steps 1-5) | ⏭️ Skipped | — |
-|   | — ESLint rules: story meta, arg spreads, Iress prefix (Task 12.10 Steps 6-8) | ❌ | — |
-|   | — Remove migration stories from Storybook (Task 12.10 Step 9) | ❌ | — |
+|   | — ESLint rules: story meta, arg spreads, Iress prefix (Task 12.10 Steps 6-8) | ✅ Done | — |
+|   | — Remove migration stories from Storybook (Task 12.10 Step 9) | ✅ Done | — |
 |   | — CI prop table validation (Task 12.10 Step 10) | ❌ | — |
 |   | — Verify CI builds pass (Task 12.4 Step 7) | ❌ | — |
 | 6 | Phase 13: Tabbed content + TypeDoc + ComponentMeta extensions (25 items) | ❌ | #5 |
