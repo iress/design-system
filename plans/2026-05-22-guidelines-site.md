@@ -752,7 +752,7 @@ Performed after Phases 7, 9, 10, and 11.3 are complete:
 
 ### Task 12.7: Sub-navigation and anchor link search
 
-- [ ] **Step 1:** Generate sub-menu items from MDX headings (h2/h3) for each page
+- [ ] [MOVED TO PHASE 13] **Step 1:** Generate sub-menu items from MDX headings (h2/h3) for each page
   - Parse MDX headings at build time or on page load
   - Show heading-level navigation in the SideNav panel when a page is active
   - Use `IressSideNav` `children` items with `href` anchor links (`#heading-id`)
@@ -1124,12 +1124,12 @@ Verify the published package structure makes type lookup easy:
 | 4 | Pipeline consolidation (scripts/translate.ts) | ✅ Done | — |
 | — | Phase 1–11 (site, MDX, search, AI panel, deploy, stories, dogfood, tokens, autodocs, embeds, JSDoc) | ✅ Done | — |
 | 5 | Phase 12 remaining | ❌ | — |
-|   | — Bundle size / code splitting (Task 12.2) | ❌ | — |
+|   | — Bundle size / code splitting (Task 12.2) | ⏭️ Skipped (internal site, not worth the complexity) | — |
 |   | — Remove `withCustomSource` export + test (Task 12.4 Steps 9-10) | ✅ Done | — |
 |   | — Re-upload IDS-FULL-REFERENCE to Gemini Gem (Task 12.4) | ❌ manual | — |
 |   | — Architecture diagrams (Task 12.5) | ✅ Done | — |
 |   | — Documentation: CONTRIBUTING.md, README updates (Tasks 12.6, 12.8) | ✅ Done | — |
-|   | — Sub-navigation and anchor link search (Task 12.7) | ❌ | — |
+|   | — Sub-navigation and anchor link search (Task 12.7) | ⏭️ Moved to Phase 13 | — |
 |   | — createMeta factory migration to all 54 files (Task 12.10 Steps 1-5) | ⏭️ Skipped | — |
 |   | — ESLint rules: story meta, arg spreads, Iress prefix (Task 12.10 Steps 6-8) | ✅ Done | — |
 |   | — Remove migration stories from Storybook (Task 12.10 Step 9) | ✅ Done | — |
