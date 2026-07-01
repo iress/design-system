@@ -15,7 +15,6 @@ export * from './helpers/disableArgTypes';
 export * from './helpers/mergeStorybookConfig';
 export * from './helpers/removeArgTypes';
 export * from './helpers/stylingProps';
-export * from './helpers/withCustomSource';
 export * from './helpers/withJsxTransformer';
 export * from './helpers/withSource';
 export * from './helpers/sourceReplacements';

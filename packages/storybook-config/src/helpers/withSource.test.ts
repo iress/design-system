@@ -1,8 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import {
   withSource,
-  withCustomSource,
-  withTransformedRawSource,
   transformSource,
   formatWithPrettier,
 } from './withSource';
@@ -255,28 +253,6 @@ export const MultipleExpander = () => (
       expect(result).toEqual({
         docs: { source: { transform, language: 'tsx' } },
       });
-    });
-  });
-
-  describe('deprecated aliases', () => {
-    it('withCustomSource works', () => {
-      const result = withCustomSource('const x = 1;', 'js');
-
-      expect(result).toEqual({
-        docs: { source: { code: 'const x = 1;', language: 'js' } },
-      });
-    });
-
-    it('withTransformedRawSource works', () => {
-      const source = `interface Props { x: number; }\nexport function C({ x }: Props) { return <F x={x} bad={1} />; }`;
-      const result = withTransformedRawSource(source, 'Props', ['bad']);
-      const code = (result as { docs: { source: { code: string } } }).docs
-        .source.code;
-
-      expect(code).not.toContain('interface Props');
-      expect(code).not.toContain(': Props');
-      expect(code).not.toContain('bad');
-      expect(code).toContain('x={x}');
     });
   });
 });

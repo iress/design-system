@@ -117,9 +117,6 @@ async function formatWithPrettier(code: string): Promise<string> {
 /**
  * Provides a custom source for a story's code panel.
  *
- * Consolidates `withCustomSource`, `withTransformedRawSource`, and
- * `withTransformedProviderSource` into a single helper.
- *
  * Always transforms `@/main` → `@iress-oss/ids-components`.
  *
  * @param source Raw source string (usually from `?raw` import) or a transform function.
@@ -211,25 +208,3 @@ export function withSource(
 
 // Exported for testing
 export { transformSource, formatWithPrettier };
-
-/**
- * @deprecated Use `withSource` instead.
- */
-export const withCustomSource = (
-  code: string,
-  language = 'tsx',
-): Record<string, unknown> => withSource(code, { language, format: false });
-
-/**
- * @deprecated Use `withSource` with `replacePropsType` option instead.
- */
-export const withTransformedRawSource = (
-  rawSource: string,
-  propsInterface: string,
-  omitArgs?: string[],
-): Record<string, unknown> =>
-  withSource(rawSource, {
-    replacePropsType: propsInterface,
-    removeProps: omitArgs,
-    format: false,
-  });

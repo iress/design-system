@@ -472,7 +472,7 @@ yarn dev
 ### Task 9.4: Derive token AI docs
 
 - [x] **Step 1:** `packages/tokens/.ai/` already maintained by `generate-token-reference.ts`
-- [ ] **Step 2:** Include token pages in `IDS-FULL-REFERENCE.md` generation — deferred to Phase 12
+- [x] **Step 2:** Include token pages in `IDS-FULL-REFERENCE.md` generation — deferred to Phase 12
 
 ---
 
@@ -602,26 +602,26 @@ packages/components/.ai/components/button.md (shipped in npm)
 
 ### Task 11.2: Use `<StoryEmbed>` in guidelines content
 
-- [ ] **Step 1:** Replace hardcoded JSX snippets in `apps/guidelines/content/components/*.mdx`
+- [x] **Step 1:** Replace hardcoded JSX snippets in `apps/guidelines/content/components/*.mdx`
   with `<StoryEmbed id="..." />` where a live demo is needed
-- [ ] **Step 2:** Keep prose/written code snippets for simple prop demonstrations (not everything needs an iframe)
+- [x] **Step 2:** Keep prose/written code snippets for simple prop demonstrations (not everything needs an iframe)
 
 ### Task 11.3: Build unified `translate.ts` pipeline
 
 > **Expanded from original scope.** See `plans/ai-docs-pipeline-consolidation.md` for full details
 > and `plans/story-code-patterns.md` for the story migration that simplifies extraction.
 
-- [ ] **Step 1:** Migrate complex stories to mock files (prerequisite — simplifies extraction)
-- [ ] **Step 2:** Create `scripts/translate.ts` with `--components` subcommand
+- [x] **Step 1:** Migrate complex stories to mock files (prerequisite — simplifies extraction)
+- [x] **Step 2:** Create `scripts/translate.ts` with `--components` subcommand
   - Reads `apps/guidelines/content/{components,patterns}/*.mdx`
   - Resolves `<StoryEmbed id="..."/>` → reads raw source from mock files or extracts render bodies
   - Applies `transformSource` (from `withSource` helper) to clean up code
   - Writes to `packages/components/.ai/{components,patterns}/*.md`
-- [ ] **Step 3:** Add `--tokens` subcommand (port from `generate-token-reference.ts`)
-- [ ] **Step 4:** Add `--skills` subcommand (port skill concatenation)
-- [ ] **Step 5:** Add `--full-reference` subcommand (generates `IDS-FULL-REFERENCE.md`)
-- [ ] **Step 6:** Add `--all` (default) that runs all subcommands
-- [ ] **Step 7:** Wire into `package.json` as `"translate": "tsx scripts/translate.ts"`
+- [x] **Step 3:** Add `--tokens` subcommand (port from `generate-token-reference.ts`)
+- [x] **Step 4:** Add `--skills` subcommand (port skill concatenation)
+- [x] **Step 5:** Add `--full-reference` subcommand (generates `IDS-FULL-REFERENCE.md`)
+- [x] **Step 6:** Add `--all` (default) that runs all subcommands
+- [x] **Step 7:** Wire into `package.json` as `"translate": "tsx scripts/translate.ts"`
 
 ### Task 11.4: Keeping examples in sync
 
@@ -685,8 +685,8 @@ for the pattern — a JSDoc comment with a brief description above the component
 
 ### Task 12.1: Fix broken MDX files
 
-- [ ] Fix 3 broken MDX files excluded in Phase 3 (card, select, loading)
-- [ ] Validate all `apps/guidelines/content/**/*.mdx` files parse without errors
+- [x] Fix 3 broken MDX files excluded in Phase 3 (card, select, loading)
+- [x] Validate all `apps/guidelines/content/**/*.mdx` files parse without errors
 
 ### Task 12.2: Bundle size — code splitting
 
@@ -700,32 +700,32 @@ After Phase 11, guidelines content uses `<StoryEmbed>` instead of inline code ex
 The AI improve step only targets `.ai/` output (not content files), eliminating the
 write-back loop.
 
-- [ ] Update ai-runner to target `.ai/` files (not content MDX) — derive produces rough
+- [x] Update ai-runner to target `.ai/` files (not content MDX) — derive produces rough
   examples, AI cleans them up in `.ai/` only
-- [ ] Remove `ignoreChanges` loop-prevention logic (AI no longer writes to watched content dir)
-- [ ] Watcher becomes: content/story change → derive → AI improve `.ai/` — no loop
-- [ ] Delete `apps/guidelines/.ai-improve.log` gitignore entry if unused
+- [x] Remove `ignoreChanges` loop-prevention logic (AI no longer writes to watched content dir)
+- [x] Watcher becomes: content/story change → derive → AI improve `.ai/` — no loop
+- [x] Delete `apps/guidelines/.ai-improve.log` gitignore entry if unused
 
 ### Task 12.4: Transition cutover (old → new workflow)
 
 Performed after Phases 7, 9, 10, and 11.3 are complete:
 
-- [ ] **Step 1:** Run `translate.ts --all` to produce a clean `.ai/` baseline from current content
-- [ ] **Step 2:** Run `ai-improve.ts` on all files to validate/improve (optional)
-- [ ] **Step 3:** Commit `.ai/` as the authoritative baseline
-- [ ] **Step 4:** Update `yarn build` to use `yarn translate` (now runs `translate.ts`)
-- [ ] **Step 5:** Delete old scripts: `translate-components.ts`, `derive-ai-docs.ts`, `generate-token-reference.ts`
-- [ ] **Step 6:** Remove `packages/*/.ai/*` ignore from `.gitignore`
+- [x] **Step 1:** Run `translate.ts --all` to produce a clean `.ai/` baseline from current content
+- [x] **Step 2:** Run `ai-improve.ts` on all files to validate/improve (optional)
+- [x] **Step 3:** Commit `.ai/` as the authoritative baseline
+- [x] **Step 4:** Update `yarn build` to use `yarn translate` (now runs `translate.ts`)
+- [x] **Step 5:** Delete old scripts: `translate-components.ts`, `derive-ai-docs.ts`, `generate-token-reference.ts`
+- [x] **Step 6:** Remove `packages/*/.ai/*` ignore from `.gitignore`
 - [ ] **Step 7:** Verify CI builds pass
-- [ ] **Step 8:** Verify `yarn dev` watcher correctly updates `.ai/` on content/story changes
-- [x] **Step 9:** Remove deprecated `withCustomSource` / `withTransformedRawSource` exports (replaced by `withSource`)
-- [x] **Step 10:** Remove old `withCustomSource.test.ts`
+- [x] **Step 8:** Verify `yarn dev` watcher correctly updates `.ai/` on content/story changes
+- [ ] **Step 9:** Remove deprecated `withCustomSource` / `withTransformedRawSource` exports (replaced by `withSource`)
+- [ ] **Step 10:** Remove old `withCustomSource.test.ts`
 
 ### Task 12.4: Update `IDS-FULL-REFERENCE.md` generation
 
-- [ ] Now handled by `translate.ts --full-reference` subcommand
-- [ ] Source: `packages/components/.ai/**/*.md` + `.kiro/skills/` (AI-optimized, not raw MDX)
-- [ ] Verify `.ai/IDS-FULL-REFERENCE.md` is regenerated correctly
+- [x] Now handled by `translate.ts --full-reference` subcommand
+- [x] Source: `packages/components/.ai/**/*.md` + `.kiro/skills/` (AI-optimized, not raw MDX)
+- [x] Verify `.ai/IDS-FULL-REFERENCE.md` is regenerated correctly
 - [ ] Re-upload to Iris Gemini Gem
 
 ### Task 12.5: Architecture diagrams
@@ -746,7 +746,7 @@ Performed after Phases 7, 9, 10, and 11.3 are complete:
 
 ### Task 12.6: Documentation
 
-- [ ] Update `AGENTS.md` to reflect new workflow (no more `yarn translate`, use `yarn dev` for .ai updates)
+- [x] Update `AGENTS.md` to reflect new workflow (no more `yarn translate`, use `yarn dev` for .ai updates)
 - [ ] Update `README.md` development section if needed
 - [ ] Add a `CONTRIBUTING.md` note about committing `.ai/` changes with PRs
 
@@ -797,10 +797,14 @@ and directs users to the guidelines site for full documentation.
 
 ### Task 12.10: Create story factory in storybook-config
 
-Create a `createComponentStories` helper in `@iress-oss/ids-storybook-config` that
+> **Decision (2026-07-01): SKIPPED.** Decided against the story factory — it makes the
+> Storybook implementation less obvious to contributors. Sticking with standard Storybook
+> story files using `componentStoryMeta()` helper for shared config (already in place for
+> 106 files) without a full factory abstraction. Steps 1-5 below are cancelled; Steps 6-10
+> (ESLint rules, migration story cleanup, CI validation) remain independently actionable.
 enforces conventions and reduces boilerplate across all component/pattern story files.
 
-- [ ] **Step 1:** Design the factory API:
+- [~] **Step 1:** Design the factory API:
   ```ts
   const { meta, Story } = createComponentStories({
     component: IressAlert,
@@ -809,14 +813,14 @@ enforces conventions and reduces boilerplate across all component/pattern story 
     argTypes: { ... },         // component-specific only
   });
   ```
-- [ ] **Step 2:** Factory auto-applies:
+- [~] **Step 2:** Factory auto-applies:
   - `parameters.docs.subtitle` from `meta.description`
   - `stylingProps` helper appended to argTypes automatically
   - `tags` from meta merged with defaults (`['autodocs']`)
   - Correctly typed `Story` type for the component
-- [ ] **Step 3:** Enforce `description` as required in `ComponentMeta` (already done)
-- [ ] **Step 4:** Title remains a static string (Storybook indexer limitation) — factory sets everything else
-- [ ] **Step 5:** Migrate all 54 primary story files to use the factory
+- [x] **Step 3:** Enforce `description` as required in `ComponentMeta` (already done)
+- [~] **Step 4:** Title remains a static string (Storybook indexer limitation) — factory sets everything else
+- [~] **Step 5:** Migrate all 54 primary story files to use the factory
 - [ ] **Step 6:** Add ESLint rule to enforce story meta quality: all story files must use `componentStoryMeta()` or include `idsConfig.testMeta`, `docs.description.component`, and `stylingProps` in argTypes. This guards the AI pipeline data quality.
 - [ ] **Step 7:** Add ESLint rule to ban `...OtherStory.args` spreads in P1 stories. Every story's `args` must be self-contained with literal values (no computed expressions, no spreads from other stories). This ensures the AI translate pipeline can extract complete code examples without runtime evaluation. P2/P3 stories (with `render` or `withSource`) are exempt.
 - [ ] **Step 8:** Add ESLint rule to enforce `Iress` prefix on exported component-specific types (e.g. `IressAlertButtonProps`, `IressCheckboxVariants`). Shared/utility types (`FormControlValue`, `LabelValueMeta`, `PositiveSpacingToken`, etc.) must NOT have the prefix. This convention allows the AI translate pipeline to distinguish component types (linked to component `.d.ts` files) from shared types (linked to `types.d.ts`/`interfaces.d.ts`).
@@ -1042,9 +1046,9 @@ Publish a `llms.txt` at the package root (included in npm distribution) that ind
 ...
 ```
 
-- [ ] Generate `llms.txt` as part of the derive/translate pipeline
-- [ ] Include in `package.json` `files` array so it ships with npm
-- [ ] Index: component docs, pattern docs, token docs
+- [x] Generate `llms.txt` as part of the derive/translate pipeline
+- [x] Include in `package.json` `files` array so it ships with npm
+- [x] Index: component docs, pattern docs, token docs
 
 ### Task 14.2: Create a resolver script for AI agents
 
@@ -1104,6 +1108,34 @@ Verify the published package structure makes type lookup easy:
 └── package.json
 ```
 
-- [ ] Verify `.ai/` is included in `files` in `package.json`
-- [ ] Verify `dist/types/` has per-component `.d.ts` files (not a single bundled type)
-- [ ] Verify paths are stable across versions (no hash suffixes, etc.)
+- [x] Verify `.ai/` is included in `files` in `package.json`
+- [x] Verify `dist/types/` has per-component `.d.ts` files (not a single bundled type)
+- [x] Verify paths are stable across versions (no hash suffixes, etc.)
+
+---
+
+## Remaining Work Checklist (Updated 2026-07-01)
+
+| # | Item | Status | Depends on |
+|---|------|--------|-----------|
+| 1 | Testing documentation (testMeta for all components) | ✅ Done | — |
+| 2 | Story verification cleanup (8 tasks) | ✅ Done | — |
+| 3 | createMeta factory (standardise story meta) | ✅ Done | — |
+| 4 | Pipeline consolidation (scripts/translate.ts) | ✅ Done | — |
+| — | Phase 1–11 (site, MDX, search, AI panel, deploy, stories, dogfood, tokens, autodocs, embeds, JSDoc) | ✅ Done | — |
+| 5 | Phase 12 remaining | ❌ | — |
+|   | — Bundle size / code splitting (Task 12.2) | ❌ | — |
+|   | — Remove `withCustomSource` export + test (Task 12.4 Steps 9-10) | ❌ | — |
+|   | — Re-upload IDS-FULL-REFERENCE to Gemini Gem (Task 12.4) | ❌ | — |
+|   | — Architecture diagrams (Task 12.5) | ❌ | — |
+|   | — Documentation: CONTRIBUTING.md, README updates (Tasks 12.6, 12.8) | ❌ | — |
+|   | — Sub-navigation and anchor link search (Task 12.7) | ❌ | — |
+|   | — createMeta factory migration to all 54 files (Task 12.10 Steps 1-5) | ⏭️ Skipped | — |
+|   | — ESLint rules: story meta, arg spreads, Iress prefix (Task 12.10 Steps 6-8) | ❌ | — |
+|   | — Remove migration stories from Storybook (Task 12.10 Step 9) | ❌ | — |
+|   | — CI prop table validation (Task 12.10 Step 10) | ❌ | — |
+|   | — Verify CI builds pass (Task 12.4 Step 7) | ❌ | — |
+| 6 | Phase 13: Tabbed content + TypeDoc + ComponentMeta extensions (25 items) | ❌ | #5 |
+| 7 | Phase 14 remaining: CLI helper, skill updates (7 items) | ❌ | #5 |
+| 8 | Private guidelines site | ❌ | #6 |
+| 9 | Phase 11.5.3 Step 2: Lint rule to verify JSDoc matches meta (optional) | ❌ | — |
