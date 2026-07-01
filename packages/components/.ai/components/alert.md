@@ -35,7 +35,7 @@ import { IressAlert } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Alert/Alert.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 An alert displays a short, important message in a way that attracts the user's attention without interrupting the user's task.
 

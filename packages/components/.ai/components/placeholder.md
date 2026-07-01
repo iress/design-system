@@ -28,7 +28,7 @@ import { IressPlaceholder } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Placeholder/Placeholder.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 A placeholder is a UI element that allows you to reserve space for content that has not been created yet, usually used for prototyping.
 

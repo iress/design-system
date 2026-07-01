@@ -38,7 +38,7 @@ import { IressFieldGroup } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/FieldGroup/FieldGroup.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Groups multiple related fields together using a `fieldset` and `legend` for accessibility.
 

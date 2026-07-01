@@ -27,7 +27,7 @@ import { IressStack } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Stack/Stack.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Use IressStack to control vertical spacing between content with consistent preset values.
 

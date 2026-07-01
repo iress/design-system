@@ -40,7 +40,7 @@ import { IressInput } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Input/Input.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Inputs allow a user to input and interact with data. This component should be used as a child of the IressField component to ensure the correct placement of elements like label, error & hint text.
 

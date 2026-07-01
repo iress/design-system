@@ -36,7 +36,69 @@ import { IressMenu } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Menu/Menu.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
+
+### IressMenuItem Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| append | `ReactNode` | — | Section after menu item content. |
+| canToggle | `boolean` | — | When true, the item can be toggled even in single-select mode. |
+| children | `ReactNode` | — | The children to be rendered inside the menu item, describing the action. |
+| className | `string` | — | The class name to be applied to the menu item. |
+| divider | `boolean` | — | Adds a divider after any content. If you would like to add a divider before the menu item, use a `<IressMenuDivider />` instead. |
+| element | `ElementType` | — | Change the component that will be rendered as the menu item, used for third-party libraries that require a specific element type. By default, it will render a button or an anchor tag based on the `href` prop. |
+| href | `string` | — | Contains a URL or a URL fragment that the hyperlink points to. If this property is set and no `element` was set, an anchor tag will be rendered. Otherwise, a button will be rendered. |
+| icon | [MaterialSymbol](https://fonts.google.com/icons?icon.set=Material+Symbols) | — | The icon to be displayed in the button. If provided, the icon will be displayed and the `children` will be used as screen reader text (although you can explicitly override this with `aria-label`) |
+| listItemStyle | `[IressCustomiseSlot](../../dist/interfaces.d.ts)` | — | Style overrides for the menu item wrapper, which is the element rendered at the top level and contains a `role` attribute for accessibility. This is useful for menu item variants that require additional structure, such as the side nav drawer items. This is only applicable for the `listitem` role, as other roles will have the `role` attribute applied directly to the menu item element itself. |
+| onBlur | `FocusEventHandler<Exclude<Parameters<Exclude<ButtonRef<C, THref>, undefined>>[0], null>>` | — | Emitted when the menu item is blurred. |
+| onClick | `MouseEventHandler<Exclude<Parameters<Exclude<ButtonRef<C, THref>, undefined>>[0], null>>` | — | Emitted when the menu item is clicked. |
+| onKeyDown | `KeyboardEventHandler<Exclude<Parameters<Exclude<ButtonRef<C, THref>, undefined>>[0], null>>` | — | Emitted when a key is pressed while focused on the menu item. |
+| loading | `boolean, string ` | — | When true, button is in loading state. If provided a string, will be used as the loading text for screen readers. |
+| prepend | `ReactNode` | — | Section before menu item content. |
+| selected | `boolean` | — | When true, shows the item in selected state. |
+| value | `[FormControlValue](../../dist/types.d.ts)` | — | To be used when menu type is listbox. |
+
+📄 [Full type definition](../../dist/components/MenuItem/MenuItem.d.ts)
+
+### IressMenuHeading Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| element | `[IressTextElements](../../dist/components/MenuHeading/MenuHeading.d.ts)` | `'h2' as E` | The HTML element that should be rendered. |
+| append | `ReactNode` | — | Section after menu item content. |
+| divider | `boolean` | — | Adds a divider after any content. If you would like to add content before the menu item, use a `<hr />` instead. |
+| prepend | `ReactNode` | — | Section before menu item content. |
+
+📄 [Full type definition](../../dist/components/MenuHeading/MenuHeading.d.ts)
+
+### IressMenuDivider Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+
+📄 [Full type definition](../../dist/components/MenuDivider/MenuDivider.d.ts)
+
+### IressMenuGroup Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| active | `boolean` | — | Whether this header is active/expanded, revealing child drawer items. Only used when parent Menu has variant="side". |
+| append | `string , number , bigint , boolean , (ReactElement> & string) | (Iterable<ReactNode> & string) | ... 23 more ...` | — | Append an element after the label. Only used when variant is 'subdraw' to add an icon indicating a submenu. By default, a right arrow icon is used when variant is 'subdraw', so this prop is only needed if you want to override that. Section after menu item content. |
+| **label** | `ReactNode` | — | Label for the group, displayed as a non-selectable heading. |
+| children | `ReactNode` | — | Items within the group (typically menu items). |
+| defaultActive | `boolean` | — | Uncontrolled default for the active/expanded state. Only used when parent Menu has variant="side". |
+| divider | `boolean` | — | Adds a divider after the group. Adds a divider after any content. If you would like to add content before the menu item, use a `<hr />` instead. |
+| element | ... 164 more ..., `article` , `circle` , `code` , `details` , `div` , `filter` , `footer` , `html` , `iframe` , `image` , `input` , `object` , `p` , `slot` , `span` , `style` , `symbol` , `title`  | — | Custom element type for the activator (e.g. for third-party routing). Only used when parent Menu has variant="side". The HTML element that should be rendered. |
+| href | `string` | — | URL for the group activator link. Only used when parent Menu has variant="side". |
+| onActiveChange | `((active?: boolean) => void)` | — | Callback fired when the active/expanded state changes. Only used when parent Menu has variant="side". |
+| variant | `MenuVariants` | — | Variant of the menu group. - `undefined` (default): Renders inline with label as heading and children below. - `'subdraw'`: Renders as a trigger that opens a fly-over submenu containing children. - `'side'`: Renders as a numbered header with an expandable drawer containing children. |
+
+📄 [Full type definition](../../dist/components/MenuGroup/MenuGroup.d.ts)
 
 A menu can display grouped action buttons, navigation items or headings.
 

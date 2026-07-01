@@ -32,7 +32,19 @@ import { IressTabSet } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/TabSet/TabSet.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
+
+### IressTab Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| active | `boolean` | — | Sets the active styling of the tab. |
+| href | `string` | — | Contains a URL or a URL fragment that the hyperlink points to. If this property is set, an anchor tag will be rendered.  **Note:** This prop should be avoided when using `children`. |
+| **label** | `ReactNode` | — | The label of this tab. |
+| value | `[FormControlValue](../../dist/types.d.ts)` | — | You can provide your own value to allow you to control its active state when used in `IressTabSet`. |
+
+📄 [Full type definition](../../dist/components/Tab/Tab.d.ts)
 
 Tabs are used to display modular pieces of related data that do not need to be compared or accessed simultaneously.
 

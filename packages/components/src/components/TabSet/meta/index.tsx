@@ -52,4 +52,5 @@ export default {
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tab-set--docs',
   guidelines:
     'https://iress.github.io/design-system/#/components/tab-set',
+  subComponents: ['IressTab'],
 } satisfies ComponentMeta;

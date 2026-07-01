@@ -39,7 +39,7 @@ import { IressSlideout } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Slideout/Slideout.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Slideouts are used to show additional information or to allow users to perform secondary tasks without leaving their normal workflow.
 

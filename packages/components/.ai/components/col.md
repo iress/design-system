@@ -27,7 +27,7 @@ import { IressCol } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Col/Col.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Used in conjunction with the IressRow component to layout page content.
 

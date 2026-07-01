@@ -32,7 +32,7 @@ import { IressTag } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Tag/Tag.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Tags represent individual units in a group of selected items.
 

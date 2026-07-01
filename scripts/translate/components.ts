@@ -5,7 +5,7 @@
  * from guidelines MDX + component meta + testMeta.
  */
 
-import { readdirSync, readFileSync, writeFileSync, mkdirSync, existsSync, statSync } from 'fs';
+import { readdirSync, readFileSync, writeFileSync, mkdirSync, existsSync, statSync, unlinkSync } from 'fs';
 import { join, basename, relative } from 'path';
 import { stripMdx } from './helpers/strip-mdx';
 import { resolveStoryEmbeds } from './helpers/resolve-stories';
@@ -100,6 +100,15 @@ async function buildDoc(file: string, type: string): Promise<{ slug: string; mar
   let additionalProps: Array<{ name: string; type: string; required?: boolean; default?: string; description: string; condition?: string }> = [];
   const metaLinks: string[] = [];
 
+  // Extract description from MDX meta for non-component types
+  if (!isComponent) {
+    const metaMatch = source.match(/export\s+const\s+meta\s*=\s*\{([^}]*)\}/s);
+    if (metaMatch) {
+      const descMatch = metaMatch[1].match(/description:\s*['"]([^'"]+)['"]/);
+      if (descMatch) description = descMatch[1];
+    }
+  }
+
   if (metaFile) {
     try {
       // Import from the built package (avoids path alias resolution issues)
@@ -165,7 +174,7 @@ async function buildDoc(file: string, type: string): Promise<{ slug: string; mar
       sections.push('## Props\n');
       sections.push('> Required props are **bold**.\n');
       sections.push(renderPropsTable(allProps, `Iress${name}`, type) + '\n');
-      sections.push('Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).\n');
+      sections.push('Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).\n');
     }
 
     // Sub-component props (declared in meta.subComponents)
@@ -210,7 +219,7 @@ async function buildDoc(file: string, type: string): Promise<{ slug: string; mar
     }
   }
 
-  return { slug, markdown: sections.join('\n'), description, importStatement, name: isComponent ? `Iress${name}` : undefined };
+  return { slug, markdown: sections.join('\n'), description, importStatement, name: isComponent && slug !== 'overview' ? `Iress${name}` : undefined };
 }
 
 interface RecipeEntry {
@@ -284,6 +293,16 @@ export async function translateComponents() {
     (d) => statSync(join(contentDir, d)).isDirectory(),
   );
 
+  // Clean stale .md files before regenerating (prevents orphaned manually-committed files)
+  for (const type of contentTypes) {
+    const outDir = join(OUTPUT_DIR, type);
+    if (existsSync(outDir)) {
+      for (const f of readdirSync(outDir).filter((f) => f.endsWith('.md'))) {
+        unlinkSync(join(outDir, f));
+      }
+    }
+  }
+
   for (const type of contentTypes) {
     const files = getGuidelineFiles(type);
     const outDir = join(OUTPUT_DIR, type);
@@ -307,16 +326,32 @@ export async function translateComponents() {
     }
   }
 
-  // Write index.json
-  writeFileSync(join(OUTPUT_DIR, 'index.json'), JSON.stringify(index, null, 2));
-
   // Copy tokens-reference.md into components .ai for co-location
   const tokensRef = join(ROOT, 'packages/tokens/.ai/tokens-reference.md');
   const tokensOutDir = join(OUTPUT_DIR, 'tokens');
   mkdirSync(tokensOutDir, { recursive: true });
   if (existsSync(tokensRef)) {
     writeFileSync(join(tokensOutDir, 'tokens-reference.md'), readFileSync(tokensRef, 'utf-8'));
+    index.push({
+      slug: 'tokens-reference',
+      type: 'tokens',
+      name: 'Token Reference',
+      description: 'Complete enumeration of all IDS design tokens with values, descriptions, and accessibility pairings.',
+      path: 'tokens/tokens-reference.md',
+    });
   }
+
+  // Add skills to index
+  const skillsDir = join(OUTPUT_DIR, 'skills');
+  if (existsSync(skillsDir)) {
+    for (const file of readdirSync(skillsDir).filter((f) => f.endsWith('.md'))) {
+      const skillSlug = file.replace('.md', '');
+      index.push({ slug: skillSlug, type: 'skills', path: `skills/${file}` });
+    }
+  }
+
+  // Write index.json
+  writeFileSync(join(OUTPUT_DIR, 'index.json'), JSON.stringify(index, null, 2));
 
   console.log(`  \u2713 ${index.length} component/pattern docs written`);
 }

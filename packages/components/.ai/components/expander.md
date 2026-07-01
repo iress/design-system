@@ -29,7 +29,7 @@ import { IressExpander } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Expander/Expander.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Expanders are commonly used to reveal more information or details about an element or content on a page.
 

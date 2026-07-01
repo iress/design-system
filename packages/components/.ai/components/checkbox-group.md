@@ -30,7 +30,7 @@ import { IressCheckboxGroup } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/CheckboxGroup/CheckboxGroup.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Checkbox groups allow users to make more than one choice in a set of related options.
 

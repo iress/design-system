@@ -35,7 +35,7 @@ import { IressField } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Field/Field.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 The field component is used to place label, hint and error information around form controls.
 

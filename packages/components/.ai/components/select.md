@@ -43,10 +43,11 @@ import { IressSelect } from '@iress-oss/ids-components';
 | footer | `ReactNode` | — | Footer showed in option panel when expanded. |
 | width | `any` | — | The width of the select. |
 | matchActivatorWidth | `boolean` | `true` | Whether the popover should match the width of the activator element. When true, the dropdown will have the same width as the select input. When false, the dropdown will size based on its content. |
+| minSearchLength | number _(Only when options is a function (async))_ | — | Minimum number of characters required before search results are shown. |
 
 📄 [Full type definition](../../dist/components/Select/Select.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Renders a dropdown select input for choosing one option from a list.
 

@@ -25,7 +25,7 @@ Buttons are the primary way users take action. Use mode to signal priority:
 
 Avoid `disabled` — keep buttons enabled and use validation or loading states
 instead. See [Button](../components/button.md) and
-[Common Mistakes](../foundations/common-mistakes.md#using-disabled-on-iressbutton).
+[Common Mistakes](../get-started/common-mistakes.md#using-disabled-on-iressbutton).
 
 ---
 

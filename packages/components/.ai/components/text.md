@@ -24,7 +24,7 @@ import { IressText } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Text/Text.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 The IressText component allows you to set typographic styles either on one element, or a block of HTML elements.
 

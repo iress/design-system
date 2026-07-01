@@ -186,7 +186,6 @@
   {
     "slug": "overview",
     "type": "components",
-    "name": "IressOverview",
     "path": "components/overview.md"
   },
   {
@@ -408,96 +407,115 @@
   {
     "slug": "accessibility",
     "type": "foundations",
+    "description": "Accessibility is everyone\\",
     "path": "foundations/accessibility.md"
   },
   {
     "slug": "iconography",
     "type": "foundations",
+    "description": "Guidelines for writing clear interface text (microcopy) and using icons effectively across Iress products.",
     "path": "foundations/iconography.md"
   },
   {
     "slug": "overview",
     "type": "foundations",
+    "description": "What the Iress Design System is, why it exists, who it serves, and how this documentation is structured.",
     "path": "foundations/overview.md"
   },
   {
     "slug": "principles",
     "type": "foundations",
+    "description": "The core design principles behind IDS — consistency, accessibility, clarity, and developer experience — and why they matter.",
     "path": "foundations/principles.md"
   },
   {
     "slug": "responsive-layout",
     "type": "foundations",
+    "description": "The Iress Design System (IDS) is built with responsive design principles in mind. This means that our components are designed to adapt to different screen sizes and orientations, ensuring a consistent user experience across devices.",
     "path": "foundations/responsive-layout.md"
   },
   {
     "slug": "user-experience",
     "type": "foundations",
+    "description": "We use heuristic guidelines to assess the usability and user-centred design quality of all Iress products.",
     "path": "foundations/user-experience.md"
   },
   {
     "slug": "using-components-consistently",
     "type": "foundations",
+    "description": "Guidelines for applying IDS components consistently across buttons, forms, navigation, data display, and overlays.",
     "path": "foundations/using-components-consistently.md"
   },
   {
     "slug": "visual-design-standards",
     "type": "foundations",
+    "description": "Typography, colour, spacing, and interactive state standards that ensure visual consistency across all Iress products.",
     "path": "foundations/visual-design-standards.md"
   },
   {
     "slug": "z-index-stacking",
     "type": "foundations",
+    "description": "The z-index determines the stacking order of elements. Elements with a higher z-index always sit in front of elements with a lower z-index. Each index has been mapped to the appropriate elevation(s).",
     "path": "foundations/z-index-stacking.md"
   },
   {
     "slug": "ai",
     "type": "get-started",
+    "description": "Use AI agent skills to accelerate development with the Iress Design System.",
     "path": "get-started/ai.md"
   },
   {
     "slug": "common-mistakes",
     "type": "get-started",
+    "description": "Patterns we see trip people up when building with IDS. Each section shows what goes wrong, why, and the fix.",
     "path": "get-started/common-mistakes.md"
   },
   {
     "slug": "content-security-policy",
     "type": "get-started",
+    "description": "IDS loads external stylesheets and fonts at runtime. If your application enforces a Content Security Policy, you need to allowlist the origins IDS loads from.",
     "path": "get-started/content-security-policy.md"
   },
   {
     "slug": "design",
     "type": "get-started",
+    "description": "Get set-up to use the latest version of the Iress Design System (IDS) in Figma.",
     "path": "get-started/design.md"
   },
   {
     "slug": "develop",
     "type": "get-started",
+    "description": "Set up your environment to use the latest version of the Iress Design System (IDS). You can use this library to build React applications that align to IDS, and ensure a consistent and modern look and feel across all Iress products.",
     "path": "get-started/develop.md"
   },
   {
     "slug": "faq",
     "type": "get-started",
+    "description": "Common questions about the Iress Design System.",
     "path": "get-started/faq.md"
   },
   {
     "slug": "versions",
     "type": "get-started",
+    "description": "Current and previous versions of the Iress Design System.",
     "path": "get-started/versions.md"
   },
   {
     "slug": "from-oui-to-v6",
     "type": "migration",
+    "description": "This guide covers migrating from the legacy OUI component library (`@iress/oui`) to the Iress Design System v6 (`@iress-oss/ids-components`). It also covers upgrading existing IDS v4 (`@iress/components-react`) components, replacing Formik with IDS v6\\",
     "path": "migration/from-oui-to-v6.md"
   },
   {
     "slug": "from-v5-to-v6",
     "type": "migration",
+    "description": "This guide covers all breaking changes, deprecations, and new features introduced in version 6 of the Iress Design System. While the list is extensive, most changes relate to look-and-feel rather than code.",
     "path": "migration/from-v5-to-v6.md"
   },
   {
     "slug": "migration-from-v4-to-v5",
     "type": "migration",
+    "description": "This is a step-by-step guide for upgrading your application from IDS v4 to v5.",
     "path": "migration/migration-from-v4-to-v5.md"
   },
   {
@@ -550,7 +568,6 @@
   {
     "slug": "overview",
     "type": "patterns",
-    "name": "IressOverview",
     "path": "patterns/overview.md"
   },
   {
@@ -579,46 +596,55 @@
   {
     "slug": "accessibility",
     "type": "styling-props",
+    "description": "These are all styling props related to screen readers and accessibility. They allow you to hide content from visual users while still providing context for screen reader users, ensuring an inclusive experience for all users.",
     "path": "styling-props/accessibility.md"
   },
   {
     "slug": "colour",
     "type": "styling-props",
+    "description": "These are all styling props related to changing the foreground and background",
     "path": "styling-props/colour.md"
   },
   {
     "slug": "layout",
     "type": "styling-props",
+    "description": "These are all styling props related to modifying layout.",
     "path": "styling-props/layout.md"
   },
   {
     "slug": "overview",
     "type": "styling-props",
+    "description": "This page lists all the custom styling properties available in our components,",
     "path": "styling-props/overview.md"
   },
   {
     "slug": "radius",
     "type": "styling-props",
+    "description": "These are all styling props related to changing the radius of a component",
     "path": "styling-props/radius.md"
   },
   {
     "slug": "sizing",
     "type": "styling-props",
+    "description": "These are all styling props related to changing the size of a component,",
     "path": "styling-props/sizing.md"
   },
   {
     "slug": "spacing",
     "type": "styling-props",
+    "description": "These are all styling props related to changing the spacing of a component.",
     "path": "styling-props/spacing.md"
   },
   {
     "slug": "typography",
     "type": "styling-props",
+    "description": "These are all styling props related to changing the typography of a component.",
     "path": "styling-props/typography.md"
   },
   {
     "slug": "colour",
     "type": "tokens",
+    "description": "All available colour tokens with hex values, CSS variables, and AA-compliant pairings.",
     "path": "tokens/colour.md"
   },
   {
@@ -629,16 +655,46 @@
   {
     "slug": "radius",
     "type": "tokens",
+    "description": "Border radius tokens for consistent rounded corners across components.",
     "path": "tokens/radius.md"
   },
   {
     "slug": "spacing",
     "type": "tokens",
+    "description": "The spacing scale based on a 4px (0.25rem) base unit, used for gaps, padding, and margins.",
     "path": "tokens/spacing.md"
   },
   {
     "slug": "typography",
     "type": "tokens",
+    "description": "Font families, sizes, weights, and line heights for headings, body text, and code.",
     "path": "tokens/typography.md"
+  },
+  {
+    "slug": "tokens-reference",
+    "type": "tokens",
+    "name": "Token Reference",
+    "description": "Complete enumeration of all IDS design tokens with values, descriptions, and accessibility pairings.",
+    "path": "tokens/tokens-reference.md"
+  },
+  {
+    "slug": "figma-to-ids",
+    "type": "skills",
+    "path": "skills/figma-to-ids.md"
+  },
+  {
+    "slug": "ui-doctor",
+    "type": "skills",
+    "path": "skills/ui-doctor.md"
+  },
+  {
+    "slug": "ui-translation",
+    "type": "skills",
+    "path": "skills/ui-translation.md"
+  },
+  {
+    "slug": "version-migration",
+    "type": "skills",
+    "path": "skills/version-migration.md"
   }
 ]

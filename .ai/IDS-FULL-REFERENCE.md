@@ -1,6 +1,6 @@
 # IDS Full Reference
 
-> Auto-generated from 101 docs. Do not edit manually.
+> Auto-generated from 99 docs. Do not edit manually.
 
 ---
 
@@ -312,7 +312,7 @@ import { IressAlert } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Alert/Alert.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 An alert displays a short, important message in a way that attracts the user's attention without interrupting the user's task.
 
@@ -715,7 +715,7 @@ import { IressAutocomplete } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Autocomplete/Autocomplete.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Autocomplete allow for users to fill in their input by providing suggestions as they type.
 
@@ -1352,7 +1352,7 @@ import { IressButtonGroup } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/ButtonGroup/ButtonGroup.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 ButtonGroup allows users to switch between two or more possible states. ButtonGroups are only used for actions that occur immediately after the user "flips the switch".
 
@@ -1662,7 +1662,7 @@ import { IressButton } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Button/Button.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 A button is a clickable item used to perform an action.
 
@@ -2185,7 +2185,7 @@ import { IressCard } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Card/Card.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 A container for grouping related content and actions with optional heading, footer, and media slots.
 
@@ -2447,7 +2447,7 @@ import { IressCheckboxGroup } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/CheckboxGroup/CheckboxGroup.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Checkbox groups allow users to make more than one choice in a set of related options.
 
@@ -2982,7 +2982,7 @@ import { IressCheckbox } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Checkbox/Checkbox.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Checkboxes are used to let a user select one or more options for a limited number of choices. Also, works as a child of IressCheckboxGroup
 
@@ -3328,7 +3328,7 @@ import { IressCol } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Col/Col.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Used in conjunction with the IressRow component to layout page content.
 
@@ -3692,7 +3692,7 @@ import { IressContainer } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Container/Container.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 IressContainer provides a means to center and horizontally pad your site's contents.
 
@@ -3828,7 +3828,7 @@ import { IressDivider } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Divider/Divider.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 A divider is a UI element that separates content in lists and layouts.
 
@@ -4042,7 +4042,7 @@ import { IressExpander } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Expander/Expander.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Expanders are commonly used to reveal more information or details about an element or content on a page.
 
@@ -4309,7 +4309,7 @@ import { IressFieldGroup } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/FieldGroup/FieldGroup.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Groups multiple related fields together using a `fieldset` and `legend` for accessibility.
 
@@ -4578,7 +4578,7 @@ import { IressField } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Field/Field.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 The field component is used to place label, hint and error information around form controls.
 
@@ -5028,7 +5028,7 @@ import { IressHide } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Hide/Hide.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 > ⚠️ **Deprecated:** `IressHide` has been deprecated. Use the `srOnly`, `hideFrom`, and `hideBelow` styling props instead. See [Styling Props — Accessibility](../styling-props/accessibility.md) for details.
 
@@ -5249,7 +5249,7 @@ import { IressIcon } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Icon/Icon.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Icons enhance experiences by visually communicating meaning, actions, status, and feedback.
 
@@ -5726,7 +5726,7 @@ import { IressImage } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Image/Image.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 IressImage renders an image that resizes based on the user's screen width. The component accepts standard image attributes like `src` and `alt`.
 
@@ -5909,7 +5909,7 @@ import { IressInline } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Inline/Inline.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 IressInline renders a set of components in a row with equal spacing around them, wrapping onto multiple lines when necessary.
 
@@ -6189,7 +6189,7 @@ import { IressInputCurrency } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/InputCurrency/InputCurrency.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 InputCurrency allows a user to input and interact with currency number. It works just like IressInput, with new props locale and currencyCode. This component meets ISO-4217 standard
 
@@ -6641,7 +6641,7 @@ import { IressInput } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Input/Input.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Inputs allow a user to input and interact with data. This component should be used as a child of the IressField component to ensure the correct placement of elements like label, error & hint text.
 
@@ -7195,7 +7195,7 @@ import { IressLabel } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Label/Label.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Use the IressLabel component when building bespoke form inputs and IressField is too restrictive.
 
@@ -7381,7 +7381,7 @@ import { IressLink } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Link/Link.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 A link is used to navigate to another page or location.
 
@@ -7573,134 +7573,6 @@ Storybook provides an interactive playground for testing different prop combinat
 
 ---
 
-<!-- components/menu-item.md -->
-
-# Menu Item
-Menu items are headings, buttons and dividers used inside an `IressMenu`
-> **Component:** `import { IressMenuItem } from '@iress-oss/ids-components'`
-> **Storybook:** [Menu Item in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu-item--docs)```tsx
-```
-
-## Quick Start
-
-```tsx
-<IressMenuItem>
-  Menu item
-</IressMenuItem>
-```
-
-## Examples
-
-### Selected
-
-The `IressMenuItem` can be set to selected using the `selected` prop.
-
-**Note:** If you are using `IressMenu` with a `role` of `listbox`, you should use the `defaultSelected` or `selected` prop on the `IressMenu` to set the selected state of its `<IressMenuItem />` children, as the `selected` prop will be ignored.
-
-```tsx
-<IressMenuItem selected />
-```
-
-[View "Selected" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu-item--selected)
-
-### Value
-
-A menu item can have a unique value set to it, used to determine its selected state in a `IressMenu` component with a `role` of `listbox`. The value is not visible to end users.
-
-```tsx
-<IressMenu role="listbox">
-<IressMenuItem />
-</IressMenu>
-```
-
-[View "Value" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu-item--value)
-
-### `canToggle`
-
-When `canToggle` is set to true, the menu item can be toggled between selected and unselected states. This only works in a `IressMenu` component with a `role` of `listbox`.
-
-```tsx
-<IressMenuItem canToggle />
-```
-
-[View "CanToggle" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu-item--can-toggle)
-
-### Prepend and append
-
-You can prepend and append content to a menu item using the `prepend` and `append` props.
-
-[View "PrependAndAppend" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu-item--prepend-and-append)
-
-### Multi-select menus
-
-Inside a `IressMenu` with a `role` of `listbox` and the `multiSelect` prop set to true, the menu item will display with a checkbox.
-
-```tsx
-<IressMenu role="listbox" multiSelect>
-<IressMenuItem />
-<IressMenuItem />
-</IressMenu>
-```
-
-[View "MultiSelect" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu-item--multi-select)
-
-### Element
-
-You can use the `element` prop to render a custom component inside the menu item. This is useful for rendering a component from a third-party library, such as `react-router-dom`.
-
-```tsx
-<RoutingLinkMenu />
-```
-
-[View "Element" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu-item--element)
-
-### Divider
-
-When `divider` is set to true, the menu item will render with a bottom border.
-
-```tsx
-<IressMenuItem divider>
-  Menu item with divider
-</IressMenuItem>
-```
-
-[View "Divider" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu-item--divider)
-
-However, it is recommended to use the `IressMenuDivider` component instead.
-
-[View "Divider" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu-divider--divider)
-
-### Heading
-
-You can use the `IressMenuHeading` to render headings within a menu. This adds styling so the appropriate padding is applied.
-
-```tsx
-<IressMenu>
-<IressMenuHeading />
-</IressMenu>
-```
-
-[View "Heading" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu-heading--heading)
-
-### Text
-
-You can use the `IressMenuText` to render other text within a menu. This adds styling so the appropriate padding is applied.
-
-```tsx
-<IressMenu>
-<IressMenuText />
-</IressMenu>
-```
-
-[View "Text" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-menu-text--text)
-
----
-
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu-item--docs)
-
-
----
-
 <!-- components/menu.md -->
 
 # Menu
@@ -7741,7 +7613,7 @@ import { IressMenu } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Menu/Menu.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 A menu can display grouped action buttons, navigation items or headings.
 
@@ -8455,7 +8327,7 @@ import { IressModal } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Modal/Modal.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Modals gather information, complete a subtask, or provide additional information without losing the context of an underlying page.
 
@@ -9383,7 +9255,7 @@ Browse the component list in the sidebar, or jump to:
 
 - [Button](../components/button.md) — the most common interactive element
 - [Form pattern](../patterns/form.md) — end-to-end form guidance
-- [Common Mistakes](../foundations/common-mistakes.md) — pitfalls to avoid
+- [Common Mistakes](../get-started/common-mistakes.md) — pitfalls to avoid
 </IressTab>
 </IressTabSet>
 
@@ -9425,7 +9297,7 @@ import { IressPanel } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Panel/Panel.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 A panel is used to group related content.
 
@@ -9527,7 +9399,7 @@ import { IressPill } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Pill/Pill.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Pills are used for status indicators and badges — primarily for status updates, notifications and counts.
 
@@ -9705,7 +9577,7 @@ import { IressPlaceholder } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Placeholder/Placeholder.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 A placeholder is a UI element that allows you to reserve space for content that has not been created yet, usually used for prototyping.
 
@@ -9826,7 +9698,7 @@ import { IressPopover } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Popover/Popover.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 A popover is a panel that is toggled on/off by an activator button or text input. The panel is positioned relative to its activator element.
 
@@ -10401,7 +10273,7 @@ import { IressProgress } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Progress/Progress.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 A progress component is used to indicate to a user the completion of a set of tasks or a process.
 
@@ -10615,7 +10487,7 @@ import { IressProvider } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Provider/Provider.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Provider is a component that sets up the Iress Design System for your application. It ensures that the design system is correctly configured and ready to use. It is required for Modal, Slideout, Toaster, and Tooltip to function correctly.
 
@@ -10763,7 +10635,7 @@ import { IressRadioGroup } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/RadioGroup/RadioGroup.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 A radio group is a group of radio buttons that allows the user to select one option from multiple options, where all options are visible.
 
@@ -11121,7 +10993,7 @@ import { IressRadio } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Radio/Radio.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 A radio is a single option presented with a radio button. It is used to select a single option from multiple options. It is typically used in an IressRadioGroup.
 
@@ -11320,7 +11192,7 @@ import { IressReadonly } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Readonly/Readonly.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Readonly displays a value that cannot be edited by the user. It renders a hidden input field to ensure the value is submitted with the form.
 
@@ -11570,7 +11442,7 @@ import { IressRow } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Row/Row.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Used in conjunction with the IressCol component to lay out page content.
 
@@ -12016,7 +11888,7 @@ import { IressSelect } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Select/Select.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Renders a dropdown select input for choosing one option from a list.
 
@@ -12902,7 +12774,7 @@ import { IressSkeleton } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Skeleton/Skeleton.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Skeletons can increase perceived performance for users. As opposed to spinners, skeletons make it feel as though things are happening immediately, then the information is incrementally displayed on the screen.
 
@@ -13308,7 +13180,7 @@ import { IressSkipLink } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/SkipLink/SkipLink.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 The skip link component allows keyboard users to quickly bypass the top-level navigation links and jump to the main content on a page.
 
@@ -13464,7 +13336,7 @@ import { IressSlideout } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Slideout/Slideout.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Slideouts are used to show additional information or to allow users to perform secondary tasks without leaving their normal workflow.
 
@@ -14382,7 +14254,7 @@ import { IressSlider } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Slider/Slider.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Sliders provide a visual indication of adjustable content, where the user can select a value from a range usually represented on a horizontal track.
 
@@ -14672,7 +14544,7 @@ import { IressSpinner } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Spinner/Spinner.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Spinners notify the user that a task is being processed. They indicate that the app is busy, and should be used when the user has to wait for more than a few seconds.
 
@@ -14848,7 +14720,7 @@ import { IressStack } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Stack/Stack.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Use IressStack to control vertical spacing between content with consistent preset values.
 
@@ -15045,7 +14917,7 @@ import { IressStyled } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Styled/Styled.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 The IressStyled component is a utility for applying design tokens to any element. It provides an unopinionated wrapper that gives you direct access to all supported styling properties without creating a dedicated component or writing custom CSS.
 
@@ -15323,7 +15195,7 @@ import { IressTabSet } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/TabSet/TabSet.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Tabs are used to display modular pieces of related data that do not need to be compared or accessed simultaneously.
 
@@ -15658,65 +15530,6 @@ const panel = screen.getByRole('tabpanel');
 
 ---
 
-<!-- components/tab.md -->
-
-# Tab
-A tab is an interactive element that controls the display of other content, usually a panel
-> **Component:** `import { IressTab } from '@iress-oss/ids-components'`
-> **Storybook:** [Tab in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab--docs)```tsx
-```
-
-## Quick Start
-
-```tsx
-<IressTab label="Tab" />
-```
-
-## Examples
-
-### Active
-
-The tab can be set to active using the `active` prop.
-
-**Note:** If you are using `IressTabSet`, you should use the `selected` prop on the `IressTabSet` to set the active state of its `<IressTab />` children, as the `active` prop will be ignored.
-
-```tsx
-<IressTab active label="Active Tab" />
-```
-
-[View "Active" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tab--active)
-
-### Value
-
-A tab can have a unique value set to it, used to determine its active state in a `IressTabSet` component. The value is not visible to end users.
-
-```tsx
-<IressTabSet>
-<IressTab label="Tab 1" value="tab-1" />
-</IressTabSet>
-```
-
-[View "Value" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tab--value)
-
-### Panel
-
-A tab can set its `children` when used inside an `IressTabSet` component, and it will render as its panel. If the tab is not used inside an `IressTabSet` component, `children` will not render.
-
-```tsx
-<IressTabSet>
-<IressTab label="Tab 1">Panel content</IressTab>
-</IressTabSet>
-```
-
-[View "Panel" example in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/story/components_components-tab--panel)
-
----
-
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tab--docs)
-
-
----
-
 <!-- components/table.md -->
 
 # Table
@@ -15757,7 +15570,7 @@ import { IressTable } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Table/Table.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Data driven component for displaying tabular data.
 
@@ -17403,7 +17216,7 @@ import { IressTagInput } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/TagInput/TagInput.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 A form control that allows users to enter and manage a collection of tags via keyboard input.
 
@@ -17548,7 +17361,7 @@ import { IressTag } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Tag/Tag.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Tags represent individual units in a group of selected items.
 
@@ -17946,7 +17759,7 @@ import { IressText } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Text/Text.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 The IressText component allows you to set typographic styles either on one element, or a block of HTML elements.
 
@@ -18773,7 +18586,7 @@ import { IressToggle } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Toggle/Toggle.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Toggles allow users to turn things on or off. When toggled, the associated change happens straight away.
 
@@ -19012,7 +18825,7 @@ import { IressTooltip } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/Tooltip/Tooltip.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 A component that shows concise, informative text about an element when focussed upon, hovered over or on a long touch.
 
@@ -19281,7 +19094,7 @@ import { IressValidationMessage } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/components/ValidationMessage/ValidationMessage.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 A validation message is used to inform the user of the status of a form input. If there are multiple messages, they can be combined using the IressValidationSummary component.
 
@@ -20071,7 +19884,7 @@ Buttons are the primary way users take action. Use mode to signal priority:
 
 Avoid `disabled` — keep buttons enabled and use validation or loading states
 instead. See [Button](../components/button.md) and
-[Common Mistakes](../foundations/common-mistakes.md#using-disabled-on-iressbutton).
+[Common Mistakes](../get-started/common-mistakes.md#using-disabled-on-iressbutton).
 
 ---
 
@@ -22492,7 +22305,7 @@ import { IressBreadcrumbs } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/patterns/Breadcrumbs/Breadcrumbs.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 Breadcrumbs are a secondary navigation aid that helps users understand their current location within the site hierarchy and provides a simple way to navigate back to higher-level pages.
 
@@ -22750,7 +22563,7 @@ import { IressContextualMenu } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/patterns/ContextualMenu/ContextualMenu.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 A compact overflow action pattern that surfaces contextual actions in a popover menu. Use this pattern for row-level or card-level secondary actions where space is constrained.
 
@@ -23120,7 +22933,7 @@ import { IressDropdownMenu } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/patterns/DropdownMenu/DropdownMenu.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 A component designed to filter a section based on a list of options and quickly navigate to relevant content.
 
@@ -23908,7 +23721,7 @@ import { IressForm } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/patterns/Form/Form.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 ### IressFormField Props
 
@@ -26964,7 +26777,7 @@ import { IressLoading } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/patterns/Loading/Loading.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 The loading pattern is used to indicate that content is being loaded or processed consistently across Iress products.
 
@@ -27716,7 +27529,7 @@ import { IressShadow } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/patterns/Shadow/Shadow.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 The shadow pattern allows you to wrap your content in the shadow DOM, allowing you to isolate your styles from the rest of the application. This is useful when you want to create a component that has its own styles, without affecting the rest of the application (such as microfrontends).
 
@@ -27834,7 +27647,7 @@ import { IressSideNav } from '@iress-oss/ids-components';
 
 📄 [Full type definition](../../dist/patterns/SideNav/SideNav.d.ts)
 
-Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../../tokens/.ai/tokens-reference.md)).
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
 
 A side navigation pattern that combines a rail (icon-only bar) with an expandable side menu panel. Provides a data-driven API where items are passed as an array, with the rail acting as the main navigation and the side menu showcasing children under each navigation group.
 

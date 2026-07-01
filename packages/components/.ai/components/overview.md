@@ -57,6 +57,6 @@ Browse the component list in the sidebar, or jump to:
 
 - [Button](../components/button.md) — the most common interactive element
 - [Form pattern](../patterns/form.md) — end-to-end form guidance
-- [Common Mistakes](../foundations/common-mistakes.md) — pitfalls to avoid
+- [Common Mistakes](../get-started/common-mistakes.md) — pitfalls to avoid
 </IressTab>
 </IressTabSet>
