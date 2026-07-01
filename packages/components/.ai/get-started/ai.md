@@ -2,6 +2,102 @@
 
 IDS provides agent skills that give AI coding assistants contextual knowledge about the design system — no runtime dependencies required.
 
+## Ask Iris
+
+🌸 **Ask Iris** is our AI assistant powered by Google Gemini, pre-loaded with
+comprehensive IDS documentation. Click the "Ask Iris" button in the site header
+to open a conversation — no setup required.
+
+Ask Iris is designed for **designers, product managers, and anyone working with
+IDS** — you don't need to be a developer to use it. Ask questions in plain
+language, upload screenshots or mockups for feedback, and get answers grounded
+in the design system. Iris can look at your designs and tell you which IDS
+components map to what you've drawn, flag inconsistencies, or suggest
+improvements.
+
+Here are some ways to get the most out of it:
+
+### Best practices
+
+Ask Iris for guidance on correct component usage, accessibility requirements,
+and design system conventions.
+
+- "What's the best way to handle form validation with IDS components?"
+- "Which component should I use for a confirmation dialog vs an alert?"
+- "How do I make a data table accessible with screen readers?"
+- "What are the spacing tokens I should use between form fields?"
+
+### Brainstorming and wireframing
+
+Describe what you're building and let Iris help you plan the component
+composition and layout before you write any code.
+
+- "I need a settings page with grouped preferences — what IDS components
+  would work well together?"
+- "Help me wireframe a dashboard layout with a sidebar nav, header, and
+  card grid"
+- "What's a good pattern for a multi-step onboarding flow using IDS?"
+- "Suggest a component structure for a file upload area with progress
+  indicators"
+
+### Visual feedback on screenshots
+
+Upload a screenshot, Figma export, or sketch and ask Iris to review it against
+IDS guidelines.
+
+- "Here's my mockup — which IDS components should the developer use to build
+  this?"
+- "Does this design follow IDS spacing and layout patterns?"
+- "I've attached a screenshot of our current UI — what's inconsistent with
+  the design system?"
+- "Can you identify the IDS tokens that match the colours in this mockup?"
+
+### Code generation and prototyping
+
+Get working IDS code snippets tailored to your use case — paste them
+straight into your project as a starting point.
+
+- "Generate a responsive form with name, email, and phone fields using IDS"
+- "Show me how to build a filterable data table with pagination"
+- "Write a navigation sidebar with nested menu items and active states"
+
+### Design token exploration
+
+Explore the token system to find the right values for spacing, colour,
+typography, and elevation.
+
+- "What colour tokens are available for status indicators?"
+- "Show me all the available border radius tokens and when to use each"
+- "Which typography tokens should I use for page headings vs card titles?"
+
+### Migration and upgrade assistance
+
+Get help moving from older versions or other component libraries to the
+latest IDS.
+
+- "How do I migrate from OUI Button to IDS Button?"
+- "What changed between IDS v5 and v6 for the Modal component?"
+- "Help me replace a custom dropdown with the IDS Select component"
+
+### Accessibility audits
+
+Describe your current implementation and ask Iris to review it for
+accessibility gaps.
+
+- "Review this form markup — am I missing any aria attributes?"
+- "What keyboard interactions should my custom tab component support?"
+- "Is my colour combination meeting WCAG AA contrast requirements?"
+
+### Pattern discovery
+
+Find established patterns for common UI problems instead of inventing
+solutions from scratch.
+
+- "What's the IDS pattern for empty states?"
+- "How should I handle loading skeletons across a page?"
+- "What's the recommended approach for responsive layouts with IDS?"
+- "Show me how other teams handle error boundaries with IDS components"
+
 ## Available Skills
 
 | Skill | Description |

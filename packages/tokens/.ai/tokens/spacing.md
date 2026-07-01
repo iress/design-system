@@ -4,6 +4,8 @@ The spacing scale based on a 4px (0.25rem) base unit, used for gaps, padding, an
 
 ## Design
 
+- [Figma design](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=6200-16)
+
 Base unit: `0.25rem` (4px). Values range from 0–8 and 10 (no 9).
 
 | Token | CSS Variable | Value | Description | Aliases |

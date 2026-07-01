@@ -43,6 +43,9 @@ export function stripMdx(source: string, keepStoryEmbeds = false): string {
         // Remove standalone JSX components (full line)
         if (/^\s*<Metadata[^/]*\/>/.test(line)) return '';
         if (/^\s*<Breakpoints\s*\/>/.test(line)) return '';
+        // Convert <FigmaLink href="url" /> to a markdown link
+        const figmaMatch = line.match(/^\s*<FigmaLink\s+href="([^"]+)"/);
+        if (figmaMatch) return `- [Figma design](${figmaMatch[1]})`;
         // Convert <IressButton href="url">text</IressButton> to [text](url)
         if (/<IressButton/.test(line)) {
           return line.replace(

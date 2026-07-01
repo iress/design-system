@@ -6,6 +6,8 @@ Font families, sizes, weights, and line heights for headings, body text, and cod
 
 Typography tokens include font family, size, weight, and line height specifications for headings, body text, and code. They are designed to create a clear typographic hierarchy and ensure consistency across products.
 
+- [Figma design](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=6200-17)
+
 ### Base
 
 | Token | CSS Variable | Value | Description |

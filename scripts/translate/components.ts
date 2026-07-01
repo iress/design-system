@@ -123,6 +123,7 @@ async function buildDoc(file: string, type: string): Promise<{ slug: string; mar
         additionalProps = meta.additionalProps ?? [];
 
         if (meta.storybook) metaLinks.push(`- [Storybook](${meta.storybook})`);
+        if (meta.figma) metaLinks.push(`- [Figma](${meta.figma})`);
         if (meta.github?.source) metaLinks.push(`- [Source](${meta.github.source})`);
         if (meta.github?.reportIssue) metaLinks.push(`- [Report issue](${meta.github.reportIssue})`);
         if (meta.github?.requestFeature) metaLinks.push(`- [Request feature](${meta.github.requestFeature})`);

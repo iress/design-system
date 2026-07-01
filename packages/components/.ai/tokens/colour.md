@@ -4,6 +4,8 @@ Colour tokens are a set of predefined colour values that can be used throughout 
 
 ## Design
 
+- [Figma design](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=6200-13)
+
 These are all the colour tokens available in the design system, grouped by their respective categories. For each token, we provide the hex value, CSS variable, and AA-compliant pairings to ensure accessibility.
 
 ### Neutral

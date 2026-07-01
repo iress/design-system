@@ -48,6 +48,8 @@ sections, and tooltips to layer detail without overwhelming the primary flow.
 Icons are a key part of the Iress Design System, providing visual cues and
 enhancing user experience.
 
+- [Figma design](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=6200-9)
+
 ## Principles
 
 1. **Clarity**: Icons should be easily recognizable and convey their intended meaning without ambiguity.
