@@ -17,6 +17,7 @@ import { IressAlert } from '@iress-oss/ids-components';
 ```
 
 - [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-alert--docs)
+- [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-31616)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Alert)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=alert&title=[Alert]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=alert,enhancement&title=[Alert]+Feature:+)
@@ -1364,6 +1365,7 @@ import { IressButton } from '@iress-oss/ids-components';
 ```
 
 - [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-button--docs)
+- [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=6201-26)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Button)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=button&title=[Button]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=button,enhancement&title=[Button]+Feature:+)
@@ -2157,6 +2159,7 @@ import { IressCheckboxGroup } from '@iress-oss/ids-components';
 ```
 
 - [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkbox-group--docs)
+- [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-28220)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/CheckboxGroup)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=checkbox-group&title=[CheckboxGroup]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=checkbox-group,enhancement&title=[CheckboxGroup]+Feature:+)
@@ -2685,6 +2688,7 @@ import { IressCheckbox } from '@iress-oss/ids-components';
 ```
 
 - [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkbox--docs)
+- [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-28220)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Checkbox)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=checkbox&title=[Checkbox]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=checkbox,enhancement&title=[Checkbox]+Feature:+)
@@ -3753,6 +3757,7 @@ import { IressExpander } from '@iress-oss/ids-components';
 ```
 
 - [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-expander--docs)
+- [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-30530)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Expander)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=expander&title=[Expander]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=expander,enhancement&title=[Expander]+Feature:+)
@@ -6341,6 +6346,7 @@ import { IressInput } from '@iress-oss/ids-components';
 ```
 
 - [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-input--docs)
+- [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=6201-23)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Input)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=input&title=[Input]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=input,enhancement&title=[Input]+Feature:+)
@@ -8087,6 +8093,7 @@ import { IressModal } from '@iress-oss/ids-components';
 ```
 
 - [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-modal--docs)
+- [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-32822)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Modal)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=modal&title=[Modal]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=modal,enhancement&title=[Modal]+Feature:+)
@@ -9230,6 +9237,7 @@ import { IressPill } from '@iress-oss/ids-components';
 ```
 
 - [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-pill--docs)
+- [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-29810)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Pill)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=pill&title=[Pill]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=pill,enhancement&title=[Pill]+Feature:+)
@@ -10460,6 +10468,7 @@ import { IressRadioGroup } from '@iress-oss/ids-components';
 ```
 
 - [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-radio-group--docs)
+- [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-28220)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/RadioGroup)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=radio-group&title=[RadioGroup]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=radio-group,enhancement&title=[RadioGroup]+Feature:+)
@@ -10817,6 +10826,7 @@ import { IressRadio } from '@iress-oss/ids-components';
 ```
 
 - [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-radio--docs)
+- [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-28220)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Radio)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=radio&title=[Radio]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=radio,enhancement&title=[Radio]+Feature:+)
@@ -11698,6 +11708,7 @@ import { IressSelect } from '@iress-oss/ids-components';
 ```
 
 - [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-select--docs)
+- [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-23433)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Select)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=select&title=[Select]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=select,enhancement&title=[Select]+Feature:+)
@@ -15020,6 +15031,7 @@ import { IressTabSet } from '@iress-oss/ids-components';
 ```
 
 - [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tab-set--docs)
+- [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-28714)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/TabSet)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=tab-set&title=[TabSet]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=tab-set,enhancement&title=[TabSet]+Feature:+)
@@ -15403,6 +15415,7 @@ import { IressTable } from '@iress-oss/ids-components';
 ```
 
 - [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-table--docs)
+- [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-33833)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Table)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=table&title=[Table]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=table,enhancement&title=[Table]+Feature:+)
@@ -17198,6 +17211,7 @@ import { IressTag } from '@iress-oss/ids-components';
 ```
 
 - [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tag--docs)
+- [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-29810)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Tag)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=tag&title=[Tag]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=tag,enhancement&title=[Tag]+Feature:+)
@@ -19257,6 +19271,8 @@ sections, and tooltips to layer detail without overwhelming the primary flow.
 Icons are a key part of the Iress Design System, providing visual cues and
 enhancing user experience.
 
+- [Figma design](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=6200-9)
+
 ## Principles
 
 1. **Clarity**: Icons should be easily recognizable and convey their intended meaning without ambiguity.
@@ -19563,6 +19579,8 @@ The Iress Design System (IDS) is built with responsive design principles in mind
 ---
 
 ## For designers
+
+- [Figma design](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=6200-11)
 
 When designing for responsive layouts, consider how your designs will adapt to different screen sizes. Use the breakpoints defined in the design system to guide your layout decisions and ensure that your designs are flexible and adaptable.
 
@@ -19929,6 +19947,102 @@ The mapping is exported as `Z_INDEX` from the `@iress-oss/ids-components` packag
 # AI
 
 IDS provides agent skills that give AI coding assistants contextual knowledge about the design system — no runtime dependencies required.
+
+## Ask Iris
+
+🌸 **Ask Iris** is our AI assistant powered by Google Gemini, pre-loaded with
+comprehensive IDS documentation. Click the "Ask Iris" button in the site header
+to open a conversation — no setup required.
+
+Ask Iris is designed for **designers, product managers, and anyone working with
+IDS** — you don't need to be a developer to use it. Ask questions in plain
+language, upload screenshots or mockups for feedback, and get answers grounded
+in the design system. Iris can look at your designs and tell you which IDS
+components map to what you've drawn, flag inconsistencies, or suggest
+improvements.
+
+Here are some ways to get the most out of it:
+
+### Best practices
+
+Ask Iris for guidance on correct component usage, accessibility requirements,
+and design system conventions.
+
+- "What's the best way to handle form validation with IDS components?"
+- "Which component should I use for a confirmation dialog vs an alert?"
+- "How do I make a data table accessible with screen readers?"
+- "What are the spacing tokens I should use between form fields?"
+
+### Brainstorming and wireframing
+
+Describe what you're building and let Iris help you plan the component
+composition and layout before you write any code.
+
+- "I need a settings page with grouped preferences — what IDS components
+  would work well together?"
+- "Help me wireframe a dashboard layout with a sidebar nav, header, and
+  card grid"
+- "What's a good pattern for a multi-step onboarding flow using IDS?"
+- "Suggest a component structure for a file upload area with progress
+  indicators"
+
+### Visual feedback on screenshots
+
+Upload a screenshot, Figma export, or sketch and ask Iris to review it against
+IDS guidelines.
+
+- "Here's my mockup — which IDS components should the developer use to build
+  this?"
+- "Does this design follow IDS spacing and layout patterns?"
+- "I've attached a screenshot of our current UI — what's inconsistent with
+  the design system?"
+- "Can you identify the IDS tokens that match the colours in this mockup?"
+
+### Code generation and prototyping
+
+Get working IDS code snippets tailored to your use case — paste them
+straight into your project as a starting point.
+
+- "Generate a responsive form with name, email, and phone fields using IDS"
+- "Show me how to build a filterable data table with pagination"
+- "Write a navigation sidebar with nested menu items and active states"
+
+### Design token exploration
+
+Explore the token system to find the right values for spacing, colour,
+typography, and elevation.
+
+- "What colour tokens are available for status indicators?"
+- "Show me all the available border radius tokens and when to use each"
+- "Which typography tokens should I use for page headings vs card titles?"
+
+### Migration and upgrade assistance
+
+Get help moving from older versions or other component libraries to the
+latest IDS.
+
+- "How do I migrate from OUI Button to IDS Button?"
+- "What changed between IDS v5 and v6 for the Modal component?"
+- "Help me replace a custom dropdown with the IDS Select component"
+
+### Accessibility audits
+
+Describe your current implementation and ask Iris to review it for
+accessibility gaps.
+
+- "Review this form markup — am I missing any aria attributes?"
+- "What keyboard interactions should my custom tab component support?"
+- "Is my colour combination meeting WCAG AA contrast requirements?"
+
+### Pattern discovery
+
+Find established patterns for common UI problems instead of inventing
+solutions from scratch.
+
+- "What's the IDS pattern for empty states?"
+- "How should I handle loading skeletons across a page?"
+- "What's the recommended approach for responsive layouts with IDS?"
+- "Show me how other teams handle error boundaries with IDS components"
 
 ## Available Skills
 
@@ -22149,6 +22263,7 @@ import { IressBreadcrumbs } from '@iress-oss/ids-components';
 ```
 
 - [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-breadcrumbs--docs)
+- [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-29259)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/patterns/Breadcrumbs)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=breadcrumbs&title=[Breadcrumbs]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=breadcrumbs,enhancement&title=[Breadcrumbs]+Feature:+)
@@ -22386,6 +22501,7 @@ import { IressContextualMenu } from '@iress-oss/ids-components';
 ```
 
 - [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-contextual-menu--docs)
+- [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-26780)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/patterns/ContextualMenu)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=contextual-menu&title=[Contextual Menu]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=contextual-menu,enhancement&title=[Contextual Menu]+Feature:+)
@@ -27477,6 +27593,7 @@ import { IressSideNav } from '@iress-oss/ids-components';
 ```
 
 - [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-side-nav--docs)
+- [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=6201-24)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/patterns/SideNav)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=side-nav&title=[Side Nav]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=side-nav,enhancement&title=[Side Nav]+Feature:+)
@@ -35681,6 +35798,8 @@ Colour tokens are a set of predefined colour values that can be used throughout 
 
 ## Design
 
+- [Figma design](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=6200-13)
+
 These are all the colour tokens available in the design system, grouped by their respective categories. For each token, we provide the hex value, CSS variable, and AA-compliant pairings to ensure accessibility.
 
 ### Neutral
@@ -35927,6 +36046,8 @@ import { IressStack } from '@iress-oss/ids-components';
 The spacing scale based on a 4px (0.25rem) base unit, used for gaps, padding, and margins.
 
 ## Design
+
+- [Figma design](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=6200-16)
 
 Base unit: `0.25rem` (4px). Values range from 0–8 and 10 (no 9).
 
@@ -36260,6 +36381,8 @@ Font families, sizes, weights, and line heights for headings, body text, and cod
 ## Design
 
 Typography tokens include font family, size, weight, and line height specifications for headings, body text, and code. They are designed to create a clear typographic hierarchy and ensure consistency across products.
+
+- [Figma design](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=6200-17)
 
 ### Base
 

@@ -1123,20 +1123,25 @@ Verify the published package structure makes type lookup easy:
 | 3 | createMeta factory (standardise story meta) | ✅ Done | — |
 | 4 | Pipeline consolidation (scripts/translate.ts) | ✅ Done | — |
 | — | Phase 1–11 (site, MDX, search, AI panel, deploy, stories, dogfood, tokens, autodocs, embeds, JSDoc) | ✅ Done | — |
-| 5 | Phase 12 remaining | ❌ | — |
-|   | — Bundle size / code splitting (Task 12.2) | ⏭️ Skipped (internal site, not worth the complexity) | — |
+| 5 | Phase 12 | ✅ Done | — |
+|   | — Bundle size / code splitting (Task 12.2) | ⏭️ Skipped (internal site) | — |
 |   | — Remove `withCustomSource` export + test (Task 12.4 Steps 9-10) | ✅ Done | — |
 |   | — Re-upload IDS-FULL-REFERENCE to Gemini Gem (Task 12.4) | ❌ manual | — |
 |   | — Architecture diagrams (Task 12.5) | ✅ Done | — |
 |   | — Documentation: CONTRIBUTING.md, README updates (Tasks 12.6, 12.8) | ✅ Done | — |
-|   | — Sub-navigation and anchor link search (Task 12.7) | ⏭️ Moved to Phase 13 | — |
-|   | — createMeta factory migration to all 54 files (Task 12.10 Steps 1-5) | ⏭️ Skipped | — |
-|   | — ESLint rules: story meta, arg spreads, Iress prefix (Task 12.10 Steps 6-8) | ✅ Done | — |
-|   | — Remove migration stories from Storybook (Task 12.10 Step 9) | ✅ Done | — |
+|   | — Sub-navigation / TOC (Task 12.7) | ✅ Done (IressMenu + IressHide, xl+ only, Design/Develop tabs) | — |
+|   | — createMeta factory migration (Task 12.10 Steps 1-5) | ⏭️ Skipped | — |
+|   | — ESLint rules (Task 12.10 Steps 6-8) | ✅ Done | — |
+|   | — Remove migration stories (Task 12.10 Step 9) | ✅ Done | — |
 |   | — CI prop table validation (Task 12.10 Step 10) | ✅ Done (pre-push hook) | — |
 |   | — Verify CI builds pass (Task 12.4 Step 7) | ❌ | — |
-|   | — Fix tokens REVIEW issues (template syntax, duplicates, missing body.md) | ✅ Done | — |
-| 6 | Phase 13: Tabbed content + TypeDoc + ComponentMeta extensions (25 items) | ❌ | #5 |
-| 7 | Phase 14 remaining: CLI helper, skill updates (7 items) | ❌ | #5 |
-| 8 | Private guidelines site | ❌ | #6 |
+|   | — Fix tokens REVIEW issues | ✅ Done | — |
+|   | — Figma links in translate pipeline | ✅ Done (meta + FigmaLink MDX component) | — |
+| 6 | Phase 13: Tabbed content + TypeDoc | ⏭️ Descoped | — |
+|   | — Tabbed file split (Task 13.1-13.2) | ⏭️ Skipped (broke Pagefind, over-engineering) | — |
+|   | — TypeDoc API reference (Task 13.3) | ⏭️ Skipped (covered by .ai/ + JSDoc + IDE) | — |
+|   | — ComponentMeta extensions (Task 13.5) | ✅ Done (figma field exists + populated) | — |
+|   | — Sub-navigation (from Task 12.7) | ✅ Done (moved here, implemented) | — |
+| 7 | Phase 14 remaining: CLI helper, skill updates (7 items) | ❌ | — |
+| 8 | Private guidelines site | ❌ | — |
 | 9 | Phase 11.5.3 Step 2: Lint rule to verify JSDoc matches meta (optional) | ❌ | — |
