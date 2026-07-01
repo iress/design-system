@@ -256,6 +256,15 @@ export const getMainConfig = ({
     });
   }
 
+  // Listen for UPDATE_HASH from child iframes (cross-origin composition)
+  window.addEventListener('message', function(event) {
+    if (!event.data || event.data.type !== 'UPDATE_HASH') return;
+    var hash = event.data.hash;
+    if (hash != null && window.location.hash !== '#' + hash) {
+      window.location.hash = hash;
+    }
+  });
+
   window.addEventListener('hashchange', broadcastHash);
   window.addEventListener('load', broadcastHash);
 </script>`,

@@ -20,7 +20,15 @@ export interface StoryItem {
 }
 
 export const setParentHash = (hash: string) => {
-  window.parent.location.hash = hash;
+  try {
+    window.parent.location.hash = hash;
+  } catch {
+    // Cross-origin: use postMessage to communicate hash changes to the parent
+    window.parent.postMessage(
+      { type: 'UPDATE_HASH', hash } satisfies BroadcastHashEvent,
+      '*',
+    );
+  }
 };
 
 export const scrollToStory = (storyId: string) => {
@@ -43,7 +51,12 @@ export function useHashNavigation(onNavigate?: (hash: string) => void) {
       scrollToStory(storyId);
     };
 
-    const initialHash = window.parent.location.hash.substring(1);
+    let initialHash = '';
+    try {
+      initialHash = window.parent.location.hash.substring(1);
+    } catch {
+      // Cross-origin: cannot read parent hash directly, rely on postMessage
+    }
     if (initialHash) {
       if (onNavigate) onNavigate(initialHash);
       const storyId = initialHash.includes('_')
