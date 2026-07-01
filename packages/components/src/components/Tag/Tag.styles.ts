@@ -7,10 +7,10 @@ export const tag = sva({
       // Performance: CSS containment limits style recalculation scope
       contain: 'layout style',
       alignItems: 'center',
-      bg: '[var(--tag-bg, {colors.colour.neutral.20})]',
+      bg: '[var(--tag-bg, {colors.colour.neutral.30})]',
       borderRadius: 'radius.system.tag',
       border: 'divider',
-      borderColor: '[var(--tag-border, transparent)]',
+      borderColor: '[var(--tag-bg, {colors.colour.neutral.30})]',
       color: '[var(--tag-color, {colors.colour.neutral.80})]',
       display: 'inline-flex',
       gap: 'spacing.1',
@@ -88,91 +88,91 @@ export const tag = sva({
       '10': {
         root: {
           '--tag-bg': '{colors.colour.data.subtle.10}',
-          '--tag-border': '{colors.colour.data.subtle.10}',
+          '--tag-border': '{colors.colour.data.bold.10}',
           '--tag-color': '{colors.colour.data.bold.10}',
         },
       },
       '20': {
         root: {
           '--tag-bg': '{colors.colour.data.subtle.20}',
-          '--tag-border': '{colors.colour.data.subtle.20}',
+          '--tag-border': '{colors.colour.data.bold.20}',
           '--tag-color': '{colors.colour.data.bold.20}',
         },
       },
       '30': {
         root: {
           '--tag-bg': '{colors.colour.data.subtle.30}',
-          '--tag-border': '{colors.colour.data.subtle.30}',
+          '--tag-border': '{colors.colour.data.bold.30}',
           '--tag-color': '{colors.colour.data.bold.30}',
         },
       },
       '40': {
         root: {
           '--tag-bg': '{colors.colour.data.subtle.40}',
-          '--tag-border': '{colors.colour.data.subtle.40}',
+          '--tag-border': '{colors.colour.data.bold.40}',
           '--tag-color': '{colors.colour.data.bold.40}',
         },
       },
       '50': {
         root: {
           '--tag-bg': '{colors.colour.data.subtle.50}',
-          '--tag-border': '{colors.colour.data.subtle.50}',
+          '--tag-border': '{colors.colour.data.bold.50}',
           '--tag-color': '{colors.colour.data.bold.50}',
         },
       },
       '60': {
         root: {
           '--tag-bg': '{colors.colour.data.subtle.60}',
-          '--tag-border': '{colors.colour.data.subtle.60}',
+          '--tag-border': '{colors.colour.data.bold.60}',
           '--tag-color': '{colors.colour.data.bold.60}',
         },
       },
       '70': {
         root: {
           '--tag-bg': '{colors.colour.data.subtle.70}',
-          '--tag-border': '{colors.colour.data.subtle.70}',
+          '--tag-border': '{colors.colour.data.bold.70}',
           '--tag-color': '{colors.colour.data.bold.70}',
         },
       },
       '80': {
         root: {
           '--tag-bg': '{colors.colour.data.subtle.80}',
-          '--tag-border': '{colors.colour.data.subtle.80}',
+          '--tag-border': '{colors.colour.data.bold.80}',
           '--tag-color': '{colors.colour.data.bold.80}',
         },
       },
       '90': {
         root: {
           '--tag-bg': '{colors.colour.data.subtle.90}',
-          '--tag-border': '{colors.colour.data.subtle.90}',
+          '--tag-border': '{colors.colour.data.bold.90}',
           '--tag-color': '{colors.colour.data.bold.90}',
         },
       },
       danger: {
         root: {
           '--tag-bg': '{colors.colour.system.danger.surface}',
-          '--tag-border': '{colors.colour.system.danger.surface}',
+          '--tag-border': '{colors.colour.system.danger.text}',
           '--tag-color': '{colors.colour.system.danger.text}',
         },
       },
       info: {
         root: {
           '--tag-bg': '{colors.colour.system.info.surface}',
-          '--tag-border': '{colors.colour.system.info.surface}',
+          '--tag-border': '{colors.colour.system.info.text}',
           '--tag-color': '{colors.colour.system.info.text}',
         },
       },
       success: {
         root: {
           '--tag-bg': '{colors.colour.system.success.surface}',
-          '--tag-border': '{colors.colour.system.success.surface}',
+          '--tag-border': '{colors.colour.system.success.text}',
           '--tag-color': '{colors.colour.system.success.text}',
         },
       },
       warning: {
         root: {
           '--tag-bg': '{colors.colour.system.warning.surface}',
-          '--tag-border': '{colors.colour.system.warning.surface}',
+          '--tag-border': '{colors.colour.system.warning.text}',
           '--tag-color': '{colors.colour.system.warning.text}',
         },
       },
@@ -180,7 +180,7 @@ export const tag = sva({
     bordered: {
       true: {
         root: {
-          borderColor: '[currentColor]',
+          borderColor: '[var(--tag-border, {colors.colour.neutral.70})]',
         },
       },
     },

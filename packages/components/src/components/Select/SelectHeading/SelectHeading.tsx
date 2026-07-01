@@ -50,7 +50,7 @@ const ClearButton = forwardRef(
         {...popoverItemProps}
         className={cx(classes.dropdownClear, GlobalCSSClass.SelectClearButton)}
         active={isActiveInPopover}
-        mode="tertiary"
+        mode="quaternary"
         ref={(element) => {
           elementRef.current = element;
           popoverItemProps?.ref?.(elementRef.current);
@@ -65,7 +65,7 @@ export const IressSelectHeading = ({
   className,
   clearAll,
   onClearAll,
-  textStyle = 'typography.heading.4',
+  textStyle = 'typography.body.md.medium',
   ...restProps
 }: IressSelectHeadingProps) => (
   <IressMenuHeading

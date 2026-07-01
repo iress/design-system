@@ -28,6 +28,9 @@ import { IressSelectHeading } from '../SelectHeading/SelectHeading';
 import { IressMenuDivider } from '@/components/Menu';
 import { type IressButtonProps } from '@/components/Button';
 import { type ControlledValue } from '@/hooks';
+import { IressSpinner } from '@/components/Spinner';
+import { IressInline } from '@/components/Inline';
+import { IressText } from '@/components/Text';
 
 interface SelectOptionsProps<TMultiple extends boolean = false>
   extends
@@ -51,6 +54,7 @@ interface SelectOptionsProps<TMultiple extends boolean = false>
 }
 
 const SelectAsyncResults = <TMultiple extends boolean = false>({
+  debouncedQuery,
   minSearchLength,
   multiSelect,
   onChange,
@@ -61,6 +65,7 @@ const SelectAsyncResults = <TMultiple extends boolean = false>({
   value,
 }: Pick<
   SelectOptionsProps<TMultiple>,
+  | 'debouncedQuery'
   | 'minSearchLength'
   | 'multiSelect'
   | 'query'
@@ -87,9 +92,14 @@ const SelectAsyncResults = <TMultiple extends boolean = false>({
     return undefined;
   };
 
+  const heading =
+    multiSelect && results.length && debouncedQuery
+      ? `Search results (${results.length})`
+      : undefined;
+
   return (
     <IressSelectMenu
-      heading={multiSelect ? 'Search results' : undefined}
+      heading={heading}
       items={results}
       multiSelect={multiSelect}
       noResults={getNoResultsMessage()}
@@ -123,6 +133,7 @@ SelectAsyncError.displayName = 'SelectAsyncError';
 
 const SelectAsyncOptions = <TMultiple extends boolean = false>({
   autoHighlight,
+  debouncedQuery,
   error,
   loading,
   minSearchLength,
@@ -139,6 +150,7 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
 }: Pick<
   SelectOptionsProps<TMultiple>,
   | 'autoHighlight'
+  | 'debouncedQuery'
   | 'error'
   | 'loading'
   | 'minSearchLength'
@@ -183,7 +195,6 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
       activator={
         <IressSelectSearchInput
           aria-label="Search"
-          loading={loading}
           onChange={(e) => setQuery?.(e.target.value)}
           ref={inputRef}
           placeholder="Search and select"
@@ -204,7 +215,7 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
                 inputRef.current?.focus();
               }}
             >
-              <h2 id={headingId}>Selected ({selectedArray.length})</h2>
+              <span id={headingId}>Selected ({selectedArray.length})</span>
             </IressSelectHeading>
           }
           items={selectedArray}
@@ -214,8 +225,15 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
         />
       )}
       {hasResultsAndSelected && <IressMenuDivider />}
+      {loading && !results.length && (
+        <IressInline gap="sm" verticalAlign="middle" p="spacing.3">
+          <IressSpinner color="colour.neutral.70" />
+          <IressText color="colour.neutral.70">Loading results...</IressText>
+        </IressInline>
+      )}
       {hasResults && (
         <SelectAsyncResults
+          debouncedQuery={debouncedQuery}
           minSearchLength={minSearchLength}
           multiSelect={multiSelect}
           onChange={onChange}
@@ -317,6 +335,7 @@ export const SelectOptions = <TMultiple extends boolean = false>({
     return (
       <SelectAsyncOptions
         autoHighlight={autoHighlight}
+        debouncedQuery={debouncedQuery}
         error={error}
         loading={loading}
         minSearchLength={minSearchLength}

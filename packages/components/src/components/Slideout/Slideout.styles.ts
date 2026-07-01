@@ -35,6 +35,7 @@ export const slideout = sva({
     },
     closeButton: {
       position: 'absolute',
+      zIndex: '[1]',
       insetInlineEnd: 'spacing.1',
       insetBlockStart: 'spacing.1',
     },

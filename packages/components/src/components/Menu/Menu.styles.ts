@@ -92,6 +92,16 @@ export const menu = sva({
         },
       },
     },
+    {
+      layout: 'stack',
+      variant: ['rail', 'side'],
+      css: {
+        root: {
+          flexWrap: 'nowrap',
+          scrollable: 'y',
+        },
+      },
+    },
   ],
   defaultVariants: {
     layout: 'stack',

@@ -51,6 +51,7 @@ export const link = sva({
       true: {
         content: {
           _groupHover: {
+            cursor: 'not-allowed',
             textDecoration: 'underline',
           },
         },

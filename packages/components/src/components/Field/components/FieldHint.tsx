@@ -5,6 +5,7 @@ import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { css } from '@/styled-system/css';
 import { styled } from '@/styled-system/jsx';
 import { field } from '../Field.styles';
+import { IressButton } from '@/components/Button';
 
 export interface FieldHintProps {
   /**
@@ -48,7 +49,12 @@ export const FieldHint = ({
   });
 
   if (horizontal) {
-    return <>{children}</>;
+    return (
+      <styled.div className={css(styles.horizontalLabelWithHint)}>
+        {children}
+        <FieldHintIcon hint={hint} />
+      </styled.div>
+    );
   }
 
   return (
@@ -70,11 +76,9 @@ export const FieldHintIcon = ({ hint }: { hint: ReactNode }) => (
     tooltipText={typeof hint === 'string' ? hint : 'Additional information'}
     align="top"
   >
-    <IressIcon
-      name="info-circle"
-      screenreaderText="More information"
-      ml="spacing.1"
-    />
+    <IressButton mode="muted" p="none" mb="-spacing.1">
+      <IressIcon name="info-circle" screenreaderText="More information" />
+    </IressButton>
   </IressTooltip>
 );
 

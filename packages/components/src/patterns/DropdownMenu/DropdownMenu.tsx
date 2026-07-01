@@ -38,6 +38,9 @@ import {
 import { IressIcon } from '@/components/Icon';
 import { IressDivider } from '@/components/Divider';
 import { IressStyled } from '@/components/Styled';
+import { IressSpinner } from '@/components/Spinner';
+import { IressInline } from '@/components/Inline';
+import { IressText } from '@/components/Text';
 import { toArray } from '@/helpers/formatting/toArray';
 import { IressButton, type IressButtonProps } from '@/components/Button';
 import { useDropdownMenuFlags } from './hooks/useDropdownMenuFlags';
@@ -267,6 +270,7 @@ const DropdownMenu = <TMultiple extends boolean = false>(
   };
 
   const handleResetFilter = () => {
+    setValue(undefined);
     onReset?.();
     if (!multiSelect) {
       setShow(false);
@@ -378,7 +382,6 @@ const DropdownMenu = <TMultiple extends boolean = false>(
                   role="searchbox"
                   className={classes.searchInput}
                   data-testid={propagateTestid(dataTestId, 'input')}
-                  loading={loading}
                   onChange={handleQueryChange}
                   onClear={handleQueryClear}
                 />
@@ -408,6 +411,12 @@ const DropdownMenu = <TMultiple extends boolean = false>(
             onChange={handleMenuChange}
             selected={selected}
           />
+        )}
+        {flags.showLoading && (
+          <IressInline gap="sm" verticalAlign="middle" p="spacing.3">
+            <IressSpinner color="colour.neutral.70" />
+            <IressText color="colour.neutral.70">Loading results...</IressText>
+          </IressInline>
         )}
         {flags.showNoResults && (
           <div className={classes.noResults}>{searchNoResultsText}</div>

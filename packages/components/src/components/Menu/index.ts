@@ -8,3 +8,4 @@ export * from './MenuDivider/MenuDivider';
 export * from './MenuGroup/MenuGroup';
 export * from './MenuItem/MenuItem';
 export * from './MenuText/MenuText';
+export * from './MenuHeading/MenuHeading';

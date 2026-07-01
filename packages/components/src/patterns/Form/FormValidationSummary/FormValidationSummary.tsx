@@ -120,6 +120,7 @@ export const IressFormValidationSummary = ({
         role="none"
         status="danger"
         variant={variant}
+        multiLine
       >
         <IressValidationSummary
           {...restProps}

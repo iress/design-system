@@ -298,6 +298,20 @@ export const menuItem = sva({
         },
       },
     },
+    {
+      variant: 'side',
+      selected: true,
+      css: {
+        root: {
+          bg: 'colour.neutral.20',
+          color: 'colour.primary.text',
+
+          _after: {
+            width: 'menu.indicator',
+          },
+        },
+      },
+    },
   ],
   defaultVariants: {
     layout: 'stack',

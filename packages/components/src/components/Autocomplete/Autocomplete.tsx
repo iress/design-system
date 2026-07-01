@@ -28,6 +28,9 @@ import { AutocompleteInstructions } from './components/AutocompleteInstructions'
 import { IressSelectMenu, type IressSelectMenuProps } from '../Select';
 import { IressReadonly } from '../Readonly';
 import { IressAlert } from '../Alert';
+import { IressSpinner } from '../Spinner';
+import { IressInline } from '../Inline';
+import { IressText } from '../Text';
 import { type LabelValueMeta } from '@/interfaces';
 import { GlobalCSSClass } from '@/enums';
 import { type FormControlValue } from '@/types';
@@ -174,6 +177,12 @@ export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
     }, [results.length, show, valueChanged, value]);
 
     useEffect(() => {
+      if (loading && valueChanged) {
+        setShow(true);
+      }
+    }, [loading, valueChanged]);
+
+    useEffect(() => {
       if (error) {
         setShow(true);
       }
@@ -249,6 +258,7 @@ export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
     const classes = autoCompleteStyles({
       isEmpty:
         results.length === 0 &&
+        !loading &&
         !error &&
         !shouldShowInstructions &&
         !shouldShowNoResults,
@@ -264,7 +274,6 @@ export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
             autoComplete={autoComplete}
             clearable={clearable}
             data-testid={propagateTestid(dataTestId, 'input')}
-            loading={loading}
             onChange={handleInputChange}
             onClear={handleInputClear}
             onFocus={handleInputFocus}
@@ -293,6 +302,12 @@ export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
         type="listbox"
         focusStartIndex={0}
       >
+        {loading && !results.length && (
+          <IressInline gap="sm" verticalAlign="middle" p="spacing.3">
+            <IressSpinner color="colour.neutral.70" />
+            <IressText color="colour.neutral.70">Loading results...</IressText>
+          </IressInline>
+        )}
         {results.length > 0 && (
           <>
             {popoverPrepend}

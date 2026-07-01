@@ -6,6 +6,7 @@ import {
   useCallback,
   useEffect,
   useMemo,
+  useRef,
 } from 'react';
 import {
   type ControlledValue,
@@ -20,6 +21,7 @@ import { menu } from './Menu.styles';
 import { cx } from '@/styled-system/css';
 import { GlobalCSSClass } from '@/enums';
 import { usePopover } from '../Popover';
+import { IressTooltipProvider } from '../Tooltip';
 
 /**
  * Menu component that provides context for its child menu items, headings, dividers, and text.
@@ -228,6 +230,7 @@ export const IressMenu = <
 }: IressMenuProps<T, TMultiple, TVariant>) => {
   const id = useIdIfNeeded({ id: idProp });
   const popover = usePopover();
+  const railTooltipContainerRef = useRef<HTMLDivElement>(null);
 
   const role = useMemo(() => {
     if (popover?.type === 'listbox' || popover?.type === 'menu') {
@@ -356,7 +359,7 @@ export const IressMenu = <
 
   const { Provider } = getMenuContext<T, TMultiple, TVariant>();
 
-  return (
+  const menuComponent = (
     <Provider value={context}>
       {isComposite ? (
         <Composite
@@ -368,6 +371,19 @@ export const IressMenu = <
       )}
     </Provider>
   );
+
+  if (variant == 'rail') {
+    return (
+      <>
+        <IressTooltipProvider container={railTooltipContainerRef}>
+          {menuComponent}
+        </IressTooltipProvider>
+        <div ref={railTooltipContainerRef} />
+      </>
+    );
+  }
+
+  return menuComponent;
 };
 
 IressMenu.displayName = 'IressMenu';
