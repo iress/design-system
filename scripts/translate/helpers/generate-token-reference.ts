@@ -64,7 +64,8 @@ function tokenPathToCssVar(tokenPath: string): string {
  */
 function resolveDisplayValue(value: unknown): string {
   if (typeof value === 'string') {
-    return value;
+    // Resolve template references like {spacing.100 || .25rem} to the fallback value
+    return value.replace(/\{[^|]+\|\|\s*([^}]+)\}/g, '$1').trim();
   }
   if (typeof value === 'number') {
     return String(value);
@@ -72,14 +73,16 @@ function resolveDisplayValue(value: unknown): string {
   if (typeof value === 'object' && value !== null) {
     // Composite typography
     const v = value as Record<string, unknown>;
+    const resolveRef = (s: unknown) =>
+      String(s ?? '').replace(/\{[^|]+\|\|\s*([^}]+)\}/g, '$1').trim();
     if ('fontFamily' in v && 'fontSize' in v) {
       const parts: string[] = [];
-      if (v.fontWeight) parts.push(String(v.fontWeight));
+      if (v.fontWeight) parts.push(resolveRef(v.fontWeight));
       if (v.fontStyle && v.fontStyle !== 'normal')
-        parts.push(String(v.fontStyle));
-      if (v.fontSize) parts.push(String(v.fontSize));
-      if (v.lineHeight) parts[parts.length - 1] += `/${v.lineHeight}`;
-      if (v.fontFamily) parts.push(String(v.fontFamily));
+        parts.push(resolveRef(v.fontStyle));
+      if (v.fontSize) parts.push(resolveRef(v.fontSize));
+      if (v.lineHeight) parts[parts.length - 1] += `/${resolveRef(v.lineHeight)}`;
+      if (v.fontFamily) parts.push(resolveRef(v.fontFamily));
       return parts.join(' ');
     }
     // Composite radius (per-corner)
@@ -89,8 +92,10 @@ function resolveDisplayValue(value: unknown): string {
       'bottomLeft' in v ||
       'bottomRight' in v
     ) {
+      const resolveRef = (s: unknown) =>
+        String(s ?? '0').replace(/\{[^|]+\|\|\s*([^}]+)\}/g, '$1').trim();
       const corners = [v.topLeft, v.topRight, v.bottomRight, v.bottomLeft]
-        .map((c) => String(c ?? '0'))
+        .map(resolveRef)
         .join(' ');
       return corners;
     }

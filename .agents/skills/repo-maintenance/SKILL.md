@@ -142,9 +142,9 @@ yarn build                                          # rebuild downstream (theme-
 ```
 
 Checklist:
-- New token category? Add entry to `packages/tokens/.ai/index.json` with `name`, `description`, `schemaSource`, `cssVariablePrefix`
+- New token category? Add the schema to `packages/tokens/src/schema/` and create a corresponding MDX at `apps/guidelines/content/tokens/<category>.mdx`. Run `yarn translate` — the index.json and references are auto-generated.
 - CSS variables follow `--iress-{category}-{name}` naming
-- Update `.agents/skills/token-usage/references/token-reference.md` if token values change
+- Run `yarn translate` to regenerate token reference and all derived docs
 - Run `yarn test:coverage` in tokens package to verify transforms
 
 ### 3. Running Validation
@@ -325,7 +325,7 @@ When code changes, these docs must stay in sync. Flag missing updates as require
 
 | What changed | Update these |
 |---|---|
-| Token schema (`packages/tokens/src/schema/`) | `packages/tokens/.ai/index.json`, `.agents/skills/token-usage/` |
+| Token schema (`packages/tokens/src/schema/`) | `packages/tokens/.ai/` (auto-generated via `yarn translate`), `.agents/skills/token-usage/` |
 | Component API (new/renamed/removed props) | `.ai/components/<name>.md`, relevant agent skills |
 | New component | `main.ts` export, `.ai/components/`, skills (`ui-translation`, `figma-to-ids`, `ui-doctor`) |
 | Package scripts or setup steps | Root `AGENTS.md`, package-level `AGENTS.md` |

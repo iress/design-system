@@ -1554,16 +1554,14 @@ import { IressButton } from '@iress/components-react';
 // ❌ Old (OUI)
 import { Button, Input } from '@iress/oui';
 
-// ✅ IDS v6 (install with @beta tag: npm install @iress-oss/ids-components@beta)
+// ✅ IDS v6
 import { IressButton, IressInput } from '@iress-oss/ids-components';
 ```
 
-> **Important:** IDS v6 is currently in beta. Install with the `@beta` tag:
->
-> ```bash
-> npm install @iress-oss/ids-components@beta
-> npm install @iress-oss/ids-tokens@beta  # if using tokens directly
-> ```
+```bash
+npm install @iress-oss/ids-components
+npm install @iress-oss/ids-tokens  # if using tokens directly
+```
 
 ### CSS entry point
 

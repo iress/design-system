@@ -1,8 +1,3 @@
-export const meta = {
-  title: 'Tokens Overview',
-  description: 'What design tokens are, how they work, and how to use them in IDS applications.',
-};
-
 # Tokens
 
 Design tokens are an integral part of the design system. They help us create consistency across components by sharing common design decisions and simplify our theming ecosystem.
@@ -11,4 +6,4 @@ Design tokens are an integral part of the design system. They help us create con
 
 Tokens are a set of variables that define the design properties of a component. They are used to define the visual properties of a component, such as colours, typography, spacing, and more.
 
-<StoryEmbed id="introduction--reference" type="tokens" controls={false} />
+See [tokens-reference.md](./tokens-reference.md) for the complete token reference.

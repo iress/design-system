@@ -348,6 +348,57 @@ export async function translateComponents() {
     });
   }
 
+  // Copy translated token content to packages/tokens/.ai/tokens/ (mirrors components/.ai/tokens/)
+  // Exclude tokens-reference.md since it already lives at packages/tokens/.ai/tokens-reference.md
+  const tokensPackageAiDir = join(ROOT, 'packages/tokens/.ai/tokens');
+  mkdirSync(tokensPackageAiDir, { recursive: true });
+  for (const file of readdirSync(tokensOutDir).filter((f) => f.endsWith('.md') && f !== 'tokens-reference.md')) {
+    writeFileSync(join(tokensPackageAiDir, file), readFileSync(join(tokensOutDir, file), 'utf-8'));
+  }
+
+  // Generate packages/tokens/.ai/index.json
+  const tokensAiRoot = join(ROOT, 'packages/tokens/.ai');
+  const tokensDocs: { slug: string; name: string; description: string; path: string }[] = [
+    {
+      slug: 'tokens-reference',
+      name: 'Token Reference',
+      description: 'Complete enumeration of all design tokens with values, descriptions, and accessibility pairings.',
+      path: 'tokens-reference.md',
+    },
+  ];
+  for (const file of readdirSync(tokensPackageAiDir).filter((f) => f.endsWith('.md'))) {
+    const slug = file.replace('.md', '');
+    if (slug === 'tokens-reference') continue; // already added above
+    // Get description from MDX meta
+    const mdxPath = join(ROOT, `apps/guidelines/content/tokens/${slug}.mdx`);
+    let desc = '';
+    if (existsSync(mdxPath)) {
+      const mdxContent = readFileSync(mdxPath, 'utf-8');
+      const descMatch = mdxContent.match(/description:\s*['"]([^'"]+)['"]/);
+      if (descMatch) desc = descMatch[1];
+    }
+    tokensDocs.push({ slug, name: slug.charAt(0).toUpperCase() + slug.slice(1), description: desc, path: `tokens/${file}` });
+  }
+  const tokensSkills: { name: string; path: string }[] = [];
+  const tokensSkillsDir = join(tokensAiRoot, 'skills');
+  if (existsSync(tokensSkillsDir)) {
+    for (const file of readdirSync(tokensSkillsDir).filter((f) => f.endsWith('.md'))) {
+      tokensSkills.push({ name: file.replace('.md', ''), path: `skills/${file}` });
+    }
+  }
+  const tokensIndex = {
+    package: '@iress-oss/ids-tokens',
+    description: 'Design tokens for the Iress Design System — colours, spacing, radius, and typography as CSS custom properties and typed JavaScript objects.',
+    docs: tokensDocs,
+    skills: tokensSkills,
+    sources: {
+      css: { importPath: '@iress-oss/ids-tokens/build/css-vars.css' },
+      cssVars: { importPath: '@iress-oss/ids-tokens', exportName: 'cssVars' },
+      designTokens: { importPath: '@iress-oss/ids-tokens', exportName: 'designTokens' },
+    },
+  };
+  writeFileSync(join(tokensAiRoot, 'index.json'), JSON.stringify(tokensIndex, null, 2) + '\n');
+
   // Add skills to index
   const skillsDir = join(OUTPUT_DIR, 'skills');
   if (existsSync(skillsDir)) {

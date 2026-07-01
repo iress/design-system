@@ -53,12 +53,10 @@ AI agents need a Figma MCP server to read Figma files directly. Without one, you
 4. **Generate code** — Produce clean, minimal React/TypeScript with proper IDS imports. Use the fewest components possible — check whether parent components already handle layout before adding `IressInline`/`IressStack` wrappers. Never wrap a single child in a layout component.
 5. **Verify output** — Check that all imports resolve, no raw HTML is used where IDS components exist, grid layouts use responsive `span` values, and no common anti-patterns are present (disabled buttons, slot attributes, redundant textStyle)
 
-> **Important:** IDS v6 is currently in beta. Install with the `@beta` tag:
->
-> ```bash
-> npm install @iress-oss/ids-components@beta
-> npm install @iress-oss/ids-tokens@beta  # if using tokens directly (e.g. cssVars or CSS vars import)
-> ```
+```bash
+npm install @iress-oss/ids-components
+npm install @iress-oss/ids-tokens  # if using tokens directly (e.g. cssVars or CSS vars import)
+```
 
 ## Figma → IDS Mapping
 

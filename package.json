@@ -68,7 +68,7 @@
     "check-coverage": "tsx ./scripts/check-coverage.ts",
     "size": "size-limit",
     "size:check": "size-limit --json",
-    "dev": "concurrently \"wait-on tcp:6006 && wait-on tcp:6007 && yarn storybook\" \"yarn packages/components dev:no-open\" \"yarn packages/tokens dev:no-open\" \"yarn packages/guidelines dev:no-open\" \"yarn dev:ai\"",
+    "dev": "concurrently \"wait-on tcp:6006 && wait-on tcp:6007 && yarn storybook\" \"yarn packages/components dev:no-open\" \"yarn packages/tokens dev:no-open\" \"yarn apps/guidelines dev:no-open\" \"yarn dev:ai\"",
     "dev:ai": "tsx ./scripts/dev-watcher.ts",
     "dev:kill": "kill $(lsof -ti tcp:6005) || true; kill $(lsof -ti tcp:6006) || true; kill $(lsof -ti tcp:6007) || true; kill $(lsof -ti tcp:5555) || true",
     "prepublish": "tsx ./scripts/storybook-addon-prepublish.ts",

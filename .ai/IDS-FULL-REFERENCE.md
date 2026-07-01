@@ -8991,15 +8991,71 @@ Storybook provides an interactive playground for testing different prop combinat
 
 # Overview
 
-<IressTabSet panelStyle={{ pt: 'spacing.4' }}>
+### Explore
 
-<IressTab label="Explore">
+| Component | Description |
+|-----------|-------------|
+| [IressAlert](alert.md) | The root element of the alert |
+| [IressAutocomplete](autocomplete.md) | The root wrapper element (no semantic role) |
+| [IressBreadcrumbs](../patterns/breadcrumbs.md) | Shows the current location within a navigational hierarchy. |
+| [IressButton](button.md) | The root element of the button |
+| [IressButtonGroup](button-group.md) | The root element of the button group |
+| [IressCard](card.md) | The root element of the card |
+| [IressCheckbox](checkbox.md) | The root wrapper element |
+| [IressCheckboxGroup](checkbox-group.md) | The root element of the checkbox group |
+| [IressCol](col.md) | The root element of the col |
+| [IressContainer](container.md) | The root element of the container |
+| [IressContextual Menu](../patterns/contextual-menu.md) | Displays a context-sensitive menu of actions triggered by user interaction. |
+| [IressDivider](divider.md) | The root element of the divider |
+| [IressExpander](expander.md) | The root element of the expander |
+| [IressFeedback](../patterns/feedback.md) | Displays transient feedback messages to communicate the result of an action. |
+| [IressField](field.md) | The root wrapper element (a div with no role) |
+| [IressField Group](field-group.md) | Groups related form fields together with a shared legend, description, and validation message. |
+| [IressFilter](../patterns/dropdown-menu.md) | Presents a list of actions or options revealed by a trigger button. |
+| [IressForm](../patterns/form.md) | Manages form state, validation, and submission for a group of input fields. |
+| [IressHide](hide.md) | The root element of the hide |
+| [IressIcon](icon.md) | The root element of the icon |
+| [IressImage](image.md) | The root element of the image |
+| [IressInline](inline.md) | The root element of the inline |
+| [IressInput](input.md) | The root element of the input |
+| [IressInputCurrency](input-currency.md) | The root element of the input currency |
+| [IressLabel](label.md) | The root element of the label |
+| [IressLink](link.md) | The root element of the link |
+| [IressLoading](../patterns/loading.md) | Displays a loading state to indicate content is being fetched or processed. |
+| [IressMenu](menu.md) | The root element of the menu |
+| [IressModal](modal.md) | The overlay backdrop (outermost element) |
+| [IressPanel](panel.md) | The root element of the panel |
+| [IressPill](pill.md) | The root element of the pill |
+| [IressPlaceholder](placeholder.md) | The root element of the placeholder |
+| [IressPopover](popover.md) | The root element of the popover |
+| [IressProgress](progress.md) | The root element of the progress |
+| [IressProvider](provider.md) | Application-level wrapper that provides shared context for Modal, Slideout, Toaster, Tooltip, and Popover components. |
+| [IressRadio](radio.md) | The root element of the radio |
+| [IressRadioGroup](radio-group.md) | The root element of the radio group |
+| [IressReadonly](readonly.md) | The root element of the readonly |
+| [IressRow](row.md) | The root element of the row |
+| [IressSearch & Selection](../patterns/search-selection.md) | Decision guide for choosing between Autocomplete, Select, DropdownMenu, InputPopover, and Popover. |
+| [IressSelect](select.md) | The root element of the select |
+| [IressShadow](../patterns/shadow.md) | Applies an elevated shadow effect to visually separate content layers. |
+| [IressSide Nav](../patterns/side-nav.md) | Provides a vertical navigation menu typically used in application sidebars. |
+| [IressSkeleton](skeleton.md) | The root element of the skeleton |
+| [IressSkipLink](skip-link.md) | The root element of the skip link |
+| [IressSlideout](slideout.md) | The root element of the slideout |
+| [IressSlider](slider.md) | The root element of the slider |
+| [IressSpinner](spinner.md) | The root element of the spinner. Default variant is decorative (aria-hidden); chatty variant has role= |
+| [IressStack](stack.md) | The root element of the stack |
+| [IressStyled](styled.md) | A polymorphic utility component that applies design tokens and styling props to any HTML element or custom component. |
+| [IressTable](table.md) | The root element of the table |
+| [IressTabSet](tab-set.md) | The root wrapper element (tablist is a nested child) |
+| [IressTag](tag.md) | The root element of the tag |
+| [IressTag Input](tag-input.md) | A form control that allows users to enter and manage a collection of tags via keyboard input. |
+| [IressText](text.md) | The root element of the text |
+| [IressToaster](toaster.md) | The visible toast list container (rendered inside the aria-live region) |
+| [IressToggle](toggle.md) | The root element of the toggle |
+| [IressTooltip](tooltip.md) | The root wrapper element (contains activator and tooltip) |
+| [IressValidation Message](validation-message.md) | The root element of the validation message |
 
-<StoryEmbed id="components-introduction--docs" controls={false} />
-
-</IressTab>
-
-<IressTab label="What are components?">
+### What are components?
 
 IDS components are pre-built React elements that implement the Iress Design
 System. Each component encodes accessibility, theming, and consistent behaviour
@@ -9049,8 +9105,6 @@ Browse the component list in the sidebar, or jump to:
 - [Button](../components/button.md) — the most common interactive element
 - [Form pattern](../patterns/form.md) — end-to-end form guidance
 - [Common Mistakes](../get-started/common-mistakes.md) — pitfalls to avoid
-</IressTab>
-</IressTabSet>
 
 ---
 
@@ -27038,15 +27092,17 @@ const message = screen.getByText('Loading...');
 
 # Overview
 
-<IressTabSet panelStyle={{ pt: 'spacing.4' }}>
+### Explore
 
-<IressTab label="Explore">
+| Pattern | Description |
+|---------|-------------|
+| [Form](../patterns/form.md) | End-to-end form building with validation, layout, and accessibility |
+| [Loading](../patterns/loading.md) | Skeleton screens, spinners, and suspense boundaries |
+| [Feedback](../patterns/feedback.md) | Choosing between Alert, Toaster, and Modal for user feedback |
+| [Search & Selection](../patterns/search-selection.md) | Autocomplete, Select, and TagInput for search and multi-select |
+| [Dropdown Menu](../patterns/dropdown-menu.md) | Context menus, action menus, and navigation menus |
 
-<StoryEmbed id="patterns-introduction--docs" controls={false} />
-
-</IressTab>
-
-<IressTab label="What are patterns?">
+### What are patterns?
 
 Patterns are multi-component recipes that solve recurring UI problems. While
 components are individual building blocks, patterns show how to assemble them
@@ -27098,9 +27154,6 @@ orchestration is custom, not the building blocks.
   Toast vs Modal
 - [Form](../patterns/form.md) — end-to-end form validation and layout
 - [Loading](../patterns/loading.md) — timing, behaviour, and pattern selection
-
-</IressTab>
-</IressTabSet>
 
 ---
 
@@ -28174,12 +28227,10 @@ AI agents need a Figma MCP server to read Figma files directly. Without one, you
 4. **Generate code** — Produce clean, minimal React/TypeScript with proper IDS imports. Use the fewest components possible — check whether parent components already handle layout before adding `IressInline`/`IressStack` wrappers. Never wrap a single child in a layout component.
 5. **Verify output** — Check that all imports resolve, no raw HTML is used where IDS components exist, grid layouts use responsive `span` values, and no common anti-patterns are present (disabled buttons, slot attributes, redundant textStyle)
 
-> **Important:** IDS v6 is currently in beta. Install with the `@beta` tag:
->
-> ```bash
-> npm install @iress-oss/ids-components@beta
-> npm install @iress-oss/ids-tokens@beta  # if using tokens directly (e.g. cssVars or CSS vars import)
-> ```
+```bash
+npm install @iress-oss/ids-components
+npm install @iress-oss/ids-tokens  # if using tokens directly (e.g. cssVars or CSS vars import)
+```
 
 ## Figma → IDS Mapping
 
@@ -30456,9 +30507,9 @@ Not every raw HTML element is a violation. The following are **acceptable except
 
 - **IressProvider must wrap the application root** — Required for fonts, CSS variables, and theming. `IressProvider` already includes `IressModalProvider`, `IressSlideoutProvider`, `IressToasterProvider`, `IressPopoverProvider`, and `IressIconProvider` — these should not be added separately. Similarly, `IressShadow` includes `IressProvider` internally, so no additional providers are needed when using `IressShadow`.
 - **The IDS component CSS must be imported** — `@iress-oss/ids-components/dist/style.css` contains all component styles
-- Users only need to install `@iress-oss/ids-components@beta` — the tokens are bundled within the component library and do not need to be installed separately. **IDS v6 is currently in beta**, so the `@beta` tag is required (e.g. `npm install @iress-oss/ids-components@beta`)
+- Users only need to install `@iress-oss/ids-components` — the tokens are bundled within the component library and do not need to be installed separately.
 - **CSP must allowlist IDS external origins** — If the app enforces a Content Security Policy, `fonts.googleapis.com` and `fonts.gstatic.com` must be in `style-src`/`font-src`. Add `cdn.iress.com` if using legacy Font Awesome icons or `IressTheme`. If using `IressShadow` and inline styles are blocked, add `<meta name="csp-nonce" content="...">` in `<head>`. See the CSP Guide at `node_modules/@iress-oss/ids-components/.ai/guides/get-started-content-security-policy.md` for details (requires `@iress-oss/ids-components` to be installed).
-- If using design tokens directly in application code (for custom styling), users should additionally install `@iress-oss/ids-tokens@beta` and import `@iress-oss/ids-tokens/build/css-vars.css`
+- If using design tokens directly in application code (for custom styling), users should additionally install `@iress-oss/ids-tokens` and import `@iress-oss/ids-tokens/build/css-vars.css`
 
 ```typescript
 // ✅ Minimum required setup (option A — standard)
@@ -30504,10 +30555,7 @@ import { IressProvider } from '@iress-oss/ids-components';
 // Components will render without styles!
 
 // ❌ Incorrect — installing tokens separately just for provider setup
-yarn add @iress-oss/ids-tokens@beta  // Not needed unless using tokens directly
-
-// ❌ Incorrect — installing without @beta tag (will not resolve to v6)
-yarn add @iress-oss/ids-components  // Must use @beta tag
+yarn add @iress-oss/ids-tokens  // Not needed unless using tokens directly
 ```
 
 #### b. Design Token Usage
@@ -30914,13 +30962,11 @@ Most IDS components accept styling props for layout adjustments:
 
 ## Setup
 
-> **Important:** IDS v6 is currently in beta. Install with the `@beta` tag:
->
-> ```bash
-> npm install @iress-oss/ids-components@beta
-> # If using tokens directly:
-> npm install @iress-oss/ids-tokens@beta
-> ```
+```bash
+npm install @iress-oss/ids-components
+# If using tokens directly:
+npm install @iress-oss/ids-tokens
+```
 
 ```tsx
 import '@iress-oss/ids-components/dist/style.css'; // Required — component styles
@@ -32891,16 +32937,14 @@ import { IressButton } from '@iress/components-react';
 // ❌ Old (OUI)
 import { Button, Input } from '@iress/oui';
 
-// ✅ IDS v6 (install with @beta tag: npm install @iress-oss/ids-components@beta)
+// ✅ IDS v6
 import { IressButton, IressInput } from '@iress-oss/ids-components';
 ```
 
-> **Important:** IDS v6 is currently in beta. Install with the `@beta` tag:
->
-> ```bash
-> npm install @iress-oss/ids-components@beta
-> npm install @iress-oss/ids-tokens@beta  # if using tokens directly
-> ```
+```bash
+npm install @iress-oss/ids-components
+npm install @iress-oss/ids-tokens  # if using tokens directly
+```
 
 ### CSS entry point
 
@@ -35774,27 +35818,6 @@ These tokens govern the interface's behavior during user engagement, ensuring cl
 | `colour.globalInteractions.backdrop` | `--iress-colour-global-interactions-backdrop` | `#61656bcc` | By dimming the underlying interface, the Backdrop reduces cognitive load and establishes a clear depth of field, signalling that the user's attention is required exclusively on the foreground element. | neutral.10 |
 | `colour.globalInteractions.focusRing` | `--iress-colour-global-interactions-focus-ring` | `#005BFF` | A high-contrast "halo" used to identify the currently active element during keyboard navigation. Applied with a 2px width and 2px offset to ensure the indicator remains distinct from the component border, satisfying WCAG 2.4.7 for visibility. | neutral.10 |
 
-## Spacing Tokens
-
-Base unit: `0.25rem` (4px). Values range from 0–8 and 10 (no 9).
-
-| Token | CSS Variable | Value | Description | Aliases |
-| --- | --- | --- | --- | --- |
-| `spacing.0` | `--iress-spacing-0` | `0rem` | No spacing | `none` |
-| `spacing.1` | `--iress-spacing-1` | `.25rem` | The base unit for spacing | `xs` |
-| `spacing.2` | `--iress-spacing-2` | `calc(2 * {spacing.100 || .25rem})` | 2x spacing | `sm` |
-| `spacing.3` | `--iress-spacing-3` | `calc(3 * {spacing.100 || .25rem})` | 3x spacing | — |
-| `spacing.4` | `--iress-spacing-4` | `calc(4 * {spacing.100 || .25rem})` | 4x spacing | `md` |
-| `spacing.5` | `--iress-spacing-5` | `calc(5 * {spacing.100 || .25rem})` | 5x spacing | — |
-| `spacing.6` | `--iress-spacing-6` | `calc(6 * {spacing.100 || .25rem})` | 6x spacing | `lg` |
-| `spacing.7` | `--iress-spacing-7` | `calc(7 * {spacing.100 || .25rem})` | 7x spacing | — |
-| `spacing.8` | `--iress-spacing-8` | `calc(8 * {spacing.100 || .25rem})` | 8x spacing | — |
-| `spacing.10` | `--iress-spacing-10` | `calc(10 * {spacing.100 || .25rem})` | 10x spacing | `xl` |
-
-## Radius Tokens
-
-Border radius scale based on `0.25rem` (4px) base unit.
-
 ## Develop
 
 You can use these tokens in your applications in three ways: via component props, CSS variables, or CSS-in-JS using the `cssVars` export from the `@iress-oss/ids-tokens` package.
@@ -35858,9 +35881,9 @@ Border radius scale based on `0.25rem` (4px) base unit.
 | --- | --- | --- | --- |
 | `radius.0` | `--iress-radius-0` | `0px` | No radius |
 | `radius.1` | `--iress-radius-1` | `0.25rem` | The base unit for radius |
-| `radius.2` | `--iress-radius-2` | `calc(2 * {radius.1 || 0.25rem})` | 2x radius |
-| `radius.3` | `--iress-radius-3` | `calc(3 * {radius.1 || 0.25rem})` | 3x radius |
-| `radius.4` | `--iress-radius-4` | `calc(4 * {radius.1 || 0.25rem})` | 4x radius |
+| `radius.2` | `--iress-radius-2` | `calc(2 * 0.25rem)` | 2x radius |
+| `radius.3` | `--iress-radius-3` | `calc(3 * 0.25rem)` | 3x radius |
+| `radius.4` | `--iress-radius-4` | `calc(4 * 0.25rem)` | 4x radius |
 
 ### System Tokens
 
@@ -35870,13 +35893,11 @@ Component-specific radius tokens that can be overridden for branding.
 
 | Token | CSS Variable | Value | Description |
 | --- | --- | --- | --- |
-| `radius.system.button` | `--iress-radius-system-button` | `{radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem}` | Applies to buttons and other interactive elements such as the hover state of links. |
-| `radius.system.form` | `--iress-radius-system-form` | `{radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem}` | Applies to form inputs and alerts. |
-| `radius.system.layout` | `--iress-radius-system-layout` | `{radius.3 || calc(3 * 0.25rem)} {radius.3 || calc(3 * 0.25rem)} {radius.3 || calc(3 * 0.25rem)} {radius.3 || calc(3 * 0.25rem)}` | Applies to panels, modals and slideouts. |
-| `radius.system.pill` | `--iress-radius-system-pill` | `{radius.4 || calc(4 * 0.25rem)} {radius.4 || calc(4 * 0.25rem)} {radius.4 || calc(4 * 0.25rem)} {radius.4 || calc(4 * 0.25rem)}` | Applies to pills. |
-| `radius.system.tag` | `--iress-radius-system-tag` | `{radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem}` | Applies to tags. |
-
-## Typography Tokens
+| `radius.system.button` | `--iress-radius-system-button` | `0.25rem 0.25rem 0.25rem 0.25rem` | Applies to buttons and other interactive elements such as the hover state of links. |
+| `radius.system.form` | `--iress-radius-system-form` | `0.25rem 0.25rem 0.25rem 0.25rem` | Applies to form inputs and alerts. |
+| `radius.system.layout` | `--iress-radius-system-layout` | `calc(3 * 0.25rem) calc(3 * 0.25rem) calc(3 * 0.25rem) calc(3 * 0.25rem)` | Applies to panels, modals and slideouts. |
+| `radius.system.pill` | `--iress-radius-system-pill` | `calc(4 * 0.25rem) calc(4 * 0.25rem) calc(4 * 0.25rem) calc(4 * 0.25rem)` | Applies to pills. |
+| `radius.system.tag` | `--iress-radius-system-tag` | `0.25rem 0.25rem 0.25rem 0.25rem` | Applies to tags. |
 
 ## Develop
 
@@ -35917,14 +35938,14 @@ Base unit: `0.25rem` (4px). Values range from 0–8 and 10 (no 9).
 | --- | --- | --- | --- | --- |
 | `spacing.0` | `--iress-spacing-0` | `0rem` | No spacing | `none` |
 | `spacing.1` | `--iress-spacing-1` | `.25rem` | The base unit for spacing | `xs` |
-| `spacing.2` | `--iress-spacing-2` | `calc(2 * {spacing.100 || .25rem})` | 2x spacing | `sm` |
-| `spacing.3` | `--iress-spacing-3` | `calc(3 * {spacing.100 || .25rem})` | 3x spacing | — |
-| `spacing.4` | `--iress-spacing-4` | `calc(4 * {spacing.100 || .25rem})` | 4x spacing | `md` |
-| `spacing.5` | `--iress-spacing-5` | `calc(5 * {spacing.100 || .25rem})` | 5x spacing | — |
-| `spacing.6` | `--iress-spacing-6` | `calc(6 * {spacing.100 || .25rem})` | 6x spacing | `lg` |
-| `spacing.7` | `--iress-spacing-7` | `calc(7 * {spacing.100 || .25rem})` | 7x spacing | — |
-| `spacing.8` | `--iress-spacing-8` | `calc(8 * {spacing.100 || .25rem})` | 8x spacing | — |
-| `spacing.10` | `--iress-spacing-10` | `calc(10 * {spacing.100 || .25rem})` | 10x spacing | `xl` |
+| `spacing.2` | `--iress-spacing-2` | `calc(2 * .25rem)` | 2x spacing | `sm` |
+| `spacing.3` | `--iress-spacing-3` | `calc(3 * .25rem)` | 3x spacing | — |
+| `spacing.4` | `--iress-spacing-4` | `calc(4 * .25rem)` | 4x spacing | `md` |
+| `spacing.5` | `--iress-spacing-5` | `calc(5 * .25rem)` | 5x spacing | — |
+| `spacing.6` | `--iress-spacing-6` | `calc(6 * .25rem)` | 6x spacing | `lg` |
+| `spacing.7` | `--iress-spacing-7` | `calc(7 * .25rem)` | 7x spacing | — |
+| `spacing.8` | `--iress-spacing-8` | `calc(8 * .25rem)` | 8x spacing | — |
+| `spacing.10` | `--iress-spacing-10` | `calc(10 * .25rem)` | 10x spacing | `xl` |
 
 ## Develop
 
@@ -36124,14 +36145,14 @@ Base unit: `0.25rem` (4px). Values range from 0–8 and 10 (no 9).
 | --- | --- | --- | --- | --- |
 | `spacing.0` | `--iress-spacing-0` | `0rem` | No spacing | `none` |
 | `spacing.1` | `--iress-spacing-1` | `.25rem` | The base unit for spacing | `xs` |
-| `spacing.2` | `--iress-spacing-2` | `calc(2 * {spacing.100 || .25rem})` | 2x spacing | `sm` |
-| `spacing.3` | `--iress-spacing-3` | `calc(3 * {spacing.100 || .25rem})` | 3x spacing | — |
-| `spacing.4` | `--iress-spacing-4` | `calc(4 * {spacing.100 || .25rem})` | 4x spacing | `md` |
-| `spacing.5` | `--iress-spacing-5` | `calc(5 * {spacing.100 || .25rem})` | 5x spacing | — |
-| `spacing.6` | `--iress-spacing-6` | `calc(6 * {spacing.100 || .25rem})` | 6x spacing | `lg` |
-| `spacing.7` | `--iress-spacing-7` | `calc(7 * {spacing.100 || .25rem})` | 7x spacing | — |
-| `spacing.8` | `--iress-spacing-8` | `calc(8 * {spacing.100 || .25rem})` | 8x spacing | — |
-| `spacing.10` | `--iress-spacing-10` | `calc(10 * {spacing.100 || .25rem})` | 10x spacing | `xl` |
+| `spacing.2` | `--iress-spacing-2` | `calc(2 * .25rem)` | 2x spacing | `sm` |
+| `spacing.3` | `--iress-spacing-3` | `calc(3 * .25rem)` | 3x spacing | — |
+| `spacing.4` | `--iress-spacing-4` | `calc(4 * .25rem)` | 4x spacing | `md` |
+| `spacing.5` | `--iress-spacing-5` | `calc(5 * .25rem)` | 5x spacing | — |
+| `spacing.6` | `--iress-spacing-6` | `calc(6 * .25rem)` | 6x spacing | `lg` |
+| `spacing.7` | `--iress-spacing-7` | `calc(7 * .25rem)` | 7x spacing | — |
+| `spacing.8` | `--iress-spacing-8` | `calc(8 * .25rem)` | 8x spacing | — |
+| `spacing.10` | `--iress-spacing-10` | `calc(10 * .25rem)` | 10x spacing | `xl` |
 
 ## Radius Tokens
 
@@ -36143,9 +36164,9 @@ Border radius scale based on `0.25rem` (4px) base unit.
 | --- | --- | --- | --- |
 | `radius.0` | `--iress-radius-0` | `0px` | No radius |
 | `radius.1` | `--iress-radius-1` | `0.25rem` | The base unit for radius |
-| `radius.2` | `--iress-radius-2` | `calc(2 * {radius.1 || 0.25rem})` | 2x radius |
-| `radius.3` | `--iress-radius-3` | `calc(3 * {radius.1 || 0.25rem})` | 3x radius |
-| `radius.4` | `--iress-radius-4` | `calc(4 * {radius.1 || 0.25rem})` | 4x radius |
+| `radius.2` | `--iress-radius-2` | `calc(2 * 0.25rem)` | 2x radius |
+| `radius.3` | `--iress-radius-3` | `calc(3 * 0.25rem)` | 3x radius |
+| `radius.4` | `--iress-radius-4` | `calc(4 * 0.25rem)` | 4x radius |
 
 ### System Tokens
 
@@ -36153,11 +36174,11 @@ Component-specific radius tokens that can be overridden for branding.
 
 | Token | CSS Variable | Value | Description |
 | --- | --- | --- | --- |
-| `radius.system.button` | `--iress-radius-system-button` | `{radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem}` | Applies to buttons and other interactive elements such as the hover state of links. |
-| `radius.system.form` | `--iress-radius-system-form` | `{radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem}` | Applies to form inputs and alerts. |
-| `radius.system.layout` | `--iress-radius-system-layout` | `{radius.3 || calc(3 * 0.25rem)} {radius.3 || calc(3 * 0.25rem)} {radius.3 || calc(3 * 0.25rem)} {radius.3 || calc(3 * 0.25rem)}` | Applies to panels, modals and slideouts. |
-| `radius.system.pill` | `--iress-radius-system-pill` | `{radius.4 || calc(4 * 0.25rem)} {radius.4 || calc(4 * 0.25rem)} {radius.4 || calc(4 * 0.25rem)} {radius.4 || calc(4 * 0.25rem)}` | Applies to pills. |
-| `radius.system.tag` | `--iress-radius-system-tag` | `{radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem}` | Applies to tags. |
+| `radius.system.button` | `--iress-radius-system-button` | `0.25rem 0.25rem 0.25rem 0.25rem` | Applies to buttons and other interactive elements such as the hover state of links. |
+| `radius.system.form` | `--iress-radius-system-form` | `0.25rem 0.25rem 0.25rem 0.25rem` | Applies to form inputs and alerts. |
+| `radius.system.layout` | `--iress-radius-system-layout` | `calc(3 * 0.25rem) calc(3 * 0.25rem) calc(3 * 0.25rem) calc(3 * 0.25rem)` | Applies to panels, modals and slideouts. |
+| `radius.system.pill` | `--iress-radius-system-pill` | `calc(4 * 0.25rem) calc(4 * 0.25rem) calc(4 * 0.25rem) calc(4 * 0.25rem)` | Applies to pills. |
+| `radius.system.tag` | `--iress-radius-system-tag` | `0.25rem 0.25rem 0.25rem 0.25rem` | Applies to tags. |
 
 ## Typography Tokens
 
@@ -36280,32 +36301,6 @@ Typography tokens include font family, size, weight, and line height specificati
 | `typography.code` | `--iress-typography-code` | `400 calc({typography.base.size || .875rem} * (16 / 14))/1.6 Space, monospace` | Used to display code snippets in the product, such as in the API documentation. |
 
 ---
-
-## Quick Reference: Token Path → CSS Variable
-
-```
-token.path.name → --iress-token-path-name
-```
-
-Examples:
-- `colour.primary.fill` → `--iress-colour-primary-fill`
-- `spacing.4` → `--iress-spacing-4`
-- `radius.system.button` → `--iress-radius-system-button`
-- `typography.heading.1` → `--iress-typography-heading-1`
-- `typography.body.md.regular` → `--iress-typography-body-md-regular`
-
-## Quick Reference: `cssVars` Usage
-
-```tsx
-import { cssVars } from '@iress-oss/ids-tokens';
-
-cssVars.colour.primary.fill; // 'var(--iress-colour-primary-fill, ...)'
-cssVars.colour.neutral[80]; // 'var(--iress-colour-neutral-80, ...)'
-cssVars.spacing[4]; // 'var(--iress-spacing-4, ...)'
-cssVars.radius[2]; // 'var(--iress-radius-2, ...)'
-cssVars.typography.heading[1]; // 'var(--iress-typography-heading-1, ...)'
-cssVars.typography.body.md.regular; // 'var(--iress-typography-body-md-regular, ...)'
-```
 
 ## Develop
 

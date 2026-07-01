@@ -87,6 +87,19 @@ export async function generateLlmsTxt() {
       '',
     ];
 
+    // Token content docs
+    const tokensContentDir = join(TOKENS_AI, 'tokens');
+    if (existsSync(tokensContentDir)) {
+      lines.push('## Token Guides');
+      lines.push('');
+      for (const file of readdirSync(tokensContentDir).filter((f) => f.endsWith('.md') && f !== 'tokens-reference.md')) {
+        const name = file.replace('.md', '');
+        const label = name.charAt(0).toUpperCase() + name.slice(1);
+        lines.push(`- [${label}](.ai/tokens/${file})`);
+      }
+      lines.push('');
+    }
+
     const skillsDir = join(TOKENS_AI, 'skills');
     if (existsSync(skillsDir)) {
       lines.push('## Skills');

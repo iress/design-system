@@ -382,7 +382,7 @@ const TOKEN_STORY_SECTIONS: Record<string, string> = {
   'spacing--spacing': '## Spacing Tokens',
   'typography--base': '### Base',
   'typography--headings': '### Headings',
-  'typography--body': '### Body',
+  'typography--body': '### Body — Small',
   'typography--code': '### Code',
   'introduction--reference': '## Colour Tokens',
 };
@@ -397,13 +397,17 @@ const tokenStoriesPlugin: StoryOverridePlugin = {
     if (!existsSync(refPath)) return '';
 
     const source = readFileSync(refPath, 'utf-8');
-    const headingLevel = sectionHeading.startsWith('## ') ? '## ' : '### ';
-    const nextHeadingRegex = new RegExp(`\n${headingLevel.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\S`);
+    // Determine heading level (## = 2, ### = 3)
+    const level = sectionHeading.startsWith('### ') ? 3 : 2;
+    // Stop at any heading at the same level or higher (fewer #'s)
+    const nextHeadingRegex = level === 3
+      ? /\n#{2,3} \S/  // Stop at ## or ###
+      : /\n## \S/;      // Stop at ##
 
     const startIdx = source.indexOf(sectionHeading);
     if (startIdx === -1) return '';
 
-    // Find the end: next heading at same level or end of file
+    // Find the end: next heading at same or higher level, or end of file
     const afterHeading = source.slice(startIdx + sectionHeading.length);
     const endMatch = afterHeading.search(nextHeadingRegex);
     const section = endMatch === -1
@@ -413,6 +417,15 @@ const tokenStoriesPlugin: StoryOverridePlugin = {
     // For the introduction--reference, just return the first section
     if (storyId === 'introduction--reference') {
       return 'See [tokens-reference.md](./tokens-reference.md) for the complete token reference.';
+    }
+
+    // For typography--body, capture from "Body — Small" to "Code" (both sm and md)
+    if (storyId === 'typography--body') {
+      const bodyStart = source.indexOf('### Body — Small');
+      const codeStart = source.indexOf('### Code');
+      if (bodyStart !== -1 && codeStart !== -1) {
+        return source.slice(bodyStart + '### Body — Small'.length, codeStart).trim();
+      }
     }
 
     return section;

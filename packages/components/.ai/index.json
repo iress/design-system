@@ -650,6 +650,7 @@
   {
     "slug": "overview",
     "type": "tokens",
+    "description": "What design tokens are, how they work, and how to use them in IDS applications.",
     "path": "tokens/overview.md"
   },
   {

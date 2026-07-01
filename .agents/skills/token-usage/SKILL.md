@@ -8,7 +8,7 @@ description: >
   theme tokens, token values, or mentions @iress-oss/ids-tokens in an IDS
   application.
 license: Apache-2.0
-compatibility: React 18+, TypeScript, @iress-oss/ids-tokens@beta
+compatibility: React 18+, TypeScript, @iress-oss/ids-tokens
 metadata:
   author: iress
   version: "1.0"
@@ -39,13 +39,11 @@ Guide AI agents on correctly using IDS design tokens in React components and CSS
 
 ### Installation
 
-> **Important:** IDS v6 is currently in beta. Install with the `@beta` tag:
->
-> ```bash
-> npm install @iress-oss/ids-tokens@beta
-> # If also using IDS React components:
-> npm install @iress-oss/ids-components@beta
-> ```
+```bash
+npm install @iress-oss/ids-tokens
+# If also using IDS React components:
+npm install @iress-oss/ids-components
+```
 
 ### Prerequisites (React only)
 

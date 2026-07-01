@@ -176,14 +176,14 @@ Base unit: `0.25rem` (4px). Values range from 0–8 and 10 (no 9).
 | --- | --- | --- | --- | --- |
 | `spacing.0` | `--iress-spacing-0` | `0rem` | No spacing | `none` |
 | `spacing.1` | `--iress-spacing-1` | `.25rem` | The base unit for spacing | `xs` |
-| `spacing.2` | `--iress-spacing-2` | `calc(2 * {spacing.100 || .25rem})` | 2x spacing | `sm` |
-| `spacing.3` | `--iress-spacing-3` | `calc(3 * {spacing.100 || .25rem})` | 3x spacing | — |
-| `spacing.4` | `--iress-spacing-4` | `calc(4 * {spacing.100 || .25rem})` | 4x spacing | `md` |
-| `spacing.5` | `--iress-spacing-5` | `calc(5 * {spacing.100 || .25rem})` | 5x spacing | — |
-| `spacing.6` | `--iress-spacing-6` | `calc(6 * {spacing.100 || .25rem})` | 6x spacing | `lg` |
-| `spacing.7` | `--iress-spacing-7` | `calc(7 * {spacing.100 || .25rem})` | 7x spacing | — |
-| `spacing.8` | `--iress-spacing-8` | `calc(8 * {spacing.100 || .25rem})` | 8x spacing | — |
-| `spacing.10` | `--iress-spacing-10` | `calc(10 * {spacing.100 || .25rem})` | 10x spacing | `xl` |
+| `spacing.2` | `--iress-spacing-2` | `calc(2 * .25rem)` | 2x spacing | `sm` |
+| `spacing.3` | `--iress-spacing-3` | `calc(3 * .25rem)` | 3x spacing | — |
+| `spacing.4` | `--iress-spacing-4` | `calc(4 * .25rem)` | 4x spacing | `md` |
+| `spacing.5` | `--iress-spacing-5` | `calc(5 * .25rem)` | 5x spacing | — |
+| `spacing.6` | `--iress-spacing-6` | `calc(6 * .25rem)` | 6x spacing | `lg` |
+| `spacing.7` | `--iress-spacing-7` | `calc(7 * .25rem)` | 7x spacing | — |
+| `spacing.8` | `--iress-spacing-8` | `calc(8 * .25rem)` | 8x spacing | — |
+| `spacing.10` | `--iress-spacing-10` | `calc(10 * .25rem)` | 10x spacing | `xl` |
 
 ## Radius Tokens
 
@@ -195,9 +195,9 @@ Border radius scale based on `0.25rem` (4px) base unit.
 | --- | --- | --- | --- |
 | `radius.0` | `--iress-radius-0` | `0px` | No radius |
 | `radius.1` | `--iress-radius-1` | `0.25rem` | The base unit for radius |
-| `radius.2` | `--iress-radius-2` | `calc(2 * {radius.1 || 0.25rem})` | 2x radius |
-| `radius.3` | `--iress-radius-3` | `calc(3 * {radius.1 || 0.25rem})` | 3x radius |
-| `radius.4` | `--iress-radius-4` | `calc(4 * {radius.1 || 0.25rem})` | 4x radius |
+| `radius.2` | `--iress-radius-2` | `calc(2 * 0.25rem)` | 2x radius |
+| `radius.3` | `--iress-radius-3` | `calc(3 * 0.25rem)` | 3x radius |
+| `radius.4` | `--iress-radius-4` | `calc(4 * 0.25rem)` | 4x radius |
 
 ### System Tokens
 
@@ -205,11 +205,11 @@ Component-specific radius tokens that can be overridden for branding.
 
 | Token | CSS Variable | Value | Description |
 | --- | --- | --- | --- |
-| `radius.system.button` | `--iress-radius-system-button` | `{radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem}` | Applies to buttons and other interactive elements such as the hover state of links. |
-| `radius.system.form` | `--iress-radius-system-form` | `{radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem}` | Applies to form inputs and alerts. |
-| `radius.system.layout` | `--iress-radius-system-layout` | `{radius.3 || calc(3 * 0.25rem)} {radius.3 || calc(3 * 0.25rem)} {radius.3 || calc(3 * 0.25rem)} {radius.3 || calc(3 * 0.25rem)}` | Applies to panels, modals and slideouts. |
-| `radius.system.pill` | `--iress-radius-system-pill` | `{radius.4 || calc(4 * 0.25rem)} {radius.4 || calc(4 * 0.25rem)} {radius.4 || calc(4 * 0.25rem)} {radius.4 || calc(4 * 0.25rem)}` | Applies to pills. |
-| `radius.system.tag` | `--iress-radius-system-tag` | `{radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem}` | Applies to tags. |
+| `radius.system.button` | `--iress-radius-system-button` | `0.25rem 0.25rem 0.25rem 0.25rem` | Applies to buttons and other interactive elements such as the hover state of links. |
+| `radius.system.form` | `--iress-radius-system-form` | `0.25rem 0.25rem 0.25rem 0.25rem` | Applies to form inputs and alerts. |
+| `radius.system.layout` | `--iress-radius-system-layout` | `calc(3 * 0.25rem) calc(3 * 0.25rem) calc(3 * 0.25rem) calc(3 * 0.25rem)` | Applies to panels, modals and slideouts. |
+| `radius.system.pill` | `--iress-radius-system-pill` | `calc(4 * 0.25rem) calc(4 * 0.25rem) calc(4 * 0.25rem) calc(4 * 0.25rem)` | Applies to pills. |
+| `radius.system.tag` | `--iress-radius-system-tag` | `0.25rem 0.25rem 0.25rem 0.25rem` | Applies to tags. |
 
 ## Typography Tokens
 
@@ -287,13 +287,11 @@ cssVars.typography.body.md.regular // 'var(--iress-typography-body-md-regular, .
 
 ### Installation
 
-> **Important:** IDS v6 is currently in beta. Install with the `@beta` tag:
->
-> ```bash
-> npm install @iress-oss/ids-tokens@beta
-> # If also using IDS React components:
-> npm install @iress-oss/ids-components@beta
-> ```
+```bash
+npm install @iress-oss/ids-tokens
+# If also using IDS React components:
+npm install @iress-oss/ids-components
+```
 
 ### Prerequisites (React only)
 
@@ -914,14 +912,14 @@ Base unit: `0.25rem` (4px). Values range from 0–8 and 10 (no 9).
 | --- | --- | --- | --- | --- |
 | `spacing.0` | `--iress-spacing-0` | `0rem` | No spacing | `none` |
 | `spacing.1` | `--iress-spacing-1` | `.25rem` | The base unit for spacing | `xs` |
-| `spacing.2` | `--iress-spacing-2` | `calc(2 * {spacing.100 || .25rem})` | 2x spacing | `sm` |
-| `spacing.3` | `--iress-spacing-3` | `calc(3 * {spacing.100 || .25rem})` | 3x spacing | — |
-| `spacing.4` | `--iress-spacing-4` | `calc(4 * {spacing.100 || .25rem})` | 4x spacing | `md` |
-| `spacing.5` | `--iress-spacing-5` | `calc(5 * {spacing.100 || .25rem})` | 5x spacing | — |
-| `spacing.6` | `--iress-spacing-6` | `calc(6 * {spacing.100 || .25rem})` | 6x spacing | `lg` |
-| `spacing.7` | `--iress-spacing-7` | `calc(7 * {spacing.100 || .25rem})` | 7x spacing | — |
-| `spacing.8` | `--iress-spacing-8` | `calc(8 * {spacing.100 || .25rem})` | 8x spacing | — |
-| `spacing.10` | `--iress-spacing-10` | `calc(10 * {spacing.100 || .25rem})` | 10x spacing | `xl` |
+| `spacing.2` | `--iress-spacing-2` | `calc(2 * .25rem)` | 2x spacing | `sm` |
+| `spacing.3` | `--iress-spacing-3` | `calc(3 * .25rem)` | 3x spacing | — |
+| `spacing.4` | `--iress-spacing-4` | `calc(4 * .25rem)` | 4x spacing | `md` |
+| `spacing.5` | `--iress-spacing-5` | `calc(5 * .25rem)` | 5x spacing | — |
+| `spacing.6` | `--iress-spacing-6` | `calc(6 * .25rem)` | 6x spacing | `lg` |
+| `spacing.7` | `--iress-spacing-7` | `calc(7 * .25rem)` | 7x spacing | — |
+| `spacing.8` | `--iress-spacing-8` | `calc(8 * .25rem)` | 8x spacing | — |
+| `spacing.10` | `--iress-spacing-10` | `calc(10 * .25rem)` | 10x spacing | `xl` |
 
 ## Radius Tokens
 
@@ -933,9 +931,9 @@ Border radius scale based on `0.25rem` (4px) base unit.
 | --- | --- | --- | --- |
 | `radius.0` | `--iress-radius-0` | `0px` | No radius |
 | `radius.1` | `--iress-radius-1` | `0.25rem` | The base unit for radius |
-| `radius.2` | `--iress-radius-2` | `calc(2 * {radius.1 || 0.25rem})` | 2x radius |
-| `radius.3` | `--iress-radius-3` | `calc(3 * {radius.1 || 0.25rem})` | 3x radius |
-| `radius.4` | `--iress-radius-4` | `calc(4 * {radius.1 || 0.25rem})` | 4x radius |
+| `radius.2` | `--iress-radius-2` | `calc(2 * 0.25rem)` | 2x radius |
+| `radius.3` | `--iress-radius-3` | `calc(3 * 0.25rem)` | 3x radius |
+| `radius.4` | `--iress-radius-4` | `calc(4 * 0.25rem)` | 4x radius |
 
 ### System Tokens
 
@@ -943,11 +941,11 @@ Component-specific radius tokens that can be overridden for branding.
 
 | Token | CSS Variable | Value | Description |
 | --- | --- | --- | --- |
-| `radius.system.button` | `--iress-radius-system-button` | `{radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem}` | Applies to buttons and other interactive elements such as the hover state of links. |
-| `radius.system.form` | `--iress-radius-system-form` | `{radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem}` | Applies to form inputs and alerts. |
-| `radius.system.layout` | `--iress-radius-system-layout` | `{radius.3 || calc(3 * 0.25rem)} {radius.3 || calc(3 * 0.25rem)} {radius.3 || calc(3 * 0.25rem)} {radius.3 || calc(3 * 0.25rem)}` | Applies to panels, modals and slideouts. |
-| `radius.system.pill` | `--iress-radius-system-pill` | `{radius.4 || calc(4 * 0.25rem)} {radius.4 || calc(4 * 0.25rem)} {radius.4 || calc(4 * 0.25rem)} {radius.4 || calc(4 * 0.25rem)}` | Applies to pills. |
-| `radius.system.tag` | `--iress-radius-system-tag` | `{radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem}` | Applies to tags. |
+| `radius.system.button` | `--iress-radius-system-button` | `0.25rem 0.25rem 0.25rem 0.25rem` | Applies to buttons and other interactive elements such as the hover state of links. |
+| `radius.system.form` | `--iress-radius-system-form` | `0.25rem 0.25rem 0.25rem 0.25rem` | Applies to form inputs and alerts. |
+| `radius.system.layout` | `--iress-radius-system-layout` | `calc(3 * 0.25rem) calc(3 * 0.25rem) calc(3 * 0.25rem) calc(3 * 0.25rem)` | Applies to panels, modals and slideouts. |
+| `radius.system.pill` | `--iress-radius-system-pill` | `calc(4 * 0.25rem) calc(4 * 0.25rem) calc(4 * 0.25rem) calc(4 * 0.25rem)` | Applies to pills. |
+| `radius.system.tag` | `--iress-radius-system-tag` | `0.25rem 0.25rem 0.25rem 0.25rem` | Applies to tags. |
 
 ## Typography Tokens
 

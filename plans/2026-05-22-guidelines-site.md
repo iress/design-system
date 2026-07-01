@@ -748,7 +748,7 @@ Performed after Phases 7, 9, 10, and 11.3 are complete:
 
 - [x] Update `AGENTS.md` to reflect new workflow (no more `yarn translate`, use `yarn dev` for .ai updates)
 - [ ] Update `README.md` development section if needed
-- [ ] Add a `CONTRIBUTING.md` note about committing `.ai/` changes with PRs
+- [x] Add a `CONTRIBUTING.md` note about committing `.ai/` changes with PRs
 
 ### Task 12.7: Sub-navigation and anchor link search
 
@@ -771,7 +771,7 @@ Performed after Phases 7, 9, 10, and 11.3 are complete:
 
 Document how to add/edit guidelines content for contributors and AI agents:
 
-- [ ] **Step 1:** Create `apps/guidelines/CONTRIBUTING.md` covering:
+- [x] **Step 1:** Create `apps/guidelines/CONTRIBUTING.md` covering:
   - How to add a new guideline page (create MDX in `content/<section>/`, add meta export)
   - Content structure (sections: `components`, `patterns`, `tokens`, `foundations`, `get-started`, etc.)
   - MDX format requirements (frontmatter, meta export, code block conventions)
@@ -1128,7 +1128,7 @@ Verify the published package structure makes type lookup easy:
 |   | — Remove `withCustomSource` export + test (Task 12.4 Steps 9-10) | ✅ Done | — |
 |   | — Re-upload IDS-FULL-REFERENCE to Gemini Gem (Task 12.4) | ❌ | — |
 |   | — Architecture diagrams (Task 12.5) | ✅ Done | — |
-|   | — Documentation: CONTRIBUTING.md, README updates (Tasks 12.6, 12.8) | ❌ | — |
+|   | — Documentation: CONTRIBUTING.md, README updates (Tasks 12.6, 12.8) | ✅ Done | — |
 |   | — Sub-navigation and anchor link search (Task 12.7) | ❌ | — |
 |   | — createMeta factory migration to all 54 files (Task 12.10 Steps 1-5) | ⏭️ Skipped | — |
 |   | — ESLint rules: story meta, arg spreads, Iress prefix (Task 12.10 Steps 6-8) | ✅ Done | — |

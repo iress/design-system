@@ -155,14 +155,14 @@ Base unit: `0.25rem` (4px). Values range from 0–8 and 10 (no 9).
 | --- | --- | --- | --- | --- |
 | `spacing.0` | `--iress-spacing-0` | `0rem` | No spacing | `none` |
 | `spacing.1` | `--iress-spacing-1` | `.25rem` | The base unit for spacing | `xs` |
-| `spacing.2` | `--iress-spacing-2` | `calc(2 * {spacing.100 || .25rem})` | 2x spacing | `sm` |
-| `spacing.3` | `--iress-spacing-3` | `calc(3 * {spacing.100 || .25rem})` | 3x spacing | — |
-| `spacing.4` | `--iress-spacing-4` | `calc(4 * {spacing.100 || .25rem})` | 4x spacing | `md` |
-| `spacing.5` | `--iress-spacing-5` | `calc(5 * {spacing.100 || .25rem})` | 5x spacing | — |
-| `spacing.6` | `--iress-spacing-6` | `calc(6 * {spacing.100 || .25rem})` | 6x spacing | `lg` |
-| `spacing.7` | `--iress-spacing-7` | `calc(7 * {spacing.100 || .25rem})` | 7x spacing | — |
-| `spacing.8` | `--iress-spacing-8` | `calc(8 * {spacing.100 || .25rem})` | 8x spacing | — |
-| `spacing.10` | `--iress-spacing-10` | `calc(10 * {spacing.100 || .25rem})` | 10x spacing | `xl` |
+| `spacing.2` | `--iress-spacing-2` | `calc(2 * .25rem)` | 2x spacing | `sm` |
+| `spacing.3` | `--iress-spacing-3` | `calc(3 * .25rem)` | 3x spacing | — |
+| `spacing.4` | `--iress-spacing-4` | `calc(4 * .25rem)` | 4x spacing | `md` |
+| `spacing.5` | `--iress-spacing-5` | `calc(5 * .25rem)` | 5x spacing | — |
+| `spacing.6` | `--iress-spacing-6` | `calc(6 * .25rem)` | 6x spacing | `lg` |
+| `spacing.7` | `--iress-spacing-7` | `calc(7 * .25rem)` | 7x spacing | — |
+| `spacing.8` | `--iress-spacing-8` | `calc(8 * .25rem)` | 8x spacing | — |
+| `spacing.10` | `--iress-spacing-10` | `calc(10 * .25rem)` | 10x spacing | `xl` |
 
 ## Radius Tokens
 
@@ -174,9 +174,9 @@ Border radius scale based on `0.25rem` (4px) base unit.
 | --- | --- | --- | --- |
 | `radius.0` | `--iress-radius-0` | `0px` | No radius |
 | `radius.1` | `--iress-radius-1` | `0.25rem` | The base unit for radius |
-| `radius.2` | `--iress-radius-2` | `calc(2 * {radius.1 || 0.25rem})` | 2x radius |
-| `radius.3` | `--iress-radius-3` | `calc(3 * {radius.1 || 0.25rem})` | 3x radius |
-| `radius.4` | `--iress-radius-4` | `calc(4 * {radius.1 || 0.25rem})` | 4x radius |
+| `radius.2` | `--iress-radius-2` | `calc(2 * 0.25rem)` | 2x radius |
+| `radius.3` | `--iress-radius-3` | `calc(3 * 0.25rem)` | 3x radius |
+| `radius.4` | `--iress-radius-4` | `calc(4 * 0.25rem)` | 4x radius |
 
 ### System Tokens
 
@@ -184,11 +184,11 @@ Component-specific radius tokens that can be overridden for branding.
 
 | Token | CSS Variable | Value | Description |
 | --- | --- | --- | --- |
-| `radius.system.button` | `--iress-radius-system-button` | `{radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem}` | Applies to buttons and other interactive elements such as the hover state of links. |
-| `radius.system.form` | `--iress-radius-system-form` | `{radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem}` | Applies to form inputs and alerts. |
-| `radius.system.layout` | `--iress-radius-system-layout` | `{radius.3 || calc(3 * 0.25rem)} {radius.3 || calc(3 * 0.25rem)} {radius.3 || calc(3 * 0.25rem)} {radius.3 || calc(3 * 0.25rem)}` | Applies to panels, modals and slideouts. |
-| `radius.system.pill` | `--iress-radius-system-pill` | `{radius.4 || calc(4 * 0.25rem)} {radius.4 || calc(4 * 0.25rem)} {radius.4 || calc(4 * 0.25rem)} {radius.4 || calc(4 * 0.25rem)}` | Applies to pills. |
-| `radius.system.tag` | `--iress-radius-system-tag` | `{radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem} {radius.1 || 0.25rem}` | Applies to tags. |
+| `radius.system.button` | `--iress-radius-system-button` | `0.25rem 0.25rem 0.25rem 0.25rem` | Applies to buttons and other interactive elements such as the hover state of links. |
+| `radius.system.form` | `--iress-radius-system-form` | `0.25rem 0.25rem 0.25rem 0.25rem` | Applies to form inputs and alerts. |
+| `radius.system.layout` | `--iress-radius-system-layout` | `calc(3 * 0.25rem) calc(3 * 0.25rem) calc(3 * 0.25rem) calc(3 * 0.25rem)` | Applies to panels, modals and slideouts. |
+| `radius.system.pill` | `--iress-radius-system-pill` | `calc(4 * 0.25rem) calc(4 * 0.25rem) calc(4 * 0.25rem) calc(4 * 0.25rem)` | Applies to pills. |
+| `radius.system.tag` | `--iress-radius-system-tag` | `0.25rem 0.25rem 0.25rem 0.25rem` | Applies to tags. |
 
 ## Typography Tokens
 
@@ -204,35 +204,35 @@ Component-specific radius tokens that can be overridden for branding.
 
 | Token | CSS Variable | Value | Description |
 | --- | --- | --- | --- |
-| `typography.heading.1` | `--iress-typography-heading-1` | `500 calc({typography.base.size || .875rem} * (24 / 14))/1.33 {typography.base.headingFont || Ubuntu, Helvetica, sans-serif}` | Use for the main page title to establish a clear hierarchy. There is only one H1 per screen, emphasising the primary purpose or context of the page. |
-| `typography.heading.2` | `--iress-typography-heading-2` | `500 calc({typography.base.size || .875rem} * (20 / 14))/1.4 {typography.base.headingFont || Ubuntu, Helvetica, sans-serif}` | Use for **primary section headings** within a page to organise content and guide the user through key areas. Also suitable for large components—such as modals—where space allows and where it pairs well with: body.md. |
-| `typography.heading.3` | `--iress-typography-heading-3` | `500 calc({typography.base.size || .875rem} * (18 / 14))/1.5 {typography.base.headingFont || Ubuntu, Helvetica, sans-serif}` | Use for: sub-sections under H2s to further structure content and maintain a clear visual hierarchy. Ideal for breaking down complex sections into manageable parts. |
-| `typography.heading.4` | `--iress-typography-heading-4` | `500 calc({typography.base.size || .875rem} * (16 / 14))/1.42 {typography.base.headingFont || Ubuntu, Helvetica, sans-serif}` | Use for: supporting headings within content blocks or small components where space is limited—such as table headers, cards, or side panels. Provides structure without overwhelming the layout. |
-| `typography.heading.5` | `--iress-typography-heading-5` | `400 calc({typography.base.size || .875rem} * (16 / 14))/1.42 {typography.base.headingFont || Ubuntu, Helvetica, sans-serif}` | Use for: minor labels or titles in compact UI elements, such as cards, sidebars, or inline labels. Best used to emphasise supplementary information without drawing too much attention. Works well with body.sm and is ideal for subtle content like fine print. Use sparingly to preserve typographic hierarchy. |
+| `typography.heading.1` | `--iress-typography-heading-1` | `500 calc(.875rem * (24 / 14))/1.33 Ubuntu, Helvetica, sans-serif` | Use for the main page title to establish a clear hierarchy. There is only one H1 per screen, emphasising the primary purpose or context of the page. |
+| `typography.heading.2` | `--iress-typography-heading-2` | `500 calc(.875rem * (20 / 14))/1.4 Ubuntu, Helvetica, sans-serif` | Use for **primary section headings** within a page to organise content and guide the user through key areas. Also suitable for large components—such as modals—where space allows and where it pairs well with: body.md. |
+| `typography.heading.3` | `--iress-typography-heading-3` | `500 calc(.875rem * (18 / 14))/1.5 Ubuntu, Helvetica, sans-serif` | Use for: sub-sections under H2s to further structure content and maintain a clear visual hierarchy. Ideal for breaking down complex sections into manageable parts. |
+| `typography.heading.4` | `--iress-typography-heading-4` | `500 calc(.875rem * (16 / 14))/1.42 Ubuntu, Helvetica, sans-serif` | Use for: supporting headings within content blocks or small components where space is limited—such as table headers, cards, or side panels. Provides structure without overwhelming the layout. |
+| `typography.heading.5` | `--iress-typography-heading-5` | `400 calc(.875rem * (16 / 14))/1.42 Ubuntu, Helvetica, sans-serif` | Use for: minor labels or titles in compact UI elements, such as cards, sidebars, or inline labels. Best used to emphasise supplementary information without drawing too much attention. Works well with body.sm and is ideal for subtle content like fine print. Use sparingly to preserve typographic hierarchy. |
 
 ### Body — Small (`body.sm`)
 
 | Token | CSS Variable | Value | Description |
 | --- | --- | --- | --- |
-| `typography.body.sm.regular` | `--iress-typography-body-sm-regular` | `400 calc({typography.base.size || .875rem} * (12 / 14))/1.5 {typography.base.bodyFont || Inter, Helvetica, sans-serif}` | The default small text, most commonly used to display text in small components and compact tables and lists. |
-| `typography.body.sm.medium` | `--iress-typography-body-sm-medium` | `500 calc({typography.base.size || .875rem} * (12 / 14))/1.5 {typography.base.bodyFont || Inter, Helvetica, sans-serif}` | Medium text is used to indicate text is interactive, such as a button or a link. |
-| `typography.body.sm.strong` | `--iress-typography-body-sm-strong` | `600 calc({typography.base.size || .875rem} * (12 / 14))/1.5 {typography.base.bodyFont || Inter, Helvetica, sans-serif}` | Strong text is used to highlight important information in a paragraph of text. |
-| `typography.body.sm.em` | `--iress-typography-body-sm-em` | `500 italic calc({typography.base.size || .875rem} * (12 / 14))/1.5 {typography.base.bodyFont || Inter, Helvetica, sans-serif}` | Emphasised text is used to highlight a term or definition in a paragraph of text. It is used sparingly, usually for legal purposes. |
+| `typography.body.sm.regular` | `--iress-typography-body-sm-regular` | `400 calc(.875rem * (12 / 14))/1.5 Inter, Helvetica, sans-serif` | The default small text, most commonly used to display text in small components and compact tables and lists. |
+| `typography.body.sm.medium` | `--iress-typography-body-sm-medium` | `500 calc(.875rem * (12 / 14))/1.5 Inter, Helvetica, sans-serif` | Medium text is used to indicate text is interactive, such as a button or a link. |
+| `typography.body.sm.strong` | `--iress-typography-body-sm-strong` | `600 calc(.875rem * (12 / 14))/1.5 Inter, Helvetica, sans-serif` | Strong text is used to highlight important information in a paragraph of text. |
+| `typography.body.sm.em` | `--iress-typography-body-sm-em` | `500 italic calc(.875rem * (12 / 14))/1.5 Inter, Helvetica, sans-serif` | Emphasised text is used to highlight a term or definition in a paragraph of text. It is used sparingly, usually for legal purposes. |
 
 ### Body — Medium (`body.md`)
 
 | Token | CSS Variable | Value | Description |
 | --- | --- | --- | --- |
-| `typography.body.md.regular` | `--iress-typography-body-md-regular` | `400 {typography.base.size || .875rem}/1.5 {typography.base.bodyFont || Inter, Helvetica, sans-serif}` | The default text, most commonly used to display text across all products. |
-| `typography.body.md.medium` | `--iress-typography-body-md-medium` | `500 {typography.base.size || .875rem}/1.5 {typography.base.bodyFont || Inter, Helvetica, sans-serif}` | Medium text is used to indicate text is interactive, such as a button or a link. |
-| `typography.body.md.strong` | `--iress-typography-body-md-strong` | `600 {typography.base.size || .875rem}/1.5 {typography.base.bodyFont || Inter, Helvetica, sans-serif}` | Strong text is used to highlight important information in a paragraph of text. |
-| `typography.body.md.em` | `--iress-typography-body-md-em` | `500 italic {typography.base.size || .875rem}/1.5 {typography.base.bodyFont || Inter, Helvetica, sans-serif}` | Emphasised text is used to highlight a term or definition in a paragraph of text. It is used sparingly, usually for legal purposes. |
+| `typography.body.md.regular` | `--iress-typography-body-md-regular` | `400 .875rem/1.5 Inter, Helvetica, sans-serif` | The default text, most commonly used to display text across all products. |
+| `typography.body.md.medium` | `--iress-typography-body-md-medium` | `500 .875rem/1.5 Inter, Helvetica, sans-serif` | Medium text is used to indicate text is interactive, such as a button or a link. |
+| `typography.body.md.strong` | `--iress-typography-body-md-strong` | `600 .875rem/1.5 Inter, Helvetica, sans-serif` | Strong text is used to highlight important information in a paragraph of text. |
+| `typography.body.md.em` | `--iress-typography-body-md-em` | `500 italic .875rem/1.5 Inter, Helvetica, sans-serif` | Emphasised text is used to highlight a term or definition in a paragraph of text. It is used sparingly, usually for legal purposes. |
 
 ### Code
 
 | Token | CSS Variable | Value | Description |
 | --- | --- | --- | --- |
-| `typography.code` | `--iress-typography-code` | `400 calc({typography.base.size || .875rem} * (16 / 14))/1.6 Space, monospace` | Used to display code snippets in the product, such as in the API documentation. |
+| `typography.code` | `--iress-typography-code` | `400 calc(.875rem * (16 / 14))/1.6 Space, monospace` | Used to display code snippets in the product, such as in the API documentation. |
 
 ---
 

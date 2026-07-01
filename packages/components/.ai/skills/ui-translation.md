@@ -135,13 +135,11 @@ Most IDS components accept styling props for layout adjustments:
 
 ## Setup
 
-> **Important:** IDS v6 is currently in beta. Install with the `@beta` tag:
->
-> ```bash
-> npm install @iress-oss/ids-components@beta
-> # If using tokens directly:
-> npm install @iress-oss/ids-tokens@beta
-> ```
+```bash
+npm install @iress-oss/ids-components
+# If using tokens directly:
+npm install @iress-oss/ids-tokens
+```
 
 ```tsx
 import '@iress-oss/ids-components/dist/style.css'; // Required — component styles

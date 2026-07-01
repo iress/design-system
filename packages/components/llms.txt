@@ -113,7 +113,7 @@
 ### Tokens
 
 - [colour](.ai/tokens/colour.md) — All available colour tokens with hex values, CSS variables, and AA-compliant pairings.
-- [overview](.ai/tokens/overview.md)
+- [overview](.ai/tokens/overview.md) — What design tokens are, how they work, and how to use them in IDS applications.
 - [radius](.ai/tokens/radius.md) — Border radius tokens for consistent rounded corners across components.
 - [spacing](.ai/tokens/spacing.md) — The spacing scale based on a 4px (0.25rem) base unit, used for gaps, padding, and margins.
 - [typography](.ai/tokens/typography.md) — Font families, sizes, weights, and line heights for headings, body text, and code.
