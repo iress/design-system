@@ -33,6 +33,13 @@ export function stripMdx(source: string, keepStoryEmbeds = false): string {
         // Remove export const meta
         if (/^export\s+const\s+\w+\s*=/.test(line)) return null; // mark for block removal
 
+        // Convert IressTabSet/IressTab to markdown headings
+        if (/^\s*<IressTabSet[\s>]/.test(line)) return '';
+        if (/^\s*<\/IressTabSet>/.test(line)) return '';
+        if (/^\s*<\/IressTab>/.test(line)) return '';
+        const tabMatch = line.match(/^\s*<IressTab\s+label="([^"]+)"/);
+        if (tabMatch) return `### ${tabMatch[1]}`;
+
         // Remove standalone JSX components (full line)
         if (/^\s*<Metadata[^/]*\/>/.test(line)) return '';
         if (/^\s*<Breakpoints\s*\/>/.test(line)) return '';

@@ -314,6 +314,13 @@ export async function translateComponents() {
       const doc = await buildDoc(file, type);
       if (!doc) continue;
       const formatted = await formatCodeBlocks(doc.markdown);
+
+      // Warn if unresolved <StoryEmbed> tags remain in output
+      if (formatted.includes('<StoryEmbed')) {
+        const count = (formatted.match(/<StoryEmbed/g) || []).length;
+        console.warn(`  ⚠ ${type}/${doc.slug}.md has ${count} unresolved <StoryEmbed> tag(s)`);
+      }
+
       writeFileSync(join(outDir, `${doc.slug}.md`), formatted);
       index.push({
         slug: doc.slug,

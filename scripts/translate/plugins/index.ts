@@ -127,7 +127,7 @@ export function getPlugin(componentName: string): StoryPlugin | undefined {
 // --- Story Override Plugins ---
 
 import { join } from 'path';
-import { readFileSync, existsSync } from 'fs';
+import { readFileSync, existsSync, readdirSync } from 'fs';
 
 const ROOT = join(import.meta.dirname, '../../..');
 
@@ -419,7 +419,89 @@ const tokenStoriesPlugin: StoryOverridePlugin = {
   },
 };
 
-const overridePlugins: StoryOverridePlugin[] = [breakpointTablePlugin, faMigrationPlugin, iconBrowserPlugin, zIndexPlugin, feedbackPlugin, formPlugin, searchSelectionPlugin, stylingPropsReferencePlugin, tokenStoriesPlugin];
+/**
+ * Replaces Introduction docs embeds with a component/pattern listing table.
+ * These are Storybook visual component browsers — in .ai/ output, we generate
+ * a useful reference table from the built package meta.
+ */
+let _componentTable: string | null = null;
+
+function getComponentTable(): string {
+  if (_componentTable) return _componentTable;
+  try {
+    // Read all meta exports from the built dist to generate a listing
+    const metaDir = join(ROOT, 'packages/components/dist/components');
+    if (!existsSync(metaDir)) return 'Browse the individual component docs in this directory.';
+
+    // Dynamically import can't be used here synchronously, so read from the source meta files
+    const metaSrcDir = join(ROOT, 'packages/components/src');
+    const components: { name: string; description: string; slug: string }[] = [];
+
+    // Scan component meta dirs
+    const componentsDir = join(metaSrcDir, 'components');
+    for (const dir of readdirSync(componentsDir)) {
+      const metaFile = join(componentsDir, dir, 'meta', 'index.tsx');
+      if (!existsSync(metaFile)) continue;
+      const content = readFileSync(metaFile, 'utf-8');
+      const headingMatch = content.match(/heading:\s*['"]([^'"]+)['"]/);
+      const descMatch = content.match(/description:\s*['"]([^'"]+)['"]/);
+      if (headingMatch && descMatch) {
+        const slug = dir.replace(/([A-Z])/g, (_, c, i) => (i ? '-' : '') + c.toLowerCase());
+        components.push({ name: headingMatch[1], description: descMatch[1], slug });
+      }
+    }
+
+    // Scan pattern meta dirs
+    const patternsDir = join(metaSrcDir, 'patterns');
+    for (const dir of readdirSync(patternsDir)) {
+      const metaFile = join(patternsDir, dir, 'meta', 'index.tsx');
+      if (!existsSync(metaFile)) continue;
+      const content = readFileSync(metaFile, 'utf-8');
+      const headingMatch = content.match(/heading:\s*['"]([^'"]+)['"]/);
+      const descMatch = content.match(/description:\s*['"]([^'"]+)['"]/);
+      if (headingMatch && descMatch) {
+        const slug = dir.replace(/([A-Z])/g, (_, c, i) => (i ? '-' : '') + c.toLowerCase());
+        components.push({ name: headingMatch[1], description: descMatch[1], slug: `../patterns/${slug}` });
+      }
+    }
+
+    components.sort((a, b) => a.name.localeCompare(b.name));
+
+    const rows = components.map((c) => {
+      const path = c.slug.startsWith('../') ? `${c.slug}.md` : `${c.slug}.md`;
+      return `| [Iress${c.name}](${path}) | ${c.description} |`;
+    });
+
+    _componentTable = ['| Component | Description |', '|-----------|-------------|', ...rows].join('\n');
+    return _componentTable;
+  } catch {
+    return 'Browse the individual component docs in this directory.';
+  }
+}
+
+const introductionPlugin: StoryOverridePlugin = {
+  stories: [
+    'components-introduction--docs',
+    'patterns-introduction--docs',
+  ],
+  render: (storyId) => {
+    if (storyId === 'patterns-introduction--docs') {
+      return [
+        '| Pattern | Description |',
+        '|---------|-------------|',
+        '| [Form](../patterns/form.md) | End-to-end form building with validation, layout, and accessibility |',
+        '| [Loading](../patterns/loading.md) | Skeleton screens, spinners, and suspense boundaries |',
+        '| [Feedback](../patterns/feedback.md) | Choosing between Alert, Toaster, and Modal for user feedback |',
+        '| [Search & Selection](../patterns/search-selection.md) | Autocomplete, Select, and TagInput for search and multi-select |',
+        '| [Dropdown Menu](../patterns/dropdown-menu.md) | Context menus, action menus, and navigation menus |',
+      ].join('\n');
+    }
+
+    return getComponentTable();
+  },
+};
+
+const overridePlugins: StoryOverridePlugin[] = [breakpointTablePlugin, faMigrationPlugin, iconBrowserPlugin, zIndexPlugin, feedbackPlugin, formPlugin, searchSelectionPlugin, stylingPropsReferencePlugin, tokenStoriesPlugin, introductionPlugin];
 
 const overrideMap = new Map<string, StoryOverridePlugin>();
 for (const plugin of overridePlugins) {

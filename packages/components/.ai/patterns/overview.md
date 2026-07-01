@@ -1,14 +1,16 @@
 # Overview
 
-<IressTabSet panelStyle={{ pt: 'spacing.4' }}>
+### Explore
 
-<IressTab label="Explore">
+| Pattern | Description |
+|---------|-------------|
+| [Form](../patterns/form.md) | End-to-end form building with validation, layout, and accessibility |
+| [Loading](../patterns/loading.md) | Skeleton screens, spinners, and suspense boundaries |
+| [Feedback](../patterns/feedback.md) | Choosing between Alert, Toaster, and Modal for user feedback |
+| [Search & Selection](../patterns/search-selection.md) | Autocomplete, Select, and TagInput for search and multi-select |
+| [Dropdown Menu](../patterns/dropdown-menu.md) | Context menus, action menus, and navigation menus |
 
-<StoryEmbed id="patterns-introduction--docs" controls={false} />
-
-</IressTab>
-
-<IressTab label="What are patterns?">
+### What are patterns?
 
 Patterns are multi-component recipes that solve recurring UI problems. While
 components are individual building blocks, patterns show how to assemble them
@@ -60,6 +62,3 @@ orchestration is custom, not the building blocks.
   Toast vs Modal
 - [Form](../patterns/form.md) — end-to-end form validation and layout
 - [Loading](../patterns/loading.md) — timing, behaviour, and pattern selection
-
-</IressTab>
-</IressTabSet>
