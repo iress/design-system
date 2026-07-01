@@ -11,13 +11,16 @@ import { useState, useRef, useEffect } from 'react';
 
 const mainStorybook = 'https://main--691abcc79dfa560a36d0a74f.chromatic.com';
 
+declare const __STORYBOOK_BRANCH__: string;
+const branch = __STORYBOOK_BRANCH__;
+
 const useRemote =
   import.meta.env.VITE_STORYBOOK_REMOTE === 'true' || !import.meta.env.DEV;
 
 const subStorybooks = useRemote
   ? {
-      components: 'https://main--69166895eb243715fcd0d241.chromatic.com',
-      tokens: 'https://main--69169618e0408bbf7684f876.chromatic.com',
+      components: `https://${branch}--69166895eb243715fcd0d241.chromatic.com`,
+      tokens: `https://${branch}--69169618e0408bbf7684f876.chromatic.com`,
     }
   : {
       components: 'http://localhost:6006',

@@ -5,6 +5,17 @@ import remarkGfm from 'remark-gfm';
 import rehypePrism from 'rehype-prism-plus';
 import { tanstackRouter } from '@tanstack/router-plugin/vite';
 import { resolve } from 'path';
+import { execSync } from 'child_process';
+
+function getCurrentBranch() {
+  try {
+    return execSync('git rev-parse --abbrev-ref HEAD', { encoding: 'utf-8' })
+      .trim()
+      .replace(/[^a-zA-Z0-9-]/g, '-');
+  } catch {
+    return 'main';
+  }
+}
 
 export default defineConfig({
   plugins: [
@@ -17,6 +28,11 @@ export default defineConfig({
     react(),
   ],
   base: '/design-system/',
+  define: {
+    __STORYBOOK_BRANCH__: JSON.stringify(
+      process.env.VITE_STORYBOOK_BRANCH || getCurrentBranch(),
+    ),
+  },
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
