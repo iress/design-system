@@ -730,19 +730,19 @@ Performed after Phases 7, 9, 10, and 11.3 are complete:
 
 ### Task 12.5: Architecture diagrams
 
-- [ ] **Diagram 1: Content flow** — where content lives, what derives from what, what ships where
+- [x] **Diagram 1: Content flow** — where content lives, what derives from what, what ships where
   ```
   .stories.tsx → Chromatic (visual) → <StoryEmbed> iframe in guidelines
   content/*.mdx → guidelines site (GitHub Pages)
   content/*.mdx → derive-ai-docs → .ai/*.md → npm package
   content + skills → IDS-FULL-REFERENCE.md → Iris Gem
   ```
-- [ ] **Diagram 2: Dev workflow** — what happens during `yarn dev`
+- [x] **Diagram 2: Dev workflow** — what happens during `yarn dev`
   ```
   file change (story or content) → watcher → derive-ai-docs (incremental) → ai-runner (validate/improve) → .ai/ updated → developer commits
   ```
-- [ ] Add diagrams to `apps/guidelines/` README or `docs/ARCHITECTURE.md`
-- [ ] Use mermaid so they render in GitHub
+- [x] Add diagrams to `apps/guidelines/` README or `docs/ARCHITECTURE.md`
+- [x] Use mermaid so they render in GitHub
 
 ### Task 12.6: Documentation
 
@@ -1127,7 +1127,7 @@ Verify the published package structure makes type lookup easy:
 |   | — Bundle size / code splitting (Task 12.2) | ❌ | — |
 |   | — Remove `withCustomSource` export + test (Task 12.4 Steps 9-10) | ✅ Done | — |
 |   | — Re-upload IDS-FULL-REFERENCE to Gemini Gem (Task 12.4) | ❌ | — |
-|   | — Architecture diagrams (Task 12.5) | ❌ | — |
+|   | — Architecture diagrams (Task 12.5) | ✅ Done | — |
 |   | — Documentation: CONTRIBUTING.md, README updates (Tasks 12.6, 12.8) | ❌ | — |
 |   | — Sub-navigation and anchor link search (Task 12.7) | ❌ | — |
 |   | — createMeta factory migration to all 54 files (Task 12.10 Steps 1-5) | ⏭️ Skipped | — |
