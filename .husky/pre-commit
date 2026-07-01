@@ -9,12 +9,3 @@ yarn lint-staged --config lint-staged.pre-commit.config.cjs
 echo "🔒 Pre-commit: Scanning for secrets..."
 ggshield secret scan pre-commit "$@"
 
-# Warn if staged MDX files contain {...args} spreads (likely unimproved examples)
-ARGS_FILES=$(git diff --cached --name-only --diff-filter=ACM -- '*.mdx' | xargs grep -l '{\.\.\.args}' 2>/dev/null || true)
-if [ -n "$ARGS_FILES" ]; then
-  echo ""
-  echo "⚠️  Staged MDX files contain {...args} spreads (unimproved code examples):"
-  echo "$ARGS_FILES" | sed 's/^/   /'
-  echo "   Run: yarn ai-improve --target guidelines --files <files>"
-  echo ""
-fi

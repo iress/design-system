@@ -47,5 +47,24 @@ else
   yarn lint-staged --config lint-staged.pre-push.config.cjs --diff="$MERGE_BASE"
 fi
 
+# Check .ai/ docs are up to date with source content
+# Only run if content, stories, meta, or token source changed
+AI_RELEVANT=$(echo "$CHANGED_FILES" | grep -E '(apps/guidelines/content/|\.stories\.tsx|/meta/index\.tsx|packages/tokens/src/)' || true)
+if [ -n "$AI_RELEVANT" ]; then
+  echo "🤖 Pre-push: Checking .ai/ docs are up to date..."
+  yarn translate --tokens --components --llms-txt 2>/dev/null
+  AI_DIFF=$(git diff --name-only -- 'packages/components/.ai/' 'packages/tokens/.ai/' 'packages/components/llms.txt' 'packages/tokens/llms.txt')
+  if [ -n "$AI_DIFF" ]; then
+    echo ""
+    echo "❌ .ai/ docs are stale! The following files changed after running yarn translate:"
+    echo "$AI_DIFF" | sed 's/^/   /'
+    echo ""
+    echo "   Fix: run 'yarn translate' and commit the changes."
+    echo ""
+    exit 1
+  fi
+  echo "✅ .ai/ docs are up to date"
+fi
+
 # Check there are no commits with secrets before pushing
 ggshield secret scan pre-push "$@"
