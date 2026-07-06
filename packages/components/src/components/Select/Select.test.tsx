@@ -764,6 +764,35 @@ describe('IressSelect', () => {
           ),
         ).not.toBeInTheDocument();
       });
+
+      it('renders a custom errorText render function when options throw an error', async () => {
+        render(
+          <IressSelect
+            data-testid="test-component"
+            placeholder="Select item(s)"
+            options={() => Promise.reject(new Error('Something went wrong'))}
+            debounceThreshold={0}
+            errorText={(err) => <span>Render fn error: {String(err)}</span>}
+            multiSelect
+          />,
+        );
+
+        // focus activator and open popover
+        await userEvent.tab();
+        await userEvent.keyboard('{Enter}');
+
+        const combobox = await screen.findByRole('combobox', {
+          name: 'Search',
+        });
+        await waitFor(() => expect(combobox).toHaveFocus());
+
+        await userEvent.keyboard('op');
+
+        const error = await screen.findByText(
+          'Render fn error: Something went wrong',
+        );
+        expect(error).toBeInTheDocument();
+      });
     });
 
     describe('name', () => {
