@@ -731,6 +731,39 @@ describe('IressSelect', () => {
 
         expect(error).toBeInTheDocument();
       });
+
+      it('renders a custom errorText node when options throw an error', async () => {
+        render(
+          <IressSelect
+            data-testid="test-component"
+            placeholder="Select item(s)"
+            options={() => Promise.reject(new Error())}
+            debounceThreshold={0}
+            errorText={<span>Custom error override</span>}
+            multiSelect
+          />,
+        );
+
+        // focus activator and open popover
+        await userEvent.tab();
+        await userEvent.keyboard('{Enter}');
+
+        const combobox = await screen.findByRole('combobox', {
+          name: 'Search',
+        });
+        await waitFor(() => expect(combobox).toHaveFocus());
+
+        await userEvent.keyboard('op');
+
+        const error = await screen.findByText('Custom error override');
+        expect(error).toBeInTheDocument();
+
+        expect(
+          screen.queryByText(
+            'An unknown error occurred. Please contact support if the error persists.',
+          ),
+        ).not.toBeInTheDocument();
+      });
     });
 
     describe('name', () => {

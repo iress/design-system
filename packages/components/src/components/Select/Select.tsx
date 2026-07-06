@@ -229,6 +229,12 @@ export type IressSelectProps<
   virtualFocus?: boolean;
 
   /**
+   * Text to be displayed when the options function errors out. It is not used when the options are provided as an array.
+   * @default <IressAlert status="danger">An unknown error occurred. Please contact support if the error persists.</IressAlert>
+   */
+  errorText?: ReactNode;
+
+  /**
    * Header showed in option panel when expanded.
    */
   header?: ReactNode;
@@ -398,6 +404,7 @@ const Select = <
     className,
     defaultValue,
     disabled,
+    errorText,
     footer,
     header,
     id,
@@ -700,6 +707,7 @@ const Select = <
             autoHighlight={autoHighlight}
             debouncedQuery={debouncedQuery}
             error={error}
+            errorText={errorText}
             initialOptions={initialOptions}
             loading={loading}
             minSearchLength={minSearchLength}

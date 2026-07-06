@@ -37,6 +37,7 @@ interface SelectOptionsProps<TMultiple extends boolean = false>
     Pick<
       IressSelectProps<TMultiple, false>,
       | 'autoHighlight'
+      | 'errorText'
       | 'minSearchLength'
       | 'multiSelect'
       | 'onChange'
@@ -112,8 +113,15 @@ const SelectAsyncResults = <TMultiple extends boolean = false>({
 
 SelectAsyncResults.displayName = 'SelectAsyncResults';
 
-const SelectAsyncError = ({ error }: Pick<SelectOptionsProps, 'error'>) => {
+const SelectAsyncError = ({
+  error,
+  errorText,
+}: Pick<SelectOptionsProps, 'error' | 'errorText'>) => {
   if (!error) return null;
+
+  if (errorText !== undefined) {
+    return <>{errorText}</>;
+  }
 
   return (
     <IressAlert status="danger">
@@ -135,6 +143,7 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
   autoHighlight,
   debouncedQuery,
   error,
+  errorText,
   loading,
   minSearchLength,
   multiSelect,
@@ -152,6 +161,7 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
   | 'autoHighlight'
   | 'debouncedQuery'
   | 'error'
+  | 'errorText'
   | 'loading'
   | 'minSearchLength'
   | 'multiSelect'
@@ -244,7 +254,7 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
           shouldShowNoResults={shouldShowNoResults}
         />
       )}
-      <SelectAsyncError error={error} />
+      <SelectAsyncError error={error} errorText={errorText} />
     </IressSelectSearch>
   );
 };
@@ -255,6 +265,7 @@ export const SelectOptions = <TMultiple extends boolean = false>({
   autoHighlight,
   debouncedQuery,
   error,
+  errorText,
   initialOptions: initialOptionsProp,
   loading,
   minSearchLength,
@@ -337,6 +348,7 @@ export const SelectOptions = <TMultiple extends boolean = false>({
         autoHighlight={autoHighlight}
         debouncedQuery={debouncedQuery}
         error={error}
+        errorText={errorText}
         loading={loading}
         minSearchLength={minSearchLength}
         multiSelect={multiSelect}
