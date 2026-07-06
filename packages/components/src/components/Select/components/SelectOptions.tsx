@@ -121,17 +121,13 @@ const SelectAsyncError = ({
   if (!error) return null;
 
   if (errorText !== undefined) {
-    return (
-      <>{typeof errorText === 'function' ? errorText(error) : errorText}</>
-    );
+    return typeof errorText === 'function' ? errorText(error) : errorText;
   }
 
   return (
     <IressAlert
       status="danger"
-      m="none"
-      borderRadius="none"
-      className={css({ borderWidth: '0' })}
+      className={css({ m: '[0]', borderRadius: 'none', borderWidth: '[0]' })}
     >
       {typeof error === 'string' ? (
         error
