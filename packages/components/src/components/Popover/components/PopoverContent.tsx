@@ -35,10 +35,13 @@ const PopoverContentInner = ({
   children,
   displayMode,
   id,
+  observerTarget = document.body,
   style,
   virtualFocus,
   ...restProps
-}: Omit<PopoverContentProps, 'container'>) => {
+}: Omit<PopoverContentProps, 'container'> & {
+  observerTarget?: Element;
+}) => {
   const popover = usePopover();
   const returnFocusRef = useRef<HTMLElement | null>(null);
 
@@ -47,7 +50,7 @@ const PopoverContentInner = ({
   useEffect(() => {
     if (popover?.show) {
       const fixFocusGuards = () => {
-        const focusGuards = document.querySelectorAll(
+        const focusGuards = observerTarget.querySelectorAll(
           '[data-floating-ui-focus-guard][aria-hidden="true"]',
         );
         focusGuards.forEach((guard) => {
@@ -78,7 +81,7 @@ const PopoverContentInner = ({
         });
       });
 
-      observer.observe(document.body, {
+      observer.observe(observerTarget, {
         childList: true,
         subtree: true,
       });
@@ -88,7 +91,7 @@ const PopoverContentInner = ({
         observer.disconnect();
       };
     }
-  }, [popover?.show]);
+  }, [popover?.show, observerTarget]);
 
   useEffect(() => {
     if (popover?.show && popover.api.elements.reference) {
@@ -142,12 +145,16 @@ const PopoverContentContainer = ({
   const { container: providerContainer } = usePopoverContainer();
   const resolvedContainer =
     container !== undefined ? container : providerContainer;
+  const observerTarget =
+    resolvedContainer && 'current' in resolvedContainer
+      ? resolvedContainer.current ?? undefined
+      : (resolvedContainer ?? undefined);
 
   if (resolvedContainer) {
     return (
       <FloatingNode id={nodeId}>
         <FloatingPortal root={resolvedContainer} preserveTabOrder>
-          <PopoverContentInner {...restProps} />
+          <PopoverContentInner {...restProps} observerTarget={observerTarget} />
         </FloatingPortal>
       </FloatingNode>
     );

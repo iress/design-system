@@ -198,6 +198,45 @@ describe('PopoverContent Accessibility', () => {
     // Should still be focusable since the observer was cleaned up
     expect(focusGuardAfterUnmount.tabIndex).toBe(0);
   });
+
+  it('should scope focus guard observation to the popover container', async () => {
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+
+    render(
+      <IressPopover
+        activator={<IressButton>Click me</IressButton>}
+        defaultShow={true}
+        container={container}
+      >
+        <IressText>Popover content</IressText>
+      </IressPopover>,
+    );
+
+    await act(async () => {});
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 50));
+    });
+
+    const outsideFocusGuard = document.createElement('span');
+    outsideFocusGuard.setAttribute('data-floating-ui-focus-guard', '');
+    outsideFocusGuard.setAttribute('aria-hidden', 'true');
+    outsideFocusGuard.tabIndex = 0;
+    document.body.appendChild(outsideFocusGuard);
+
+    const containerFocusGuard = document.createElement('span');
+    containerFocusGuard.setAttribute('data-floating-ui-focus-guard', '');
+    containerFocusGuard.setAttribute('aria-hidden', 'true');
+    containerFocusGuard.tabIndex = 0;
+    container.appendChild(containerFocusGuard);
+
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 50));
+    });
+
+    expect(outsideFocusGuard.tabIndex).toBe(0);
+    expect(containerFocusGuard.tabIndex).toBe(-1);
+  });
 });
 
 describe('Nested Popover Focus Management', () => {

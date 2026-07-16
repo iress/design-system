@@ -10,7 +10,7 @@ import {
 export interface AutocompleteSearchHookProps {
   /**
    * Time in milliseconds to wait for before performing result search. Only applies to searchable options (function).
-   * @default 500
+   * @default 300
    */
   debounceThreshold?: number;
 
@@ -25,6 +25,12 @@ export interface AutocompleteSearchHookProps {
    * Initial options data set, shown when the input is empty.
    */
   initialOptions?: LabelValueMeta[];
+
+  /**
+   * Time in milliseconds to wait before showing the loading spinner for async options.
+   * @default 250
+   */
+  loadingDelay?: number;
 
   /**
    * Minimum number of characters required before triggering async search. Only applies to searchable options (function).
@@ -100,9 +106,9 @@ export interface AutocompleteSearchHookReturn {
   stopSearch: () => void;
 }
 
-const DEFAULT_DEBOUNCE_THRESHOLD = 500;
+const DEFAULT_DEBOUNCE_THRESHOLD = 300;
 const DEFAULT_MIN_SEARCH_LENGTH = 1;
-const LOADING_DELAY = 250;
+const DEFAULT_LOADING_DELAY = 250;
 
 const translateReasonToError = (reason?: string | Error) => {
   if (reason instanceof Error && reason.message) {
@@ -178,6 +184,7 @@ const useSearchState = () => {
 const useSearchOperations = (
   searchState: ReturnType<typeof useSearchState>,
   requestIdCounter: React.MutableRefObject<number>,
+  loadingDelay: number,
 ) => {
   const lastQueryRun = useRef<string>('');
   const loadingTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -215,7 +222,7 @@ const useSearchOperations = (
 
         loadingTimerRef.current = setTimeout(() => {
           searchState.setLoadingState(true);
-        }, LOADING_DELAY);
+        }, loadingDelay);
 
         try {
           const results = await searchFn(query);
@@ -247,6 +254,7 @@ const useSearchOperations = (
       updateQueryTracking,
       requestIdCounter,
       clearLoadingTimer,
+      loadingDelay,
     ],
   );
 
@@ -285,13 +293,18 @@ export const useAutocompleteSearch = ({
   debounceThreshold = DEFAULT_DEBOUNCE_THRESHOLD,
   disabled = false,
   initialOptions = [],
+  loadingDelay = DEFAULT_LOADING_DELAY,
   minSearchLength = DEFAULT_MIN_SEARCH_LENGTH,
   options = [],
   query = '',
 }: AutocompleteSearchHookProps): AutocompleteSearchHookReturn => {
   const searchState = useSearchState();
   const requestIdCounter = useRef<number>(0);
-  const searchOperations = useSearchOperations(searchState, requestIdCounter);
+  const searchOperations = useSearchOperations(
+    searchState,
+    requestIdCounter,
+    loadingDelay,
+  );
 
   const [debouncedQuery] = useDebounce(query, debounceThreshold);
 
