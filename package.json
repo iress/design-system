@@ -37,7 +37,7 @@
     "lint-staged": "^17.0.4",
     "pinst": "^3.0.0",
     "prettier": "^3.8.3",
-    "puppeteer": "^24.43.0",
+    "puppeteer": "^25.3.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "storybook": "^10.4.1",
