@@ -81,7 +81,7 @@
     "@tanstack/react-virtual": "3.13.12",
     "@types/mdx": "^2.0.13",
     "fuzzysort": "3.1.0",
-    "material-symbols": "0.44.6",
+    "material-symbols": "0.45.6",
     "query-selector-shadow-dom": "1.0.1",
     "use-debounce": "10.1.1"
   },
