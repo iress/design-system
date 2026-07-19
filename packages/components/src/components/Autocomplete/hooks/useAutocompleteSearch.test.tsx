@@ -181,10 +181,11 @@ describe('useAutocompleteSearch', () => {
       () => expect(hook.result.current.debouncedQuery).toBe('cus'),
       { timeout: 200 },
     );
-    await waitFor(() => expect(hook.result.current.loading).toBe(false));
-
-    expect(hook.result.current.debouncedQuery).toBe('cus');
-    expect(hook.result.current.results).toHaveLength(options.length);
+    // With 250ms loading delay and fast search (50ms), wait for results instead of loading state
+    await waitFor(() =>
+      expect(hook.result.current.results).toHaveLength(options.length),
+    );
+    expect(hook.result.current.loading).toBe(false);
 
     // The search results are sorted by relevance, so check the first result matches expected pattern
     const label = render(hook.result.current.results[0].formattedLabel);
@@ -201,10 +202,9 @@ describe('useAutocompleteSearch', () => {
       () => expect(hook.result.current.debouncedQuery).toBe('xyz'),
       { timeout: 200 },
     );
-    await waitFor(() => expect(hook.result.current.loading).toBe(false));
-
-    expect(hook.result.current.debouncedQuery).toBe('xyz');
-    expect(hook.result.current.results).toHaveLength(0);
+    // With 250ms loading delay and fast search (50ms), wait for results instead of loading state
+    await waitFor(() => expect(hook.result.current.results).toHaveLength(0));
+    expect(hook.result.current.loading).toBe(false);
   });
 
   it('does not call search function when the query is empty', async () => {
@@ -421,14 +421,13 @@ describe('useAutocompleteSearch', () => {
         { timeout: 300 },
       );
 
-      // Now loading should appear and API should be called
-      await waitFor(() => expect(hook.result.current.loading).toBe(true));
+      // With 250ms loading delay and fast search (100ms), loading never appears
       expect(mockSearch).toHaveBeenCalledTimes(1);
       expect(mockSearch).toHaveBeenCalledWith('apple');
 
       // Wait for search to complete
-      await waitFor(() => expect(hook.result.current.loading).toBe(false));
-      expect(hook.result.current.results).toHaveLength(1);
+      await waitFor(() => expect(hook.result.current.results).toHaveLength(1));
+      expect(hook.result.current.loading).toBe(false);
       expect(hook.result.current.results[0].label).toBe('Result for apple');
     });
 
@@ -1276,12 +1275,15 @@ describe('useAutocompleteSearch', () => {
       expect(mockSearch).toHaveBeenCalledWith('test');
 
       // Should display final results without any visual flashing
-      await waitFor(() => expect(hook.result.current.loading).toBe(false));
-      expect(hook.result.current.results).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({ label: 'Result for test' }),
-        ]),
+      // With 250ms loading delay and fast search (50ms), loading never appears
+      await waitFor(() =>
+        expect(hook.result.current.results).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({ label: 'Result for test' }),
+          ]),
+        ),
       );
+      expect(hook.result.current.loading).toBe(false);
     });
 
     it('Using initial options with search functionality works correctly', async () => {

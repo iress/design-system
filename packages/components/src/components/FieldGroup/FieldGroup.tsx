@@ -1,7 +1,7 @@
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { type IressFieldProps } from '../Field';
 import { splitCssProps, styled } from '@/styled-system/jsx';
-import { FieldFooter } from '../components/FieldFooter';
+import { FieldFooter } from '../Field/components/FieldFooter';
 import { fieldGroup } from './FieldGroup.styles';
 import { css, cx } from '@/styled-system/css';
 import { GlobalCSSClass } from '@/enums';
@@ -46,6 +46,7 @@ export const IressFieldGroup = ({
 }: IressFieldGroupProps) => {
   const styles = fieldGroup.raw({
     hasError: !!error || !!errorMessages?.length,
+    hasHint: !!hint,
     hiddenLabel,
     inline,
     join,

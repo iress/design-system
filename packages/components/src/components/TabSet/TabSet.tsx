@@ -27,6 +27,12 @@ import { type IressCustomiseSlot } from '@/interfaces';
 
 export interface IressTabSetProps extends Omit<IressStyledProps, 'onChange'> {
   /**
+   * Content rendered alongside the tablist in the tab bar row, but outside the tablist itself.
+   * Useful for placing action buttons (e.g. "Add tab") at the end of the tab bar.
+   */
+  append?: ReactNode;
+
+  /**
    * Content to be displayed inside the IressTabs, usually multiple `IressTab`.
    */
   children?: ReactNode;
@@ -41,7 +47,7 @@ export interface IressTabSetProps extends Omit<IressStyledProps, 'onChange'> {
    * Layout options for the positioning of tabs.
    * @default top-left
    */
-  layout?: 'top-left' | 'top-center' | 'top-right';
+  layout?: 'top-left' | 'top-center' | 'top-right' | 'top-stretch';
 
   /**
    * Emitted when a tab changes.
@@ -157,6 +163,7 @@ const ActiveIndicator = (props: IressUnstyledProps) => {
 };
 
 export const IressTabSet = ({
+  append,
   children,
   className,
   defaultSelected,
@@ -244,6 +251,7 @@ export const IressTabSet = ({
                 <HoverIndicator className={styles.hoverIndicator} />
                 {children}
               </Composite>
+              {append && <div className={styles.append}>{append}</div>}
             </styled.div>
             <styled.div
               {...panelStyle}

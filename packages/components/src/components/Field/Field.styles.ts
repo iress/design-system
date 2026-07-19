@@ -5,6 +5,7 @@ export const field = sva({
     'root',
     'hint',
     'label',
+    'horizontalLabelWithHint',
     'footer',
     'footerIcon',
     'supplementary',
@@ -20,6 +21,10 @@ export const field = sva({
     },
     element: {
       position: 'relative',
+      '& > .ids-radio-group:first-child, & > .ids-checkbox-group:first-child, & > .ids-checkbox:first-child':
+        {
+          mt: 'spacing.1',
+        },
     },
     hint: {
       color: 'colour.neutral.70',
@@ -37,7 +42,12 @@ export const field = sva({
       fontSize: 'inherit',
     },
     label: {
-      mb: 'spacing.1',
+      mb: 'spacing.2',
+    },
+    horizontalLabelWithHint: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 'spacing.1',
     },
     labelContainer: {},
     fieldContainer: {
@@ -71,6 +81,12 @@ export const field = sva({
         label: {
           mb: 'none',
         },
+        element: {
+          '& > .ids-radio-group:first-child, & > .ids-checkbox-group:first-child, & > .ids-checkbox:first-child':
+            {
+              mt: 'spacing.0',
+            },
+        },
       },
     },
     hasError: {
@@ -85,7 +101,7 @@ export const field = sva({
     hasHint: {
       true: {
         label: {
-          mb: 'spacing.0',
+          mb: 'spacing.1',
         },
       },
     },

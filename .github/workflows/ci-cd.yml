@@ -62,22 +62,22 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
       - name: Enable Corepack
         run: corepack enable
       - name: Cache Yarn dependencies
         id: yarn-cache
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: ${{ env.INSTALL_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
       - name: Cache Yarn build
         id: yarn-cache-build
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: ${{ env.BUILD_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ github.run_id }}
@@ -97,21 +97,21 @@ jobs:
       matrix:
         check: [lint, typecheck, test:ci, lint:mermaid, size]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
       - name: Enable Corepack
         run: corepack enable
       - name: Restore Yarn dependencies
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@v6
         with:
           path: ${{ env.INSTALL_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
           fail-on-cache-miss: true
       - name: Restore build outputs
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@v6
         with:
           path: ${{ env.BUILD_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ github.run_id }}
@@ -162,21 +162,21 @@ jobs:
     needs: setup
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
       - name: Enable Corepack
         run: corepack enable
       - name: Restore Yarn dependencies
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@v6
         with:
           path: ${{ env.INSTALL_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
           fail-on-cache-miss: true
       - name: Restore build outputs
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@v6
         with:
           path: ${{ env.BUILD_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ github.run_id }}
@@ -213,23 +213,23 @@ jobs:
             token: CHROMATIC_TOKENS_PROJECT_TOKEN
             dir: packages/tokens
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
       - name: Enable Corepack
         run: corepack enable
       - name: Restore Yarn dependencies
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@v6
         with:
           path: ${{ env.INSTALL_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
           fail-on-cache-miss: true
       - name: Restore build outputs
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@v6
         with:
           path: ${{ env.BUILD_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ github.run_id }}
@@ -267,12 +267,12 @@ jobs:
       id-token: write
       contents: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
           registry-url: 'https://registry.npmjs.org'
@@ -281,14 +281,14 @@ jobs:
         run: corepack enable
 
       - name: Restore Yarn dependencies
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@v6
         with:
           path: ${{ env.INSTALL_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
           fail-on-cache-miss: true
 
       - name: Restore build outputs
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@v6
         with:
           path: ${{ env.BUILD_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ github.run_id }}
@@ -369,12 +369,12 @@ jobs:
       id-token: write
       contents: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
           registry-url: 'https://registry.npmjs.org'
@@ -383,14 +383,14 @@ jobs:
         run: corepack enable
 
       - name: Restore Yarn dependencies
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@v6
         with:
           path: ${{ env.INSTALL_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
           fail-on-cache-miss: true
 
       - name: Restore build outputs
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@v6
         with:
           path: ${{ env.BUILD_CACHE_PATHS }}
           key: yarn-${{ runner.os }}-${{ github.run_id }}

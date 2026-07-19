@@ -585,10 +585,12 @@ describe('IressSelect', () => {
 
         await userEvent.type(combobox, 'op');
 
-        const optionsRound1 = await screen.findAllByRole('option');
-        expect(optionsRound1).toHaveLength(6); // heading is an option as well... a11y things
+        await waitFor(async () => {
+          const optionsRound1 = await screen.findAllByRole('option');
+          expect(optionsRound1).toHaveLength(6); // heading is an option as well... a11y things
+        });
 
-        expect(screen.getByText('Search results')).toBeInTheDocument();
+        expect(screen.getByText('Search results (5)')).toBeInTheDocument();
 
         await userEvent.keyboard('{ArrowDown}{Enter}');
 
@@ -636,10 +638,12 @@ describe('IressSelect', () => {
 
         await userEvent.keyboard('op');
 
-        const optionsRound1 = await screen.findAllByRole('option');
-        expect(optionsRound1).toHaveLength(6); // heading is an option as well... a11y things
+        await waitFor(async () => {
+          const optionsRound1 = await screen.findAllByRole('option');
+          expect(optionsRound1).toHaveLength(6); // heading is an option as well... a11y things
+        });
 
-        expect(screen.getByText('Search results')).toBeInTheDocument();
+        expect(screen.getByText('Search results (5)')).toBeInTheDocument();
 
         // WAF-854 change: After typing, focus is now on search results, not the heading
         // So we don't need to press ArrowDown first to navigate to an option
@@ -1551,7 +1555,9 @@ describe('IressSelect', () => {
       expect(options.length).toBeGreaterThan(0);
 
       // Check that the label highlighting is working
-      const highlightedLabels = screen.getAllByText(/test/i, { selector: 'b' });
+      const highlightedLabels = await screen.findAllByText(/test/i, {
+        selector: 'b',
+      });
       expect(highlightedLabels.length).toBeGreaterThan(0);
 
       // Verify both label and meta can be highlighted
@@ -1612,7 +1618,9 @@ describe('IressSelect', () => {
       expect(reactMeta).toHaveTextContent('React Element Meta');
 
       // Check that we can find an option where meta is highlighted
-      const highlightedText = screen.getAllByText('option', { selector: 'b' });
+      const highlightedText = await screen.findAllByText('option', {
+        selector: 'b',
+      });
       expect(highlightedText).toHaveLength(2);
       expect(highlightedText[1].parentElement).toHaveTextContent(
         'Regular option meta',

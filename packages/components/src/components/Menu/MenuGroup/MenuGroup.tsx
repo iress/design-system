@@ -1,10 +1,12 @@
-import { useContext, type ReactNode } from 'react';
+import {
+  useContext,
+  type ElementType,
+  type MouseEventHandler,
+  type ReactNode,
+} from 'react';
 import type { TextElements } from '@/components/Text';
 import { IressMenuDivider } from '../MenuDivider/MenuDivider';
-import {
-  IressMenuHeading,
-  type IressMenuTextProps,
-} from '../MenuText/MenuText';
+import { type IressMenuTextProps } from '../MenuText/MenuText';
 import {
   IressPopover,
   type IressPopoverProps,
@@ -18,13 +20,14 @@ import { menuGroup } from './MenuGroup.styles';
 import { useControlledState, useIdIfNeeded } from '@/hooks';
 import { cx } from '@/styled-system/css';
 import { GlobalCSSClass } from '@/enums';
+import { IressMenuHeading } from '../MenuHeading/MenuHeading';
 
 type MenuGroupRestProps<
   TLabel extends TextElements = 'h2',
   TVariant extends MenuVariants = undefined,
 > = TVariant extends 'subdraw'
   ? Omit<IressPopoverProps, 'children' | 'activator'>
-  : Omit<IressMenuTextProps<TLabel>, 'children'>;
+  : Omit<IressMenuTextProps<TLabel>, 'children' | 'element'>;
 
 export type IressMenuGroupProps<
   TLabel extends TextElements = 'h2',
@@ -64,10 +67,28 @@ export type IressMenuGroupProps<
   divider?: boolean;
 
   /**
+   * Custom element type for the activator (e.g. for third-party routing).
+   * Only used when parent Menu has variant="side".
+   */
+  element?: ElementType;
+
+  /**
+   * URL for the group activator link.
+   * Only used when parent Menu has variant="side".
+   */
+  href?: string;
+
+  /**
    * Callback fired when the active/expanded state changes.
    * Only used when parent Menu has variant="side".
    */
   onActiveChange?: (active?: boolean) => void;
+
+  /**
+   * Click handler for the group activator.
+   * Only used when parent Menu has variant="side".
+   */
+  onClick?: MouseEventHandler;
 
   /**
    * Variant of the menu group.
@@ -95,8 +116,11 @@ export const IressMenuGroup = <
   className,
   defaultActive,
   divider,
+  element,
+  href,
   label,
   onActiveChange,
+  onClick,
   variant: variantProp,
   'data-testid': dataTestId,
   ...restProps
@@ -136,7 +160,12 @@ export const IressMenuGroup = <
           <IressMenuItem
             className={cx(classes.activator, GlobalCSSClass.MenuGroupActivator)}
             data-testid={propagateTestid(dataTestId, 'activator')}
-            onClick={() => setActive(!active)}
+            href={href}
+            element={element}
+            onClick={(e: Parameters<MouseEventHandler>[0]) => {
+              setActive(!active);
+              onClick?.(e);
+            }}
             aria-expanded={active}
             id={id}
             aria-controls={`${id}-content`}

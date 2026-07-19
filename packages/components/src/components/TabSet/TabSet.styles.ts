@@ -6,6 +6,7 @@ export const tabSet = sva({
     'list',
     'listHolder',
     'panel',
+    'append',
     'activeIndicator',
     'hoverIndicator',
     'overflowEndIndicator',
@@ -23,6 +24,8 @@ export const tabSet = sva({
       overflowX: 'clip',
       overflowY: 'visible',
       pt: 'spacing.2',
+      display: 'flex',
+      alignItems: 'stretch',
 
       _after: {
         content: '""',
@@ -34,6 +37,13 @@ export const tabSet = sva({
         pointerEvents: 'none',
       },
     },
+    append: {
+      display: 'flex',
+      alignItems: 'center',
+      marginLeft: 'auto',
+      flexShrink: '[0]',
+      pb: 'spacing.1',
+    },
     list: {
       display: 'flex',
       flexWrap: 'nowrap',
@@ -41,6 +51,8 @@ export const tabSet = sva({
       overflowY: 'visible',
       scrollSnapType: '[x proximity]',
       position: 'relative',
+      flex: '[1 1 auto]',
+      minWidth: '[0]',
     },
     panel: {
       textStyle: 'typography.body.md',
@@ -112,6 +124,26 @@ export const tabSet = sva({
       'top-right': {
         list: {
           justifyContent: 'flex-end',
+        },
+      },
+      'top-stretch': {
+        list: {
+          justifyContent: 'flex-start',
+
+          '& > *': {
+            flex: '1',
+          },
+
+          '& [role="tab"]': {
+            width: '12/12',
+            justifyContent: 'center',
+          },
+        },
+        activeIndicator: {
+          flex: 'none',
+        },
+        hoverIndicator: {
+          flex: 'none',
         },
       },
     },
