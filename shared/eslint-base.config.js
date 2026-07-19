@@ -54,6 +54,7 @@ export async function createSonarConfig() {
       // Common overrides for design system context
       'sonarjs/deprecation': 'off',
       'sonarjs/function-return-type': 'off',
+      'sonarjs/no-redundant-optional': 'off',
       'sonarjs/todo-tag': 'off',
     },
   };
@@ -154,5 +155,6 @@ export const baseTestConfig = {
     'sonarjs/no-nested-functions': 'off',
     'sonarjs/cognitive-complexity': 'off',
     'sonarjs/assertions-in-tests': 'off', // Does not seem to count .not assertions
+    'sonarjs/no-skipped-tests': 'off',
   },
 };
