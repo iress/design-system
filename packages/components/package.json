@@ -47,7 +47,7 @@
     "@vitest/coverage-v8": "4.1.5",
     "@vitest/ui": "4.1.5",
     "concurrently": "^9.2.1",
-    "dompurify": "^3.4.1",
+    "dompurify": "^3.4.11",
     "eslint": "10.6.0",
     "eslint-plugin-file-progress": "^4.0.0",
     "eslint-plugin-mdx": "3.8.1",
