@@ -147,7 +147,7 @@ const PopoverContentContainer = ({
     container !== undefined ? container : providerContainer;
   const observerTarget =
     resolvedContainer && 'current' in resolvedContainer
-      ? resolvedContainer.current ?? undefined
+      ? (resolvedContainer.current ?? undefined)
       : (resolvedContainer ?? undefined);
 
   if (resolvedContainer) {
