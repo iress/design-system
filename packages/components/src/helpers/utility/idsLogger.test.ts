@@ -1,6 +1,5 @@
 import { idsLogger } from './idsLogger';
-
-const loggerLevels = ['log', 'warn', 'error'] as const;
+import { LoggerLevels } from '@/enums';
 
 vi.unmock('./idsLogger');
 
@@ -9,13 +8,13 @@ describe('idsLogger', () => {
     'background: #21F5A8; color: #3A1C46; font-weight:bold;';
 
   beforeAll(() => {
-    loggerLevels.forEach((level) => {
+    Object.values(LoggerLevels).forEach((level) => {
       vi.spyOn(console, level).mockImplementation(() => undefined);
     });
   });
 
   afterAll(() => {
-    loggerLevels.forEach((level) => {
+    Object.values(LoggerLevels).forEach((level) => {
       vi.spyOn(console, level).mockReset();
     });
   });
@@ -30,7 +29,7 @@ describe('idsLogger', () => {
   });
 
   it('provides a warning message when the level is set to log', () => {
-    idsLogger('test log', 'log');
+    idsLogger('test log', LoggerLevels.Log);
     expect(console.log).toHaveBeenLastCalledWith(
       '%c IDS ',
       logMessageStyles,
@@ -39,7 +38,7 @@ describe('idsLogger', () => {
   });
 
   it('provides a warning message when the level is set to warn', () => {
-    idsLogger('test warn', 'warn');
+    idsLogger('test warn', LoggerLevels.Warn);
     expect(console.warn).toHaveBeenLastCalledWith(
       '%c IDS ',
       logMessageStyles,
@@ -48,7 +47,7 @@ describe('idsLogger', () => {
   });
 
   it('provides a warning message when the level is set to warn', () => {
-    idsLogger('test error', 'error');
+    idsLogger('test error', LoggerLevels.Error);
     expect(console.error).toHaveBeenLastCalledWith(
       '%c IDS ',
       logMessageStyles,

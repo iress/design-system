@@ -1,11 +1,24 @@
-import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { IressPanel } from './Panel';
 import { IressPlaceholder } from '../Placeholder';
 import { IressText } from '../Text';
-import { IressInline } from '@/main';
-import { stylingProps } from '@iress-oss/ids-storybook-config';
+import { IressStack } from '../Stack';
+import {
+  IressInline,
+  type IressPanelProps,
+  PADDING_SIZES,
+  TEXT_ALIGNS,
+} from '@/main';
+import {
+  CurrentBreakpoint,
+  disableArgTypes,
+  withJsxTransformer,
+} from '@iress-oss/ids-storybook-config';
+import { PANEL_BACKGROUNDS } from './Panel.types';
 
-type PanelCustomArgs = React.ComponentProps<typeof IressPanel>;
+type PanelCustomArgs = React.ComponentProps<typeof IressPanel> & {
+  responsivePadding?: IressPanelProps['padding'];
+};
 type Story = StoryObj<PanelCustomArgs>;
 
 const childrenOptions = {
@@ -27,7 +40,7 @@ const childrenOptions = {
     </p>,
   ],
   story: (
-    <IressInline noWrap gap="spacing.4">
+    <IressInline noWrap gutter="md">
       <IressPlaceholder
         width="100px"
         height="100px"
@@ -56,14 +69,181 @@ export default {
       options: Object.keys(childrenOptions),
       mapping: childrenOptions,
     },
-    ...stylingProps,
   },
-  tags: ['updated'],
 } as Meta<typeof IressPanel>;
 
 export const Default: Story = {
   args: {
-    heading: 'Panel Heading',
     children: 'text',
+  },
+};
+
+export const Background: Story = {
+  ...Default,
+  argTypes: {
+    ...Default.argTypes,
+    ...disableArgTypes(['background']),
+  },
+  render: (args) => (
+    <IressStack gutter="md">
+      {PANEL_BACKGROUNDS.map((background) => (
+        <IressPanel key={background} {...args} background={background}>
+          <IressText element="h2">{background}</IressText>
+          {args.children}
+        </IressPanel>
+      ))}
+    </IressStack>
+  ),
+};
+
+export const Padding: Story = {
+  ...Default,
+  argTypes: {
+    ...Default.argTypes,
+    ...disableArgTypes(['padding']),
+  },
+  render: (args) => (
+    <IressStack gutter="md">
+      {PADDING_SIZES.map((padding) => (
+        <IressPanel key={padding} {...args} padding={padding}>
+          <IressText element="h2">{padding}</IressText>
+          {args.children}
+        </IressPanel>
+      ))}
+    </IressStack>
+  ),
+};
+
+export const ResponsivePadding: Story = {
+  ...Default,
+  args: {
+    noGutter: true,
+    padding: {
+      xs: 'none',
+      sm: 'sm',
+      md: 'md',
+      lg: 'lg',
+    },
+  },
+  argTypes: {
+    ...Default.argTypes,
+    ...disableArgTypes(['children']),
+  },
+  render: (args) => (
+    <IressPanel {...args}>
+      <p>
+        Current breakpoint: <CurrentBreakpoint />.
+      </p>
+      <p>
+        <pre>padding=&#123;{JSON.stringify(args.padding, null, 2)}&#125;</pre>
+      </p>
+    </IressPanel>
+  ),
+};
+
+export const VariablePadding: Story = {
+  ...Default,
+  args: {
+    noGutter: true,
+    padding: {
+      xs: 'none',
+      sm: 'sm',
+      md: 'md',
+      lg: 'lg',
+    },
+    responsivePadding: {
+      xs: {
+        b: 'sm',
+        t: 'lg',
+        r: 'sm',
+        l: 'lg',
+      },
+      xl: {
+        b: 'none',
+        t: 'sm',
+        r: 'lg',
+        l: 'sm',
+      },
+    },
+  },
+  argTypes: {
+    ...Default.argTypes,
+    ...disableArgTypes(['children']),
+  },
+  render: (args) => (
+    <IressStack gutter="md">
+      <IressPanel {...args}>
+        <h2>Variable padding</h2>
+        <p>
+          <pre>padding=&#123;{JSON.stringify(args.padding, null, 2)}&#125;</pre>
+        </p>
+      </IressPanel>
+      <IressPanel {...args} padding={args.responsivePadding}>
+        <h2>Responsive variable padding</h2>
+        <p>
+          Current breakpoint: <CurrentBreakpoint />.
+        </p>
+        <p>
+          <pre>
+            padding=&#123;{JSON.stringify(args.responsivePadding, null, 2)}
+            &#125;
+          </pre>
+        </p>
+      </IressPanel>
+    </IressStack>
+  ),
+  parameters: {
+    ...withJsxTransformer({
+      filterProps: ['responsivePadding'],
+    }),
+  },
+};
+
+export const TextAlign: Story = {
+  ...Default,
+  argTypes: {
+    ...Default.argTypes,
+    ...disableArgTypes(['textAlign']),
+  },
+  render: (args) => (
+    <IressStack gutter="md">
+      {TEXT_ALIGNS.map((textAlign) => (
+        <IressPanel
+          key={textAlign}
+          {...args}
+          textAlign={textAlign === 'inherit' ? 'center' : textAlign}
+        >
+          <IressText element="h2">{textAlign}</IressText>
+          {args.children}
+          {textAlign === 'inherit' && (
+            <IressPanel {...args} textAlign={textAlign}>
+              <h3>Inherits center align of parent panel</h3>
+              {args.children}
+            </IressPanel>
+          )}
+        </IressPanel>
+      ))}
+    </IressStack>
+  ),
+};
+
+export const Stretch: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    stretch: true,
+  },
+  render: (args) => (
+    <IressStack style={{ height: '200px' }}>
+      <IressPanel {...args} />
+    </IressStack>
+  ),
+};
+
+export const NoBorderRadius: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    noBorderRadius: true,
   },
 };
