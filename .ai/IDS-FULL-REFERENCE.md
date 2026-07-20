@@ -2,6 +2,25 @@
 
 > Auto-generated from 98 docs. Do not edit manually.
 
+## Figma Design Links
+
+| Component | Figma |
+|-----------|-------|
+| IressAlert | [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-31616) |
+| IressButton | [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=6201-26) |
+| IressCheckboxGroup | [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-28220) |
+| IressCheckbox | [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-28220) |
+| IressExpander | [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-30530) |
+| IressInput | [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=6201-23) |
+| IressModal | [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-32822) |
+| IressPill | [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-29810) |
+| IressRadioGroup | [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-28220) |
+| IressRadio | [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-28220) |
+| IressSelect | [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-23433) |
+| IressTabSet | [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-28714) |
+| IressTable | [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-33833) |
+| IressTag | [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-29810) |
+
 ---
 
 <!-- components/alert.md -->
@@ -11874,6 +11893,8 @@ Add a `multiSelectLimit` prop to restrict the number of selections visible to th
 #### Async Options
 
 Load options dynamically using the `onSearch` callback.
+
+**Note:** When using async options inside `IressFormField`, you must store the full `{ label, value }` option object in form state (not just the primitive value). This is because `IressSelect` cannot resolve a primitive value back to a display label without re-fetching. See the [Form caveats](../patterns/form.md#storing-select-values-in-form-state) for examples.
 
 ```tsx
 import {
@@ -26477,6 +26498,51 @@ resetField('rich-select', null); // or undefined
 
 This will properly reset the field to null and clear the field value.
 
+#### Storing Select values in form state
+
+The correct value to store in form state depends on whether `IressSelect` options are static (array) or asynchronous (function).
+
+##### Static options (array-based)
+
+`IressFormField` will store the primitive value of the selected option in form state. This is because `IressSelect` can resolve a primitive value back to a display label when options are static.
+
+```tsx
+// ✅ Store primitive value for static selects
+<IressFormField
+  name="meetingType"
+  label="Meeting Type"
+  render={({ onChange, ...controlledProps }) => (
+    <IressSelect
+      {...controlledProps}
+      options={[{ label: 'Annual Review', value: 'annual-review' }]}
+    />
+  )}
+/>;
+```
+
+##### Async options (function-based)
+
+Store the full `{ label, value }` option object because `IressSelect` needs `LabelValueMeta` to render the selected label when options are asynchronous (it cannot resolve a primitive value back to a label without re-fetching).
+
+```tsx
+// ✅ Store full option object for async selects
+<IressFormField
+  name="client"
+  label="Client"
+  render={({ onChange, ...controlledProps }) => (
+    <IressSelect
+      {...controlledProps}
+      onChange={(_e, _val, option) => onChange(option)}
+      options={searchClients}
+    />
+  )}
+/>;
+```
+
+##### Troubleshooting
+
+If you see the warning _"A primitive value was passed but cannot be resolved because options are asynchronous"_ from IDS, it means you are storing a primitive value for an async select. Switch to storing the full option object as shown above.
+
 ---
 
 [View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-form--docs)
@@ -28348,6 +28414,17 @@ AI agents need a Figma MCP server to read Figma files directly. Without one, you
 npm install @iress-oss/ids-components
 npm install @iress-oss/ids-tokens  # if using tokens directly (e.g. cssVars or CSS vars import)
 ```
+
+## Documentation & Verification
+
+Before using any component, verify it exists and check its props:
+
+1. **Discovery** — Read `node_modules/@iress-oss/ids-components/llms.txt` for the full list of available components and their doc paths
+2. **Usage docs** — Read `node_modules/@iress-oss/ids-components/.ai/components/<name>.md` for props, examples, and design guidance
+3. **Type verification** — Read `node_modules/@iress-oss/ids-components/dist/components/<Name>/<Name>.d.ts` to confirm a prop exists before using it
+4. **Token docs** — Read `node_modules/@iress-oss/ids-tokens/llms.txt` for available tokens
+
+**Never assume props exist.** Always verify against the installed `.d.ts` types. If a prop isn't in the type definition, it doesn't exist.
 
 ## Figma → IDS Mapping
 
@@ -30910,16 +30987,24 @@ Top Issues:
 
 ## Reference
 
-> **Note:** Component docs, pattern docs, and the manifest are within the package itself.
+> **Note:** Component docs, pattern docs, and the manifest are within the installed package itself.
 
-- **Component docs:** `node_modules/@iress-oss/ids-components/.ai/components/`
+**Discovery:**
+- **Start here:** `node_modules/@iress-oss/ids-components/llms.txt` — lists all available docs
+- **Component docs:** `node_modules/@iress-oss/ids-components/.ai/components/<name>.md`
 - **Pattern docs:** `node_modules/@iress-oss/ids-components/.ai/patterns/`
 - **Index (full component list):** `node_modules/@iress-oss/ids-components/.ai/index.json`
-- **Token usage skill:** `.agents/skills/token-usage/SKILL.md`
-- **Figma mapping skill:** `.agents/skills/figma-to-ids/SKILL.md`
-- **UI translation skill:** `.agents/skills/ui-translation/SKILL.md`
-- **Storybook and Guidelines:** https://main--691abcc79dfa560a36d0a74f.chromatic.com
-- **Common mistakes guide:** `node_modules/@iress-oss/ids-components/.ai/guides/foundations-common-mistakes.md` (requires `@iress-oss/ids-components` to be installed)
+- **Token docs:** `node_modules/@iress-oss/ids-tokens/llms.txt`
+
+**Verification:**
+- **Type definitions:** `node_modules/@iress-oss/ids-components/dist/components/<Name>/<Name>.d.ts`
+- **Never assume props exist** — always verify against the `.d.ts` before flagging missing usage
+
+**Related skills:**
+- **Token usage:** `.agents/skills/token-usage/SKILL.md`
+- **Figma mapping:** `.agents/skills/figma-to-ids/SKILL.md`
+- **UI translation:** `.agents/skills/ui-translation/SKILL.md`
+- **Common mistakes guide:** `node_modules/@iress-oss/ids-components/.ai/foundations/common-mistakes.md`
 
 ## Common Mistakes to Flag in Audits
 
@@ -31105,6 +31190,17 @@ function App() {
   return <IressProvider>{/* your UI */}</IressProvider>;
 }
 ```
+
+## Documentation & Verification
+
+Before using any component, verify it exists and check its props:
+
+1. **Discovery** — Read `node_modules/@iress-oss/ids-components/llms.txt` for the full list of available components and their doc paths
+2. **Usage docs** — Read `node_modules/@iress-oss/ids-components/.ai/components/<name>.md` for props, examples, and design guidance
+3. **Type verification** — Read `node_modules/@iress-oss/ids-components/dist/components/<Name>/<Name>.d.ts` to confirm a prop exists before using it
+4. **Token docs** — Read `node_modules/@iress-oss/ids-tokens/llms.txt` for available tokens
+
+**Never assume props exist.** Always verify against the installed `.d.ts` types. If a prop isn't in the type definition, it doesn't exist.
 
 ## Component Mapping
 

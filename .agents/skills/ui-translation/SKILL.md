@@ -58,6 +58,17 @@ function App() {
 }
 ```
 
+## Documentation & Verification
+
+Before using any component, verify it exists and check its props:
+
+1. **Discovery** — Read `node_modules/@iress-oss/ids-components/llms.txt` for the full list of available components and their doc paths
+2. **Usage docs** — Read `node_modules/@iress-oss/ids-components/.ai/components/<name>.md` for props, examples, and design guidance
+3. **Type verification** — Read `node_modules/@iress-oss/ids-components/dist/components/<Name>/<Name>.d.ts` to confirm a prop exists before using it
+4. **Token docs** — Read `node_modules/@iress-oss/ids-tokens/llms.txt` for available tokens
+
+**Never assume props exist.** Always verify against the installed `.d.ts` types. If a prop isn't in the type definition, it doesn't exist.
+
 ## Component Mapping
 
 When you need to find the right IDS component for a UI element, read [references/component-mapping.md](references/component-mapping.md) for the full description → IDS component mapping tables (actions, form inputs, layout, content, overlays, navigation, tables).

@@ -356,16 +356,24 @@ Top Issues:
 
 ## Reference
 
-> **Note:** Component docs, pattern docs, and the manifest are within the package itself.
+> **Note:** Component docs, pattern docs, and the manifest are within the installed package itself.
 
-- **Component docs:** `node_modules/@iress-oss/ids-components/.ai/components/`
+**Discovery:**
+- **Start here:** `node_modules/@iress-oss/ids-components/llms.txt` — lists all available docs
+- **Component docs:** `node_modules/@iress-oss/ids-components/.ai/components/<name>.md`
 - **Pattern docs:** `node_modules/@iress-oss/ids-components/.ai/patterns/`
 - **Index (full component list):** `node_modules/@iress-oss/ids-components/.ai/index.json`
-- **Token usage skill:** `.agents/skills/token-usage/SKILL.md`
-- **Figma mapping skill:** `.agents/skills/figma-to-ids/SKILL.md`
-- **UI translation skill:** `.agents/skills/ui-translation/SKILL.md`
-- **Storybook and Guidelines:** https://main--691abcc79dfa560a36d0a74f.chromatic.com
-- **Common mistakes guide:** `node_modules/@iress-oss/ids-components/.ai/guides/foundations-common-mistakes.md` (requires `@iress-oss/ids-components` to be installed)
+- **Token docs:** `node_modules/@iress-oss/ids-tokens/llms.txt`
+
+**Verification:**
+- **Type definitions:** `node_modules/@iress-oss/ids-components/dist/components/<Name>/<Name>.d.ts`
+- **Never assume props exist** — always verify against the `.d.ts` before flagging missing usage
+
+**Related skills:**
+- **Token usage:** `.agents/skills/token-usage/SKILL.md`
+- **Figma mapping:** `.agents/skills/figma-to-ids/SKILL.md`
+- **UI translation:** `.agents/skills/ui-translation/SKILL.md`
+- **Common mistakes guide:** `node_modules/@iress-oss/ids-components/.ai/foundations/common-mistakes.md`
 
 ## Common Mistakes to Flag in Audits
 

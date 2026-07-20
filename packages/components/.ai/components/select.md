@@ -176,6 +176,8 @@ Add a `multiSelectLimit` prop to restrict the number of selections visible to th
 
 Load options dynamically using the `onSearch` callback.
 
+**Note:** When using async options inside `IressFormField`, you must store the full `{ label, value }` option object in form state (not just the primitive value). This is because `IressSelect` cannot resolve a primitive value back to a display label without re-fetching. See the [Form caveats](../patterns/form.md#storing-select-values-in-form-state) for examples.
+
 ```tsx
 import {
   IressCol,

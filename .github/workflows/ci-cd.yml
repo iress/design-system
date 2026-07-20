@@ -42,6 +42,8 @@ permissions:
 env:
   NODE_VERSION: '22'
   YARN_VERSION: '4.10.3'
+  STORYBOOK_BRANCH: ${{ github.head_ref || github.ref_name }}
+  VITE_STORYBOOK_BRANCH: ${{ github.head_ref || github.ref_name }}
   INSTALL_CACHE_PATHS: |
     .yarn/cache
     .yarn/unplugged

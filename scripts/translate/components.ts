@@ -19,6 +19,28 @@ const GUIDELINES_DIR = join(ROOT, 'apps/guidelines/content');
 const COMPONENTS_SRC = join(ROOT, 'packages/components/src');
 const OUTPUT_DIR = join(ROOT, 'packages/components/.ai');
 
+/**
+ * Chromatic project IDs for each Storybook instance.
+ * URL format: https://<branch>--<projectId>.chromatic.com
+ */
+const CHROMATIC_PROJECT_IDS = [
+  '691abcc79dfa560a36d0a74f', // root (guidelines)
+  '69166895eb243715fcd0d241', // components
+  '69169618e0408bbf7684f876', // tokens
+];
+
+const STORYBOOK_BRANCH = process.env.STORYBOOK_BRANCH || 'main';
+
+/** Replace hardcoded branch prefixes in Chromatic URLs with the current branch. */
+function replaceChromaticBranch(content: string): string {
+  if (STORYBOOK_BRANCH === 'main') return content;
+  const pattern = new RegExp(
+    `(\\w[\\w-]*)(?=--(${CHROMATIC_PROJECT_IDS.join('|')})\\.chromatic\\.com)`,
+    'g',
+  );
+  return content.replace(pattern, STORYBOOK_BRANCH);
+}
+
 interface DocEntry {
   slug: string;
   type: string;
@@ -314,7 +336,10 @@ export async function translateComponents() {
     for (const file of files) {
       const doc = await buildDoc(file, type);
       if (!doc) continue;
-      const formatted = await formatCodeBlocks(doc.markdown);
+      let formatted = await formatCodeBlocks(doc.markdown);
+
+      // Replace hardcoded Chromatic branch with current branch
+      formatted = replaceChromaticBranch(formatted);
 
       // Warn if unresolved <StoryEmbed> tags remain in output
       if (formatted.includes('<StoryEmbed')) {

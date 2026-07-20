@@ -9,10 +9,10 @@ import {
 } from '@iress-oss/ids-components';
 import { useState, useRef, useEffect } from 'react';
 
-const mainStorybook = 'https://main--691abcc79dfa560a36d0a74f.chromatic.com';
-
 declare const __STORYBOOK_BRANCH__: string;
 const branch = __STORYBOOK_BRANCH__;
+
+const mainStorybook = `https://${branch}--691abcc79dfa560a36d0a74f.chromatic.com`;
 
 const useRemote =
   import.meta.env.VITE_STORYBOOK_REMOTE === 'true' || !import.meta.env.DEV;

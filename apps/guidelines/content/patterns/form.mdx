@@ -614,6 +614,51 @@ resetField('rich-select', null); // or undefined
 
 This will properly reset the field to null and clear the field value.
 
+#### Storing Select values in form state
+
+The correct value to store in form state depends on whether `IressSelect` options are static (array) or asynchronous (function).
+
+##### Static options (array-based)
+
+`IressFormField` will store the primitive value of the selected option in form state. This is because `IressSelect` can resolve a primitive value back to a display label when options are static.
+
+```tsx
+// ✅ Store primitive value for static selects
+<IressFormField
+  name="meetingType"
+  label="Meeting Type"
+  render={({ onChange, ...controlledProps }) => (
+    <IressSelect
+      {...controlledProps}
+      options={[{ label: 'Annual Review', value: 'annual-review' }]}
+    />
+  )}
+/>
+```
+
+##### Async options (function-based)
+
+Store the full `{ label, value }` option object because `IressSelect` needs `LabelValueMeta` to render the selected label when options are asynchronous (it cannot resolve a primitive value back to a label without re-fetching).
+
+```tsx
+// ✅ Store full option object for async selects
+<IressFormField
+  name="client"
+  label="Client"
+  render={({ onChange, ...controlledProps }) => (
+    <IressSelect
+      {...controlledProps}
+      onChange={(_e, _val, option) => onChange(option)}
+      options={searchClients}
+    />
+  )}
+/>
+```
+
+##### Troubleshooting
+
+If you see the warning _"A primitive value was passed but cannot be resolved because options are asynchronous"_ from IDS, it means you are storing a primitive value for an async select. Switch to storing the full option object as shown above.
+
 ---
 
 <IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-form--docs">View in Storybook</IressButton>

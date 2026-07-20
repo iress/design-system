@@ -28,3 +28,4 @@ packages/components/src/styled-system
 storybook-static
 packages/components/.storybook/component-versions.json
 .ai-improve.log
+.DS_Store
