@@ -288,6 +288,204 @@ describe('useDynamicFontSubsetting', () => {
     });
   });
 
+  describe('MFE icon merging', () => {
+    it('stores only own icon list in data-icons attribute (not a full union)', () => {
+      const icons = new Set(['icon1', 'icon2']);
+
+      renderHook(() =>
+        useDynamicFontSubsetting({
+          icons,
+          buildUrl: (icons) => `https://fonts.test/${icons.join(',')}`,
+          dataAttribute: 'test-font',
+          fontFamily: 'Test Font',
+        }),
+      );
+
+      const linkElement = document.querySelector('link[data-test-font]');
+      expect(linkElement?.getAttribute('data-icons')).toBe('icon1,icon2');
+    });
+
+    it('uses a unique per-instance ID as the data attribute value', () => {
+      const icons = new Set(['icon1']);
+
+      renderHook(() =>
+        useDynamicFontSubsetting({
+          icons,
+          buildUrl: (icons) => `https://fonts.test/${icons.join(',')}`,
+          dataAttribute: 'test-font',
+          fontFamily: 'Test Font',
+        }),
+      );
+
+      const linkElement = document.querySelector('link[data-test-font]');
+      // Value must be a non-empty instance ID (not just "true")
+      const instanceId = linkElement?.getAttribute('data-test-font');
+      expect(instanceId).toBeTruthy();
+      expect(instanceId).not.toBe('true');
+    });
+
+    it('merges icons from other instances into the URL to prevent competing font-face rules', () => {
+      // Simulate another provider's link already in the DOM (different instanceId as value)
+      const otherProviderLink = document.createElement('link');
+      otherProviderLink.rel = 'stylesheet';
+      otherProviderLink.setAttribute('data-test-font', 'other-instance-id');
+      otherProviderLink.setAttribute(
+        'data-url',
+        'https://fonts.test/icon1,icon2',
+      );
+      otherProviderLink.setAttribute('data-icons', 'icon1,icon2');
+      document.head.appendChild(otherProviderLink);
+
+      // This hook instance only knows about icon3 and icon4
+      const icons = new Set(['icon3', 'icon4']);
+
+      renderHook(() =>
+        useDynamicFontSubsetting({
+          icons,
+          buildUrl: (icons) => `https://fonts.test/${icons.join(',')}`,
+          dataAttribute: 'test-font',
+          fontFamily: 'Test Font',
+        }),
+      );
+
+      // The new link should be a superset: other provider's icons + this instance's icons
+      const newLink = document.querySelector(
+        'link[data-url="https://fonts.test/icon1,icon2,icon3,icon4"]',
+      );
+      expect(newLink).toBeInTheDocument();
+    });
+
+    it("creates a superset link but never removes other providers' links", async () => {
+      // Simulate provider A's link already in the DOM
+      const providerALink = document.createElement('link');
+      providerALink.rel = 'stylesheet';
+      providerALink.setAttribute('data-test-font', 'provider-a-id');
+      providerALink.setAttribute('data-url', 'https://fonts.test/icon1,icon2');
+      providerALink.setAttribute('data-icons', 'icon1,icon2');
+      document.head.appendChild(providerALink);
+
+      // Provider B hook mounts with its own icons
+      const icons = new Set(['icon3', 'icon4']);
+
+      renderHook(() =>
+        useDynamicFontSubsetting({
+          icons,
+          buildUrl: (icons) => `https://fonts.test/${icons.join(',')}`,
+          dataAttribute: 'test-font',
+          fontFamily: 'Test Font',
+        }),
+      );
+
+      // Provider B's new link exists with the superset URL
+      const providerBLink = document.querySelector(
+        'link[data-url="https://fonts.test/icon1,icon2,icon3,icon4"]',
+      );
+      expect(providerBLink).toBeInTheDocument();
+
+      // Simulate provider B's link loading
+      providerBLink?.dispatchEvent(new Event('load'));
+
+      await waitFor(() => {
+        // Provider A's link must NOT be removed — it belongs to a different instance
+        expect(
+          document.querySelector('link[data-test-font="provider-a-id"]'),
+        ).toBeInTheDocument();
+      });
+
+      // Both links coexist; provider B's link (last in DOM) wins in CSS cascade
+      expect(document.querySelectorAll('link[data-test-font]').length).toBe(2);
+    });
+
+    it('each provider only removes its own previous link on URL update', async () => {
+      const icons1 = new Set(['icon1']);
+      const icons2 = new Set(['icon1', 'icon2']);
+
+      const { rerender } = renderHook(
+        ({ icons }) =>
+          useDynamicFontSubsetting({
+            icons,
+            buildUrl: (icons) => `https://fonts.test/${icons.join(',')}`,
+            dataAttribute: 'test-font',
+            fontFamily: 'Test Font',
+          }),
+        { initialProps: { icons: icons1 } },
+      );
+
+      const firstLink = document.querySelector('link[data-test-font]');
+      const instanceId = firstLink?.getAttribute('data-test-font');
+      expect(firstLink).toBeInTheDocument();
+
+      act(() => {
+        rerender({ icons: icons2 });
+      });
+
+      // A new link with expanded URL exists
+      const newLink = document.querySelector(
+        'link[data-url="https://fonts.test/icon1,icon2"]',
+      );
+      expect(newLink).toBeInTheDocument();
+      // New link has the same instance ID as the old one
+      expect(newLink?.getAttribute('data-test-font')).toBe(instanceId);
+
+      // Simulate load — only the old own link should be removed
+      newLink?.dispatchEvent(new Event('load'));
+
+      await waitFor(() => {
+        const remaining = document.querySelectorAll('link[data-test-font]');
+        expect(remaining.length).toBe(1);
+        expect(remaining[0].getAttribute('data-url')).toBe(
+          'https://fonts.test/icon1,icon2',
+        );
+      });
+    });
+
+    it('does not add data-icons attribute when noSubsetting is true', () => {
+      const icons = new Set(['icon1', 'icon2']);
+
+      renderHook(() =>
+        useDynamicFontSubsetting({
+          icons,
+          buildUrl: (icons) => `https://fonts.test/${icons.join(',')}`,
+          dataAttribute: 'test-font',
+          fontFamily: 'Test Font',
+          noSubsetting: true,
+        }),
+      );
+
+      const linkElement = document.querySelector('link[data-test-font]');
+      expect(linkElement?.hasAttribute('data-icons')).toBe(false);
+    });
+
+    it('does not merge icons from other providers when noSubsetting is true', () => {
+      // Simulate another provider's link in the DOM
+      const existingLink = document.createElement('link');
+      existingLink.rel = 'stylesheet';
+      existingLink.setAttribute('data-test-font', 'other-instance-id');
+      existingLink.setAttribute('data-url', 'https://fonts.test/icon1,icon2');
+      existingLink.setAttribute('data-icons', 'icon1,icon2');
+      document.head.appendChild(existingLink);
+
+      // Hook with noSubsetting=true: buildUrl ignores icon list
+      const icons = new Set(['icon3']);
+
+      renderHook(() =>
+        useDynamicFontSubsetting({
+          icons,
+          buildUrl: () => 'https://fonts.test/full-font',
+          dataAttribute: 'test-font',
+          fontFamily: 'Test Font',
+          noSubsetting: true,
+        }),
+      );
+
+      // URL should be the full-font URL, not a merged subset
+      const newLink = document.querySelector(
+        'link[data-url="https://fonts.test/full-font"]',
+      );
+      expect(newLink).toBeInTheDocument();
+    });
+  });
+
   describe('URL caching', () => {
     it('does not recreate link if URL has not changed', () => {
       const icons = new Set(['icon1']);
@@ -488,7 +686,7 @@ describe('useDynamicFontSubsetting', () => {
       expect(() => unmount()).not.toThrow();
     });
 
-    it('removes old link when URL changes', async () => {
+    it('removes own old link when URL changes to a new icon set', async () => {
       const icons1 = new Set(['icon1']);
       const icons2 = new Set(['icon2']);
 
@@ -514,7 +712,7 @@ describe('useDynamicFontSubsetting', () => {
         rerender({ icons: icons2 });
       });
 
-      // Simulate load event on new link to trigger old link removal
+      // New link for the updated icon set is created alongside the old one
       const linkElements = document.querySelectorAll('link[data-test-font]');
       const newLink = Array.from(linkElements).find(
         (el) => el.getAttribute('data-url') === 'https://fonts.test/icon2',
@@ -523,6 +721,7 @@ describe('useDynamicFontSubsetting', () => {
 
       await waitFor(() => {
         const remaining = document.querySelectorAll('link[data-test-font]');
+        // Only the new link remains after the old own link is removed
         expect(remaining.length).toBe(1);
         expect(remaining[0].getAttribute('data-url')).toBe(
           'https://fonts.test/icon2',
