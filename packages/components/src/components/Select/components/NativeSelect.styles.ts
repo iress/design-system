@@ -45,7 +45,7 @@ export const nativeSelect = sva({
     showingPlaceholder: {
       true: {
         element: {
-          color: 'colour.neutral.70',
+          color: 'colour.neutral.60',
         },
       },
     },
