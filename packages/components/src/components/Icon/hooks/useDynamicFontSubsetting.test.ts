@@ -306,22 +306,41 @@ describe('useDynamicFontSubsetting', () => {
     });
 
     it('uses a unique per-instance ID as the data attribute value', () => {
-      const icons = new Set(['icon1']);
-
+      // Render two independent hook instances to verify they get different IDs
       renderHook(() =>
         useDynamicFontSubsetting({
-          icons,
-          buildUrl: (icons) => `https://fonts.test/${icons.join(',')}`,
+          icons: new Set(['icon1']),
+          buildUrl: (icons) => `https://fonts.test/a/${icons.join(',')}`,
           dataAttribute: 'test-font',
           fontFamily: 'Test Font',
         }),
       );
 
-      const linkElement = document.querySelector('link[data-test-font]');
-      // Value must be a non-empty instance ID (not just "true")
-      const instanceId = linkElement?.getAttribute('data-test-font');
-      expect(instanceId).toBeTruthy();
-      expect(instanceId).not.toBe('true');
+      renderHook(() =>
+        useDynamicFontSubsetting({
+          icons: new Set(['icon2']),
+          buildUrl: (icons) => `https://fonts.test/b/${icons.join(',')}`,
+          dataAttribute: 'test-font',
+          fontFamily: 'Test Font',
+        }),
+      );
+
+      const linkElements = document.querySelectorAll('link[data-test-font]');
+      expect(linkElements.length).toBeGreaterThanOrEqual(2);
+
+      const instanceIds = Array.from(linkElements).map((el) =>
+        el.getAttribute('data-test-font'),
+      );
+
+      // Each ID must be a non-empty string (not just "true")
+      instanceIds.forEach((id) => {
+        expect(id).toBeTruthy();
+        expect(id).not.toBe('true');
+      });
+
+      // The two instances must have different IDs — this is the key uniqueness guarantee
+      const uniqueIds = new Set(instanceIds);
+      expect(uniqueIds.size).toBe(instanceIds.length);
     });
 
     it('merges icons from other instances into the URL to prevent competing font-face rules', () => {

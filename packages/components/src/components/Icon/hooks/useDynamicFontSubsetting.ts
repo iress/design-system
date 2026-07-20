@@ -166,12 +166,19 @@ export const useDynamicFontSubsetting = ({
     [fontFamily, handleFontLoaded, handleFontError, mergeLoadedIcons],
   );
 
-  // Cleanup on unmount — only removes THIS instance's link, leaving other providers intact.
+  // Cleanup on unmount — removes ALL links owned by THIS instance, leaving other providers
+  // intact. During icon-set updates there can be multiple links for the same instance (old +
+  // new) until the new link's `load` handler removes the old one. If unmount races that handler,
+  // the older link would be orphaned. Querying by instance ID catches both.
   useEffect(() => {
     return () => {
-      currentLinkRef.current?.parentNode?.removeChild(currentLinkRef.current);
+      document
+        .querySelectorAll(
+          `link[data-${dataAttribute}="${instanceIdRef.current}"]`,
+        )
+        .forEach((link) => link.parentNode?.removeChild(link));
     };
-  }, []);
+  }, [dataAttribute]);
 
   // Load fonts dynamically based on usage
   useEffect(() => {
@@ -185,6 +192,22 @@ export const useDynamicFontSubsetting = ({
     const ownLink = document.querySelector<HTMLLinkElement>(
       `link[data-${dataAttribute}="${instanceId}"]`,
     );
+
+    // In mixed MFE setups, a noSubsetting=true provider creates a full-font link without
+    // `data-icons`. If this subsetting instance appends a smaller subset link after it, that
+    // link becomes last in DOM order and shadows the full-font rule in Firefox (last
+    // @font-face wins). Detect this case and skip subset creation — the full-font link
+    // already covers all icons.
+    if (!noSubsetting) {
+      const fullFontLink = document.querySelector<HTMLLinkElement>(
+        `link[data-${dataAttribute}]:not([data-icons])`,
+      );
+      if (fullFontLink && fullFontLink !== ownLink) {
+        // A full-font provider is active — just check readiness without creating a new link.
+        checkFontReady(null, iconsArray);
+        return;
+      }
+    }
 
     // Build a URL covering own icons plus every other active provider's icons (union).
     const mergedIcons = noSubsetting
