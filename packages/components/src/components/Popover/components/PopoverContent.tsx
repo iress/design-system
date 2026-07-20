@@ -9,7 +9,7 @@ import {
 } from '@floating-ui/react';
 import { composePopoverFloatingProps } from '../helpers/composeFloatingProps';
 import { type FloatingUIContainer, type IressStyledProps } from '@/types';
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { styled } from '@/styled-system/jsx';
 import { usePopover } from '../hooks/usePopover';
 import { usePopoverContainer } from '../hooks/usePopoverContainer';
@@ -35,7 +35,7 @@ const PopoverContentInner = ({
   children,
   displayMode,
   id,
-  observerTarget = document.body,
+  observerTarget,
   style,
   virtualFocus,
   ...restProps
@@ -49,8 +49,10 @@ const PopoverContentInner = ({
   // See: https://github.com/floating-ui/floating-ui/issues/2823
   useEffect(() => {
     if (popover?.show) {
+      const target = observerTarget ?? document.body;
+
       const fixFocusGuards = () => {
-        const focusGuards = observerTarget.querySelectorAll(
+        const focusGuards = target.querySelectorAll(
           '[data-floating-ui-focus-guard][aria-hidden="true"]',
         );
         focusGuards.forEach((guard) => {
@@ -81,7 +83,7 @@ const PopoverContentInner = ({
         });
       });
 
-      observer.observe(observerTarget, {
+      observer.observe(target, {
         childList: true,
         subtree: true,
       });
@@ -145,10 +147,22 @@ const PopoverContentContainer = ({
   const { container: providerContainer } = usePopoverContainer();
   const resolvedContainer =
     container !== undefined ? container : providerContainer;
-  const observerTarget =
-    resolvedContainer && 'current' in resolvedContainer
-      ? (resolvedContainer.current ?? undefined)
-      : (resolvedContainer ?? undefined);
+
+  // Resolve the observer target element reactively so that lazily-mounted
+  // ref containers trigger a re-render once they become available.
+  const [observerTarget, setObserverTarget] = useState<Element | undefined>();
+
+  useEffect(() => {
+    if (!resolvedContainer) {
+      setObserverTarget(undefined);
+      return;
+    }
+    const target =
+      'current' in resolvedContainer
+        ? (resolvedContainer.current ?? undefined)
+        : (resolvedContainer ?? undefined);
+    setObserverTarget(target);
+  }, [resolvedContainer]);
 
   if (resolvedContainer) {
     return (

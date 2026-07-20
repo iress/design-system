@@ -236,6 +236,10 @@ describe('PopoverContent Accessibility', () => {
 
     expect(outsideFocusGuard.tabIndex).toBe(0);
     expect(containerFocusGuard.tabIndex).toBe(-1);
+
+    // Clean up appended DOM nodes to avoid leaking state into other tests
+    outsideFocusGuard.remove();
+    container.remove();
   });
 });
 
