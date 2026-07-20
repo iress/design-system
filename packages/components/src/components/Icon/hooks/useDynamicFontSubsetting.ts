@@ -50,7 +50,7 @@ export interface UseDynamicFontSubsettingOptions {
  * icons remain visible.
  */
 const computeUnionIcons = (
-  iconsArray: string[],
+  ownIcons: string[],
   dataAttribute: string,
   ownLink: HTMLLinkElement | null,
 ): string[] => {
@@ -63,14 +63,16 @@ const computeUnionIcons = (
       return raw ? raw.split(',').filter(Boolean) : [];
     });
 
-  if (otherIcons.length === 0) return iconsArray;
-  const merged = Array.from(new Set([...iconsArray, ...otherIcons]));
+  if (otherIcons.length === 0) return ownIcons;
+  const merged = Array.from(new Set([...ownIcons, ...otherIcons]));
   merged.sort((a, b) => a.localeCompare(b));
   return merged;
 };
 
 // Monotonically increasing counter used to assign a stable unique ID to each hook instance.
-// Avoids Math.random() and is sufficient since IDs only need to be unique within a page session.
+// JavaScript is single-threaded so incrementing this synchronously during render is safe —
+// there is no risk of two instances receiving the same ID. IDs only need to be unique within
+// a page session, so the simple integer counter is sufficient.
 let instanceCounter = 0;
 
 /**
@@ -174,11 +176,11 @@ export const useDynamicFontSubsetting = ({
     );
 
     // Build a URL covering own icons plus every other active provider's icons (union).
-    const mergedIconsArray = noSubsetting
+    const mergedIcons = noSubsetting
       ? iconsArray
       : computeUnionIcons(iconsArray, dataAttribute, ownLink);
 
-    const url = buildUrl(mergedIconsArray);
+    const url = buildUrl(mergedIcons);
 
     if (url === false) {
       if (noSubsetting) setFullyLoaded(true);
