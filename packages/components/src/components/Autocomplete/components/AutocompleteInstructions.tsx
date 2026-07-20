@@ -12,7 +12,7 @@ export const AutocompleteInstructions = ({
 }: AutocompleteInstructionsProps) => {
   const instructionText = `Type at least ${minSearchLength} character${minSearchLength === 1 ? '' : 's'} to search`;
 
-  return <IressPanel>{instructionText}</IressPanel>;
+  return <IressPanel noBorder>{instructionText}</IressPanel>;
 };
 
 AutocompleteInstructions.displayName = 'AutocompleteInstructions';
