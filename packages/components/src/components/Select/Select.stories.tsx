@@ -6,6 +6,8 @@ import {
 } from '@/mocks/generateLabelValues';
 import { SelectAsync } from './mocks/SelectAsync';
 import SelectAsyncSource from './mocks/SelectAsync.tsx?raw';
+import { SelectAsyncErrorText } from './mocks/SelectAsyncErrorText';
+import SelectAsyncErrorTextSource from './mocks/SelectAsyncErrorText.tsx?raw';
 import { SelectAsyncMinLength } from './mocks/SelectAsyncMinLength';
 import SelectAsyncMinLengthSource from './mocks/SelectAsyncMinLength.tsx?raw';
 import { SelectCustomLabel } from './mocks/SelectCustomLabel';
@@ -47,6 +49,7 @@ export default {
     placeholder: '',
   },
   argTypes: {
+    errorText: reactNodeArgType,
     footer: reactNodeArgType,
     header: reactNodeArgType,
     placeholder: reactNodeArgType,
@@ -147,6 +150,21 @@ export const AsyncOptionsMinSearchLength: Story = {
   render: (args) => <SelectAsyncMinLength {...args} />,
   parameters: {
     ...withCustomSource(SelectAsyncMinLengthSource),
+  },
+};
+
+export const ErrorText: Story = {
+  render: (args) => <SelectAsyncErrorText {...args} />,
+  parameters: {
+    ...withCustomSource(SelectAsyncErrorTextSource),
+    docs: {
+      description: {
+        story: `Use the \`errorText\` prop to customise the error message shown when async
+options fail. It accepts a \`ReactNode\` or a render function
+\`(error: boolean | string) => ReactNode\` that receives the error value.
+Type "error" to trigger the error state.`,
+      },
+    },
   },
 };
 

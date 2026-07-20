@@ -121,6 +121,18 @@ By default, async searches are triggered after 1 character. Setting a higher val
 
 <ComponentExample of={ComponentStories.AsyncOptionsMinSearchLength} />
 
+### Custom error text
+
+When using asynchronous options, the `errorText` prop lets you customise the
+error message shown when the options function throws. By default, a generic
+danger alert is displayed.
+
+You can pass a `ReactNode` for a static message, or a render function
+`(error: boolean | string) => ReactNode` to access the error value and render
+it dynamically.
+
+<ComponentExample of={ComponentStories.ErrorText} />
+
 ### Initial options
 
 If you are using asynchronous options, you can provide an initial set of options to display before the user has interacted with the select using the `initialOptions` prop.
