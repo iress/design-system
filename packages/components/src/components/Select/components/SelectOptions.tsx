@@ -124,11 +124,7 @@ const SelectAsyncError = ({
   }
 
   return (
-    <IressAlert
-      status="danger"
-      variant="full-width"
-      mb="none"
-    >
+    <IressAlert status="danger" variant="full-width" mb="none">
       {typeof error === 'string' ? (
         error
       ) : (

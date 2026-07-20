@@ -23,7 +23,7 @@ const options = async (query: string) => {
   }
 
   const data = await fetch(
-    `https://swapi.py4e.com/api/people/?search=${query}`,
+    `https://swapi.py4e.com/api/people/?search=${encodeURIComponent(query)}`,
   ).then((response) => response.json() as Promise<StarWarsCharacterApi>);
 
   return data.results.map((character: StarWarsCharacter) => ({
@@ -58,7 +58,9 @@ export const SelectAsyncErrorText = () => (
           id="error-fn"
           placeholder='Type "error" to see the render function'
           errorText={(err) => (
-            <IressAlert status="warning" mb="none" variant="full-width">Error: {String(err)}</IressAlert>
+            <IressAlert status="warning" mb="none" variant="full-width">
+              Error: {String(err)}
+            </IressAlert>
           )}
         />
       </IressField>

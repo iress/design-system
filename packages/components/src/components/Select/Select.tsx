@@ -231,7 +231,7 @@ export type IressSelectProps<
   /**
    * Text to be displayed when the options function errors out. It is not used when the options are provided as an array.
    * Can be a ReactNode or a render function that receives the error value.
-   * @default <IressAlert status="danger">An unknown error occurred. Please contact support if the error persists.</IressAlert>
+   * @default <IressAlert status="danger" variant="full-width" mb="none">An unknown error occurred. Please contact support if the error persists.</IressAlert>
    */
   errorText?: ((error: boolean | string) => ReactNode) | ReactNode;
 
