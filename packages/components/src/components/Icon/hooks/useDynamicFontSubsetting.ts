@@ -48,6 +48,17 @@ export interface UseDynamicFontSubsettingOptions {
  * superset of all active icon sets. Since links are always appended to the end of <head>, the
  * newest link is last in document order and takes precedence in the CSS cascade — ensuring all
  * icons remain visible.
+ *
+ * Known limitations:
+ * 1. Stale links accumulate — each provider keeps its own <link> even after a later provider
+ *    creates a superset. These earlier links still trigger HTTP requests but their @font-face
+ *    rules are shadowed by the last link in DOM order. For 2–3 MFEs this is negligible; if many
+ *    providers are expected, consider a shared singleton registry approach.
+ * 2. Near-simultaneous mounts — if two providers mount in the same tick (e.g. concurrent React),
+ *    both may call computeUnionIcons before the other's link is in the DOM, resulting in two
+ *    partial-subset links. In practice React's synchronous commit + useEffect ordering means
+ *    Provider A's link exists before Provider B's effect fires, so this is unlikely in typical
+ *    MFE shell architectures where MFEs mount sequentially.
  */
 const computeUnionIcons = (
   ownIcons: string[],
@@ -221,6 +232,11 @@ export const useDynamicFontSubsetting = ({
     link.addEventListener('load', () => checkFontReady(ownLink, iconsArray));
     link.addEventListener('error', () => handleFontError(iconsArray));
 
+    // Append to end of <head> so this link is last in document order — Firefox's CSS cascade
+    // picks the last @font-face rule for a given family, so the superset URL wins.
+    // NOTE: Other providers' earlier links are intentionally left in place. Each provider manages
+    // only its own link lifecycle. The earlier links become redundant (their @font-face rules are
+    // shadowed) but removing them could break the owning provider's load/error tracking.
     document.head.appendChild(link);
     currentLinkRef.current = link;
   }, [
