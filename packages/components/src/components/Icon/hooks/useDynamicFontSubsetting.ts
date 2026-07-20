@@ -80,6 +80,38 @@ const computeUnionIcons = (
   return merged;
 };
 
+/**
+ * Checks if a full-font (noSubsetting) link from another provider is already active in the DOM.
+ * When a full-font link exists, subsetting instances should skip creating their own link to
+ * avoid shadowing it in Firefox's CSS cascade.
+ */
+const isFullFontAlreadyActive = (
+  noSubsetting: boolean,
+  dataAttribute: string,
+  ownLink: HTMLLinkElement | null,
+): boolean => {
+  if (noSubsetting) return false;
+  const fullFontLink = document.querySelector<HTMLLinkElement>(
+    `link[data-${dataAttribute}]:not([data-icons])`,
+  );
+  return Boolean(fullFontLink && fullFontLink !== ownLink);
+};
+
+/**
+ * Determines whether font readiness should be re-checked when the existing link already
+ * serves the current URL. Returns true when there are icons that haven't been confirmed
+ * loaded yet.
+ */
+const shouldRecheckReadiness = (
+  noSubsetting: boolean,
+  fullyLoaded: boolean,
+  iconsArray: string[],
+  loadedIcons: Set<string>,
+): boolean => {
+  if (noSubsetting) return !fullyLoaded;
+  return iconsArray.some((icon) => !loadedIcons.has(icon));
+};
+
 // Monotonically increasing counter used to assign a stable unique ID to each hook instance.
 // JavaScript is single-threaded so incrementing this synchronously during render is safe —
 // there is no risk of two instances receiving the same ID. IDs only need to be unique within
@@ -198,15 +230,9 @@ export const useDynamicFontSubsetting = ({
     // link becomes last in DOM order and shadows the full-font rule in Firefox (last
     // @font-face wins). Detect this case and skip subset creation — the full-font link
     // already covers all icons.
-    if (!noSubsetting) {
-      const fullFontLink = document.querySelector<HTMLLinkElement>(
-        `link[data-${dataAttribute}]:not([data-icons])`,
-      );
-      if (fullFontLink && fullFontLink !== ownLink) {
-        // A full-font provider is active — just check readiness without creating a new link.
-        checkFontReady(null, iconsArray);
-        return;
-      }
+    if (isFullFontAlreadyActive(noSubsetting, dataAttribute, ownLink)) {
+      checkFontReady(null, iconsArray);
+      return;
     }
 
     // Build a URL covering own icons plus every other active provider's icons (union).
@@ -223,13 +249,15 @@ export const useDynamicFontSubsetting = ({
 
     if (ownLink?.getAttribute('data-url') === url) {
       // Own link already serves the current union URL — only re-check readiness for new icons.
-      if (noSubsetting && !fullyLoaded) {
+      if (
+        shouldRecheckReadiness(
+          noSubsetting,
+          fullyLoaded,
+          iconsArray,
+          loadedIcons,
+        )
+      ) {
         checkFontReady(null, iconsArray);
-      } else {
-        const hasNewIcons = iconsArray.some((icon) => !loadedIcons.has(icon));
-        if (hasNewIcons) {
-          checkFontReady(null, iconsArray);
-        }
       }
       return;
     }
