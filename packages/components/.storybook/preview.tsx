@@ -15,6 +15,7 @@ const basePreview = getPreview({
       'react-hook-form': 'latest',
     },
   },
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   componentVersions,
 });
 

@@ -353,31 +353,7 @@ describe('IressSlideout', () => {
       expect(slideout).toBeInTheDocument();
     });
 
-    it('does not close when clicking on a component outside the slideout', async () => {
-      const screen = render(
-        <>
-          <IressButton>Button outside slideout</IressButton>
-          <IressSlideout defaultShow role={TEST_ROLE} data-testid={TEST_ID}>
-            Content inside slideout
-          </IressSlideout>
-        </>,
-      );
-
-      const button = screen.getByRole('button', {
-        name: 'Button outside slideout',
-      });
-      const slideout = await screen.findByRole(TEST_ROLE);
-
-      await waitFor(() => expect(slideout).toHaveFocus());
-
-      await userEvent.click(button);
-
-      await waitFor(() => expect(slideout).not.toHaveFocus());
-
-      expect(slideout).toBeInTheDocument();
-    });
-
-    it('does not close when clicking on a component outside the slideout', async () => {
+    it('loses focus when clicking on a component outside the slideout', async () => {
       const screen = render(
         <>
           <IressButton>Button outside slideout</IressButton>

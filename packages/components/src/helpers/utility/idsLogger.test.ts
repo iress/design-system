@@ -47,7 +47,7 @@ describe('idsLogger', () => {
     );
   });
 
-  it('provides a warning message when the level is set to warn', () => {
+  it('provides an error message when the level is set to error', () => {
     idsLogger('test error', 'error');
     expect(console.error).toHaveBeenLastCalledWith(
       '%c IDS ',

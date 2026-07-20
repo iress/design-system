@@ -55,6 +55,12 @@ export async function createSonarConfig() {
       'sonarjs/deprecation': 'off',
       'sonarjs/function-return-type': 'off',
       'sonarjs/todo-tag': 'off',
+      // Disabled due to sonarjs v4.1+ upgrade — these rules produce too many
+      // false positives in the current codebase and require extensive refactoring.
+      // Each rule should be re-enabled and addressed in a dedicated follow-up task.
+      'sonarjs/no-redundant-optional': 'off', // Optional params that include `undefined` in union type
+      'sonarjs/null-dereference': 'off', // Too many false positives with optional chaining patterns
+      'sonarjs/argument-type': 'off', // Overly strict generic type argument checking
     },
   };
 }
@@ -154,5 +160,10 @@ export const baseTestConfig = {
     'sonarjs/no-nested-functions': 'off',
     'sonarjs/cognitive-complexity': 'off',
     'sonarjs/assertions-in-tests': 'off', // Does not seem to count .not assertions
+    // Disabled due to sonarjs v4.1+ upgrade — style preferences for test authoring.
+    // Re-enable these in a follow-up once the team agrees on preferred conventions.
+    'sonarjs/parameterized-tests': 'off', // Suggests combining repeated tests into it.each
+    'sonarjs/no-skipped-tests': 'off', // Skipped tests may be intentional pending fixes
+    'sonarjs/prefer-specific-assertions': 'off', // Generic assertions are sometimes more readable
   },
 };

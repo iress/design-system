@@ -39,8 +39,8 @@ describe('PreviewSnippet', () => {
   });
 
   it('renders without crashing', () => {
-    render(<PreviewSnippet />);
-    expect(true).toBe(true);
+    const { container } = render(<PreviewSnippet />);
+    expect(container).toBeInTheDocument();
   });
 
   it('emits custom code when provided in parameters', () => {
