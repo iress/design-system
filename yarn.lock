@@ -2092,7 +2092,7 @@ __metadata:
     typescript: "npm:^6.0.3"
     vite: "npm:8.0.11"
     wait-on: "npm:^9.0.10"
-    ws: "npm:^8.20.0"
+    ws: "npm:^8.21.0"
     zx: "npm:^8.8.5"
   languageName: unknown
   linkType: soft
@@ -15229,7 +15229,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ws@npm:^8.18.0, ws@npm:^8.18.3, ws@npm:^8.20.0":
+"ws@npm:^8.18.0, ws@npm:^8.18.3":
   version: 8.20.0
   resolution: "ws@npm:8.20.0"
   peerDependencies:
