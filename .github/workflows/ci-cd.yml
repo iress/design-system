@@ -297,12 +297,6 @@ jobs:
       - name: Install dependencies if needed
         run: yarn install --immutable
 
-      - name: Configure npm authentication for OIDC
-        run: |
-          echo 'npmRegistries:' >> .yarnrc.yml
-          echo '  "https://registry.npmjs.org":' >> .yarnrc.yml
-          echo '    npmAuthToken: "${NODE_AUTH_TOKEN}"' >> .yarnrc.yml
-
       - name: Detect Version Changes (Stable)
         id: version-check
         run: |
@@ -315,6 +309,10 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
+          echo 'npmRegistries:' >> .yarnrc.yml
+          echo '  "https://registry.npmjs.org":' >> .yarnrc.yml
+          echo '    npmAuthToken: "${NODE_AUTH_TOKEN}"' >> .yarnrc.yml
+
           PACKAGES="${{ steps.version-check.outputs.packages_to_publish }}"
           echo "Publishing packages: $PACKAGES"
           RELEASE_INFO=""
