@@ -749,6 +749,104 @@ describe('useDynamicFontSubsetting', () => {
     });
   });
 
+  describe('Orphaned stylesheet cleanup', () => {
+    it('removes all links for this instance on unmount, including old links pending load', () => {
+      const icons1 = new Set(['icon1']);
+      const icons2 = new Set(['icon1', 'icon2']);
+
+      const { rerender, unmount } = renderHook(
+        ({ icons }) =>
+          useDynamicFontSubsetting({
+            icons,
+            buildUrl: (icons) => `https://fonts.test/${icons.join(',')}`,
+            dataAttribute: 'test-font',
+            fontFamily: 'Test Font',
+          }),
+        { initialProps: { icons: icons1 } },
+      );
+
+      // First link created
+      expect(document.querySelectorAll('link[data-test-font]').length).toBe(1);
+
+      // Rerender with new icons — creates a second link (old one stays until load fires)
+      act(() => {
+        rerender({ icons: icons2 });
+      });
+
+      // Both old and new links coexist (load hasn't fired to remove the old one)
+      expect(
+        document.querySelectorAll('link[data-test-font]').length,
+      ).toBeGreaterThanOrEqual(2);
+
+      // Unmount before the new link's load event fires
+      unmount();
+
+      // ALL links for this instance should be removed — no orphans
+      expect(document.querySelectorAll('link[data-test-font]').length).toBe(0);
+    });
+  });
+
+  describe('Mixed noSubsetting MFE scenarios', () => {
+    it('subsetting provider skips link creation when a full-font link already exists', () => {
+      // Simulate a noSubsetting=true provider's link (no data-icons attribute)
+      const fullFontLink = document.createElement('link');
+      fullFontLink.rel = 'stylesheet';
+      fullFontLink.setAttribute('data-test-font', 'full-font-instance');
+      fullFontLink.setAttribute('data-url', 'https://fonts.test/full-font');
+      // No data-icons attribute — this is a full-font link
+      document.head.appendChild(fullFontLink);
+
+      // A subsetting provider mounts with its own icons
+      const icons = new Set(['icon3', 'icon4']);
+
+      renderHook(() =>
+        useDynamicFontSubsetting({
+          icons,
+          buildUrl: (icons) => `https://fonts.test/${icons.join(',')}`,
+          dataAttribute: 'test-font',
+          fontFamily: 'Test Font',
+        }),
+      );
+
+      // The subsetting provider should NOT create a new subset link that would shadow the full-font
+      const allLinks = document.querySelectorAll('link[data-test-font]');
+      expect(allLinks.length).toBe(1);
+      expect(allLinks[0].getAttribute('data-url')).toBe(
+        'https://fonts.test/full-font',
+      );
+    });
+
+    it('subsetting provider still creates link if no full-font link exists', () => {
+      // Another subsetting provider's link (has data-icons)
+      const subsetLink = document.createElement('link');
+      subsetLink.rel = 'stylesheet';
+      subsetLink.setAttribute('data-test-font', 'other-subset-instance');
+      subsetLink.setAttribute('data-url', 'https://fonts.test/icon1,icon2');
+      subsetLink.setAttribute('data-icons', 'icon1,icon2');
+      document.head.appendChild(subsetLink);
+
+      const icons = new Set(['icon3']);
+
+      renderHook(() =>
+        useDynamicFontSubsetting({
+          icons,
+          buildUrl: (icons) => `https://fonts.test/${icons.join(',')}`,
+          dataAttribute: 'test-font',
+          fontFamily: 'Test Font',
+        }),
+      );
+
+      // Should create a new link (union of all subset providers)
+      const allLinks = document.querySelectorAll('link[data-test-font]');
+      expect(allLinks.length).toBe(2);
+      // New link should be the superset
+      const newLink = document.querySelector(
+        'link[data-url="https://fonts.test/icon1,icon2,icon3"]',
+      );
+      expect(newLink).toBeInTheDocument();
+    });
+  });
+
   describe('CSP nonce support', () => {
     it('adds nonce attribute to link element when csp-nonce meta tag exists', () => {
       const meta = document.createElement('meta');
