@@ -124,6 +124,7 @@ export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
         </IressAlert>
       ),
       initialOptions,
+      loadingDelay,
       limitDesktop = 12,
       limitMobile = 6,
       minSearchLength,
@@ -165,6 +166,7 @@ export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
     } = useAutocompleteSearch({
       debounceThreshold,
       initialOptions,
+      loadingDelay,
       minSearchLength,
       options,
       query: getFormControlValueAsStringIfDefined(value),

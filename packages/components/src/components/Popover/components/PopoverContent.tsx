@@ -9,7 +9,7 @@ import {
 } from '@floating-ui/react';
 import { composePopoverFloatingProps } from '../helpers/composeFloatingProps';
 import { type FloatingUIContainer, type IressStyledProps } from '@/types';
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { styled } from '@/styled-system/jsx';
 import { usePopover } from '../hooks/usePopover';
 import { usePopoverContainer } from '../hooks/usePopoverContainer';
@@ -35,10 +35,13 @@ const PopoverContentInner = ({
   children,
   displayMode,
   id,
+  observerTarget,
   style,
   virtualFocus,
   ...restProps
-}: Omit<PopoverContentProps, 'container'>) => {
+}: Omit<PopoverContentProps, 'container'> & {
+  observerTarget?: Element;
+}) => {
   const popover = usePopover();
   const returnFocusRef = useRef<HTMLElement | null>(null);
 
@@ -46,8 +49,10 @@ const PopoverContentInner = ({
   // See: https://github.com/floating-ui/floating-ui/issues/2823
   useEffect(() => {
     if (popover?.show) {
+      const target = observerTarget ?? document.body;
+
       const fixFocusGuards = () => {
-        const focusGuards = document.querySelectorAll(
+        const focusGuards = target.querySelectorAll(
           '[data-floating-ui-focus-guard][aria-hidden="true"]',
         );
         focusGuards.forEach((guard) => {
@@ -78,7 +83,7 @@ const PopoverContentInner = ({
         });
       });
 
-      observer.observe(document.body, {
+      observer.observe(target, {
         childList: true,
         subtree: true,
       });
@@ -88,7 +93,7 @@ const PopoverContentInner = ({
         observer.disconnect();
       };
     }
-  }, [popover?.show]);
+  }, [popover?.show, observerTarget]);
 
   useEffect(() => {
     if (popover?.show && popover.api.elements.reference) {
@@ -143,11 +148,27 @@ const PopoverContentContainer = ({
   const resolvedContainer =
     container !== undefined ? container : providerContainer;
 
+  // Resolve the observer target element reactively so that lazily-mounted
+  // ref containers trigger a re-render once they become available.
+  const [observerTarget, setObserverTarget] = useState<Element | undefined>();
+
+  useEffect(() => {
+    if (!resolvedContainer) {
+      setObserverTarget(undefined);
+      return;
+    }
+    const target =
+      'current' in resolvedContainer
+        ? (resolvedContainer.current ?? undefined)
+        : (resolvedContainer ?? undefined);
+    setObserverTarget(target);
+  }, [resolvedContainer]);
+
   if (resolvedContainer) {
     return (
       <FloatingNode id={nodeId}>
         <FloatingPortal root={resolvedContainer} preserveTabOrder>
-          <PopoverContentInner {...restProps} />
+          <PopoverContentInner {...restProps} observerTarget={observerTarget} />
         </FloatingPortal>
       </FloatingNode>
     );
