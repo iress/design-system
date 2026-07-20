@@ -18,7 +18,6 @@ import {
   type IressSelectMenuProps,
 } from '../SelectMenu/SelectMenu';
 import { IressAlert } from '@/components/Alert';
-import { css } from '@/styled-system/css';
 import {
   type FormattedLabelValueMeta,
   type LabelValueMeta,
@@ -127,7 +126,8 @@ const SelectAsyncError = ({
   return (
     <IressAlert
       status="danger"
-      className={css({ m: '[0]', borderRadius: 'none', borderWidth: '[0]' })}
+      variant="full-width"
+      mb="none"
     >
       {typeof error === 'string' ? (
         error
