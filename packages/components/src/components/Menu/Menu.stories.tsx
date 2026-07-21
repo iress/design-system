@@ -57,7 +57,10 @@ export const Basic: Story = {
   render: (args) => <MenuBasic {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(MenuBasicSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(MenuBasicSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -65,7 +68,10 @@ export const SecondaryNavigation: Story = {
   render: (args) => <MenuNavigation {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(MenuNavigationSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(MenuNavigationSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -87,7 +93,10 @@ export const Layout: Story = {
   render: (args) => <MenuLayout {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(MenuLayoutSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(MenuLayoutSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -111,7 +120,10 @@ export const SlotProps: Story = {
   render: (args) => <MenuSlots {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(MenuSlotsSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(MenuSlotsSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -119,7 +131,10 @@ export const Complex: Story = {
   render: (args) => <MenuComplex {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(MenuComplexSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(MenuComplexSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -127,7 +142,10 @@ export const Headings: Story = {
   render: (args) => <MenuHeadings {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(MenuHeadingsSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(MenuHeadingsSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -135,7 +153,10 @@ export const Dividers: Story = {
   render: (args) => <MenuDividers {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(MenuDividersSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(MenuDividersSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -143,7 +164,10 @@ export const ExtraInformation: Story = {
   render: (args) => <MenuExtraInformation {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(MenuExtraInformationSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(MenuExtraInformationSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -159,6 +183,9 @@ export const Variants: Story = {
   render: (args) => <MenuVariants {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(MenuVariantsSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(MenuVariantsSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };

@@ -270,7 +270,7 @@ const DropdownMenu = <TMultiple extends boolean = false>(
   };
 
   const handleResetFilter = () => {
-    setValue(undefined as never);
+    setValue(undefined);
     onReset?.();
     if (!multiSelect) {
       setShow(false);

@@ -2,12 +2,9 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 
 import { IressInline } from '.';
 import { IressPlaceholder } from '../Placeholder';
-import { IressPanel } from '../Panel';
 import { IressStack } from '../Stack';
 import { IressText } from '../Text';
 import { IressContainer } from '../Container';
-import { HORIZONTAL_ALIGNS, VERTICAL_ALIGNS } from '@/constants';
-import { SPACING_AND_ALIAS_TOKENS } from '@theme-preset/tokens/spacing';
 import {
   componentStoryMeta,
   disableArgTypes,

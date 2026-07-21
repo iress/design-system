@@ -85,7 +85,12 @@ const SanitisedInputForm = lazy(() =>
 type Story = StoryObj<typeof IressForm>;
 
 const testMeta: TestComponentMeta[] = [
-  { part: 'main', description: 'The form element', query: <code>getByRole('form')</code>, testId: 'form' },
+  {
+    part: 'main',
+    description: 'The form element',
+    query: <code>getByRole('form')</code>,
+    testId: 'form',
+  },
 ];
 
 export default {
@@ -100,7 +105,8 @@ export default {
     },
     idsConfig: {
       tabDescriptions: {
-        fields: 'All form controls (Input, Select, Checkbox, etc.) should be wrapped in an IressFormField component which is responsible for the layout of the label, form control and error message, as well as providing accessibility features such as associating the label with the form control and announcing error messages to screen readers.',
+        fields:
+          'All form controls (Input, Select, Checkbox, etc.) should be wrapped in an IressFormField component which is responsible for the layout of the label, form control and error message, as well as providing accessibility features such as associating the label with the form control and announcing error messages to screen readers.',
         rules:
           'Form validation rules are determined from React Hook Form. Here you can see how to use the built-in validation rules, how to add custom validation messages and how to use the `validate` option to create your own rules.',
         patterns:

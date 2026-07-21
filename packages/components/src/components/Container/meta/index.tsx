@@ -12,7 +12,8 @@ export const testMeta: TestComponentMeta[] = [
 
 export default {
   heading: 'Container',
-  description: 'Provides a max-width wrapper to constrain content within a page layout.',
+  description:
+    'Provides a max-width wrapper to constrain content within a page layout.',
   tags: ['layout', 'wrapper', 'responsive'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
@@ -31,6 +32,5 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-container--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/components/container',
+  guidelines: 'https://iress.github.io/design-system/#/components/container',
 } satisfies ComponentMeta;

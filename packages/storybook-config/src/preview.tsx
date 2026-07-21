@@ -167,7 +167,9 @@ export const getPreview = ({
         page: AutoDocs,
         source: {
           transform: async (code: string) =>
-            formatWithPrettier(applySourceReplacements(code, sourceReplacements)),
+            formatWithPrettier(
+              applySourceReplacements(code, sourceReplacements),
+            ),
         },
         toc: false,
       },

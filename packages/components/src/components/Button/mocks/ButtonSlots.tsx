@@ -1,4 +1,10 @@
-import { IressButton, IressIcon, IressInline, IressPill, IressStack } from '@/main';
+import {
+  IressButton,
+  IressIcon,
+  IressInline,
+  IressPill,
+  IressStack,
+} from '@/main';
 
 export function ButtonSlots() {
   return (

@@ -38,7 +38,11 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'menu item',
     description: 'An individual menu option',
-    query: <code>getByRole('option', {'{'} name: '...' {'}'})</code>,
+    query: (
+      <code>
+        getByRole('option', {'{'} name: '...' {'}'})
+      </code>
+    ),
     testId: 'select__menu-item',
   },
   {
@@ -50,7 +54,8 @@ export const testMeta: TestComponentMeta[] = [
 
 export default {
   heading: 'Select',
-  description: 'Renders a dropdown select input for choosing one option from a list.',
+  description:
+    'Renders a dropdown select input for choosing one option from a list.',
   tags: ['form', 'data-entry', 'dropdown', 'rich-select'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
@@ -69,15 +74,16 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-select--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/components/select',
+  guidelines: 'https://iress.github.io/design-system/#/components/select',
   additionalProps: [
     {
       name: 'minSearchLength',
       type: 'number',
-      description: 'Minimum number of characters required before search results are shown.',
+      description:
+        'Minimum number of characters required before search results are shown.',
       condition: 'Only when options is a function (async)',
     },
   ],
-  figma: 'https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-23433',
+  figma:
+    'https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-23433',
 } satisfies ComponentMeta;

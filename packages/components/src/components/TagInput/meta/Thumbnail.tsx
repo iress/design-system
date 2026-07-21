@@ -49,7 +49,12 @@ const Thumbnail = () => (
       style={{ fill: cssVars.colour.neutral[60] }}
     />
     {/* Tag 1 close */}
-    <circle cx="162" cy="234" r="10" style={{ fill: cssVars.colour.neutral[50] }} />
+    <circle
+      cx="162"
+      cy="234"
+      r="10"
+      style={{ fill: cssVars.colour.neutral[50] }}
+    />
     {/* Tag 2 */}
     <rect
       x="200"
@@ -68,7 +73,12 @@ const Thumbnail = () => (
       style={{ fill: cssVars.colour.neutral[60] }}
     />
     {/* Tag 2 close */}
-    <circle cx="316" cy="234" r="10" style={{ fill: cssVars.colour.neutral[50] }} />
+    <circle
+      cx="316"
+      cy="234"
+      r="10"
+      style={{ fill: cssVars.colour.neutral[50] }}
+    />
     {/* Tag 3 */}
     <rect
       x="354"
@@ -87,7 +97,12 @@ const Thumbnail = () => (
       style={{ fill: cssVars.colour.neutral[60] }}
     />
     {/* Tag 3 close */}
-    <circle cx="430" cy="234" r="10" style={{ fill: cssVars.colour.neutral[50] }} />
+    <circle
+      cx="430"
+      cy="234"
+      r="10"
+      style={{ fill: cssVars.colour.neutral[50] }}
+    />
     {/* Cursor line */}
     <rect
       x="474"

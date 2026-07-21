@@ -8,8 +8,17 @@ import {
   withSource,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressProvider>;
+
+const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The root element of the provider',
+    testId: 'provider',
+  },
+];
 
 export default {
   title: 'Components/Provider',
@@ -18,6 +27,15 @@ export default {
     ...disableArgTypes(['children']),
     children: reactNodeArgType,
     ...stylingProps,
+  },
+  parameters: {
+    idsConfig: { testMeta },
+    docs: {
+      description: {
+        component:
+          'The root provider that wraps your application to enable IDS theming, icons, and context features.',
+      },
+    },
   },
 } as Meta<typeof IressProvider>;
 

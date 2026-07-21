@@ -6,7 +6,11 @@ import {
   useState,
   type MouseEvent,
 } from 'react';
-import { Toaster, type ToasterItem, type ToasterProps } from './Toaster';
+import {
+  Toaster,
+  type ToasterItem,
+  type ToasterProps,
+} from './components/Toaster';
 import {
   registerToaster,
   type ToasterRegister,

@@ -1,6 +1,6 @@
 import { act, render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { Toaster, type ToasterProps, ToasterItem } from './Toaster';
+import { Toaster, type ToasterProps, ToasterItem } from './components/Toaster';
 import { toaster as toasterStyles } from './Toaster.styles';
 import { GlobalCSSClass } from '@/enums';
 

@@ -11,8 +11,12 @@ import {
 import { lazy, Suspense } from 'react';
 
 const HomePageHero = lazy(() => import('../components/heroes/HomePageHero'));
-const ComponentsHero = lazy(() => import('../components/heroes/ComponentsHero'));
-const FoundationsHero = lazy(() => import('../components/heroes/FoundationsHero'));
+const ComponentsHero = lazy(
+  () => import('../components/heroes/ComponentsHero'),
+);
+const FoundationsHero = lazy(
+  () => import('../components/heroes/FoundationsHero'),
+);
 const TokensHero = lazy(() => import('../components/heroes/TokensHero'));
 
 export const Route = createFileRoute('/')({
@@ -27,11 +31,15 @@ function HomePage() {
           <IressStack gap="md">
             <IressText element="h1">Iress Design System</IressText>
             <IressText element="p" color="muted">
-              A shared visual language, working code, and design tools for building
-              consistent digital products across Iress.
+              A shared visual language, working code, and design tools for
+              building consistent digital products across Iress.
             </IressText>
             <IressInline gap="md">
-              <IressButton mode="primary" element={Link} to="/get-started/develop">
+              <IressButton
+                mode="primary"
+                element={Link}
+                to="/get-started/develop"
+              >
                 Start developing
               </IressButton>
               <IressButton element={Link} to="/get-started/design">
@@ -55,7 +63,11 @@ function HomePage() {
             element={Link}
             to="/foundations/principles"
             onClick={() => {}}
-            media={<Suspense fallback={null}><FoundationsHero /></Suspense>}
+            media={
+              <Suspense fallback={null}>
+                <FoundationsHero />
+              </Suspense>
+            }
           >
             Core principles, accessibility, responsive layout, and content
             guidelines that underpin every component.
@@ -68,7 +80,11 @@ function HomePage() {
             element={Link}
             to="/components/button"
             onClick={() => {}}
-            media={<Suspense fallback={null}><ComponentsHero /></Suspense>}
+            media={
+              <Suspense fallback={null}>
+                <ComponentsHero />
+              </Suspense>
+            }
           >
             Production-ready React components with built-in accessibility,
             theming, and responsive behaviour.
@@ -81,7 +97,11 @@ function HomePage() {
             element={Link}
             to="/patterns/form"
             onClick={() => {}}
-            media={<Suspense fallback={null}><TokensHero /></Suspense>}
+            media={
+              <Suspense fallback={null}>
+                <TokensHero />
+              </Suspense>
+            }
           >
             Composable patterns for common workflows — forms, navigation,
             loading states, and feedback.

@@ -8,8 +8,8 @@ export const testMeta: TestComponentMeta[] = [
     description: 'The root element of the input',
     query: (
       <>
-        <code>getByRole('textbox')</code>, or{' '}
-        <code>getByLabelText('...')</code> when inside a Field
+        <code>getByRole('textbox')</code>, or <code>getByLabelText('...')</code>{' '}
+        when inside a Field
       </>
     ),
     testId: 'input',
@@ -37,8 +37,7 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-input--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/components/input',
+  guidelines: 'https://iress.github.io/design-system/#/components/input',
   additionalProps: [
     {
       name: 'clearable',
@@ -49,16 +48,19 @@ export default {
     {
       name: 'variant',
       type: "'search'",
-      description: 'The variant of the input. The search variant applies different styles for the clear button and loading spinner.',
+      description:
+        'The variant of the input. The search variant applies different styles for the clear button and loading spinner.',
       condition: 'Only when rows is not set',
     },
     {
       name: 'autoGrow',
       type: 'boolean | number',
       default: 'false',
-      description: 'Enables auto-grow for textarea. Set to true for default max 5 rows, or a number for custom max rows.',
+      description:
+        'Enables auto-grow for textarea. Set to true for default max 5 rows, or a number for custom max rows.',
       condition: 'Only when rows is set',
     },
   ],
-  figma: 'https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=6201-23',
+  figma:
+    'https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=6201-23',
 } satisfies ComponentMeta;

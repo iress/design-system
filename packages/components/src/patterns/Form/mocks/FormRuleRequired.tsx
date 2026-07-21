@@ -7,21 +7,21 @@ import { IressForm, IressFormField, IressInput, IressButton } from '@/main';
 export function FormRuleRequired() {
   return (
     <IressForm>
-        <IressFormField
-          label="Default message"
-          name="default"
-          rules={{ required: true }}
-          render={(controlledProps) => <IressInput {...controlledProps} />}
-        />
-        <IressFormField
-          label="Custom message"
-          name="custom"
-          rules={{ required: 'Please check this field' }}
-          render={(controlledProps) => <IressInput {...controlledProps} />}
-        />
-        <IressButton type="submit" mode="primary" >
-          Validate
-        </IressButton>
+      <IressFormField
+        label="Default message"
+        name="default"
+        rules={{ required: true }}
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+      />
+      <IressFormField
+        label="Custom message"
+        name="custom"
+        rules={{ required: 'Please check this field' }}
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+      />
+      <IressButton type="submit" mode="primary">
+        Validate
+      </IressButton>
     </IressForm>
   );
 }

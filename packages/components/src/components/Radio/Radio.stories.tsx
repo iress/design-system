@@ -41,7 +41,10 @@ export const ReadOnly: Story = {
   render: (args) => <RadioReadOnly {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(RadioReadOnlySource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(RadioReadOnlySource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -49,6 +52,9 @@ export const Variants: Story = {
   render: (args) => <RadioVariants {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(RadioVariantsSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(RadioVariantsSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };

@@ -8,11 +8,19 @@ export function IconFlip() {
         <IressText>(default)</IressText>
       </IressStack>
       <IressStack horizontalAlign="center">
-        <IressIcon name="home" textStyle="typography.heading.1" flip="horizontal" />
+        <IressIcon
+          name="home"
+          textStyle="typography.heading.1"
+          flip="horizontal"
+        />
         <IressText>horizontal</IressText>
       </IressStack>
       <IressStack horizontalAlign="center">
-        <IressIcon name="home" textStyle="typography.heading.1" flip="vertical" />
+        <IressIcon
+          name="home"
+          textStyle="typography.heading.1"
+          flip="vertical"
+        />
         <IressText>vertical</IressText>
       </IressStack>
       <IressStack horizontalAlign="center">

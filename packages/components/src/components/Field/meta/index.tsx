@@ -10,8 +10,10 @@ export const testMeta: TestComponentMeta[] = [
       <>
         No role-based query — use <code>getByTestId('field')</code>. To query
         the child input, use{' '}
-        <code>getByRole('textbox', {'{'} name: '...' {'}'})</code> or{' '}
-        <code>getByLabelText('...')</code>
+        <code>
+          getByRole('textbox', {'{'} name: '...' {'}'})
+        </code>{' '}
+        or <code>getByLabelText('...')</code>
       </>
     ),
     testId: 'field',
@@ -38,7 +40,8 @@ export const testMeta: TestComponentMeta[] = [
 
 export default {
   heading: 'Field',
-  description: 'Wraps a form control with its label, description, and validation message.',
+  description:
+    'Wraps a form control with its label, description, and validation message.',
   tags: ['form', 'wrapper', 'validation'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
@@ -57,6 +60,5 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-field--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/components/field',
+  guidelines: 'https://iress.github.io/design-system/#/components/field',
 } satisfies ComponentMeta;

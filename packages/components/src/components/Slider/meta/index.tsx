@@ -28,7 +28,8 @@ export const testMeta: TestComponentMeta[] = [
 
 export default {
   heading: 'Slider',
-  description: 'Allows users to select a value from a range by dragging a handle.',
+  description:
+    'Allows users to select a value from a range by dragging a handle.',
   tags: ['form', 'data-entry', 'range'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
@@ -47,6 +48,5 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-slider--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/components/slider',
+  guidelines: 'https://iress.github.io/design-system/#/components/slider',
 } satisfies ComponentMeta;

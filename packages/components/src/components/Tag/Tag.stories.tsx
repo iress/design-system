@@ -43,7 +43,10 @@ export const Mode: Story = {
   render: (args) => <TagMode {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(TagModeSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(TagModeSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -51,7 +54,10 @@ export const Status: Story = {
   render: (args) => <TagStatus {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(TagStatusSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(TagStatusSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -59,7 +65,10 @@ export const Bordered: Story = {
   render: (args) => <TagBordered {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(TagBorderedSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(TagBorderedSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 

@@ -13,7 +13,8 @@ export const testMeta: TestComponentMeta[] = [
 
 export default {
   heading: 'Divider',
-  description: 'Renders a horizontal or vertical line to visually separate content.',
+  description:
+    'Renders a horizontal or vertical line to visually separate content.',
   tags: ['layout', 'separator', 'visual'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
@@ -32,6 +33,5 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-divider--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/components/divider',
+  guidelines: 'https://iress.github.io/design-system/#/components/divider',
 } satisfies ComponentMeta;

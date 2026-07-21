@@ -29,6 +29,7 @@ export type IressTextElements =
 /**
  * @deprecated Use `IressTextElements` instead. This type will be removed in a future release.
  */
+// eslint-disable-next-line sonarjs/redundant-type-aliases
 export type TextElements = IressTextElements;
 
 export type IressTextProps<E extends IressTextElements = 'div'> =

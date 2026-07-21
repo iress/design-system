@@ -8,7 +8,6 @@ import {
   IressText,
   IressStack,
   IressIcon,
-  PopoverRef,
 } from '@iress-oss/ids-components';
 
 interface PagefindResult {
@@ -29,19 +28,23 @@ let pagefind: PagefindAPI | null = null;
 
 async function getPagefind(): Promise<PagefindAPI> {
   if (pagefind) return pagefind;
-  pagefind = await import(
+  pagefind = (await import(
     /* @vite-ignore */ `${import.meta.env.BASE_URL}pagefind/pagefind.js`
-  );
-  await pagefind!.options({ excerptLength: 15 });
-  await pagefind!.init();
-  return pagefind!;
+  )) as PagefindAPI;
+  await pagefind.options({ excerptLength: 15 });
+  await pagefind.init();
+  return pagefind;
 }
 
 export function Search() {
   const navigate = useNavigate();
   const [results, setResults] = useState<PagefindResult[]>([]);
   const [searchError, setSearchError] = useState(false);
-  const inputRef = useRef<{ input: HTMLInputElement | null; focus: () => void; blur: () => void } | null>(null);
+  const inputRef = useRef<{
+    input: HTMLInputElement | null;
+    focus: () => void;
+    blur: () => void;
+  } | null>(null);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -85,7 +88,9 @@ export function Search() {
           type="search"
           aria-label="Search guidelines"
           placeholder="Search..."
-          onChange={handleChange}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            void handleChange(e);
+          }}
           variant="search"
           width="16"
           append={<IressIcon name="search" />}
@@ -102,9 +107,9 @@ export function Search() {
             <IressMenuItem
               key={r.url}
               element={Link}
-              to={r.url?.split('#')[1] as string}
+              to={r.url?.split('#')[1]}
               onClick={() => {
-                navigate({ to: r.url?.split('#')[1] });
+                void navigate({ to: r.url?.split('#')[1] });
                 document
                   .querySelector<HTMLElement>('[data-pagefind-body]')
                   ?.focus({

@@ -11,7 +11,6 @@ import {
   IressTag,
   IressPill,
   IressContextualMenu,
-  IressPanel,
 } from '@/main';
 import { useState } from 'react';
 
@@ -25,11 +24,7 @@ const SLOT_CONTENT = {
     />
   ),
   heading: <h2>Welcome to Iress!</h2>,
-  topRight: (
-    <IressContextualMenu>
-      More actions in here
-    </IressContextualMenu>
-  ),
+  topRight: <IressContextualMenu>More actions in here</IressContextualMenu>,
   children: (
     <IressText>
       Find out all the onboarding material you need{' '}
@@ -47,7 +42,7 @@ const SLOT_CONTENT = {
   ),
 };
 
-const SLOT_NAMES = Object.keys(SLOT_CONTENT) as Array<keyof typeof SLOT_CONTENT>;
+const SLOT_NAMES = Object.keys(SLOT_CONTENT) as (keyof typeof SLOT_CONTENT)[];
 
 export function CardAllSlots() {
   const [show, setShow] = useState({
@@ -60,7 +55,10 @@ export function CardAllSlots() {
   });
 
   const cardProps = Object.fromEntries(
-    SLOT_NAMES.filter((slot) => show[slot]).map((slot) => [slot, SLOT_CONTENT[slot]]),
+    SLOT_NAMES.filter((slot) => show[slot]).map((slot) => [
+      slot,
+      SLOT_CONTENT[slot],
+    ]),
   );
 
   return (

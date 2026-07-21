@@ -16,7 +16,10 @@ import {
 } from '@/main';
 import { useState } from 'react';
 import { cssVars } from '@iress-oss/ids-tokens';
-import { withBreakpointLabel, withSource } from '@iress-oss/ids-storybook-config';
+import {
+  withBreakpointLabel,
+  withSource,
+} from '@iress-oss/ids-storybook-config';
 import { GRID_SIZE, Z_INDEX } from '@theme-preset/constants';
 import { ResponsiveTableColumns } from './mocks/ResponsiveTableColumns';
 import ResponsiveTableColumnsSource from './mocks/ResponsiveTableColumns.tsx?raw';
@@ -248,12 +251,12 @@ export const Xs: Story = {
   args: {
     caption: BREAKPOINT_DETAILS.xs.screenWidthRange,
   },
-   decorators: [withBreakpointLabel()],
+  decorators: [withBreakpointLabel()],
   render: ({ caption }) => (
     <IressStack gap="lg">
       <IressInline gap="md" verticalAlign="bottom">
         <IressStack gap="xs" maxWidth="input.16">
-            <BreakpointXs />
+          <BreakpointXs />
           <IressText>
             <strong>{caption}</strong>
             <br />
@@ -323,12 +326,12 @@ export const Sm: Story = {
   args: {
     caption: BREAKPOINT_DETAILS.sm.screenWidthRange,
   },
-   decorators: [withBreakpointLabel()],
+  decorators: [withBreakpointLabel()],
   render: ({ caption }) => (
     <IressStack gap="lg">
       <IressInline gap="md" verticalAlign="bottom">
         <IressStack gap="xs" maxWidth="input.16">
-            <BreakpointSm />
+          <BreakpointSm />
           <IressText>
             <strong>{caption}</strong>
             <br />
@@ -398,12 +401,12 @@ export const Md: Story = {
   args: {
     caption: BREAKPOINT_DETAILS.md.screenWidthRange,
   },
-   decorators: [withBreakpointLabel()],
+  decorators: [withBreakpointLabel()],
   render: ({ caption }) => (
     <IressStack gap="lg">
       <IressInline gap="md" verticalAlign="bottom">
         <IressStack gap="xs" maxWidth="input.16">
-            <BreakpointMd />
+          <BreakpointMd />
           <IressText>
             <strong>{caption}</strong>
             <br />
@@ -488,12 +491,12 @@ export const Lg: Story = {
   args: {
     caption: BREAKPOINT_DETAILS.lg.screenWidthRange,
   },
-   decorators: [withBreakpointLabel()],
+  decorators: [withBreakpointLabel()],
   render: ({ caption }) => (
     <IressStack gap="lg">
       <IressInline gap="md" verticalAlign="bottom">
         <IressStack gap="xs" maxWidth="input.16">
-            <BreakpointLg />
+          <BreakpointLg />
           <IressText>
             <strong>{caption}</strong>
             <br />
@@ -613,12 +616,12 @@ export const Xl: Story = {
   args: {
     caption: BREAKPOINT_DETAILS.xl.screenWidthRange,
   },
-   decorators: [withBreakpointLabel()],
+  decorators: [withBreakpointLabel()],
   render: ({ caption }) => (
     <IressStack gap="lg">
       <IressInline gap="md" verticalAlign="bottom">
         <IressStack gap="xs" maxWidth="input.16">
-            <BreakpointXl />
+          <BreakpointXl />
           <IressText>
             <strong>{caption}</strong>
             <br />
@@ -740,12 +743,12 @@ export const Xxl: Story = {
   args: {
     caption: BREAKPOINT_DETAILS.xxl.screenWidthRange,
   },
-   decorators: [withBreakpointLabel()],
+  decorators: [withBreakpointLabel()],
   render: ({ caption }) => (
     <IressStack gap="lg">
       <IressInline gap="md" verticalAlign="bottom">
         <IressStack gap="xs" maxWidth="input.16">
-            <BreakpointXl />
+          <BreakpointXl />
           <IressText>
             <strong>{caption}</strong>
             <br />
@@ -884,15 +887,21 @@ const zIndexUsage: Record<keyof typeof Z_INDEX, string> = {
 };
 
 export const ZIndex: Story = {
-  render: () => <IressTable caption="Z-Index Usage" columns={[
-      { label: 'Name', key: 'name', width: '1%' },
-      { label: 'Usage', key: 'usage' },
-      { label: 'Value', key: 'value', width: '200px', sort: 'asc' },
-    ]} rows={Object.entries(Z_INDEX)
-      .filter(([name]) => name !== 'displayName' && name !== '__docgenInfo')
-      .map(([name, value]) => ({
-        name,
-        usage: zIndexUsage[name as keyof typeof Z_INDEX],
-        value,
-      }))} />,
+  render: () => (
+    <IressTable
+      caption="Z-Index Usage"
+      columns={[
+        { label: 'Name', key: 'name', width: '1%' },
+        { label: 'Usage', key: 'usage' },
+        { label: 'Value', key: 'value', width: '200px', sort: 'asc' },
+      ]}
+      rows={Object.entries(Z_INDEX)
+        .filter(([name]) => name !== 'displayName' && name !== '__docgenInfo')
+        .map(([name, value]) => ({
+          name,
+          usage: zIndexUsage[name as keyof typeof Z_INDEX],
+          value,
+        }))}
+    />
+  ),
 };

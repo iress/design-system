@@ -130,7 +130,7 @@ export const Align: Story = {
 
 export const Delay: Story = {
   render: (args) => (
-     <IressStyled pt="spacing.6">
+    <IressStyled pt="spacing.6">
       <IressInline horizontalAlign="center" gap="sm">
         <IressTooltip {...args} delay={0}>
           <IressButton>0ms (no delay)</IressButton>

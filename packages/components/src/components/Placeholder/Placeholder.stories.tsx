@@ -1,6 +1,9 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressPlaceholder } from '.';
-import { componentStoryMeta, reactNodeArgType } from '@iress-oss/ids-storybook-config';
+import {
+  componentStoryMeta,
+  reactNodeArgType,
+} from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressPlaceholder>;

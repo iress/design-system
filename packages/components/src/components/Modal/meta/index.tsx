@@ -11,19 +11,31 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
     description: 'The dialog element (nested inside backdrop)',
-    query: <code>findByRole('dialog', {'{'} name: '...' {'}'})</code>,
+    query: (
+      <code>
+        findByRole('dialog', {'{'} name: '...' {'}'})
+      </code>
+    ),
     testId: 'modal',
   },
   {
     part: 'heading',
     description: 'The modal heading',
-    query: <code>getByRole('heading', {'{'} name: '...' {'}'})</code>,
+    query: (
+      <code>
+        getByRole('heading', {'{'} name: '...' {'}'})
+      </code>
+    ),
     testId: 'modal__heading',
   },
   {
     part: 'close button',
     description: 'The close button',
-    query: <code>findByRole('button', {'{'} name: 'Close' {'}'})</code>,
+    query: (
+      <code>
+        findByRole('button', {'{'} name: 'Close' {'}'})
+      </code>
+    ),
     testId: 'modal__close-button__button',
   },
   {
@@ -51,7 +63,8 @@ export const testMeta: TestComponentMeta[] = [
 
 export default {
   heading: 'Modal',
-  description: 'Displays content in a focused overlay dialog that requires user interaction.',
+  description:
+    'Displays content in a focused overlay dialog that requires user interaction.',
   tags: ['overlay', 'dialog', 'interactive'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
@@ -70,7 +83,7 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-modal--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/components/modal',
-  figma: 'https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-32822',
+  guidelines: 'https://iress.github.io/design-system/#/components/modal',
+  figma:
+    'https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-32822',
 } satisfies ComponentMeta;

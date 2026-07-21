@@ -9,8 +9,8 @@ export const testMeta: TestComponentMeta[] = [
     query: (
       <>
         <code>getByRole('list')</code> by default, or{' '}
-        <code>getByRole('menu')</code> /{' '}
-        <code>getByRole('listbox')</code> depending on role prop
+        <code>getByRole('menu')</code> / <code>getByRole('listbox')</code>{' '}
+        depending on role prop
       </>
     ),
     testId: 'menu',
@@ -19,7 +19,11 @@ export const testMeta: TestComponentMeta[] = [
     part: 'activator',
     description:
       'A menu group activator (propagated from IressMenuGroup data-testid)',
-    query: <code>getByRole('button', {'{'} name: '...' {'}'})</code>,
+    query: (
+      <code>
+        getByRole('button', {'{'} name: '...' {'}'})
+      </code>
+    ),
     testId: '<menugroup-testid>__activator',
   },
   {
@@ -69,7 +73,11 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-menu--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/components/menu',
-  subComponents: ['IressMenuItem', 'IressMenuHeading', 'IressMenuDivider', 'IressMenuGroup'],
+  guidelines: 'https://iress.github.io/design-system/#/components/menu',
+  subComponents: [
+    'IressMenuItem',
+    'IressMenuHeading',
+    'IressMenuDivider',
+    'IressMenuGroup',
+  ],
 } satisfies ComponentMeta;

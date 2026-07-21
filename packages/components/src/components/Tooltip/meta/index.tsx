@@ -43,6 +43,5 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tooltip--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/components/tooltip',
+  guidelines: 'https://iress.github.io/design-system/#/components/tooltip',
 } satisfies ComponentMeta;

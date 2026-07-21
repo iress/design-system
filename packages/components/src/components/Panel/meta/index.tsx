@@ -12,7 +12,8 @@ export const testMeta: TestComponentMeta[] = [
 
 export default {
   heading: 'Panel',
-  description: 'Provides a sectioned container for grouping related content with an optional heading.',
+  description:
+    'Provides a sectioned container for grouping related content with an optional heading.',
   tags: ['layout', 'container', 'content'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
@@ -31,6 +32,5 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-panel--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/components/panel',
+  guidelines: 'https://iress.github.io/design-system/#/components/panel',
 } satisfies ComponentMeta;

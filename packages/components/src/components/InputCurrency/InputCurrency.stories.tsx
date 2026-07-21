@@ -108,7 +108,10 @@ export const CurrencyInTableRecipe: Story = {
   render: (args) => <CurrencyInTable {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(CurrencyInTableSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(CurrencyInTableSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 

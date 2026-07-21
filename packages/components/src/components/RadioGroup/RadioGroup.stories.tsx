@@ -93,7 +93,10 @@ export const Layout: Story = {
   render: (args) => <RadioGroupLayout {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(RadioGroupLayoutSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(RadioGroupLayoutSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 

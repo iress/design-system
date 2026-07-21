@@ -8,9 +8,13 @@ export const testMeta: TestComponentMeta[] = [
     description: 'The root element of the icon',
     query: (
       <>
-        <code>getByRole('img', {'{'} name: '...' {'}'})</code> when a label is
-        provided, otherwise{' '}
-        <code>getByRole('img', {'{'} hidden: true {'}'})</code>
+        <code>
+          getByRole('img', {'{'} name: '...' {'}'})
+        </code>{' '}
+        when a label is provided, otherwise{' '}
+        <code>
+          getByRole('img', {'{'} hidden: true {'}'})
+        </code>
       </>
     ),
     testId: 'icon',
@@ -38,6 +42,5 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-icon--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/components/icon',
+  guidelines: 'https://iress.github.io/design-system/#/components/icon',
 } satisfies ComponentMeta;

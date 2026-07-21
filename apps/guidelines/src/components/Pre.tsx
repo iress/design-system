@@ -1,5 +1,10 @@
 import { type HTMLAttributes, useRef, useState } from 'react';
-import { IressButton, IressIcon, IressInline, IressStack } from '@iress-oss/ids-components';
+import {
+  IressButton,
+  IressIcon,
+  IressInline,
+  IressStack,
+} from '@iress-oss/ids-components';
 import { cssVars } from '@iress-oss/ids-tokens';
 
 export function Pre(props: HTMLAttributes<HTMLPreElement>) {
@@ -10,7 +15,7 @@ export function Pre(props: HTMLAttributes<HTMLPreElement>) {
 
   const handleCopy = () => {
     const code = preRef.current?.textContent ?? '';
-    navigator.clipboard.writeText(code);
+    void navigator.clipboard.writeText(code);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -37,22 +42,27 @@ export function Pre(props: HTMLAttributes<HTMLPreElement>) {
               border-left-color: transparent;
           }
         `}</style>
-      <pre ref={preRef} {...props} style={{ flex: 1, marginBlockEnd: 0 }} />
-      {!hideCopy && (
-        <IressStack stretch bg="colour.neutral.20" pt="spacing.3" style={{ flex: 0 }}>
-          <IressButton
-            mode="muted"
-            onClick={handleCopy} 
+        <pre ref={preRef} {...props} style={{ flex: 1, marginBlockEnd: 0 }} />
+        {!hideCopy && (
+          <IressStack
+            stretch
             bg="colour.neutral.20"
+            pt="spacing.3"
+            style={{ flex: 0 }}
           >
-            {copied ? (
-              'Copied!'
-            ) : (
-              <IressIcon name="content_copy" screenreaderText="Copy code" />
-            )}
-          </IressButton>
-        </IressStack>
-      )}
+            <IressButton
+              mode="muted"
+              onClick={handleCopy}
+              bg="colour.neutral.20"
+            >
+              {copied ? (
+                'Copied!'
+              ) : (
+                <IressIcon name="content_copy" screenreaderText="Copy code" />
+              )}
+            </IressButton>
+          </IressStack>
+        )}
       </IressInline>
     </div>
   );

@@ -6,7 +6,11 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
     description: 'The root element of the button group',
-    query: <code>getByRole('group', {'{'} name: '...' {'}'})</code>,
+    query: (
+      <code>
+        getByRole('group', {'{'} name: '...' {'}'})
+      </code>
+    ),
     testId: 'buttongroup',
   },
   {
@@ -19,7 +23,8 @@ export const testMeta: TestComponentMeta[] = [
 
 export default {
   heading: 'ButtonGroup',
-  description: 'Groups related buttons together with consistent spacing and alignment.',
+  description:
+    'Groups related buttons together with consistent spacing and alignment.',
   tags: ['form', 'action', 'group'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
@@ -38,6 +43,5 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-button-group--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/components/button-group',
+  guidelines: 'https://iress.github.io/design-system/#/components/button-group',
 } satisfies ComponentMeta;

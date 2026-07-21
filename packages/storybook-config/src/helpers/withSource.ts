@@ -22,6 +22,34 @@ interface WithSourceOptions {
 }
 
 /**
+ * Extracts the return JSX from an exported function or arrow function.
+ */
+function extractExportedJSX(code: string): string {
+  // Match: export function X(...) { ... return (...) }
+  const fnPattern =
+    // eslint-disable-next-line sonarjs/slow-regex
+    /export function \w+\([^)]*\)\s*\{[\s\S]*?return\s*\(\s*([\s\S]*)\s*\);\s*\}/;
+  const fnMatch = fnPattern.exec(code);
+  if (fnMatch) return fnMatch[1];
+
+  // Match: export const X = (...) => { ... return (...) }
+  const arrowReturnPattern =
+    // eslint-disable-next-line sonarjs/slow-regex
+    /export const \w+\s*=\s*(?:\([^)]*\)|[^=]*)\s*=>\s*\{[\s\S]*?return\s*\(\s*([\s\S]*)\s*\);\s*\}/;
+  const arrowReturnMatch = arrowReturnPattern.exec(code);
+  if (arrowReturnMatch) return arrowReturnMatch[1];
+
+  // Match: export const X = (...) => (...)
+  const arrowExprPattern =
+    // eslint-disable-next-line sonarjs/slow-regex
+    /export const \w+\s*=\s*(?:\([^)]*\)|[^=]*)\s*=>\s*\(\s*([\s\S]*)\s*\);?\s*$/;
+  const arrowExprMatch = arrowExprPattern.exec(code);
+  if (arrowExprMatch) return arrowExprMatch[1];
+
+  return code;
+}
+
+/**
  * Applies all string transformations to source code.
  */
 function transformSource(source: string, options?: WithSourceOptions): string {
@@ -57,28 +85,13 @@ function transformSource(source: string, options?: WithSourceOptions): string {
 
   // Strip import statements if requested
   if (options?.stripImports) {
+    // eslint-disable-next-line sonarjs/slow-regex
     code = code.replace(/^import\s+.*;\s*\n/gm, '');
   }
 
   // Extract just the return JSX from export function
   if (options?.stripExportFunction) {
-    // Match: export function X(...) { ... return (...) }
-    const fnMatch = code.match(/export function \w+\([^)]*\)\s*\{[\s\S]*?return\s*\(\s*([\s\S]*)\s*\);\s*\}/);
-    if (fnMatch) {
-      code = fnMatch[1];
-    } else {
-      // Match: export const X = (...) => { ... return (...) }
-      const arrowReturnMatch = code.match(/export const \w+\s*=\s*(?:\([^)]*\)|[^=]*)\s*=>\s*\{[\s\S]*?return\s*\(\s*([\s\S]*)\s*\);\s*\}/);
-      if (arrowReturnMatch) {
-        code = arrowReturnMatch[1];
-      } else {
-        // Match: export const X = (...) => (...)
-        const arrowExprMatch = code.match(/export const \w+\s*=\s*(?:\([^)]*\)|[^=]*)\s*=>\s*\(\s*([\s\S]*)\s*\);?\s*$/);
-        if (arrowExprMatch) {
-          code = arrowExprMatch[1];
-        }
-      }
-    }
+    code = extractExportedJSX(code);
   }
 
   // Clean up empty lines left by removals and trim

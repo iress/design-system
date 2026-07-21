@@ -33,7 +33,10 @@ export const Mode: StoryObj<typeof IressExpander> = {
   render: (args) => <ExpanderMode {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(ExpanderModeSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(ExpanderModeSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 

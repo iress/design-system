@@ -31,6 +31,5 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-skeleton--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/components/skeleton',
+  guidelines: 'https://iress.github.io/design-system/#/components/skeleton',
 } satisfies ComponentMeta;

@@ -102,7 +102,10 @@ export const Layout: Story = {
   render: (args) => <TabSetLayout {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(TabSetLayoutSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(TabSetLayoutSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -153,7 +156,8 @@ export const DynamicBadge: Story = {
         story:
           'Toggle the pill on the active tab to see the active indicator resize and reposition automatically. This demonstrates that `ResizeObserver` correctly tracks tab size changes at runtime.',
       },
-      ...withSource(TabsWithDynamicBadgeSource, { stripImports: true }).docs as object,
+      ...(withSource(TabsWithDynamicBadgeSource, { stripImports: true })
+        .docs as object),
     },
   },
 };

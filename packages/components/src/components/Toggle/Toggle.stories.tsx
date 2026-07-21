@@ -57,6 +57,9 @@ export const Layout: Story = {
   render: (args) => <ToggleLayout {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(ToggleLayoutSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(ToggleLayoutSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };

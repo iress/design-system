@@ -8,7 +8,9 @@ import {
 
 const SLIDEOUT_ID = 'storybook-slideout';
 
-export function AppWithSlideoutProvider(props: Partial<IressSlideoutProps> = {}) {
+export function AppWithSlideoutProvider(
+  props: Partial<IressSlideoutProps> = {},
+) {
   return (
     <IressSlideoutProvider>
       <SlideoutWithTrigger {...props} />
@@ -19,7 +21,7 @@ export function AppWithSlideoutProvider(props: Partial<IressSlideoutProps> = {})
 function SlideoutWithTrigger({
   id = SLIDEOUT_ID,
   ...slideoutProps
-}: Partial<IressSlideoutProps>) {
+}: Readonly<Partial<IressSlideoutProps>>) {
   const { showSlideout } = useSlideout();
 
   return (

@@ -9,8 +9,8 @@ export default {
   parameters: {
     idsConfig: {
       autodocsTemplate: 'default',
-    }
-  }
+    },
+  },
 } as Meta<typeof IressText>;
 
 export const focusable: Story = {

@@ -12,7 +12,7 @@ interface StarWarsCharacterApi {
 export function AutocompleteUsingAsync() {
   return (
     <IressAutocomplete
-      placeholder="Search star wars characters, or type &quot;error&quot; to see the error text"
+      placeholder='Search star wars characters, or type "error" to see the error text'
       options={async (query: string) => {
         if (query === 'error') {
           throw new Error('This is an error');

@@ -1,8 +1,7 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { IressTable, IressTableFormattedValue } from '..';
+import { IressTableFormattedValue } from '..';
 import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 import {
-  disableArgTypes,
   reactNodeArgType,
   stylingProps,
   withSource,

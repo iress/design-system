@@ -64,11 +64,7 @@ const defaultValues = {
 
 const ClientSection: React.FC<ClientProps> = ({ control }) => {
   return (
-    <IressFieldGroup
-      label="Client"
-      inline
-      mb="none"
-    >
+    <IressFieldGroup label="Client" inline mb="none">
       <IressFormField
         name="client.name"
         label="Name"
@@ -110,44 +106,40 @@ const DependantSection: React.FC<DependantProps> = ({
           style={{ zIndex: 1 }}
         />
       </IressInline>
-      <IressFieldGroup
-        label={`Dependant ${index + 1}`}
-        inline
-        mb="none"
-      >
-          <IressFormField
-            name={`dependants.${index}.name`}
-            label="Name"
-            control={control}
-            render={(controlledProps) => <IressInput {...controlledProps} />}
-            rules={{ required: true }}
-          />
-          <IressFormField
-            name={`dependants.${index}.relationship`}
-            label="Relationship"
-            control={control}
-            render={(controlledProps) => <IressInput {...controlledProps} />}
-            rules={{ required: true }}
-          />
-          <IressFormField
-            name={`dependants.${index}.age`}
-            label="Age"
-            control={control}
-            render={(controlledProps) => <IressInput {...controlledProps} />}
-            rules={{ required: true }}
-          />
-          <IressButton
-            type="button"
-            prepend={<IressIcon name="check" />}
-            onClick={() => {
-              const data = getValues();
-              const value = data?.dependants[index];
-              update(index, value);
-            }}
-          >
-            Save
-          </IressButton>
-        </IressFieldGroup>
+      <IressFieldGroup label={`Dependant ${index + 1}`} inline mb="none">
+        <IressFormField
+          name={`dependants.${index}.name`}
+          label="Name"
+          control={control}
+          render={(controlledProps) => <IressInput {...controlledProps} />}
+          rules={{ required: true }}
+        />
+        <IressFormField
+          name={`dependants.${index}.relationship`}
+          label="Relationship"
+          control={control}
+          render={(controlledProps) => <IressInput {...controlledProps} />}
+          rules={{ required: true }}
+        />
+        <IressFormField
+          name={`dependants.${index}.age`}
+          label="Age"
+          control={control}
+          render={(controlledProps) => <IressInput {...controlledProps} />}
+          rules={{ required: true }}
+        />
+        <IressButton
+          type="button"
+          prepend={<IressIcon name="check" />}
+          onClick={() => {
+            const data = getValues();
+            const value = data?.dependants[index];
+            update(index, value);
+          }}
+        >
+          Save
+        </IressButton>
+      </IressFieldGroup>
     </IressPanel>
   );
 };
@@ -175,27 +167,27 @@ export const FormGroups = () => {
         add/edit/delete child form sections:
       </p>
       <IressHookForm<FormValues> id="mainForm" form={form} onSubmit={onSubmit}>
-          <ClientSection control={control} />
-          {fields.map((field, index) => (
-            <DependantSection
-              key={field.id}
-              index={index}
-              control={control}
-              update={update}
-              remove={remove}
-              getValues={getValues}
-            />
-          ))}
-          <IressButton
-            type="button"
-            prepend={<IressIcon name="plus" />}
-            onClick={() => {
-              append({ name: '', relationship: '', age: undefined });
-            }}
-            status="success"
-          >
-            Add Dependant
-          </IressButton>
+        <ClientSection control={control} />
+        {fields.map((field, index) => (
+          <DependantSection
+            key={field.id}
+            index={index}
+            control={control}
+            update={update}
+            remove={remove}
+            getValues={getValues}
+          />
+        ))}
+        <IressButton
+          type="button"
+          prepend={<IressIcon name="plus" />}
+          onClick={() => {
+            append({ name: '', relationship: '', age: undefined });
+          }}
+          status="success"
+        >
+          Add Dependant
+        </IressButton>
         <IressDivider my="md" />
         <IressButton type="submit" mode="primary">
           Submit All

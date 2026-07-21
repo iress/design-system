@@ -11,7 +11,11 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'input',
     description: 'The underlying radio input element',
-    query: <code>getByRole('radio', {'{'} name: '...' {'}'})</code>,
+    query: (
+      <code>
+        getByRole('radio', {'{'} name: '...' {'}'})
+      </code>
+    ),
     testId: 'radio__input',
   },
   {
@@ -23,7 +27,8 @@ export const testMeta: TestComponentMeta[] = [
 
 export default {
   heading: 'Radio',
-  description: 'Renders a single radio button for use within a group of mutually exclusive options.',
+  description:
+    'Renders a single radio button for use within a group of mutually exclusive options.',
   tags: ['form', 'selection', 'interactive'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
@@ -42,7 +47,7 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-radio--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/components/radio',
-  figma: 'https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-28220',
+  guidelines: 'https://iress.github.io/design-system/#/components/radio',
+  figma:
+    'https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-28220',
 } satisfies ComponentMeta;

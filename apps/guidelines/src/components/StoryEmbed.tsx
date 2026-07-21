@@ -3,7 +3,6 @@ import {
   IressCard,
   IressIcon,
   IressInline,
-  IressLink,
   IressSpinner,
   IressText,
 } from '@iress-oss/ids-components';
@@ -89,21 +88,29 @@ export function StoryEmbed({
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
-      if (event.source !== iframeRef.current?.contentWindow) return;
+      if (
+        event.source !==
+        (iframeRef.current?.contentWindow as MessageEventSource | null)
+      )
+        return;
 
-      if (event.data?.type === 'RELAY_SIZE' && iframeRef.current && autoHeight) {
-        iframeRef.current.style.height = `${event.data.height + 10}px`;
+      const data = event.data as
+        | { type: string; height?: number; flag?: boolean }
+        | undefined;
+
+      if (data?.type === 'RELAY_SIZE' && iframeRef.current && autoHeight) {
+        iframeRef.current.style.height = `${(data.height ?? 0) + 10}px`;
       }
 
-      if (event.data?.type === 'RELAY_PANEL') {
-        const isOpen = !!event.data.flag;
+      if (data?.type === 'RELAY_PANEL') {
+        const isOpen = !!data.flag;
         setPanelOpen(isOpen);
 
         // Re-request size after panel toggle settles
         setTimeout(() => {
           iframeRef.current?.contentWindow?.postMessage(
             { type: 'REQUEST_SIZE' },
-            '*',
+            new URL(iframeSrc).origin,
           );
         }, 300);
       }
@@ -122,7 +129,7 @@ export function StoryEmbed({
         selectorsToHide: hide,
         showPanel: showPanel ?? !!panel,
       },
-      '*',
+      new URL(iframeSrc).origin,
     );
   };
 
@@ -137,7 +144,7 @@ export function StoryEmbed({
       {
         type: 'OPEN_SANDBOX',
       },
-      '*',
+      new URL(iframeSrc).origin,
     );
   };
 
@@ -183,39 +190,39 @@ export function StoryEmbed({
           />
         )}
         {controls && (
-        <IressInline gap="xs" bg="colour.neutral.20" p="sm">
-          <IressButton
-            mode="muted"
-            onClick={() => togglePanel('storybook/docs/panel')}
-            prepend={<IressIcon name="code_blocks" />}
-          >
-            Show code
-          </IressButton>
-          <IressButton
-            mode="muted"
-            onClick={() => togglePanel('storybook/a11y/panel')}
-            prepend={<IressIcon name="accessibility_new" />}
-          >
-            Accessibility
-          </IressButton>
-          <IressButton
-            mode="muted"
-            onClick={() => openSandbox()}
-            prepend={<IressIcon name="draw" />}
-          >
-            Open in CodeSandbox
-          </IressButton>
-          <IressButton
-            href={storybookUrl}
-            target="_blank"
-            mode="muted"
-            rel="noopener noreferrer"
-            ml="auto"
-            append={<IressIcon name="open_in_new" />}
-          >
-            Open in Storybook
-          </IressButton>
-        </IressInline>
+          <IressInline gap="xs" bg="colour.neutral.20" p="sm">
+            <IressButton
+              mode="muted"
+              onClick={() => togglePanel('storybook/docs/panel')}
+              prepend={<IressIcon name="code_blocks" />}
+            >
+              Show code
+            </IressButton>
+            <IressButton
+              mode="muted"
+              onClick={() => togglePanel('storybook/a11y/panel')}
+              prepend={<IressIcon name="accessibility_new" />}
+            >
+              Accessibility
+            </IressButton>
+            <IressButton
+              mode="muted"
+              onClick={() => openSandbox()}
+              prepend={<IressIcon name="draw" />}
+            >
+              Open in CodeSandbox
+            </IressButton>
+            <IressButton
+              href={storybookUrl}
+              target="_blank"
+              mode="muted"
+              rel="noopener noreferrer"
+              ml="auto"
+              append={<IressIcon name="open_in_new" />}
+            >
+              Open in Storybook
+            </IressButton>
+          </IressInline>
         )}
       </div>
     </IressCard>

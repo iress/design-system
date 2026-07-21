@@ -1,9 +1,4 @@
-import {
-  IressBreadcrumbs,
-  IressPanel,
-  IressStack,
-  IressText,
-} from '@/main';
+import { IressBreadcrumbs, IressPanel, IressStack, IressText } from '@/main';
 
 export function BreadcrumbsAllConfigurations() {
   return (

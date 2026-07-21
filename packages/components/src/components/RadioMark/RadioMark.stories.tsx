@@ -115,7 +115,11 @@ export const CustomColors: Story = {
       </IressText>
       <IressText>
         <IressRadioMark {...args} color="colour.system.danger.fill" />
-        <IressRadioMark {...args} checked={true} color="colour.system.danger.fill" />
+        <IressRadioMark
+          {...args}
+          checked={true}
+          color="colour.system.danger.fill"
+        />
         Can be set to any color using the color prop, but will not change on
         hover or focus when used outside of a radio button context
       </IressText>

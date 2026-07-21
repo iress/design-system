@@ -34,7 +34,8 @@ export const testMeta: TestComponentMeta[] = [
 
 export default {
   heading: 'Autocomplete',
-  description: 'Provides a text input with suggestions that filter as the user types.',
+  description:
+    'Provides a text input with suggestions that filter as the user types.',
   tags: ['form', 'data-entry', 'search'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
@@ -53,6 +54,5 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-autocomplete--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/components/autocomplete',
+  guidelines: 'https://iress.github.io/design-system/#/components/autocomplete',
 } satisfies ComponentMeta;

@@ -8,8 +8,13 @@ export const testMeta: TestComponentMeta[] = [
     description: 'The root element of the tag',
     query: (
       <>
-        <code>getByRole('button', {'{'} name: '...' {'}'})</code> when
-        interactive, or <code>getByRole('link', {'{'} name: '...' {'}'})</code>{' '}
+        <code>
+          getByRole('button', {'{'} name: '...' {'}'})
+        </code>{' '}
+        when interactive, or{' '}
+        <code>
+          getByRole('link', {'{'} name: '...' {'}'})
+        </code>{' '}
         when rendered as a link
       </>
     ),
@@ -18,14 +23,19 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'delete button',
     description: 'The tag delete button',
-    query: <code>getByRole('button', {'{'} name: 'Remove item' {'}'})</code>,
+    query: (
+      <code>
+        getByRole('button', {'{'} name: 'Remove item' {'}'})
+      </code>
+    ),
     testId: 'tag__delete-button__button',
   },
 ];
 
 export default {
   heading: 'Tag',
-  description: 'Displays a compact label for categorisation, filtering, or metadata.',
+  description:
+    'Displays a compact label for categorisation, filtering, or metadata.',
   tags: ['data-display', 'label', 'categorization'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
@@ -44,7 +54,7 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tag--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/components/tag',
-  figma: 'https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-29810',
+  guidelines: 'https://iress.github.io/design-system/#/components/tag',
+  figma:
+    'https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-29810',
 } satisfies ComponentMeta;

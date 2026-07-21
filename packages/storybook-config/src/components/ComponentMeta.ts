@@ -53,12 +53,12 @@ export interface ComponentMeta {
    * Additional props that react-docgen-typescript can't resolve (e.g. conditional/discriminated union props).
    * These are appended to the generated props table.
    */
-  additionalProps?: Array<{
+  additionalProps?: {
     name: string;
     type: string;
     required?: boolean;
     default?: string;
     description: string;
     condition?: string;
-  }>;
+  }[];
 }

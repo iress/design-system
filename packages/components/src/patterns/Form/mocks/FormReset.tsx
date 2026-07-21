@@ -47,4 +47,4 @@ export function FormReset() {
       </IressButton>
     </IressForm>
   );
-};
+}

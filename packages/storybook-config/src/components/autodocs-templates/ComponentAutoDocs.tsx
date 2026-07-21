@@ -30,9 +30,7 @@ const BUILT_IN_TABS = [
   'testing',
   'api',
 ] as const;
-type TabName = string;
-
-const isTabName = (value: string): value is TabName =>
+const isTabName = (value: string): boolean =>
   BUILT_IN_TABS.includes(value as (typeof BUILT_IN_TABS)[number]) ||
   value.length > 0;
 
@@ -45,7 +43,7 @@ const StoriesTabContent = ({
   description,
 }: {
   stories: StoryItem[];
-  type: TabName;
+  type: string;
   description: string;
 }) => {
   const { IressText } = use(IressStorybookContext);
@@ -83,32 +81,34 @@ const StoriesTabContent = ({
 
 export const ComponentAutoDocs = () => {
   const { IressText, IressTabSet, IressTab } = use(IressStorybookContext);
-  const [selectedTab, setSelectedTab] = useState<TabName>('playground');
+  const [selectedTab, setSelectedTab] = useState<string>('playground');
   const docsContext = useContext(DocsContext);
   const resolvedMeta = useOf<'meta'>('meta');
 
   // componentStories() returns stories in file-definition order
-  const stories = docsContext.componentStories().filter(
-    (story) => !story.moduleExport.tags?.includes('!autodocs'),
-  );
+  const stories = docsContext
+    .componentStories()
+    .filter(
+      (story) =>
+        !(story.moduleExport as { tags?: string[] }).tags?.includes(
+          '!autodocs',
+        ),
+    );
   const primaryStory = stories[0];
   const restOfStories = stories.slice(1);
 
-  const recipes = restOfStories.filter(
-    (story) =>
-      story.tags?.includes('recipe'),
+  const recipes = restOfStories.filter((story) =>
+    story.tags?.includes('recipe'),
   );
   const hasRecipes = recipes.length > 0;
 
-  const references = restOfStories.filter(
-    (story) =>
-      story.tags?.includes('reference'),
+  const references = restOfStories.filter((story) =>
+    story.tags?.includes('reference'),
   );
   const hasReferences = references.length > 0;
 
-  const migrations = restOfStories.filter(
-    (story) =>
-      story.tags?.includes('migration'),
+  const migrations = restOfStories.filter((story) =>
+    story.tags?.includes('migration'),
   );
   const hasMigrations = migrations.length > 0;
 
@@ -144,14 +144,14 @@ export const ComponentAutoDocs = () => {
       : config?.guidelinesUrl;
   const hasTestMeta = testMeta.length > 0;
 
-  const selectTab = (tab: TabName) => {
+  const selectTab = (tab: string) => {
     setSelectedTab(tab);
     setParentHash(tab);
   };
 
   useHashNavigation((hash) => {
-    const [tab] = hash.split('_');
-    if (isTabName(tab)) setSelectedTab(tab);
+    const tab = hash.split('_')[0];
+    if (tab && isTabName(tab)) setSelectedTab(tab);
   });
 
   return (
@@ -164,7 +164,7 @@ export const ComponentAutoDocs = () => {
       <ComponentStatus of={resolvedMeta.preparedMeta} />
       <IressTabSet
         selected={selectedTab}
-        onChange={(e) => selectTab(e.value as TabName)}
+        onChange={(e) => selectTab(e.value as string)}
         append={
           guidelinesUrl && (
             <IressButton

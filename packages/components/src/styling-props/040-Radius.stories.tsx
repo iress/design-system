@@ -9,7 +9,7 @@ export default {
   parameters: {
     idsConfig: {
       autodocsTemplate: 'default',
-    }
+    },
   },
 } as Meta<typeof IressPanel>;
 
@@ -22,7 +22,7 @@ export const borderRadius: Story = {
   },
   render: (args) => (
     <IressInput
-      {...args}
+      borderRadius={args.borderRadius}
       px="spacing.4"
       py="spacing.2"
       placeholder="Search everything"

@@ -9,23 +9,28 @@ export function FormRulePattern() {
 
   return (
     <IressForm>
-        <IressFormField
-          label="Default message"
-          name="default"
-          hint="Enter a valid email address"
-          rules={{ pattern: emailRegex }}
-          render={(controlledProps) => <IressInput {...controlledProps} />}
-        />
-        <IressFormField
-          label="Custom message"
-          name="custom"
-          hint="Enter a valid email address"
-          rules={{ pattern: { value: emailRegex, message: 'Please enter a valid email address!' } }}
-          render={(controlledProps) => <IressInput {...controlledProps} />}
-        />
-        <IressButton type="submit" mode="primary">
-          Validate
-        </IressButton>
+      <IressFormField
+        label="Default message"
+        name="default"
+        hint="Enter a valid email address"
+        rules={{ pattern: emailRegex }}
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+      />
+      <IressFormField
+        label="Custom message"
+        name="custom"
+        hint="Enter a valid email address"
+        rules={{
+          pattern: {
+            value: emailRegex,
+            message: 'Please enter a valid email address!',
+          },
+        }}
+        render={(controlledProps) => <IressInput {...controlledProps} />}
+      />
+      <IressButton type="submit" mode="primary">
+        Validate
+      </IressButton>
     </IressForm>
   );
 }

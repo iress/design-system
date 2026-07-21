@@ -12,7 +12,11 @@ const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
     description: 'The root element of the close button',
-    query: <code>getByRole('button', {'{'} name: 'Close' {'}'})</code>,
+    query: (
+      <code>
+        getByRole('button', {'{'} name: 'Close' {'}'})
+      </code>
+    ),
     testId: 'close-button',
   },
 ];

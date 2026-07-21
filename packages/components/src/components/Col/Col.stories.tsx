@@ -26,14 +26,6 @@ type ColWithCustomArgs = React.ComponentProps<typeof IressCol> & {
 };
 type Story = StoryObj<ColWithCustomArgs>;
 
-const columnsArgType = {
-  name: 'Column settings',
-  type: 'object' as never,
-  table: {
-    category: STORYBOOK_ONLY_CATEGORY,
-  },
-};
-
 export default {
   title: 'Components/Col',
   component: IressCol,

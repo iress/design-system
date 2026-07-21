@@ -6,7 +6,6 @@ import { IressStack } from '.';
 import { IressText } from '../Text';
 import { IressButton } from '../Button';
 import { IressInline } from '../Inline';
-import { SPACING_AND_ALIAS_TOKENS } from '@theme-preset/tokens/spacing';
 import {
   componentStoryMeta,
   disableArgTypes,

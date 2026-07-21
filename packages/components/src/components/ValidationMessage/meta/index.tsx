@@ -19,7 +19,8 @@ export const testMeta: TestComponentMeta[] = [
 
 export default {
   heading: 'Validation Message',
-  description: 'Displays a validation error or helper message associated with a form field.',
+  description:
+    'Displays a validation error or helper message associated with a form field.',
   tags: ['form', 'feedback', 'validation'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),

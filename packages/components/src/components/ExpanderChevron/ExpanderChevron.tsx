@@ -12,7 +12,7 @@ export interface IressExpanderChevronProps {
    * Whether the chevron is in the open state.
    */
   open?: boolean;
-  
+
   /**
    * Whether the chevron should be displayed inline.
    */

@@ -1,4 +1,10 @@
-import { useContext, type ElementType, type MouseEventHandler, type ReactNode } from 'react';
+import {
+  useContext,
+  type ElementType,
+  type MouseEvent,
+  type MouseEventHandler,
+  type ReactNode,
+} from 'react';
 import type { TextElements } from '@/components/Text';
 import { IressMenuDivider } from '../MenuDivider/MenuDivider';
 import { type IressMenuTextProps } from '../MenuText/MenuText';
@@ -167,7 +173,7 @@ export const IressMenuGroup = <
             data-testid={propagateTestid(dataTestId, 'activator')}
             href={href}
             element={element}
-            onClick={(e) => {
+            onClick={(e: MouseEvent) => {
               setActive(!active);
               onClick?.(e);
             }}

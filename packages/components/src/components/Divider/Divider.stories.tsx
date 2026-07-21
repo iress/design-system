@@ -2,7 +2,11 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressDivider } from '.';
 import { IressInline } from '../Inline';
 import { IressText } from '../Text';
-import { disableArgTypes, stylingProps, withSource } from '@iress-oss/ids-storybook-config';
+import {
+  disableArgTypes,
+  stylingProps,
+  withSource,
+} from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 
 import { DividerGutter } from './mocks/DividerGutter';
@@ -51,6 +55,9 @@ export const Gutter: Story = {
   render: (args) => <DividerGutter {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(DividerGutterSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(DividerGutterSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };

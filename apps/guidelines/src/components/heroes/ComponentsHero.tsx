@@ -1,4 +1,3 @@
-
 import { cssVars } from '@iress-oss/ids-tokens';
 
 const ComponentsHero = () => (
@@ -6,7 +5,12 @@ const ComponentsHero = () => (
     viewBox="0 0 751 605"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    style={{ display: 'block', height: 'auto', width: '100%', objectFit: 'contain' }}
+    style={{
+      display: 'block',
+      height: 'auto',
+      width: '100%',
+      objectFit: 'contain',
+    }}
   >
     <rect
       width="751"

@@ -39,7 +39,8 @@ export const testMeta: TestComponentMeta[] = [
 
 export default {
   heading: 'Card',
-  description: 'Groups related content and actions into a contained, visually distinct surface.',
+  description:
+    'Groups related content and actions into a contained, visually distinct surface.',
   tags: ['layout', 'container', 'content'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
@@ -58,6 +59,5 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-card--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/components/card',
+  guidelines: 'https://iress.github.io/design-system/#/components/card',
 } satisfies ComponentMeta;

@@ -147,7 +147,10 @@ for (const dir of allDirs) {
       const literals = type
         .getUnionTypes()
         .filter((t) => t.isStringLiteral() || t.isNumberLiteral())
-        .map((t) => String(t.getLiteralValue()));
+        .map((t) => {
+          const value = t.getLiteralValue();
+          return typeof value === 'string' ? value : `${value as number}`;
+        });
 
       // Skip: boolean-like, single value, huge unions (icon names, etc.)
       if (literals.length < 2 || literals.length > 20) continue;

@@ -1,13 +1,13 @@
 import { useContext, useEffect, useRef } from 'react';
-import { IressStack } from '../Stack';
+import { IressStack } from '../../Stack';
 import { FloatingPortal } from '@floating-ui/react';
 import { type FloatingUIContainer, type IressStyledProps } from '@/types';
-import { toaster as toasterStyles } from './Toaster.styles';
+import { toaster as toasterStyles } from '../Toaster.styles';
 import { cx } from '@/styled-system/css';
 import { styled } from '@/styled-system/jsx';
 import { GlobalCSSClass } from '@/enums';
-import { ToasterContext } from './hooks/useToaster';
-import { Toast, type ToastProps } from './components/Toast/Toast';
+import { ToasterContext } from '../hooks/useToaster';
+import { Toast, type ToastProps } from './Toast/Toast';
 
 export interface ToasterItem extends Omit<ToastProps, 'animation'> {
   /**

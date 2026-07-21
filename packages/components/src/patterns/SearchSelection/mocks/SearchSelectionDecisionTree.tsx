@@ -67,32 +67,34 @@ function getRecommendation(answers: Answers): Recommendation {
   const { trigger, purpose, freetext } = answers;
   if (!trigger || !purpose) return null;
 
-  // Input-triggered
-  if (trigger === 'input') {
-    if (purpose === 'navigate') return 'input-popover';
-    if (purpose === 'form-value') {
-      if (!freetext) return null; // need the freetext answer
-      return freetext === 'yes' ? 'autocomplete' : 'select';
-    }
-    // input + action or custom is not a valid pattern
-    return 'invalid';
+  // Input-triggered with form-value needs the freetext answer
+  if (trigger === 'input' && purpose === 'form-value') {
+    if (!freetext) return null;
+    return freetext === 'yes' ? 'autocomplete' : 'select';
   }
 
-  // Button-triggered
-  if (trigger === 'button') {
-    if (purpose === 'action' || purpose === 'navigate') return 'dropdown-menu';
-    if (purpose === 'form-value') return 'select';
-    if (purpose === 'custom') return 'popover';
-  }
+  // Lookup table for trigger + purpose combinations
+  const lookup: Record<string, Record<string, Recommendation>> = {
+    input: {
+      navigate: 'input-popover',
+      action: 'invalid',
+      custom: 'invalid',
+    },
+    button: {
+      action: 'dropdown-menu',
+      navigate: 'dropdown-menu',
+      'form-value': 'select',
+      custom: 'popover',
+    },
+    click: {
+      'form-value': 'select',
+      action: 'dropdown-menu',
+      navigate: 'dropdown-menu',
+      custom: 'popover',
+    },
+  };
 
-  // Click-triggered (input that opens on click, no typing)
-  if (trigger === 'click') {
-    if (purpose === 'form-value') return 'select';
-    if (purpose === 'action' || purpose === 'navigate') return 'dropdown-menu';
-    if (purpose === 'custom') return 'popover';
-  }
-
-  return 'invalid';
+  return lookup[trigger]?.[purpose] ?? 'invalid';
 }
 
 const recommendations: Record<
@@ -129,6 +131,12 @@ const recommendations: Record<
       'Popover displays custom rich content triggered by a button. Use when the content does not fit into a menu or select pattern.',
     link: '/components/popover',
   },
+  invalid: {
+    heading: 'No Match Found',
+    description:
+      'The combination of answers does not match a known pattern. Please revisit your selections or contact the design system team for guidance.',
+    link: '/patterns/search-selection',
+  },
 };
 
 export function SearchSelectionDecisionTree() {
@@ -144,46 +152,46 @@ export function SearchSelectionDecisionTree() {
         </IressAlert>
         <IressRow>
           <IressCol>
-        {getVisibleQuestions(answers).map((q) => (
-          <IressField key={q.id} label={q.label}>
-            <IressRadioGroup
-              name={q.id}
-              value={answers[q.id] ?? ''}
-              onChange={(_, value) => {
-                if (value === undefined) return;
-                setAnswers((prev) => ({ ...prev, [q.id]: value }));
-              }}
-              id={q.id}
-            >
-              {q.options.map((opt) => (
-                <IressRadio key={opt.value} value={opt.value}>
-                  {opt.label}
-                </IressRadio>
-              ))}
-            </IressRadioGroup>
-          </IressField>
-        ))}
-        </IressCol>
-        <IressCol>
-        {recommendation && recommendation !== 'invalid' && (
-          <IressPanel stretch>
-            <IressText mb="sm">
-              <h2>{recommendations[recommendation].heading}</h2>
-              {recommendations[recommendation].description}
-            </IressText>
-            <IressLink href={recommendations[recommendation].link}>
-              View documentation →
-            </IressLink>
-          </IressPanel>
-        )}
-        {recommendation === 'invalid' && (
-          <IressAlert status="warning">
-            This combination doesn't map to a standard pattern. Consider
-            rethinking the interaction — for example, typing in an input
-            typically sets a form value or navigates, not triggers actions.
-          </IressAlert>
-        )}
-        </IressCol>
+            {getVisibleQuestions(answers).map((q) => (
+              <IressField key={q.id} label={q.label}>
+                <IressRadioGroup
+                  name={q.id}
+                  value={answers[q.id] ?? ''}
+                  onChange={(_, value) => {
+                    if (value === undefined) return;
+                    setAnswers((prev) => ({ ...prev, [q.id]: value }));
+                  }}
+                  id={q.id}
+                >
+                  {q.options.map((opt) => (
+                    <IressRadio key={opt.value} value={opt.value}>
+                      {opt.label}
+                    </IressRadio>
+                  ))}
+                </IressRadioGroup>
+              </IressField>
+            ))}
+          </IressCol>
+          <IressCol>
+            {recommendation && recommendation !== 'invalid' && (
+              <IressPanel stretch>
+                <IressText mb="sm">
+                  <h2>{recommendations[recommendation].heading}</h2>
+                  {recommendations[recommendation].description}
+                </IressText>
+                <IressLink href={recommendations[recommendation].link}>
+                  View documentation →
+                </IressLink>
+              </IressPanel>
+            )}
+            {recommendation === 'invalid' && (
+              <IressAlert status="warning">
+                This combination doesn't map to a standard pattern. Consider
+                rethinking the interaction — for example, typing in an input
+                typically sets a form value or navigates, not triggers actions.
+              </IressAlert>
+            )}
+          </IressCol>
         </IressRow>
       </IressStyled>
     </IressContainer>

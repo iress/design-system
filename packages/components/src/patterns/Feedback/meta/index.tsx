@@ -3,7 +3,8 @@ import type { ComponentMeta } from '@helpers/meta/types';
 
 export default {
   heading: 'Feedback',
-  description: 'Displays transient feedback messages to communicate the result of an action.',
+  description:
+    'Displays transient feedback messages to communicate the result of an action.',
   tags: ['feedback', 'alert', 'toast', 'modal', 'notification'],
   Thumbnail: lazy(() => import('./Thumbnail')),
   github: {
@@ -18,6 +19,5 @@ export default {
     requestFeature:
       'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=feedback,enhancement&title=[Feedback]+Feature:+',
   },
-  guidelines:
-    'https://iress.github.io/design-system/#/patterns/feedback',
+  guidelines: 'https://iress.github.io/design-system/#/patterns/feedback',
 } satisfies ComponentMeta;

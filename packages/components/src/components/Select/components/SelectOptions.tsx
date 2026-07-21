@@ -95,7 +95,10 @@ const SelectAsyncResults = <TMultiple extends boolean = false>({
     return undefined;
   };
 
-  const heading = multiSelect && results.length && debouncedQuery ? `Search results (${results.length})` : undefined;
+  const heading =
+    multiSelect && results.length && debouncedQuery
+      ? `Search results (${results.length})`
+      : undefined;
 
   return (
     <IressSelectMenu

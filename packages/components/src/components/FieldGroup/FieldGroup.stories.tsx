@@ -78,7 +78,11 @@ const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
     description: 'The root fieldset element of the field group',
-    query: <code>getByRole('group', {'{'} name: 'label' {'}'})</code>,
+    query: (
+      <code>
+        getByRole('group', {'{'} name: 'label' {'}'})
+      </code>
+    ),
     testId: 'field-group',
   },
   {
@@ -120,6 +124,12 @@ export default {
   tags: ['updated'],
   parameters: {
     idsConfig: { testMeta },
+    docs: {
+      description: {
+        component:
+          'Groups related form fields together with a shared label, hint, and error state using a fieldset/legend pattern.',
+      },
+    },
   },
 } as Meta<typeof IressFieldGroup>;
 

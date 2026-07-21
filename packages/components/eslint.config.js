@@ -135,10 +135,7 @@ export default [
   // Only applies to the main component file (top-level in component dir, same name as dir).
   // Internal types (sub-components, hooks, providers, base) are exempt.
   {
-    files: [
-      'src/components/*/[A-Z]*.tsx',
-      'src/patterns/*/[A-Z]*.tsx',
-    ],
+    files: ['src/components/*/[A-Z]*.tsx', 'src/patterns/*/[A-Z]*.tsx'],
     ignores: [
       '**/*.test.tsx',
       '**/*.stories.tsx',

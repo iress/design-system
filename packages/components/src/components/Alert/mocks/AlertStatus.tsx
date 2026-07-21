@@ -19,14 +19,14 @@ export function AlertStatus() {
       </IressAlert>
       <IressAlert status="warning">
         This is a simple warning alert. It is used for a message requiring
-        attention but not resolution in order to continue, such as noting data is
-        not current or your password is about to expire.
+        attention but not resolution in order to continue, such as noting data
+        is not current or your password is about to expire.
       </IressAlert>
       <IressAlert status="neutral">
         This is a simple neutral alert. It is normally used for general
         information that does not fit into the other categories, such as a note
-        about requesting cookie consent, advertising a new feature or an upcoming
-        change.
+        about requesting cookie consent, advertising a new feature or an
+        upcoming change.
       </IressAlert>
     </IressStack>
   );

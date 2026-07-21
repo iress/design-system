@@ -1,9 +1,4 @@
-import {
-  IressButton,
-  IressFormField,
-  IressHookForm,
-  IressInput,
-} from '@/main';
+import { IressButton, IressFormField, IressHookForm, IressInput } from '@/main';
 import { useForm } from 'react-hook-form';
 
 export const HiddenInputsForm = () => {

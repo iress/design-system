@@ -24,6 +24,7 @@ export const setParentHash = (hash: string) => {
     window.parent.location.hash = hash;
   } catch {
     // Cross-origin: use postMessage to communicate hash changes to the parent
+    // eslint-disable-next-line sonarjs/post-message
     window.parent.postMessage(
       { type: 'UPDATE_HASH', hash } satisfies BroadcastHashEvent,
       '*',
@@ -122,8 +123,14 @@ export const StoriesWithToc = ({
         <div key={story.id}>
           <h3 id={story.id}>{story.name}</h3>
           <Description of={story.moduleExport as never} />
-          {!storyOnly && <ComponentCanvas of={story.moduleExport as never} refresh />}
-          {storyOnly && <IressStyled mb="spacing.6"><Story of={story.moduleExport as never} /></IressStyled>}
+          {!storyOnly && (
+            <ComponentCanvas of={story.moduleExport as never} refresh />
+          )}
+          {storyOnly && (
+            <IressStyled mb="spacing.6">
+              <Story of={story.moduleExport as never} />
+            </IressStyled>
+          )}
         </div>
       ))}
     </IressCol>

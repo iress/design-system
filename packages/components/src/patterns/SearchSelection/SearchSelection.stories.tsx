@@ -1,7 +1,10 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { SearchSelectionDecisionTree } from './mocks/SearchSelectionDecisionTree';
 import SearchSelectionDecisionTreeSource from './mocks/SearchSelectionDecisionTree.tsx?raw';
-import { componentStoryMeta, withSource } from '@iress-oss/ids-storybook-config';
+import {
+  componentStoryMeta,
+  withSource,
+} from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 
 type Story = StoryObj<typeof SearchSelectionDecisionTree>;

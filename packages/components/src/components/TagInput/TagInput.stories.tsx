@@ -23,9 +23,17 @@ export default {
   title: 'Components/TagInput',
   component: IressTagInput,
   tags: ['updated'],
-  argTypes: stylingProps,
+  argTypes: {
+    ...stylingProps,
+  },
   parameters: {
     idsConfig: { testMeta },
+    docs: {
+      description: {
+        component:
+          'A text input that converts entered values into removable tags, suitable for multi-value inputs like email recipients.',
+      },
+    },
   },
 } as Meta<typeof IressTagInput>;
 

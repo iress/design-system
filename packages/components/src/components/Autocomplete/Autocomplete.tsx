@@ -108,6 +108,7 @@ export interface IressAutocompletePopoverProps extends Pick<
 /**
  * @deprecated Use `IressAutocompletePopoverProps` instead. This type will be removed in a future release.
  */
+// eslint-disable-next-line no-restricted-syntax
 export type AutocompletePopoverProps = IressAutocompletePopoverProps;
 
 /**

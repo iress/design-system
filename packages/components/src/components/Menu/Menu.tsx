@@ -27,7 +27,18 @@ import { IressTooltipProvider } from '../Tooltip';
  * Menu component that provides context for its child menu items, headings, dividers, and text.
  * Does not apply to `multiSelect`, as the presence of checkboxes is determined by the `multiSelect` prop on the parent MenuItem instead to allow for more flexible combinations of single and multi select items within the same menu.
  */
-export type MenuVariants = 'subdraw' | 'radio' | 'side' | 'rail' | undefined;
+export type IressMenuVariants =
+  | 'subdraw'
+  | 'radio'
+  | 'side'
+  | 'rail'
+  | undefined;
+
+/**
+ * @deprecated Use `IressMenuVariants` instead. This type will be removed in a future release.
+ */
+// eslint-disable-next-line no-restricted-syntax, sonarjs/redundant-type-aliases
+export type MenuVariants = IressMenuVariants;
 
 export interface IressMenuProps<
   T = FormControlValue,

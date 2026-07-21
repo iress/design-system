@@ -6,14 +6,19 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'main',
     description: 'The root element of the skip link',
-    query: <code>getByRole('link', {'{'} name: 'Skip to content' {'}'})</code>,
+    query: (
+      <code>
+        getByRole('link', {'{'} name: 'Skip to content' {'}'})
+      </code>
+    ),
     testId: 'skip-link',
   },
 ];
 
 export default {
   heading: 'SkipLink',
-  description: 'Provides a keyboard-accessible link to skip to the main content area.',
+  description:
+    'Provides a keyboard-accessible link to skip to the main content area.',
   tags: ['accessibility', 'navigation', 'link'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
@@ -32,6 +37,5 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-skip-link--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/components/skip-link',
+  guidelines: 'https://iress.github.io/design-system/#/components/skip-link',
 } satisfies ComponentMeta;

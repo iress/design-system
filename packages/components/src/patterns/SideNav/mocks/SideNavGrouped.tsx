@@ -18,15 +18,27 @@ export function SideNavGrouped() {
               label: 'Personal',
               active: true,
               children: [
-                { key: 'basic', label: 'Basic Details', href: '/hubs/basic-details' },
-                { key: 'dependants', label: 'Dependants', href: '/hubs/dependants' },
+                {
+                  key: 'basic',
+                  label: 'Basic Details',
+                  href: '/hubs/basic-details',
+                },
+                {
+                  key: 'dependants',
+                  label: 'Dependants',
+                  href: '/hubs/dependants',
+                },
               ],
             },
             {
               key: 'financial',
               label: 'Financial',
               children: [
-                { key: 'employment', label: 'Employment', href: '/hubs/employment' },
+                {
+                  key: 'employment',
+                  label: 'Employment',
+                  href: '/hubs/employment',
+                },
                 { key: 'tax', label: 'Tax Details', href: '/hubs/tax' },
               ],
             },
@@ -38,8 +50,16 @@ export function SideNavGrouped() {
           icon: 'bar_chart',
           href: '/portfolios',
           children: [
-            { key: 'holdings', label: 'Holdings', href: '/portfolios/holdings' },
-            { key: 'transactions', label: 'Transactions', href: '/portfolios/transactions' },
+            {
+              key: 'holdings',
+              label: 'Holdings',
+              href: '/portfolios/holdings',
+            },
+            {
+              key: 'transactions',
+              label: 'Transactions',
+              href: '/portfolios/transactions',
+            },
           ],
         },
       ]}

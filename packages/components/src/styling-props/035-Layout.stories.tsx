@@ -16,7 +16,7 @@ export default {
   parameters: {
     idsConfig: {
       autodocsTemplate: 'default',
-    }
+    },
   },
 } as Meta<typeof IressPanel>;
 
@@ -91,8 +91,8 @@ export const scrollable: Story = {
   ...alignSelf,
   args: {
     scrollable: 'y',
-    style: { height: '200px' }, 
-    noBorder: true
+    style: { height: '200px' },
+    noBorder: true,
   },
   render: (args) => (
     <IressCard px="sm">

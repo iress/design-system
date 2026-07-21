@@ -18,13 +18,21 @@ export const testMeta: TestComponentMeta[] = [
   {
     part: 'heading',
     description: 'The slideout heading',
-    query: <code>getByRole('heading', {'{'} name: '...' {'}'})</code>,
+    query: (
+      <code>
+        getByRole('heading', {'{'} name: '...' {'}'})
+      </code>
+    ),
     testId: 'slideout__heading',
   },
   {
     part: 'close button',
     description: 'The close button',
-    query: <code>findByRole('button', {'{'} name: 'Close' {'}'})</code>,
+    query: (
+      <code>
+        findByRole('button', {'{'} name: 'Close' {'}'})
+      </code>
+    ),
     testId: 'slideout__close-button__button',
   },
   {
@@ -42,7 +50,8 @@ export const testMeta: TestComponentMeta[] = [
 
 export default {
   heading: 'Slideout',
-  description: 'Displays supplementary content in a panel that slides in from the edge of the viewport.',
+  description:
+    'Displays supplementary content in a panel that slides in from the edge of the viewport.',
   tags: ['overlay', 'navigation', 'panel'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
@@ -61,6 +70,5 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-slideout--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/components/slideout',
+  guidelines: 'https://iress.github.io/design-system/#/components/slideout',
 } satisfies ComponentMeta;

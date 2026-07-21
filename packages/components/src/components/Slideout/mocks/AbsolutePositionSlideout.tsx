@@ -35,11 +35,9 @@ export function AbsolutePositionSlideout() {
           position="left"
           mode="push"
           heading="Absolute slideout"
-          style={
-            {
-              position: 'absolute',
-            }
-          }
+          style={{
+            position: 'absolute',
+          }}
         >
           Slideout content
         </IressSlideout>

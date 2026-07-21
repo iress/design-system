@@ -9,12 +9,22 @@ import AppWithModalProviderSource from './mocks/AppWithModalProvider.tsx?raw';
 import {
   disableArgTypes,
   STORYBOOK_ONLY_CATEGORY,
+  stylingProps,
 } from '@iress-oss/ids-storybook-config';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 
 type CustomArgs = Partial<IressModalProviderProps> & {
   modal: Partial<IressModalProps>;
 };
 type Story = StoryObj<CustomArgs>;
+
+const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The root element of the modal provider',
+    testId: 'modal-provider',
+  },
+];
 
 export default {
   title: 'Components/Modal/ModalProvider',
@@ -28,8 +38,16 @@ export default {
         category: STORYBOOK_ONLY_CATEGORY,
       },
     },
+    ...stylingProps,
   },
   parameters: {
+    idsConfig: { testMeta },
+    docs: {
+      description: {
+        component:
+          'Provides a context-based API for opening and managing modals declaratively via the useModal hook.',
+      },
+    },
     actions: {
       disable: true,
     },

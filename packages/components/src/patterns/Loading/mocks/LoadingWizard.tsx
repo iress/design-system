@@ -99,14 +99,14 @@ const Chart = () => {
           onSubmit={(projectionData) => setMoney(projectionData.money)}
           heading="Update projection"
         >
-            <IressFormField
-              name="money"
-              label="My money"
-              render={(controlledProps) => (
-                <IressInputCurrency {...controlledProps} />
-              )}
-            />
-            <IressButton type="submit">Update projection</IressButton>
+          <IressFormField
+            name="money"
+            label="My money"
+            render={(controlledProps) => (
+              <IressInputCurrency {...controlledProps} />
+            )}
+          />
+          <IressButton type="submit">Update projection</IressButton>
         </IressForm>
       </IressPanel>
     </IressLoading>

@@ -2,7 +2,10 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressIcon, type IressIconProps } from './Icon';
 import { IressText } from '../Text';
 import { IressInline } from '../Inline';
-import { componentStoryMeta, withSource } from '@iress-oss/ids-storybook-config';
+import {
+  componentStoryMeta,
+  withSource,
+} from '@iress-oss/ids-storybook-config';
 import { IressLink } from '../Link';
 import { IressIconProvider } from './IconProvider';
 import React, { useMemo, useState } from 'react';
@@ -236,7 +239,10 @@ export const Filled: Story = {
   render: (_args) => <IconFilled />,
   parameters: {
     controls: { disable: true },
-    ...withSource(IconFilledSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(IconFilledSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -244,7 +250,10 @@ export const Flip: Story = {
   render: (args) => <IconFlip {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(IconFlipSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(IconFlipSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -252,7 +261,10 @@ export const Rotate: Story = {
   render: (args) => <IconRotate {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(IconRotateSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(IconRotateSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -260,7 +272,10 @@ export const Spin: Story = {
   render: (args) => <IconSpin {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(IconSpinSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(IconSpinSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -286,7 +301,8 @@ export const ExternalLink: Story = {
 export const FontAwesomeToMaterialMigration: Story = {
   render: () => (
     <IressTable
-      caption="Font Awesome to Material Symbols Migration Reference" hiddenCaption
+      caption="Font Awesome to Material Symbols Migration Reference"
+      hiddenCaption
       compact
       columns={[
         {

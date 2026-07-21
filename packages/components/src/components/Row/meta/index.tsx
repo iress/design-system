@@ -12,7 +12,8 @@ export const testMeta: TestComponentMeta[] = [
 
 export default {
   heading: 'Row',
-  description: 'Arranges children in a horizontal row within a grid or flex layout.',
+  description:
+    'Arranges children in a horizontal row within a grid or flex layout.',
   tags: ['layout', 'grid', 'container'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
@@ -31,6 +32,5 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-row--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/components/row',
+  guidelines: 'https://iress.github.io/design-system/#/components/row',
 } satisfies ComponentMeta;

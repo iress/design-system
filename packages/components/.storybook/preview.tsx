@@ -11,7 +11,11 @@ const basePreview = getPreview({
     noStyles: true,
   },
   guidelinesUrl: (title) => {
-    const slug = title.toLowerCase().replace(/\s*\/\s*/g, '/');
+    const slug = title
+      .toLowerCase()
+      .split('/')
+      .map((s) => s.trim())
+      .join('/');
     return `https://iress.github.io/design-system/#/${slug}`;
   },
   sandboxConfig: {

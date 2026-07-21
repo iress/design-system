@@ -6,7 +6,7 @@ import {
   checkboxGroup as checkboxGroupStyles,
 } from '.';
 import { getFinancialReviewCheckboxes } from './mocks/checkboxGroupChildren';
-import { IressFieldGroup, IressFieldGroupProps } from '../Field';
+import { IressFieldGroup, IressFieldGroupProps } from '../FieldGroup';
 import userEvent from '@testing-library/user-event';
 import { IressCheckbox, checkbox as checkboxStyles } from '../Checkbox';
 import { GlobalCSSClass } from '@/enums';

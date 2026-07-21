@@ -3,6 +3,7 @@ import { IressExpanderChevron } from './ExpanderChevron';
 import { IressStack } from '../Stack';
 import { IressText } from '../Text';
 import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
+import { stylingProps } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressExpanderChevron>;
 
@@ -18,6 +19,9 @@ export default {
   title: 'Components/Expander/ExpanderChevron',
   component: IressExpanderChevron,
   tags: ['updated'],
+  argTypes: {
+    ...stylingProps,
+  },
   parameters: {
     idsConfig: { testMeta },
     docs: {

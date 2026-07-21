@@ -49,7 +49,10 @@ export const Element: Story = {
   render: (args) => <TextElement {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(TextElementSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(TextElementSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -57,7 +60,10 @@ export const Variant: Story = {
   render: (args) => <TextVariant {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(TextVariantSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(TextVariantSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -65,7 +71,10 @@ export const Mode: Story = {
   render: (args) => <TextMode {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(TextModeSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(TextModeSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -73,7 +82,10 @@ export const Align: Story = {
   render: (args) => <TextAlign {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(TextAlignSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(TextAlignSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -100,7 +112,7 @@ export const HeadingsWithIcons: HeadingStory = {
   argTypes: {
     ...disableArgTypes(['element']),
   },
-  tags: ['recipe']
+  tags: ['recipe'],
 };
 
 export const TypographicBlock: Story = {

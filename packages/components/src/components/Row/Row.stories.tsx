@@ -6,15 +6,13 @@ import { IressPlaceholder } from '../Placeholder';
 import { IressText } from '../Text';
 import { IressCol } from '../Col';
 import { IressDivider } from '../Divider';
-import { HORIZONTAL_ALIGNS, IressStack, VERTICAL_ALIGNS } from '@/main';
-import { SPACING_AND_ALIAS_TOKENS } from '@theme-preset/tokens/spacing';
+import { IressStack } from '@/main';
 import {
   componentStoryMeta,
   disableArgTypes,
   reactNodeArgType,
   withBreakpointLabel,
 } from '@iress-oss/ids-storybook-config';
-import { cssVars } from '@iress-oss/ids-tokens';
 import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressRow>;
@@ -141,13 +139,19 @@ export const Gutter: Story = {
   render: (args) => (
     <IressStack maxWidth="container.xl" gap="xl">
       <IressText element="h3">spacing.2</IressText>
-      <IressRow {...args} gutter="spacing.2">{args.children}</IressRow>
+      <IressRow {...args} gutter="spacing.2">
+        {args.children}
+      </IressRow>
       <IressDivider mb="xl" />
       <IressText element="h3">spacing.4</IressText>
-      <IressRow {...args} gutter="spacing.4">{args.children}</IressRow>
+      <IressRow {...args} gutter="spacing.4">
+        {args.children}
+      </IressRow>
       <IressDivider mb="xl" />
       <IressText element="h3">spacing.7</IressText>
-      <IressRow {...args} gutter="spacing.7">{args.children}</IressRow>
+      <IressRow {...args} gutter="spacing.7">
+        {args.children}
+      </IressRow>
     </IressStack>
   ),
 };
@@ -195,9 +199,7 @@ export const ResponsiveGutter: Story = {
   },
   render: (args) => (
     <IressContainer>
-      <IressRow {...args}>
-        {args.children}
-      </IressRow>
+      <IressRow {...args}>{args.children}</IressRow>
     </IressContainer>
   ),
   decorators: [withBreakpointLabel()],
@@ -232,13 +234,21 @@ export const HorizontalAlignment: Story = {
     <IressContainer>
       <IressStack gap="md">
         <IressText element="h3">left</IressText>
-        <IressRow {...args} horizontalAlign="left">{args.children}</IressRow>
+        <IressRow {...args} horizontalAlign="left">
+          {args.children}
+        </IressRow>
         <IressText element="h3">center</IressText>
-        <IressRow {...args} horizontalAlign="center">{args.children}</IressRow>
+        <IressRow {...args} horizontalAlign="center">
+          {args.children}
+        </IressRow>
         <IressText element="h3">right</IressText>
-        <IressRow {...args} horizontalAlign="right">{args.children}</IressRow>
+        <IressRow {...args} horizontalAlign="right">
+          {args.children}
+        </IressRow>
         <IressText element="h3">between</IressText>
-        <IressRow {...args} horizontalAlign="between">{args.children}</IressRow>
+        <IressRow {...args} horizontalAlign="between">
+          {args.children}
+        </IressRow>
       </IressStack>
     </IressContainer>
   ),
@@ -273,13 +283,21 @@ export const VerticalAlignment: Story = {
     <IressContainer>
       <IressStack gap="md">
         <IressText element="h3">top</IressText>
-        <IressRow {...args} style={{ height: '10rem' }} verticalAlign="top">{args.children}</IressRow>
+        <IressRow {...args} style={{ height: '10rem' }} verticalAlign="top">
+          {args.children}
+        </IressRow>
         <IressText element="h3">middle</IressText>
-        <IressRow {...args} style={{ height: '10rem' }} verticalAlign="middle">{args.children}</IressRow>
+        <IressRow {...args} style={{ height: '10rem' }} verticalAlign="middle">
+          {args.children}
+        </IressRow>
         <IressText element="h3">bottom</IressText>
-        <IressRow {...args} style={{ height: '10rem' }} verticalAlign="bottom">{args.children}</IressRow>
+        <IressRow {...args} style={{ height: '10rem' }} verticalAlign="bottom">
+          {args.children}
+        </IressRow>
         <IressText element="h3">stretch</IressText>
-        <IressRow {...args} style={{ height: '10rem' }} verticalAlign="stretch">{args.children}</IressRow>
+        <IressRow {...args} style={{ height: '10rem' }} verticalAlign="stretch">
+          {args.children}
+        </IressRow>
       </IressStack>
     </IressContainer>
   ),

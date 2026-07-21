@@ -3,7 +3,8 @@ import type { ComponentMeta } from '@helpers/meta/types';
 
 export default {
   heading: 'Filter',
-  description: 'Presents a list of actions or options revealed by a trigger button.',
+  description:
+    'Presents a list of actions or options revealed by a trigger button.',
   tags: ['data-display', 'filtering', 'interactive'],
   Thumbnail: lazy(() => import('./Thumbnail')),
   import: "import { IressDropdownMenu } from '@iress-oss/ids-components';",
@@ -21,6 +22,5 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-dropdown-menu--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/patterns/dropdown-menu',
+  guidelines: 'https://iress.github.io/design-system/#/patterns/dropdown-menu',
 } satisfies ComponentMeta;

@@ -1,9 +1,4 @@
-import {
-  useRef,
-  useEffect,
-  useState,
-  type ReactNode,
-} from 'react';
+import { useRef, useEffect, useState, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import {
   IressButton,
@@ -32,18 +27,12 @@ function getTabFromUrl(): string | undefined {
  * Uses CSS visibility to preserve React component lifecycle in all sections.
  * Selected tab syncs with URL hash (e.g. ?tab=design).
  */
-export function TabbedContent({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export function TabbedContent({ children }: { children: ReactNode }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const tabHostRef = useRef<HTMLDivElement | null>(null);
   const [tabs, setTabs] = useState<string[]>([]);
   const [storybookUrl, setStorybookUrl] = useState<string | undefined>();
-  const [selectedTab, setSelectedTab] = useState<number | undefined>(
-    undefined,
-  );
+  const [selectedTab, setSelectedTab] = useState<number | undefined>(undefined);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -70,10 +59,12 @@ export function TabbedContent({
       return;
     }
 
-    setTabs(tabHeadings.map((h) => h.textContent!.trim()));
+    setTabs(tabHeadings.map((h) => h.textContent.trim()));
 
     // Extract storybook URL from Metadata component's rendered link
-    const sbLink = container.querySelector<HTMLAnchorElement>('a[href*="chromatic.com"]');
+    const sbLink = container.querySelector<HTMLAnchorElement>(
+      'a[href*="chromatic.com"]',
+    );
     setStorybookUrl(sbLink?.href);
 
     // Insert a host element for the tab bar before the first tab heading
@@ -88,7 +79,7 @@ export function TabbedContent({
         child.tagName === 'H2' &&
         TAB_HEADINGS.includes(child.textContent?.trim() ?? '')
       ) {
-        currentTab = child.textContent!.trim();
+        currentTab = child.textContent.trim();
         child.dataset.tabSection = currentTab;
         child.style.display = 'none';
       } else if (currentTab) {

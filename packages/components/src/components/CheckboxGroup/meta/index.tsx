@@ -13,7 +13,8 @@ export const testMeta: TestComponentMeta[] = [
 
 export default {
   heading: 'CheckboxGroup',
-  description: 'Groups related checkboxes so users can select multiple options from a set.',
+  description:
+    'Groups related checkboxes so users can select multiple options from a set.',
   tags: ['form', 'selection', 'group'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
@@ -34,5 +35,6 @@ export default {
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkbox-group--docs',
   guidelines:
     'https://iress.github.io/design-system/#/components/checkbox-group',
-  figma: 'https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-28220',
+  figma:
+    'https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-28220',
 } satisfies ComponentMeta;

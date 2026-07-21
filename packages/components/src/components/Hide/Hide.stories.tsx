@@ -43,9 +43,7 @@ export const HiddenOn: Story = {
   render: () => (
     <IressStack gap="spacing.1">
       <IressHide hiddenOn={{ xs: true }}>
-        <IressText>
-          This text is hidden on xs screens and above.
-        </IressText>
+        <IressText>This text is hidden on xs screens and above.</IressText>
       </IressHide>
       <IressHide hiddenOn={{ md: true }}>
         <IressText color="colour.system.success.text">

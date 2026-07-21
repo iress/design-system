@@ -1,6 +1,10 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { RouterProvider, createHashHistory, createRouter } from '@tanstack/react-router';
+import {
+  RouterProvider,
+  createHashHistory,
+  createRouter,
+} from '@tanstack/react-router';
 import { IressProvider } from '@iress-oss/ids-components';
 import { MDXProvider } from '@mdx-js/react';
 import { routeTree } from './routeTree.gen';

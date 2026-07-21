@@ -17,7 +17,7 @@ export default {
     },
     idsConfig: {
       autodocsTemplate: 'landing',
-    }
+    },
   },
 } as Meta<typeof CodeSandbox>;
 

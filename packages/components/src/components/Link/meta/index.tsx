@@ -8,9 +8,13 @@ export const testMeta: TestComponentMeta[] = [
     description: 'The root element of the link',
     query: (
       <>
-        <code>getByRole('link', {'{'} name: '...' {'}'})</code> when an href is
-        provided, otherwise{' '}
-        <code>getByRole('button', {'{'} name: '...' {'}'})</code>
+        <code>
+          getByRole('link', {'{'} name: '...' {'}'})
+        </code>{' '}
+        when an href is provided, otherwise{' '}
+        <code>
+          getByRole('button', {'{'} name: '...' {'}'})
+        </code>
       </>
     ),
     testId: 'link',
@@ -19,7 +23,8 @@ export const testMeta: TestComponentMeta[] = [
 
 export default {
   heading: 'Link',
-  description: 'Renders a navigational anchor styled consistently with the design system.',
+  description:
+    'Renders a navigational anchor styled consistently with the design system.',
   tags: ['navigation', 'text', 'interactive'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
@@ -38,6 +43,5 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-link--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/components/link',
+  guidelines: 'https://iress.github.io/design-system/#/components/link',
 } satisfies ComponentMeta;

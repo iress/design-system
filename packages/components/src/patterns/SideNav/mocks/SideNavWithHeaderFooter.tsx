@@ -20,8 +20,16 @@ export function SideNavWithHeaderFooter() {
           icon: 'hub',
           href: '/hubs',
           children: [
-            { key: 'basic', label: 'Basic Details', href: '/hubs/basic-details' },
-            { key: 'dependants', label: 'Dependants', href: '/hubs/dependants' },
+            {
+              key: 'basic',
+              label: 'Basic Details',
+              href: '/hubs/basic-details',
+            },
+            {
+              key: 'dependants',
+              label: 'Dependants',
+              href: '/hubs/dependants',
+            },
           ],
         },
         {
@@ -30,8 +38,16 @@ export function SideNavWithHeaderFooter() {
           icon: 'bar_chart',
           href: '/portfolios',
           children: [
-            { key: 'holdings', label: 'Holdings', href: '/portfolios/holdings' },
-            { key: 'transactions', label: 'Transactions', href: '/portfolios/transactions' },
+            {
+              key: 'holdings',
+              label: 'Holdings',
+              href: '/portfolios/holdings',
+            },
+            {
+              key: 'transactions',
+              label: 'Transactions',
+              href: '/portfolios/transactions',
+            },
           ],
         },
         {

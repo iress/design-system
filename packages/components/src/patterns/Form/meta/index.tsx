@@ -3,7 +3,8 @@ import type { ComponentMeta } from '@helpers/meta/types';
 
 export default {
   heading: 'Form',
-  description: 'Manages form state, validation, and submission for a group of input fields.',
+  description:
+    'Manages form state, validation, and submission for a group of input fields.',
   tags: ['form', 'crud'],
   Thumbnail: lazy(() => import('./Thumbnail')),
   import: "import { IressForm } from '@iress-oss/ids-components';",
@@ -21,7 +22,10 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-form--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/patterns/form',
-  subComponents: ['IressFormField', 'IressFormFieldset', 'IressFormValidationSummary'],
+  guidelines: 'https://iress.github.io/design-system/#/patterns/form',
+  subComponents: [
+    'IressFormField',
+    'IressFormFieldset',
+    'IressFormValidationSummary',
+  ],
 } satisfies ComponentMeta;

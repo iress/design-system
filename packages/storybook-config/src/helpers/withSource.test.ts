@@ -1,9 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import {
-  withSource,
-  transformSource,
-  formatWithPrettier,
-} from './withSource';
+import { withSource, transformSource, formatWithPrettier } from './withSource';
 
 describe('withSource', () => {
   describe('basic usage', () => {
@@ -201,9 +197,7 @@ export const MultipleExpander = () => (
     });
 
     it('replaces serialized document.body with document.body', () => {
-      const result = transformSource(
-        `<Component\n  container: {}\n/>`,
-      );
+      const result = transformSource(`<Component\n  container: {}\n/>`);
 
       expect(result).toContain('container: document.body');
     });

@@ -4,7 +4,10 @@ import { LoadingWizard } from './mocks/LoadingWizard';
 import LoadingWizardSource from './mocks/LoadingWizard.tsx?raw';
 import { LoadingWizardFast } from './mocks/LoadingWizardFast';
 import LoadingWizardFastSource from './mocks/LoadingWizardFast.tsx?raw';
-import { componentStoryMeta, withSource } from '@iress-oss/ids-storybook-config';
+import {
+  componentStoryMeta,
+  withSource,
+} from '@iress-oss/ids-storybook-config';
 import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 import { LoadingGraph } from './mocks/LoadingGraph';
@@ -25,7 +28,12 @@ type Story = StoryObj<typeof IressLoading>;
 
 const testMeta: TestComponentMeta[] = [
   { part: 'main', description: 'The root loading element', testId: 'loading' },
-  { part: 'message', description: 'The loading message text', query: <code>getByText('...')</code>, testId: 'loading__message' },
+  {
+    part: 'message',
+    description: 'The loading message text',
+    query: <code>getByText('...')</code>,
+    testId: 'loading__message',
+  },
 ];
 
 type LongLoadingStory = StoryObj<typeof LongLoading>;

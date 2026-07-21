@@ -6,7 +6,12 @@ import {
   IressFormValidationSummary,
   IressInput,
 } from '@/main';
-import { reactNodeArgType, removeArgTypes, stylingProps, type TestComponentMeta } from '@iress-oss/ids-storybook-config';
+import {
+  reactNodeArgType,
+  removeArgTypes,
+  stylingProps,
+  type TestComponentMeta,
+} from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressFormValidationSummary>;
 
@@ -23,10 +28,10 @@ export default {
   title: 'Patterns/Form/FormValidationSummary',
   component: IressFormValidationSummary,
   argTypes: {
-      ...removeArgTypes(['ref']),
-      children: reactNodeArgType,
-      ...stylingProps,
-    },
+    ...removeArgTypes(['ref']),
+    children: reactNodeArgType,
+    ...stylingProps,
+  },
   parameters: {
     idsConfig: { testMeta },
   },

@@ -74,4 +74,4 @@ export function CustomErrorHandlingForm() {
       </IressModal>
     </IressForm>
   );
-};
+}

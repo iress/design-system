@@ -107,7 +107,10 @@ export const Hint: Story = {
     },
   },
   render: () => (
-    <IressField label="Email address" hint="For us to be able to contact you in the future">
+    <IressField
+      label="Email address"
+      hint="For us to be able to contact you in the future"
+    >
       <IressInput id="email" name="email" required type="email" />
     </IressField>
   ),
@@ -136,7 +139,10 @@ export const ErrorMessage: Story = {
     },
   },
   render: () => (
-    <IressField label="Error message" errorMessages={[{ message: 'This field is required' }]}>
+    <IressField
+      label="Error message"
+      errorMessages={[{ message: 'This field is required' }]}
+    >
       <IressInput id="name" name="name" required />
     </IressField>
   ),

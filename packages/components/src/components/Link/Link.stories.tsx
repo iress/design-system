@@ -81,6 +81,9 @@ export const Element: Story = {
   render: (args) => <RoutingLink {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(RoutingLinkSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(RoutingLinkSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };

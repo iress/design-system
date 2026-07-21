@@ -40,7 +40,10 @@ export const Mode: Story = {
   render: (args) => <SkeletonMode {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(SkeletonModeSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(SkeletonModeSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -72,7 +75,10 @@ export const Size: Story = {
   render: (args) => <SkeletonSize {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(SkeletonSizeSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(SkeletonSizeSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 

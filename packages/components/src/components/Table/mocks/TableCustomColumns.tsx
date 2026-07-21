@@ -1,8 +1,4 @@
-import {
-  IressPill,
-  IressTable,
-  IressTableFormattedValue,
-} from '@/main';
+import { IressPill, IressTable, IressTableFormattedValue } from '@/main';
 
 const renderColumn = (value: number) => (
   <IressPill mode={value > 30000 ? '70' : '10'}>

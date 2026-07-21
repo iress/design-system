@@ -28,11 +28,39 @@ type Story = StoryObj<IressDropdownMenuProps<true>>;
 type SingleStory = StoryObj<IressDropdownMenuProps<false>>;
 
 const testMeta: TestComponentMeta[] = [
-  { part: 'main', description: 'The root dropdown menu element', testId: 'dropdown-menu' },
-  { part: 'activator', description: 'The activator button', query: <code>getByRole('button')</code>, testId: 'dropdown-menu__activator-button__button' },
-  { part: 'input', description: 'The search input', query: <code>getByRole('searchbox')</code>, testId: 'dropdown-menu__input' },
-  { part: 'menu', description: 'The menu listbox', query: <code>getByRole('listbox')</code>, testId: 'dropdown-menu__menu' },
-  { part: 'reset button', description: 'The reset filter button', query: <code>getByRole('button', {'{'} name: 'Reset filter' {'}'})</code>, testId: 'dropdown-menu__reset-button' },
+  {
+    part: 'main',
+    description: 'The root dropdown menu element',
+    testId: 'dropdown-menu',
+  },
+  {
+    part: 'activator',
+    description: 'The activator button',
+    query: <code>getByRole('button')</code>,
+    testId: 'dropdown-menu__activator-button__button',
+  },
+  {
+    part: 'input',
+    description: 'The search input',
+    query: <code>getByRole('searchbox')</code>,
+    testId: 'dropdown-menu__input',
+  },
+  {
+    part: 'menu',
+    description: 'The menu listbox',
+    query: <code>getByRole('listbox')</code>,
+    testId: 'dropdown-menu__menu',
+  },
+  {
+    part: 'reset button',
+    description: 'The reset filter button',
+    query: (
+      <code>
+        getByRole('button', {'{'} name: 'Reset filter' {'}'})
+      </code>
+    ),
+    testId: 'dropdown-menu__reset-button',
+  },
 ];
 
 export default {
@@ -72,17 +100,19 @@ export const Controlled: SingleStory = {
 export const SearchTable: SingleStory = {
   render: (args) => <TableWithFilters {...args} />,
   parameters: {
-    ...withSource(
-      TableWithFiltersSource,
-      { stripImports: true, replacePropsType: 'IressDropdownMenuProps' },
-    ),
+    ...withSource(TableWithFiltersSource, {
+      stripImports: true,
+      replacePropsType: 'IressDropdownMenuProps',
+    }),
   },
 };
 
 export const MultiSelect: Story = {
   render: (args) => <ControlledDropdownMenuMultiselect {...args} />,
   parameters: {
-    ...withSource(ControlledDropdownMenuMultiselectSource, { stripImports: true }),
+    ...withSource(ControlledDropdownMenuMultiselectSource, {
+      stripImports: true,
+    }),
   },
 };
 
@@ -289,7 +319,14 @@ export const StylingProps: SingleStory = {
     ...Default.args,
     activatorStyle: {
       bg: 'colour.data.subtle.10',
-    }
+    },
   },
-  render: (args) => <IressDropdownMenu {...args} p="spacing.2" borderRadius="radius.system.button" bg="colour.accent.surface" />,
+  render: (args) => (
+    <IressDropdownMenu
+      {...args}
+      p="spacing.2"
+      borderRadius="radius.system.button"
+      bg="colour.accent.surface"
+    />
+  ),
 };

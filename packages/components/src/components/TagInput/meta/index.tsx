@@ -22,6 +22,5 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-taginput--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/components/tag-input',
+  guidelines: 'https://iress.github.io/design-system/#/components/tag-input',
 } satisfies ComponentMeta;

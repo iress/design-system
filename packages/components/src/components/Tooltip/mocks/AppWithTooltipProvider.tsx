@@ -25,11 +25,7 @@ export const App = () => {
             <IressButton>Uses provider</IressButton>
           </IressTooltip>
 
-          <IressTooltip
-            open
-            container={null}
-            tooltipText="Renders inline"
-          >
+          <IressTooltip open container={null} tooltipText="Renders inline">
             <IressButton>Overrides provider</IressButton>
           </IressTooltip>
         </IressStack>

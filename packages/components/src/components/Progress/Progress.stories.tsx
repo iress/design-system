@@ -1,7 +1,10 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 
 import { IressProgress } from '.';
-import { componentStoryMeta, withSource } from '@iress-oss/ids-storybook-config';
+import {
+  componentStoryMeta,
+  withSource,
+} from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 
 import { ProgressExamples } from './mocks/ProgressExamples';
@@ -28,6 +31,9 @@ export const ProgressExamplesStory: Story = {
   render: (args) => <ProgressExamples {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(ProgressExamplesSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(ProgressExamplesSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };

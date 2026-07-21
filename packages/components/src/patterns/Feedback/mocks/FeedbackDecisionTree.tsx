@@ -115,9 +115,9 @@ function ModalExample() {
 
 function RecommendationResult({
   recommendation,
-}: {
+}: Readonly<{
   recommendation: Recommendation;
-}) {
+}>) {
   if (recommendation === 'alert') {
     return (
       <>
@@ -162,33 +162,33 @@ export function FeedbackDecisionTree() {
         </IressAlert>
         <IressRow>
           <IressCol>
-        {questions.map((q) => (
-          <IressField key={q.id} label={q.label}>
-            <IressRadioGroup
-              name={q.id}
-              value={answers[q.id] ?? ''}
-              onChange={(_, value) => {
-                if (value === undefined) return;
-                setAnswers((prev) => ({ ...prev, [q.id]: value }));
-              }}
-              id={q.id}
-            >
-              {q.options.map((opt) => (
-                <IressRadio key={opt.value} value={opt.value}>
-                  {opt.label}
-                </IressRadio>
-              ))}
-            </IressRadioGroup>
-          </IressField>
-        ))}
-        </IressCol>
-        <IressCol>
-        {recommendation && (
-          <IressPanel stretch>
-            <RecommendationResult recommendation={recommendation} />
-          </IressPanel>
-        )}
-        </IressCol>
+            {questions.map((q) => (
+              <IressField key={q.id} label={q.label}>
+                <IressRadioGroup
+                  name={q.id}
+                  value={answers[q.id] ?? ''}
+                  onChange={(_, value) => {
+                    if (value === undefined) return;
+                    setAnswers((prev) => ({ ...prev, [q.id]: value }));
+                  }}
+                  id={q.id}
+                >
+                  {q.options.map((opt) => (
+                    <IressRadio key={opt.value} value={opt.value}>
+                      {opt.label}
+                    </IressRadio>
+                  ))}
+                </IressRadioGroup>
+              </IressField>
+            ))}
+          </IressCol>
+          <IressCol>
+            {recommendation && (
+              <IressPanel stretch>
+                <RecommendationResult recommendation={recommendation} />
+              </IressPanel>
+            )}
+          </IressCol>
         </IressRow>
       </IressStyled>
     </IressContainer>

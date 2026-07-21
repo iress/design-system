@@ -40,9 +40,7 @@ export const TestTable = ({ items }: TestTableProps) => {
             <td>{description}</td>
             <td>
               {query ?? (
-                <IressText color="colour.neutral.70">
-                  Use test ID →
-                </IressText>
+                <IressText color="colour.neutral.70">Use test ID →</IressText>
               )}
             </td>
             <td>

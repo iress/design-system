@@ -317,7 +317,10 @@ export const WithMenu: Story = {
   render: (args) => <PopoverWithMenu {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(PopoverWithMenuSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(PopoverWithMenuSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 

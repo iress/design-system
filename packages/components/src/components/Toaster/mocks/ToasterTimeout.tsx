@@ -1,8 +1,4 @@
-import {
-  IressButton,
-  IressToasterProvider,
-  useToaster,
-} from '@/main';
+import { IressButton, IressToasterProvider, useToaster } from '@/main';
 
 const ToastWithTrigger = () => {
   const toaster = useToaster();

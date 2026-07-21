@@ -1,13 +1,10 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressSlideout } from '.';
-import { IressButton } from '../Button';
-import { useSlideout } from './hooks/useSlideout';
 import { IressSlideoutProvider } from './SlideoutProvider';
 import { SlideoutUsingState } from './mocks/SlideoutUsingState';
 import SlideoutUsingStateSource from './mocks/SlideoutUsingState.tsx?raw';
 import { IressPanel } from '../Panel';
 import { IressText } from '../Text';
-import { IressInline } from '../Inline';
 import { SlideoutPositions } from './mocks/SlideoutPositions';
 import SlideoutPositionsSource from './mocks/SlideoutPositions.tsx?raw';
 import { SlideoutSizes } from './mocks/SlideoutSizes';
@@ -24,7 +21,6 @@ import { SlideoutWithFooter } from './mocks/SlideoutWithFooter';
 import SlideoutWithFooterSource from './mocks/SlideoutWithFooter.tsx?raw';
 import {
   componentStoryMeta,
-  disableArgTypes,
   withSource,
   reactNodeArgType,
   withBreakpointLabel,
@@ -97,9 +93,7 @@ export const Modes: Story = {
     controls: { disable: true },
     ...withSource(SlideoutModesSource, { stripImports: true }),
   },
-  decorators: [
-    withBreakpointLabel(),
-  ],
+  decorators: [withBreakpointLabel()],
 };
 
 export const Position: Story = {
@@ -147,13 +141,13 @@ export const Microfrontend: Story = {
     ...mergeStorybookConfig(
       withSource(SlideoutMicrofrontendSource, { stripImports: true }),
       {
-    docs: {
+        docs: {
           story: {
             height: '600px',
           },
         },
       },
-    )
+    ),
   },
   tags: ['recipe'],
 };

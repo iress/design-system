@@ -192,7 +192,10 @@ export const InitialOptions: Story = {
   render: (args) => <SelectInitialOptions {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(SelectInitialOptionsSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(SelectInitialOptionsSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -310,8 +313,9 @@ export const Native: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'This shows how to set the native prop to use the native select element instead of the custom dropdown. This is useful for mobile devices or when you want to leverage the native select behavior and styling.',
-      }
+        story:
+          'This shows how to set the native prop to use the native select element instead of the custom dropdown. This is useful for mobile devices or when you want to leverage the native select behavior and styling.',
+      },
     },
   },
   decorators: [withBreakpointLabel()],

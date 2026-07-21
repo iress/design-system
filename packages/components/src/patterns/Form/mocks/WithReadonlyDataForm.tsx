@@ -32,40 +32,40 @@ export const WithReadonlyDataForm = () => {
         values={values}
       >
         <IressContainer>
-            <IressText element="h2">User Details</IressText>
-            <IressRow gutter="md">
-              <IressCol>
-                <IressFormField
-                  name="firstName"
-                  label="First Name"
-                  render={(controlledProps) => (
-                    <IressInput {...controlledProps} readOnly />
-                  )}
-                  mb="none"
-                />
-              </IressCol>
-              <IressCol>
-                <IressFormField
-                  name="lastName"
-                  label="Last Name"
-                  render={(controlledProps) => (
-                    <IressInput {...controlledProps} readOnly />
-                  )}
-                  mb="none"
-                />
-              </IressCol>
-            </IressRow>
-            <IressDivider my="spacing.4" />
-                <IressFormField
-                  name="email"
-                  label="Email"
-                  render={(controlledProps) => (
-                    <IressInput {...controlledProps} type="email" />
-                  )}
-                />
-            <IressButton type="submit" mode="primary">
-              Submit
-            </IressButton>
+          <IressText element="h2">User Details</IressText>
+          <IressRow gutter="md">
+            <IressCol>
+              <IressFormField
+                name="firstName"
+                label="First Name"
+                render={(controlledProps) => (
+                  <IressInput {...controlledProps} readOnly />
+                )}
+                mb="none"
+              />
+            </IressCol>
+            <IressCol>
+              <IressFormField
+                name="lastName"
+                label="Last Name"
+                render={(controlledProps) => (
+                  <IressInput {...controlledProps} readOnly />
+                )}
+                mb="none"
+              />
+            </IressCol>
+          </IressRow>
+          <IressDivider my="spacing.4" />
+          <IressFormField
+            name="email"
+            label="Email"
+            render={(controlledProps) => (
+              <IressInput {...controlledProps} type="email" />
+            )}
+          />
+          <IressButton type="submit" mode="primary">
+            Submit
+          </IressButton>
         </IressContainer>
       </IressForm>
       <IressModal show={!!preview} onShowChange={(show) => setPreview(show)}>

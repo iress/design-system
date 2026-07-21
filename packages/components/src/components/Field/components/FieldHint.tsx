@@ -49,10 +49,12 @@ export const FieldHint = ({
   });
 
   if (horizontal) {
-    return <styled.div className={css(styles.horizontalLabelWithHint)}>
-      {children}
-      <FieldHintIcon hint={hint} />
-    </styled.div>;
+    return (
+      <styled.div className={css(styles.horizontalLabelWithHint)}>
+        {children}
+        <FieldHintIcon hint={hint} />
+      </styled.div>
+    );
   }
 
   return (
@@ -75,10 +77,7 @@ export const FieldHintIcon = ({ hint }: { hint: ReactNode }) => (
     align="top"
   >
     <IressButton mode="muted" p="none" mb="-spacing.1">
-    <IressIcon
-      name="info-circle"
-      screenreaderText="More information"
-    />
+      <IressIcon name="info-circle" screenreaderText="More information" />
     </IressButton>
   </IressTooltip>
 );

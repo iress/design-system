@@ -4,7 +4,8 @@ export function IconSpin() {
   return (
     <IressInline gap="md">
       <IressText>
-        <IressIcon name="spinner" screenreaderText="Loading..." spin="half" /> half
+        <IressIcon name="spinner" screenreaderText="Loading..." spin="half" />{' '}
+        half
       </IressText>
       <IressText>
         <IressIcon name="spinner" screenreaderText="Loading..." spin={1} /> 1

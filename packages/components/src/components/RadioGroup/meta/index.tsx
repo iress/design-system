@@ -13,7 +13,8 @@ export const testMeta: TestComponentMeta[] = [
 
 export default {
   heading: 'RadioGroup',
-  description: 'Groups related radio buttons so users can select one option from a set.',
+  description:
+    'Groups related radio buttons so users can select one option from a set.',
   tags: ['form', 'selection', 'group'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
@@ -32,7 +33,7 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-radio-group--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/components/radio-group',
-  figma: 'https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-28220',
+  guidelines: 'https://iress.github.io/design-system/#/components/radio-group',
+  figma:
+    'https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-28220',
 } satisfies ComponentMeta;

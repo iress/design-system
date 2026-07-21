@@ -3,7 +3,8 @@ import type { ComponentMeta } from '@helpers/meta/types';
 
 export default {
   heading: 'Side Nav',
-  description: 'Provides a vertical navigation menu typically used in application sidebars.',
+  description:
+    'Provides a vertical navigation menu typically used in application sidebars.',
   tags: ['navigation', 'sidebar', 'rail', 'menu'],
   Thumbnail: lazy(() => import('./Thumbnail')),
   import: "import { IressSideNav } from '@iress-oss/ids-components';",
@@ -21,7 +22,7 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-side-nav--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/patterns/side-nav',
-  figma: 'https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=6201-24',
+  guidelines: 'https://iress.github.io/design-system/#/patterns/side-nav',
+  figma:
+    'https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=6201-24',
 } satisfies ComponentMeta;

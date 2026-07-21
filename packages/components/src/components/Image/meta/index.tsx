@@ -8,8 +8,8 @@ export const testMeta: TestComponentMeta[] = [
     description: 'The root element of the image',
     query: (
       <>
-        <code>getByRole('img')</code>, or{' '}
-        <code>getByAltText('...')</code> to match by alt text
+        <code>getByRole('img')</code>, or <code>getByAltText('...')</code> to
+        match by alt text
       </>
     ),
     testId: 'image',
@@ -18,7 +18,8 @@ export const testMeta: TestComponentMeta[] = [
 
 export default {
   heading: 'Image',
-  description: 'Renders a responsive image with optional fallback and loading behaviour.',
+  description:
+    'Renders a responsive image with optional fallback and loading behaviour.',
   tags: ['media', 'visual', 'content'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
@@ -37,6 +38,5 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-image--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/components/image',
+  guidelines: 'https://iress.github.io/design-system/#/components/image',
 } satisfies ComponentMeta;

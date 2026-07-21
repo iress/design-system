@@ -13,10 +13,34 @@ import BreadcrumbsAllConfigurationsSource from './mocks/BreadcrumbsAllConfigurat
 type Story = StoryObj<typeof IressBreadcrumbs>;
 
 const testMeta: TestComponentMeta[] = [
-  { part: 'main', description: 'The root navigation element', query: <code>getByRole('navigation')</code>, testId: 'breadcrumbs' },
-  { part: 'item', description: 'A breadcrumb link item', query: <code>getByRole('link', {'{'} name: '...' {'}'})</code>, testId: 'breadcrumbs__item-*' },
-  { part: 'overflow', description: 'The overflow trigger button', query: <code>getByRole('button')</code>, testId: 'breadcrumbs__overflow' },
-  { part: 'menu', description: 'The overflow menu', query: <code>getByRole('menu')</code>, testId: 'breadcrumbs__menu' },
+  {
+    part: 'main',
+    description: 'The root navigation element',
+    query: <code>getByRole('navigation')</code>,
+    testId: 'breadcrumbs',
+  },
+  {
+    part: 'item',
+    description: 'A breadcrumb link item',
+    query: (
+      <code>
+        getByRole('link', {'{'} name: '...' {'}'})
+      </code>
+    ),
+    testId: 'breadcrumbs__item-*',
+  },
+  {
+    part: 'overflow',
+    description: 'The overflow trigger button',
+    query: <code>getByRole('button')</code>,
+    testId: 'breadcrumbs__overflow',
+  },
+  {
+    part: 'menu',
+    description: 'The overflow menu',
+    query: <code>getByRole('menu')</code>,
+    testId: 'breadcrumbs__menu',
+  },
 ];
 
 export default {

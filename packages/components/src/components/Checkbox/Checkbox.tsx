@@ -36,6 +36,7 @@ export type IressCheckboxVariants = 'card' | 'touch' | undefined;
 /**
  * @deprecated Use `IressCheckboxVariants` instead. This type will be removed in a future release.
  */
+// eslint-disable-next-line sonarjs/redundant-type-aliases, no-restricted-syntax
 export type CheckboxVariants = IressCheckboxVariants;
 
 export interface IressCheckboxProps<

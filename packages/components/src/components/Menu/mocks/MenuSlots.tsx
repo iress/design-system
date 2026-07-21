@@ -27,7 +27,10 @@ export function MenuSlots() {
       >
         Visit the Iress website
       </IressMenuItem>
-      <IressMenuItem href="https://google.com" append={<IressPill>8+</IressPill>}>
+      <IressMenuItem
+        href="https://google.com"
+        append={<IressPill>8+</IressPill>}
+      >
         Visit Google
       </IressMenuItem>
     </IressMenu>

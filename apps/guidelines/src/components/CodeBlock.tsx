@@ -1,4 +1,9 @@
-import { IressButton, IressCard, IressInline, IressLink } from '@iress-oss/ids-components';
+import {
+  IressButton,
+  IressCard,
+  IressInline,
+  IressLink,
+} from '@iress-oss/ids-components';
 
 interface CodeBlockProps {
   children: string;
@@ -6,9 +11,13 @@ interface CodeBlockProps {
   chromaticUrl?: string;
 }
 
-export function CodeBlock({ children, language, chromaticUrl }: CodeBlockProps) {
+export function CodeBlock({
+  children,
+  language,
+  chromaticUrl,
+}: CodeBlockProps) {
   const handleCopy = () => {
-    navigator.clipboard.writeText(children);
+    void navigator.clipboard.writeText(children);
   };
 
   return (
@@ -23,7 +32,11 @@ export function CodeBlock({ children, language, chromaticUrl }: CodeBlockProps) 
           Copy
         </IressButton>
         {chromaticUrl && (
-          <IressLink href={chromaticUrl} target="_blank" rel="noopener noreferrer">
+          <IressLink
+            href={chromaticUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             View in Storybook
           </IressLink>
         )}

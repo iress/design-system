@@ -590,7 +590,9 @@ describe('IressSelect', () => {
           expect(optionsRound1).toHaveLength(6); // heading is an option as well... a11y things
         });
 
-        expect(screen.getByText('Search results')).toBeInTheDocument();
+        expect(
+          screen.getByText(/^Search results \(\d+\)$/),
+        ).toBeInTheDocument();
 
         await userEvent.keyboard('{ArrowDown}{Enter}');
 
@@ -643,7 +645,9 @@ describe('IressSelect', () => {
           expect(optionsRound1).toHaveLength(6); // heading is an option as well... a11y things
         });
 
-        expect(screen.getByText('Search results')).toBeInTheDocument();
+        expect(
+          screen.getByText(/^Search results \(\d+\)$/),
+        ).toBeInTheDocument();
 
         // WAF-854 change: After typing, focus is now on search results, not the heading
         // So we don't need to press ArrowDown first to navigate to an option

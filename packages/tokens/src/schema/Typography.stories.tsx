@@ -351,58 +351,58 @@ export const Code: Story = {
   args: {
     children: (
       <IressStack gap="xl" p="xs">
-      <IressRow gutter="xl">
-        <IressCol span={{ lg: 4 }}>
-          <IressText
-            textStyle="typography.code"
-            mb="sm"
-            style={{
-              font: cssVars.typography.code,
-            }}
-          >
-            Code goes here
-          </IressText>
-          <IressText element="strong">Code</IressText>
-          <Markdown>{typography.code.$description}</Markdown>
-        </IressCol>
-        <IressCol pt="sm">
-          <IressStack gap="sm">
-            <IressInline gap="sm">
-              <strong>Font</strong>
-              <CssSpark
-                cssVar={cssVars.typography._code.fontFamily}
-                property="fontFamily"
-                trimmed
-              />
-            </IressInline>
-            <IressInline gap="sm">
-              <strong>Weight</strong>
-              <CssSpark
-                cssVar={cssVars.typography._code.fontWeight}
-                property="fontWeight"
-              />
-            </IressInline>
-            <IressInline gap="sm">
-              <strong>Size</strong>
-              <CssSpark
-                cssVar={cssVars.typography._code.fontSize}
-                property="fontSize"
-              />
-            </IressInline>
-            <IressInline gap="sm">
-              <strong>Line height</strong>
-              <CssSpark
-                additionalStyles={{
-                  fontSize: cssVars.typography._code.fontSize,
-                }}
-                cssVar={cssVars.typography._code.lineHeight}
-                property="lineHeight"
-              />
-            </IressInline>
-            <TokenTag>typography.code</TokenTag>
-          </IressStack>
-        </IressCol>
-      </IressRow>
+        <IressRow gutter="xl">
+          <IressCol span={{ lg: 4 }}>
+            <IressText
+              textStyle="typography.code"
+              mb="sm"
+              style={{
+                font: cssVars.typography.code,
+              }}
+            >
+              Code goes here
+            </IressText>
+            <IressText element="strong">Code</IressText>
+            <Markdown>{typography.code.$description}</Markdown>
+          </IressCol>
+          <IressCol pt="sm">
+            <IressStack gap="sm">
+              <IressInline gap="sm">
+                <strong>Font</strong>
+                <CssSpark
+                  cssVar={cssVars.typography._code.fontFamily}
+                  property="fontFamily"
+                  trimmed
+                />
+              </IressInline>
+              <IressInline gap="sm">
+                <strong>Weight</strong>
+                <CssSpark
+                  cssVar={cssVars.typography._code.fontWeight}
+                  property="fontWeight"
+                />
+              </IressInline>
+              <IressInline gap="sm">
+                <strong>Size</strong>
+                <CssSpark
+                  cssVar={cssVars.typography._code.fontSize}
+                  property="fontSize"
+                />
+              </IressInline>
+              <IressInline gap="sm">
+                <strong>Line height</strong>
+                <CssSpark
+                  additionalStyles={{
+                    fontSize: cssVars.typography._code.fontSize,
+                  }}
+                  cssVar={cssVars.typography._code.lineHeight}
+                  property="lineHeight"
+                />
+              </IressInline>
+              <TokenTag>typography.code</TokenTag>
+            </IressStack>
+          </IressCol>
+        </IressRow>
       </IressStack>
     ),
   },

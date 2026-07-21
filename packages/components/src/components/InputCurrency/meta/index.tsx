@@ -8,8 +8,9 @@ export const testMeta: TestComponentMeta[] = [
     description: 'The root element of the input currency',
     query: (
       <>
-        <code>getByRole('textbox')</code>, or{' '}
-        <code>getByLabelText('...')</code> when inside a Field. In focus, the input will have the role of <code>spinbutton</code>.
+        <code>getByRole('textbox')</code>, or <code>getByLabelText('...')</code>{' '}
+        when inside a Field. In focus, the input will have the role of{' '}
+        <code>spinbutton</code>.
       </>
     ),
     testId: 'input-currency',

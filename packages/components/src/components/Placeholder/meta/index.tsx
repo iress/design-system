@@ -13,7 +13,8 @@ export const testMeta: TestComponentMeta[] = [
 
 export default {
   heading: 'Placeholder',
-  description: 'Renders a visual placeholder to represent future or missing content.',
+  description:
+    'Renders a visual placeholder to represent future or missing content.',
   tags: ['layout', 'empty-state', 'content'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
@@ -32,6 +33,5 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-placeholder--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/components/placeholder',
+  guidelines: 'https://iress.github.io/design-system/#/components/placeholder',
 } satisfies ComponentMeta;

@@ -5,7 +5,12 @@ export function ProgressExamples() {
     <IressStack gap="md">
       <IressProgress min={0} max={50} value={0} />
       <IressProgress min={10} max={30} value={20} />
-      <IressProgress min={0} max={50} value={30} sectionTitle="Step {{current}} of {{max}}" />
+      <IressProgress
+        min={0}
+        max={50}
+        value={30}
+        sectionTitle="Step {{current}} of {{max}}"
+      />
       <IressProgress
         min={0}
         max={100}

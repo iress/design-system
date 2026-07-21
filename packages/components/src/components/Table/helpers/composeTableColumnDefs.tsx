@@ -75,7 +75,8 @@ export interface IressTableColumnFilter<TRow extends object> {
 /**
  * @deprecated Use `IressTableColumnFilter` instead. This type will be removed in a future release.
  */
-export type TableColumnFilter<TRow extends object> =  IressTableColumnFilter<TRow>;
+export type TableColumnFilter<TRow extends object> =
+  IressTableColumnFilter<TRow>;
 
 /**
  * Normalizes the `filter` column option into an `IressTableColumnFilter` object.
@@ -89,7 +90,10 @@ export const normalizeColumnFilter = <TRow extends object>(
   return filter;
 };
 
-export interface IressTableColumn<TRow extends object, TVal = never> extends Pick<
+export interface IressTableColumn<
+  TRow extends object,
+  TVal = never,
+> extends Pick<
   IressCSSProps,
   'bg' | 'color' | 'noGutter' | 'srOnly' | 'textAlign' | 'textStyle'
 > {
@@ -165,7 +169,10 @@ export interface IressTableColumn<TRow extends object, TVal = never> extends Pic
 /**
  * @deprecated Use `IressTableColumn` instead. This type will be removed in a future release.
  */
-export type TableColumn<TRow extends object, TVal = never> = IressTableColumn<TRow, TVal>;
+export type TableColumn<TRow extends object, TVal = never> = IressTableColumn<
+  TRow,
+  TVal
+>;
 
 /**
  * Filter function that checks if the cell value is included in the array of selected filter values.

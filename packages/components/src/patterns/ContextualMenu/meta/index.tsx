@@ -3,7 +3,8 @@ import type { ComponentMeta } from '@helpers/meta/types';
 
 export default {
   heading: 'Contextual Menu',
-  description: 'Displays a context-sensitive menu of actions triggered by user interaction.',
+  description:
+    'Displays a context-sensitive menu of actions triggered by user interaction.',
   tags: ['menu', 'actions', 'overflow'],
   Thumbnail: lazy(() => import('./Thumbnail')),
   import: "import { IressContextualMenu } from '@iress-oss/ids-components';",
@@ -23,5 +24,6 @@ export default {
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-contextual-menu--docs',
   guidelines:
     'https://iress.github.io/design-system/#/patterns/contextual-menu',
-  figma: 'https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-26780',
+  figma:
+    'https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-26780',
 } satisfies ComponentMeta;

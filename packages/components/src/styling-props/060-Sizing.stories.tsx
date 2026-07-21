@@ -9,7 +9,7 @@ export default {
   parameters: {
     idsConfig: {
       autodocsTemplate: 'default',
-    }
+    },
   },
 } as Meta<typeof IressPanel>;
 

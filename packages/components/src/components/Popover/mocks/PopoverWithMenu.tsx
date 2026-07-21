@@ -1,4 +1,10 @@
-import { IressButton, IressIcon, IressMenu, IressMenuItem, IressPopover } from '@/main';
+import {
+  IressButton,
+  IressIcon,
+  IressMenu,
+  IressMenuItem,
+  IressPopover,
+} from '@/main';
 
 export function PopoverWithMenu() {
   return (
@@ -12,7 +18,10 @@ export function PopoverWithMenu() {
         <IressMenuItem value="edit" prepend={<IressIcon name="edit" />}>
           Edit
         </IressMenuItem>
-        <IressMenuItem value="duplicate" prepend={<IressIcon name="content_copy" />}>
+        <IressMenuItem
+          value="duplicate"
+          prepend={<IressIcon name="content_copy" />}
+        >
           Duplicate
         </IressMenuItem>
         <IressMenuItem value="delete" prepend={<IressIcon name="delete" />}>

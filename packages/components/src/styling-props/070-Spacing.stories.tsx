@@ -9,7 +9,7 @@ export default {
   parameters: {
     idsConfig: {
       autodocsTemplate: 'default',
-    }
+    },
   },
 } as Meta<typeof IressPanel>;
 
@@ -158,7 +158,9 @@ export const noGutter: Story = {
   render: (args) => (
     <IressPanel {...args}>
       <ul>
-        <li>Margin is removed due to <code>noGutter</code></li>
+        <li>
+          Margin is removed due to <code>noGutter</code>
+        </li>
         <li>Last child has no bottom margin</li>
       </ul>
     </IressPanel>

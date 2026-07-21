@@ -4,7 +4,7 @@ import { LoadingSuspenseWizard } from './mocks/LoadingWizardWithSuspense';
 import LoadingSuspenseWizardSource from './mocks/LoadingWizardWithSuspense.tsx?raw';
 import { LoadingSuspenseWizardFast } from './mocks/LoadingWizardWithSuspenseFast';
 import LoadingSuspenseWizardFastSource from './mocks/LoadingWizardWithSuspenseFast.tsx?raw';
-import { withSource } from '@iress-oss/ids-storybook-config';
+import { withSource, stylingProps } from '@iress-oss/ids-storybook-config';
 import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressLoadingSuspense>;
@@ -27,8 +27,17 @@ export default {
   title: 'Patterns/Loading/Suspense',
   component: IressLoadingSuspense,
   tags: ['beta: '],
+  argTypes: {
+    ...stylingProps,
+  },
   parameters: {
     idsConfig: { testMeta },
+    docs: {
+      description: {
+        component:
+          'A Suspense-compatible loading boundary that displays IressLoading while async content resolves.',
+      },
+    },
   },
 } as Meta<typeof IressLoadingSuspense>;
 

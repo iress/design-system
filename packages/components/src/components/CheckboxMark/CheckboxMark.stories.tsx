@@ -21,6 +21,12 @@ export default {
   },
   parameters: {
     idsConfig: { testMeta },
+    docs: {
+      description: {
+        component:
+          'A standalone checkbox mark indicator that renders the visual check/indeterminate state without the full Checkbox wrapper.',
+      },
+    },
   },
 } as Meta<typeof IressCheckboxMark>;
 

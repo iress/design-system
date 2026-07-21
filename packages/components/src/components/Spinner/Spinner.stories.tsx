@@ -2,7 +2,10 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressSpinner } from '.';
 import { IressInline } from '../Inline';
 import { IressText } from '../Text';
-import { componentStoryMeta, addToStorybookCategory } from '@iress-oss/ids-storybook-config';
+import {
+  componentStoryMeta,
+  addToStorybookCategory,
+} from '@iress-oss/ids-storybook-config';
 import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressSpinner>;

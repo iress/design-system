@@ -78,4 +78,4 @@ export function ControlledForm() {
       </IressModal>
     </>
   );
-};
+}

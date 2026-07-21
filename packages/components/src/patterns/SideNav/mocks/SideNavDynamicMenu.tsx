@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { IressSideNav, type SideNavPanelItem } from '@/main';
+import { IressSideNav, type IressSideNavPanelItem } from '@/main';
 
-const menusBySection: Record<string, SideNavPanelItem[]> = {
+const menusBySection: Record<string, IressSideNavPanelItem[]> = {
   hubs: [
     {
       key: 'client-details',

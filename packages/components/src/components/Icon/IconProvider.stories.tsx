@@ -5,12 +5,34 @@ import { IressInline } from '../Inline';
 import { IressIconProvider, type IressIconProviderProps } from './IconProvider';
 import { IressButton } from '../Button';
 import { useState } from 'react';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
+import { stylingProps } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<IressIconProviderProps>;
+
+const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The root element of the icon provider',
+    testId: 'icon-provider',
+  },
+];
 
 export default {
   title: 'Components/Icon/Provider',
   component: IressIconProvider,
+  argTypes: {
+    ...stylingProps,
+  },
+  parameters: {
+    idsConfig: { testMeta },
+    docs: {
+      description: {
+        component:
+          'IressIconProvider enables automatic font subsetting, reducing bundle size by loading only the icons used in your application.',
+      },
+    },
+  },
 } as Meta<typeof IressIconProvider>;
 
 export const Provider: Story = {

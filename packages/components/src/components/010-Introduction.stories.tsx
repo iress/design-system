@@ -195,75 +195,75 @@ const Reference = () => {
 
   return (
     <IressContainer>
-    <IressStack gap="lg" my="lg" maxWidth="overlay.lg" mx="auto">
-      <IressInline gap="md" horizontalAlign="between" verticalAlign="bottom">
-        <IressField label="Search components" mb="none" stretch>
-          <IressInput
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onClear={() => setSearchQuery('')}
-            clearable
-            prepend={<IressIcon name="search" />}
-            id="search-components"
+      <IressStack gap="lg" my="lg" maxWidth="overlay.lg" mx="auto">
+        <IressInline gap="md" horizontalAlign="between" verticalAlign="bottom">
+          <IressField label="Search components" mb="none" stretch>
+            <IressInput
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onClear={() => setSearchQuery('')}
+              clearable
+              prepend={<IressIcon name="search" />}
+              id="search-components"
+            />
+          </IressField>
+          <IressDropdownMenu
+            label="Filter by tags"
+            multiSelect
+            options={allTags}
+            selected={selectedTags}
+            onChange={setSelectedTags}
+            onReset={() => setSelectedTags([])}
+            visibleResetButton
+            limitDesktop={9999}
           />
-        </IressField>
-        <IressDropdownMenu
-          label="Filter by tags"
-          multiSelect
-          options={allTags}
-          selected={selectedTags}
-          onChange={setSelectedTags}
-          onReset={() => setSelectedTags([])}
-          visibleResetButton
-          limitDesktop={9999}
-        />
-      </IressInline>
-      <IressRow gutter="lg">
-        {filteredComponents.map(({ Thumbnail, ...component }) => (
-          <IressCol key={component.heading} span={{ xs: 12, md: 4 }}>
-            <IressCard
-              heading={component.heading}
-              media={
-                <Suspense
-                  fallback={
-                    <IressSkeleton mode="rect" width="751px" height="184px" />
-                  }
-                >
-                  <Thumbnail />
-                </Suspense>
-              }
-              footer={
-                <IressInline gap="sm">
-                  {'storybook' in component && component.storybook && (
-                    <IressButton
-                      mode="secondary"
-                      compact
-                      href={component.storybook}
-                      target="_blank"
-                    >
-                      Storybook
-                    </IressButton>
-                  )}
-                  {'guidelines' in component && component.guidelines && (
-                    <IressButton
-                      mode="secondary"
-                      compact
-                      href={component.guidelines}
-                      target="_blank"
-                    >
-                      Guidelines
-                    </IressButton>
-                  )}
-                </IressInline>
-              }
-              stretch
-            >
-              {component.description}
-            </IressCard>
-          </IressCol>
-        ))}
-      </IressRow>
-    </IressStack>
+        </IressInline>
+        <IressRow gutter="lg">
+          {filteredComponents.map(({ Thumbnail, ...component }) => (
+            <IressCol key={component.heading} span={{ xs: 12, md: 4 }}>
+              <IressCard
+                heading={component.heading}
+                media={
+                  <Suspense
+                    fallback={
+                      <IressSkeleton mode="rect" width="751px" height="184px" />
+                    }
+                  >
+                    <Thumbnail />
+                  </Suspense>
+                }
+                footer={
+                  <IressInline gap="sm">
+                    {'storybook' in component && component.storybook && (
+                      <IressButton
+                        mode="secondary"
+                        compact
+                        href={component.storybook}
+                        target="_blank"
+                      >
+                        Storybook
+                      </IressButton>
+                    )}
+                    {'guidelines' in component && component.guidelines && (
+                      <IressButton
+                        mode="secondary"
+                        compact
+                        href={component.guidelines}
+                        target="_blank"
+                      >
+                        Guidelines
+                      </IressButton>
+                    )}
+                  </IressInline>
+                }
+                stretch
+              >
+                {component.description}
+              </IressCard>
+            </IressCol>
+          ))}
+        </IressRow>
+      </IressStack>
     </IressContainer>
   );
 };

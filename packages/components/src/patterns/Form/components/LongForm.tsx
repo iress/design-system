@@ -139,7 +139,7 @@ const LongFormPattern = <T extends FieldValues, TContext = object>(
         gap="sm"
         horizontalAlign="between"
         verticalAlign="bottom"
-        className={styles.header} 
+        className={styles.header}
         noWrap
       >
         {heading}
@@ -147,7 +147,8 @@ const LongFormPattern = <T extends FieldValues, TContext = object>(
       </IressInline>
       <IressPanel
         {...panelStyle}
-        className={cx(styles.children, panelStyle.className)} noBorder
+        className={cx(styles.children, panelStyle.className)}
+        noBorder
       >
         {alert}
         {children}

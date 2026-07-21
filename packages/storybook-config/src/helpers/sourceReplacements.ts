@@ -8,8 +8,9 @@ export interface SourceReplacement {
  * Applied in both `getPreview` (global) and `withSource` (per-story).
  */
 export const DEFAULT_SOURCE_REPLACEMENTS: SourceReplacement[] = [
-  { pattern: /container:\s*\{\}/g, replacement: 'container: document.body' },
-  { pattern: /\s*ref=\{undefined\}/g, replacement: '' },
+  { pattern: /container:[ \t]*\{\}/g, replacement: 'container: document.body' },
+  // eslint-disable-next-line sonarjs/slow-regex
+  { pattern: /[ \t]*ref=\{undefined\}/g, replacement: '' },
 ];
 
 /**

@@ -1,6 +1,7 @@
 import {
   type CSSProperties,
   type ElementType,
+  type MouseEvent,
   type MouseEventHandler,
   type ReactNode,
   useMemo,
@@ -19,6 +20,7 @@ import { useSideNavState } from './hooks/useSideNavState';
 import { isSideNavGroup } from './SideNav.helpers';
 import type { IressStyledProps } from '@/types';
 import { IressText } from '@/components/Text';
+import type { IressTextElements } from '@/components/Text/Text';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -89,7 +91,9 @@ export type SideNavSideMenuGroup = IressSideNavSideMenuGroup;
  * When mixing flat items and groups in a single array, ensure all `key` values
  * are unique across both types to avoid React reconciliation issues.
  */
-export type IressSideNavPanelItem = IressSideNavSubItem | IressSideNavSideMenuGroup;
+export type IressSideNavPanelItem =
+  | IressSideNavSubItem
+  | IressSideNavSideMenuGroup;
 
 /**
  * A top-level navigation item with a rail icon and optional panel children.
@@ -413,7 +417,7 @@ export const IressSideNav = ({
                       key={entry.key ?? index}
                       label={entry.label}
                       href={entry.href}
-                      element={entry.element}
+                      element={entry.element as IressTextElements}
                       onClick={entry.onClick}
                       active={openGroupKey === entry.key}
                       onActiveChange={(isOpen) =>
@@ -445,7 +449,7 @@ export const IressSideNav = ({
                       key={entry.key ?? index}
                       href={entry.href}
                       element={entry.element}
-                      onClick={(e) => {
+                      onClick={(e: MouseEvent) => {
                         setOpenGroupKey(undefined);
                         entry.onClick?.(e);
                       }}

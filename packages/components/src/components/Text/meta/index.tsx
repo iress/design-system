@@ -13,7 +13,8 @@ export const testMeta: TestComponentMeta[] = [
 
 export default {
   heading: 'Text',
-  description: 'Renders styled text with consistent typography from the design system.',
+  description:
+    'Renders styled text with consistent typography from the design system.',
   tags: ['typography', 'content', 'display'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
@@ -32,6 +33,5 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-text--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/components/text',
+  guidelines: 'https://iress.github.io/design-system/#/components/text',
 } satisfies ComponentMeta;

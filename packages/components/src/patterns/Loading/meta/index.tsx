@@ -3,7 +3,8 @@ import type { ComponentMeta } from '@helpers/meta/types';
 
 export default {
   heading: 'Loading',
-  description: 'Displays a loading state to indicate content is being fetched or processed.',
+  description:
+    'Displays a loading state to indicate content is being fetched or processed.',
   tags: ['loading', 'skeleton', 'progress'],
   Thumbnail: lazy(() => import('./Thumbnail')),
   import: "import { IressLoading } from '@iress-oss/ids-components';",
@@ -21,6 +22,5 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-loading--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/patterns/loading',
+  guidelines: 'https://iress.github.io/design-system/#/patterns/loading',
 } satisfies ComponentMeta;

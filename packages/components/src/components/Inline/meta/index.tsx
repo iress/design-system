@@ -12,7 +12,8 @@ export const testMeta: TestComponentMeta[] = [
 
 export default {
   heading: 'Inline',
-  description: 'Lays out children horizontally with consistent spacing between items.',
+  description:
+    'Lays out children horizontally with consistent spacing between items.',
   tags: ['layout', 'spacing', 'alignment'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
@@ -31,6 +32,5 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-inline--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/components/inline',
+  guidelines: 'https://iress.github.io/design-system/#/components/inline',
 } satisfies ComponentMeta;

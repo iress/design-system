@@ -1,10 +1,5 @@
 import { useState } from 'react';
-import {
-  IressButton,
-  IressSkeleton,
-  IressStack,
-  IressText,
-} from '@/main';
+import { IressButton, IressSkeleton, IressStack, IressText } from '@/main';
 
 const TEXT_STYLES = [
   'typography.heading.1',

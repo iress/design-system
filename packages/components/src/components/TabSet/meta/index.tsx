@@ -18,7 +18,11 @@ export const testMeta: TestComponentMeta[] = [
     part: 'tab',
     description:
       'An individual tab item (rendered by IressTab, receives its own data-testid)',
-    query: <code>getByRole('tab', {'{'} name: '...' {'}'})</code>,
+    query: (
+      <code>
+        getByRole('tab', {'{'} name: '...' {'}'})
+      </code>
+    ),
     testId: '<tab-testid>',
   },
   {
@@ -31,7 +35,8 @@ export const testMeta: TestComponentMeta[] = [
 
 export default {
   heading: 'TabSet',
-  description: 'Organises content into tabbed panels, showing one panel at a time.',
+  description:
+    'Organises content into tabbed panels, showing one panel at a time.',
   tags: ['navigation', 'layout', 'interactive'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
@@ -50,8 +55,8 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tab-set--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/components/tab-set',
+  guidelines: 'https://iress.github.io/design-system/#/components/tab-set',
   subComponents: ['IressTab'],
-  figma: 'https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-28714',
+  figma:
+    'https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-28714',
 } satisfies ComponentMeta;

@@ -18,7 +18,8 @@ export const testMeta: TestComponentMeta[] = [
 
 export default {
   heading: 'Progress',
-  description: 'Visualises the completion status of a task or process as a progress bar.',
+  description:
+    'Visualises the completion status of a task or process as a progress bar.',
   tags: ['data-display', 'feedback', 'loading'],
   testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
@@ -37,6 +38,5 @@ export default {
   },
   storybook:
     'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-progress--docs',
-  guidelines:
-    'https://iress.github.io/design-system/#/components/progress',
+  guidelines: 'https://iress.github.io/design-system/#/components/progress',
 } satisfies ComponentMeta;

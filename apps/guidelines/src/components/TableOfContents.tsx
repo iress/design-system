@@ -50,7 +50,9 @@ export function TableOfContents() {
       // Only show TOC on pages with Design/Develop/Specifications tabs
       const tabButtons = Array.from(document.querySelectorAll('[role="tab"]'));
       const hasComponentTabs = tabButtons.some(
-        (btn) => btn.textContent?.trim() === 'Design' || btn.textContent?.trim() === 'Develop',
+        (btn) =>
+          btn.textContent?.trim() === 'Design' ||
+          btn.textContent?.trim() === 'Develop',
       );
       setVisibleTab(hasComponentTabs ? (tab ?? 'design') : '');
     };
@@ -157,21 +159,25 @@ export function TableOfContents() {
   if (headings.length < 2) return null;
 
   return (
-      <IressStack gap="xs" py="md" px="sm" srOnly={{ base: true, xl: false }} className="toc">
-        <IressMenuHeading>
-          On this page
-        </IressMenuHeading>
-        <IressMenu fluid>
-          {headings.map((heading) => (
-            <IressMenuItem
-              key={heading.id}
-              selected={activeId === heading.id}
-              onClick={() => scrollToHeading(heading.id)}
-            >
-              {heading.text}
-            </IressMenuItem>
-          ))}
-        </IressMenu>
-      </IressStack>
+    <IressStack
+      gap="xs"
+      py="md"
+      px="sm"
+      srOnly={{ base: true, xl: false }}
+      className="toc"
+    >
+      <IressMenuHeading>On this page</IressMenuHeading>
+      <IressMenu fluid>
+        {headings.map((heading) => (
+          <IressMenuItem
+            key={heading.id}
+            selected={activeId === heading.id}
+            onClick={() => scrollToHeading(heading.id)}
+          >
+            {heading.text}
+          </IressMenuItem>
+        ))}
+      </IressMenu>
+    </IressStack>
   );
 }

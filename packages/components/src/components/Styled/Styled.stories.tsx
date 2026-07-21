@@ -4,7 +4,7 @@ import { IressStack } from '../Stack';
 import { IressText } from '../Text';
 import { IressIcon } from '../Icon';
 import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
-import { disableArgTypes } from '@iress-oss/ids-storybook-config';
+import { disableArgTypes, stylingProps } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressStyled>;
 
@@ -20,14 +20,24 @@ export default {
   title: 'Components/Styled',
   component: IressStyled,
   tags: ['updated'],
+  argTypes: {
+    ...stylingProps,
+  },
   parameters: {
     idsConfig: { testMeta },
+    docs: {
+      description: {
+        component:
+          'A utility component that applies IDS design token styling props to any HTML element.',
+      },
+    },
   },
 } as Meta<typeof IressStyled>;
 
 export const Default: Story = {
   args: {
-    children: 'This is styled content using design tokens from the Iress Design System.',
+    children:
+      'This is styled content using design tokens from the Iress Design System.',
     p: 'spacing.4',
     bg: 'colour.neutral.20',
     borderRadius: 'radius.2',

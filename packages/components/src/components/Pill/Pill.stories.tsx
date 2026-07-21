@@ -36,7 +36,10 @@ export const Mode: Story = {
   render: (args) => <PillMode {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(PillModeSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(PillModeSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
@@ -44,6 +47,9 @@ export const Status: Story = {
   render: (args) => <PillStatus {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(PillStatusSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(PillStatusSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };

@@ -31,24 +31,27 @@ interface Suggestion {
   url: string;
 }
 
+interface PagefindModule {
+  init: () => Promise<void>;
+  search: (query: string) => Promise<{
+    results: {
+      data: () => Promise<{ url: string; meta?: { title?: string } }>;
+    }[];
+  }>;
+}
+
 async function fetchSuggestions(splat: string): Promise<Suggestion[]> {
   try {
-    const pagefind = await import(
+    const pagefind = (await import(
       /* @vite-ignore */ `${import.meta.env.BASE_URL}pagefind/pagefind.js`
-    );
+    )) as PagefindModule;
     await pagefind.init();
     const slug = splat.split('/').pop() ?? splat;
     const search = await pagefind.search(slug);
     const results = await Promise.all(
-      search.results
-        .slice(0, 6)
-        .map(
-          (r: {
-            data: () => Promise<{ url: string; meta?: { title?: string } }>;
-          }) => r.data(),
-        ),
+      search.results.slice(0, 6).map((r) => r.data()),
     );
-    return results.map((r: { url: string; meta?: { title?: string } }) => ({
+    return results.map((r) => ({
       title: r.meta?.title ?? r.url,
       url: r.url,
     }));
@@ -66,7 +69,7 @@ function SplatRoute() {
   useEffect(() => {
     if (!page && splat) {
       setLoading(true);
-      fetchSuggestions(splat).then((s) => {
+      void fetchSuggestions(splat).then((s) => {
         setSuggestions(s);
         setLoading(false);
       });
@@ -93,7 +96,7 @@ function SplatRoute() {
             <IressStack element="ul" gap="xs">
               {suggestions.map((s) => (
                 <li key={s.url}>
-                  <IressLink element={Link} to={s.url?.split('#')[1] as string}>
+                  <IressLink element={Link} to={s.url?.split('#')[1]}>
                     {s.title}
                   </IressLink>
                 </li>

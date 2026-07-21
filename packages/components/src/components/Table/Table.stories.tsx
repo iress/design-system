@@ -50,7 +50,6 @@ export default {
   }),
 } as Meta<typeof IressTable>;
 
-
 export const AutomaticColumns: Story = {
   args: {
     caption: 'My investments',
@@ -552,7 +551,10 @@ export const Compact: Story = {
   render: (args) => <TableCompact {...args} />,
   parameters: {
     controls: { disable: true },
-    ...withSource(TableCompactSource, { stripImports: true, stripExportFunction: true }),
+    ...withSource(TableCompactSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
