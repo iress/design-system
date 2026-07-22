@@ -144,11 +144,13 @@ export const PopoverActivator = ({
             popover.show
           ) {
             // Does not work with queueMicrotask or without timeout (it needs to happen after Floating UI does its thing)
+            clearTimeout(focusTimeoutRef.current ?? undefined);
             focusTimeoutRef.current = setTimeout(() => {
               a11yElement.current?.focus();
             });
 
             // Without the timeout, it makes the popover close and open again
+            clearTimeout(closeTimeoutRef.current ?? undefined);
             closeTimeoutRef.current = setTimeout(() => {
               // Don't close if focus has moved to another floating element (e.g. a
               // nested popover portaled to document.body). This prevents the parent
