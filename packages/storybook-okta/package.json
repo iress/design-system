@@ -41,7 +41,7 @@
     "watch": "tsup --watch"
   },
   "dependencies": {
-    "@okta/okta-auth-js": "^8.0.0",
+    "@okta/okta-auth-js": "^8.0.1",
     "@storybook/icons": "2.1.0"
   },
   "devDependencies": {
