@@ -745,4 +745,20 @@ describe('IressPopoverProvider', () => {
 
     document.body.removeChild(providerContainer);
   });
+
+  it('clears pending timeouts when the activator unmounts', async () => {
+    vi.useFakeTimers();
+
+    const { unmount } = renderComponent();
+
+    // Unmount before any pending timers fire
+    unmount();
+
+    // Running all pending timers after unmount should not throw.
+    // Previously the 300ms closeTimeout would access document.activeElement
+    // after the jsdom environment was torn down, causing a ReferenceError.
+    expect(() => vi.runAllTimers()).not.toThrow();
+
+    vi.useRealTimers();
+  });
 });

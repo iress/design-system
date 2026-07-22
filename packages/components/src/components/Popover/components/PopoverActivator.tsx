@@ -47,6 +47,8 @@ export const PopoverActivator = ({
 }: PopoverActivatorProps) => {
   const popover = usePopover();
   const a11yElement = useRef<HTMLElement | null>(null);
+  const focusTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const childrenProps = children?.props as IressButtonProps<undefined>;
   const activatorInteractions = usePopoverActivatorInteractions<'button'>(
@@ -67,13 +69,24 @@ export const PopoverActivator = ({
   }, [childrenProps, popover]);
 
   useEffect(() => {
+    return () => {
+      if (focusTimeoutRef.current !== null) {
+        clearTimeout(focusTimeoutRef.current);
+      }
+      if (closeTimeoutRef.current !== null) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
     if (
       !a11yElement.current ||
       !popover?.getVirtualFocus ||
       popover.activeIndex === null
     )
       return;
-    setTimeout(() =>
+    const timeoutId = setTimeout(() =>
       popover?.api.refs.domReference.current?.removeAttribute(
         'aria-activedescendant',
       ),
@@ -82,6 +95,7 @@ export const PopoverActivator = ({
       'aria-activedescendant',
       popover.list.current?.[popover.activeIndex]?.id ?? '',
     );
+    return () => clearTimeout(timeoutId);
   }, [popover]);
 
   return (
@@ -130,12 +144,12 @@ export const PopoverActivator = ({
             popover.show
           ) {
             // Does not work with queueMicrotask or without timeout (it needs to happen after Floating UI does its thing)
-            setTimeout(() => {
+            focusTimeoutRef.current = setTimeout(() => {
               a11yElement.current?.focus();
             });
 
             // Without the timeout, it makes the popover close and open again
-            setTimeout(() => {
+            closeTimeoutRef.current = setTimeout(() => {
               // Don't close if focus has moved to another floating element (e.g. a
               // nested popover portaled to document.body). This prevents the parent
               // popover from closing when a child popover opens and steals focus.
