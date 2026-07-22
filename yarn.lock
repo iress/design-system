@@ -1941,7 +1941,7 @@ __metadata:
     glob: "npm:^13.0.3"
     jest-axe: "npm:^10.0.0"
     jsdom: "npm:^29.1.1"
-    postcss: "npm:^8.5.14"
+    postcss: "npm:^8.5.17"
     postcss-preset-env: "npm:^11.3.0"
     postcss-scss: "npm:^4.0.9"
     prettier: "npm:^3.8.3"
@@ -11844,17 +11844,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.5.14":
-  version: 8.5.14
-  resolution: "postcss@npm:8.5.14"
-  dependencies:
-    nanoid: "npm:^3.3.11"
-    picocolors: "npm:^1.1.1"
-    source-map-js: "npm:^1.2.1"
-  checksum: 10c0/48138207cf5ef5581be1bfe2cb65ccfe0ac75e43888ba045afc8ed6043d7b56aeb3b9a9fe5b353ff554be943cd0cc15d826ccb991525159175971e5ee8ab0237
-  languageName: node
-  linkType: hard
-
 "postcss@npm:^8.5.16":
   version: 8.5.19
   resolution: "postcss@npm:8.5.19"
@@ -11863,6 +11852,17 @@ __metadata:
     picocolors: "npm:^1.1.1"
     source-map-js: "npm:^1.2.1"
   checksum: 10c0/302af9e4dfa8cce4f43af1798576b3a77ab7b23abac5522328c6c7a830d49b31281cba9d6071e478e6970a05ef82346d1570b8fbffae912f26a4f1a1a07f0a44
+  languageName: node
+  linkType: hard
+
+"postcss@npm:^8.5.17":
+  version: 8.5.17
+  resolution: "postcss@npm:8.5.17"
+  dependencies:
+    nanoid: "npm:^3.3.12"
+    picocolors: "npm:^1.1.1"
+    source-map-js: "npm:^1.2.1"
+  checksum: 10c0/5ff97c377a34becb6dc51262eb3f892c474459c682506eff04bac3b65bc6af4451802b40341af4e69956c05665a4a298dec975ba12d75e1310dfa3d89b9f587d
   languageName: node
   linkType: hard
 
