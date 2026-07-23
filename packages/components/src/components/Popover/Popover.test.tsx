@@ -745,4 +745,31 @@ describe('IressPopoverProvider', () => {
 
     document.body.removeChild(providerContainer);
   });
+
+  it('clears pending timeouts when the activator unmounts', async () => {
+    vi.useFakeTimers({ shouldAdvanceTime: true });
+
+    try {
+      const { unmount } = renderComponent({ defaultShow: true });
+
+      const content = screen.getByText(TEST_ID);
+
+      // Wait for the popover content to receive focus (Floating UI behaviour)
+      await waitFor(() => expect(content).toHaveFocus());
+
+      // Shift-tab back to the activator triggers the onFocus handler which
+      // schedules a 0ms focus timeout and a 300ms close timeout.
+      await userEvent.tab({ shift: true });
+
+      // Unmount while the 300ms closeTimeout is still pending.
+      unmount();
+
+      // Running all pending timers after unmount should not throw.
+      // Previously the 300ms closeTimeout would access document.activeElement
+      // after the jsdom environment was torn down, causing a ReferenceError.
+      expect(() => vi.runAllTimers()).not.toThrow();
+    } finally {
+      vi.useRealTimers();
+    }
+  });
 });
