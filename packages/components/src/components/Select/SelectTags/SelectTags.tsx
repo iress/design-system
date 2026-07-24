@@ -181,7 +181,7 @@ const Tags = ({
             adjustFocusOnTagDelete(popover, e);
           }}
           onDeactivated={() => onToggleActions?.(false)}
-          container={popoverContainer}
+          container={popoverContainer ?? document.body}
           align="bottom-end"
           contentStyle={{ p: 'none' }}
           virtualFocus

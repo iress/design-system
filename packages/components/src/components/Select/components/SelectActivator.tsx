@@ -25,7 +25,7 @@ export interface IressSelectActivatorProps {
   /**
    * The container element to render the multiselect tags actions popover into.
    * Useful when rendering inside a Shadow DOM or a custom portal root.
-   * By default, the popover will render where its parent is rendered.
+   * Defaults to `document.body`. Pass `null` to render the popover inline.
    */
   popoverContainer?: FloatingUIContainer;
 
