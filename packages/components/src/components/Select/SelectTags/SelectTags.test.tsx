@@ -263,6 +263,30 @@ describe('IressSelectTags', () => {
       });
     });
 
+    describe('popoverContainer', () => {
+      it('renders the actions popover into the specified container', async () => {
+        const customContainer = document.createElement('div');
+        document.body.appendChild(customContainer);
+
+        render(
+          <IressSelectTags
+            limit={1}
+            selected={MOCK_LABEL_VALUE_META}
+            popoverContainer={customContainer}
+          />,
+        );
+
+        const actionsButton = screen.getByRole('button', { name: 'Actions' });
+        await userEvent.click(actionsButton);
+
+        await waitFor(() =>
+          expect(customContainer.querySelector('[role="list"]')).not.toBeNull(),
+        );
+
+        customContainer.remove();
+      });
+    });
+
     describe('selectedOptionsText', () => {
       it('changes the label text when the limit has been reached', () => {
         render(
