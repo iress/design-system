@@ -61,12 +61,12 @@ interface SelectActivatorProps<TMultiple extends boolean = false>
       | 'multiSelectLimit'
       | 'onChange'
       | 'placeholder'
-      | 'popoverContainer'
       | 'renderLabel'
       | 'append'
       | 'prepend'
       | 'selectedOptionsText'
     >,
+    Pick<IressSelectActivatorProps, 'popoverContainer'>,
     Omit<SelectLabelRenderProps<TMultiple>, 'close'> {
   async?: boolean;
   setShow: (show: boolean) => void;

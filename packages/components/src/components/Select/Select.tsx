@@ -107,7 +107,7 @@ type SelectProps<TNative extends boolean | Breakpoints = false> =
         Omit<AutocompleteSearchHookProps, 'disabled' | 'query'> &
         Pick<
           IressSelectActivatorProps,
-          'append' | 'popoverContainer' | 'prepend' | 'selectedOptionsText'
+          'append' | 'prepend' | 'selectedOptionsText'
         >
     : Omit<NativeSelectProps, 'value' | 'onChange' | 'options'>;
 
@@ -488,13 +488,13 @@ const Select = <
 
   const {
     append,
+    container,
     debounceThreshold,
     initialOptions,
     loadingDelay,
     minSearchLength,
     onActivated,
     onDeactivated,
-    popoverContainer,
     prepend,
     selectedOptionsText,
     ...restProps
@@ -680,7 +680,7 @@ const Select = <
             multiSelectLimit={multiSelectLimit}
             onChange={onChange as SelectChangeEvent<TMultiple, false>}
             placeholder={placeholder}
-            popoverContainer={popoverContainer}
+            popoverContainer={container}
             prepend={prepend}
             renderLabel={renderLabel}
             selectedOptionsText={selectedOptionsText}
@@ -692,6 +692,7 @@ const Select = <
         }
         align={align}
         className={cx(className, classes.root, GlobalCSSClass.Select)}
+        container={container}
         contentClassName={cx(classes.popoverContent)}
         contentStyle={{
           ...restProps.contentStyle,
