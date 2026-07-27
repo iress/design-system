@@ -103,6 +103,7 @@ const Tags = ({
   onDelete,
   onDeleteAll,
   onToggleActions,
+  popoverContainer,
   selectedArray,
   selectedOptionsText,
 }: Pick<
@@ -112,6 +113,7 @@ const Tags = ({
   | 'onDelete'
   | 'onDeleteAll'
   | 'onToggleActions'
+  | 'popoverContainer'
   | 'selectedOptionsText'
 > & {
   selectedArray: LabelValueMeta[];
@@ -179,7 +181,7 @@ const Tags = ({
             adjustFocusOnTagDelete(popover, e);
           }}
           onDeactivated={() => onToggleActions?.(false)}
-          container={document.body}
+          container={popoverContainer ?? document.body}
           align="bottom-end"
           contentStyle={{ p: 'none' }}
           virtualFocus
@@ -209,6 +211,7 @@ export const IressSelectTags = ({
   onDeleteAll,
   onToggleActions,
   placeholder,
+  popoverContainer,
   prepend,
   selected,
   selectedOptionsText = '{{numOptions}} selected',
@@ -244,6 +247,7 @@ export const IressSelectTags = ({
             onDelete={onDelete}
             onDeleteAll={onDeleteAll}
             onToggleActions={onToggleActions}
+            popoverContainer={popoverContainer}
             selectedArray={selectedArray}
             selectedOptionsText={selectedOptionsText}
           />

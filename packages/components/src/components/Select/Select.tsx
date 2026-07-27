@@ -488,6 +488,7 @@ const Select = <
 
   const {
     append,
+    container,
     debounceThreshold,
     initialOptions,
     loadingDelay,
@@ -679,6 +680,7 @@ const Select = <
             multiSelectLimit={multiSelectLimit}
             onChange={onChange as SelectChangeEvent<TMultiple, false>}
             placeholder={placeholder}
+            popoverContainer={container}
             prepend={prepend}
             renderLabel={renderLabel}
             selectedOptionsText={selectedOptionsText}
@@ -690,6 +692,7 @@ const Select = <
         }
         align={align}
         className={cx(className, classes.root, GlobalCSSClass.Select)}
+        container={container}
         contentClassName={cx(classes.popoverContent)}
         contentStyle={{
           ...restProps.contentStyle,
