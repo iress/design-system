@@ -35,9 +35,7 @@ describe('CodeBlock', () => {
   });
 
   it('applies the language class to the code element', () => {
-    const { container } = render(
-      <CodeBlock language="tsx">code</CodeBlock>,
-    );
+    const { container } = render(<CodeBlock language="tsx">code</CodeBlock>);
     const codeEl = container.querySelector('code');
     expect(codeEl).toHaveClass('language-tsx');
   });

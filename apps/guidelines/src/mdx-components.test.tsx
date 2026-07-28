@@ -26,7 +26,9 @@ describe('stripLeadingEmoji', () => {
     expect(result).not.toBeNull();
     // The result should be a new <p> with the emoji stripped
     const arr = result as React.ReactElement[];
-    expect(arr[0].props.children).toEqual(['Nested warning']);
+    expect(
+      (arr[0] as React.ReactElement<{ children: unknown }>).props.children,
+    ).toEqual(['Nested warning']);
   });
 
   it('strips ⚠️ from text inside nested elements', () => {

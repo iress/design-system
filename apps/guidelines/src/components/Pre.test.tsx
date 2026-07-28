@@ -11,7 +11,13 @@ vi.mock('@iress-oss/ids-components', () => ({
       {children}
     </button>
   ),
-  IressIcon: ({ name, screenreaderText }: { name: string; screenreaderText?: string }) => (
+  IressIcon: ({
+    name,
+    screenreaderText,
+  }: {
+    name: string;
+    screenreaderText?: string;
+  }) => (
     <span data-testid="ids-icon" data-name={name}>
       {screenreaderText ?? name}
     </span>

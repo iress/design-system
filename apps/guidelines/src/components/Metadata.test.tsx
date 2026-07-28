@@ -3,38 +3,41 @@ import { Metadata } from './Metadata';
 import type { ComponentMeta } from '@iress-oss/ids-storybook-config';
 
 vi.mock('@iress-oss/ids-components', () => ({
-  IressInline: ({ children }: React.PropsWithChildren) => (
-    <div data-testid="ids-inline">{children}</div>
+  IressInline: (props: Record<string, unknown>) => (
+    <div data-testid="ids-inline">{props.children as React.ReactNode}</div>
   ),
   IressIcon: ({ name }: { name: string }) => (
     <span data-testid="ids-icon" data-name={name} />
   ),
-  IressText: ({
-    children,
-    element: Element = 'span',
-  }: React.PropsWithChildren<{ element?: string }>) => (
-    <Element data-testid="ids-text">{children}</Element>
+  IressText: (props: Record<string, unknown>) => {
+    const Element = (props.element as string) || 'span';
+    return (
+      // @ts-expect-error — dynamic element for mock
+      <Element data-testid="ids-text">
+        {props.children as React.ReactNode}
+      </Element>
+    );
+  },
+  IressStack: (props: Record<string, unknown>) => (
+    <div data-testid="ids-stack">{props.children as React.ReactNode}</div>
   ),
-  IressStack: ({ children }: React.PropsWithChildren) => (
-    <div data-testid="ids-stack">{children}</div>
-  ),
-  IressButton: ({
-    children,
-    href,
-    ...props
-  }: React.PropsWithChildren<{ href?: string }>) => (
-    <a href={href} data-testid="ids-button" {...props}>
-      {children}
+  IressButton: (props: Record<string, unknown>) => (
+    <a
+      href={props.href as string | undefined}
+      data-testid="ids-button"
+      target={props.target as string | undefined}
+      rel={props.rel as string | undefined}
+    >
+      {props.children as React.ReactNode}
     </a>
   ),
-  IressTooltip: ({
-    children,
-    tooltipText,
-  }: React.PropsWithChildren<{ tooltipText?: string }>) => (
-    <div data-tooltip={tooltipText}>{children}</div>
+  IressTooltip: (props: Record<string, unknown>) => (
+    <div data-tooltip={props.tooltipText as string | undefined}>
+      {props.children as React.ReactNode}
+    </div>
   ),
-  IressStyled: ({ children }: React.PropsWithChildren) => (
-    <span>{children}</span>
+  IressStyled: (props: Record<string, unknown>) => (
+    <span>{props.children as React.ReactNode}</span>
   ),
 }));
 
@@ -42,6 +45,7 @@ const baseMeta: ComponentMeta = {
   heading: 'Alert',
   description: 'An alert component',
   tags: ['stable'],
+  Thumbnail: null,
 };
 
 describe('Metadata', () => {
