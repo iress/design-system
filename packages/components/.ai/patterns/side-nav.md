@@ -469,9 +469,12 @@ Use the `sideMenuItems` prop to override the side panel content with dynamically
 
 ```tsx
 import { useState } from 'react';
-import { IressSideNav, type SideNavPanelItem } from '@iress-oss/ids-components';
+import {
+  IressSideNav,
+  type IressSideNavPanelItem,
+} from '@iress-oss/ids-components';
 
-const menusBySection: Record<string, SideNavPanelItem[]> = {
+const menusBySection: Record<string, IressSideNavPanelItem[]> = {
   hubs: [
     {
       key: 'client-details',

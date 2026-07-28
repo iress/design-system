@@ -570,7 +570,7 @@ export function PopoverWithListbox() {
         role="listbox"
         aria-label="Country"
         selected={selected}
-        onChange={(value) => setSelected(value as string)}
+        onChange={(value) => setSelected(value!)}
       >
         <IressMenuItem value="aus">Australia</IressMenuItem>
         <IressMenuItem value="nz">New Zealand</IressMenuItem>

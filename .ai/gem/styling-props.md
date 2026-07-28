@@ -689,11 +689,11 @@ The `borderRadius` prop allows you to change the border radius of any component.
 
 ```tsx
 <IressInput
-  borderRadius="radius.system.layout"
-  px="spacing.4"
-  py="spacing.2"
-  placeholder="Search everything"
-/>;
+      borderRadius=radius.system.layout
+      px="spacing.4"
+      py="spacing.2"
+      placeholder="Search everything"
+    />
 ```
 
 ### Removing border radius

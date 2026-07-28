@@ -1955,7 +1955,6 @@ import {
   IressTag,
   IressPill,
   IressContextualMenu,
-  IressPanel,
 } from '@iress-oss/ids-components';
 import { useState } from 'react';
 
@@ -1987,9 +1986,7 @@ const SLOT_CONTENT = {
   ),
 };
 
-const SLOT_NAMES = Object.keys(SLOT_CONTENT) as Array<
-  keyof typeof SLOT_CONTENT
->;
+const SLOT_NAMES = Object.keys(SLOT_CONTENT) as (keyof typeof SLOT_CONTENT)[];
 
 export function CardAllSlots() {
   const [show, setShow] = useState({
@@ -7364,7 +7361,7 @@ import { IressMenu } from '@iress-oss/ids-components';
 | onChange | `((value?: [ControlledValue](../../dist/hooks/useControlledState.d.ts)<T, TMultiple> , null) => void)` | — | Emitted when the menu value changes |
 | selected | `[ControlledValue](../../dist/hooks/useControlledState.d.ts)<T, TMultiple>` | — | Selected values of menu when `role` is listbox. Used for controlled menus. |
 | role | `list` , `listbox`, `menu`  | `list` | Type of menu, corresponding to [aria-roles](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles). Will be set automatically when used inside popover or when the `multiSelect` prop is set to true. |
-| variant | `MenuVariants` | — | The variant of the menu, which determines some opinionated styles for the menu items |
+| variant | `[IressMenuVariants](../../dist/components/Menu/Menu.d.ts)` | — | The variant of the menu, which determines some opinionated styles for the menu items |
 | data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
 
 📄 [Full type definition](../../dist/components/Menu/Menu.d.ts)
@@ -7429,7 +7426,7 @@ Also accepts all [styling props](../styling-props/overview.md) ([type definition
 | element | ... 164 more ..., `article` , `circle` , `code` , `details` , `div` , `filter` , `footer` , `html` , `iframe` , `image` , `input` , `object` , `p` , `slot` , `span` , `style` , `symbol` , `title`  | — | Custom element type for the activator (e.g. for third-party routing). Only used when parent Menu has variant="side". The HTML element that should be rendered. |
 | href | `string` | — | URL for the group activator link. Only used when parent Menu has variant="side". |
 | onActiveChange | `((active?: boolean) => void)` | — | Callback fired when the active/expanded state changes. Only used when parent Menu has variant="side". |
-| variant | `MenuVariants` | — | Variant of the menu group. - `undefined` (default): Renders inline with label as heading and children below. - `'subdraw'`: Renders as a trigger that opens a fly-over submenu containing children. - `'side'`: Renders as a numbered header with an expandable drawer containing children. |
+| variant | `[IressMenuVariants](../../dist/components/Menu/Menu.d.ts)` | — | Variant of the menu group. - `undefined` (default): Renders inline with label as heading and children below. - `'subdraw'`: Renders as a trigger that opens a fly-over submenu containing children. - `'side'`: Renders as a numbered header with an expandable drawer containing children. |
 
 📄 [Full type definition](../../dist/components/MenuGroup/MenuGroup.d.ts)
 
@@ -10100,7 +10097,7 @@ export function PopoverWithListbox() {
         role="listbox"
         aria-label="Country"
         selected={selected}
-        onChange={(value) => setSelected(value as string)}
+        onChange={(value) => setSelected(value!)}
       >
         <IressMenuItem value="aus">Australia</IressMenuItem>
         <IressMenuItem value="nz">New Zealand</IressMenuItem>
@@ -13363,7 +13360,7 @@ export function AppWithSlideoutProvider(
 function SlideoutWithTrigger({
   id = SLIDEOUT_ID,
   ...slideoutProps
-}: Partial<IressSlideoutProps>) {
+}: Readonly<Partial<IressSlideoutProps>>) {
   const { showSlideout } = useSlideout();
 
   return (
@@ -28119,9 +28116,12 @@ Use the `sideMenuItems` prop to override the side panel content with dynamically
 
 ```tsx
 import { useState } from 'react';
-import { IressSideNav, type SideNavPanelItem } from '@iress-oss/ids-components';
+import {
+  IressSideNav,
+  type IressSideNavPanelItem,
+} from '@iress-oss/ids-components';
 
-const menusBySection: Record<string, SideNavPanelItem[]> = {
+const menusBySection: Record<string, IressSideNavPanelItem[]> = {
   hubs: [
     {
       key: 'client-details',
@@ -35376,11 +35376,11 @@ The `borderRadius` prop allows you to change the border radius of any component.
 
 ```tsx
 <IressInput
-  borderRadius="radius.system.layout"
-  px="spacing.4"
-  py="spacing.2"
-  placeholder="Search everything"
-/>;
+      borderRadius=radius.system.layout
+      px="spacing.4"
+      py="spacing.2"
+      placeholder="Search everything"
+    />
 ```
 
 ### Removing border radius

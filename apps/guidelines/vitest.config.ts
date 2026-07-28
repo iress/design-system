@@ -3,6 +3,9 @@ import { defineConfig } from 'vitest/config';
 import { resolve } from 'path';
 
 export default defineConfig({
+  define: {
+    __STORYBOOK_BRANCH__: JSON.stringify('main'),
+  },
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
@@ -22,6 +25,8 @@ export default defineConfig({
         'src/vite-env.d.ts',
         'src/mdx.d.ts',
         'src/routeTree.gen.ts',
+        'src/routes/**',
+        'src/components/heroes/**',
         'src/**/*.test.*',
       ],
     },

@@ -65,7 +65,7 @@ const WARNING_PREFIX = /^\s*⚠️\s*/;
  * Walks into the first text node of the children tree (through <p>, <strong>, etc.)
  * and strips the ⚠️ prefix if found. Returns the new children tree, or null if no match.
  */
-function stripLeadingEmoji(children: ReactNode): ReactNode | null {
+export function stripLeadingEmoji(children: ReactNode): ReactNode | null {
   const childArray = Children.toArray(children);
   if (childArray.length === 0) return null;
 

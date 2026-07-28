@@ -186,7 +186,7 @@ export function AppWithSlideoutProvider(
 function SlideoutWithTrigger({
   id = SLIDEOUT_ID,
   ...slideoutProps
-}: Partial<IressSlideoutProps>) {
+}: Readonly<Partial<IressSlideoutProps>>) {
   const { showSlideout } = useSlideout();
 
   return (

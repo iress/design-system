@@ -50,7 +50,6 @@ import {
   IressTag,
   IressPill,
   IressContextualMenu,
-  IressPanel,
 } from '@iress-oss/ids-components';
 import { useState } from 'react';
 
@@ -82,9 +81,7 @@ const SLOT_CONTENT = {
   ),
 };
 
-const SLOT_NAMES = Object.keys(SLOT_CONTENT) as Array<
-  keyof typeof SLOT_CONTENT
->;
+const SLOT_NAMES = Object.keys(SLOT_CONTENT) as (keyof typeof SLOT_CONTENT)[];
 
 export function CardAllSlots() {
   const [show, setShow] = useState({
