@@ -333,7 +333,7 @@ describe('IressField', () => {
         errorMessages: [{ message: 'This field is required' }],
       });
 
-      const errorContainer = screen.getByTestId(`${TEST_ID}__error`);
+      const errorContainer = screen.getByRole('list');
       expect(errorContainer).toHaveAttribute('id', `${TEST_ID}-error`);
     });
 
@@ -344,7 +344,7 @@ describe('IressField', () => {
         errorId: customErrorId,
       });
 
-      const errorContainer = screen.getByTestId(`${TEST_ID}__error`);
+      const errorContainer = screen.getByRole('list');
       expect(errorContainer).toHaveAttribute('id', customErrorId);
     });
 
@@ -352,7 +352,7 @@ describe('IressField', () => {
       const screen = renderComponent();
 
       // No error container rendered when no errors
-      expect(screen.queryByTestId(`${TEST_ID}__error`)).not.toBeInTheDocument();
+      expect(screen.queryByRole('list')).not.toBeInTheDocument();
     });
   });
 

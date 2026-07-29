@@ -138,12 +138,13 @@ describe('IressFormField', () => {
     // After submit, aria-invalid and aria-describedby should be set
     await screen.findByText('This field is required');
     expect(input).toHaveAttribute('aria-invalid', 'true');
+    expect(input).toHaveAttribute('aria-describedby', 'iress-form__name-error');
 
-    const describedById = input.getAttribute('aria-describedby');
-    expect(describedById).toBe('iress-form__name-error');
-
-    const errorContainer = document.getElementById(describedById!);
-    expect(errorContainer).toBeInTheDocument();
+    // Verify the error container referenced by aria-describedby exists and contains the error text
+    const errorContainer = screen
+      .getAllByRole('list')
+      .find((el) => el.id === 'iress-form__name-error');
+    expect(errorContainer).toBeDefined();
     expect(errorContainer).toHaveTextContent('This field is required');
   });
 
