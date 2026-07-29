@@ -96,9 +96,11 @@ export const NativeSelect = forwardRef(
             onChange?.(event, nodeValue);
           }}
           ref={ref}
-          value={getFormControlValueAsStringIfDefined(
-            value?.value ?? value?.label,
-          )}
+          value={
+            getFormControlValueAsStringIfDefined(
+              value?.value ?? value?.label,
+            ) ?? ''
+          }
         >
           {placeholder !== undefined && <option value="">{placeholder}</option>}
           {options.map((option) => {
