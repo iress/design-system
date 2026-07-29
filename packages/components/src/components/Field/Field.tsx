@@ -63,6 +63,12 @@ export type IressFieldProps<
     errorMessages?: ValidationMessageObj[];
 
     /**
+     * ID for the error container element, used to associate the error message with the form control via `aria-describedby`.
+     * When provided, this ID is set on the error message container so that `aria-describedby` on the control points to it.
+     */
+    errorId?: string;
+
+    /**
      * Renders the group in a read-only state (no asterisk symbol).
      * Use `'locked'` when the control is read-only due to permissions.
      */
@@ -85,6 +91,7 @@ export const IressField = ({
   className,
   'data-testid': dataTestId,
   error,
+  errorId,
   errorMessages,
   hiddenLabel,
   hint,
@@ -173,6 +180,7 @@ export const IressField = ({
         className={css(styles.footer)}
         data-testid={propagateTestid(dataTestId, 'error')}
         error={error}
+        errorId={errorId}
         errorMessages={errorMessages}
         supplementary={supplementary}
       />
