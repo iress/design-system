@@ -18,6 +18,8 @@ import { IressSelectMenu } from './SelectMenu/SelectMenu';
 import { IressForm } from '@/patterns/Form/Form';
 import { IressFormField } from '@/patterns/Form/FormField/FormField';
 import { IressButton } from '@/components/Button';
+import { type FormRef } from '@/patterns/Form';
+import { useRef } from 'react';
 
 describe('IressSelect', () => {
   const classes = select();
@@ -1987,6 +1989,116 @@ describe('IressSelect', () => {
       await userEvent.click(submit);
 
       expect(submittedFormData!.get('gender')).toBe('male');
+    });
+
+    it('resets native select value when form.reset() is called', async () => {
+      interface TestFormData {
+        provider: string;
+      }
+
+      const FormWithNativeSelectAndReset = () => {
+        const formRef = useRef<FormRef<TestFormData>>(null);
+
+        return (
+          <IressForm<TestFormData>
+            ref={formRef}
+            mode="onBlur"
+            reValidateMode="onChange"
+            defaultValues={{ provider: '' }}
+          >
+            <IressFormField<TestFormData>
+              label="Provider"
+              name="provider"
+              rules={{ required: 'Select a provider' }}
+              render={(properties) => (
+                <IressSelect
+                  native
+                  {...properties}
+                  data-testid="native-select"
+                  options={[
+                    { value: '', label: 'Select...' },
+                    { value: 'option1', label: 'Option 1' },
+                    { value: 'option2', label: 'Option 2' },
+                  ]}
+                />
+              )}
+            />
+            <IressButton onClick={() => formRef.current?.reset()}>
+              Reset
+            </IressButton>
+          </IressForm>
+        );
+      };
+
+      render(<FormWithNativeSelectAndReset />);
+
+      const select = screen.getByRole('combobox');
+      expect(select).toHaveValue('');
+
+      await userEvent.selectOptions(select, 'option1');
+      expect(select).toHaveValue('option1');
+
+      const resetButton = screen.getByRole('button', { name: 'Reset' });
+      await userEvent.click(resetButton);
+
+      expect(select).toHaveValue('');
+    });
+
+    it('resets non-native select value when form.reset() is called', async () => {
+      interface TestFormData {
+        provider: string;
+      }
+
+      const FormWithSelectAndReset = () => {
+        const formRef = useRef<FormRef<TestFormData>>(null);
+
+        return (
+          <IressForm<TestFormData>
+            ref={formRef}
+            mode="onBlur"
+            reValidateMode="onChange"
+            defaultValues={{ provider: '' }}
+          >
+            <IressFormField<TestFormData>
+              label="Provider"
+              name="provider"
+              render={(properties) => (
+                <IressSelect
+                  {...properties}
+                  data-testid="non-native-select"
+                  options={[
+                    { value: 'option1', label: 'Option 1' },
+                    { value: 'option2', label: 'Option 2' },
+                  ]}
+                />
+              )}
+            />
+            <IressButton onClick={() => formRef.current?.reset()}>
+              Reset
+            </IressButton>
+          </IressForm>
+        );
+      };
+
+      render(<FormWithSelectAndReset />);
+
+      const combobox = screen.getByRole('combobox');
+      const hiddenInput = screen.getByTestId('non-native-select__hidden-input');
+
+      expect(hiddenInput).toHaveValue('');
+
+      await userEvent.click(combobox);
+      const option = await screen.findByRole('option', { name: 'Option 1' });
+      await userEvent.click(option);
+
+      expect(hiddenInput).toHaveValue('option1');
+      expect(combobox).toHaveTextContent('Option 1');
+
+      const resetButton = screen.getByRole('button', { name: 'Reset' });
+      await userEvent.click(resetButton);
+
+      expect(hiddenInput).toHaveValue('');
+      expect(combobox).not.toHaveTextContent('Option 1');
     });
   });
 });
