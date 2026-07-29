@@ -605,6 +605,7 @@ const Select = <
         disabled={disabled}
         id={id}
         name={name}
+        onBlur={onBlur}
         onChange={(e, value) => {
           (onChange as SelectChangeEvent<false, true>)?.(
             e,
