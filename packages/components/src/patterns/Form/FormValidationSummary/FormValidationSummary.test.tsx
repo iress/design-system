@@ -106,4 +106,91 @@ describe('IressFormValidationSummary', () => {
       'Error: Woe Is Me: Please fill me outError: More Woe: Please fill me out too',
     );
   });
+
+  it('should use role="alert" by default', () => {
+    render(
+      <FormContext.Provider
+        value={{
+          id: 'testForm',
+          errorMessages: { field: 'Required' },
+          setFocusOnError: vi.fn(),
+          setErrorMessage: vi.fn(),
+        }}
+      >
+        <IressFormValidationSummary data-testid="validation-summary" />
+      </FormContext.Provider>,
+    );
+
+    expect(screen.getByTestId('validation-summary')).toHaveAttribute(
+      'role',
+      'alert',
+    );
+  });
+
+  it('should allow overriding the role prop', () => {
+    render(
+      <FormContext.Provider
+        value={{
+          id: 'testForm',
+          errorMessages: { field: 'Required' },
+          setFocusOnError: vi.fn(),
+          setErrorMessage: vi.fn(),
+        }}
+      >
+        <IressFormValidationSummary
+          data-testid="validation-summary"
+          role="status"
+        />
+      </FormContext.Provider>,
+    );
+
+    expect(screen.getByTestId('validation-summary')).toHaveAttribute(
+      'role',
+      'status',
+    );
+  });
+
+  it('should allow overriding aria-live prop', () => {
+    render(
+      <FormContext.Provider
+        value={{
+          id: 'testForm',
+          errorMessages: { field: 'Required' },
+          setFocusOnError: vi.fn(),
+          setErrorMessage: vi.fn(),
+        }}
+      >
+        <IressFormValidationSummary
+          data-testid="validation-summary"
+          aria-live="polite"
+        />
+      </FormContext.Provider>,
+    );
+
+    const summary = screen.getByTestId('validation-summary');
+    expect(summary).toHaveAttribute('aria-live', 'polite');
+  });
+
+  it('should forward role and aria-live when there are no errors', () => {
+    render(
+      <FormContext.Provider
+        value={{
+          id: 'testForm',
+          errorMessages: {},
+          setFocusOnError: vi.fn(),
+          setErrorMessage: vi.fn(),
+        }}
+      >
+        <IressFormValidationSummary
+          data-testid="validation-summary"
+          role="status"
+          aria-live="polite"
+        />
+      </FormContext.Provider>,
+    );
+
+    const summary = screen.getByTestId('validation-summary');
+    expect(summary).toHaveAttribute('role', 'status');
+    expect(summary).toHaveAttribute('aria-live', 'polite');
+  });
 });
