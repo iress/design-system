@@ -64,7 +64,8 @@ export type IressFieldProps<
 
     /**
      * ID for the error container element, used to associate the error message with the form control via `aria-describedby`.
-     * When provided, this ID is set on the error message container so that `aria-describedby` on the control points to it.
+     * When `error` or `errorMessages` are present and `htmlFor` is set, this is automatically derived as `${htmlFor}-error`.
+     * Override only if you need a custom error container ID.
      */
     errorId?: string;
 
@@ -113,8 +114,13 @@ export const IressField = ({
     htmlFor = htmlForProp;
   }
 
+  // Auto-derive errorId from htmlFor when errors are present (can be overridden by explicit errorId prop)
+  const hasError = !!error || !!errorMessages?.length;
+  const effectiveErrorId =
+    errorId ?? (hasError && htmlFor ? `${htmlFor}-error` : undefined);
+
   const styles = field.raw({
-    hasError: !!error || !!errorMessages?.length,
+    hasError,
     hasHint: !!hint,
     hiddenLabel,
     horizontal,
@@ -180,7 +186,7 @@ export const IressField = ({
         className={css(styles.footer)}
         data-testid={propagateTestid(dataTestId, 'error')}
         error={error}
-        errorId={errorId}
+        errorId={effectiveErrorId}
         errorMessages={errorMessages}
         supplementary={supplementary}
       />

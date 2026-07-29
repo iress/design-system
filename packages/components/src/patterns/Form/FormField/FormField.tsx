@@ -202,7 +202,6 @@ export const IressFormField = <T extends FieldValues>({
 
   return (
     <IressField
-      errorId={hasError ? errorId : undefined}
       errorMessages={hasError ? [{ message: errorMessage }] : undefined}
       htmlFor={`${form.id}__${name}`}
       readOnly={readOnly}

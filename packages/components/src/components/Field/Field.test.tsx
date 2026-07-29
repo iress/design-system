@@ -327,6 +327,33 @@ describe('IressField', () => {
       const results = await axe(screen.container);
       expect(results).toHaveNoViolations();
     });
+
+    it('auto-derives errorId from htmlFor when error is present', () => {
+      const screen = renderComponent({
+        errorMessages: [{ message: 'This field is required' }],
+      });
+
+      const errorContainer = screen.getByTestId(`${TEST_ID}__error`);
+      expect(errorContainer).toHaveAttribute('id', `${TEST_ID}-error`);
+    });
+
+    it('uses explicit errorId over the auto-derived one', () => {
+      const customErrorId = 'my-custom-error';
+      const screen = renderComponent({
+        errorMessages: [{ message: 'This field is required' }],
+        errorId: customErrorId,
+      });
+
+      const errorContainer = screen.getByTestId(`${TEST_ID}__error`);
+      expect(errorContainer).toHaveAttribute('id', customErrorId);
+    });
+
+    it('does not set errorId when there are no errors', () => {
+      const screen = renderComponent();
+
+      // No error container rendered when no errors
+      expect(screen.queryByTestId(`${TEST_ID}__error`)).not.toBeInTheDocument();
+    });
   });
 
   describe('hint functionality', () => {
