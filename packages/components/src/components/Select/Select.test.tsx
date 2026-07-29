@@ -2044,6 +2044,44 @@ describe('IressSelect', () => {
       expect(select).toHaveValue('');
     });
 
+    it('triggers required validation on blur for native select in onBlur mode', async () => {
+      interface TestFormData {
+        selection: string;
+      }
+
+      render(
+        <IressForm<TestFormData> mode="onBlur" reValidateMode="onChange">
+          <IressFormField<TestFormData>
+            label="Select an option"
+            name="selection"
+            rules={{ required: 'Please select an option' }}
+            render={(properties) => (
+              <IressSelect
+                native
+                {...properties}
+                data-testid="native-select-on-blur"
+                options={[
+                  { value: '', label: ' ' },
+                  { value: 'option1', label: 'Option 1' },
+                ]}
+              />
+            )}
+          />
+          <IressButton>Next</IressButton>
+        </IressForm>,
+      );
+
+      const select = screen.getByTestId('native-select-on-blur__select');
+      select.focus();
+      expect(select).toHaveFocus();
+
+      await userEvent.tab();
+
+      expect(
+        await screen.findByText('Please select an option'),
+      ).toBeInTheDocument();
+    });
+
     it('resets non-native select value when form.reset() is called', async () => {
       interface TestFormData {
         provider: string;
