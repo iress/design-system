@@ -97,6 +97,17 @@ export interface FormFieldRenderProps<
    * ID of the field. It is automatically generated based on the name of the field and its parent form.
    */
   id: string;
+
+  /**
+   * References the ID of the error message container when the field has a validation error,
+   * so that assistive technologies can associate the error with the control.
+   */
+  'aria-describedby'?: string;
+
+  /**
+   * Set to `true` when the field has a validation error, indicating an invalid state to assistive technologies.
+   */
+  'aria-invalid'?: boolean;
 }
 
 /**
@@ -175,9 +186,13 @@ export const IressFormField = <T extends FieldValues>({
 
   const renderField = useFieldRenderProps<T>(field);
 
+  const errorId = `${form.id}__${name}-error`;
+  const hasError = !!errorMessage && !readOnly;
+
   const controlProps = {
     ...renderField,
     id: `${form.id}__${name}`,
+    ...(hasError ? { 'aria-describedby': errorId, 'aria-invalid': true } : {}),
   };
 
   const controlState = {
@@ -187,9 +202,7 @@ export const IressFormField = <T extends FieldValues>({
 
   return (
     <IressField
-      errorMessages={
-        errorMessage && !readOnly ? [{ message: errorMessage }] : undefined
-      }
+      errorMessages={hasError ? [{ message: errorMessage }] : undefined}
       htmlFor={`${form.id}__${name}`}
       readOnly={readOnly}
       required={!!rules?.required}
@@ -200,6 +213,7 @@ export const IressFormField = <T extends FieldValues>({
         </>
       }
       {...fieldProps}
+      errorId={errorId}
     >
       {render(controlProps, controlState)}
     </IressField>

@@ -327,6 +327,47 @@ describe('IressField', () => {
       const results = await axe(screen.container);
       expect(results).toHaveNoViolations();
     });
+
+    it('generates error container with id derived from htmlFor for aria-describedby wiring', () => {
+      const screen = renderComponent({
+        errorMessages: [{ message: 'This field is required' }],
+      });
+
+      // Field generates error container with predictable id so consumers can wire aria-describedby
+      const input = screen.getByRole('textbox', { name: TEST_LABEL });
+      const errorList = screen.getByRole('list');
+
+      expect(errorList).toHaveAttribute('id', `${TEST_ID}-error`);
+      expect(errorList).toHaveTextContent('This field is required');
+
+      // Demonstrate proper wiring: when input has aria-describedby pointing to error container
+      // screen readers can announce the error
+      input.setAttribute('aria-describedby', `${TEST_ID}-error`);
+      expect(input).toHaveAccessibleDescription('This field is required');
+    });
+
+    it('uses explicit errorId for error container when provided', () => {
+      const customErrorId = 'my-custom-error';
+      const screen = renderComponent({
+        errorMessages: [{ message: 'This field is required' }],
+        errorId: customErrorId,
+      });
+
+      const input = screen.getByRole('textbox', { name: TEST_LABEL });
+      const errorList = screen.getByRole('list');
+
+      expect(errorList).toHaveAttribute('id', customErrorId);
+
+      // Demonstrate proper wiring with custom id
+      input.setAttribute('aria-describedby', customErrorId);
+      expect(input).toHaveAccessibleDescription('This field is required');
+    });
+
+    it('does not render error container when there are no errors', () => {
+      const screen = renderComponent();
+
+      expect(screen.queryByRole('list')).not.toBeInTheDocument();
+    });
   });
 
   describe('hint functionality', () => {
