@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 
 import { IressFormField, IressFormFieldProps } from './FormField';
 import {
@@ -167,8 +167,10 @@ describe('IressFormField', () => {
 
     await userEvent.click(submit);
 
-    // Error resolved: input should be valid with no error description
-    expect(input).toBeValid();
+    // Wait for validation to complete and error to be removed
+    await waitFor(() => {
+      expect(input).toBeValid();
+    });
     expect(input).not.toHaveAccessibleDescription();
   });
 

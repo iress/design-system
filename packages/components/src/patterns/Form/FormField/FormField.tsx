@@ -213,6 +213,7 @@ export const IressFormField = <T extends FieldValues>({
         </>
       }
       {...fieldProps}
+      errorId={errorId}
     >
       {render(controlProps, controlState)}
     </IressField>
