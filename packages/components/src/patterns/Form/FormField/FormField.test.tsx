@@ -113,7 +113,7 @@ describe('IressFormField', () => {
     expect(formErrorMessage).toBeInTheDocument();
   });
 
-  it('sets aria-invalid and aria-describedby on the control when validation fails', async () => {
+  it('marks control as invalid and announces error to screen readers when validation fails', async () => {
     render(
       <IressForm id="iress-form">
         <IressFormField
@@ -128,27 +128,21 @@ describe('IressFormField', () => {
 
     const input = await screen.findByRole('textbox', { name: 'RequiredLabel' });
 
-    // Before submit, no aria-invalid or aria-describedby
-    expect(input).not.toHaveAttribute('aria-invalid');
-    expect(input).not.toHaveAttribute('aria-describedby');
+    // Before submit, input is valid with no error description
+    expect(input).toBeValid();
+    expect(input).not.toHaveAccessibleDescription();
 
     const submit = screen.getByRole('button', { name: 'Submit' });
     await userEvent.click(submit);
 
-    // After submit, aria-invalid and aria-describedby should be set
+    // After submit, screen readers should announce the input as invalid
+    // and the error message should be associated with the input
     await screen.findByText('This field is required');
-    expect(input).toHaveAttribute('aria-invalid', 'true');
-    expect(input).toHaveAttribute('aria-describedby', 'iress-form__name-error');
-
-    // Verify the error container referenced by aria-describedby exists and contains the error text
-    const errorContainer = screen
-      .getAllByRole('list')
-      .find((el) => el.id === 'iress-form__name-error');
-    expect(errorContainer).toBeDefined();
-    expect(errorContainer).toHaveTextContent('This field is required');
+    expect(input).toBeInvalid();
+    expect(input).toHaveAccessibleDescription('This field is required');
   });
 
-  it('removes aria-invalid and aria-describedby once the error is resolved', async () => {
+  it('removes invalid state and error description once the error is resolved', async () => {
     render(
       <IressForm id="iress-form">
         <IressFormField
@@ -166,19 +160,19 @@ describe('IressFormField', () => {
 
     await userEvent.click(submit);
     await screen.findByText('This field is required');
-    expect(input).toHaveAttribute('aria-invalid', 'true');
+    expect(input).toBeInvalid();
 
     // Correct the error by typing a value
     await userEvent.type(input, 'Some value');
 
     await userEvent.click(submit);
 
-    // Error resolved: aria attributes should be removed
-    expect(input).not.toHaveAttribute('aria-invalid');
-    expect(input).not.toHaveAttribute('aria-describedby');
+    // Error resolved: input should be valid with no error description
+    expect(input).toBeValid();
+    expect(input).not.toHaveAccessibleDescription();
   });
 
-  it('does not set aria-invalid or aria-describedby when readOnly', async () => {
+  it('does not mark control as invalid when readOnly', async () => {
     render(
       <IressForm id="iress-form">
         <IressFormField
@@ -196,8 +190,8 @@ describe('IressFormField', () => {
     const submit = screen.getByRole('button', { name: 'Submit' });
     await userEvent.click(submit);
 
-    expect(input).not.toHaveAttribute('aria-invalid');
-    expect(input).not.toHaveAttribute('aria-describedby');
+    expect(input).toBeValid();
+    expect(input).not.toHaveAccessibleDescription();
   });
 
   it('does not show or set error messages when readOnly is true', async () => {

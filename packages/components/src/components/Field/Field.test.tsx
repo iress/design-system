@@ -328,30 +328,44 @@ describe('IressField', () => {
       expect(results).toHaveNoViolations();
     });
 
-    it('auto-derives errorId from htmlFor when error is present', () => {
+    it('generates error container with id derived from htmlFor for aria-describedby wiring', () => {
       const screen = renderComponent({
         errorMessages: [{ message: 'This field is required' }],
       });
 
-      const errorContainer = screen.getByRole('list');
-      expect(errorContainer).toHaveAttribute('id', `${TEST_ID}-error`);
+      // Field generates error container with predictable id so consumers can wire aria-describedby
+      const input = screen.getByRole('textbox', { name: TEST_LABEL });
+      const errorList = screen.getByRole('list');
+
+      expect(errorList).toHaveAttribute('id', `${TEST_ID}-error`);
+      expect(errorList).toHaveTextContent('This field is required');
+
+      // Demonstrate proper wiring: when input has aria-describedby pointing to error container
+      // screen readers can announce the error
+      input.setAttribute('aria-describedby', `${TEST_ID}-error`);
+      expect(input).toHaveAccessibleDescription('This field is required');
     });
 
-    it('uses explicit errorId over the auto-derived one', () => {
+    it('uses explicit errorId for error container when provided', () => {
       const customErrorId = 'my-custom-error';
       const screen = renderComponent({
         errorMessages: [{ message: 'This field is required' }],
         errorId: customErrorId,
       });
 
-      const errorContainer = screen.getByRole('list');
-      expect(errorContainer).toHaveAttribute('id', customErrorId);
+      const input = screen.getByRole('textbox', { name: TEST_LABEL });
+      const errorList = screen.getByRole('list');
+
+      expect(errorList).toHaveAttribute('id', customErrorId);
+
+      // Demonstrate proper wiring with custom id
+      input.setAttribute('aria-describedby', customErrorId);
+      expect(input).toHaveAccessibleDescription('This field is required');
     });
 
-    it('does not set errorId when there are no errors', () => {
+    it('does not render error container when there are no errors', () => {
       const screen = renderComponent();
 
-      // No error container rendered when no errors
       expect(screen.queryByRole('list')).not.toBeInTheDocument();
     });
   });
