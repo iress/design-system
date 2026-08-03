@@ -54,6 +54,8 @@ export const IressFormValidationSummary = ({
   icon,
   srOnly,
   variant,
+  role,
+  'aria-live': ariaLive,
   ...restProps
 }: IressFormValidationSummaryProps) => {
   const form = useContext(FormContext);
@@ -74,6 +76,8 @@ export const IressFormValidationSummary = ({
         data-testid={testId}
         srOnly={srOnly}
         ref={form.setFocusOnError}
+        {...(role !== undefined && { role })}
+        {...(ariaLive !== undefined && { 'aria-live': ariaLive })}
       >
         {children}
       </FocusableAlert>
@@ -111,6 +115,8 @@ export const IressFormValidationSummary = ({
       ref={form.setFocusOnError}
       data-testid={testId}
       srOnly={srOnly}
+      {...(role !== undefined && { role })}
+      {...(ariaLive !== undefined && { 'aria-live': ariaLive })}
     >
       <IressAlert
         actions={actions}

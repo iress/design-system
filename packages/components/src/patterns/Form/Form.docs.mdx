@@ -543,6 +543,38 @@ Some use cases:
   }}
 />
 
+### Controlling screen reader announcements
+
+By default, `IressFormValidationSummary` uses `role="alert"` (an assertive live region), which causes screen readers to interrupt the user and read out the entire error list immediately. When using `mode="onBlur"`, a new error is added every time the user leaves a field — this can be disruptive.
+
+You have two options for a less intrusive experience:
+
+**Option 1 — Polite announcements via `aria-live`**
+
+Pass `aria-live="polite"` and `role="status"` to `IressFormValidationSummary` to switch to a polite live region. Screen readers will wait for a pause in user activity before announcing changes.
+
+```tsx
+<IressForm mode="onBlur">
+  <IressFormValidationSummary aria-live="polite" role="status" srOnly />
+  {/* fields */}
+</IressForm>
+```
+
+**Option 2 — Only announce on submit via `updateErrorSummaryOnSubmit`**
+
+Pass `updateErrorSummaryOnSubmit` to `IressForm` (or `IressHookForm`) to prevent the summary from updating while the user is still filling in the form. The summary will only be populated — and announced — when the form is submitted.
+
+```tsx
+<IressForm mode="onBlur" updateErrorSummaryOnSubmit>
+  {/* fields */}
+</IressForm>
+```
+
+| Approach | When to use |
+|---|---|
+| `aria-live="polite"` on `IressFormValidationSummary` | Real-time feedback is still desirable but should not interrupt the user |
+| `updateErrorSummaryOnSubmit` on `IressForm` | Errors should only be announced once the user tries to submit |
+
 ## Migration to version 5 and beyond
 
 The previous form components contained a lot of logic to translate the HTML5 validation API to a format that matched the design system’s guidelines. This allowed users to use the default props of input such as `pattern` and `required`, and be assured that the `IressField` would display errors accordingly.
