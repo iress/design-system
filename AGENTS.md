@@ -100,7 +100,29 @@ Core packages (build order: tokens → theme-preset → components):
 - `packages/theme-preset/` — `@iress-oss/ids-theme-preset` — Panda CSS theme preset
 - `packages/components/` — `@iress-oss/ids-components` — React component library (Panda CSS)
 
+Apps:
+
+- `apps/guidelines/` — `@iress/ids-guidelines` — IDS documentation site (deployed to GitHub Pages)
+
 Supporting: `storybook-config/`, `storybook-okta/`, `storybook-sandbox/`, `storybook-toggle-stories/`, `storybook-version-badge/`
+
+## Documentation structure
+
+All narrative documentation lives in `apps/guidelines/content/`:
+
+- `components/*.mdx` — component documentation (Button, Alert, Modal, etc.)
+- `patterns/*.mdx` — pattern documentation (Form, Loading, etc.)
+- `tokens/*.mdx` — design token documentation (colour, spacing, typography, etc.)
+- `foundations/*.mdx` — design foundations (accessibility, responsive, consistency, etc.)
+- `get-started/*.mdx` — getting started guides (develop, design, etc.)
+- `styling-props/*.mdx` — styling prop documentation (spacing, sizing, layout, etc.)
+- `resources/*.mdx` — migration guides and other resources
+
+**Derived artifacts** (do not edit directly):
+
+- `packages/components/.ai/` — AI-optimized markdown derived from guidelines content, shipped in npm package
+- `packages/tokens/.ai/` — token reference and skills, shipped in npm package
+- `.ai/IDS-FULL-REFERENCE.md` — concatenated reference for AI assistants (Gemini Gem, etc.)
 
 ## File organization
 

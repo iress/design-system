@@ -716,7 +716,7 @@ Performed after Phases 7, 9, 10, and 11.3 are complete:
 - [x] **Step 4:** Update `yarn build` to use `yarn translate` (now runs `translate.ts`)
 - [x] **Step 5:** Delete old scripts: `translate-components.ts`, `derive-ai-docs.ts`, `generate-token-reference.ts`
 - [x] **Step 6:** Remove `packages/*/.ai/*` ignore from `.gitignore`
-- [ ] **Step 7:** Verify CI builds pass
+- [x] **Step 7:** Verify CI builds pass (verified 2026-08-11: lint, typecheck, test:ci all pass for guidelines app locally and in CI)
 - [x] **Step 8:** Verify `yarn dev` watcher correctly updates `.ai/` on content/story changes
 - [x] **Step 9:** Remove deprecated `withCustomSource` / `withTransformedRawSource` exports (replaced by `withSource`)
 - [x] **Step 10:** Remove old `withCustomSource.test.ts`
@@ -747,7 +747,7 @@ Performed after Phases 7, 9, 10, and 11.3 are complete:
 ### Task 12.6: Documentation
 
 - [x] Update `AGENTS.md` to reflect new workflow (no more `yarn translate`, use `yarn dev` for .ai updates)
-- [ ] Update `README.md` development section if needed
+- [x] Update `README.md` development section if needed
 - [x] Add a `CONTRIBUTING.md` note about committing `.ai/` changes with PRs
 
 ### Task 12.7: Sub-navigation and anchor link search
@@ -777,12 +777,12 @@ Document how to add/edit guidelines content for contributors and AI agents:
   - MDX format requirements (frontmatter, meta export, code block conventions)
   - How to preview locally (`yarn workspace @iress/ids-guidelines run dev`)
   - How to deploy (build + commit `docs/`)
-- [ ] **Step 2:** Update `.github/instructions/` to reference guidelines as the docs source of truth
-- [ ] **Step 3:** Update `AGENTS.md` to document:
+- [x] **Step 2:** Update `.github/instructions/` to reference guidelines as the docs source of truth
+- [x] **Step 3:** Update `AGENTS.md` to document:
   - All narrative docs live in `apps/guidelines/content/` (not `.docs.mdx`)
   - `packages/components/.ai/` is a derived artifact, not hand-edited
   - Token docs live in `apps/guidelines/content/tokens/`
-- [ ] **Step 4:** Add a note to the root `README.md` development section about the guidelines app
+- [x] **Step 4:** Add a note to the root `README.md` development section about the guidelines app
 
 ### Task 12.9: Add Storybook introduction/cover page
 
@@ -1128,13 +1128,13 @@ Verify the published package structure makes type lookup easy:
 |   | — Remove `withCustomSource` export + test (Task 12.4 Steps 9-10) | ✅ Done | — |
 |   | — Re-upload IDS-FULL-REFERENCE to Gemini Gem (Task 12.4) | ❌ manual | — |
 |   | — Architecture diagrams (Task 12.5) | ✅ Done | — |
-|   | — Documentation: CONTRIBUTING.md, README updates (Tasks 12.6, 12.8) | ✅ Done | — |
+|   | — Documentation: CONTRIBUTING.md, README, AGENTS.md, instructions (Tasks 12.6, 12.8) | ✅ Done | — |
 |   | — Sub-navigation / TOC (Task 12.7) | ✅ Done (IressMenu + IressHide, xl+ only, Design/Develop tabs) | — |
 |   | — createMeta factory migration (Task 12.10 Steps 1-5) | ⏭️ Skipped | — |
 |   | — ESLint rules (Task 12.10 Steps 6-8) | ✅ Done | — |
 |   | — Remove migration stories (Task 12.10 Step 9) | ✅ Done | — |
 |   | — CI prop table validation (Task 12.10 Step 10) | ✅ Done (pre-push hook) | — |
-|   | — Verify CI builds pass (Task 12.4 Step 7) | ❌ | — |
+|   | — Verify CI builds pass (Task 12.4 Step 7) | ✅ Done (verified 2026-08-11) | — |
 |   | — Fix tokens REVIEW issues | ✅ Done | — |
 |   | — Figma links in translate pipeline | ✅ Done (meta + FigmaLink MDX component) | — |
 | 6 | Phase 13: Tabbed content + TypeDoc | ⏭️ Descoped | — |
