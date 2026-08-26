@@ -212,7 +212,9 @@ export const IressModal = <TStatus extends ModalStatus = undefined>({
   const dismiss = useDismiss(floatingContext, {
     enabled: disableBackdropClick !== 'no-esc',
     outsidePress: (e) => {
-      if (disableBackdropClick) return false;
+      if (disableBackdropClick === true || disableBackdropClick === 'no-esc') {
+        return false;
+      }
 
       const target = e.target as HTMLElement;
       return !target.closest(`.${GlobalCSSClass.Toaster}`);
