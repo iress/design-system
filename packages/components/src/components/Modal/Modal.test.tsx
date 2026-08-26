@@ -378,11 +378,19 @@ describe('IressModal', () => {
         await waitFor(() => expect(dialog).toHaveFocus());
 
         await userEvent.click(backdrop);
-        expect(dialog).toBeInTheDocument();
+        await expect(
+          waitForElementToBeRemoved(() => screen.queryByRole('dialog'), {
+            timeout: 500,
+          }),
+        ).rejects.toThrow();
 
         await userEvent.keyboard('{Escape}');
 
-        expect(dialog).toBeInTheDocument();
+        await expect(
+          waitForElementToBeRemoved(() => screen.queryByRole('dialog'), {
+            timeout: 500,
+          }),
+        ).rejects.toThrow();
       });
     });
 

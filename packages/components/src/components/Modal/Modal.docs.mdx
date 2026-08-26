@@ -131,7 +131,12 @@ When `status` is set:
 
 ### Disable closing
 
-For instances where you require the user's full attention and you want to ensure they continue the current task before closing the modal, you can disable the backdrop and escape key using `disableBackdropClick` and/or hide the close button using `noCloseButton`.
+For instances where you require the user's full attention and you want to
+ensure they continue the current task before closing the modal, you can use
+`disableBackdropClick={true}` to disable backdrop clicks while still allowing
+Escape key dismissal. If you need to disable both backdrop clicks and Escape
+dismissal, set `disableBackdropClick="no-esc"`. You can also hide the close
+button using `noCloseButton`.
 
 **Note:** As these options remove the default handling of the closing the modal, please ensure you provide a clear way for the user to close the modal.
 
