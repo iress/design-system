@@ -366,6 +366,20 @@ describe('IressModal', () => {
 
         await waitForElementToBeRemoved(dialog);
       });
+
+      it('does not allow closing with the escape key when set to no-esc', async () => {
+        const screen = renderComponent({
+          defaultShow: true,
+          disableBackdropClick: 'no-esc',
+        });
+
+        const dialog = await screen.findByRole('dialog');
+        await waitFor(() => expect(dialog).toHaveFocus());
+
+        await userEvent.keyboard('{Escape}');
+
+        expect(dialog).toBeInTheDocument();
+      });
     });
 
     describe('fixedFooter', () => {
