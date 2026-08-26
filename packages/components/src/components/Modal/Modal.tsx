@@ -212,7 +212,7 @@ export const IressModal = <TStatus extends ModalStatus = undefined>({
   const dismiss = useDismiss(floatingContext, {
     enabled: disableBackdropClick !== 'no-esc',
     outsidePress: (e) => {
-      if (disableBackdropClick === true || disableBackdropClick === 'no-esc') {
+      if (disableBackdropClick === true) {
         return false;
       }
 
