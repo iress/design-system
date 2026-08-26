@@ -374,7 +374,11 @@ describe('IressModal', () => {
         });
 
         const dialog = await screen.findByRole('dialog');
+        const backdrop = await screen.findByTestId(`${TEST_ID}__backdrop`);
         await waitFor(() => expect(dialog).toHaveFocus());
+
+        await userEvent.click(backdrop);
+        expect(dialog).toBeInTheDocument();
 
         await userEvent.keyboard('{Escape}');
 
