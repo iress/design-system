@@ -352,6 +352,20 @@ describe('IressModal', () => {
 
         expect(backdrop).toBeInTheDocument();
       });
+
+      it('still allows closing with the escape key', async () => {
+        const screen = renderComponent({
+          defaultShow: true,
+          disableBackdropClick: true,
+        });
+
+        const dialog = await screen.findByRole('dialog');
+        await waitFor(() => expect(dialog).toHaveFocus());
+
+        await userEvent.keyboard('{Escape}');
+
+        await waitForElementToBeRemoved(dialog);
+      });
     });
 
     describe('fixedFooter', () => {
