@@ -491,12 +491,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bundled-es-modules/deepmerge@npm:^4.3.1":
-  version: 4.3.1
-  resolution: "@bundled-es-modules/deepmerge@npm:4.3.1"
+"@bundled-es-modules/deepmerge@npm:^4.3.2":
+  version: 4.3.2
+  resolution: "@bundled-es-modules/deepmerge@npm:4.3.2"
   dependencies:
     deepmerge: "npm:^4.3.1"
-  checksum: 10c0/50493fb741d588aa358edc5e844cbf31493cb64aca0a5ca0d33d73f61eb9eb853f7038074429343afbe199e614a6be8400abfd31909f9e5f14a53a4cff39b894
+  checksum: 10c0/e868004dc4474b68efdd83306a13402aeb5ff748542397549ff2d8f922ce51f657792e115b28bfe31245a6fe591cb7a76f944e55ef51baf621366cca6af6f5dc
   languageName: node
   linkType: hard
 
@@ -2028,7 +2028,7 @@ __metadata:
     rimraf: "npm:^6.1.3"
     rollup-plugin-tree-shakeable: "npm:^2.0.0"
     storybook: "npm:10.4.6"
-    style-dictionary: "npm:^5.4.0"
+    style-dictionary: "npm:^5.4.4"
     tsx: "npm:^4.23.0"
     typescript: "npm:^6.0.3"
     vite: "npm:8.1.5"
@@ -13719,11 +13719,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"style-dictionary@npm:^5.4.0":
-  version: 5.4.0
-  resolution: "style-dictionary@npm:5.4.0"
+"style-dictionary@npm:^5.4.4":
+  version: 5.4.4
+  resolution: "style-dictionary@npm:5.4.4"
   dependencies:
-    "@bundled-es-modules/deepmerge": "npm:^4.3.1"
+    "@bundled-es-modules/deepmerge": "npm:^4.3.2"
     "@bundled-es-modules/glob": "npm:^13.0.6"
     "@bundled-es-modules/memfs": "npm:^4.17.0"
     "@zip.js/zip.js": "npm:^2.7.44"
@@ -13738,7 +13738,7 @@ __metadata:
     tinycolor2: "npm:^1.6.0"
   bin:
     style-dictionary: bin/style-dictionary.js
-  checksum: 10c0/b489b4bf5e8deb2b3fcc066132b13c32e224f9b8fb54e83dec73d196184355750eeb55975ac5d7e7d3fa3d51a8738d688da689ade2d426184b43b3a9f6997319
+  checksum: 10c0/6fd7214d703c0a4bafcd1584eb5bccf0200c3578a4591cd26441ea0a6cc50131bb474f4208f88697894d8596b34b66acc260a861e5dde58bb48eebd23e188d47
   languageName: node
   linkType: hard
 
