@@ -1829,7 +1829,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@iress-oss/ids-storybook-okta@workspace:packages/storybook-okta"
   dependencies:
-    "@okta/okta-auth-js": "npm:^8.0.0"
+    "@okta/okta-auth-js": "npm:^8.0.1"
     "@storybook/addon-docs": "npm:10.4.6"
     "@storybook/icons": "npm:2.1.0"
     "@storybook/react-vite": "npm:10.4.6"
@@ -2715,16 +2715,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@okta/okta-auth-js@npm:^8.0.0":
-  version: 8.0.0
-  resolution: "@okta/okta-auth-js@npm:8.0.0"
+"@okta/okta-auth-js@npm:^8.0.1":
+  version: 8.0.1
+  resolution: "@okta/okta-auth-js@npm:8.0.1"
   dependencies:
     "@babel/runtime": "npm:^7.28.6"
     broadcast-channel: "npm:~7.3.0"
     js-cookie: "npm:^3.0.5"
     node-cache: "npm:^5.1.2"
     tiny-emitter: "npm:2.1.0"
-  checksum: 10c0/b2c487a0801187bb303c149e288e79877ea92eb4a5f6e225b1bf2a0d1dac39e2267610f577684a7ba14871362abd4ff0d19670575216523c42952a007363a64c
+  checksum: 10c0/b81967818cc382019875367d0bc311117ee5f433df90eeb26d98b1166e17eb5736dd9f0dade1e6d3a7b2662f8af1bcda4cf4edca1c794928352e2c9e84103cc0
   languageName: node
   linkType: hard
 
