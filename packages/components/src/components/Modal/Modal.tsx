@@ -70,9 +70,10 @@ export interface IressModalProps<
   defaultShow?: boolean;
 
   /**
-   * When set to `true`, users cannot exit the modal by clicking the backdrop or using the escape key.
+   * When set to `true`, users cannot exit the modal by clicking the backdrop.
+   * When set to `"no-esc"`, users also cannot exit the modal using the escape key.
    */
-  disableBackdropClick?: boolean;
+  disableBackdropClick?: boolean | 'no-esc';
 
   /**
    * When set to `true` the modal's footer will always be visible and fixed to the bottom of the modal.
@@ -209,8 +210,12 @@ export const IressModal = <TStatus extends ModalStatus = undefined>({
     onOpenChange,
   });
   const dismiss = useDismiss(floatingContext, {
-    enabled: !disableBackdropClick,
+    escapeKey: disableBackdropClick !== 'no-esc',
     outsidePress: (e) => {
+      if (disableBackdropClick === true || disableBackdropClick === 'no-esc') {
+        return false;
+      }
+
       const target = e.target as HTMLElement;
       return !target.closest(`.${GlobalCSSClass.Toaster}`);
     },
