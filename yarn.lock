@@ -1701,8 +1701,8 @@ __metadata:
     "@types/jest-axe": "npm:3.5.9"
     "@types/mdx": "npm:^2.0.13"
     "@types/query-selector-shadow-dom": "npm:1.0.4"
-    "@types/react": "npm:^19.2.14"
-    "@types/react-dom": "npm:^19.2.3"
+    "@types/react": "npm:^19.2.18"
+    "@types/react-dom": "npm:^19.2.4"
     "@vitejs/plugin-react": "npm:^6.0.3"
     "@vitest/coverage-v8": "npm:4.1.10"
     "@vitest/ui": "npm:4.1.10"
@@ -1724,8 +1724,8 @@ __metadata:
     postcss: "npm:8.5.19"
     prettier: "npm:^3.8.2"
     query-selector-shadow-dom: "npm:1.0.1"
-    react: "npm:^19.2.6"
-    react-dom: "npm:^19.2.6"
+    react: "npm:^19.2.8"
+    react-dom: "npm:^19.2.8"
     react-dropzone: "npm:15.0.0"
     react-hook-form: "npm:7.72.1"
     rimraf: "npm:^6.1.3"
@@ -1771,7 +1771,7 @@ __metadata:
     "@testing-library/jest-dom": "npm:^6.9.1"
     "@testing-library/react": "npm:^16.3.2"
     "@testing-library/user-event": "npm:^14.6.1"
-    "@types/react": "npm:^19.2.14"
+    "@types/react": "npm:^19.2.18"
     "@types/react-dom": "npm:^19"
     "@types/react-is": "npm:^19"
     "@typescript-eslint/eslint-plugin": "npm:^8.62.1"
@@ -1790,9 +1790,9 @@ __metadata:
     json5: "npm:^2.2.3"
     prettier: "npm:^3.8.2"
     radash: "npm:12.1.1"
-    react: "npm:^19.2.6"
+    react: "npm:^19.2.8"
     react-diff-viewer: "npm:^3.1.1"
-    react-dom: "npm:^19.2.6"
+    react-dom: "npm:^19.2.8"
     react-element-to-jsx-string: "npm:^17.0.1"
     react-is: "npm:^19.2.6"
     remark-gfm: "npm:^4.0.1"
@@ -1836,8 +1836,8 @@ __metadata:
     "@testing-library/dom": "npm:^10.4.1"
     "@testing-library/react": "npm:^16.3.2"
     "@types/node": "npm:^25.6.2"
-    "@types/react": "npm:^19.2.14"
-    "@types/react-dom": "npm:^19.2.3"
+    "@types/react": "npm:^19.2.18"
+    "@types/react-dom": "npm:^19.2.4"
     "@typescript-eslint/eslint-plugin": "npm:^8.62.1"
     "@typescript-eslint/parser": "npm:^8.62.1"
     "@vitejs/plugin-react": "npm:^6.0.3"
@@ -1850,8 +1850,8 @@ __metadata:
     eslint-plugin-mdx: "npm:3.8.1"
     eslint-plugin-prettier: "npm:^5.5.6"
     prettier: "npm:^3.8.2"
-    react: "npm:^19.2.6"
-    react-dom: "npm:^19.2.6"
+    react: "npm:^19.2.8"
+    react-dom: "npm:^19.2.8"
     rimraf: "npm:6.1.3"
     storybook: "npm:10.4.6"
     tsup: "npm:^8.5.1"
@@ -1873,8 +1873,8 @@ __metadata:
     "@storybook/icons": "npm:2.1.0"
     "@storybook/react-vite": "npm:10.4.6"
     "@types/node": "npm:^25.6.2"
-    "@types/react": "npm:^19.2.14"
-    "@types/react-dom": "npm:^19.2.3"
+    "@types/react": "npm:^19.2.18"
+    "@types/react-dom": "npm:^19.2.4"
     "@typescript-eslint/eslint-plugin": "npm:^8.62.1"
     "@typescript-eslint/parser": "npm:^8.62.1"
     "@vitejs/plugin-react": "npm:^6.0.3"
@@ -1887,8 +1887,8 @@ __metadata:
     eslint-plugin-prettier: "npm:^5.5.6"
     lz-string: "npm:^1.5.0"
     prettier: "npm:^3.8.2"
-    react: "npm:^19.2.6"
-    react-dom: "npm:^19.2.6"
+    react: "npm:^19.2.8"
+    react-dom: "npm:^19.2.8"
     rimraf: "npm:6.1.3"
     storybook: "npm:10.4.6"
     tsup: "npm:^8.5.1"
@@ -1911,8 +1911,8 @@ __metadata:
     "@storybook/icons": "npm:2.1.0"
     "@storybook/react-vite": "npm:10.4.6"
     "@types/node": "npm:^25.6.2"
-    "@types/react": "npm:^19.2.14"
-    "@types/react-dom": "npm:^19.2.3"
+    "@types/react": "npm:^19.2.18"
+    "@types/react-dom": "npm:^19.2.4"
     "@typescript-eslint/eslint-plugin": "npm:^8.62.1"
     "@typescript-eslint/parser": "npm:^8.62.1"
     "@vitejs/plugin-react": "npm:^6.0.3"
@@ -1924,8 +1924,8 @@ __metadata:
     eslint-plugin-mdx: "npm:3.8.1"
     eslint-plugin-prettier: "npm:^5.5.6"
     prettier: "npm:^3.8.2"
-    react: "npm:^19.2.6"
-    react-dom: "npm:^19.2.6"
+    react: "npm:^19.2.8"
+    react-dom: "npm:^19.2.8"
     rimraf: "npm:6.1.3"
     storybook: "npm:10.4.6"
     tsup: "npm:^8.5.1"
@@ -1946,8 +1946,8 @@ __metadata:
     "@storybook/addon-docs": "npm:10.4.6"
     "@storybook/react-vite": "npm:10.4.6"
     "@types/node": "npm:^25.6.2"
-    "@types/react": "npm:^19.2.14"
-    "@types/react-dom": "npm:^19.2.3"
+    "@types/react": "npm:^19.2.18"
+    "@types/react-dom": "npm:^19.2.4"
     "@typescript-eslint/eslint-plugin": "npm:^8.62.1"
     "@typescript-eslint/parser": "npm:^8.62.1"
     "@vitejs/plugin-react": "npm:^6.0.3"
@@ -1959,8 +1959,8 @@ __metadata:
     eslint-plugin-mdx: "npm:3.8.1"
     eslint-plugin-prettier: "npm:^5.5.6"
     prettier: "npm:^3.8.2"
-    react: "npm:^19.2.6"
-    react-dom: "npm:^19.2.6"
+    react: "npm:^19.2.8"
+    react-dom: "npm:^19.2.8"
     rimraf: "npm:6.1.3"
     storybook: "npm:10.4.6"
     tsup: "npm:^8.5.1"
@@ -2004,8 +2004,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@iress-oss/ids-tokens@workspace:packages/tokens"
   dependencies:
-    "@types/react": "npm:^19.2.14"
-    "@types/react-dom": "npm:^19.2.3"
+    "@types/react": "npm:^19.2.18"
+    "@types/react-dom": "npm:^19.2.4"
     "@typescript-eslint/eslint-plugin": "npm:^8.62.1"
     "@typescript-eslint/parser": "npm:^8.62.1"
     "@vitejs/plugin-react": "npm:^6.0.3"
@@ -2022,8 +2022,8 @@ __metadata:
     nodemon: "npm:^3.1.14"
     prettier: "npm:^3.8.2"
     radash: "npm:^12.1.1"
-    react: "npm:^19.2.6"
-    react-dom: "npm:^19.2.6"
+    react: "npm:^19.2.8"
+    react-dom: "npm:^19.2.8"
     remark-gfm: "npm:^4.0.1"
     rimraf: "npm:^6.1.3"
     rollup-plugin-tree-shakeable: "npm:^2.0.0"
@@ -2082,8 +2082,8 @@ __metadata:
     pinst: "npm:^3.0.0"
     prettier: "npm:^3.8.2"
     puppeteer: "npm:^25.0.2"
-    react: "npm:^19.2.6"
-    react-dom: "npm:^19.2.6"
+    react: "npm:^19.2.8"
+    react-dom: "npm:^19.2.8"
     size-limit: "npm:12.1.0"
     storybook: "npm:10.4.6"
     storybook-addon-tag-badges: "npm:^3.1.0"
@@ -4791,12 +4791,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^19, @types/react-dom@npm:^19.2.3":
+"@types/react-dom@npm:^19":
   version: 19.2.3
   resolution: "@types/react-dom@npm:19.2.3"
   peerDependencies:
     "@types/react": ^19.2.0
   checksum: 10c0/b486ebe0f4e2fb35e2e108df1d8fc0927ca5d6002d5771e8a739de11239fe62d0e207c50886185253c99eb9dedfeeb956ea7429e5ba17f6693c7acb4c02f8cd1
+  languageName: node
+  linkType: hard
+
+"@types/react-dom@npm:^19.2.4":
+  version: 19.2.4
+  resolution: "@types/react-dom@npm:19.2.4"
+  peerDependencies:
+    "@types/react": ^19.2.0
+  checksum: 10c0/b7d854ce17bb51a3a067168268a90f0123d10dc490f63f1ff5409f07ac715febeb8f5b7b473404a9d437106571e0312fc2937a945634d590abfc9aa46a14b01b
   languageName: node
   linkType: hard
 
@@ -4809,12 +4818,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^19.2.14":
+"@types/react@npm:*":
   version: 19.2.14
   resolution: "@types/react@npm:19.2.14"
   dependencies:
     csstype: "npm:^3.2.2"
   checksum: 10c0/7d25bf41b57719452d86d2ac0570b659210402707313a36ee612666bf11275a1c69824f8c3ee1fdca077ccfe15452f6da8f1224529b917050eb2d861e52b59b7
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:^19.2.18":
+  version: 19.2.18
+  resolution: "@types/react@npm:19.2.18"
+  dependencies:
+    csstype: "npm:^3.2.2"
+  checksum: 10c0/d04216172b4b4362b310017c210dfbe019fb4f4e7dffd0313e70b3acb3051d5c3e76e7e84e3cf4c6a3c824993ffadfe3949e589a6398a09d4200e7670e2962de
   languageName: node
   linkType: hard
 
@@ -12473,7 +12491,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0, react-dom@npm:^19.2.3, react-dom@npm:^19.2.6":
+"react-dom@npm:^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0, react-dom@npm:^19.2.3":
   version: 19.2.6
   resolution: "react-dom@npm:19.2.6"
   dependencies:
@@ -12481,6 +12499,17 @@ __metadata:
   peerDependencies:
     react: ^19.2.6
   checksum: 10c0/dbf2aef67857c03a612bc9316a4562e5066f43fa04bf28f7f0734963fc1350da2c9f8eb973930655453281079f30cc8222bab383dbec4b5097084e2c081e3334
+  languageName: node
+  linkType: hard
+
+"react-dom@npm:^19.2.8":
+  version: 19.2.8
+  resolution: "react-dom@npm:19.2.8"
+  dependencies:
+    scheduler: "npm:^0.27.0"
+  peerDependencies:
+    react: ^19.2.8
+  checksum: 10c0/41ba2247b76f687fcfe5bbc99f514d6b851d8c8041c2f5ded36ed05bd7fdc5208cacbac9de51e3e6633e77f96f44cec9f0d4a5a55184dba4e00738f224439134
   languageName: node
   linkType: hard
 
@@ -12564,10 +12593,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0, react@npm:^19.2.3, react@npm:^19.2.6":
+"react@npm:^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0, react@npm:^19.2.3":
   version: 19.2.6
   resolution: "react@npm:19.2.6"
   checksum: 10c0/66afde33b9a9ee87b1e1cae39d8e7e040d1262e719524fd70660c4d4ce79929c532ac19fc3df5a911edaf02768fdf2c49de4ede1ba99bc6aad72796e0e26e798
+  languageName: node
+  linkType: hard
+
+"react@npm:^19.2.8":
+  version: 19.2.8
+  resolution: "react@npm:19.2.8"
+  checksum: 10c0/5f86bdb56426652fd6d989d30a6f2e603c057272c47c9ca3a3fbe190a3a39ee9ccce937d63cfc039717abed1b8891d6a499134bc35311acc07eafdacd86537cd
   languageName: node
   linkType: hard
 
