@@ -295,6 +295,7 @@ const Input = <
     variant,
     width,
   });
+  const clearButtonVisible = clearable && !!validValue;
 
   return (
     <div
@@ -352,12 +353,20 @@ const Input = <
               screenreaderText={loading === true ? 'loading' : loading}
             />
           )}
-          {validValue && clearable && (
+          {clearable && (
             <IressCloseButton
-              onClick={handleClear}
-              onMouseDown={(e) => e.preventDefault()}
+              onClick={clearButtonVisible ? handleClear : undefined}
+              onMouseDown={(e) => {
+                if (clearButtonVisible) {
+                  e.preventDefault();
+                }
+              }}
               screenreaderText="Clear"
               compact
+              disabled={!clearButtonVisible}
+              tabIndex={clearButtonVisible ? 0 : -1}
+              style={!clearButtonVisible ? { visibility: 'hidden' } : undefined}
+              aria-hidden={!clearButtonVisible}
             />
           )}
         </div>
