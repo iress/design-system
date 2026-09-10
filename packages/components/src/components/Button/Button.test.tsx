@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { IressButton, button as buttonStyles } from '.';
 import { IressIcon } from '../Icon';
+import { IressButtonGroup } from '../ButtonGroup';
 import { axe } from 'jest-axe';
 import { GlobalCSSClass } from '@/enums';
 
@@ -212,6 +213,24 @@ describe('IressButton', () => {
         );
 
         expect(screen.getByRole('button')).toHaveAttribute(
+          'data-analytics',
+          'manual-value',
+        );
+      });
+
+      it('preserves the resolved analytics attribute inside a button group', () => {
+        render(
+          <IressButtonGroup label="Actions">
+            <IressButton
+              analytics={{ page: 'summary', action: 'save-draft' }}
+              data-analytics="manual-value"
+            >
+              Button
+            </IressButton>
+          </IressButtonGroup>,
+        );
+
+        expect(screen.getByRole('button', { name: 'Button' })).toHaveAttribute(
           'data-analytics',
           'manual-value',
         );

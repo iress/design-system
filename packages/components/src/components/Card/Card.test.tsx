@@ -13,7 +13,7 @@ import { GlobalCSSClass } from '@/enums';
 const TEST_ID = 'test-component';
 
 function renderCard(
-  { children, ...restProps }: Partial<IressCardProps> = {},
+  { children, ...restProps }: Partial<IressCardProps<'div'>> = {},
   renderFn: typeof render = render,
 ): RenderResult {
   return renderFn(

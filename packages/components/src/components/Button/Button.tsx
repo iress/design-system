@@ -311,11 +311,11 @@ const Button = <
         <Component
           aria-label={childrenLabel}
           aria-describedby={loading ? spinnerId : undefined}
-          data-analytics={analyticsAttribute}
           type={element || !nonStyleProps.href ? 'button' : undefined}
           {...renderProps}
           {...buttonGroupItem?.props}
           {...nonStyleProps}
+          data-analytics={analyticsAttribute}
           ref={elementRef}
         />
       </IressTooltip>
@@ -325,11 +325,11 @@ const Button = <
   return (
     <Component
       aria-describedby={loading ? spinnerId : undefined}
-      data-analytics={analyticsAttribute}
       type={element || !nonStyleProps.href ? 'button' : undefined}
       {...renderProps}
       {...buttonGroupItem?.props}
       {...nonStyleProps}
+      data-analytics={analyticsAttribute}
       ref={elementRef}
     />
   );

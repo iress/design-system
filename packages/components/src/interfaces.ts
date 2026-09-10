@@ -495,6 +495,13 @@ export interface IressAnalyticsProps {
    * Structured metadata used to generate a `data-analytics` attribute for interactive components.
    */
   analytics?: IressAnalyticsMetadata;
+
+  /**
+   * Explicit analytics identifier rendered directly to the DOM. When both
+   * `analytics` and `data-analytics` are provided, `data-analytics` takes
+   * precedence.
+   */
+  'data-analytics'?: string;
 }
 
 export interface IressTestProps {
