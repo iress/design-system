@@ -9,11 +9,16 @@ import {
   type ComponentPropsWithoutRef,
 } from 'react';
 import { GlobalCSSClass } from '@/enums';
-import { type IressCSSProps, type IressTestProps } from '@/interfaces';
+import {
+  type IressAnalyticsProps,
+  type IressCSSProps,
+  type IressTestProps,
+} from '@/interfaces';
 import { IressText } from '../Text';
+import { resolveAnalyticsAttribute } from '@/helpers/utility/analytics';
 
 export interface InternalCardProps<E extends ElementType = 'div'>
-  extends IressCSSProps, IressTestProps {
+  extends IressCSSProps, IressTestProps, IressAnalyticsProps {
   /**
    * Main body of the card
    */
@@ -76,6 +81,7 @@ export const IressCard = <E extends ElementType = 'div'>({
   element,
   className,
   selected,
+  analytics,
   children,
   footer,
   heading,
@@ -95,6 +101,17 @@ export const IressCard = <E extends ElementType = 'div'>({
   const clickable = isInteractiveElement || !!restProps.onClick;
   const [styleProps, nonStyleProps] = splitCssProps(restProps);
   const { stretch, ...otherStyleProps } = styleProps;
+  const existingAnalyticsAttribute = Reflect.get(
+    nonStyleProps,
+    'data-analytics',
+  );
+  const explicitAnalyticsAttribute =
+    typeof existingAnalyticsAttribute === 'string'
+      ? existingAnalyticsAttribute
+      : undefined;
+  const analyticsAttribute = clickable
+    ? resolveAnalyticsAttribute(analytics, explicitAnalyticsAttribute)
+    : explicitAnalyticsAttribute;
 
   const styles = card.raw({
     clickable,
@@ -115,6 +132,7 @@ export const IressCard = <E extends ElementType = 'div'>({
 
   return (
     <StyledElement
+      data-analytics={analyticsAttribute}
       {...nonStyleProps}
       className={cx(
         css(styles.root, otherStyleProps),

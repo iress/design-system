@@ -18,6 +18,19 @@ describe('IressMenuItem', () => {
     expect(anchor).toBeInTheDocument();
   });
 
+  it('renders a generated data-analytics attribute', () => {
+    render(
+      <IressMenuItem analytics={{ page: 'actions', action: 'approve' }}>
+        Test
+      </IressMenuItem>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Test' })).toHaveAttribute(
+      'data-analytics',
+      'actions-approve',
+    );
+  });
+
   describe('inside menu', () => {
     it('renders inside a listitem element inside default menu', () => {
       render(

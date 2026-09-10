@@ -155,6 +155,21 @@ describe('IressLink', () => {
         expect(link).toBeInTheDocument();
       });
     });
+
+    describe('analytics', () => {
+      it('renders a generated data-analytics attribute', () => {
+        render(
+          <IressLink analytics={{ page: 'summary', action: 'learn-more' }}>
+            Link
+          </IressLink>,
+        );
+
+        expect(screen.getByRole('button')).toHaveAttribute(
+          'data-analytics',
+          'summary-learn-more',
+        );
+      });
+    });
   });
 });
 

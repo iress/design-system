@@ -187,6 +187,21 @@ describe('IressButton', () => {
       });
     });
 
+    describe('analytics', () => {
+      it('renders a generated data-analytics attribute', () => {
+        render(
+          <IressButton analytics={{ page: 'summary', action: 'save-draft' }}>
+            Button
+          </IressButton>,
+        );
+
+        expect(screen.getByRole('button')).toHaveAttribute(
+          'data-analytics',
+          'summary-save-draft',
+        );
+      });
+    });
+
     describe('noWrap', () => {
       const noWrapButtonClassName = buttonStyles({ noWrap: true }).root;
 

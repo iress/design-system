@@ -21,8 +21,13 @@ import { type ButtonGroupItemProps, useButtonGroupItem } from '../ButtonGroup';
 import { splitCssProps } from '@/styled-system/jsx';
 import { css, cx } from '@/styled-system/css';
 import { button } from '@/styled-system/recipes';
-import { type IressCSSProps, type IressTestProps } from '@/interfaces';
+import {
+  type IressAnalyticsProps,
+  type IressCSSProps,
+  type IressTestProps,
+} from '@/interfaces';
 import { usePopover } from '../Popover';
+import { resolveAnalyticsAttribute } from '@/helpers/utility/analytics';
 import type { MaterialSymbol } from 'material-symbols';
 import { IressIcon } from '../Icon';
 import { IressTooltip } from '../Tooltip';
@@ -64,7 +69,11 @@ export interface InternalButtonProps<
   C extends ElementType | undefined = undefined,
   THref extends string | undefined = undefined,
 >
-  extends IressCSSProps, IressTestProps, ButtonGroupItemProps {
+  extends
+    IressCSSProps,
+    IressTestProps,
+    IressAnalyticsProps,
+    ButtonGroupItemProps {
   /**
    * Sets the active state of the button, usually used to indicate the button has activated a modal, popover or slideout.
    */
@@ -175,6 +184,7 @@ const Button = <
     element,
     fluid,
     icon,
+    analytics,
     loading = false,
     mode = 'secondary',
     prepend,
@@ -219,6 +229,16 @@ const Button = <
   const [styleProps, nonStyleProps] = useMemo(
     () => splitCssProps(restProps),
     [restProps],
+  );
+  const existingAnalyticsAttribute = Reflect.get(
+    nonStyleProps,
+    'data-analytics',
+  );
+  const analyticsAttribute = resolveAnalyticsAttribute(
+    analytics,
+    typeof existingAnalyticsAttribute === 'string'
+      ? existingAnalyticsAttribute
+      : undefined,
   );
 
   const handleClick = useCallback(
@@ -291,6 +311,7 @@ const Button = <
         <Component
           aria-label={childrenLabel}
           aria-describedby={loading ? spinnerId : undefined}
+          data-analytics={analyticsAttribute}
           type={element || !nonStyleProps.href ? 'button' : undefined}
           {...renderProps}
           {...buttonGroupItem?.props}
@@ -304,6 +325,7 @@ const Button = <
   return (
     <Component
       aria-describedby={loading ? spinnerId : undefined}
+      data-analytics={analyticsAttribute}
       type={element || !nonStyleProps.href ? 'button' : undefined}
       {...renderProps}
       {...buttonGroupItem?.props}
