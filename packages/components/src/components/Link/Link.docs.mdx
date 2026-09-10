@@ -21,6 +21,16 @@ import {
 
 If you provide a `href`, it will render as an `<a />` element. Otherwise it will render as a `<button />` element. This helps ensure it presents the correct role to assistive technologies for the best accessibility.
 
+### Analytics
+
+Use the `analytics` prop to generate a `data-analytics` attribute for the link.
+
+```tsx
+<IressLink analytics={{ page: 'summary', action: 'learn-more' }}>
+  Learn more
+</IressLink>
+```
+
 ## When to use
 
 - If you want to include a link alongside static text, use the `IressLink` component.
