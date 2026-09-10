@@ -31,6 +31,22 @@ describe('IressMenuItem', () => {
     );
   });
 
+  it('prefers an explicit data-analytics attribute', () => {
+    render(
+      <IressMenuItem
+        analytics={{ page: 'actions', action: 'approve' }}
+        data-analytics="manual-value"
+      >
+        Test
+      </IressMenuItem>,
+    );
+
+    expect(screen.getByRole('button', { name: 'Test' })).toHaveAttribute(
+      'data-analytics',
+      'manual-value',
+    );
+  });
+
   describe('inside menu', () => {
     it('renders inside a listitem element inside default menu', () => {
       render(

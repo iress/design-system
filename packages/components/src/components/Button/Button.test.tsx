@@ -200,6 +200,22 @@ describe('IressButton', () => {
           'summary-save-draft',
         );
       });
+
+      it('prefers an explicit data-analytics attribute', () => {
+        render(
+          <IressButton
+            analytics={{ page: 'summary', action: 'save-draft' }}
+            data-analytics="manual-value"
+          >
+            Button
+          </IressButton>,
+        );
+
+        expect(screen.getByRole('button')).toHaveAttribute(
+          'data-analytics',
+          'manual-value',
+        );
+      });
     });
 
     describe('noWrap', () => {

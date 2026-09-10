@@ -165,6 +165,18 @@ describe('IressCard', () => {
           'data-analytics',
         );
       });
+
+      it('preserves an explicit data-analytics attribute for non-clickable cards', () => {
+        const screen = renderCard({
+          analytics: { page: 'portfolio', action: 'open-position' },
+          'data-analytics': 'manual-value',
+        });
+
+        expect(screen.getByTestId(TEST_ID)).toHaveAttribute(
+          'data-analytics',
+          'manual-value',
+        );
+      });
     });
 
     describe('children', () => {

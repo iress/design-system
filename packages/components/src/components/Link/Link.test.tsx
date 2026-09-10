@@ -169,6 +169,22 @@ describe('IressLink', () => {
           'summary-learn-more',
         );
       });
+
+      it('prefers an explicit data-analytics attribute', () => {
+        render(
+          <IressLink
+            analytics={{ page: 'summary', action: 'learn-more' }}
+            data-analytics="manual-value"
+          >
+            Link
+          </IressLink>,
+        );
+
+        expect(screen.getByRole('button')).toHaveAttribute(
+          'data-analytics',
+          'manual-value',
+        );
+      });
     });
   });
 });
