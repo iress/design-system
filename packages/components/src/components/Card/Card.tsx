@@ -82,6 +82,7 @@ export const IressCard = <E extends ElementType = 'div'>({
   className,
   selected,
   analytics,
+  'data-analytics': dataAnalytics,
   children,
   footer,
   heading,
@@ -101,17 +102,12 @@ export const IressCard = <E extends ElementType = 'div'>({
   const clickable = isInteractiveElement || !!restProps.onClick;
   const [styleProps, nonStyleProps] = splitCssProps(restProps);
   const { stretch, ...otherStyleProps } = styleProps;
-  const existingAnalyticsAttribute = Reflect.get(
-    nonStyleProps,
-    'data-analytics',
-  );
-  const explicitAnalyticsAttribute =
-    typeof existingAnalyticsAttribute === 'string'
-      ? existingAnalyticsAttribute
-      : undefined;
   const analyticsAttribute = clickable
-    ? resolveAnalyticsAttribute(analytics, explicitAnalyticsAttribute)
-    : explicitAnalyticsAttribute;
+    ? resolveAnalyticsAttribute({
+        analytics,
+        'data-analytics': dataAnalytics,
+      })
+    : dataAnalytics;
 
   const styles = card.raw({
     clickable,

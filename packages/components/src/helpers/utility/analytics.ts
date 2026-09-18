@@ -1,6 +1,10 @@
-import type { IressAnalyticsMetadata } from '@/interfaces';
+import type { IressAnalyticsMetadata, IressAnalyticsProps } from '@/interfaces';
 
 const trimValue = (value: string | undefined) => value?.trim();
+
+interface ResolveAnalyticsAttributeOptions {
+  generateFromAnalytics?: boolean;
+}
 
 export const createAnalyticsAttribute = (
   analytics?: IressAnalyticsMetadata,
@@ -17,6 +21,14 @@ export const createAnalyticsAttribute = (
 };
 
 export const resolveAnalyticsAttribute = (
-  analytics: IressAnalyticsMetadata | undefined,
-  existingAttribute?: string,
-) => existingAttribute ?? createAnalyticsAttribute(analytics);
+  {
+    analytics,
+    'data-analytics': explicitAttribute,
+  }: Pick<IressAnalyticsProps, 'analytics' | 'data-analytics'>,
+  { generateFromAnalytics = true }: ResolveAnalyticsAttributeOptions = {},
+) => {
+  if (explicitAttribute !== undefined) return explicitAttribute;
+  return generateFromAnalytics
+    ? createAnalyticsAttribute(analytics)
+    : undefined;
+};

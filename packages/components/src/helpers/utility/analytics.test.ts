@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { resolveAnalyticsAttribute as publicResolveAnalyticsAttribute } from '../../main';
 import {
   createAnalyticsAttribute,
   resolveAnalyticsAttribute,
@@ -44,14 +45,39 @@ describe('analytics utilities', () => {
   describe('resolveAnalyticsAttribute', () => {
     it('prefers an explicit data-analytics attribute', () => {
       expect(
-        resolveAnalyticsAttribute(
-          {
+        resolveAnalyticsAttribute({
+          analytics: {
             page: 'summary',
             action: 'save-draft',
           },
-          'manually-set',
-        ),
+          'data-analytics': 'manually-set',
+        }),
       ).toBe('manually-set');
+    });
+
+    it('can skip generating a value from analytics metadata', () => {
+      expect(
+        resolveAnalyticsAttribute(
+          {
+            analytics: {
+              page: 'summary',
+              action: 'save-draft',
+            },
+          },
+          { generateFromAnalytics: false },
+        ),
+      ).toBeUndefined();
+    });
+
+    it('is available from the public package entry point', () => {
+      expect(
+        publicResolveAnalyticsAttribute({
+          analytics: {
+            page: 'summary',
+            action: 'save-draft',
+          },
+        }),
+      ).toBe('summary-save-draft');
     });
   });
 });

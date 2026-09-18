@@ -209,6 +209,7 @@ const MenuItem = <
   {
     append,
     analytics,
+    'data-analytics': dataAnalytics,
     canToggle,
     children,
     className,
@@ -426,16 +427,10 @@ const MenuItem = <
     () => splitCssProps(restProps),
     [restProps],
   );
-  const existingAnalyticsAttribute = Reflect.get(
-    nonStyleProps,
-    'data-analytics',
-  );
-  const analyticsAttribute = resolveAnalyticsAttribute(
+  const analyticsAttribute = resolveAnalyticsAttribute({
     analytics,
-    typeof existingAnalyticsAttribute === 'string'
-      ? existingAnalyticsAttribute
-      : undefined,
-  );
+    'data-analytics': dataAnalytics,
+  });
 
   const renderProps = useMemo<MenuItemRenderProps<C, THref>>(
     () => ({

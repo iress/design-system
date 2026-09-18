@@ -86,6 +86,7 @@ const Link = <
   {
     active,
     analytics,
+    'data-analytics': dataAnalytics,
     append,
     children,
     className,
@@ -108,16 +109,10 @@ const Link = <
     () => splitCssProps(restProps),
     [restProps],
   );
-  const existingAnalyticsAttribute = Reflect.get(
-    nonStyleProps,
-    'data-analytics',
-  );
-  const analyticsAttribute = resolveAnalyticsAttribute(
+  const analyticsAttribute = resolveAnalyticsAttribute({
     analytics,
-    typeof existingAnalyticsAttribute === 'string'
-      ? existingAnalyticsAttribute
-      : undefined,
-  );
+    'data-analytics': dataAnalytics,
+  });
 
   const handleClick = useCallback(
     (e: MouseEvent<ButtonInstance<C, THref>>) => {
