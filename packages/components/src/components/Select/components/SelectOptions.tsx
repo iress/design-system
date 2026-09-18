@@ -44,6 +44,7 @@ interface SelectOptionsProps<TMultiple extends boolean = false>
       | 'options'
       | 'renderOptions'
       | 'initialOptions'
+      | 'searchInputProps'
     >,
     Omit<
       SelectOptionsRenderProps<TMultiple>,
@@ -53,6 +54,24 @@ interface SelectOptionsProps<TMultiple extends boolean = false>
   shouldShowInstructions?: boolean;
   shouldShowNoResults?: boolean;
 }
+
+const getSearchInputProps = (
+  searchInputProps: SelectOptionsProps['searchInputProps'],
+) => {
+  if (!searchInputProps) {
+    return undefined;
+  }
+
+  return {
+    className: searchInputProps.className,
+    'data-testid': searchInputProps['data-testid'],
+    inputMode: searchInputProps.inputMode,
+    maxLength: searchInputProps.maxLength,
+    minLength: searchInputProps.minLength,
+    pattern: searchInputProps.pattern,
+    spellCheck: searchInputProps.spellCheck,
+  };
+};
 
 const SelectAsyncResults = <TMultiple extends boolean = false>({
   debouncedQuery,
@@ -151,6 +170,7 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
   onClear,
   query,
   results,
+  searchInputProps,
   setQuery,
   show,
   value,
@@ -167,6 +187,7 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
   | 'multiSelect'
   | 'query'
   | 'results'
+  | 'searchInputProps'
   | 'setQuery'
   | 'show'
   | 'value'
@@ -188,6 +209,7 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
   const hasResultsAndSelected = hasResults && hasSelected;
   const inputRef = useRef<InputRef | null>(null);
   const headingId = useId();
+  const safeSearchInputProps = getSearchInputProps(searchInputProps);
 
   useEffect(() => {
     if (!show) {
@@ -204,6 +226,7 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
     <IressSelectSearch
       activator={
         <IressSelectSearchInput
+          {...safeSearchInputProps}
           aria-label="Search"
           onChange={(e) => setQuery?.(e.target.value)}
           ref={inputRef}
@@ -275,6 +298,7 @@ export const SelectOptions = <TMultiple extends boolean = false>({
   query,
   renderOptions,
   results,
+  searchInputProps,
   setQuery,
   setShow,
   setValue,
@@ -356,6 +380,7 @@ export const SelectOptions = <TMultiple extends boolean = false>({
         onClear={handleClear}
         query={query}
         results={results}
+        searchInputProps={searchInputProps}
         setQuery={setQuery}
         show={show}
         value={value}
