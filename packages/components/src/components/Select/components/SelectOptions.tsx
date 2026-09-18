@@ -44,6 +44,7 @@ interface SelectOptionsProps<TMultiple extends boolean = false>
       | 'options'
       | 'renderOptions'
       | 'initialOptions'
+      | 'searchInputProps'
     >,
     Omit<
       SelectOptionsRenderProps<TMultiple>,
@@ -151,6 +152,7 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
   onClear,
   query,
   results,
+  searchInputProps,
   setQuery,
   show,
   value,
@@ -167,6 +169,7 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
   | 'multiSelect'
   | 'query'
   | 'results'
+  | 'searchInputProps'
   | 'setQuery'
   | 'show'
   | 'value'
@@ -204,6 +207,7 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
     <IressSelectSearch
       activator={
         <IressSelectSearchInput
+          {...searchInputProps}
           aria-label="Search"
           onChange={(e) => setQuery?.(e.target.value)}
           ref={inputRef}
@@ -275,6 +279,7 @@ export const SelectOptions = <TMultiple extends boolean = false>({
   query,
   renderOptions,
   results,
+  searchInputProps,
   setQuery,
   setShow,
   setValue,
@@ -356,6 +361,7 @@ export const SelectOptions = <TMultiple extends boolean = false>({
         onClear={handleClear}
         query={query}
         results={results}
+        searchInputProps={searchInputProps}
         setQuery={setQuery}
         show={show}
         value={value}

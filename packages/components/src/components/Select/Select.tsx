@@ -14,6 +14,7 @@ import {
 import { cx } from '@/styled-system/css';
 import { select } from './Select.styles';
 import { type IressSelectMenuProps } from '.';
+import { type IressSelectSearchInputProps } from './SelectSearchInput/SelectSearchInput';
 import {
   useAutocompleteSearch,
   type AutocompleteSearchHookProps,
@@ -203,6 +204,21 @@ export type IressSelectProps<
    * Completely customise the rendering of the select options.
    */
   renderOptions?: (props: SelectOptionsRenderProps<TMultiple>) => ReactNode;
+
+  /**
+   * Props to apply to the internal async search input shown when `options` is a function.
+   * Selection state, query updates, and built-in accessibility labelling remain controlled by `IressSelect`.
+   */
+  searchInputProps?: Omit<
+    IressSelectSearchInputProps,
+    | 'aria-label'
+    | 'disabled'
+    | 'onChange'
+    | 'placeholder'
+    | 'readOnly'
+    | 'ref'
+    | 'value'
+  >;
 
   /**
    * Whether its required. Will be passed to the hidden input.
@@ -422,6 +438,7 @@ const Select = <
     renderHiddenInput,
     renderLabel,
     renderOptions,
+    searchInputProps,
     required,
     type: typeProp,
     value: valueProp,
@@ -724,6 +741,7 @@ const Select = <
             query={query}
             renderOptions={renderOptions}
             results={results}
+            searchInputProps={searchInputProps}
             setQuery={setQuery}
             setShow={setShow}
             setValue={setValue}

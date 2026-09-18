@@ -1262,6 +1262,63 @@ describe('IressSelect', () => {
         expect(onBlur).not.toHaveBeenCalled();
       });
     });
+
+    describe('searchInputProps', () => {
+      it('applies maxLength to the async search input without changing selection behaviour', async () => {
+        const onChange = vi.fn();
+        const asyncOptions = vi
+          .fn()
+          .mockImplementation(async (query: string) =>
+            query ? [{ label: query, value: query }] : [],
+          );
+
+        render(
+          <IressSelect
+            data-testid="test-component"
+            placeholder="Select an item"
+            options={asyncOptions}
+            searchInputProps={{ maxLength: 3 }}
+            debounceThreshold={0}
+            onChange={onChange}
+          />,
+        );
+
+        const activator = screen.getByRole('button', {
+          name: 'Select an item',
+        });
+        await userEvent.click(activator);
+
+        const combobox = await screen.findByRole('combobox', {
+          name: 'Search',
+        });
+
+        expect(combobox).toHaveAttribute('maxlength', '3');
+
+        await userEvent.type(combobox, 'abcd');
+
+        expect(combobox).toHaveValue('abc');
+        expect(asyncOptions).not.toHaveBeenCalledWith('abcd');
+
+        const option = await screen.findByRole('option', {
+          name: 'abc',
+        });
+        await userEvent.click(option);
+
+        expect(onChange).toHaveBeenCalledWith(
+          expect.objectContaining({
+            target: { value: 'abc' },
+          }),
+          'abc',
+          expect.objectContaining({
+            label: 'abc',
+            value: 'abc',
+          }),
+        );
+        expect(screen.getByTestId('test-component__hidden-input')).toHaveValue(
+          'abc',
+        );
+      });
+    });
   });
 
   describe('accessibility', () => {
