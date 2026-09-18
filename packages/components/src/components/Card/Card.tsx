@@ -15,7 +15,7 @@ import {
   type IressTestProps,
 } from '@/interfaces';
 import { IressText } from '../Text';
-import { resolveAnalyticsAttribute } from '@/helpers/utility/analytics';
+import { resolveAnalyticsAttributeFromProps } from '@/helpers/utility/analytics';
 
 export interface InternalCardProps<E extends ElementType = 'div'>
   extends IressCSSProps, IressTestProps, IressAnalyticsProps {
@@ -103,7 +103,7 @@ export const IressCard = <E extends ElementType = 'div'>({
   const [styleProps, nonStyleProps] = splitCssProps(restProps);
   const { stretch, ...otherStyleProps } = styleProps;
   const analyticsAttribute = clickable
-    ? resolveAnalyticsAttribute({
+    ? resolveAnalyticsAttributeFromProps({
         analytics,
         'data-analytics': dataAnalytics,
       })

@@ -27,7 +27,7 @@ import {
   type IressTestProps,
 } from '@/interfaces';
 import { GlobalCSSClass } from '@/enums';
-import { resolveAnalyticsAttribute } from '@/helpers/utility/analytics';
+import { resolveAnalyticsAttributeFromProps } from '@/helpers/utility/analytics';
 
 export type IressLinkProps<
   C extends ElementType | undefined = undefined,
@@ -109,7 +109,7 @@ const Link = <
     () => splitCssProps(restProps),
     [restProps],
   );
-  const analyticsAttribute = resolveAnalyticsAttribute({
+  const analyticsAttribute = resolveAnalyticsAttributeFromProps({
     analytics,
     'data-analytics': dataAnalytics,
   });

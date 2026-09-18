@@ -27,7 +27,7 @@ import {
   type IressTestProps,
 } from '@/interfaces';
 import { usePopover } from '../Popover';
-import { resolveAnalyticsAttribute } from '@/helpers/utility/analytics';
+import { resolveAnalyticsAttributeFromProps } from '@/helpers/utility/analytics';
 import type { MaterialSymbol } from 'material-symbols';
 import { IressIcon } from '../Icon';
 import { IressTooltip } from '../Tooltip';
@@ -231,7 +231,7 @@ const Button = <
     () => splitCssProps(restProps),
     [restProps],
   );
-  const analyticsAttribute = resolveAnalyticsAttribute({
+  const analyticsAttribute = resolveAnalyticsAttributeFromProps({
     analytics,
     'data-analytics': dataAnalytics,
   });

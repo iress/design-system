@@ -46,7 +46,7 @@ import type {
 } from '@/interfaces';
 import { GlobalCSSClass } from '@/enums';
 import { spreadUnlessUndefined } from '@/helpers/utility/spreadUnlessUndefined';
-import { resolveAnalyticsAttribute } from '@/helpers/utility/analytics';
+import { resolveAnalyticsAttributeFromProps } from '@/helpers/utility/analytics';
 import { IressRadioMark } from '@/components/RadioMark';
 import type { MaterialSymbol } from 'material-symbols';
 import { IressIcon } from '@/components/Icon';
@@ -427,7 +427,7 @@ const MenuItem = <
     () => splitCssProps(restProps),
     [restProps],
   );
-  const analyticsAttribute = resolveAnalyticsAttribute({
+  const analyticsAttribute = resolveAnalyticsAttributeFromProps({
     analytics,
     'data-analytics': dataAnalytics,
   });
