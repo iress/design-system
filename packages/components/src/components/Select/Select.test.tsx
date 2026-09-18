@@ -1264,7 +1264,7 @@ describe('IressSelect', () => {
     });
 
     describe('searchInputProps', () => {
-      it('applies maxLength to the async search input without changing selection behaviour', async () => {
+      it('applies supported passive props to the async search input without changing selection behaviour', async () => {
         const onChange = vi.fn();
         const asyncOptions = vi
           .fn()
@@ -1277,7 +1277,15 @@ describe('IressSelect', () => {
             data-testid="test-component"
             placeholder="Select an item"
             options={asyncOptions}
-            searchInputProps={{ maxLength: 3 }}
+            searchInputProps={{
+              className: 'custom-search-input',
+              'data-testid': 'custom-search-input',
+              inputMode: 'search',
+              maxLength: 3,
+              minLength: 2,
+              pattern: '[a-z]+',
+              spellCheck: true,
+            }}
             debounceThreshold={0}
             onChange={onChange}
           />,
@@ -1288,11 +1296,18 @@ describe('IressSelect', () => {
         });
         await userEvent.click(activator);
 
-        const combobox = await screen.findByRole('combobox', {
+        await screen.findByRole('combobox', {
           name: 'Search',
         });
+        const searchInput = screen.getByTestId('custom-search-input');
+        const combobox = screen.getByTestId('custom-search-input__input');
 
+        expect(searchInput).toHaveClass('custom-search-input');
+        expect(combobox).toHaveAttribute('inputmode', 'search');
         expect(combobox).toHaveAttribute('maxlength', '3');
+        expect(combobox).toHaveAttribute('minlength', '2');
+        expect(combobox).toHaveAttribute('pattern', '[a-z]+');
+        expect(combobox).toHaveAttribute('spellcheck', 'true');
 
         await userEvent.type(combobox, 'abcd');
 
