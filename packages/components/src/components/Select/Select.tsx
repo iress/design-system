@@ -218,7 +218,9 @@ export type IressSelectProps<
   /**
    * Passive props to apply to the internal async search input shown when
    * `options` is a function, such as input constraints and non-interactive
-   * presentation props. Selection state, query updates, and built-in
+   * presentation props. Supported keys are `className`, `data-testid`,
+   * `inputMode`, `maxLength`, `minLength`, `pattern`, and `spellCheck`.
+   * Selection state, query updates, built-in placeholder text, and
    * accessibility labelling remain controlled by `IressSelect`.
    */
   searchInputProps?: SelectSearchInputProps;
