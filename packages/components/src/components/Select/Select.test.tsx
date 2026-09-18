@@ -1333,6 +1333,78 @@ describe('IressSelect', () => {
           'abc',
         );
       });
+
+      it('ignores blocked runtime props so built-in async combobox behaviour still wins', async () => {
+        const onChange = vi.fn();
+        const blockedOnChange = vi.fn();
+        const asyncOptions = vi
+          .fn()
+          .mockImplementation(async (query: string) =>
+            query ? [{ label: query, value: query }] : [],
+          );
+        const unsafeSearchInputProps = {
+          'aria-label': 'Injected label',
+          disabled: true,
+          onChange: blockedOnChange,
+          placeholder: 'Injected placeholder',
+          readOnly: true,
+          value: 'blocked value',
+        } as unknown as NonNullable<IressSelectProps['searchInputProps']>;
+
+        render(
+          <IressSelect
+            data-testid="test-component"
+            placeholder="Select an item"
+            options={asyncOptions}
+            searchInputProps={unsafeSearchInputProps}
+            debounceThreshold={0}
+            onChange={onChange}
+          />,
+        );
+
+        const activator = screen.getByRole('button', {
+          name: 'Select an item',
+        });
+        await userEvent.click(activator);
+
+        const combobox = await screen.findByRole('combobox', {
+          name: 'Search',
+        });
+
+        expect(combobox).toHaveAccessibleName('Search');
+        expect(combobox).toHaveAttribute('placeholder', 'Search and select');
+        expect(combobox).toHaveValue('');
+        expect(combobox).not.toBeDisabled();
+        expect(combobox).not.toHaveAttribute('readonly');
+
+        await userEvent.type(combobox, 'ab');
+
+        expect(blockedOnChange).not.toHaveBeenCalled();
+        expect(combobox).toHaveValue('ab');
+
+        await waitFor(() => {
+          expect(asyncOptions).toHaveBeenCalledWith('ab');
+        });
+
+        const option = await screen.findByRole('option', {
+          name: 'ab',
+        });
+        await userEvent.click(option);
+
+        expect(onChange).toHaveBeenCalledWith(
+          expect.objectContaining({
+            target: { value: 'ab' },
+          }),
+          'ab',
+          expect.objectContaining({
+            label: 'ab',
+            value: 'ab',
+          }),
+        );
+        expect(screen.getByTestId('test-component__hidden-input')).toHaveValue(
+          'ab',
+        );
+      });
     });
   });
 

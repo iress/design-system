@@ -17,7 +17,7 @@
 | Description              | IDS Component                       | Example                                                                                                                        |
 | ------------------------ | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | Labelled text input      | `IressField` + `IressInput`         | See Form example below                                                                                                         |
-| Select dropdown (static or async) | `IressField` + `IressSelect` | `<IressField label="Country"><IressSelect>...</IressSelect></IressField>` — supports static options and async loading via an `options` function |
+| Select dropdown (static or async) | `IressField` + `IressSelect` | `<IressField label="Country"><IressSelect>...</IressSelect></IressField>` — supports static options and async loading via an `options` function. For async search field constraints or annotations, prefer `searchInputProps` (`className`, `data-testid`, `inputMode`, `maxLength`, `minLength`, `pattern`, `spellCheck`) instead of rebuilding the UI with `renderOptions`. |
 | Freetext input with suggestions  | `IressField` + `IressAutocomplete` | `<IressField label="Search"><IressAutocomplete /></IressField>` — allows any text input; suggestions are optional |
 | Currency input           | `IressField` + `IressInputCurrency` | `<IressField label="Amount"><IressInputCurrency /></IressField>`                                                               |
 | Checkbox                 | `IressCheckbox`                     | `<IressCheckbox value="agree">I agree</IressCheckbox>`                                                                         |
@@ -29,7 +29,7 @@
 
 ### Select vs Autocomplete Decision Guide
 
-- **Need to restrict to valid options?** → `IressSelect` — supports static options and async loading via an `options` function. Use this for most selection use cases. Always read the component doc to understand filtering behaviour for your use case.
+- **Need to restrict to valid options?** → `IressSelect` — supports static options and async loading via an `options` function. For async selects, `searchInputProps` is only for safe passive search-input attributes; `IressSelect` still controls query state, placeholder text, and accessibility labels. Use this for most selection use cases. Always read the component doc to understand filtering behaviour for your use case.
 - **Need freetext with optional suggestions?** → `IressAutocomplete` — allows any text input; suggestions are offered but not enforced.
 
 ## Layout

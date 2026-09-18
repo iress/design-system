@@ -108,6 +108,16 @@ If you need to constrain or annotate the visible search field, use
 search input. This is useful for cases such as enforcing a maximum query length
 without recreating the built-in search UI via `renderOptions`.
 
+Supported `searchInputProps` keys are:
+`className`, `data-testid`, `inputMode`, `maxLength`, `minLength`, `pattern`,
+and `spellCheck`.
+
+Do not use `searchInputProps` for interactive or controlled input behaviour
+such as `value`, `onChange`, `placeholder`, `aria-label`, `disabled`,
+`readOnly`, or refs. `IressSelect` keeps the async combobox query state,
+placeholder text, and accessibility labelling under its own control. Only use
+`renderOptions` when you need to replace the full built-in async options UI.
+
 ```tsx
 <IressSelect
   options={searchOptions}
