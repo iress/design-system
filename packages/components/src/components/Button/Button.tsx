@@ -21,8 +21,13 @@ import { type ButtonGroupItemProps, useButtonGroupItem } from '../ButtonGroup';
 import { splitCssProps } from '@/styled-system/jsx';
 import { css, cx } from '@/styled-system/css';
 import { button } from '@/styled-system/recipes';
-import { type IressCSSProps, type IressTestProps } from '@/interfaces';
+import {
+  type IressAnalyticsProps,
+  type IressCSSProps,
+  type IressTestProps,
+} from '@/interfaces';
 import { usePopover } from '../Popover';
+import { resolveAnalyticsAttributeFromProps } from '@/helpers/utility/analytics';
 import type { MaterialSymbol } from 'material-symbols';
 import { IressIcon } from '../Icon';
 import { IressTooltip } from '../Tooltip';
@@ -64,7 +69,11 @@ export interface InternalButtonProps<
   C extends ElementType | undefined = undefined,
   THref extends string | undefined = undefined,
 >
-  extends IressCSSProps, IressTestProps, ButtonGroupItemProps {
+  extends
+    IressCSSProps,
+    IressTestProps,
+    IressAnalyticsProps,
+    ButtonGroupItemProps {
   /**
    * Sets the active state of the button, usually used to indicate the button has activated a modal, popover or slideout.
    */
@@ -175,6 +184,8 @@ const Button = <
     element,
     fluid,
     icon,
+    analytics,
+    'data-analytics': dataAnalytics,
     loading = false,
     mode = 'secondary',
     prepend,
@@ -220,6 +231,10 @@ const Button = <
     () => splitCssProps(restProps),
     [restProps],
   );
+  const analyticsAttribute = resolveAnalyticsAttributeFromProps({
+    analytics,
+    'data-analytics': dataAnalytics,
+  });
 
   const handleClick = useCallback(
     (e: MouseEvent<ButtonInstance<C, THref>>) => {
@@ -295,6 +310,7 @@ const Button = <
           {...renderProps}
           {...buttonGroupItem?.props}
           {...nonStyleProps}
+          data-analytics={analyticsAttribute}
           ref={elementRef}
         />
       </IressTooltip>
@@ -308,6 +324,7 @@ const Button = <
       {...renderProps}
       {...buttonGroupItem?.props}
       {...nonStyleProps}
+      data-analytics={analyticsAttribute}
       ref={elementRef}
     />
   );

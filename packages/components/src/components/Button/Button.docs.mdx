@@ -19,6 +19,19 @@ import * as CloseButtonStories from './CloseButton/CloseButton.stories';
 
 ## Usage
 
+### Analytics
+
+Use the `analytics` prop to generate a standard `data-analytics` attribute
+without manually assembling the string yourself.
+
+```tsx
+<IressButton
+  analytics={{ page: 'summary', action: 'save-draft' }}
+>
+  Save draft
+</IressButton>
+```
+
 ### Avoid using `disabled`
 
 IDS discourages using `disabled` on `IressButton`. Although the native HTML `disabled` attribute is supported via the underlying `<button>`/`<a>` element, it is an anti-pattern that should be avoided because:
