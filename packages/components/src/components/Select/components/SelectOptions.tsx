@@ -55,6 +55,24 @@ interface SelectOptionsProps<TMultiple extends boolean = false>
   shouldShowNoResults?: boolean;
 }
 
+const getSearchInputProps = (
+  searchInputProps: SelectOptionsProps['searchInputProps'],
+) => {
+  if (!searchInputProps) {
+    return undefined;
+  }
+
+  return {
+    className: searchInputProps.className,
+    'data-testid': searchInputProps['data-testid'],
+    inputMode: searchInputProps.inputMode,
+    maxLength: searchInputProps.maxLength,
+    minLength: searchInputProps.minLength,
+    pattern: searchInputProps.pattern,
+    spellCheck: searchInputProps.spellCheck,
+  };
+};
+
 const SelectAsyncResults = <TMultiple extends boolean = false>({
   debouncedQuery,
   minSearchLength,
@@ -191,6 +209,7 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
   const hasResultsAndSelected = hasResults && hasSelected;
   const inputRef = useRef<InputRef | null>(null);
   const headingId = useId();
+  const safeSearchInputProps = getSearchInputProps(searchInputProps);
 
   useEffect(() => {
     if (!show) {
@@ -207,7 +226,7 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
     <IressSelectSearch
       activator={
         <IressSelectSearchInput
-          {...searchInputProps}
+          {...safeSearchInputProps}
           aria-label="Search"
           onChange={(e) => setQuery?.(e.target.value)}
           ref={inputRef}

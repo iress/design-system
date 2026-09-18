@@ -14,7 +14,6 @@ import {
 import { cx } from '@/styled-system/css';
 import { select } from './Select.styles';
 import { type IressSelectMenuProps } from '.';
-import { type IressSelectSearchInputProps } from './SelectSearchInput/SelectSearchInput';
 import {
   useAutocompleteSearch,
   type AutocompleteSearchHookProps,
@@ -112,6 +111,17 @@ type SelectProps<TNative extends boolean | Breakpoints = false> =
         >
     : Omit<NativeSelectProps, 'value' | 'onChange' | 'options'>;
 
+type SelectSearchInputProps = Pick<
+  IressInputProps,
+  | 'className'
+  | 'data-testid'
+  | 'inputMode'
+  | 'maxLength'
+  | 'minLength'
+  | 'pattern'
+  | 'spellCheck'
+>;
+
 export type IressSelectProps<
   TMultiple extends boolean = false,
   TNative extends boolean | Breakpoints = false,
@@ -206,19 +216,12 @@ export type IressSelectProps<
   renderOptions?: (props: SelectOptionsRenderProps<TMultiple>) => ReactNode;
 
   /**
-   * Props to apply to the internal async search input shown when `options` is a function.
-   * Selection state, query updates, and built-in accessibility labelling remain controlled by `IressSelect`.
+   * Passive props to apply to the internal async search input shown when
+   * `options` is a function, such as input constraints and non-interactive
+   * presentation props. Selection state, query updates, and built-in
+   * accessibility labelling remain controlled by `IressSelect`.
    */
-  searchInputProps?: Omit<
-    IressSelectSearchInputProps,
-    | 'aria-label'
-    | 'disabled'
-    | 'onChange'
-    | 'placeholder'
-    | 'readOnly'
-    | 'ref'
-    | 'value'
-  >;
+  searchInputProps?: SelectSearchInputProps;
 
   /**
    * Whether its required. Will be passed to the hidden input.
