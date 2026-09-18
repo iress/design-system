@@ -111,6 +111,17 @@ type SelectProps<TNative extends boolean | Breakpoints = false> =
         >
     : Omit<NativeSelectProps, 'value' | 'onChange' | 'options'>;
 
+type SelectSearchInputProps = Pick<
+  IressInputProps,
+  | 'className'
+  | 'data-testid'
+  | 'inputMode'
+  | 'maxLength'
+  | 'minLength'
+  | 'pattern'
+  | 'spellCheck'
+>;
+
 export type IressSelectProps<
   TMultiple extends boolean = false,
   TNative extends boolean | Breakpoints = false,
@@ -203,6 +214,16 @@ export type IressSelectProps<
    * Completely customise the rendering of the select options.
    */
   renderOptions?: (props: SelectOptionsRenderProps<TMultiple>) => ReactNode;
+
+  /**
+   * Passive props to apply to the internal async search input shown when
+   * `options` is a function, such as input constraints and non-interactive
+   * presentation props. Supported keys are `className`, `data-testid`,
+   * `inputMode`, `maxLength`, `minLength`, `pattern`, and `spellCheck`.
+   * Selection state, query updates, built-in placeholder text, and
+   * accessibility labelling remain controlled by `IressSelect`.
+   */
+  searchInputProps?: SelectSearchInputProps;
 
   /**
    * Whether its required. Will be passed to the hidden input.
@@ -422,6 +443,7 @@ const Select = <
     renderHiddenInput,
     renderLabel,
     renderOptions,
+    searchInputProps,
     required,
     type: typeProp,
     value: valueProp,
@@ -724,6 +746,7 @@ const Select = <
             query={query}
             renderOptions={renderOptions}
             results={results}
+            searchInputProps={searchInputProps}
             setQuery={setQuery}
             setShow={setShow}
             setValue={setValue}

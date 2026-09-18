@@ -1262,6 +1262,150 @@ describe('IressSelect', () => {
         expect(onBlur).not.toHaveBeenCalled();
       });
     });
+
+    describe('searchInputProps', () => {
+      it('applies supported passive props to the async search input without changing selection behaviour', async () => {
+        const onChange = vi.fn();
+        const asyncOptions = vi
+          .fn()
+          .mockImplementation(async (query: string) =>
+            query ? [{ label: query, value: query }] : [],
+          );
+
+        render(
+          <IressSelect
+            data-testid="test-component"
+            placeholder="Select an item"
+            options={asyncOptions}
+            searchInputProps={{
+              className: 'custom-search-input',
+              'data-testid': 'custom-search-input',
+              inputMode: 'search',
+              maxLength: 3,
+              minLength: 2,
+              pattern: '[a-z]+',
+              spellCheck: true,
+            }}
+            debounceThreshold={0}
+            onChange={onChange}
+          />,
+        );
+
+        const activator = screen.getByRole('button', {
+          name: 'Select an item',
+        });
+        await userEvent.click(activator);
+
+        await screen.findByRole('combobox', {
+          name: 'Search',
+        });
+        const searchInput = screen.getByTestId('custom-search-input');
+        const combobox = screen.getByTestId('custom-search-input__input');
+
+        expect(searchInput).toHaveClass('custom-search-input');
+        expect(combobox).toHaveAttribute('inputmode', 'search');
+        expect(combobox).toHaveAttribute('maxlength', '3');
+        expect(combobox).toHaveAttribute('minlength', '2');
+        expect(combobox).toHaveAttribute('pattern', '[a-z]+');
+        expect(combobox).toHaveAttribute('spellcheck', 'true');
+
+        await userEvent.type(combobox, 'abcd');
+
+        expect(combobox).toHaveValue('abc');
+        expect(asyncOptions).not.toHaveBeenCalledWith('abcd');
+
+        const option = await screen.findByRole('option', {
+          name: 'abc',
+        });
+        await userEvent.click(option);
+
+        expect(onChange).toHaveBeenCalledWith(
+          expect.objectContaining({
+            target: { value: 'abc' },
+          }),
+          'abc',
+          expect.objectContaining({
+            label: 'abc',
+            value: 'abc',
+          }),
+        );
+        expect(screen.getByTestId('test-component__hidden-input')).toHaveValue(
+          'abc',
+        );
+      });
+
+      it('ignores blocked runtime props so built-in async combobox behaviour still wins', async () => {
+        const onChange = vi.fn();
+        const blockedOnChange = vi.fn();
+        const asyncOptions = vi
+          .fn()
+          .mockImplementation(async (query: string) =>
+            query ? [{ label: query, value: query }] : [],
+          );
+        const unsafeSearchInputProps = {
+          'aria-label': 'Injected label',
+          disabled: true,
+          onChange: blockedOnChange,
+          placeholder: 'Injected placeholder',
+          readOnly: true,
+          value: 'blocked value',
+        } as unknown as NonNullable<IressSelectProps['searchInputProps']>;
+
+        render(
+          <IressSelect
+            data-testid="test-component"
+            placeholder="Select an item"
+            options={asyncOptions}
+            searchInputProps={unsafeSearchInputProps}
+            debounceThreshold={0}
+            onChange={onChange}
+          />,
+        );
+
+        const activator = screen.getByRole('button', {
+          name: 'Select an item',
+        });
+        await userEvent.click(activator);
+
+        const combobox = await screen.findByRole('combobox', {
+          name: 'Search',
+        });
+
+        expect(combobox).toHaveAccessibleName('Search');
+        expect(combobox).toHaveAttribute('placeholder', 'Search and select');
+        expect(combobox).toHaveValue('');
+        expect(combobox).not.toBeDisabled();
+        expect(combobox).not.toHaveAttribute('readonly');
+
+        await userEvent.type(combobox, 'ab');
+
+        expect(blockedOnChange).not.toHaveBeenCalled();
+        expect(combobox).toHaveValue('ab');
+
+        await waitFor(() => {
+          expect(asyncOptions).toHaveBeenCalledWith('ab');
+        });
+
+        const option = await screen.findByRole('option', {
+          name: 'ab',
+        });
+        await userEvent.click(option);
+
+        expect(onChange).toHaveBeenCalledWith(
+          expect.objectContaining({
+            target: { value: 'ab' },
+          }),
+          'ab',
+          expect.objectContaining({
+            label: 'ab',
+            value: 'ab',
+          }),
+        );
+        expect(screen.getByTestId('test-component__hidden-input')).toHaveValue(
+          'ab',
+        );
+      });
+    });
   });
 
   describe('accessibility', () => {
