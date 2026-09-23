@@ -2123,7 +2123,7 @@ __metadata:
     "@iress-oss/ids-storybook-sandbox": "npm:^0.2.2"
     "@iress-oss/ids-storybook-toggle-stories": "npm:^0.1.0"
     "@iress-oss/ids-storybook-version-badge": "npm:^0.1.1"
-    "@mermaid-js/mermaid-cli": "npm:^11.14.0"
+    "@mermaid-js/mermaid-cli": "npm:^11.17.0"
     "@storybook/addon-a11y": "npm:^10.5.7"
     "@storybook/addon-docs": "npm:^10.5.7"
     "@storybook/addon-links": "npm:10.5.7"
@@ -2345,9 +2345,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mermaid-js/mermaid-cli@npm:^11.14.0":
-  version: 11.15.0
-  resolution: "@mermaid-js/mermaid-cli@npm:11.15.0"
+"@mermaid-js/mermaid-cli@npm:^11.17.0":
+  version: 11.17.0
+  resolution: "@mermaid-js/mermaid-cli@npm:11.17.0"
   dependencies:
     "@fortawesome/fontawesome-free": "npm:^6.0.0 || ^7.0.1"
     "@mermaid-js/layout-elk": "npm:^0.1.5 || ^0.2.0"
@@ -2360,13 +2360,13 @@ __metadata:
     mermaid: "npm:^11.14.0"
     p-limit: "npm:^6.2.0"
   peerDependencies:
-    puppeteer: ^23 || ^24
+    puppeteer: ^23 || ^24 || ^25
   dependenciesMeta:
     "@mermaid-js/layout-tidy-tree":
       optional: true
   bin:
     mmdc: src/cli.js
-  checksum: 10c0/874d707eb737a5010323b2911faf112dcc84cb03d04d99851069184cbab6a5b680279565505755289d5f2b56627a8b11b5f75753c8a68a36b67b9cfdaaa938d1
+  checksum: 10c0/ef4163fafb5a0945f2e5b07997c9a3b533df6aba54a867218f48a83f588157481befc50322b1e3cf4b33c771f0240648f804fe2097240e507668779a8cf0fff7
   languageName: node
   linkType: hard
 
