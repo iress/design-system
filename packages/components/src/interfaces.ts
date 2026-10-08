@@ -473,6 +473,37 @@ export interface IressCSSProps {
   width?: ResponsiveProp<SizeToken | 'auto'>;
 }
 
+export interface IressAnalyticsMetadata {
+  /**
+   * The page or section where the interaction happens.
+   */
+  page: string;
+
+  /**
+   * The action the user is taking.
+   */
+  action: string;
+
+  /**
+   * The entity the action applies to.
+   */
+  target?: string;
+}
+
+export interface IressAnalyticsProps {
+  /**
+   * Structured metadata used to generate a `data-analytics` attribute for interactive components.
+   */
+  analytics?: IressAnalyticsMetadata;
+
+  /**
+   * Explicit analytics identifier rendered directly to the DOM. When both
+   * `analytics` and `data-analytics` are provided, `data-analytics` takes
+   * precedence.
+   */
+  'data-analytics'?: string;
+}
+
 export interface IressTestProps {
   /**
    * The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.

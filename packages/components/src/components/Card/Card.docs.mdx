@@ -111,6 +111,17 @@ You can use all the slots together to create a custom card layout.
 
 Note: The `clickable` prop has been deprecated in favour of using component variations, or the `onClick` prop.
 
+### Analytics
+
+Clickable cards can use the `analytics` prop to generate a `data-analytics`
+attribute for product instrumentation.
+
+```tsx
+<IressButtonCard analytics={{ page: 'portfolio', action: 'open-position' }}>
+  Open position
+</IressButtonCard>
+```
+
 ### Heading only
 
 Since the `heading` prop now renders the component you give it, you have full control over the content of the `heading`. This means you can add pass it a heading with a link.
