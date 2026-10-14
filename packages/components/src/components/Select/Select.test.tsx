@@ -1284,6 +1284,7 @@ describe('IressSelect', () => {
               maxLength: 3,
               minLength: 2,
               pattern: '[a-z]+',
+              placeholder: 'Search by name',
               spellCheck: true,
             }}
             debounceThreshold={0}
@@ -1307,6 +1308,7 @@ describe('IressSelect', () => {
         expect(combobox).toHaveAttribute('maxlength', '3');
         expect(combobox).toHaveAttribute('minlength', '2');
         expect(combobox).toHaveAttribute('pattern', '[a-z]+');
+        expect(combobox).toHaveAttribute('placeholder', 'Search by name');
         expect(combobox).toHaveAttribute('spellcheck', 'true');
 
         await userEvent.type(combobox, 'abcd');
@@ -1346,7 +1348,6 @@ describe('IressSelect', () => {
           'aria-label': 'Injected label',
           disabled: true,
           onChange: blockedOnChange,
-          placeholder: 'Injected placeholder',
           readOnly: true,
           value: 'blocked value',
         } as unknown as NonNullable<IressSelectProps['searchInputProps']>;

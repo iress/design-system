@@ -69,6 +69,7 @@ const getSearchInputProps = (
     maxLength: searchInputProps.maxLength,
     minLength: searchInputProps.minLength,
     pattern: searchInputProps.pattern,
+    placeholder: searchInputProps.placeholder,
     spellCheck: searchInputProps.spellCheck,
   };
 };
@@ -230,7 +231,7 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
           aria-label="Search"
           onChange={(e) => setQuery?.(e.target.value)}
           ref={inputRef}
-          placeholder="Search and select"
+          placeholder={safeSearchInputProps?.placeholder ?? 'Search and select'}
           value={query}
         />
       }
