@@ -1,4 +1,4 @@
-import { RenderResult, render } from '@testing-library/react';
+import { RenderResult, fireEvent, render } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { generateLabelValueMeta } from '@/mocks/generateLabelValues';
 import { IressSelectMenuProps, IressSelectMenu } from './SelectMenu';
@@ -60,6 +60,21 @@ describe('IressSelectMenu', () => {
   });
 
   describe('props', () => {
+    it('forwards mousedown without preventing default outside virtual focus', () => {
+      const onMouseDown = vi.fn();
+      const screen = renderComponent({
+        onMouseDown,
+        items: [{ label: 'Favourites', children: TEST_ITEMS }],
+      });
+
+      expect(
+        fireEvent.mouseDown(
+          screen.getByRole('heading', { name: 'Favourites' }),
+        ),
+      ).toBe(true);
+      expect(onMouseDown).toHaveBeenCalledOnce();
+    });
+
     describe('heading', () => {
       it('adds a heading using a string and connects it to menu via aria-labelledby', () => {
         const screen = renderComponent({
