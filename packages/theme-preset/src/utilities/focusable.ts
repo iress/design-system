@@ -137,6 +137,7 @@ export const focusable = defineUtility({
 
     if (value === 'select-activator') {
       return {
+        borderColor: `var(--iress-border-color, ${cssVars.colour.neutral[70]})`,
         '&:hover': {
           backgroundColor: cssVars.colour.neutral[20],
         },

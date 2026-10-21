@@ -29,6 +29,8 @@ import {
   IressText,
   IressInline,
   IressMenuText,
+  IressForm,
+  IressFormField,
 } from '@/main';
 import {
   reactNodeArgType,
@@ -76,6 +78,33 @@ export const SingleSelect: Story = {
   args: {
     options: MOCK_LABEL_VALUE_META,
   },
+};
+
+export const RequiredValidation: Story = {
+  args: {
+    ...SingleSelect.args,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Submit without selecting a gender, then move focus away from the select. The validation message and red border should remain visible, including while hovering. Previously the unfocused select kept its neutral border.',
+      },
+    },
+  },
+  render: (args) => (
+    <IressForm onSubmit={() => undefined}>
+      <IressFormField
+        label="Gender"
+        name="gender"
+        rules={{ required: true }}
+        render={(controlledProps) => (
+          <IressSelect {...args} {...controlledProps} />
+        )}
+      />
+      <IressButton type="submit">Validate</IressButton>
+    </IressForm>
+  ),
 };
 
 export const PreSelectedValue: Story = {
