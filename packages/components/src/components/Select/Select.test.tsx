@@ -15,6 +15,7 @@ import { menuItem } from '../Menu';
 import { createRef, type FormEvent } from 'react';
 import { IressLabel } from '../Label';
 import { IressSelectMenu } from './SelectMenu/SelectMenu';
+import { IressSelectLabel } from './SelectLabel/SelectLabel';
 import { IressForm } from '@/patterns/Form/Form';
 import { IressFormField } from '@/patterns/Form/FormField/FormField';
 import { IressButton } from '@/components/Button';
@@ -68,6 +69,104 @@ describe('IressSelect', () => {
   });
 
   describe('interactions copied from native select', () => {
+    it.each([
+      'default',
+      'custom portalled',
+      'custom modal',
+      'group padding',
+    ] as const)(
+      'preserves keyboard navigation after clicking a group label with %s rendering',
+      async (rendering) => {
+        const onChange = vi.fn();
+        const portalRoot =
+          rendering === 'custom modal'
+            ? render(
+                <div role="dialog" aria-label="Choose a country" />,
+              ).getByRole('dialog')
+            : document.body;
+        const options = [
+          {
+            label: 'Favourites',
+            children: [
+              { label: 'Australia', value: 'au' },
+              { label: 'Canada', value: 'ca' },
+            ],
+          },
+          {
+            label: 'All countries',
+            children: [
+              { label: 'France', value: 'fr' },
+              { label: 'Germany', value: 'de' },
+            ],
+          },
+        ];
+        const customProps: Partial<IressSelectProps> =
+          rendering === 'custom portalled' || rendering === 'custom modal'
+            ? {
+                container: portalRoot,
+                renderLabel: ({ value }) => (
+                  <IressSelectLabel role="combobox" selected={value} />
+                ),
+                renderOptions: ({ results, value, handleMenuChange }) => (
+                  <IressSelectMenu
+                    items={results}
+                    selected={value}
+                    onChange={handleMenuChange}
+                  />
+                ),
+              }
+            : {};
+
+        render(
+          <IressSelect
+            {...customProps}
+            options={options}
+            onChange={onChange}
+          />,
+          rendering === 'custom modal' ? { container: portalRoot } : undefined,
+        );
+
+        const combobox = await screen.findByRole('combobox');
+        await userEvent.tab();
+        await userEvent.keyboard('{Enter}');
+
+        const australia = await screen.findByRole('option', {
+          name: 'Australia',
+        });
+        expect(australia).toHaveClass(
+          menuItem({ isActiveInPopover: true }).root!,
+        );
+
+        const heading = screen.getByRole('heading', { name: 'All countries' });
+        if (rendering === 'custom modal') {
+          expect(screen.getByRole('dialog')).toContainElement(heading);
+        }
+        await userEvent.click(
+          rendering === 'group padding' ? heading.parentElement! : heading,
+        );
+        expect(combobox).toHaveFocus();
+        expect(combobox).toHaveAttribute('aria-expanded', 'true');
+        expect(onChange).not.toHaveBeenCalled();
+
+        await userEvent.keyboard('{ArrowDown}');
+        expect(combobox).toHaveAttribute(
+          'aria-activedescendant',
+          screen.getByRole('option', { name: 'Canada' }).id,
+        );
+        await userEvent.keyboard('{ArrowUp}');
+        expect(combobox).toHaveAttribute('aria-activedescendant', australia.id);
+        await userEvent.keyboard('{Enter}');
+
+        expect(onChange).toHaveBeenCalledWith(
+          expect.anything(),
+          'au',
+          options[0].children[0],
+        );
+        expect(combobox).toHaveTextContent('Australia');
+        expect(combobox).toHaveAttribute('aria-expanded', 'false');
+      },
+    );
+
     it('returns focus to the activator when clicking the activator', async () => {
       render(<IressSelect options={MOCK_LABEL_VALUES} />);
 
