@@ -364,42 +364,6 @@ export const GroupedMultiSelect: Story = {
   },
 };
 
-export const GroupLabelKeyboardNavigation: Story = {
-  name: 'Bug: Keyboard navigation after clicking a group label',
-  args: {
-    ...GroupedOptions.args,
-    options: [
-      {
-        label: 'Favourites',
-        children: [
-          { label: 'Australia', value: 'au' },
-          { label: 'Canada', value: 'ca' },
-        ],
-      },
-      {
-        label: 'All countries',
-        children: generateLabelValueMeta(40),
-      },
-    ],
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: `**Problem:** Clicking a non-selectable group label used to move
-focus away from the combobox, leaving the list open without keyboard control.
-
-**Expected:** The group-label click is ignored; arrow keys still move the
-highlight and Enter selects the highlighted option.
-
-**How to test:**
-1. Tab to the select and press Enter to open it.
-2. Scroll the list with the mouse and click "All countries".
-3. Press Up or Down, then Enter to select the highlighted option.`,
-      },
-    },
-  },
-};
-
 export const GroupedWithSearch: Story = {
   args: {
     ...GroupedOptions.args,
