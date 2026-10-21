@@ -1682,13 +1682,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@iress-oss/ids-components@npm:^6.4.0, @iress-oss/ids-components@workspace:packages/components":
+"@iress-oss/ids-components@npm:^6.4.1, @iress-oss/ids-components@workspace:packages/components":
   version: 0.0.0-use.local
   resolution: "@iress-oss/ids-components@workspace:packages/components"
   dependencies:
     "@floating-ui/react": "npm:0.27.19"
     "@fortawesome/fontawesome-common-types": "npm:0.2.36"
-    "@iress-oss/ids-theme-preset": "npm:^6.0.0"
+    "@iress-oss/ids-theme-preset": "npm:^6.0.1"
     "@iress-oss/ids-tokens": "npm:^6.0.0"
     "@pandacss/dev": "npm:1.9.1"
     "@tanstack/react-table": "npm:8.21.3"
@@ -1756,7 +1756,7 @@ __metadata:
   resolution: "@iress-oss/ids-storybook-config@workspace:packages/storybook-config"
   dependencies:
     "@chromatic-com/storybook": "npm:^5.2.1"
-    "@iress-oss/ids-components": "npm:^6.4.0"
+    "@iress-oss/ids-components": "npm:^6.4.1"
     "@iress-oss/ids-storybook-okta": "npm:^0.1.2"
     "@iress-oss/ids-storybook-sandbox": "npm:^0.2.2"
     "@iress-oss/ids-storybook-toggle-stories": "npm:^0.1.0"
@@ -1974,7 +1974,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@iress-oss/ids-theme-preset@npm:^6.0.0, @iress-oss/ids-theme-preset@workspace:packages/theme-preset":
+"@iress-oss/ids-theme-preset@npm:^6.0.1, @iress-oss/ids-theme-preset@workspace:packages/theme-preset":
   version: 0.0.0-use.local
   resolution: "@iress-oss/ids-theme-preset@workspace:packages/theme-preset"
   dependencies:
@@ -2051,7 +2051,7 @@ __metadata:
   resolution: "@iress/design-system-monorepo@workspace:."
   dependencies:
     "@chromatic-com/storybook": "npm:^5.2.1"
-    "@iress-oss/ids-components": "npm:^6.4.0"
+    "@iress-oss/ids-components": "npm:^6.4.1"
     "@iress-oss/ids-storybook-config": "npm:^0.6.0"
     "@iress-oss/ids-storybook-okta": "npm:^0.1.2"
     "@iress-oss/ids-storybook-sandbox": "npm:^0.2.2"
