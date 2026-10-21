@@ -52,9 +52,9 @@
     "storybook": "10.4.6",
     "storybook-addon-tag-badges": "^3.1.0",
     "ts-dedent": "^2.2.0",
-    "tsx": "^4.23.0",
+    "tsx": "^4.23.13",
     "typescript": "^6.0.3",
-    "vite": "8.2.2",
+    "vite": "8.3.0",
     "wait-on": "^9.0.10",
     "ws": "^8.21.3",
     "zx": "^8.8.5"
