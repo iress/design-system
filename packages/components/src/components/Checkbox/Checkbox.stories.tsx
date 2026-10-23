@@ -4,6 +4,7 @@ import { IressCheckbox } from '.';
 import { IressCheckboxMark } from '../CheckboxMark';
 import { IressTable } from '../Table';
 import { IressStack } from '../Stack';
+import { IressInline } from '@/main';
 import {
   disableArgTypes,
   withJsxTransformer,
@@ -27,6 +28,17 @@ export default {
 export const Default: Story = {
   args: {
     children: 'A checkbox',
+  },
+};
+
+export const InlineLabel: Story = {
+  args: {
+    children: (
+      <IressInline horizontalAlign="between">
+        <span>Westpac Group</span>
+        <span>$142,000 p.a.</span>
+      </IressInline>
+    ),
   },
 };
 

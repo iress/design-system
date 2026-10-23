@@ -3,6 +3,7 @@ import { IressCheckbox, checkbox as checkboxStyles } from '.';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 import { GlobalCSSClass } from '@/enums';
+import { IressInline } from '../Inline';
 
 const TEST_ID = 'test-component';
 
@@ -34,6 +35,42 @@ describe('IressCheckbox', () => {
   });
 
   describe('props', () => {
+    describe('inline label', () => {
+      it.each([undefined, 'touch', 'card'] as const)(
+        'fills the available label space for the %s variant',
+        async (variant) => {
+          const screen = render(
+            <IressCheckbox variant={variant}>
+              <IressInline horizontalAlign="between">
+                <span>Westpac Group</span>
+                <span>$142,000 p.a.</span>
+              </IressInline>
+            </IressCheckbox>,
+          );
+          const styles = checkboxStyles.raw({ variant });
+          const checkbox = screen.getByRole('checkbox', {
+            name: /Westpac Group\s*\$142,000 p\.a\./,
+          });
+
+          expect(styles.label).toMatchObject({ flex: '1' });
+          expect(styles.content).toMatchObject({ flex: '1' });
+
+          await userEvent.click(screen.getByText('$142,000 p.a.'));
+          expect(checkbox).toBeChecked();
+
+          await userEvent.click(screen.getByText('Westpac Group'));
+          expect(checkbox).not.toBeChecked();
+        },
+      );
+
+      it('keeps hidden labels compact', () => {
+        const styles = checkboxStyles.raw({ hiddenLabel: true });
+
+        expect(styles.label).toMatchObject({ flex: 'initial' });
+        expect(styles.content).toMatchObject({ srOnly: true });
+      });
+    });
+
     describe('checked', () => {
       it('adds the checked class', () => {
         const screen = render(<IressCheckbox name="test-checkbox" checked />);

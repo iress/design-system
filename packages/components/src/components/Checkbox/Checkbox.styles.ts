@@ -21,12 +21,14 @@ export const checkbox = sva({
       lineHeight: '1.5',
       margin: 'spacing.0',
       display: 'inline-flex',
+      flex: '1',
       cursor: 'pointer',
     },
     heading: {
       display: 'block',
     },
     content: {
+      flex: '1',
       font: 'inherit',
       color: 'colour.neutral.80',
     },
@@ -48,6 +50,7 @@ export const checkbox = sva({
       true: {
         label: {
           display: 'inline-block',
+          flex: 'initial',
         },
         mark: {
           marginInlineEnd: 'spacing.0',
@@ -80,9 +83,6 @@ export const checkbox = sva({
           _hover: {
             backgroundColor: 'colour.neutral.20',
           },
-        },
-        content: {
-          flex: '1',
         },
         mark: {
           flex: '[0]',
