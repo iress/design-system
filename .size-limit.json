@@ -2,7 +2,8 @@
   {
     "name": "@iress-oss/ids-components JS",
     "path": "packages/components/dist/**/*.js",
-    "limit": "377 kB",
+    "limit": "420 kB",
+    "message": "Includes the documentation metadata and lazy thumbnails shipped through the /meta export.",
     "gzip": true
   },
   {

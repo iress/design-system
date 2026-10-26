@@ -889,10 +889,11 @@ describe('IressSelect', () => {
 
         await userEvent.keyboard('op');
 
-        const error = await screen.findByText(
-          'Render fn error: Something went wrong',
-        );
-        expect(error).toBeInTheDocument();
+        await waitFor(() => {
+          expect(
+            screen.getByText('Render fn error: Something went wrong'),
+          ).toBeInTheDocument();
+        });
       });
     });
 

@@ -159,9 +159,11 @@ jobs:
           elif [ "${{ matrix.check }}" = "docs-check" ]; then
             # Verify docs/ is up to date with the guidelines build
             yarn workspace @iress/ids-guidelines run build
-            if [ -n "$(git diff --name-only docs/)" ] || [ -n "$(git ls-files --others --exclude-standard docs/)" ]; then
+            # Pagefind ships platform-specific vendor WASM; compare the site and search index, not those binaries.
+            DOCS_PATHS=(docs/ ':!docs/pagefind/wasm.en.pagefind' ':!docs/pagefind/wasm.unknown.pagefind')
+            if [ -n "$(git diff --name-only -- "${DOCS_PATHS[@]}")" ] || [ -n "$(git ls-files --others --exclude-standard -- "${DOCS_PATHS[@]}")" ]; then
               echo "❌ docs/ is out of date. Run 'yarn workspace @iress/ids-guidelines run build' and commit docs/."
-              git diff --stat docs/
+              git diff --stat -- "${DOCS_PATHS[@]}"
               exit 1
             fi
             echo "✅ docs/ is up to date."

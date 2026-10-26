@@ -180,7 +180,7 @@ Budgets are defined in `.size-limit.json`:
 
 | Bundle | Limit |
 |---|---|
-| `@iress-oss/ids-components` JS | 377 kB gzip |
+| `@iress-oss/ids-components` JS | 420 kB gzip (including documentation metadata) |
 | `@iress-oss/ids-components` CSS | 46 kB gzip |
 | `@iress-oss/ids-tokens` JS | 20 kB gzip |
 | `@iress-oss/ids-tokens` CSS | 3 kB gzip |

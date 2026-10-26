@@ -1717,9 +1717,8 @@ describe('useAutocompleteSearch', () => {
         await waitFor(() => {
           expect(asyncSearchFn).toHaveBeenCalledWith('');
           expect(hook.result.current.loading).toBe(false);
+          expect(hook.result.current.results).toHaveLength(mockResults.length);
         });
-
-        expect(hook.result.current.results).toHaveLength(mockResults.length);
       });
 
       it('forces async search to run even below minSearchLength', async () => {
@@ -1744,9 +1743,8 @@ describe('useAutocompleteSearch', () => {
         await waitFor(() => {
           expect(asyncSearchFn).toHaveBeenCalledWith('ab');
           expect(hook.result.current.loading).toBe(false);
+          expect(hook.result.current.results).toHaveLength(mockResults.length);
         });
-
-        expect(hook.result.current.results).toHaveLength(mockResults.length);
       });
 
       it('bypasses duplicate query check for async search when forced', async () => {
@@ -1762,6 +1760,7 @@ describe('useAutocompleteSearch', () => {
         await waitFor(() => {
           expect(asyncSearchFn).toHaveBeenCalledTimes(1);
           expect(hook.result.current.loading).toBe(false);
+          expect(hook.result.current.results).toHaveLength(mockResults.length);
         });
 
         // Force search again with same query
@@ -1772,9 +1771,8 @@ describe('useAutocompleteSearch', () => {
         await waitFor(() => {
           expect(asyncSearchFn).toHaveBeenCalledTimes(2);
           expect(hook.result.current.loading).toBe(false);
+          expect(hook.result.current.results).toHaveLength(mockResults.length);
         });
-
-        expect(hook.result.current.results).toHaveLength(mockResults.length);
       });
 
       it('handles errors correctly when forced async search fails', async () => {

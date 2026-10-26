@@ -1,5 +1,5 @@
 import { createIndex, close } from 'pagefind';
-import { readFileSync, readdirSync, statSync, watch } from 'fs';
+import { readFileSync, readdirSync, rmSync, statSync, watch } from 'fs';
 import { join, relative } from 'path';
 
 const CONTENT_DIR = join(import.meta.dirname, '../content');
@@ -97,6 +97,7 @@ async function main() {
     });
   }
 
+  rmSync(OUTPUT_DIR, { recursive: true, force: true });
   await index.writeFiles({ outputPath: OUTPUT_DIR });
   await close();
   console.log(`Pagefind index written to ${OUTPUT_DIR}`);

@@ -68,6 +68,9 @@ yarn size:check              # same, but JSON output (useful for scripting)
 
 Budgets are defined in `.size-limit.json`. The `ci-cd.yml` workflow checks bundle sizes as part of the validation matrix on every push.
 
+The components JS budget is 420 kB gzipped, including documentation metadata and
+lazy thumbnails from the `/meta` export.
+
 ## Linting
 
 ```bash
@@ -140,6 +143,9 @@ All narrative documentation lives in `apps/guidelines/content/`:
 ## CI/CD
 
 GitHub Actions workflow in `.github/workflows/ci-cd.yml`. Runs on all pushes and merge groups. Supports canary releases via workflow_dispatch.
+
+The guidelines freshness check compares the built site and search index with
+`docs/`, excluding Pagefind's platform-specific vendor WASM binaries.
 
 ## Security
 
