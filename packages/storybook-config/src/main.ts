@@ -318,15 +318,25 @@ export const getMainConfig = ({
       `<script>
       function _waitFor(sel, cb, t) {
         var el = document.querySelector(sel);
-        if (el) return cb(el);
+        if (el) {
+          cb(el);
+          return function() {};
+        }
+        var timer;
+        function cancel() {
+          o.disconnect();
+          clearTimeout(timer);
+        }
         var o = new MutationObserver(function() {
           el = document.querySelector(sel);
-          if (el) { o.disconnect(); cb(el); }
+          if (el) { cancel(); cb(el); }
         });
-        o.observe(document.body, { childList: true, subtree: true });
-        if (t) setTimeout(function() { o.disconnect(); }, t);
+        o.observe(document.body, { childList: true, subtree: true, attributes: true });
+        if (t) timer = setTimeout(cancel, t);
+        return cancel;
       }
 
+      var _embedCleanups = [];
       window.addEventListener('message', function embedStorybook(event) {
         if (!event.data) return;
         const { type, ...params } = event.data;
@@ -335,86 +345,73 @@ export const getMainConfig = ({
           return;
         }
 
+        // A newer request supersedes all pending work from the previous one.
+        _embedCleanups.forEach(function(cancel) { cancel(); });
+        _embedCleanups = [];
+        function waitForEmbed(sel, cb, t) {
+          _embedCleanups.push(_waitFor(sel, cb, t));
+        }
+
         window.postMessage({ type: 'REQUEST_SIZE' }, '*');
         window.postMessage({ type: 'REQUEST_PANEL' }, '*');
 
-        if (params.panel) {
-          // If panel is open, select the specified panel tab.
-          _waitFor(_queryToClosePanel, function(hidePanel) { 
-            console.log('[Storybook Host] Panel is open', hidePanel);
-
-            _waitFor('[role="tab"][data-key="' + params.panel + '"]', function(panelEl) { 
-              panelEl.click(); 
-              console.log('[Storybook Host] Selected panel:', params.panel);
-
-              if (params.showPanel === false) {
-                hidePanel.click();
-                console.log('[Storybook Host] Closed panel as per showPanel=false');
-              }
-            }, 5000);
-          }, 5000);
-          
-          // Open panel and then select a specific addon panel tab
-          _waitFor(_queryToOpenPanel, function(addonPanel) {
-            if (params.showPanel !== false) {
-              addonPanel.click();
-              console.log('[Storybook Host] Opened addon panel');
-            } 
-
-            _waitFor('[role="tab"][data-key="' + params.panel + '"]', function(panelEl) { 
-              panelEl.click(); 
-              console.log('[Storybook Host] Selected panel:', params.panel);
-            }, 5000);
-          }, 5000);
-        } else if (params.showPanel === true) {
-          // Just open the addon panel without selecting a tab
-          _waitFor(_queryToOpenPanel, function(addonPanel) { 
-            addonPanel.click();
-            console.log('[Storybook Host] Opened addon panel (showPanel)');
+        if (params.panel && params.showPanel !== false || params.showPanel === true) {
+          waitForEmbed(_queryToOpenPanel + ', ' + _queryToClosePanel, function(toggle) {
+            if (toggle.matches(_queryToOpenPanel)) {
+              toggle.click();
+            }
           }, 5000);
         } else if (params.showPanel === false) {
-          // Close addon panel — poll to catch Storybook's SET_CONFIG
-          // re-opening the panel after the URL-based close.
-          var _closePanelCheck = setInterval(function() {
-            var panel = document.getElementById('storybook-panel-root');
-            if (panel && panel.offsetHeight > 0) {
+          if (params.panel) {
+            waitForEmbed(_queryToClosePanel, function(toggle) {
+              toggle.click();
+            }, 5000);
+          } else {
+            // Catch Storybook's initial SET_CONFIG, but never undo a later user request.
+            var closePanelCheck = setInterval(function() {
+              var panel = document.getElementById('storybook-panel-root');
               var toggle = document.querySelector(_queryToClosePanel);
-              if (toggle) {
+              if (panel && panel.offsetHeight > 0 && toggle) {
                 toggle.click();
-                console.log('[Storybook Host] Closed addon panel (showPanel)');
               }
-            }
-          }, 500);
-          setTimeout(function() { clearInterval(_closePanelCheck); }, 8000);
+            }, 500);
+            var closePanelTimeout = setTimeout(function() {
+              clearInterval(closePanelCheck);
+            }, 8000);
+            _embedCleanups.push(function() {
+              clearInterval(closePanelCheck);
+              clearTimeout(closePanelTimeout);
+            });
+          }
         }
 
         if (params.allowedPanels?.length > 0) {
           var allowedPanels = params.allowedPanels;
-          var newOpenPanel = params.panel;
 
-          _waitFor('[role="tablist"][aria-label="Available addons"]', function(tabList) { 
+          waitForEmbed('[role="tablist"][aria-label="Available addons"]', function(tabList) {
             tabList.querySelectorAll('[role="tab"]').forEach(function(tab) {
               var key = tab.getAttribute('data-key');
 
               if (allowedPanels.includes(key)) {
                 console.log('[Storybook Host] Keeping panel:', key);
-                if (!newOpenPanel && params.showPanel !== false) {
-                  tab.click();
-                  newOpenPanel = key;
-                  console.log('[Storybook Host] Clicking panel:', key);
-                }
               } else {
                 tab.style.display = 'none';
-                  console.log('[Storybook Host] Hiding panel:', key);
+                console.log('[Storybook Host] Hiding panel:', key);
               }
             });
+          }, 5000);
+        }
+
+        if (params.panel && params.showPanel !== false) {
+          waitForEmbed('[role="tab"][data-key="' + params.panel + '"]', function(panelEl) {
+            panelEl.click();
           }, 5000);
         }
 
         // Hide elements by CSS selector
         if (params.selectorsToHide) {
           params.selectorsToHide.forEach(function(sel) {
-            _waitFor(sel, function() { 
+            waitForEmbed(sel, function() {
               document.querySelectorAll(sel).forEach(function(el) {
                 el.style.display = 'none';
                 console.log('[Storybook Host] Hiding:', sel);

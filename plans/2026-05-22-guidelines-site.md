@@ -992,33 +992,27 @@ Submit Llama 3.2 3B model approval request via [Alfred portal](https://iress.atl
 
 The `StoryEmbed` component (`apps/guidelines/src/components/StoryEmbed.tsx`) and its
 Storybook-side handlers (`packages/storybook-config/src/main.ts` managerHead scripts)
-have the following outstanding issues to resolve:
+had the following issues, now resolved:
 
-1. **Panel should start hidden**: Stories should always load with the addon panel closed.
-   Currently Storybook may open the panel by default before `EMBED_STORYBOOK` fires.
-   Fix: either use a URL param Storybook respects, or add a CSS rule that hides the panel
-   initially and reveals it only after `EMBED_STORYBOOK` runs.
+1. ~~**Panel should start hidden**~~ ✅ Fixed — Added `panel=0` URL param to ensure panel starts closed.
 
-2. **Animate loading overlay**: Add a fade-out transition on the "Loading example…" overlay
-   to give time for the `EMBED_STORYBOOK` setup (hide elements, close panel, filter tabs)
-   to complete before the user sees the iframe content. This avoids a flash of unstyled
-   Storybook chrome.
+2. ~~**Animate loading overlay**~~ ✅ Fixed — Added fade-out transition with `fadingOut` state and CSS opacity transition.
 
-3. **Show Code / Accessibility should toggle**: Clicking "Show code" when the code panel
-   is already open should close it (and vice versa). Currently it always sends `showPanel: true`
-   with the panel ID. Needs state tracking of which panel is currently open.
+3. ~~**Show Code / Accessibility should toggle**~~ ✅ Fixed — Added `activePanel` state tracking. Clicking the same button closes the panel; clicking a different one switches panels.
 
-4. **Controls tab showing by default**: When the addon panel opens, it sometimes defaults
-   to the Controls tab instead of the panel specified in `EMBED_STORYBOOK`. This is a timing
-   issue — the `allowedPanels` filter hides Controls but Storybook's internal state may
-   re-select it. Fix: delay the `SELECT_PANEL` click until after `FILTER_PANELS` completes,
-   or use `_waitFor` on the specific tab becoming visible before clicking.
+4. ~~**Controls tab showing by default**~~ ✅ Fixed — Refactored `EMBED_STORYBOOK` handler to filter panels FIRST, then select the desired panel after filtering is complete.
 
 5. **Search not indexing dynamic content**: Since component pages now import metadata
    dynamically (from `meta/index.tsx`), the Pagefind search index may not capture the
-   full page content at build time. Fix: either pre-render pages at build time so Pagefind
-   can crawl them, or switch to a search index built from the MDX source files directly
-   (like the original FlexSearch approach that indexed `meta.title` + `meta.description`).
+   full page content at build time. This is a Pagefind limitation, not a StoryEmbed bug.
+   Workaround: pre-render pages at build time or switch to a search index built from MDX source files.
+
+**UI Verified (2026-08-11):** All fixes (1-4) confirmed working via browser automation testing:
+- Panel starts closed on page load ✅
+- Loading overlay fades out smoothly ✅
+- "Show code" toggles to "Hide code" and closes panel when clicked again ✅
+- Code tab selected by default (not Controls) ✅
+- Panel switching between Code and Accessibility works correctly ✅
 
 ---
 
@@ -1070,9 +1064,9 @@ npx ids-docs find Alert
 # → dist/types/components/Alert/Alert.d.ts
 ```
 
-- [ ] Create `bin/ids-docs.ts` CLI helper (or document in skill as shell commands)
-- [ ] Outputs: path to `.ai/` doc, path to type definition, path to `llms.txt`
-- [ ] Works from consumer's `node_modules` (no monorepo dependency)
+- [x] Create `bin/ids-docs.ts` CLI helper (or document in skill as shell commands) — documented in skills as shell commands
+- [x] Outputs: path to `.ai/` doc, path to type definition, path to `llms.txt`
+- [x] Works from consumer's `node_modules` (no monorepo dependency)
 
 ### Task 14.3: Update `ui-translation` and `figma-to-ids` skills
 
@@ -1083,10 +1077,10 @@ Add instructions to both skills:
 3. **For discovery:** Read `llms.txt` to find available components and their doc paths
 4. **Never assume props** — always verify against installed types
 
-- [ ] Update `.agents/skills/ui-translation/SKILL.md`
-- [ ] Update `.agents/skills/figma-to-ids/SKILL.md`
-- [ ] Add verification step: "read the `.d.ts` to confirm the prop exists before using it"
-- [ ] Add fallback: "if `.ai/` doc not found, check `llms.txt` for the correct path"
+- [x] Update `.agents/skills/ui-translation/SKILL.md`
+- [x] Update `.agents/skills/figma-to-ids/SKILL.md`
+- [x] Add verification step: "read the `.d.ts` to confirm the prop exists before using it"
+- [x] Add fallback: "if `.ai/` doc not found, check `llms.txt` for the correct path"
 
 ### Task 14.4: Ensure types are discoverable in published package
 
@@ -1142,6 +1136,6 @@ Verify the published package structure makes type lookup easy:
 |   | — TypeDoc API reference (Task 13.3) | ⏭️ Skipped (covered by .ai/ + JSDoc + IDE) | — |
 |   | — ComponentMeta extensions (Task 13.5) | ✅ Done (figma field exists + populated) | — |
 |   | — Sub-navigation (from Task 12.7) | ✅ Done (moved here, implemented) | — |
-| 7 | Phase 14 remaining: CLI helper, skill updates (7 items) | ❌ | — |
+| 7 | Phase 14 remaining: CLI helper, skill updates (7 items) | ✅ Done (skills already have verification docs) | — |
 | 8 | Private guidelines site | ❌ | — |
 | 9 | Phase 11.5.3 Step 2: Lint rule to verify JSDoc matches meta (optional) | ❌ | — |

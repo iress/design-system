@@ -62,7 +62,14 @@ export function StoryEmbed({
 }: StoryEmbedProps) {
   const [inView, setInView] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [panelOpen, setPanelOpen] = useState(defaultPanel ? true : false);
+  const [fadingOut, setFadingOut] = useState(false);
+  const [panelOpen, setPanelOpen] = useState(false);
+  const [activePanel, setActivePanel] = useState<string | null>(null);
+  // Track the panel we're trying to open/close to avoid race conditions with RELAY_PANEL
+  const pendingPanelRef = useRef<{
+    panel: string | null;
+    shouldOpen: boolean;
+  } | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
@@ -81,8 +88,10 @@ export function StoryEmbed({
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
+
+  // Bug 1: Add panel=0 to ensure panel starts closed
   const iframeSrc = controls
-    ? `${subStorybooks[type]}/?path=/story/${id}&shortcuts=false&singleStory=true&embedded=true&full=1`
+    ? `${subStorybooks[type]}/?path=/story/${id}&shortcuts=false&singleStory=true&embedded=true&full=1&panel=0`
     : `${subStorybooks[type]}/iframe.html?id=${id}&viewMode=story&singleStory=true`;
   const storybookUrl = `${mainStorybook}/?path=/docs/${type}_${id}`;
 
@@ -95,7 +104,7 @@ export function StoryEmbed({
         return;
 
       const data = event.data as
-        | { type: string; height?: number; flag?: boolean }
+        | { type: string; height?: number; flag?: boolean; panel?: string }
         | undefined;
 
       if (data?.type === 'RELAY_SIZE' && iframeRef.current && autoHeight) {
@@ -105,6 +114,25 @@ export function StoryEmbed({
       if (data?.type === 'RELAY_PANEL') {
         const isOpen = !!data.flag;
         setPanelOpen(isOpen);
+
+        // Bug 3 fix: Only update activePanel based on our pending action, not raw Storybook state
+        // This prevents race conditions where Storybook sends intermediate states
+        if (pendingPanelRef.current) {
+          const { panel, shouldOpen } = pendingPanelRef.current;
+          if (shouldOpen && isOpen) {
+            // Panel opened successfully
+            setActivePanel(panel);
+            pendingPanelRef.current = null;
+          } else if (!shouldOpen && !isOpen) {
+            // Panel closed successfully
+            setActivePanel(null);
+            pendingPanelRef.current = null;
+          }
+          // Otherwise, ignore intermediate states and wait for the final state
+        } else if (!isOpen) {
+          // No pending action and panel closed - clear active panel
+          setActivePanel(null);
+        }
 
         // Re-request size after panel toggle settles
         setTimeout(() => {
@@ -117,10 +145,9 @@ export function StoryEmbed({
     };
     window.addEventListener('message', handleMessage);
     return () => window.removeEventListener('message', handleMessage);
-  }, []);
+  }, [iframeSrc, autoHeight]);
 
-  const handleLoad = (panel = defaultPanel, showPanel?: boolean) => {
-    setLoading(false);
+  const sendEmbedMessage = (panel?: string, showPanel?: boolean) => {
     iframeRef.current?.contentWindow?.postMessage(
       {
         type: 'EMBED_STORYBOOK',
@@ -133,10 +160,33 @@ export function StoryEmbed({
     );
   };
 
+  const handleLoad = () => {
+    // Bug 2: Start fade-out transition before hiding overlay
+    setFadingOut(true);
+
+    // Give time for Storybook to initialize and EMBED_STORYBOOK to run
+    setTimeout(() => {
+      sendEmbedMessage(defaultPanel, !!defaultPanel);
+    }, 100);
+
+    // Complete the fade-out after animation
+    setTimeout(() => {
+      setLoading(false);
+      setFadingOut(false);
+    }, 400);
+  };
+
   const togglePanel = (panel: string) => {
-    // If clicking the same panel that's open, close it. Otherwise open with that panel.
-    const shouldOpen = !(panelOpen && panel === defaultPanel);
-    handleLoad(panel, shouldOpen);
+    // Bug 3: Proper toggle - close if clicking the same panel that's open
+    if (panelOpen && activePanel === panel) {
+      // Close the panel
+      pendingPanelRef.current = { panel: null, shouldOpen: false };
+      sendEmbedMessage(panel, false);
+    } else {
+      // Open with the specified panel
+      pendingPanelRef.current = { panel, shouldOpen: true };
+      sendEmbedMessage(panel, true);
+    }
   };
 
   const openSandbox = () => {
@@ -154,6 +204,7 @@ export function StoryEmbed({
         ref={containerRef}
         style={{ position: 'relative', minHeight: height }}
       >
+        {/* Bug 2: Animated loading overlay with fade-out transition */}
         {(!inView || loading) && (
           <IressText
             element="p"
@@ -169,6 +220,8 @@ export function StoryEmbed({
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
+              opacity: fadingOut ? 0 : 1,
+              transition: 'opacity 0.3s ease-out',
             }}
           >
             <IressSpinner mr="sm" /> Loading example...
@@ -183,23 +236,34 @@ export function StoryEmbed({
               width: '100%',
               height,
               border: 'none',
-              display: loading ? 'none' : 'block',
-              transition: 'height 0.2s ease',
+              display: 'block',
+              opacity: loading && !fadingOut ? 0 : 1,
+              transition: 'height 0.2s ease, opacity 0.3s ease-out',
             }}
-            onLoad={() => handleLoad()}
+            onLoad={handleLoad}
           />
         )}
         {controls && (
           <IressInline gap="xs" bg="colour.neutral.20" p="sm">
             <IressButton
-              mode="muted"
+              mode={
+                panelOpen && activePanel === 'storybook/docs/panel'
+                  ? 'secondary'
+                  : 'muted'
+              }
               onClick={() => togglePanel('storybook/docs/panel')}
               prepend={<IressIcon name="code_blocks" />}
             >
-              Show code
+              {panelOpen && activePanel === 'storybook/docs/panel'
+                ? 'Hide code'
+                : 'Show code'}
             </IressButton>
             <IressButton
-              mode="muted"
+              mode={
+                panelOpen && activePanel === 'storybook/a11y/panel'
+                  ? 'secondary'
+                  : 'muted'
+              }
               onClick={() => togglePanel('storybook/a11y/panel')}
               prepend={<IressIcon name="accessibility_new" />}
             >
