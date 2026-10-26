@@ -88,7 +88,6 @@ When assisting with this repository, GitHub Copilot should:
 After modifying any file in `apps/guidelines/content/` or `packages/components/src/**/*.stories.tsx`:
 
 1. Run `yarn translate` to regenerate `.ai/` documentation after modifying guidelines content or stories
-2. Run `npx tsx scripts/derive-ai-docs.ts --files <changed-content-files>` to sync `packages/components/.ai/`
 
 This ensures `.ai/` stays in sync and code examples are correct before committing.
 

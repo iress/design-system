@@ -12,7 +12,11 @@ export function ModalWithButton() {
         id={MODAL_ID}
         show={false}
         heading="Modal heading"
-        footer={<IressButton>Close</IressButton>}
+        footer={
+          <IressButton onClick={() => showModal(MODAL_ID, false)}>
+            Close
+          </IressButton>
+        }
       >
         Modal content goes here.
       </IressModal>

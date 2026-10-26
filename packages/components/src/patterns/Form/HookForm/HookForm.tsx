@@ -359,14 +359,23 @@ HookForm.displayName = 'IressHookForm';
  *
  * @example
  * ```tsx
- * import { IressHookForm } from '@iress-oss/ids-components';
+ * import { IressButton, IressFormField, IressHookForm, IressInput } from '@iress-oss/ids-components';
  * import { useForm } from 'react-hook-form';
  *
- * const form = useForm({ defaultValues: { name: '' } });
+ * function ContactForm() {
+ *   const form = useForm({ defaultValues: { email: '' } });
  *
- * <IressHookForm form={form} onSubmit={(data) => {}}>
- *   <IressFormField name="email" label="Email" />
- * </IressHookForm>
+ *   return (
+ *     <IressHookForm form={form} onSubmit={(data) => console.log(data)}>
+ *       <IressFormField
+ *         name="email"
+ *         label="Email"
+ *         render={(field) => <IressInput {...field} type="email" />}
+ *       />
+ *       <IressButton type="submit">Submit</IressButton>
+ *     </IressHookForm>
+ *   );
+ * }
  * ```
  */
 export const IressHookForm = forwardRef(HookForm) as (<

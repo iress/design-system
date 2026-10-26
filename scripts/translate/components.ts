@@ -379,7 +379,9 @@ export async function translateComponents() {
   const tokensPackageAiDir = join(ROOT, 'packages/tokens/.ai/tokens');
   mkdirSync(tokensPackageAiDir, { recursive: true });
   for (const file of readdirSync(tokensOutDir).filter((f) => f.endsWith('.md') && f !== 'tokens-reference.md')) {
-    writeFileSync(join(tokensPackageAiDir, file), readFileSync(join(tokensOutDir, file), 'utf-8'));
+    const content = readFileSync(join(tokensOutDir, file), 'utf-8')
+      .replaceAll('](./tokens-reference.md)', '](../tokens-reference.md)');
+    writeFileSync(join(tokensPackageAiDir, file), content);
   }
 
   // Generate packages/tokens/.ai/index.json

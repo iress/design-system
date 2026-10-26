@@ -8,7 +8,7 @@
  * those are component-internal and not part of the shared meta contract.
  */
 
-export type { ComponentMeta } from '@helpers/meta/types';
+export type { ComponentMeta, TestComponentMeta } from '@helpers/meta/types';
 
 // Components
 export { default as alertMeta } from '@/components/Alert/meta';

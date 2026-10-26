@@ -1,6 +1,5 @@
 import { lazy } from 'react';
-import type { ComponentMeta } from '@helpers/meta/types';
-import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
+import type { ComponentMeta, TestComponentMeta } from '@helpers/meta/types';
 
 export const testMeta: TestComponentMeta[] = [
   {

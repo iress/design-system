@@ -8274,7 +8274,11 @@ export function ModalWithButton() {
         id={MODAL_ID}
         show={false}
         heading="Modal heading"
-        footer={<IressButton>Close</IressButton>}
+        footer={
+          <IressButton onClick={() => showModal(MODAL_ID, false)}>
+            Close
+          </IressButton>
+        }
       >
         Modal content goes here.
       </IressModal>
@@ -8717,7 +8721,11 @@ export function ModalResponsiveSize() {
         show={false}
         heading="Responsive modal"
         width={{ xs: 'overlay.sm', md: 'overlay.md', xxl: 'overlay.lg' }}
-        footer={<IressButton>Close</IressButton>}
+        footer={
+          <IressButton onClick={() => showModal(MODAL_ID, false)}>
+            Close
+          </IressButton>
+        }
       >
         Resize your screen to see the modal width change between sm, md, and lg.
       </IressModal>

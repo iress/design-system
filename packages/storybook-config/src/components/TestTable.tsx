@@ -1,12 +1,8 @@
-import { type ReactNode, use } from 'react';
+import { use } from 'react';
+import type { TestComponentMeta } from '@iress-oss/ids-components/meta';
 import { IressStorybookContext } from './IressStorybookContext';
 
-export interface TestComponentMeta {
-  part: string;
-  description: string;
-  query?: ReactNode;
-  testId: string;
-}
+export type { TestComponentMeta } from '@iress-oss/ids-components/meta';
 
 export interface TestTableProps {
   items: TestComponentMeta[];
