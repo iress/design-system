@@ -5,6 +5,7 @@ import {
   useSandboxCanvasProps,
   type UseSandboxCanvasProps,
 } from '@iress-oss/ids-storybook-sandbox';
+import { RefreshIcon } from '@storybook/icons';
 
 export interface ComponentCanvasProps extends Omit<
   UseSandboxCanvasProps,
@@ -31,7 +32,11 @@ export const ComponentCanvas = ({
 
   if (refresh) {
     additionalActions.push({
-      title: 'Refresh',
+      title: (
+        <>
+          <RefreshIcon /> Refresh
+        </>
+      ),
       onClick: () => {
         if (restProps?.story?.inline === false) {
           const iframes = [

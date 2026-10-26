@@ -10,6 +10,18 @@ export interface IressSlideoutProviderProps extends PropsWithChildren {
   container?: FloatingUIContainer;
 }
 
+/**
+ * Provides slideout context to descendant components, managing open/close state for slideouts.
+ *
+ * @example
+ * ```tsx
+ * import { IressSlideoutProvider, IressSlideout } from '@iress-oss/ids-components';
+ *
+ * <IressSlideoutProvider>
+ *   <IressSlideout id="details" heading="Details">Content</IressSlideout>
+ * </IressSlideoutProvider>
+ * ```
+ */
 export const IressSlideoutProvider = ({
   children,
   container,

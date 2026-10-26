@@ -1,13 +1,11 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressSelect } from './Select';
-import {
-  generateLabelValueMeta,
-  MOCK_LABEL_VALUE_META,
-} from '@/mocks/generateLabelValues';
 import { SelectAsync } from './mocks/SelectAsync';
 import SelectAsyncSource from './mocks/SelectAsync.tsx?raw';
 import { SelectAsyncErrorText } from './mocks/SelectAsyncErrorText';
 import SelectAsyncErrorTextSource from './mocks/SelectAsyncErrorText.tsx?raw';
+import { SelectRequiredValidation } from './mocks/SelectRequiredValidation';
+import SelectRequiredValidationSource from './mocks/SelectRequiredValidation.tsx?raw';
 import { SelectAsyncMinLength } from './mocks/SelectAsyncMinLength';
 import SelectAsyncMinLengthSource from './mocks/SelectAsyncMinLength.tsx?raw';
 import { SelectCustomLabel } from './mocks/SelectCustomLabel';
@@ -20,8 +18,10 @@ import { SelectNewOption } from './mocks/SelectNewOption';
 import SelectNewOptionSource from './mocks/SelectNewOption.tsx?raw';
 import { OptionsLongText } from './mocks/SelectOptionLongText';
 import SelectOptionLongTextSource from './mocks/SelectOptionLongText.tsx?raw';
-import { IressStack } from '../Stack';
-import { FORM_ELEMENT_WIDTHS } from '@/constants';
+import { SelectSizing } from './mocks/SelectSizing';
+import SelectSizingSource from './mocks/SelectSizing.tsx?raw';
+import { SelectLotsOfOptions } from './mocks/SelectLotsOfOptions';
+import SelectLotsOfOptionsSource from './mocks/SelectLotsOfOptions.tsx?raw';
 import {
   type IressSelectProps,
   IressDivider,
@@ -29,17 +29,17 @@ import {
   IressText,
   IressInline,
   IressMenuText,
-  IressForm,
-  IressFormField,
 } from '@/main';
 import {
+  componentStoryMeta,
   reactNodeArgType,
-  stylingProps,
   addToStorybookCategory,
   disableArgTypes,
   mergeStorybookConfig,
-  withCustomSource,
+  withSource,
+  withBreakpointLabel,
 } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressSelect>;
 
@@ -50,41 +50,50 @@ export default {
     container: document.body,
     placeholder: '',
   },
-  argTypes: {
-    errorText: reactNodeArgType,
-    footer: reactNodeArgType,
-    header: reactNodeArgType,
-    placeholder: reactNodeArgType,
-    ...stylingProps,
-    ...mergeStorybookConfig(
-      disableArgTypes(['container']),
-      addToStorybookCategory<IressSelectProps>('Popover props', [
-        'align',
-        'container',
-        'displayMode',
-        'focusStartIndex',
-        'onActivated',
-        'onDeactivated',
-        'onNavigate',
-        'type',
-        'virtualFocus',
-      ]),
-    ),
-  },
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      errorText: reactNodeArgType,
+      footer: reactNodeArgType,
+      header: reactNodeArgType,
+      placeholder: reactNodeArgType,
+      ...mergeStorybookConfig(
+        disableArgTypes(['container']),
+        addToStorybookCategory<IressSelectProps>('Popover props', [
+          'align',
+          'container',
+          'displayMode',
+          'focusStartIndex',
+          'onActivated',
+          'onDeactivated',
+          'onNavigate',
+          'type',
+          'virtualFocus',
+        ]),
+      ),
+    },
+  }),
   tags: ['updated'],
 } as Meta<typeof IressSelect>;
 
 export const SingleSelect: Story = {
   args: {
-    options: MOCK_LABEL_VALUE_META,
+    options: [
+      { label: 'Option 1', value: '1' },
+      { label: 'Option 2', value: '2' },
+      { label: 'Option 3', value: '3' },
+      { label: 'Option 4', value: '4' },
+      { label: 'Option 5', value: '5' },
+    ],
   },
 };
 
 export const RequiredValidation: Story = {
-  args: {
-    ...SingleSelect.args,
-  },
   parameters: {
+    controls: { disable: true },
+    ...withSource(SelectRequiredValidationSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
     docs: {
       description: {
         story:
@@ -92,24 +101,18 @@ export const RequiredValidation: Story = {
       },
     },
   },
-  render: (args) => (
-    <IressForm onSubmit={() => undefined}>
-      <IressFormField
-        label="Gender"
-        name="gender"
-        rules={{ required: true }}
-        render={(controlledProps) => (
-          <IressSelect {...args} {...controlledProps} />
-        )}
-      />
-      <IressButton type="submit">Validate</IressButton>
-    </IressForm>
-  ),
+  render: (args) => <SelectRequiredValidation {...args} />,
 };
 
 export const PreSelectedValue: Story = {
   args: {
-    options: MOCK_LABEL_VALUE_META,
+    options: [
+      { label: 'Option 1', value: '1' },
+      { label: 'Option 2', value: '2' },
+      { label: 'Option 3', value: '3' },
+      { label: 'Option 4', value: '4' },
+      { label: 'Option 5', value: '5' },
+    ],
     defaultValue: '2',
   },
   parameters: {
@@ -132,7 +135,13 @@ This means you can work directly with the raw values your API returns, without c
 
 export const PreSelectedMultiValue: Story = {
   args: {
-    options: MOCK_LABEL_VALUE_META,
+    options: [
+      { label: 'Option 1', value: '1' },
+      { label: 'Option 2', value: '2' },
+      { label: 'Option 3', value: '3' },
+      { label: 'Option 4', value: '4' },
+      { label: 'Option 5', value: '5' },
+    ],
     multiSelect: true,
     defaultValue: ['1', '3', '5'],
   },
@@ -147,14 +156,26 @@ export const PreSelectedMultiValue: Story = {
 
 export const MultiSelect: Story = {
   args: {
-    ...SingleSelect.args,
+    options: [
+      { label: 'Option 1', value: '1' },
+      { label: 'Option 2', value: '2' },
+      { label: 'Option 3', value: '3' },
+      { label: 'Option 4', value: '4' },
+      { label: 'Option 5', value: '5' },
+    ],
     multiSelect: true,
   },
 };
 
 export const MultiSelectLimit: Story = {
   args: {
-    options: MOCK_LABEL_VALUE_META,
+    options: [
+      { label: 'Option 1', value: '1' },
+      { label: 'Option 2', value: '2' },
+      { label: 'Option 3', value: '3' },
+      { label: 'Option 4', value: '4' },
+      { label: 'Option 5', value: '5' },
+    ],
     multiSelect: true,
     multiSelectLimit: 2,
     defaultValue: ['1', '2', '3', '4', '5'],
@@ -164,28 +185,37 @@ export const MultiSelectLimit: Story = {
 export const Placeholder: Story = {
   args: {
     placeholder: 'Select an option',
-    options: MOCK_LABEL_VALUE_META,
+    options: [
+      { label: 'Option 1', value: '1' },
+      { label: 'Option 2', value: '2' },
+      { label: 'Option 3', value: '3' },
+      { label: 'Option 4', value: '4' },
+      { label: 'Option 5', value: '5' },
+    ],
   },
 };
 
 export const AsyncOptions: Story = {
   render: (args) => <SelectAsync {...args} />,
   parameters: {
-    ...withCustomSource(SelectAsyncSource),
+    controls: { disable: true },
+    ...withSource(SelectAsyncSource, { stripImports: true }),
   },
 };
 
 export const AsyncOptionsMinSearchLength: Story = {
   render: (args) => <SelectAsyncMinLength {...args} />,
   parameters: {
-    ...withCustomSource(SelectAsyncMinLengthSource),
+    controls: { disable: true },
+    ...withSource(SelectAsyncMinLengthSource, { stripImports: true }),
   },
 };
 
 export const ErrorText: Story = {
   render: (args) => <SelectAsyncErrorText {...args} />,
   parameters: {
-    ...withCustomSource(SelectAsyncErrorTextSource),
+    controls: { disable: true },
+    ...withSource(SelectAsyncErrorTextSource, { stripImports: true }),
     docs: {
       description: {
         story: `Use the \`errorText\` prop to customise the error message shown when async
@@ -200,57 +230,58 @@ Type "error" to trigger the error state.`,
 export const InitialOptions: Story = {
   render: (args) => <SelectInitialOptions {...args} />,
   parameters: {
-    ...withCustomSource(SelectInitialOptionsSource),
+    controls: { disable: true },
+    ...withSource(SelectInitialOptionsSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };
 
 export const Sizing: Story = {
-  args: {
-    ...SingleSelect.args,
+  render: (args) => <SelectSizing {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(SelectSizingSource, { stripImports: true }),
   },
-  argTypes: {
-    ...disableArgTypes(['placeholder', 'width']),
-  },
-  render: (args) => (
-    <IressStack gap="md">
-      {FORM_ELEMENT_WIDTHS.map((width) => (
-        <div key={width}>
-          <IressSelect
-            {...args}
-            placeholder={width}
-            width={width}
-            aria-label={`Select option (width: ${width})`}
-          />
-        </div>
-      ))}
-    </IressStack>
-  ),
 };
 
 export const CustomLabel: Story = {
   render: (args) => <SelectCustomLabel {...args} />,
   parameters: {
-    ...withCustomSource(SelectCustomLabelSource),
+    controls: { disable: true },
+    ...withSource(SelectCustomLabelSource, { stripImports: true }),
   },
+  tags: ['recipe'],
 };
 
 export const CustomOptions: Story = {
   render: (args) => <SelectCustomOptions {...args} />,
   parameters: {
-    ...withCustomSource(SelectCustomOptionsSource),
+    controls: { disable: true },
+    ...withSource(SelectCustomOptionsSource, { stripImports: true }),
   },
+  tags: ['recipe'],
 };
 
 export const CreateNewOption: Story = {
   render: (args) => <SelectNewOption {...args} />,
   parameters: {
-    ...withCustomSource(SelectNewOptionSource),
+    controls: { disable: true },
+    ...withSource(SelectNewOptionSource, { stripImports: true }),
   },
+  tags: ['recipe'],
 };
 
 export const HeaderFooter: Story = {
   args: {
-    options: MOCK_LABEL_VALUE_META,
+    options: [
+      { label: 'Option 1', value: '1' },
+      { label: 'Option 2', value: '2' },
+      { label: 'Option 3', value: '3' },
+      { label: 'Option 4', value: '4' },
+      { label: 'Option 5', value: '5' },
+    ],
     header: (
       <>
         <IressMenuText>
@@ -277,38 +308,67 @@ export const HeaderFooter: Story = {
 
 export const Readonly: Story = {
   args: {
-    ...MultiSelect.args,
+    options: [
+      { label: 'Option 1', value: '1' },
+      { label: 'Option 2', value: '2' },
+      { label: 'Option 3', value: '3' },
+      { label: 'Option 4', value: '4' },
+      { label: 'Option 5', value: '5' },
+    ],
+    multiSelect: true,
     readOnly: true,
     value: ['1', '2', '3'],
   },
 };
 
 export const LotsOfOptions: Story = {
-  args: {
-    ...SingleSelect.args,
-    options: async () => Promise.resolve(generateLabelValueMeta(200)),
-    autoHighlight: false,
+  render: (args) => <SelectLotsOfOptions {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(SelectLotsOfOptionsSource, { stripImports: true }),
   },
 };
 
 export const LongTextOptions: Story = {
   render: (args) => <OptionsLongText {...args} />,
   parameters: {
-    ...withCustomSource(SelectOptionLongTextSource),
+    controls: { disable: true },
+    ...withSource(SelectOptionLongTextSource, { stripImports: true }),
   },
 };
 
 export const Native: Story = {
   args: {
-    ...SingleSelect.args,
+    options: [
+      { label: 'Option 1', value: '1' },
+      { label: 'Option 2', value: '2' },
+      { label: 'Option 3', value: '3' },
+      { label: 'Option 4', value: '4' },
+      { label: 'Option 5', value: '5' },
+    ],
     native: 'md',
     defaultValue: '2',
   },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'This shows how to set the native prop to use the native select element instead of the custom dropdown. This is useful for mobile devices or when you want to leverage the native select behavior and styling.',
+      },
+    },
+  },
+  decorators: [withBreakpointLabel()],
 };
 
 export const Disabled: Story = {
   args: {
-    ...SingleSelect.args,
+    options: [
+      { label: 'Option 1', value: '1' },
+      { label: 'Option 2', value: '2' },
+      { label: 'Option 3', value: '3' },
+      { label: 'Option 4', value: '4' },
+      { label: 'Option 5', value: '5' },
+    ],
     defaultValue: '1',
     disabled: true,
   },
@@ -345,20 +405,37 @@ export const GroupedOptions: Story = {
       },
     ],
   },
-  parameters: {
-    docs: {
-      description: {
-        story: `Use the \`children\` property in \`LabelValueMeta\` to create grouped options. 
-        Groups provide visual organization for related options. The group label is non-selectable, 
-        and only the child items can be selected.`,
-      },
-    },
-  },
 };
 
 export const GroupedMultiSelect: Story = {
   args: {
-    ...GroupedOptions.args,
+    options: [
+      {
+        label: 'Fruits',
+        children: [
+          { label: 'Apple', value: 'apple' },
+          { label: 'Banana', value: 'banana' },
+          { label: 'Orange', value: 'orange' },
+          { label: 'Strawberry', value: 'strawberry' },
+        ],
+      },
+      {
+        label: 'Vegetables',
+        children: [
+          { label: 'Carrot', value: 'carrot' },
+          { label: 'Broccoli', value: 'broccoli' },
+          { label: 'Spinach', value: 'spinach' },
+        ],
+      },
+      {
+        label: 'Grains',
+        children: [
+          { label: 'Rice', value: 'rice' },
+          { label: 'Wheat', value: 'wheat' },
+          { label: 'Oats', value: 'oats' },
+        ],
+      },
+    ],
     multiSelect: true,
     placeholder: 'Select multiple foods',
   },
@@ -366,9 +443,8 @@ export const GroupedMultiSelect: Story = {
 
 export const GroupedWithSearch: Story = {
   args: {
-    ...GroupedOptions.args,
+    placeholder: 'Select a food',
     options: async (query: string) => {
-      // Simulate async search with grouped results
       const allOptions = [
         {
           label: 'Fruits',
@@ -391,7 +467,6 @@ export const GroupedWithSearch: Story = {
 
       if (!query) return Promise.resolve(allOptions);
 
-      // Filter groups and their children based on query
       return Promise.resolve(
         allOptions
           .map((group) => ({
@@ -402,14 +477,6 @@ export const GroupedWithSearch: Story = {
           }))
           .filter((group) => group.children.length > 0),
       );
-    },
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: `When using async options with groups, filter the children based on the search query 
-        and return only groups that have matching children.`,
-      },
     },
   },
 };

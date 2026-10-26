@@ -140,7 +140,7 @@ export interface IressDropdownMenuProps<TMultiple extends boolean = false>
   /**
    * Text displayed next to label when two or more options are selected.
    * It supports `{{numOptions}}` as a placeholder for the number of options selected.
-   * @default {{numOptions}} selected
+   * @default ' ({{numOptions}})'
    */
   selectedOptionsText?: string;
 
@@ -432,6 +432,19 @@ const DropdownMenu = <TMultiple extends boolean = false>(
   );
 };
 
+/**
+ * Presents a list of actions or options revealed by a trigger button.
+ *
+ * @example
+ * ```tsx
+ * import { IressDropdownMenu } from '@iress-oss/ids-components';
+ *
+ * <IressDropdownMenu
+ *   label="Actions"
+ *   options={[{ label: 'Edit', value: 'edit' }, { label: 'Delete', value: 'delete' }]}
+ * />
+ * ```
+ */
 export const IressDropdownMenu = forwardRef(DropdownMenu) as (<
   TMultiple extends boolean = false,
 >(

@@ -1,0 +1,18 @@
+{
+  "name": "ids-dev",
+  "description": "IDS monorepo development agent with design system skills",
+  "tools": ["@builtin", "@chrome-devtools", "@playwright"],
+  "allowedTools": ["@builtin", "@chrome-devtools", "@playwright"],
+  "resources": [
+    "skill://.agents/skills/**/SKILL.md",
+    "skill://.kiro/skills/**/SKILL.md",
+    "skill://~/.kiro/skills/confluence/**/SKILL.md"
+  ],
+  "mcpServers": {
+    "chrome-devtools": {
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp", "--isolated"],
+      "timeout": 120000
+    }
+  }
+}

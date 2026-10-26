@@ -3,7 +3,7 @@ import {
   IressIcon,
   IressTable,
   IressTableBody,
-  type TableColumn,
+  type IressTableColumn,
 } from '@/main';
 
 interface Liability {
@@ -72,7 +72,7 @@ const contingentLiabilities = [
   },
 ];
 
-const columns: TableColumn<Liability>[] = [
+const columns: IressTableColumn<Liability>[] = [
   {
     key: 'owner',
     label: 'Owner',

@@ -4,12 +4,23 @@ import { IressMenu } from '../Menu';
 import { IressIcon, IressPanel, IressPill, IressPopover } from '@/main';
 import { RoutingLinkMenu } from './mocks/RoutingLinkMenu';
 import RoutingLinkMenuSource from './mocks/RoutingLinkMenu.tsx?raw';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 import {
   reactNodeArgType,
   stylingProps,
+  withSource,
 } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressMenuItem>;
+
+const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The root element of the menu item',
+    query: <code>getByRole('menuitem')</code>,
+    testId: 'menu-item',
+  },
+];
 
 export default {
   title: 'Components/Menu/MenuItem',
@@ -20,6 +31,9 @@ export default {
     children: reactNodeArgType,
     prepend: reactNodeArgType,
     ...stylingProps,
+  },
+  parameters: {
+    idsConfig: { testMeta },
   },
 } as Meta<typeof IressMenuItem>;
 
@@ -37,7 +51,7 @@ export const Unselected: Story = {
 
 export const Selected: Story = {
   args: {
-    ...Unselected.args,
+    children: 'Menu item',
     selected: true,
   },
 };
@@ -57,14 +71,14 @@ export const Value: Story = {
 export const CanToggle: Story = {
   ...Value,
   args: {
-    ...Value.args,
+    children: 'Menu item',
+    value: 9,
     canToggle: true,
   },
 };
 
 export const Divider: Story = {
   args: {
-    ...Unselected.args,
     children: 'Menu item with divider',
     divider: true,
   },
@@ -72,9 +86,8 @@ export const Divider: Story = {
 };
 
 export const PrependAndAppend: Story = {
-  ...Unselected,
   args: {
-    ...Unselected.args,
+    children: 'Menu item',
     prepend: <IressIcon name="home" />,
     append: <IressPill mode="70">New</IressPill>,
   },
@@ -93,12 +106,8 @@ export const MultiSelect: Story = {
 export const Element: Story = {
   render: (args) => <RoutingLinkMenu {...args} />,
   parameters: {
-    docs: {
-      source: {
-        code: RoutingLinkMenuSource,
-        language: 'tsx',
-      },
-    },
+    controls: { disable: true },
+    ...withSource(RoutingLinkMenuSource, { stripImports: true }),
   },
 };
 

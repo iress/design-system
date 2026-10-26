@@ -1,20 +1,21 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressPlaceholder } from '.';
 import {
+  componentStoryMeta,
   reactNodeArgType,
-  stylingProps,
 } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressPlaceholder>;
 
 export default {
   title: 'Components/Placeholder',
   component: IressPlaceholder,
-  tags: ['updated'],
-  argTypes: {
-    children: reactNodeArgType,
-    ...stylingProps,
-  },
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      children: reactNodeArgType,
+    },
+  }),
 } as Meta<typeof IressPlaceholder>;
 
 export const Default: Story = {

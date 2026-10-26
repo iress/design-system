@@ -3,14 +3,34 @@ import { IressMenuGroup, type IressMenuGroupProps } from './MenuGroup';
 import { IressMenu } from '../Menu';
 import { IressMenuItem } from '../MenuItem/MenuItem';
 import { IressPanel } from '@/main';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
+
+const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The root element of the menu group',
+    query: <code>getByRole('group')</code>,
+    testId: 'menu-group',
+  },
+  {
+    part: 'activator',
+    description: 'The activator element for subdraw variant',
+    testId: 'menu-group__activator',
+  },
+  {
+    part: 'subdraw',
+    description: 'The subdraw container',
+    testId: 'menu-group__subdraw',
+  },
+];
 
 export default {
   title: 'Components/Menu/MenuGroup',
   component: IressMenuGroup,
   parameters: {
+    idsConfig: { testMeta },
     layout: 'centered',
   },
-  tags: ['autodocs'],
 } satisfies Meta<typeof IressMenuGroup>;
 
 type Story = StoryObj<IressMenuGroupProps>;
@@ -81,11 +101,11 @@ export const Selectable: Story = {
 };
 
 export const SubdrawVariant: Story = {
-  render: () => (
+  render: (args) => (
     <IressPanel>
       <IressMenu>
         <IressMenuItem>Regular Item</IressMenuItem>
-        <IressMenuGroup label="More Options" variant="subdraw">
+        <IressMenuGroup {...args} label="More Options" variant="subdraw">
           <IressMenuItem>Submenu Item 1</IressMenuItem>
           <IressMenuItem>Submenu Item 2</IressMenuItem>
           <IressMenuItem>Submenu Item 3</IressMenuItem>
@@ -105,15 +125,15 @@ export const SubdrawVariant: Story = {
 };
 
 export const SubdrawWithDividers: Story = {
-  render: () => (
+  render: (args) => (
     <IressPanel>
       <IressMenu>
-        <IressMenuGroup label="File" variant="subdraw" divider>
+        <IressMenuGroup {...args} label="File" variant="subdraw" divider>
           <IressMenuItem>New</IressMenuItem>
           <IressMenuItem>Open</IressMenuItem>
           <IressMenuItem>Save</IressMenuItem>
         </IressMenuGroup>
-        <IressMenuGroup label="Edit" variant="subdraw" divider>
+        <IressMenuGroup {...args} label="Edit" variant="subdraw" divider>
           <IressMenuItem>Cut</IressMenuItem>
           <IressMenuItem>Copy</IressMenuItem>
           <IressMenuItem>Paste</IressMenuItem>
@@ -133,15 +153,15 @@ export const SubdrawWithDividers: Story = {
 };
 
 export const NestedSubdraw: Story = {
-  render: () => (
+  render: (args) => (
     <IressPanel>
       <IressMenu role="menu">
-        <IressMenuGroup label="Settings" variant="subdraw">
+        <IressMenuGroup {...args} label="Settings" variant="subdraw">
           <IressMenuItem>General</IressMenuItem>
-          <IressMenuGroup label="Advanced" variant="subdraw">
+          <IressMenuGroup {...args} label="Advanced" variant="subdraw">
             <IressMenuItem>Developer Options</IressMenuItem>
             <IressMenuItem>Debug Mode</IressMenuItem>
-            <IressMenuGroup label="Experimental" variant="subdraw">
+            <IressMenuGroup {...args} label="Experimental" variant="subdraw">
               <IressMenuItem>Feature A</IressMenuItem>
               <IressMenuItem>Feature B</IressMenuItem>
             </IressMenuGroup>

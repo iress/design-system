@@ -1,0 +1,55 @@
+export const meta = {
+  title: 'Typography Tokens',
+  description: 'Font families, sizes, weights, and line heights for headings, body text, and code.',
+};
+
+# Typography Tokens
+
+Font families, sizes, weights, and line heights for headings, body text, and code.
+
+## Design
+
+Typography tokens include font family, size, weight, and line height specifications for headings, body text, and code. They are designed to create a clear typographic hierarchy and ensure consistency across products.
+
+<FigmaLink href="https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=6200-17" />
+
+### Base
+
+<StoryEmbed id="typography--base" type="tokens" controls={false} />
+
+### Headings
+
+<StoryEmbed id="typography--headings" type="tokens" controls={false} />
+
+### Body
+
+<StoryEmbed id="typography--body" type="tokens" controls={false} />
+
+### Code
+
+<StoryEmbed id="typography--code" type="tokens" controls={false} />
+
+## Develop
+
+You can use these tokens in your applications in three ways: via component props, CSS variables, or CSS-in-JS using the `cssVars` export from the `@iress-oss/ids-tokens` package.
+
+> **Note:** Always use `IressText` for text rendering. It applies the correct
+> typography tokens automatically based on the `element` prop.
+
+### Via IressText (recommended)
+
+```tsx
+import { IressText } from '@iress-oss/ids-components';
+
+<IressText element="h1">Page Title</IressText>
+<IressText>Body paragraph</IressText>
+<IressText textStyle="typography.body.sm.strong">Small bold</IressText>
+```
+
+### Via CSS variables
+
+```css
+.heading { font: var(--typography-heading-1); }
+.body { font: var(--typography-body-md-regular); }
+```
+

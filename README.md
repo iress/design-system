@@ -26,7 +26,7 @@ This repository includes specialized GitHub Copilot agents to assist with develo
 
 - **Bug-Fixing Agent**: Systematically fixes bugs from the issue tracker with comprehensive documentation
 
-**Learn more**: See the [Copilot Agent Setup Guide](docs/COPILOT-AGENT-SETUP.md) for detailed instructions on using these agents in VS Code and Slack.
+**Learn more**: See the [Copilot Agent Setup Guide](.github/docs/COPILOT-AGENT-SETUP.md) for detailed instructions on using these agents in VS Code and Slack.
 
 ## Development
 
@@ -72,6 +72,20 @@ To run tests for all packages:
 ```bash
 yarn test
 ```
+
+### Guidelines Site
+
+The IDS documentation site lives in `apps/guidelines/`. It's the source of truth for all component, pattern, and token documentation.
+
+```bash
+# Run the guidelines site locally
+yarn workspace @iress/ids-guidelines run dev
+
+# Build and preview
+yarn workspace @iress/ids-guidelines run preview
+```
+
+The site is deployed to GitHub Pages at https://iress.github.io/design-system/. Build output is committed to `docs/` on the main branch.
 
 ## Agent Skills
 

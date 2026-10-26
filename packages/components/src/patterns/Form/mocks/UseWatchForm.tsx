@@ -3,7 +3,6 @@ import {
   IressCheckboxGroup,
   IressForm,
   IressFormField,
-  type IressFormProps,
   IressInput,
   IressText,
 } from '@/main';
@@ -76,8 +75,10 @@ const FormSectionWithConditionalFields = () => {
   );
 };
 
-export const UseWatchForm = (args: IressFormProps<FieldValues>) => (
-  <IressForm {...args}>
-    <FormSectionWithConditionalFields />
-  </IressForm>
-);
+export function UseWatchForm() {
+  return (
+    <IressForm>
+      <FormSectionWithConditionalFields />
+    </IressForm>
+  );
+}

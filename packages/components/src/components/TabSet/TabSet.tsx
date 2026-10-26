@@ -1,7 +1,7 @@
 import { Composite } from '@floating-ui/react';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import {
-  type TabSetChangedEventDetail,
+  type IressTabSetChangedEventDetail,
   TabSetContext,
   TabSetProvider,
 } from './TabSetProvider';
@@ -52,7 +52,7 @@ export interface IressTabSetProps extends Omit<IressStyledProps, 'onChange'> {
   /**
    * Emitted when a tab changes.
    */
-  onChange?: (event: TabSetChangedEventDetail) => void;
+  onChange?: (event: IressTabSetChangedEventDetail) => void;
 
   /**
    * Custom style for the panel (the area that contains the tab content).
@@ -162,6 +162,19 @@ const ActiveIndicator = (props: IressUnstyledProps) => {
   return <div {...props} ref={ref} style={style} />;
 };
 
+/**
+ * Organises content into tabbed panels, showing one panel at a time.
+ *
+ * @example
+ * ```tsx
+ * import { IressTabSet, IressTab } from '@iress-oss/ids-components';
+ *
+ * <IressTabSet>
+ *   <IressTab label="Tab 1">Content 1</IressTab>
+ *   <IressTab label="Tab 2">Content 2</IressTab>
+ * </IressTabSet>
+ * ```
+ */
 export const IressTabSet = ({
   append,
   children,

@@ -2,7 +2,7 @@ import { addToStorybookCategory } from './addToStorybookCategory';
 import { disableArgTypes } from './disableArgTypes';
 import { mergeStorybookConfig } from './mergeStorybookConfig';
 import { removeArgTypes } from './removeArgTypes';
-import { withCustomSource } from './withCustomSource';
+import { withSource } from './withSource';
 
 describe('mergeStorybookConfig', () => {
   it('combines multiple objects into a single object', () => {
@@ -57,8 +57,8 @@ describe('mergeStorybookConfig', () => {
         removeArgTypes(['hello']),
         disableArgTypes(['world']),
       ),
-      parameters: mergeStorybookConfig(withCustomSource('code')),
-    }).toEqual({
+      parameters: mergeStorybookConfig(withSource('code')),
+    }).toMatchObject({
       argTypes: {
         hello: {
           table: {

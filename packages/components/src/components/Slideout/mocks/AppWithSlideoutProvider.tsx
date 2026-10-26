@@ -8,16 +8,20 @@ import {
 
 const SLIDEOUT_ID = 'storybook-slideout';
 
-export const App = (slideoutProps: IressSlideoutProps) => (
-  <IressSlideoutProvider>
-    <SlideoutWithTrigger {...slideoutProps} />
-  </IressSlideoutProvider>
-);
+export function AppWithSlideoutProvider(
+  props: Partial<IressSlideoutProps> = {},
+) {
+  return (
+    <IressSlideoutProvider>
+      <SlideoutWithTrigger {...props} />
+    </IressSlideoutProvider>
+  );
+}
 
-const SlideoutWithTrigger = ({
+function SlideoutWithTrigger({
   id = SLIDEOUT_ID,
   ...slideoutProps
-}: IressSlideoutProps) => {
+}: Readonly<Partial<IressSlideoutProps>>) {
   const { showSlideout } = useSlideout();
 
   return (
@@ -26,16 +30,18 @@ const SlideoutWithTrigger = ({
         Show slideout using provider
       </IressButton>
       <IressSlideout
-        {...slideoutProps}
         id={id}
+        heading="Provider slideout"
         footer={
           <IressButton onClick={() => showSlideout(id, false)}>
             Close slideout
           </IressButton>
         }
+        {...slideoutProps}
       >
-        {slideoutProps.children ?? 'Slideout content'}
+        This slideout was opened via IressSlideoutProvider and the useSlideout
+        hook.
       </IressSlideout>
     </>
   );
-};
+}

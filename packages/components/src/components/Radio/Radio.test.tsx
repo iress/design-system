@@ -101,7 +101,7 @@ describe('IressRadio', () => {
     describe('readOnly', () => {
       it('renders a hidden input with the correct value, if checked', () => {
         const screen = render(
-          <IressRadio value="radio" defaultChecked readOnly>
+          <IressRadio value="radio" checked readOnly>
             Label
           </IressRadio>,
         );
@@ -139,7 +139,7 @@ describe('IressRadio', () => {
 
       it('supports readOnly="locked" when checked', () => {
         const screen = render(
-          <IressRadio value="radio" defaultChecked readOnly="locked">
+          <IressRadio value="radio" checked readOnly="locked">
             Label
           </IressRadio>,
         );

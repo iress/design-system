@@ -169,6 +169,16 @@ const Link = <
   );
 };
 
+/**
+ * Renders a navigational anchor styled consistently with the design system.
+ *
+ * @example
+ * ```tsx
+ * import { IressLink } from '@iress-oss/ids-components';
+ *
+ * <IressLink href="/about">About us</IressLink>
+ * ```
+ */
 export const IressLink = forwardRef(Link) as (<
   C extends ElementType | undefined = undefined,
   THref extends string | undefined = undefined,

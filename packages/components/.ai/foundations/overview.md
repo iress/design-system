@@ -1,0 +1,62 @@
+# Overview
+
+The Iress Design System (IDS) is a shared library of React components, design
+tokens, and guidelines that Iress product teams use to build consistent,
+accessible, and performant user interfaces.
+
+## Why a design system?
+
+Iress builds financial software used by advisers, traders, lenders, and their
+clients. These users work in complex, data-rich environments where clarity and
+reliability are non-negotiable. A design system helps us:
+
+- **Ship faster** — teams reuse proven components instead of rebuilding common
+  UI patterns from scratch.
+- **Stay consistent** — shared tokens and components mean every product looks
+  and behaves the same, reducing cognitive load for users who switch between
+  Iress tools.
+- **Meet accessibility standards** — components are built to WCAG 2.1 AA by
+  default, so teams start compliant rather than retrofitting later.
+- **Reduce maintenance** — bug fixes and improvements propagate to every product
+  through a single dependency update.
+
+## Who is it for?
+
+| Audience | How they use IDS |
+|----------|-----------------|
+| **Designers** | Use the Figma library to create layouts that map directly to coded components. |
+| **Developers** | Install `@iress-oss/ids-components` and compose UIs using React components and design tokens. |
+| **Product managers** | Reference the guidelines to understand available patterns and make informed scope decisions. |
+| **QA engineers** | Use the documented accessibility and keyboard specs to verify implementations. |
+| **Business analysts** | Reference components and patterns to write accurate requirements and map user flows to existing UI capabilities. |
+
+## How this documentation is organised
+
+| Section | What you'll find |
+|---------|-----------------|
+| **Get Started** | Installation, Figma setup, and CSP configuration. |
+| **Foundations** | The *why* — design principles, accessibility philosophy, UX heuristics, and visual standards. |
+| **Tokens** | The design language — colour, typography, spacing, and radius values used across all components. |
+| **Styling Props** | How to apply tokens via component props for layout, spacing, colour, and typography. |
+| **Components** | Individual component documentation with design guidance, code examples, and accessibility specs. |
+| **Patterns** | Multi-component recipes for common UI tasks like forms, loading states, and navigation. |
+| **Resources** | Migration guides for upgrading between major versions. |
+
+## Guiding principles
+
+IDS is built on four pillars. Each is explored in detail in its own page:
+
+1. [Consistency](../foundations/principles.md#consistency) — predictable patterns
+   reduce user friction and speed up development.
+2. [Accessibility First](../foundations/principles.md#accessibility-first) — every
+   component meets WCAG 2.1 AA out of the box.
+3. [Clarity and Usability](../foundations/principles.md#clarity-and-usability) — clear
+   hierarchy and immediate feedback over visual novelty.
+4. [Developer Experience](../foundations/principles.md#developer-experience) — clean
+   APIs, comprehensive docs, and efficient testing.
+
+## Next steps
+
+- **Designers**: [Set up Figma](../get-started/design.md)
+- **Developers**: [Install and start building](../get-started/develop.md)
+- **Everyone**: [Core design principles](../foundations/principles.md)

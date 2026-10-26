@@ -1,28 +1,88 @@
 import { lazy } from 'react';
-import type { TestId } from '@helpers/testing';
+import type { ComponentMeta, TestComponentMeta } from '@helpers/meta/types';
 
-export const testIds: TestId[] = [
-  { suffix: 'heading', description: 'The modal heading' },
-  { suffix: 'backdrop', description: 'The overlay backdrop' },
+export const testMeta: TestComponentMeta[] = [
   {
-    suffix: 'close-button__button',
+    part: 'backdrop',
+    description: 'The overlay backdrop (outermost element)',
+    testId: 'modal__backdrop',
+  },
+  {
+    part: 'main',
+    description: 'The dialog element (nested inside backdrop)',
+    query: (
+      <code>
+        findByRole('dialog', {'{'} name: '...' {'}'})
+      </code>
+    ),
+    testId: 'modal',
+  },
+  {
+    part: 'heading',
+    description: 'The modal heading',
+    query: (
+      <code>
+        getByRole('heading', {'{'} name: '...' {'}'})
+      </code>
+    ),
+    testId: 'modal__heading',
+  },
+  {
+    part: 'close button',
     description: 'The close button',
+    query: (
+      <code>
+        findByRole('button', {'{'} name: 'Close' {'}'})
+      </code>
+    ),
+    testId: 'modal__close-button__button',
   },
-  { suffix: 'content', description: 'The modal content area' },
   {
-    suffix: 'status-header',
+    part: 'content',
+    description: 'The modal content area',
+    testId: 'modal__content',
+  },
+  {
+    part: 'status header',
     description: 'The status icon header (when status is set)',
+    testId: 'modal__status-header',
   },
   {
-    suffix: 'status-icon',
+    part: 'status icon',
     description: 'The status icon (when status is set)',
+    testId: 'modal__status-icon',
   },
-  { suffix: 'footer', description: 'The modal footer' },
+  {
+    part: 'footer',
+    description: 'The modal footer',
+    query: <code>getByText('...')</code>,
+    testId: 'modal__footer',
+  },
 ];
 
 export default {
   heading: 'Modal',
-  href: '/?path=/docs/components-modal--docs',
+  description:
+    'Displays content in a focused overlay dialog that requires user interaction.',
   tags: ['overlay', 'dialog', 'interactive'],
+  testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
-};
+  import: "import { IressModal } from '@iress-oss/ids-components';",
+  github: {
+    source:
+      'https://github.com/iress/design-system/tree/main/packages/components/src/components/Modal',
+    guidelines:
+      'https://github.com/iress/design-system/edit/main/apps/guidelines/content/components/modal.mdx',
+    storybook:
+      'https://github.com/iress/design-system/edit/main/packages/components/src/components/Modal/Modal.stories.tsx',
+    reportIssue:
+      'https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=modal&title=[Modal]+Bug:+',
+    requestFeature:
+      'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=modal,enhancement&title=[Modal]+Feature:+',
+  },
+  storybook:
+    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-modal--docs',
+  guidelines: 'https://iress.github.io/design-system/#/components/modal',
+  figma:
+    'https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-32822',
+} satisfies ComponentMeta;

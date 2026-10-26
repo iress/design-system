@@ -32,6 +32,7 @@ permissions:
   id-token: write
   contents: write
   actions: read
+  pages: write
 
 # Conflicts with merge_group events
 # concurrency:
@@ -41,13 +42,17 @@ permissions:
 env:
   NODE_VERSION: '22'
   YARN_VERSION: '4.10.3'
+  STORYBOOK_BRANCH: ${{ github.head_ref || github.ref_name }}
+  VITE_STORYBOOK_BRANCH: ${{ github.head_ref || github.ref_name }}
   INSTALL_CACHE_PATHS: |
     .yarn/cache
     .yarn/unplugged
     node_modules
+    apps/*/node_modules
     packages/*/node_modules
     ~/.cache/ms-playwright
   BUILD_CACHE_PATHS: |
+    apps/*/dist
     packages/*/.ai
     packages/*/build
     packages/*/dist
@@ -95,7 +100,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        check: [lint, typecheck, test:ci, lint:mermaid, size]
+        check: [lint, typecheck, test:ci, lint:mermaid, size, docs-check]
     steps:
       - uses: actions/checkout@v7
       - name: Setup Node.js
@@ -151,6 +156,17 @@ jobs:
                 ATTEMPT=$((ATTEMPT + 1))
               fi
             done
+          elif [ "${{ matrix.check }}" = "docs-check" ]; then
+            # Verify docs/ is up to date with the guidelines build
+            yarn workspace @iress/ids-guidelines run build
+            # Pagefind ships platform-specific vendor WASM; compare the site and search index, not those binaries.
+            DOCS_PATHS=(docs/ ':!docs/pagefind/wasm.en.pagefind' ':!docs/pagefind/wasm.unknown.pagefind')
+            if [ -n "$(git diff --name-only -- "${DOCS_PATHS[@]}")" ] || [ -n "$(git ls-files --others --exclude-standard -- "${DOCS_PATHS[@]}")" ]; then
+              echo "❌ docs/ is out of date. Run 'yarn workspace @iress/ids-guidelines run build' and commit docs/."
+              git diff --stat -- "${DOCS_PATHS[@]}"
+              exit 1
+            fi
+            echo "✅ docs/ is up to date."
           else
             # Run other checks normally (lint, typecheck, lint:mermaid) without retry
             yarn ${{ matrix.check }}
@@ -469,3 +485,44 @@ jobs:
             yarn workspaces foreach -A --no-private npm publish --tag canary --access public --provenance
           fi
           echo "✅ Canary release published successfully!"
+
+  # TODO: Re-enable once Platform Tech adds GitHub Actions runner IPs to the org IP allowlist.
+  # See: https://github.com/iress/design-system/issues — deploy fails with 403 due to IP allowlist.
+  # deploy-guidelines:
+  #   name: Deploy Guidelines
+  #   if: github.repository_owner == 'iress' && github.event_name == 'push' && contains(fromJSON('["refs/heads/main", "refs/heads/feat/guidelines"]'), github.ref)
+  #   runs-on: ubuntu-latest
+  #   needs: [validated]
+  #   timeout-minutes: 15
+  #   environment:
+  #     name: github-pages
+  #     url: ${{ steps.deployment.outputs.page_url }}
+  #   steps:
+  #     - uses: actions/checkout@v6
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v6
+  #       with:
+  #         node-version: ${{ env.NODE_VERSION }}
+  #     - name: Enable Corepack
+  #       run: corepack enable
+  #     - name: Restore Yarn dependencies
+  #       uses: actions/cache/restore@v5
+  #       with:
+  #         path: ${{ env.INSTALL_CACHE_PATHS }}
+  #         key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+  #         fail-on-cache-miss: true
+  #     - name: Restore build outputs
+  #       uses: actions/cache/restore@v5
+  #       with:
+  #         path: ${{ env.BUILD_CACHE_PATHS }}
+  #         key: yarn-${{ runner.os }}-${{ github.run_id }}
+  #         fail-on-cache-miss: true
+  #     - name: Install dependencies if needed
+  #       run: yarn install --immutable
+  #     - name: Upload Pages artifact
+  #       uses: actions/upload-pages-artifact@v3
+  #       with:
+  #         path: apps/guidelines/dist
+  #     - name: Deploy to GitHub Pages
+  #       id: deployment
+  #       uses: actions/deploy-pages@v4

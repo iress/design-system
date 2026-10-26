@@ -1,14 +1,40 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressTagInput } from './TagInput';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 import { stylingProps } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressTagInput>;
 
+const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The root element of the tag input',
+    query: <code>getByRole('textbox')</code>,
+    testId: 'tag-input',
+  },
+  {
+    part: 'tag',
+    description: 'An individual tag element',
+    testId: 'tag-input__tag',
+  },
+];
+
 export default {
-  title: 'Components/Tag/TagInput',
+  title: 'Components/TagInput',
   component: IressTagInput,
   tags: ['updated'],
-  argTypes: stylingProps,
+  argTypes: {
+    ...stylingProps,
+  },
+  parameters: {
+    idsConfig: { testMeta },
+    docs: {
+      description: {
+        component:
+          'A text input that converts entered values into removable tags, suitable for multi-value inputs like email recipients.',
+      },
+    },
+  },
 } as Meta<typeof IressTagInput>;
 
 export const TagInput: Story = {

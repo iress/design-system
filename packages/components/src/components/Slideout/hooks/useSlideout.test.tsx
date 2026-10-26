@@ -7,7 +7,7 @@ import {
 
 import { useSlideout } from './useSlideout';
 import userEvent from '@testing-library/user-event';
-import { App as AppWithSlideoutProvider } from '../mocks/AppWithSlideoutProvider';
+import { AppWithSlideoutProvider } from '../mocks/AppWithSlideoutProvider';
 
 const ID = 'slideout';
 

@@ -4,39 +4,37 @@ import { IressInline } from '../Inline';
 import { IressIcon } from '../Icon';
 import { IressText } from '../Text';
 import {
+  componentStoryMeta,
   disableArgTypes,
   reactNodeArgType,
-  stylingProps,
-  withTransformedRawSource,
+  withSource,
 } from '@iress-oss/ids-storybook-config';
 import { ReadonlyEditToggle } from './mocks/ReadonlyEditToggle';
 import ReadonlyEditToggleSource from './mocks/ReadonlyEditToggle.tsx?raw';
+import componentMeta from './meta';
 
 type Story = StoryObj<IressReadonlyProps>;
 
 export default {
   title: 'Components/Readonly',
   component: IressReadonly,
-  argTypes: {
-    ...disableArgTypes(['children']),
-    children: reactNodeArgType,
-    ...stylingProps,
-  },
-  tags: ['updated'],
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      ...disableArgTypes(['children']),
+      children: reactNodeArgType,
+    },
+  }),
 } as Meta<typeof IressReadonly>;
 
 export const Default: Story = {
   args: {
-    append: '',
-    prepend: '',
     value: 'AU',
   },
 };
 
 export const RichContent: Story = {
-  ...Default,
   args: {
-    ...Default.args,
+    value: 'AU',
     children: (
       <IressInline verticalAlign="middle" gap="sm">
         <IressIcon name="flag" /> Australia
@@ -46,9 +44,8 @@ export const RichContent: Story = {
 };
 
 export const InlineStyle: Story = {
-  ...Default,
   args: {
-    ...Default.args,
+    value: 'AU',
     children: (
       <IressInline verticalAlign="middle" gap="sm">
         <IressIcon name="flag" /> Australia
@@ -71,11 +68,8 @@ export const Actions: Story = {
   },
   render: (args) => <ReadonlyEditToggle {...args} />,
   parameters: {
-    ...withTransformedRawSource(
-      ReadonlyEditToggleSource,
-      'IressReadonlyProps',
-      ['actions'],
-    ),
+    controls: { disable: true },
+    ...withSource(ReadonlyEditToggleSource, { stripImports: true }),
   },
 };
 

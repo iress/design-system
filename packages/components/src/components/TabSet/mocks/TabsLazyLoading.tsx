@@ -1,13 +1,7 @@
-import {
-  IressButton,
-  IressStack,
-  IressTab,
-  IressTabSet,
-  type IressTabSetProps,
-} from '@/main';
+import { IressButton, IressStack, IressTab, IressTabSet } from '@/main';
 import { useState } from 'react';
 
-export const TabsLazyLoading = (args: IressTabSetProps) => {
+export function TabsLazyLoading() {
   const [loadTabs, setLoadTabs] = useState<boolean>();
 
   return (
@@ -15,7 +9,7 @@ export const TabsLazyLoading = (args: IressTabSetProps) => {
       <IressButton onClick={() => setLoadTabs(!loadTabs)} alignSelf="start">
         Toggle tabs
       </IressButton>
-      <IressTabSet {...args}>
+      <IressTabSet>
         {loadTabs && (
           <>
             <IressTab label="Address">Address information goes here</IressTab>
@@ -30,4 +24,4 @@ export const TabsLazyLoading = (args: IressTabSetProps) => {
       </IressTabSet>
     </IressStack>
   );
-};
+}

@@ -49,6 +49,16 @@ const SkipLink = <
   </IressButton>
 );
 
+/**
+ * Provides a keyboard-accessible link to skip to the main content area.
+ *
+ * @example
+ * ```tsx
+ * import { IressSkipLink } from '@iress-oss/ids-components';
+ *
+ * <IressSkipLink href="#main">Skip to content</IressSkipLink>
+ * ```
+ */
 export const IressSkipLink = forwardRef(SkipLink) as (<
   C extends ElementType | undefined = undefined,
   THref extends string | undefined = undefined,

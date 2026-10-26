@@ -1,0 +1,234 @@
+import { modalMeta } from '@iress-oss/ids-components/meta';
+import { IressButton } from '@iress-oss/ids-components';
+
+# Modal
+
+Modals gather information, complete a subtask, or provide additional information without losing the context of an underlying page.
+
+<Metadata meta={modalMeta} />
+
+<StoryEmbed id="components-modal--static"/>
+
+## Design
+
+### When to use
+
+- **Subtasks**: Gathering information required by the underlying page (e.g. form inputs)
+- **Confirmations**: Requiring explicit user acknowledgement before a destructive action
+- **Supplemental content**: Providing non-essential information related to the underlying page
+- **Full attention**: Content that requires the user's undivided focus
+
+Use modals sparingly — only when the task has a **direct relationship** to the underlying screen and requires the user's full attention.
+
+#### Choosing a size
+
+| Size | Use case | Example |
+|------|----------|---------|
+| **Small** | Communicate the outcome of an irreversible action. Concise, single action, optionally one input field. | Terms acceptance, delete confirmation, simple acknowledgement |
+| **Medium** | Provide optional supporting information or context. May contain a single action and larger inputs like a textarea. | Help content, detailed descriptions, feedback forms |
+| **Large** | Facilitate sub-flows within a primary flow. Used when the action impacts the underlying screen but doesn't warrant a separate page. | CSV upload wizard, multi-step forms, bulk operations |
+
+### When not to use
+
+- **Brief status messages** — use [Alert](/components/alert) or [Toaster](/components/toaster) instead
+- **Content that can be inline** — incorporate into the page without complicating its intent
+- **Secondary workflows** — use a [Slideout](/components/slideout) for tasks that don't require blocking the page
+
+#### Use a page instead of a modal when:
+
+- **The task is complex or multi-step** — if it takes more than 2-3 steps or has branching logic, it deserves its own page with a proper URL
+- **The user needs to reference other content** — modals block the underlying page; if users need to cross-reference data, use a page or slideout
+- **The content is long or scrollable** — if the modal would need significant scrolling, the content is too complex for a modal
+- **The task can be bookmarked or shared** — modals don't have URLs; if the task needs a permalink, use a page
+- **The user may need to leave and return** — modals lose state when closed; for tasks that take time or need saving as draft, use a page
+- **It contains a full form with many fields** — forms with more than 5-6 fields should be a dedicated page, not crammed into a modal
+
+> **Rule of thumb:** If you're reaching for `size="lg"` and `fixedFooter`, ask whether a dedicated page would be more appropriate. Large modals should be the exception, not the norm.
+
+For a full comparison of feedback components, see the [Feedback pattern](/patterns/feedback).
+
+### Do's and Don'ts
+
+| ✅ Do | ❌ Don't |
+|-------|----------|
+| Provide a clear way to dismiss the modal (close button, cancel action) | Remove all dismissal methods without providing an alternative |
+| Use status modals for confirmations and alerts | Use modals for transient success messages |
+| Keep modal content focused on a single task | Nest modals inside other modals |
+| Use appropriate size for the content | Use large modals for short confirmation messages |
+
+### Content guidelines
+
+- **Heading**: Use sentence case, describe the task or question
+- **Body**: Keep content focused — if it's too long, consider a Slideout or separate page
+- **Actions**: Place primary action on the right, cancel/secondary on the left
+- **Status modals**: Use `danger` for destructive confirmations, `warning` for caution, `success` for completion
+
+### Related patterns
+
+- [Feedback](/patterns/feedback) — decision tree for choosing the right feedback component
+- [Slideout](/components/slideout) — for longer secondary workflows
+- [Alert](/components/alert) — for inline persistent messages
+- [Toaster](/components/toaster) — for transient confirmations
+
+## Develop
+
+### Quick Start
+
+```tsx
+import { IressModal } from '@iress-oss/ids-components';
+
+<IressModal heading="Modal Header">
+    <p>Modal content goes here.</p>
+</IressModal>
+```
+
+<IressButton href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-modal--docs#api-props" mode="secondary">View all props</IressButton>
+
+### Usage
+
+#### Using the `show` property
+
+You can use state to control the modal by setting the `show` property to `true` or `false`. To sync your state with the modal, use the `onShowChange` prop.
+
+<StoryEmbed id="components-modal--show-with-state"/>
+
+#### Using the `IressModalProvider`
+
+Use `IressModalProvider` to open and close modals from anywhere in your application via a unique `id` and the `useModal` hook.
+
+> **Note:** If you are already using `IressProvider` or `IressShadow`, you do not need to add `IressModalProvider` separately — it is already included.
+
+<StoryEmbed id="components-modal-modalprovider--provider"/>
+
+#### Heading
+
+The `heading` prop sets a heading for the modal, rendered in the header and announced by screen readers when opened.
+
+<StoryEmbed id="components-modal--heading"/>
+
+#### Footer
+
+Use the `footer` prop to place content underneath the main content, usually for buttons.
+
+<StoryEmbed id="components-modal--footer-slot"/>
+
+#### Fixed footer
+
+The `fixedFooter` prop fixes the footer to the bottom of the modal, useful when main content scrolls.
+
+> **Using with popovers and tooltips**
+>
+> The fixed footer variant prevents content from overflowing the modal. This can
+> cause layout issues with components that use popovers (e.g. Select). Try using
+> a modal without a fixed footer if you encounter these issues.
+
+<StoryEmbed id="components-modal--fixed-footer"/>
+
+#### Size
+
+The `size` prop can be set to `sm`, `md` or `lg`. Defaults to `md`.
+
+<StoryEmbed id="components-modal--size"/>
+
+#### Responsive size
+
+Use the `width` styling prop for responsive sizes. The modal becomes full width on screens smaller than the specified value.
+
+<StoryEmbed id="components-modal--responsive-size"/>
+
+#### Status
+
+The `status` prop (`danger`, `success`, `warning`) displays a contextual status icon. When set, size is restricted to `sm` or `md` and the `actions` prop is enabled.
+
+<StoryEmbed id="components-modal--status"/>
+
+#### Disable closing
+
+Use `disableBackdropClick={true}` to disable backdrop clicks while still allowing
+Escape key dismissal. Set `disableBackdropClick="no-esc"` to disable both backdrop
+clicks and Escape dismissal. You can also hide the close button using
+`noCloseButton`. Ensure you provide an alternative way to close.
+
+<StoryEmbed id="components-modal--disable-closing"/>
+
+### Testing
+
+Query the modal dialog by its role:
+
+```tsx
+await user.click(screen.getByRole('button', { name: 'Open modal' }));
+const modal = await screen.findByRole('dialog', { name: 'Modal heading' });
+
+await user.click(screen.getByRole('button', { name: 'Close modal' }));
+await waitForElementToBeRemoved(modal);
+```
+
+**Note:** In version 5, modals are rendered conditionally — they are not in the
+DOM until shown. Use `findByRole` when waiting for a modal to appear.
+
+**Gotchas:**
+
+- **Conditional rendering**: Use `findByRole` (async) instead of `getByRole` — content isn't in the DOM until `show` is `true`
+- **Backdrop click closes modal**: Use `disableBackdropClick` if your test needs to prevent this
+- **Focus management**: Focus moves inside on open, returns to trigger on close
+
+<IressButton href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-modal--docs#testing" mode="secondary">View test IDs</IressButton>
+
+---
+
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
+
+<IressButton href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-modal--docs">View in Storybook</IressButton>
+
+## Specifications
+
+### Behaviour
+
+| State | Behaviour |
+|-------|-----------|
+| Default | Modal is hidden until `show` is `true` or opened via `useModal` |
+| Active | Backdrop covers page, body scroll is disabled, focus is trapped inside |
+| Dismissed | Clicking backdrop, pressing Escape, or clicking close button hides the modal |
+| Fixed footer | Footer stays pinned to bottom, content scrolls above it |
+| Status | Shows contextual icon in header, restricts size to `sm`/`md` |
+
+### Accessibility
+
+**WCAG compliance:**
+
+- **2.1.2 No Keyboard Trap** — Focus is trapped within modal but can be dismissed via Escape
+- **4.1.2 Name, Role, Value** — Uses `role="dialog"` with `aria-labelledby` pointing to heading
+- **2.4.3 Focus Order** — Focus moves into modal on open, returns to trigger on close
+
+**ARIA roles:**
+
+| Element | Role | Description |
+|---------|------|-------------|
+| Modal container | `dialog` | Identifies the modal as a dialog |
+| Heading | referenced via `aria-labelledby` | Provides accessible name |
+
+### Keyboard interaction
+
+| Key | Action |
+|-----|--------|
+| `Escape` | Closes the modal (unless disabled) |
+| `Tab` | Moves focus to next focusable element within the modal |
+| `Shift+Tab` | Moves focus to previous focusable element within the modal |
+| `Enter` / `Space` | Activates focused button |
+
+### Edge cases
+
+- **Conditional rendering**: Modal and its contents are not in the DOM until shown — use async queries in tests
+- **Nested popovers**: Fixed footer modals may clip popover content — use non-fixed footer when needed
+- **Multiple modals**: Only one modal should be active at a time
+- **Focus restore**: If the trigger element is removed while modal is open, focus moves to document body
+
+---
+
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
+
+<IressButton href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-modal--docs">View in Storybook</IressButton>

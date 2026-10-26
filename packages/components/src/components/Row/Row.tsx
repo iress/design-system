@@ -48,6 +48,19 @@ const Component = styled('div', row) as FC<
   }
 >;
 
+/**
+ * Arranges children in a horizontal row within a grid or flex layout.
+ *
+ * @example
+ * ```tsx
+ * import { IressRow, IressCol } from '@iress-oss/ids-components';
+ *
+ * <IressRow>
+ *   <IressCol span={6}>Left</IressCol>
+ *   <IressCol span={6}>Right</IressCol>
+ * </IressRow>
+ * ```
+ */
 export const IressRow = ({
   className,
   horizontalAlign,

@@ -7,12 +7,12 @@ import {
   IressIcon,
   IressInput,
   type IressInputProps,
-  IressPanel,
   IressPopover,
   IressReadonly,
   IressSelect,
 } from '@/main';
 import { type ComponentProps } from 'react';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 import {
   disableArgTypes,
   STORYBOOK_ONLY_CATEGORY,
@@ -74,8 +74,37 @@ const defaultInputs: FieldAndInputProps[] = [
   },
 ];
 
+const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The root fieldset element of the field group',
+    query: (
+      <code>
+        getByRole('group', {'{'} name: 'label' {'}'})
+      </code>
+    ),
+    testId: 'field-group',
+  },
+  {
+    part: 'legend',
+    description: 'The legend/label of the field group',
+    query: <code>getByText('...')</code>,
+    testId: 'field-group__legend',
+  },
+  {
+    part: 'hint',
+    description: 'The hint text of the field group',
+    testId: 'field-group__hint',
+  },
+  {
+    part: 'error',
+    description: 'The error message of the field group',
+    testId: 'field-group__error',
+  },
+];
+
 export default {
-  title: 'Components/Field/FieldGroup',
+  title: 'Components/FieldGroup',
   argTypes: {
     ...disableArgTypes(['children']),
     error: reactNodeArgType,
@@ -93,6 +122,15 @@ export default {
   },
   component: IressFieldGroup,
   tags: ['updated'],
+  parameters: {
+    idsConfig: { testMeta },
+    docs: {
+      description: {
+        component:
+          'Groups related form fields together with a shared label, hint, and error state using a fieldset/legend pattern.',
+      },
+    },
+  },
 } as Meta<typeof IressFieldGroup>;
 
 export const Default: Story = {
@@ -117,6 +155,16 @@ export const Inline: Story = {
     ...Default.args,
     inline: true,
   },
+  render: () => (
+    <IressFieldGroup label="Full name" inline>
+      <IressField label="First name" htmlFor="firstName">
+        <IressInput id="firstName" />
+      </IressField>
+      <IressField label="Last name" htmlFor="lastName">
+        <IressInput id="lastName" />
+      </IressField>
+    </IressFieldGroup>
+  ),
 };
 
 export const InlineSink: Story = {
@@ -171,7 +219,7 @@ export const InlineSink: Story = {
             </IressButton>
           }
         >
-          <IressPanel>Settings goes here</IressPanel>
+          Settings goes here
         </IressPopover>
       </IressFieldGroup>
     </form>
@@ -216,7 +264,7 @@ export const InlineAndReadonly: Story = {
             </IressButton>
           }
         >
-          <IressPanel>Settings goes here</IressPanel>
+          Settings goes here
         </IressPopover>
       </IressFieldGroup>
     </form>
@@ -229,6 +277,16 @@ export const Join: Story = {
     ...Default.args,
     join: true,
   },
+  render: () => (
+    <IressFieldGroup label="Full name" join>
+      <IressField label="First name" htmlFor="firstName">
+        <IressInput id="firstName" />
+      </IressField>
+      <IressField label="Last name" htmlFor="lastName">
+        <IressInput id="lastName" />
+      </IressField>
+    </IressFieldGroup>
+  ),
 };
 
 export const JoinSink: Story = {
@@ -237,6 +295,34 @@ export const JoinSink: Story = {
     ...InlineSink.args,
     join: true,
   },
+  render: () => (
+    <form>
+      <IressFieldGroup label="Full name" inline join>
+        <IressField label="Emoji" htmlFor="emoji">
+          <IressSelect
+            width="2"
+            id="emoji"
+            options={[
+              { label: '🐶', value: 'dog' },
+              { label: '🐱', value: 'cat' },
+              { label: '🐭', value: 'mouse' },
+            ]}
+            container={document.body}
+          />
+        </IressField>
+
+        <IressField label="First name" htmlFor="firstName" required>
+          <IressInput id="firstName" required />
+        </IressField>
+
+        <IressField label="Last name" htmlFor="lastName" required>
+          <IressInput id="lastName" required />
+        </IressField>
+
+        <IressButton type="submit">Submit</IressButton>
+      </IressFieldGroup>
+    </form>
+  ),
 };
 
 export const JoinAndReadonly: Story = {

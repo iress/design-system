@@ -1,0 +1,46 @@
+{
+  "name": "@iress/ids-guidelines",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"vite\" \"tsx scripts/build-search-index.ts --watch\" \"yarn dev:ai\"",
+    "dev:no-open": "concurrently \"vite\" \"tsx scripts/build-search-index.ts --watch\"",
+    "build": "vite build && tsx scripts/build-search-index.ts && rm -rf ../../docs && cp -r dist ../../docs",
+    "preview": "vite build && tsx scripts/build-search-index.ts && vite preview",
+    "search:build": "tsx scripts/build-search-index.ts",
+    "lint": "eslint . --max-warnings 0",
+    "test": "vitest --config vitest.config.ts --watch",
+    "test:coverage": "vitest run --config vitest.config.ts --coverage",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@iress-oss/ids-components": "workspace:*",
+    "@iress-oss/ids-tokens": "workspace:*",
+    "@mdx-js/react": "^3.1.0",
+    "@tanstack/react-router": "^1.120.3",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "rehype-prism-plus": "^2.0.0",
+    "rehype-slug": "^6.0.0"
+  },
+  "devDependencies": {
+    "@mdx-js/rollup": "^3.1.0",
+    "@tanstack/router-plugin": "^1.120.3",
+    "@testing-library/dom": "10.4.1",
+    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/react": "16.3.2",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^6.0.1",
+    "concurrently": "^9.2.1",
+    "eslint": "10.3.0",
+    "jsdom": "29.1.1",
+    "pagefind": "^1.5.2",
+    "remark-gfm": "^4.0.1",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.3",
+    "vite": "8.0.11",
+    "vitest": "4.1.5"
+  }
+}

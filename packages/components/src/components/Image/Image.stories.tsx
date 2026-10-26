@@ -1,27 +1,29 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { IressImage } from '.';
+import { IressImage, type IressImageProps } from '.';
 import { IressStack } from '@/components/Stack';
 import { IressText } from '@/components/Text';
-import React from 'react';
-import { stylingProps } from '@iress-oss/ids-storybook-config';
+import { componentStoryMeta } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 
-type Story = StoryObj<typeof IressImage>;
-const MAX_WIDTHS = [70, '250px', '50%', undefined] as const;
+type Story = StoryObj<IressImageProps & { stylingProps?: boolean }>;
 
 export default {
   title: 'Components/Image',
   component: IressImage,
   tags: ['beta: '],
-  argsTypes: {
-    ...stylingProps,
-  },
+  ...componentStoryMeta(componentMeta),
 } as Meta<typeof IressImage>;
 
 export const Default: Story = {
   args: {
     src: 'https://www.fdcbuilding.com.au/wp-content/webp-express/webp-images/uploads/2020/01/4-1.jpg.webp',
     alt: 'Placeholder image',
+    maxWidth: '200px',
+    stylingProps: true,
   },
+  render: ({ stylingProps: _stylingProps, ...args }) => (
+    <IressImage {...args} />
+  ),
 };
 
 export const MaxWidth: Story = {
@@ -29,14 +31,34 @@ export const MaxWidth: Story = {
   args: {
     ...Default.args,
   },
-  render: (args) => (
+  render: () => (
     <IressStack gap="md">
-      {MAX_WIDTHS.map((width, index) => (
-        <React.Fragment key={index}>
-          <IressText element="h3">{width ?? 'undefined'}</IressText>
-          <IressImage {...args} maxWidth={width} />
-        </React.Fragment>
-      ))}
+      <IressText element="h3">70</IressText>
+      <IressImage
+        src="https://www.fdcbuilding.com.au/wp-content/webp-express/webp-images/uploads/2020/01/4-1.jpg.webp"
+        alt="Placeholder image"
+        maxWidth={70}
+      />
+
+      <IressText element="h3">250px</IressText>
+      <IressImage
+        src="https://www.fdcbuilding.com.au/wp-content/webp-express/webp-images/uploads/2020/01/4-1.jpg.webp"
+        alt="Placeholder image"
+        maxWidth="250px"
+      />
+
+      <IressText element="h3">50%</IressText>
+      <IressImage
+        src="https://www.fdcbuilding.com.au/wp-content/webp-express/webp-images/uploads/2020/01/4-1.jpg.webp"
+        alt="Placeholder image"
+        maxWidth="50%"
+      />
+
+      <IressText element="h3">undefined</IressText>
+      <IressImage
+        src="https://www.fdcbuilding.com.au/wp-content/webp-express/webp-images/uploads/2020/01/4-1.jpg.webp"
+        alt="Placeholder image"
+      />
     </IressStack>
   ),
 };

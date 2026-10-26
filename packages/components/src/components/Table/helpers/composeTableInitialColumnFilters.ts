@@ -1,14 +1,14 @@
 import { type ColumnFiltersState } from '@tanstack/react-table';
 import {
   normalizeColumnFilter,
-  type TableColumn,
+  type IressTableColumn,
 } from './composeTableColumnDefs';
 
 export const composeTableInitialColumnFilters = <
   TRow extends object,
   TVal = unknown,
 >(
-  columns?: TableColumn<TRow, TVal>[],
+  columns?: IressTableColumn<TRow, TVal>[],
 ): ColumnFiltersState => {
   if (!columns) return [];
 

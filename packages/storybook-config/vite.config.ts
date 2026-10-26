@@ -74,7 +74,6 @@ export default defineConfig({
           '@mdx-js/react',
           'react-jsx-runtime',
           'react-element-to-jsx-string',
-          'react-diff-viewer',
         ].some((dep) => id === dep || id.startsWith(`${dep}/`));
       },
     },

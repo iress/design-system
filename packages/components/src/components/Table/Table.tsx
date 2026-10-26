@@ -8,7 +8,7 @@ import { type ReactNode, useRef, useState, useCallback, useMemo } from 'react';
 import { table } from './Table.styles';
 import { cx } from '@/styled-system/css';
 import { styled } from '@/styled-system/jsx';
-import { type TableColumn } from './helpers/composeTableColumnDefs';
+import { type IressTableColumn } from './helpers/composeTableColumnDefs';
 import { type IressStyledProps } from '@/types';
 import { GlobalCSSClass } from '@/enums';
 import type { UIEvent } from 'react';
@@ -67,7 +67,7 @@ export type IressTableProps<
    * A mapping of columns to be displayed in the table.
    * If not provided, it will be automatically regenerated from the row data.
    */
-  columns?: TableColumn<TRow, TVal>[];
+  columns?: IressTableColumn<TRow, TVal>[];
 
   /**
    * Compact view of the table, used for tables with a lot of data.
@@ -127,6 +127,20 @@ export type IressTableProps<
   virtualise?: boolean | TableVirtualiseOptions;
 };
 
+/**
+ * Displays structured data in rows and columns.
+ *
+ * @example
+ * ```tsx
+ * import { IressTable } from '@iress-oss/ids-components';
+ *
+ * <IressTable
+ *   caption="Users"
+ *   columns={[{ accessorKey: 'name', header: 'Name' }]}
+ *   rows={[{ name: 'Alice' }]}
+ * />
+ * ```
+ */
 export const IressTable = <TRow extends object = never, TVal = never>({
   alternate = false,
   caption,

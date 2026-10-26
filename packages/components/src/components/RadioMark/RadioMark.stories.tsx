@@ -2,18 +2,28 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressRadioMark } from './RadioMark';
 import { IressStack } from '../Stack';
 import { IressText } from '../Text';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 import { stylingProps } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressRadioMark>;
 
+const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The root element of the radio mark',
+    testId: 'radio-mark',
+  },
+];
+
 export default {
-  title: 'Components/RadioMark',
+  title: 'Components/Radio/RadioMark',
   component: IressRadioMark,
   tags: ['updated'],
   argTypes: {
     ...stylingProps,
   },
   parameters: {
+    idsConfig: { testMeta },
     docs: {
       description: {
         component: `
@@ -51,14 +61,14 @@ export const States: Story = {
       },
     },
   },
-  render: () => (
+  render: (args) => (
     <IressStack gap="md">
       <IressText>
-        <IressRadioMark checked={false} />
+        <IressRadioMark {...args} checked={false} />
         Unchecked
       </IressText>
       <IressText>
-        <IressRadioMark checked={true} />
+        <IressRadioMark {...args} checked={true} />
         Checked
       </IressText>
     </IressStack>
@@ -74,14 +84,14 @@ export const CustomSizing: Story = {
       },
     },
   },
-  render: () => (
+  render: (args) => (
     <IressStack gap="lg">
       <IressText element="span" textStyle="typography.body.sm">
-        <IressRadioMark checked={true} />
+        <IressRadioMark {...args} checked={true} />
         Small
       </IressText>
       <IressText element="span" textStyle="typography.body.md">
-        <IressRadioMark checked={true} />
+        <IressRadioMark {...args} checked={true} />
         Medium
       </IressText>
     </IressStack>
@@ -97,15 +107,19 @@ export const CustomColors: Story = {
       },
     },
   },
-  render: () => (
+  render: (args) => (
     <IressStack gap="md">
       <IressText>
-        <IressRadioMark checked={true} />
+        <IressRadioMark {...args} checked={true} />
         By default, inherits text colour
       </IressText>
       <IressText>
-        <IressRadioMark color="colour.system.danger.fill" />
-        <IressRadioMark checked={true} color="colour.system.danger.fill" />
+        <IressRadioMark {...args} color="colour.system.danger.fill" />
+        <IressRadioMark
+          {...args}
+          checked={true}
+          color="colour.system.danger.fill"
+        />
         Can be set to any color using the color prop, but will not change on
         hover or focus when used outside of a radio button context
       </IressText>

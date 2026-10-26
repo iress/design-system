@@ -5,9 +5,9 @@ import {
 } from './useTableColumnStyles';
 import { PropsWithChildren } from 'react';
 import { TableProvider, TableProviderProps } from '../TableProvider';
-import { TableColumn } from '../helpers/composeTableColumnDefs';
+import { IressTableColumn } from '../helpers/composeTableColumnDefs';
 
-const columns: TableColumn<object, unknown>[] = [
+const columns: IressTableColumn<object, unknown>[] = [
   {
     divider: true,
     key: 'test',

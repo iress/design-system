@@ -6,6 +6,25 @@ interface HookProps {
 }
 
 describe('useEstimatedProgressValue', () => {
+  it('continues beyond the estimate until the latest message timecode', async () => {
+    vi.useFakeTimers();
+    try {
+      const hook = renderHook(() =>
+        useEstimatedProgressValue(1000, false, undefined, 2500),
+      );
+
+      await act(async () => vi.advanceTimersByTime(1500));
+      expect(hook.result.current).toBeGreaterThan(1000);
+      expect(hook.result.current).toBeLessThan(2000);
+
+      await act(async () => vi.advanceTimersByTime(600));
+      expect(hook.result.current).toBeGreaterThanOrEqual(2000);
+      hook.unmount();
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
   it('updates the progress based on the estimatedFinishTime', async () => {
     vi.useFakeTimers();
 

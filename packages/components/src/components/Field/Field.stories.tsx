@@ -6,18 +6,20 @@ import { IressIcon } from '../Icon';
 import { IressReadonly } from '../Readonly';
 import { IressText } from '../Text';
 import { IressStack } from '../Stack';
-import { IressInline } from '../Inline';
-import { IressRow } from '../Row';
-import { IressCol } from '../Col';
-import { type ComponentProps, useState } from 'react';
-import { IressToggle } from '../Toggle';
+import { type ComponentProps } from 'react';
 import {
+  componentStoryMeta,
   disableArgTypes,
   STORYBOOK_ONLY_CATEGORY,
   withJsxTransformer,
+  withSource,
   reactNodeArgType,
-  stylingProps,
 } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
+import { FieldSupplementary } from './mocks/FieldSupplementary';
+import FieldSupplementarySource from './mocks/FieldSupplementary.tsx?raw';
+import { FieldRemoveErrorMargin } from './mocks/FieldRemoveErrorMargin';
+import FieldRemoveErrorMarginSource from './mocks/FieldRemoveErrorMargin.tsx?raw';
 
 type IressFieldPropsAndCustomArgs = ComponentProps<typeof IressField> & {
   input: Omit<IressInputProps, 'onChange'>;
@@ -35,22 +37,22 @@ const defaultInput = {
 export default {
   title: 'Components/Field',
   component: IressField,
-  argTypes: {
-    ...disableArgTypes(['children']),
-    error: reactNodeArgType,
-    hint: reactNodeArgType,
-    supplementary: reactNodeArgType,
-    ...stylingProps,
-    input: {
-      name: 'Input settings',
-      type: 'array',
-      table: {
-        category: STORYBOOK_ONLY_CATEGORY,
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      ...disableArgTypes(['children']),
+      error: reactNodeArgType,
+      hint: reactNodeArgType,
+      supplementary: reactNodeArgType,
+      input: {
+        name: 'Input settings',
+        type: 'array',
+        table: {
+          category: STORYBOOK_ONLY_CATEGORY,
+        },
+        defaultValue: defaultInput,
       },
-      defaultValue: defaultInput,
     },
-  },
-  tags: ['updated'],
+  }),
 } as Meta<typeof IressField>;
 
 export const Default: Story = {
@@ -70,14 +72,25 @@ export const Label: Story = {
   args: {
     ...Default.args,
     label: (
-      <span>
+      <>
         <IressIcon name="home" /> Find your address
-      </span>
+      </>
     ),
   },
   argTypes: {
     ...disableArgTypes(['label']),
   },
+  render: () => (
+    <IressField
+      label={
+        <>
+          <IressIcon name="home" /> Find your address
+        </>
+      }
+    >
+      <IressInput id="address" name="address" />
+    </IressField>
+  ),
 };
 
 export const Hint: Story = {
@@ -93,6 +106,14 @@ export const Hint: Story = {
       type: 'email',
     },
   },
+  render: () => (
+    <IressField
+      label="Email address"
+      hint="For us to be able to contact you in the future"
+    >
+      <IressInput id="email" name="email" required type="email" />
+    </IressField>
+  ),
 };
 
 export const ErrorMessage: Story = {
@@ -117,12 +138,19 @@ export const ErrorMessage: Story = {
       ],
     },
   },
+  render: () => (
+    <IressField
+      label="Error message"
+      errorMessages={[{ message: 'This field is required' }]}
+    >
+      <IressInput id="name" name="name" required />
+    </IressField>
+  ),
 };
 
 export const CustomError: Story = {
   ...Default,
   args: {
-    ...Default.args,
     label: 'Custom error',
     error: (
       <IressText element="small" color="colour.system.danger.text">
@@ -140,17 +168,21 @@ export const CustomError: Story = {
 export const HiddenLabel = {
   ...Default,
   args: {
-    ...Default.args,
     label: 'This label is hidden',
     hint: 'This hint text is hidden',
     hiddenLabel: true,
+    input: {
+      id: 'name',
+      name: 'input1',
+      required: true,
+      type: 'text',
+    },
   },
 };
 
 export const HiddenLabelWithError = {
   ...Default,
   args: {
-    ...Default.args,
     label: 'This label is hidden',
     hint: 'This hint text is hidden',
     error: (
@@ -159,15 +191,26 @@ export const HiddenLabelWithError = {
       </IressText>
     ),
     hiddenLabel: true,
+    input: {
+      id: 'name',
+      name: 'input1',
+      required: true,
+      type: 'text',
+    },
   },
 };
 
 export const Required = {
   ...Default,
   args: {
-    ...Default.args,
     label: 'This field is required',
     required: true,
+    input: {
+      id: 'name',
+      name: 'input1',
+      required: true,
+      type: 'text',
+    },
   },
 };
 
@@ -217,36 +260,16 @@ export const Supplementary: Story = {
   argTypes: {
     ...disableArgTypes(['error', 'errorMessages']),
   },
-  render: ({ input, ...args }) => {
-    const [error, setError] = useState<string | undefined>();
-
-    return (
-      <IressStack gap="spacing.5">
-        <IressToggle
-          onChange={(checked) =>
-            setError(checked ? 'This field is required' : undefined)
-          }
-          checked={error !== undefined}
-        >
-          Show error
-        </IressToggle>
-        <IressField {...args} error={error}>
-          <IressInput {...input} />
-        </IressField>
-      </IressStack>
-    );
-  },
+  render: (args) => <FieldSupplementary {...args} />,
   parameters: {
-    ...withJsxTransformer({
-      showFunctions: true,
-    }),
+    controls: { disable: true },
+    ...withSource(FieldSupplementarySource, { stripImports: true }),
   },
 };
 
 export const Horizontal: Story = {
   ...Default,
   args: {
-    ...Default.args,
     horizontal: true,
     labelWidth: '250px',
     label: 'Email address',
@@ -266,7 +289,6 @@ export const Horizontal: Story = {
 export const HorizontalWithError: Story = {
   ...Default,
   args: {
-    ...Default.args,
     horizontal: true,
     labelWidth: '250px',
     label: 'Email address',
@@ -327,129 +349,9 @@ export const RemoveErrorMargin: Story = {
     ...Default.args,
     label: 'Field Label',
   },
-  render: ({ input, ...args }) => {
-    const [removeErrorMargin, setRemoveErrorMargin] = useState(false);
-    const [showError, setShowError] = useState(false);
-
-    const fieldProps = {
-      removeErrorMargin,
-      ...(showError
-        ? {
-            errorMessages: [
-              {
-                message: 'This field is required',
-              },
-            ],
-          }
-        : {}),
-    };
-
-    const fieldPropsWithContent = {
-      removeErrorMargin,
-      ...(showError
-        ? {
-            errorMessages: [
-              {
-                message: 'This field is required',
-              },
-            ],
-          }
-        : {
-            supplementary: 'This is always-displayed supplementary text',
-          }),
-    };
-
-    return (
-      <IressStack gap="spacing.5">
-        <IressInline gap="spacing.4">
-          <IressToggle
-            onChange={(checked) => setRemoveErrorMargin(checked)}
-            checked={removeErrorMargin}
-          >
-            Remove error margin (tighter field spacing)
-          </IressToggle>
-
-          <IressToggle
-            onChange={(checked) => setShowError(checked)}
-            checked={showError}
-          >
-            Show error message
-          </IressToggle>
-        </IressInline>
-
-        <IressRow gutter="spacing.6">
-          {/* Vertical Layout Column */}
-          <IressCol span="6">
-            <IressStack gap="spacing.2">
-              <IressText element="h3">Vertical Label Layout</IressText>
-              <IressStack gap="spacing.0">
-                <IressField {...args} {...fieldProps} label="First Name">
-                  <IressInput {...input} placeholder="Enter first name" />
-                </IressField>
-                <IressField
-                  {...args}
-                  {...fieldPropsWithContent}
-                  label="Last Name"
-                >
-                  <IressInput {...input} placeholder="Enter last name" />
-                </IressField>
-                <IressField {...args} {...fieldProps} label="Email Address">
-                  <IressInput
-                    {...input}
-                    type="email"
-                    placeholder="Enter email"
-                  />
-                </IressField>
-              </IressStack>
-            </IressStack>
-          </IressCol>
-
-          {/* Horizontal Layout Column */}
-          <IressCol span="6">
-            <IressStack gap="spacing.2">
-              <IressText element="h3">Horizontal Label Layout</IressText>
-              <IressStack gap="spacing.0">
-                <IressField
-                  {...args}
-                  {...fieldProps}
-                  horizontal
-                  labelWidth="120px"
-                  label="First Name"
-                >
-                  <IressInput {...input} placeholder="Enter first name" />
-                </IressField>
-                <IressField
-                  {...args}
-                  {...fieldPropsWithContent}
-                  horizontal
-                  labelWidth="120px"
-                  label="Last Name"
-                >
-                  <IressInput {...input} placeholder="Enter last name" />
-                </IressField>
-                <IressField
-                  {...args}
-                  {...fieldProps}
-                  horizontal
-                  labelWidth="120px"
-                  label="Email Address"
-                >
-                  <IressInput
-                    {...input}
-                    type="email"
-                    placeholder="Enter email"
-                  />
-                </IressField>
-              </IressStack>
-            </IressStack>
-          </IressCol>
-        </IressRow>
-      </IressStack>
-    );
-  },
+  render: (args) => <FieldRemoveErrorMargin {...args} />,
   parameters: {
-    ...withJsxTransformer({
-      showFunctions: true,
-    }),
+    controls: { disable: true },
+    ...withSource(FieldRemoveErrorMarginSource, { stripImports: true }),
   },
 };

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { IressButton, IressPanel, IressPopover } from '@/main';
+import { IressButton, IressPopover } from '@/main';
 
 export const PopoverParentContainer = () => {
   const [parentContainer, setParentContainer] = useState<HTMLDivElement | null>(
@@ -12,9 +12,7 @@ export const PopoverParentContainer = () => {
         activator={<IressButton>Toggle</IressButton>}
         container={parentContainer}
       >
-        <IressPanel>
-          This content will be rendered in the parent container
-        </IressPanel>
+        This content will be rendered in the parent container
       </IressPopover>
     </div>
   );

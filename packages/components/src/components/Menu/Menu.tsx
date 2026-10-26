@@ -27,7 +27,18 @@ import { IressTooltipProvider } from '../Tooltip';
  * Menu component that provides context for its child menu items, headings, dividers, and text.
  * Does not apply to `multiSelect`, as the presence of checkboxes is determined by the `multiSelect` prop on the parent MenuItem instead to allow for more flexible combinations of single and multi select items within the same menu.
  */
-export type MenuVariants = 'subdraw' | 'radio' | 'side' | 'rail' | undefined;
+export type IressMenuVariants =
+  | 'subdraw'
+  | 'radio'
+  | 'side'
+  | 'rail'
+  | undefined;
+
+/**
+ * @deprecated Use `IressMenuVariants` instead. This type will be removed in a future release.
+ */
+// eslint-disable-next-line no-restricted-syntax, sonarjs/redundant-type-aliases
+export type MenuVariants = IressMenuVariants;
 
 export interface IressMenuProps<
   T = FormControlValue,
@@ -207,6 +218,19 @@ function getMenuContext<
 // eslint-disable-next-line react-refresh/only-export-components -- Context export for use throughout the component tree
 export const MenuContext = createMenuContext();
 
+/**
+ * Displays a list of navigational or actionable items.
+ *
+ * @example
+ * ```tsx
+ * import { IressMenu, IressMenuItem } from '@iress-oss/ids-components';
+ *
+ * <IressMenu>
+ *   <IressMenuItem>Item 1</IressMenuItem>
+ *   <IressMenuItem>Item 2</IressMenuItem>
+ * </IressMenu>
+ * ```
+ */
 export const IressMenu = <
   T = FormControlValue,
   TMultiple extends boolean = false,

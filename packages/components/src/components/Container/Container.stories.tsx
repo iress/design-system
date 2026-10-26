@@ -1,27 +1,32 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressContainer } from '.';
-import { IressPanel } from '../Panel';
 import {
-  CurrentBreakpoint,
+  componentStoryMeta,
   reactNodeArgType,
-  stylingProps,
+  withBreakpointLabel,
 } from '@iress-oss/ids-storybook-config';
 import { IressTable } from '../Table';
 import { BREAKPOINT_DETAILS, BREAKPOINTS } from '@/constants';
+import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressContainer>;
 
 export default {
   title: 'Components/Container',
   component: IressContainer,
-  tags: ['updated'],
-  argTypes: {
-    children: reactNodeArgType,
-    ...stylingProps,
-  },
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      children: reactNodeArgType,
+    },
+  }),
 } as Meta<typeof IressContainer>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    children:
+      'This content is inside a container that snaps to fixed max widths at different breakpoints.',
+  },
+};
 
 export const Container: Story = {
   render: (args) => (
@@ -31,24 +36,10 @@ export const Container: Story = {
         interface by snapping the layout to fixed max widths at different
         breakpoints.
       </p>
-
-      {args.fluid ? (
-        <p>
-          When the <code>fluid</code> prop is enabled, the container will span
-          the full width of its containing element. Try resizing the screen to
-          see how the IressContainer is 100% for all screen sizes.
-        </p>
-      ) : (
-        <p>Try resizing the screen to see the difference.</p>
-      )}
-
-      <IressPanel>
-        <CurrentBreakpoint
-          renderLabel={args.fluid ? 'container-fluid' : 'container'}
-        />
-      </IressPanel>
+      <p>Try resizing the screen to see the difference.</p>
     </IressContainer>
   ),
+  decorators: [withBreakpointLabel('container')],
 };
 
 export const Fluid: Story = {
@@ -59,8 +50,9 @@ export const Fluid: Story = {
 };
 
 export const BreakpointTable: Story = {
-  render: () => (
+  render: (args) => (
     <IressTable
+      {...args}
       caption="Container breakpoints"
       rows={BREAKPOINTS.map((breakpoint) => ({
         breakpoint,
@@ -69,4 +61,5 @@ export const BreakpointTable: Story = {
       }))}
     />
   ),
+  tags: ['reference'],
 };

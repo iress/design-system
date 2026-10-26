@@ -27,6 +27,16 @@ type IressStyledComponent = (<E extends ElementType = 'div'>(
   },
 ) => ReactNode) & { displayName?: 'IressStyled' };
 
+/**
+ * Applies design system styling props (spacing, colour, typography) to any element.
+ *
+ * @example
+ * ```tsx
+ * import { IressStyled } from '@iress-oss/ids-components';
+ *
+ * <IressStyled p="md" bg="colour.neutral.20">Styled content</IressStyled>
+ * ```
+ */
 export const IressStyled = forwardRef(
   <E extends ElementType = 'div'>(
     props: IressStyledProps<E>,

@@ -14,11 +14,12 @@ import ToasterTimeoutSource from './mocks/ToasterTimeout.tsx?raw';
 import { CloseToastViaProvider } from './mocks/CloseToastViaProvider';
 import CloseToastViaProviderSource from './mocks/CloseToastViaProvider.tsx?raw';
 import {
+  componentStoryMeta,
   disableArgTypes,
   removeArgTypes,
-  withTransformedRawSource,
-  stylingProps,
+  withSource,
 } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 
 type Story = StoryObj<IressToasterProviderProps>;
 
@@ -28,62 +29,45 @@ export default {
   args: {
     container: document.body,
   },
-  argTypes: {
-    ...disableArgTypes(['container']),
-    ...stylingProps,
-  },
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      ...disableArgTypes(['container']),
+    },
+  }),
 } as Meta<typeof IressToasterProvider>;
 
 export const Default: Story = {};
 
 export const Provider: Story = {
-  args: {
-    container: document.body,
-  },
   argTypes: {
     ...removeArgTypes(['toast']),
   },
   render: (args) => <SimpleToasterExample {...args} />,
   parameters: {
-    ...withTransformedRawSource(
-      SimpleToasterExampleSource,
-      'IressToasterProviderProps',
-      ['container'],
-    ),
+    controls: { disable: true },
+    ...withSource(SimpleToasterExampleSource, { stripImports: true }),
   },
 };
 
 export const Close: Story = {
-  args: {
-    container: document.body,
-  },
   argTypes: {
     ...removeArgTypes(['toast']),
   },
   render: (args) => <CloseToastViaProvider {...args} />,
   parameters: {
-    ...withTransformedRawSource(
-      CloseToastViaProviderSource,
-      'IressToasterProviderProps',
-      ['container'],
-    ),
+    controls: { disable: true },
+    ...withSource(CloseToastViaProviderSource, { stripImports: true }),
   },
 };
 
 export const Position: Story = {
-  args: {
-    ...Provider.args,
-  },
   argTypes: {
     ...disableArgTypes(['position']),
   },
   render: (args) => <ToasterPositionExamples {...args} />,
   parameters: {
-    ...withTransformedRawSource(
-      ToasterPositionExamplesSource,
-      'IressToasterProviderProps',
-      ['container'],
-    ),
+    controls: { disable: true },
+    ...withSource(ToasterPositionExamplesSource, { stripImports: true }),
   },
 };
 
@@ -93,27 +77,18 @@ export const Statuses: Story = {
   },
   render: (args) => <ToastStatuses {...args} />,
   parameters: {
-    ...withTransformedRawSource(
-      ToastStatusesSource,
-      'IressToasterProviderProps',
-      ['container'],
-    ),
+    controls: { disable: true },
+    ...withSource(ToastStatusesSource, { stripImports: true }),
   },
 };
 
 export const Timeout: Story = {
-  args: {
-    ...Provider.args,
-  },
   argTypes: {
     ...removeArgTypes(['toast']),
   },
   render: (args) => <ToasterTimeout {...args} />,
   parameters: {
-    ...withTransformedRawSource(
-      ToasterTimeoutSource,
-      'IressToasterProviderProps',
-      ['container'],
-    ),
+    controls: { disable: true },
+    ...withSource(ToasterTimeoutSource, { stripImports: true }),
   },
 };

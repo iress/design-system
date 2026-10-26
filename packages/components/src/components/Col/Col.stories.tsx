@@ -1,19 +1,23 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressCol, type IressColProps } from '.';
 import { IressPlaceholder } from '../Placeholder';
+import { ColResponsiveSpan } from './mocks/ColResponsiveSpan';
+import ColResponsiveSpanSource from './mocks/ColResponsiveSpan.tsx?raw';
 import { IressRow, type IressRowProps } from '../Row';
 import { IressStack } from '../Stack';
-import { IressPanel } from '../Panel';
 import { IressText } from '../Text';
 import { IressContainer } from '../Container';
 import {
-  CurrentBreakpoint,
+  componentStoryMeta,
   disableArgTypes,
   removeArgTypes,
   STORYBOOK_ONLY_CATEGORY,
   withJsxTransformer,
   omitStylingProps,
+  withBreakpointLabel,
+  withSource,
 } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 
 type ColWithCustomArgs = React.ComponentProps<typeof IressCol> & {
   numberOfColumns?: number;
@@ -22,43 +26,36 @@ type ColWithCustomArgs = React.ComponentProps<typeof IressCol> & {
 };
 type Story = StoryObj<ColWithCustomArgs>;
 
-const columnsArgType = {
-  name: 'Column settings',
-  type: 'object' as never,
-  table: {
-    category: STORYBOOK_ONLY_CATEGORY,
-  },
-};
-
 export default {
   title: 'Components/Col',
   component: IressCol,
-  argTypes: {
-    ...disableArgTypes(['children']),
-    ...omitStylingProps(['alignSelf']),
-    numberOfColumns: {
-      name: 'Number of columns',
-      description: 'Number of columns to render',
-      type: 'number',
-      table: {
-        category: STORYBOOK_ONLY_CATEGORY,
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      ...disableArgTypes(['children']),
+      ...omitStylingProps(['alignSelf']),
+      numberOfColumns: {
+        name: 'Number of columns',
+        description: 'Number of columns to render',
+        type: 'number',
+        table: {
+          category: STORYBOOK_ONLY_CATEGORY,
+        },
+      },
+      row: {
+        name: 'Row settings',
+        description: 'Change the row settings to see how the columns respond',
+        type: 'object',
+        table: {
+          category: STORYBOOK_ONLY_CATEGORY,
+        },
       },
     },
-    row: {
-      name: 'Row settings',
-      description: 'Change the row settings to see how the columns respond',
-      type: 'object',
-      table: {
-        category: STORYBOOK_ONLY_CATEGORY,
-      },
+    parameters: {
+      ...withJsxTransformer({
+        filterProps: ['numberOfColumns', 'columns', 'row'],
+      }),
     },
-  },
-  parameters: {
-    ...withJsxTransformer({
-      filterProps: ['numberOfColumns', 'columns', 'row'],
-    }),
-  },
-  tags: ['updated'],
+  }),
 } as Meta<typeof IressCol>;
 
 export const Default: Story = {
@@ -179,49 +176,12 @@ export const Span: Story = {
 };
 
 export const ResponsiveSpan: Story = {
-  ...Default,
-  args: {
-    ...Default.args,
-    columns: [
-      {
-        span: {
-          xs: 12,
-          md: 3,
-        },
-      },
-      {
-        span: {
-          xs: 12,
-          md: 9,
-        },
-      },
-    ],
+  render: () => <ColResponsiveSpan />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(ColResponsiveSpanSource, { stripImports: true }),
   },
-  argTypes: {
-    ...removeArgTypes(['numberOfColumns', 'span']),
-    columns: columnsArgType,
-  },
-  render: ({ numberOfColumns: _noc, row, columns = [], ...columnProps }) => (
-    <IressStack gap="spacing.4">
-      <IressPanel>
-        Current breakpoint: <CurrentBreakpoint />.
-      </IressPanel>
-
-      <IressRow {...row}>
-        {columns.map((column, index) => (
-          <IressCol {...columnProps} {...column} key={index}>
-            <IressPlaceholder>
-              <IressText textAlign="center">
-                Column {index + 1}
-                <br />
-                {column.span && JSON.stringify(column.span)}
-              </IressText>
-            </IressPlaceholder>
-          </IressCol>
-        ))}
-      </IressRow>
-    </IressStack>
-  ),
+  decorators: [withBreakpointLabel()],
 };
 
 export const Offset: Story = {
@@ -296,39 +256,20 @@ export const Offset: Story = {
 
 export const ResponsiveOffset: Story = {
   ...Default,
-  args: {
-    ...Default.args,
-    columns: [
-      {
-        offset: {
-          md: 5,
-          lg: 2,
-        },
-      },
-    ],
-  },
   argTypes: {
     ...removeArgTypes(['numberOfColumns', 'offset']),
-    columns: columnsArgType,
   },
-  render: ({ numberOfColumns: _noc, row, columns = [], ...columnProps }) => (
+  decorators: [withBreakpointLabel()],
+  render: () => (
     <IressStack gap="spacing.4">
-      <IressPanel>
-        Current breakpoint: <CurrentBreakpoint />.
-      </IressPanel>
-
-      <IressRow {...row}>
-        {columns.map((column, index) => (
-          <IressCol {...columnProps} {...column} key={index}>
-            <IressPlaceholder>
-              <IressText textAlign="center">
-                Column {index + 1}
-                <br />
-                {column.offset && JSON.stringify(column.offset)}
-              </IressText>
-            </IressPlaceholder>
-          </IressCol>
-        ))}
+      <IressRow>
+        <IressCol offset={{ md: 5, lg: 2 }}>
+          <IressPlaceholder>
+            <IressText textAlign="center">
+              offset: {'{'} md: 5, lg: 2 {'}'}
+            </IressText>
+          </IressPlaceholder>
+        </IressCol>
       </IressRow>
     </IressStack>
   ),

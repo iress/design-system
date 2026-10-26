@@ -14,6 +14,16 @@ export type IressSelectLabelProps = Omit<
 > &
   IressSelectActivatorProps;
 
+/**
+ * The activator button for a select, displaying the selected value or placeholder text.
+ *
+ * @example
+ * ```tsx
+ * import { IressSelectLabel } from '@iress-oss/ids-components';
+ *
+ * <IressSelectLabel placeholder="Choose an option" selected={[]} />
+ * ```
+ */
 export const IressSelectLabel = ({
   append,
   className,

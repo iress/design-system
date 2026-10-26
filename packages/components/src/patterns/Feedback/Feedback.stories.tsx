@@ -1,37 +1,36 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { FeedbackExample } from './mocks/FeedbackExample';
-import FeedbackExampleSource from './mocks/FeedbackExample.tsx?raw';
-import { DecisionTreeDecorator } from './mocks/DecisionTreeDecorator';
+import { FeedbackDecisionTree } from './mocks/FeedbackDecisionTree';
+import FeedbackDecisionTreeSource from './mocks/FeedbackDecisionTree.tsx?raw';
+import {
+  componentStoryMeta,
+  withSource,
+} from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 
-type Story = StoryObj<typeof FeedbackExample>;
+type Story = StoryObj<typeof FeedbackDecisionTree>;
 
 export default {
   title: 'Patterns/Feedback',
-  component: FeedbackExample,
+  component: FeedbackDecisionTree,
   tags: ['beta'],
-  parameters: {
-    chromatic: {
-      disableSnapshot: true,
+  ...componentStoryMeta(componentMeta, {
+    idsConfig: {
+      autodocsTemplate: 'landing',
     },
-    controls: {
-      disable: true,
-    },
-  },
-} as Meta<typeof FeedbackExample>;
-
-export const DecisionTree: Story = {
-  decorators: [
-    (Story) => (
-      <DecisionTreeDecorator>
-        <Story />
-      </DecisionTreeDecorator>
-    ),
-  ],
-  parameters: {
-    docs: {
-      source: {
-        code: FeedbackExampleSource,
+    parameters: {
+      chromatic: {
+        disableSnapshot: true,
+      },
+      controls: {
+        disable: true,
       },
     },
+  }),
+} as Meta<typeof FeedbackDecisionTree>;
+
+export const DecisionTree: Story = {
+  render: (_args) => <FeedbackDecisionTree />,
+  parameters: {
+    ...withSource(FeedbackDecisionTreeSource, { stripImports: true }),
   },
 };

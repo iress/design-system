@@ -1,9 +1,7 @@
 import { useState, useCallback, useRef } from 'react';
-import { IressTable, type IressTableProps } from '@/main';
+import { IressTable } from '@/main';
 import { IressPill } from '@/components/Pill';
 import { IressLoading } from '@/patterns/Loading';
-
-type Props = Partial<IressTableProps<object, never>>;
 
 const STATUS_MODES: Record<string, 'success' | 'info' | 'warning' | 'danger'> =
   {
@@ -59,7 +57,7 @@ const simulateServerFetch = (statusFilter: string[]): Promise<object[]> =>
     }, 800);
   });
 
-export const TableFilteringServerSide = (args: Props) => {
+export function TableFilteringServerSide() {
   const [rows, setRows] = useState<object[]>(ALL_ROWS);
   const [loaded, setLoaded] = useState(true);
   const [updating, setUpdating] = useState(false);
@@ -88,7 +86,6 @@ export const TableFilteringServerSide = (args: Props) => {
         caption="My investments"
         compact
         rows={rows}
-        {...args}
         columns={[
           {
             key: 'investment_name',
@@ -139,4 +136,4 @@ export const TableFilteringServerSide = (args: Props) => {
       />
     </IressLoading>
   );
-};
+}

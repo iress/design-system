@@ -1,26 +1,22 @@
 // Components
 export * from './components/CodeSandbox';
-export * from './components/ComponentApi';
-export * from './components/ComponentApiExpander';
-export * from './components/ComponentExample';
-export * from './components/ComponentOverview';
 export * from './components/ComponentStatus';
 export * from './components/CurrentBreakpoint';
-export * from './components/DiffViewer';
-export * from './components/HideSidebar';
+export * from './decorators/withBreakpointLabel';
 export * from './components/Redirect';
-export * from './components/TestIdTable';
+export * from './components/TestTable';
+export * from './components/ComponentMeta';
 
 // Stories/MDX helpers
 export * from './helpers/addToStorybookCategory';
+export * from './helpers/createComponentMeta';
 export * from './helpers/disableArgTypes';
 export * from './helpers/mergeStorybookConfig';
 export * from './helpers/removeArgTypes';
-export * from './helpers/stringifyStorybookArgs';
 export * from './helpers/stylingProps';
-export * from './helpers/withCustomSource';
 export * from './helpers/withJsxTransformer';
-export * from './helpers/withTransformedSource';
+export * from './helpers/withSource';
+export * from './helpers/sourceReplacements';
 
 // Constants
 export * from './constants';

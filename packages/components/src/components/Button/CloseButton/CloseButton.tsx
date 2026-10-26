@@ -14,6 +14,16 @@ export interface IressCloseButtonProps extends Omit<
   screenreaderText?: string;
 }
 
+/**
+ * A circular close button with a close icon, typically used to dismiss modals, slideouts, or notifications.
+ *
+ * @example
+ * ```tsx
+ * import { IressCloseButton } from '@iress-oss/ids-components';
+ *
+ * <IressCloseButton screenreaderText="Close dialog" onClick={handleClose} />
+ * ```
+ */
 export const IressCloseButton = forwardRef(
   (
     {

@@ -55,6 +55,15 @@ export interface IressShadowProps
  * This component allows you to encapsulate its children within a Shadow DOM.
  * It automatically includes the IDS CSS and allows for additional stylesheets
  * and font faces to be added either to the shadow DOM or the parent document head.
+ *
+ * @example
+ * ```tsx
+ * import { IressShadow } from '@iress-oss/ids-components';
+ *
+ * <IressShadow>
+ *   <div>Encapsulated content</div>
+ * </IressShadow>
+ * ```
  */
 export const IressShadow = forwardRef<ShadowRoot | null, IressShadowProps>(
   (

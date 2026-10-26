@@ -7,10 +7,12 @@
   "type": "module",
   "workspaces": {
     "packages": [
-      "packages/*"
+      "packages/*",
+      "apps/*"
     ]
   },
   "resolutions": {
+    "@types/node": "22.15.29",
     "shell-quote": "1.8.4"
   },
   "devDependencies": {
@@ -36,6 +38,7 @@
     "concurrently": "^10.0.3",
     "eslint": "^10.6.0",
     "eslint-plugin-file-progress": "^4.0.0",
+    "eslint-plugin-jsdoc": "^62.9.0",
     "eslint-plugin-mdx": "3.8.1",
     "eslint-plugin-prettier": "^5.5.6",
     "eslint-plugin-react-hooks": "^7.1.1",
@@ -47,6 +50,7 @@
     "prettier": "^3.8.2",
     "puppeteer": "^25.0.2",
     "react": "^19.2.6",
+    "react-docgen-typescript": "^2.4.0",
     "react-dom": "^19.2.6",
     "size-limit": "12.1.0",
     "storybook": "10.4.6",
@@ -64,8 +68,9 @@
     "check-coverage": "tsx ./scripts/check-coverage.ts",
     "size": "size-limit",
     "size:check": "size-limit --json",
-    "dev": "concurrently \"wait-on tcp:6006 && wait-on tcp:6007 && yarn storybook\" \"yarn packages/components dev:no-open\" \"yarn packages/tokens dev:no-open\"",
-    "dev:kill": "kill $(lsof -ti tcp:6005) || true; kill $(lsof -ti tcp:6006) || true; kill $(lsof -ti tcp:6007) || true",
+    "dev": "concurrently \"wait-on tcp:6006 && wait-on tcp:6007 && yarn storybook\" \"yarn packages/components dev:no-open\" \"yarn packages/tokens dev:no-open\" \"yarn apps/guidelines dev:no-open\" \"yarn dev:ai\"",
+    "dev:ai": "tsx ./scripts/dev-watcher.ts",
+    "dev:kill": "kill $(lsof -ti tcp:6005) || true; kill $(lsof -ti tcp:6006) || true; kill $(lsof -ti tcp:6007) || true; kill $(lsof -ti tcp:5555) || true",
     "prepublish": "tsx ./scripts/storybook-addon-prepublish.ts",
     "prepare": "husky && yarn build",
     "build-storybook": "storybook build",
@@ -76,11 +81,12 @@
     "test": "yarn monorepo run test",
     "test:coverage": "yarn monorepo run test:coverage",
     "test:ci": "yarn test:coverage && yarn check-coverage --all",
-    "translate": "yarn translate:components && yarn generate:token-reference && yarn translate:skills && yarn generate:llms-txt",
-    "translate:components": "tsx ./scripts/translate-components.ts",
-    "translate:skills": "tsx ./scripts/translate-skills.ts",
-    "generate:token-reference": "tsx ./scripts/generate-token-reference.ts",
-    "generate:llms-txt": "tsx ./scripts/generate-llms-txt.ts",
+    "translate": "tsx ./scripts/translate.ts",
+    "translate:components": "tsx ./scripts/translate.ts --components",
+    "translate:tokens": "tsx ./scripts/translate.ts --tokens",
+    "translate:skills": "tsx ./scripts/translate.ts --skills",
+    "generate:llms-txt": "tsx ./scripts/translate.ts --llms-txt",
+    "generate:token-reference": "tsx ./scripts/translate.ts --tokens",
     "components:versions": "tsx ./scripts/generate-component-versions.ts",
     "typecheck": "yarn monorepo run typecheck",
     "monorepo": "yarn workspaces foreach -Ai --topological-dev --exclude=@iress/design-system-monorepo"

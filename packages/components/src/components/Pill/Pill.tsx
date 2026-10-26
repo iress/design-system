@@ -41,6 +41,16 @@ export interface IressPillProps extends IressStyledProps<'span'> {
     | 'warning';
 }
 
+/**
+ * Displays a small, rounded badge for categorisation or status indication.
+ *
+ * @example
+ * ```tsx
+ * import { IressPill } from '@iress-oss/ids-components';
+ *
+ * <IressPill>New</IressPill>
+ * ```
+ */
 export const IressPill = ({
   children,
   mode = '90',

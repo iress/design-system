@@ -25,7 +25,7 @@
     "analyse": "yarn vite-bundle-visualizer",
     "build": "yarn cssVars && vite build",
     "build-storybook": "storybook build --stats-json",
-    "dev": "concurrently \"yarn watch:cssVars\" \"yarn storybook\"",
+    "dev": "concurrently \"yarn watch:cssVars\" \"yarn storybook\" \"yarn dev:ai\"",
     "dev:no-open": "concurrently \"yarn watch:cssVars\" \"yarn storybook --no-open\"",
     "clean": "rimraf build dist coverage src/generated storybook-static",
     "cssVars": "tsx plugins/generateCssVars.ts",

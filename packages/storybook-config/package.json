@@ -44,9 +44,7 @@
   "dependencies": {
     "@iress-oss/ids-tokens": "^6.0.0",
     "radash": "12.1.1",
-    "react-diff-viewer": "^3.1.1",
-    "react-element-to-jsx-string": "^17.0.1",
-    "remark-gfm": "^4.0.1"
+    "react-element-to-jsx-string": "^17.0.1"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.2.1",

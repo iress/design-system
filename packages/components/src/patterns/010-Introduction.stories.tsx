@@ -4,7 +4,10 @@ import {
   IressRow,
   IressStack,
   IressCol,
+  IressInline,
+  IressButton,
   IressSkeleton,
+  IressContainer,
 } from '@/main';
 import { Suspense } from 'react';
 
@@ -14,49 +17,73 @@ import dropdownMenu from './DropdownMenu/meta';
 import feedback from './Feedback/meta';
 import form from './Form/meta';
 import loading from './Loading/meta';
+import searchSelection from './SearchSelection/meta';
 import shadow from './Shadow/meta';
 import sideNav from './SideNav/meta';
 
-const patterns: {
-  heading: string;
-  href: string;
-  tags?: string[];
-  Thumbnail: React.FC;
-}[] = [
+const patterns = [
   breadcrumbs,
   contextualMenu,
   dropdownMenu,
   feedback,
   form,
   loading,
+  searchSelection,
   shadow,
   sideNav,
 ];
 
 const Reference = () => {
   return (
-    <IressStack gap="lg" mt="lg">
-      <IressRow gutter="lg">
-        {patterns.map(({ Thumbnail, ...component }) => (
-          <IressCol key={component.heading} span={{ md: 3 }}>
-            <IressCard
-              {...component}
-              element="a"
-              media={
-                <Suspense
-                  fallback={
-                    <IressSkeleton mode="rect" width="751px" height="184px" />
-                  }
-                >
-                  <Thumbnail />
-                </Suspense>
-              }
-              stretch
-            />
-          </IressCol>
-        ))}
-      </IressRow>
-    </IressStack>
+    <IressContainer>
+      <IressStack gap="lg" my="lg" maxWidth="overlay.lg" mx="auto">
+        <IressRow gutter="lg">
+          {patterns.map(({ Thumbnail, ...component }) => (
+            <IressCol key={component.heading} span={{ md: 4 }}>
+              <IressCard
+                media={
+                  <Suspense
+                    fallback={
+                      <IressSkeleton mode="rect" width="751px" height="184px" />
+                    }
+                  >
+                    <Thumbnail />
+                  </Suspense>
+                }
+                heading={component.heading}
+                footer={
+                  <IressInline gap="sm">
+                    {'storybook' in component && component.storybook && (
+                      <IressButton
+                        mode="secondary"
+                        compact
+                        href={component.storybook}
+                        target="_blank"
+                      >
+                        Storybook
+                      </IressButton>
+                    )}
+                    {'guidelines' in component && component.guidelines && (
+                      <IressButton
+                        mode="secondary"
+                        compact
+                        href={component.guidelines}
+                        target="_blank"
+                      >
+                        Guidelines
+                      </IressButton>
+                    )}
+                  </IressInline>
+                }
+                stretch
+              >
+                {component.description}
+              </IressCard>
+            </IressCol>
+          ))}
+        </IressRow>
+      </IressStack>
+    </IressContainer>
   );
 };
 
@@ -66,11 +93,11 @@ export default {
   title: 'Patterns/Introduction',
   component: Reference,
   parameters: {
-    chromatic: {
-      disableSnapshot: true,
-    },
-    controls: {
-      disable: true,
+    chromatic: { disableSnapshot: true },
+    controls: { disable: true },
+    layout: 'fullscreen',
+    idsConfig: {
+      autodocsTemplate: 'landing',
     },
   },
 } as Meta<typeof Reference>;

@@ -156,6 +156,21 @@ describe('IressTabs', () => {
       });
     });
 
+    describe('append', () => {
+      it('renders append content outside the tablist', () => {
+        const screen = renderComponent({
+          append: <button data-testid="append-btn">Add</button>,
+        });
+
+        const appendBtn = screen.getByTestId('append-btn');
+        expect(appendBtn).toBeInTheDocument();
+
+        // Append content should NOT be inside the tablist
+        const tablist = screen.getByRole('tablist');
+        expect(tablist).not.toContainElement(appendBtn);
+      });
+    });
+
     describe('layout', () => {
       it('changes the layout of the tabs', () => {
         const screen = renderComponent({
