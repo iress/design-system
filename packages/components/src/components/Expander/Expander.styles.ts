@@ -60,9 +60,13 @@ export const expander = sva({
           _hover: {
             bg: 'colour.neutral.20',
           },
+          _focusVisible: {
+            bg: 'colour.neutral.20',
+          },
 
           '&[aria-expanded="true"]': {
             borderBottomRadius: 'radius.0',
+            bg: 'colour.neutral.20',
           },
         },
         content: {

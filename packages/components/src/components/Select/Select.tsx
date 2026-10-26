@@ -112,6 +112,17 @@ type SelectProps<TNative extends boolean | Breakpoints = false> =
         >
     : Omit<NativeSelectProps, 'value' | 'onChange' | 'options'>;
 
+type SelectSearchInputProps = Pick<
+  IressInputProps,
+  | 'className'
+  | 'data-testid'
+  | 'inputMode'
+  | 'maxLength'
+  | 'minLength'
+  | 'pattern'
+  | 'spellCheck'
+>;
+
 export type IressSelectProps<
   TMultiple extends boolean = false,
   TNative extends boolean | Breakpoints = false,
@@ -206,6 +217,16 @@ export type IressSelectProps<
   renderOptions?: (props: SelectOptionsRenderProps<TMultiple>) => ReactNode;
 
   /**
+   * Passive props to apply to the internal async search input shown when
+   * `options` is a function, such as input constraints and non-interactive
+   * presentation props. Supported keys are `className`, `data-testid`,
+   * `inputMode`, `maxLength`, `minLength`, `pattern`, and `spellCheck`.
+   * Selection state, query updates, built-in placeholder text, and
+   * accessibility labelling remain controlled by `IressSelect`.
+   */
+  searchInputProps?: SelectSearchInputProps;
+
+  /**
    * Whether its required. Will be passed to the hidden input.
    */
   required?: boolean;
@@ -228,6 +249,13 @@ export type IressSelectProps<
    * If you are customising using `renderOptions`, you may need to set this manually.
    */
   virtualFocus?: boolean;
+
+  /**
+   * Text to be displayed when the options function errors out. It is not used when the options are provided as an array.
+   * Can be a ReactNode or a render function that receives the error value.
+   * @default <IressAlert status="danger" variant="full-width" mb="none">An unknown error occurred. Please contact support if the error persists.</IressAlert>
+   */
+  errorText?: ((error: boolean | string) => ReactNode) | ReactNode;
 
   /**
    * Header showed in option panel when expanded.
@@ -399,6 +427,7 @@ const Select = <
     className,
     defaultValue,
     disabled,
+    errorText,
     footer,
     header,
     id,
@@ -415,6 +444,7 @@ const Select = <
     renderHiddenInput,
     renderLabel,
     renderOptions,
+    searchInputProps,
     required,
     type: typeProp,
     value: valueProp,
@@ -481,8 +511,10 @@ const Select = <
 
   const {
     append,
+    container,
     debounceThreshold,
     initialOptions,
+    loadingDelay,
     minSearchLength,
     onActivated,
     onDeactivated,
@@ -503,6 +535,7 @@ const Select = <
     debounceThreshold,
     disabled: !show || !!native,
     initialOptions,
+    loadingDelay,
     minSearchLength,
     options,
     query,
@@ -595,6 +628,7 @@ const Select = <
         disabled={disabled}
         id={id}
         name={name}
+        onBlur={onBlur}
         onChange={(e, value) => {
           (onChange as SelectChangeEvent<false, true>)?.(
             e,
@@ -670,6 +704,7 @@ const Select = <
             multiSelectLimit={multiSelectLimit}
             onChange={onChange as SelectChangeEvent<TMultiple, false>}
             placeholder={placeholder}
+            popoverContainer={container}
             prepend={prepend}
             renderLabel={renderLabel}
             selectedOptionsText={selectedOptionsText}
@@ -681,6 +716,7 @@ const Select = <
         }
         align={align}
         className={cx(className, classes.root, GlobalCSSClass.Select)}
+        container={container}
         contentClassName={cx(classes.popoverContent)}
         contentStyle={{
           ...restProps.contentStyle,
@@ -702,6 +738,7 @@ const Select = <
             data-testid={propagateTestid(restProps['data-testid'], 'menu')}
             debouncedQuery={debouncedQuery}
             error={error}
+            errorText={errorText}
             initialOptions={initialOptions}
             loading={loading}
             minSearchLength={minSearchLength}
@@ -711,6 +748,7 @@ const Select = <
             query={query}
             renderOptions={renderOptions}
             results={results}
+            searchInputProps={searchInputProps}
             setQuery={setQuery}
             setShow={setShow}
             setValue={setValue}

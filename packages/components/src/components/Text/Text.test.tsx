@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { IressText } from '.';
 import { text } from './Text.styles';
+import { css } from '@/styled-system/css';
 import { GlobalCSSClass } from '@/enums';
 
 describe('IressText', () => {
@@ -17,6 +18,17 @@ describe('IressText', () => {
 
       expect(element).toHaveClass(text(), 'test-class', GlobalCSSClass.Text);
       expect(element).toBeInstanceOf(HTMLDivElement);
+    });
+
+    it('should apply the deprecated colour.neutral.90 alias', () => {
+      render(
+        <IressText data-testid="test-id" color="colour.neutral.90">
+          Test text
+        </IressText>,
+      );
+
+      const element = screen.getByTestId('test-id');
+      expect(element).toHaveClass(css({ color: 'colour.neutral.90' }));
     });
 
     it('should render with the correct element', () => {

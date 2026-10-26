@@ -184,7 +184,7 @@ export const alert = sva({
         alertVars: {
           '--alert-surface': '{colors.colour.neutral.20}',
           '--alert-surfaceHover': '{colors.colour.neutral.30}',
-          '--alert-text': '{colors.colour.neutral.90}',
+          '--alert-text': '{colors.colour.neutral.80}',
           '--alert-fill': '{colors.colour.neutral.70}',
           '--alert-fillHover': '{colors.colour.neutral.80}',
           '--alert-onFill': '{colors.colour.neutral.20}',

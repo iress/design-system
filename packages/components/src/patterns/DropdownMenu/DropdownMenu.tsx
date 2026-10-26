@@ -195,6 +195,7 @@ const DropdownMenu = <TMultiple extends boolean = false>(
     label,
     id: idProp,
     initialOptions,
+    loadingDelay,
     inputProps: inputPropsProp = {
       clearable: true,
       prepend: <IressIcon name="search" />,
@@ -293,6 +294,7 @@ const DropdownMenu = <TMultiple extends boolean = false>(
     debounceThreshold,
     initialOptions:
       initialOptions ?? (typeof options === 'function' ? undefined : options),
+    loadingDelay,
     options,
     query,
   });

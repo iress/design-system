@@ -39,6 +39,16 @@ export function TabSetLayout() {
           <IressTab label="History">Medical history goes here</IressTab>
         </IressTabSet>
       </IressPanel>
+      <IressPanel>
+        <IressText element="h2">top-stretch</IressText>
+        <IressTabSet layout="top-stretch">
+          <IressTab label="Address">Address information goes here</IressTab>
+          <IressTab label="Employment">
+            Employment information goes here
+          </IressTab>
+          <IressTab label="History">Medical history goes here</IressTab>
+        </IressTabSet>
+      </IressPanel>
     </IressStack>
   );
 }

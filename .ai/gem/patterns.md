@@ -648,8 +648,9 @@ import { IressDropdownMenu } from '@iress-oss/ids-components';
 | onNavigate | `((activeIndex: number , null) => void)` | — | Is called when registered popover items are navigated using arrow keys. Only works with `type` listbox and menu. |
 | nested | `boolean` | — | Whether this popover uses nested navigation (ArrowRight to open, ArrowLeft to close). When not set, this is auto-detected based on whether the popover is inside another popover. |
 | disabled | `boolean` | `false` | Disables the hook from running any effects or search operations. When disabled, the hook returns empty results and default state. |
-| debounceThreshold | `number` | `500` | Time in milliseconds to wait for before performing result search. Only applies to searchable options (function). |
+| debounceThreshold | `number` | `300` | Time in milliseconds to wait for before performing result search. Only applies to searchable options (function). |
 | initialOptions | `[LabelValueMeta](../../dist/interfaces.d.ts)<[FormControlValue](../../dist/types.d.ts)>[]` | — | Initial options data set, shown when the input is empty. |
+| loadingDelay | `number` | `250` | Time in milliseconds to wait before showing the loading spinner for async options. |
 | minSearchLength | `number` | `1` | Minimum number of characters required before triggering async search. Only applies to searchable options (function). Below this threshold, no search will be triggered and no loading state will be shown. |
 | **options** | `[LabelValueMeta](../../dist/interfaces.d.ts)<[FormControlValue](../../dist/types.d.ts)>[] , ((query: string) => Promise<[LabelValueMeta](../../dist/interfaces.d.ts)<[FormControlValue](../../dist/types.d.ts)>[]>)` | — | Options data set, shown when the input is not empty. |
 | limitMobile | `number` | `6` | Maximum number of results displayed on mobile screen sizes (< 768). |
@@ -1461,6 +1462,7 @@ Also accepts all [styling props](../styling-props/overview.md) ([type definition
 | hint | `ReactNode` | — | Text to be displayed as supporting field description. |
 | horizontal | `boolean` | — | Displays the label and input field inline instead of stacked vertically. |
 | hiddenLabel | `boolean` | — | Visually hides the label text, but still available to screen readers. |
+| errorId | `string` | — | ID for the error container element, used to associate the error message with the form control via `aria-describedby`. When `error` or `errorMessages` are present and `htmlFor` is set, this is automatically derived as `${htmlFor}-error`. Override only if you need a custom error container ID. |
 | errorMessages | `[ValidationMessageObj](../../dist/interfaces.d.ts)[]` | — | Validation errors to be displayed above the field, an array of validation messages to be displayed in `IressValidationSummary`. |
 | labelWidth | `string` | — | Controls the width of the label container when in horizontal mode. Can be any valid CSS width value (e.g., '200px', '20%', 'auto'). Only applies when `horizontal` is true. |
 | removeErrorMargin | `boolean` | — | Removes the reserved space for error messages, allowing fields to stack with narrower gaps. When true, no margin is reserved for potential error messages. |
@@ -1485,6 +1487,7 @@ Also accepts all [styling props](../styling-props/overview.md) ([type definition
 | horizontal | `boolean` | — | Displays the label and input field inline instead of stacked vertically. |
 | readOnly | `[FormControlReadOnly](../../dist/types.d.ts)` | — | Renders the group in a read-only state (no asterisk symbol). Use `'locked'` when the control is read-only due to permissions. |
 | hiddenLabel | `boolean` | — | Visually hides the label text, but still available to screen readers. |
+| errorId | `string` | — | ID for the error container element, used to associate the error message with the form control via `aria-describedby`. When `error` or `errorMessages` are present and `htmlFor` is set, this is automatically derived as `${htmlFor}-error`. Override only if you need a custom error container ID. |
 | errorMessages | `[ValidationMessageObj](../../dist/interfaces.d.ts)[]` | — | Validation errors to be displayed above the field, an array of validation messages to be displayed in `IressValidationSummary`. |
 | labelWidth | `string` | — | Controls the width of the label container when in horizontal mode. Can be any valid CSS width value (e.g., '200px', '20%', 'auto'). Only applies when `horizontal` is true. |
 | removeErrorMargin | `boolean` | — | Removes the reserved space for error messages, allowing fields to stack with narrower gaps. When true, no margin is reserved for potential error messages. |
@@ -2897,6 +2900,38 @@ export const HookFormExample = () => {
 ```tsx
 <IressFormValidationSummary />;
 ```
+
+### Controlling screen reader announcements
+
+By default, `IressFormValidationSummary` uses `role="alert"` (an assertive live region), which causes screen readers to interrupt the user and read out the entire error list immediately. When using `mode="onBlur"`, a new error is added every time the user leaves a field — this can be disruptive.
+
+You have two options for a less intrusive experience:
+
+**Option 1 — Polite announcements via `aria-live`**
+
+Pass `aria-live="polite"` and `role="status"` to `IressFormValidationSummary` to switch to a polite live region. Screen readers will wait for a pause in user activity before announcing changes.
+
+```tsx
+<IressForm mode="onBlur">
+  <IressFormValidationSummary aria-live="polite" role="status" srOnly />
+  {/* fields */}
+</IressForm>;
+```
+
+**Option 2 — Only announce on submit via `updateErrorSummaryOnSubmit`**
+
+Pass `updateErrorSummaryOnSubmit` to `IressForm` (or `IressHookForm`) to prevent the summary from updating while the user is still filling in the form. The summary will only be populated — and announced — when the form is submitted.
+
+```tsx
+<IressForm mode="onBlur" updateErrorSummaryOnSubmit>
+  {/* fields */}
+</IressForm>;
+```
+
+| Approach | When to use |
+|---|---|
+| `aria-live="polite"` on `IressFormValidationSummary` | Real-time feedback is still desirable but should not interrupt the user |
+| `updateErrorSummaryOnSubmit` on `IressForm` | Errors should only be announced once the user tries to submit |
 
 #### With readonly data
 

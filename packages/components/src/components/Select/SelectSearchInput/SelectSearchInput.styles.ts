@@ -14,7 +14,7 @@ export const selectSearchInput = sva({
         borderWidth: '0px',
         borderBottomWidth: '1px',
         borderBottomStyle: 'solid',
-        '--iress-shadow-focus': 'inset 0 -1px 0 0 {colors.colour.neutral.90}',
+        '--iress-shadow-focus': 'inset 0 -1px 0 0 {colors.colour.neutral.80}',
       },
 
       '&:has(input:focus, textarea:focus) > *': {

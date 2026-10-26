@@ -93,7 +93,7 @@ Also accepts all [styling props](../styling-props/overview.md) ([type definition
 | children | `ReactNode` | — | Items within the group (typically menu items). |
 | defaultActive | `boolean` | — | Uncontrolled default for the active/expanded state. Only used when parent Menu has variant="side". |
 | divider | `boolean` | — | Adds a divider after the group. Adds a divider after any content. If you would like to add content before the menu item, use a `<hr />` instead. |
-| element | ... 164 more ..., `article` , `circle` , `code` , `details` , `div` , `filter` , `footer` , `html` , `iframe` , `image` , `input` , `object` , `p` , `slot` , `span` , `style` , `symbol` , `title`  | — | Custom element type for the activator (e.g. for third-party routing). Only used when parent Menu has variant="side". The HTML element that should be rendered. |
+| element | `ElementType` | — | Custom element type for the activator (e.g. for third-party routing). Only used when parent Menu has variant="side". |
 | href | `string` | — | URL for the group activator link. Only used when parent Menu has variant="side". |
 | onActiveChange | `((active?: boolean) => void)` | — | Callback fired when the active/expanded state changes. Only used when parent Menu has variant="side". |
 | variant | `[IressMenuVariants](../../dist/components/Menu/Menu.d.ts)` | — | Variant of the menu group. - `undefined` (default): Renders inline with label as heading and children below. - `'subdraw'`: Renders as a trigger that opens a fly-over submenu containing children. - `'side'`: Renders as a numbered header with an expandable drawer containing children. |

@@ -31,7 +31,7 @@ export const Library = {
   parameters: {
     IDS_Sandbox: {
       dependencies: {
-        '@iress-oss/ids-components': 'alpha',
+        '@iress-oss/ids-components': 'beta',
       },
       html: IDSStubHTML,
       template: IDSStubTemplate,

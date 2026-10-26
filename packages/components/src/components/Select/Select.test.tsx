@@ -15,9 +15,12 @@ import { menuItem } from '../Menu';
 import { createRef, type FormEvent } from 'react';
 import { IressLabel } from '../Label';
 import { IressSelectMenu } from './SelectMenu/SelectMenu';
+import { IressSelectLabel } from './SelectLabel/SelectLabel';
 import { IressForm } from '@/patterns/Form/Form';
 import { IressFormField } from '@/patterns/Form/FormField/FormField';
 import { IressButton } from '@/components/Button';
+import { type FormRef } from '@/patterns/Form';
+import { useRef } from 'react';
 
 describe('IressSelect', () => {
   const classes = select();
@@ -66,6 +69,104 @@ describe('IressSelect', () => {
   });
 
   describe('interactions copied from native select', () => {
+    it.each([
+      'default',
+      'custom portalled',
+      'custom modal',
+      'group padding',
+    ] as const)(
+      'preserves keyboard navigation after clicking a group label with %s rendering',
+      async (rendering) => {
+        const onChange = vi.fn();
+        const portalRoot =
+          rendering === 'custom modal'
+            ? render(
+                <div role="dialog" aria-label="Choose a country" />,
+              ).getByRole('dialog')
+            : document.body;
+        const options = [
+          {
+            label: 'Favourites',
+            children: [
+              { label: 'Australia', value: 'au' },
+              { label: 'Canada', value: 'ca' },
+            ],
+          },
+          {
+            label: 'All countries',
+            children: [
+              { label: 'France', value: 'fr' },
+              { label: 'Germany', value: 'de' },
+            ],
+          },
+        ];
+        const customProps: Partial<IressSelectProps> =
+          rendering === 'custom portalled' || rendering === 'custom modal'
+            ? {
+                container: portalRoot,
+                renderLabel: ({ value }) => (
+                  <IressSelectLabel role="combobox" selected={value} />
+                ),
+                renderOptions: ({ results, value, handleMenuChange }) => (
+                  <IressSelectMenu
+                    items={results}
+                    selected={value}
+                    onChange={handleMenuChange}
+                  />
+                ),
+              }
+            : {};
+
+        render(
+          <IressSelect
+            {...customProps}
+            options={options}
+            onChange={onChange}
+          />,
+          rendering === 'custom modal' ? { container: portalRoot } : undefined,
+        );
+
+        const combobox = await screen.findByRole('combobox');
+        await userEvent.tab();
+        await userEvent.keyboard('{Enter}');
+
+        const australia = await screen.findByRole('option', {
+          name: 'Australia',
+        });
+        expect(australia).toHaveClass(
+          menuItem({ isActiveInPopover: true }).root!,
+        );
+
+        const heading = screen.getByRole('heading', { name: 'All countries' });
+        if (rendering === 'custom modal') {
+          expect(screen.getByRole('dialog')).toContainElement(heading);
+        }
+        await userEvent.click(
+          rendering === 'group padding' ? heading.parentElement! : heading,
+        );
+        expect(combobox).toHaveFocus();
+        expect(combobox).toHaveAttribute('aria-expanded', 'true');
+        expect(onChange).not.toHaveBeenCalled();
+
+        await userEvent.keyboard('{ArrowDown}');
+        expect(combobox).toHaveAttribute(
+          'aria-activedescendant',
+          screen.getByRole('option', { name: 'Canada' }).id,
+        );
+        await userEvent.keyboard('{ArrowUp}');
+        expect(combobox).toHaveAttribute('aria-activedescendant', australia.id);
+        await userEvent.keyboard('{Enter}');
+
+        expect(onChange).toHaveBeenCalledWith(
+          expect.anything(),
+          'au',
+          options[0].children[0],
+        );
+        expect(combobox).toHaveTextContent('Australia');
+        expect(combobox).toHaveAttribute('aria-expanded', 'false');
+      },
+    );
+
     it('returns focus to the activator when clicking the activator', async () => {
       render(<IressSelect options={MOCK_LABEL_VALUES} />);
 
@@ -590,9 +691,7 @@ describe('IressSelect', () => {
           expect(optionsRound1).toHaveLength(6); // heading is an option as well... a11y things
         });
 
-        expect(
-          screen.getByText(/^Search results \(\d+\)$/),
-        ).toBeInTheDocument();
+        expect(screen.getByText('Search results (5)')).toBeInTheDocument();
 
         await userEvent.keyboard('{ArrowDown}{Enter}');
 
@@ -645,9 +744,7 @@ describe('IressSelect', () => {
           expect(optionsRound1).toHaveLength(6); // heading is an option as well... a11y things
         });
 
-        expect(
-          screen.getByText(/^Search results \(\d+\)$/),
-        ).toBeInTheDocument();
+        expect(screen.getByText('Search results (5)')).toBeInTheDocument();
 
         // WAF-854 change: After typing, focus is now on search results, not the heading
         // So we don't need to press ArrowDown first to navigate to an option
@@ -733,6 +830,68 @@ describe('IressSelect', () => {
 
         const error = await screen.findByText('Custom error message');
 
+        expect(error).toBeInTheDocument();
+      });
+
+      it('renders a custom errorText node when options throw an error', async () => {
+        render(
+          <IressSelect
+            data-testid="test-component"
+            placeholder="Select item(s)"
+            options={() => Promise.reject(new Error())}
+            debounceThreshold={0}
+            errorText={<span>Custom error override</span>}
+            multiSelect
+          />,
+        );
+
+        // focus activator and open popover
+        await userEvent.tab();
+        await userEvent.keyboard('{Enter}');
+
+        const combobox = await screen.findByRole('combobox', {
+          name: 'Search',
+        });
+        await waitFor(() => expect(combobox).toHaveFocus());
+
+        await userEvent.keyboard('op');
+
+        const error = await screen.findByText('Custom error override');
+        expect(error).toBeInTheDocument();
+
+        expect(
+          screen.queryByText(
+            'An unknown error occurred. Please contact support if the error persists.',
+          ),
+        ).not.toBeInTheDocument();
+      });
+
+      it('renders a custom errorText render function when options throw an error', async () => {
+        render(
+          <IressSelect
+            data-testid="test-component"
+            placeholder="Select item(s)"
+            options={() => Promise.reject(new Error('Something went wrong'))}
+            debounceThreshold={0}
+            errorText={(err) => <span>Render fn error: {String(err)}</span>}
+            multiSelect
+          />,
+        );
+
+        // focus activator and open popover
+        await userEvent.tab();
+        await userEvent.keyboard('{Enter}');
+
+        const combobox = await screen.findByRole('combobox', {
+          name: 'Search',
+        });
+        await waitFor(() => expect(combobox).toHaveFocus());
+
+        await userEvent.keyboard('op');
+
+        const error = await screen.findByText(
+          'Render fn error: Something went wrong',
+        );
         expect(error).toBeInTheDocument();
       });
     });
@@ -1200,6 +1359,150 @@ describe('IressSelect', () => {
         await userEvent.click(option);
 
         expect(onBlur).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('searchInputProps', () => {
+      it('applies supported passive props to the async search input without changing selection behaviour', async () => {
+        const onChange = vi.fn();
+        const asyncOptions = vi
+          .fn()
+          .mockImplementation(async (query: string) =>
+            query ? [{ label: query, value: query }] : [],
+          );
+
+        render(
+          <IressSelect
+            data-testid="test-component"
+            placeholder="Select an item"
+            options={asyncOptions}
+            searchInputProps={{
+              className: 'custom-search-input',
+              'data-testid': 'custom-search-input',
+              inputMode: 'search',
+              maxLength: 3,
+              minLength: 2,
+              pattern: '[a-z]+',
+              spellCheck: true,
+            }}
+            debounceThreshold={0}
+            onChange={onChange}
+          />,
+        );
+
+        const activator = screen.getByRole('button', {
+          name: 'Select an item',
+        });
+        await userEvent.click(activator);
+
+        await screen.findByRole('combobox', {
+          name: 'Search',
+        });
+        const searchInput = screen.getByTestId('custom-search-input');
+        const combobox = screen.getByTestId('custom-search-input__input');
+
+        expect(searchInput).toHaveClass('custom-search-input');
+        expect(combobox).toHaveAttribute('inputmode', 'search');
+        expect(combobox).toHaveAttribute('maxlength', '3');
+        expect(combobox).toHaveAttribute('minlength', '2');
+        expect(combobox).toHaveAttribute('pattern', '[a-z]+');
+        expect(combobox).toHaveAttribute('spellcheck', 'true');
+
+        await userEvent.type(combobox, 'abcd');
+
+        expect(combobox).toHaveValue('abc');
+        expect(asyncOptions).not.toHaveBeenCalledWith('abcd');
+
+        const option = await screen.findByRole('option', {
+          name: 'abc',
+        });
+        await userEvent.click(option);
+
+        expect(onChange).toHaveBeenCalledWith(
+          expect.objectContaining({
+            target: { value: 'abc' },
+          }),
+          'abc',
+          expect.objectContaining({
+            label: 'abc',
+            value: 'abc',
+          }),
+        );
+        expect(screen.getByTestId('test-component__hidden-input')).toHaveValue(
+          'abc',
+        );
+      });
+
+      it('ignores blocked runtime props so built-in async combobox behaviour still wins', async () => {
+        const onChange = vi.fn();
+        const blockedOnChange = vi.fn();
+        const asyncOptions = vi
+          .fn()
+          .mockImplementation(async (query: string) =>
+            query ? [{ label: query, value: query }] : [],
+          );
+        const unsafeSearchInputProps = {
+          'aria-label': 'Injected label',
+          disabled: true,
+          onChange: blockedOnChange,
+          placeholder: 'Injected placeholder',
+          readOnly: true,
+          value: 'blocked value',
+        } as unknown as NonNullable<IressSelectProps['searchInputProps']>;
+
+        render(
+          <IressSelect
+            data-testid="test-component"
+            placeholder="Select an item"
+            options={asyncOptions}
+            searchInputProps={unsafeSearchInputProps}
+            debounceThreshold={0}
+            onChange={onChange}
+          />,
+        );
+
+        const activator = screen.getByRole('button', {
+          name: 'Select an item',
+        });
+        await userEvent.click(activator);
+
+        const combobox = await screen.findByRole('combobox', {
+          name: 'Search',
+        });
+
+        expect(combobox).toHaveAccessibleName('Search');
+        expect(combobox).toHaveAttribute('placeholder', 'Search and select');
+        expect(combobox).toHaveValue('');
+        expect(combobox).not.toBeDisabled();
+        expect(combobox).not.toHaveAttribute('readonly');
+
+        await userEvent.type(combobox, 'ab');
+
+        expect(blockedOnChange).not.toHaveBeenCalled();
+        expect(combobox).toHaveValue('ab');
+
+        await waitFor(() => {
+          expect(asyncOptions).toHaveBeenCalledWith('ab');
+        });
+
+        const option = await screen.findByRole('option', {
+          name: 'ab',
+        });
+        await userEvent.click(option);
+
+        expect(onChange).toHaveBeenCalledWith(
+          expect.objectContaining({
+            target: { value: 'ab' },
+          }),
+          'ab',
+          expect.objectContaining({
+            label: 'ab',
+            value: 'ab',
+          }),
+        );
+        expect(screen.getByTestId('test-component__hidden-input')).toHaveValue(
+          'ab',
+        );
       });
     });
   });
@@ -1929,6 +2232,154 @@ describe('IressSelect', () => {
       await userEvent.click(submit);
 
       expect(submittedFormData!.get('gender')).toBe('male');
+    });
+
+    it('resets native select value when form.reset() is called', async () => {
+      interface TestFormData {
+        provider: string;
+      }
+
+      const FormWithNativeSelectAndReset = () => {
+        const formRef = useRef<FormRef<TestFormData>>(null);
+
+        return (
+          <IressForm<TestFormData>
+            ref={formRef}
+            mode="onBlur"
+            reValidateMode="onChange"
+            defaultValues={{ provider: '' }}
+          >
+            <IressFormField<TestFormData>
+              label="Provider"
+              name="provider"
+              rules={{ required: 'Select a provider' }}
+              render={(properties) => (
+                <IressSelect
+                  native
+                  {...properties}
+                  data-testid="native-select"
+                  options={[
+                    { value: '', label: 'Select...' },
+                    { value: 'option1', label: 'Option 1' },
+                    { value: 'option2', label: 'Option 2' },
+                  ]}
+                />
+              )}
+            />
+            <IressButton onClick={() => formRef.current?.reset()}>
+              Reset
+            </IressButton>
+          </IressForm>
+        );
+      };
+
+      render(<FormWithNativeSelectAndReset />);
+
+      const select = screen.getByRole('combobox');
+      expect(select).toHaveValue('');
+
+      await userEvent.selectOptions(select, 'option1');
+      expect(select).toHaveValue('option1');
+
+      const resetButton = screen.getByRole('button', { name: 'Reset' });
+      await userEvent.click(resetButton);
+
+      expect(select).toHaveValue('');
+    });
+
+    it('triggers required validation on blur for native select in onBlur mode', async () => {
+      interface TestFormData {
+        selection: string;
+      }
+
+      render(
+        <IressForm<TestFormData> mode="onBlur" reValidateMode="onChange">
+          <IressFormField<TestFormData>
+            label="Select an option"
+            name="selection"
+            rules={{ required: 'Please select an option' }}
+            render={(properties) => (
+              <IressSelect
+                native
+                {...properties}
+                data-testid="native-select-on-blur"
+                options={[
+                  { value: '', label: ' ' },
+                  { value: 'option1', label: 'Option 1' },
+                ]}
+              />
+            )}
+          />
+          <IressButton>Next</IressButton>
+        </IressForm>,
+      );
+
+      const select = screen.getByTestId('native-select-on-blur__select');
+      select.focus();
+      expect(select).toHaveFocus();
+
+      await userEvent.tab();
+
+      expect(
+        await screen.findByText('Please select an option'),
+      ).toBeInTheDocument();
+    });
+
+    it('resets non-native select value when form.reset() is called', async () => {
+      interface TestFormData {
+        provider: string;
+      }
+
+      const FormWithSelectAndReset = () => {
+        const formRef = useRef<FormRef<TestFormData>>(null);
+
+        return (
+          <IressForm<TestFormData>
+            ref={formRef}
+            mode="onBlur"
+            reValidateMode="onChange"
+            defaultValues={{ provider: '' }}
+          >
+            <IressFormField<TestFormData>
+              label="Provider"
+              name="provider"
+              render={(properties) => (
+                <IressSelect
+                  {...properties}
+                  data-testid="non-native-select"
+                  options={[
+                    { value: 'option1', label: 'Option 1' },
+                    { value: 'option2', label: 'Option 2' },
+                  ]}
+                />
+              )}
+            />
+            <IressButton onClick={() => formRef.current?.reset()}>
+              Reset
+            </IressButton>
+          </IressForm>
+        );
+      };
+
+      render(<FormWithSelectAndReset />);
+
+      const combobox = screen.getByRole('combobox');
+      const hiddenInput = screen.getByTestId('non-native-select__hidden-input');
+
+      expect(hiddenInput).toHaveValue('');
+
+      await userEvent.click(combobox);
+      const option = await screen.findByRole('option', { name: 'Option 1' });
+      await userEvent.click(option);
+
+      expect(hiddenInput).toHaveValue('option1');
+      expect(combobox).toHaveTextContent('Option 1');
+
+      const resetButton = screen.getByRole('button', { name: 'Reset' });
+      await userEvent.click(resetButton);
+
+      expect(hiddenInput).toHaveValue('');
+      expect(combobox).not.toHaveTextContent('Option 1');
     });
   });
 });

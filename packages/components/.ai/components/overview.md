@@ -6,6 +6,7 @@
 |-----------|-------------|
 | [IressAlert](alert.md) | The root element of the alert |
 | [IressAutocomplete](autocomplete.md) | The root wrapper element (no semantic role) |
+| [IressAvatar](avatar.md) | Avatars display user identity in a circular frame, with optional badge and type indicators. |
 | [IressBreadcrumbs](../patterns/breadcrumbs.md) | Shows the current location within a navigational hierarchy. |
 | [IressButton](button.md) | The root element of the button |
 | [IressButtonGroup](button-group.md) | The root element of the button group |

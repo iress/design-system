@@ -16,6 +16,11 @@ export interface FieldFooterProps extends IressStyledProps {
   error?: ReactNode;
 
   /**
+   * ID for the error container element, used to associate the error message with the form control via `aria-describedby`.
+   */
+  errorId?: string;
+
+  /**
    * Validation errors to be displayed above the field, an array of validation messages to be displayed in `IressValidationSummary`.
    */
   errorMessages?: ValidationMessageObj[];
@@ -39,6 +44,7 @@ export const FieldFooter = ({
   className,
   'data-testid': dataTestId,
   error,
+  errorId,
   errorMessages = [],
   multipleFields,
   supplementary,
@@ -80,6 +86,7 @@ export const FieldFooter = ({
     >
       {hasError && (
         <IressValidationSummary
+          id={errorId}
           itemStyle={{
             textStyle: 'typography.body.sm',
           }}

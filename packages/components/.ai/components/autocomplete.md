@@ -23,7 +23,7 @@ import { IressAutocomplete } from '@iress-oss/ids-components';
 | append | `ReactNode` | `<IressIcon name="search" />` | Append content. |
 | autoSelect | `boolean` | `true` | If true, the selected option becomes the value of the input when the autocomplete loses focus. |
 | clearable | `boolean` | `true` | If `true`, then user can clear the value of the input. |
-| errorText | `ReactNode` | `( <IressAlert status="danger" mb="none" borderRadius="radius.system.form"> An unknown error occurred. Please contact support if the error persists. </IressAlert> )` | Text to be displayed when the options function errors out. It is not used when the options are provided as an array. |
+| errorText | `ReactNode` | `( <IressAlert status="danger" mb="none" variant="full-width"> An unknown error occurred. Please contact support if the error persists. </IressAlert> )` | Text to be displayed when the options function errors out. It is not used when the options are provided as an array. |
 | noResultsText | `ReactNode` | — | Text to be displayed when no results are found. |
 | onChange | `((e?: SyntheticEvent<HTMLInputElement, Event>, value?: string, option?: [LabelValueMeta](../../dist/interfaces.d.ts)<[FormControlValue](../../dist/types.d.ts)> , undefined) => void) | undefined` | — | Emitted when the user changes the input. The second and third arguments are only available when the options were selected from the `options` prop. |
 | popoverProps | `[IressAutocompletePopoverProps](../../dist/components/Autocomplete/Autocomplete.d.ts)` | `{}` | Customise the IressInputPopover props for your needs. |
@@ -41,8 +41,9 @@ import { IressAutocomplete } from '@iress-oss/ids-components';
 | alignRight | `boolean` | `false` | Set input content align to right, useful for numeric inputs. |
 | formatter | `((value?: string) => string | number)` | — | Bring your own formatter that will be used to format the value when the input is not focused, allowing you to display the value in a different format. e.g. User type in value="dsf 987kkk123" => result after formatter: $987,123 (string) |
 | onClear | `((e: ChangeEvent<HTMLInputElement, Element>) => void)` | — | Emitted when the input is manually cleared. |
-| debounceThreshold | `number` | `500` | Time in milliseconds to wait for before performing result search. Only applies to searchable options (function). |
+| debounceThreshold | `number` | `300` | Time in milliseconds to wait for before performing result search. Only applies to searchable options (function). |
 | initialOptions | `[LabelValueMeta](../../dist/interfaces.d.ts)<[FormControlValue](../../dist/types.d.ts)>[]` | — | Initial options data set, shown when the input is empty. |
+| loadingDelay | `number` | `250` | Time in milliseconds to wait before showing the loading spinner for async options. |
 | minSearchLength | `number` | `1` | Minimum number of characters required before triggering async search. Only applies to searchable options (function). Below this threshold, no search will be triggered and no loading state will be shown. |
 | **options** | `[LabelValueMeta](../../dist/interfaces.d.ts)<[FormControlValue](../../dist/types.d.ts)>[] , ((query: string) => Promise<[LabelValueMeta](../../dist/interfaces.d.ts)<[FormControlValue](../../dist/types.d.ts)>[]>)` | — | Options data set, shown when the input is not empty. |
 | limitMobile | `number` | `6` | Maximum number of results displayed on mobile screen sizes (< 768). |

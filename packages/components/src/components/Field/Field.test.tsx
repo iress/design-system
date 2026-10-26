@@ -92,6 +92,56 @@ describe('IressField', () => {
   });
 
   describe('props', () => {
+    describe('label, hint and input spacing', () => {
+      it('uses spacing.2 between label and input when hint is not present', () => {
+        const styles = field.raw({});
+
+        expect(styles.label?.mb).toBe('spacing.2');
+      });
+
+      it('uses hint spacing variant when hint is present', () => {
+        const baseClasses = field();
+        const hasHintClasses = field({ hasHint: true });
+        const styles = field.raw({});
+        const screen = renderComponent({
+          hint: 'Helpful hint',
+        });
+
+        const label = screen.getByText(TEST_LABEL).closest('label');
+
+        expect(hasHintClasses.label).not.toBe(baseClasses.label);
+        expect(styles.hint?.mb).toBe('spacing.1');
+        expect(label).toHaveClass(hasHintClasses.label!);
+      });
+    });
+
+    describe('checkbox and radio group spacing', () => {
+      const directControlSelector =
+        '& > .ids-radio-group:first-child, & > .ids-checkbox-group:first-child, & > .ids-checkbox:first-child';
+
+      it('adds top spacing for direct checkbox/radio controls', () => {
+        const styles = field.raw({});
+        const directControlSpacing = styles.element?.[directControlSelector] as
+          | { mt?: string; marginTop?: string }
+          | undefined;
+
+        expect(
+          directControlSpacing?.mt ?? directControlSpacing?.marginTop,
+        ).toBe('spacing.1');
+      });
+
+      it('does not add extra top spacing in horizontal layout', () => {
+        const styles = field.raw({ horizontal: true });
+        const directControlSpacing = styles.element?.[directControlSelector] as
+          | { mt?: string; marginTop?: string }
+          | undefined;
+
+        expect(
+          directControlSpacing?.mt ?? directControlSpacing?.marginTop,
+        ).toBe('spacing.0');
+      });
+    });
+
     describe('hiddenLabel', () => {
       it('has a label accessible for screen readers', () => {
         const screen = renderComponent({
@@ -152,7 +202,7 @@ describe('IressField', () => {
       expect(label).toBeInTheDocument();
       expect(infoIcon).toBeInTheDocument();
 
-      // In horizontal mode, label and hint icon are siblings inside a wrapper div
+      // In horizontal mode, label and hint icon are siblings inside a flex wrapper
       const labelElement = label.closest('label');
       const wrapper = labelElement?.parentElement;
       expect(wrapper).toContainElement(infoIcon);
@@ -276,6 +326,47 @@ describe('IressField', () => {
       const screen = renderComponent();
       const results = await axe(screen.container);
       expect(results).toHaveNoViolations();
+    });
+
+    it('generates error container with id derived from htmlFor for aria-describedby wiring', () => {
+      const screen = renderComponent({
+        errorMessages: [{ message: 'This field is required' }],
+      });
+
+      // Field generates error container with predictable id so consumers can wire aria-describedby
+      const input = screen.getByRole('textbox', { name: TEST_LABEL });
+      const errorList = screen.getByRole('list');
+
+      expect(errorList).toHaveAttribute('id', `${TEST_ID}-error`);
+      expect(errorList).toHaveTextContent('This field is required');
+
+      // Demonstrate proper wiring: when input has aria-describedby pointing to error container
+      // screen readers can announce the error
+      input.setAttribute('aria-describedby', `${TEST_ID}-error`);
+      expect(input).toHaveAccessibleDescription('This field is required');
+    });
+
+    it('uses explicit errorId for error container when provided', () => {
+      const customErrorId = 'my-custom-error';
+      const screen = renderComponent({
+        errorMessages: [{ message: 'This field is required' }],
+        errorId: customErrorId,
+      });
+
+      const input = screen.getByRole('textbox', { name: TEST_LABEL });
+      const errorList = screen.getByRole('list');
+
+      expect(errorList).toHaveAttribute('id', customErrorId);
+
+      // Demonstrate proper wiring with custom id
+      input.setAttribute('aria-describedby', customErrorId);
+      expect(input).toHaveAccessibleDescription('This field is required');
+    });
+
+    it('does not render error container when there are no errors', () => {
+      const screen = renderComponent();
+
+      expect(screen.queryByRole('list')).not.toBeInTheDocument();
     });
   });
 

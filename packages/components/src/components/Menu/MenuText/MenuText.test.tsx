@@ -161,4 +161,11 @@ describe('IressMenuHeading', () => {
     );
     expect(heading.closest(`.${GlobalCSSClass.MenuHeading}`)).not.toBeNull();
   });
+
+  it('applies static heading styles', () => {
+    const headingStyles = menuItem.raw({ isHeading: true }).root;
+
+    expect(headingStyles.cursor).toBe('default');
+    expect(headingStyles._hover).toEqual({ background: 'transparent' });
+  });
 });

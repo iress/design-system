@@ -158,7 +158,7 @@ const colour = {
       $type: Type.Color,
       $value: '#A8B2BB',
       $extensions: {
-        'iress.contrast.AA': ['colour.neutral.90'],
+        'iress.contrast.AA': ['colour.neutral.80', 'colour.neutral.90'],
         'styler.panel': 'colour.neutral',
       },
     },
@@ -168,7 +168,7 @@ const colour = {
       $type: Type.Color,
       $value: '#828F9D',
       $extensions: {
-        'iress.contrast.AA': ['colour.neutral.90'],
+        'iress.contrast.AA': ['colour.neutral.80', 'colour.neutral.90'],
         'styler.panel': 'colour.neutral',
       },
     },
@@ -185,11 +185,11 @@ const colour = {
     },
     80: {
       $description:
-        'Used as the default text colour for most components. For tooltips, it is used as the background colour.',
+        'Used as the default text colour for most components. For tooltips, it is used as the background colour. This token now uses the previous Neutral 90 value to improve visual hierarchy.',
       $type: Type.Color,
-      $value: '#384666',
+      $value: '#141F4D',
       $extensions: {
-        'iress.aliases': ['text'],
+        'iress.aliases': ['text', 'colour.neutral.90'],
         'iress.contrast.AA': [
           'colour.neutral.10',
           'colour.neutral.20',
@@ -200,8 +200,10 @@ const colour = {
       },
     },
     90: {
+      $deprecated:
+        'Use colour.neutral.80 instead. This token is a backwards-compatible alias and will be removed in a future major version.',
       $description:
-        'Used for very dark text or UI elements requiring maximum contrast.',
+        'Deprecated alias for colour.neutral.80. Resolves to the same value (#141F4D).',
       $type: Type.Color,
       $value: '#141F4D',
       $extensions: {
@@ -385,7 +387,7 @@ const colour = {
         $extensions: {
           'iress.contrast.AA': [
             'colour.system.success.text',
-            'colour.neutral.90',
+            'colour.neutral.80',
           ],
           'styler.panel': 'colour.system.success',
         },
@@ -397,7 +399,7 @@ const colour = {
         $extensions: {
           'iress.contrast.AA': [
             'colour.system.success.text',
-            'colour.neutral.90',
+            'colour.neutral.80',
           ],
           'styler.panel': 'colour.system.success',
         },
@@ -453,7 +455,7 @@ const colour = {
         $extensions: {
           'iress.contrast.AA': [
             'colour.system.danger.text',
-            'colour.neutral.90',
+            'colour.neutral.80',
           ],
           'styler.panel': 'colour.system.danger',
         },
@@ -465,7 +467,7 @@ const colour = {
         $extensions: {
           'iress.contrast.AA': [
             'colour.system.danger.text',
-            'colour.neutral.90',
+            'colour.neutral.80',
           ],
           'styler.panel': 'colour.system.danger',
         },
@@ -519,7 +521,7 @@ const colour = {
         $extensions: {
           'iress.contrast.AA': [
             'colour.system.warning.text',
-            'colour.neutral.90',
+            'colour.neutral.80',
           ],
           'styler.panel': 'colour.system.warning',
         },
@@ -531,7 +533,7 @@ const colour = {
         $extensions: {
           'iress.contrast.AA': [
             'colour.system.warning.text',
-            'colour.neutral.90',
+            'colour.neutral.80',
           ],
           'styler.panel': 'colour.system.warning',
         },
@@ -582,7 +584,7 @@ const colour = {
         $type: Type.Color,
         $value: '#E5EEFF',
         $extensions: {
-          'iress.contrast.AA': ['colour.system.info.text', 'colour.neutral.90'],
+          'iress.contrast.AA': ['colour.system.info.text', 'colour.neutral.80'],
           'styler.panel': 'colour.system.info',
         },
       },
@@ -591,7 +593,7 @@ const colour = {
         $type: Type.Color,
         $value: '#CCDEFF',
         $extensions: {
-          'iress.contrast.AA': ['colour.system.info.text', 'colour.neutral.90'],
+          'iress.contrast.AA': ['colour.system.info.text', 'colour.neutral.80'],
           'styler.panel': 'colour.system.info',
         },
       },
@@ -617,7 +619,7 @@ const colour = {
         $type: Type.Color,
         $value: '#FFE6F2',
         $extensions: {
-          'iress.contrast.AA': ['colour.data.bold.10', 'colour.neutral.90'],
+          'iress.contrast.AA': ['colour.data.bold.10', 'colour.neutral.80'],
           'styler.panel': 'colour.data.subtle',
         },
       },
@@ -626,7 +628,7 @@ const colour = {
         $type: Type.Color,
         $value: '#FEEAFF',
         $extensions: {
-          'iress.contrast.AA': ['colour.data.bold.20', 'colour.neutral.90'],
+          'iress.contrast.AA': ['colour.data.bold.20', 'colour.neutral.80'],
           'styler.panel': 'colour.data.subtle',
         },
       },
@@ -635,7 +637,7 @@ const colour = {
         $type: Type.Color,
         $value: '#F1E6FF',
         $extensions: {
-          'iress.contrast.AA': ['colour.data.bold.30', 'colour.neutral.90'],
+          'iress.contrast.AA': ['colour.data.bold.30', 'colour.neutral.80'],
           'styler.panel': 'colour.data.subtle',
         },
       },
@@ -644,7 +646,7 @@ const colour = {
         $type: Type.Color,
         $value: '#E5F5FF',
         $extensions: {
-          'iress.contrast.AA': ['colour.data.bold.40', 'colour.neutral.90'],
+          'iress.contrast.AA': ['colour.data.bold.40', 'colour.neutral.80'],
           'styler.panel': 'colour.data.subtle',
         },
       },
@@ -653,7 +655,7 @@ const colour = {
         $type: Type.Color,
         $value: '#E6EEFF',
         $extensions: {
-          'iress.contrast.AA': ['colour.data.bold.50', 'colour.neutral.90'],
+          'iress.contrast.AA': ['colour.data.bold.50', 'colour.neutral.80'],
           'styler.panel': 'colour.data.subtle',
         },
       },
@@ -662,7 +664,7 @@ const colour = {
         $type: Type.Color,
         $value: '#C8D7FF',
         $extensions: {
-          'iress.contrast.AA': ['colour.data.bold.60', 'colour.neutral.90'],
+          'iress.contrast.AA': ['colour.data.bold.60', 'colour.neutral.80'],
           'styler.panel': 'colour.data.subtle',
         },
       },
@@ -672,7 +674,7 @@ const colour = {
         $type: Type.Color,
         $value: '#E4FFFD',
         $extensions: {
-          'iress.contrast.AA': ['colour.data.bold.70', 'colour.neutral.90'],
+          'iress.contrast.AA': ['colour.data.bold.70', 'colour.neutral.80'],
           'styler.panel': 'colour.data.subtle',
         },
       },
@@ -681,7 +683,7 @@ const colour = {
         $type: Type.Color,
         $value: '#BADFD4',
         $extensions: {
-          'iress.contrast.AA': ['colour.data.bold.80', 'colour.neutral.90'],
+          'iress.contrast.AA': ['colour.data.bold.80', 'colour.neutral.80'],
           'styler.panel': 'colour.data.subtle',
         },
       },
@@ -690,7 +692,7 @@ const colour = {
         $type: Type.Color,
         $value: '#ECECEC',
         $extensions: {
-          'iress.contrast.AA': ['colour.data.bold.90', 'colour.neutral.90'],
+          'iress.contrast.AA': ['colour.data.bold.90', 'colour.neutral.80'],
           'styler.panel': 'colour.data.subtle',
         },
       },

@@ -37,6 +37,88 @@ export interface UseDynamicFontSubsettingOptions {
 }
 
 /**
+ * Computes the union of icon names across all active hook instances.
+ *
+ * Multiple IressIconProvider instances on the same page (e.g. in MFE scenarios) all share the
+ * same font-family name. Firefox (unlike Chrome) uses the last-defined @font-face declaration
+ * when multiple rules exist for the same family without unicode-range, so any new link that
+ * only contains its own subset will shadow every other provider's icons, causing them to render
+ * as text. Each instance stores only its own icon names in `data-icons`. When creating a new
+ * link, this instance reads every other provider's `data-icons` and builds a URL that is the
+ * superset of all active icon sets. Since links are always appended to the end of <head>, the
+ * newest link is last in document order and takes precedence in the CSS cascade — ensuring all
+ * icons remain visible.
+ *
+ * Known limitations:
+ * 1. Stale links accumulate — each provider keeps its own <link> even after a later provider
+ *    creates a superset. These earlier links still trigger HTTP requests but their @font-face
+ *    rules are shadowed by the last link in DOM order. For 2–3 MFEs this is negligible; if many
+ *    providers are expected, consider a shared singleton registry approach.
+ * 2. Near-simultaneous mounts — if two providers mount in the same tick (e.g. concurrent React),
+ *    both may call computeUnionIcons before the other's link is in the DOM, resulting in two
+ *    partial-subset links. In practice React's synchronous commit + useEffect ordering means
+ *    Provider A's link exists before Provider B's effect fires, so this is unlikely in typical
+ *    MFE shell architectures where MFEs mount sequentially.
+ */
+const computeUnionIcons = (
+  ownIcons: string[],
+  dataAttribute: string,
+  ownLink: HTMLLinkElement | null,
+): string[] => {
+  const otherIcons = Array.from(
+    document.querySelectorAll<HTMLLinkElement>(`link[data-${dataAttribute}]`),
+  )
+    .filter((link) => link !== ownLink)
+    .flatMap((link) => {
+      const raw = link.getAttribute('data-icons');
+      return raw ? raw.split(',').filter(Boolean) : [];
+    });
+
+  if (otherIcons.length === 0) return ownIcons;
+  const merged = Array.from(new Set([...ownIcons, ...otherIcons]));
+  merged.sort((a, b) => a.localeCompare(b));
+  return merged;
+};
+
+/**
+ * Checks if a full-font (noSubsetting) link from another provider is already active in the DOM.
+ * When a full-font link exists, subsetting instances should skip creating their own link to
+ * avoid shadowing it in Firefox's CSS cascade.
+ */
+const isFullFontAlreadyActive = (
+  noSubsetting: boolean,
+  dataAttribute: string,
+  ownLink: HTMLLinkElement | null,
+): boolean => {
+  if (noSubsetting) return false;
+  const fullFontLink = document.querySelector<HTMLLinkElement>(
+    `link[data-${dataAttribute}]:not([data-icons])`,
+  );
+  return Boolean(fullFontLink && fullFontLink !== ownLink);
+};
+
+/**
+ * Determines whether font readiness should be re-checked when the existing link already
+ * serves the current URL. Returns true when there are icons that haven't been confirmed
+ * loaded yet.
+ */
+const shouldRecheckReadiness = (
+  noSubsetting: boolean,
+  fullyLoaded: boolean,
+  iconsArray: string[],
+  loadedIcons: Set<string>,
+): boolean => {
+  if (noSubsetting) return !fullyLoaded;
+  return iconsArray.some((icon) => !loadedIcons.has(icon));
+};
+
+// Monotonically increasing counter used to assign a stable unique ID to each hook instance.
+// JavaScript is single-threaded so incrementing this synchronously during render is safe —
+// there is no risk of two instances receiving the same ID. IDs only need to be unique within
+// a page session, so the simple integer counter is sufficient.
+let instanceCounter = 0;
+
+/**
  * Hook to dynamically load fonts with text subsetting from a CDN.
  * Only loads the specific glyphs that are actually used, dramatically reducing payload size.
  *
@@ -58,6 +140,11 @@ export const useDynamicFontSubsetting = ({
   const [loadedIcons, setLoadedIcons] = useState<Set<string>>(new Set());
   const [fullyLoaded, setFullyLoaded] = useState<boolean>(false);
   const currentLinkRef = useRef<HTMLLinkElement | null>(null);
+
+  // Stable unique identifier for this hook instance. Used as the value of the
+  // `data-${dataAttribute}` attribute so each provider owns its own link element
+  // and never accidentally modifies another provider's link.
+  const instanceIdRef = useRef(String(++instanceCounter));
 
   const mergeLoadedIcons = useCallback((iconsToMerge: string[]) => {
     setLoadedIcons((prevLoaded) => {
@@ -111,50 +198,96 @@ export const useDynamicFontSubsetting = ({
     [fontFamily, handleFontLoaded, handleFontError, mergeLoadedIcons],
   );
 
-  // Cleanup on unmount
+  // Cleanup on unmount — removes ALL links owned by THIS instance, leaving other providers
+  // intact. During icon-set updates there can be multiple links for the same instance (old +
+  // new) until the new link's `load` handler removes the old one. If unmount races that handler,
+  // the older link would be orphaned. Querying by instance ID catches both.
   useEffect(() => {
     return () => {
-      currentLinkRef.current?.parentNode?.removeChild(currentLinkRef.current);
+      document
+        .querySelectorAll(
+          `link[data-${dataAttribute}="${instanceIdRef.current}"]`,
+        )
+        .forEach((link) => link.parentNode?.removeChild(link));
     };
-  }, []);
+  }, [dataAttribute]);
 
   // Load fonts dynamically based on usage
   useEffect(() => {
     if (disabled) return;
 
+    const instanceId = instanceIdRef.current;
     const iconsArray = Array.from(icons);
     iconsArray.sort((a, b) => a.localeCompare(b));
-    const url = buildUrl(iconsArray);
-    const existing = document.querySelector(`link[data-${dataAttribute}]`);
+
+    // Find THIS instance's own link element (identified by instanceId as attribute value).
+    const ownLink = document.querySelector<HTMLLinkElement>(
+      `link[data-${dataAttribute}="${instanceId}"]`,
+    );
+
+    // In mixed MFE setups, a noSubsetting=true provider creates a full-font link without
+    // `data-icons`. If this subsetting instance appends a smaller subset link after it, that
+    // link becomes last in DOM order and shadows the full-font rule in Firefox (last
+    // @font-face wins). Detect this case and skip subset creation — the full-font link
+    // already covers all icons.
+    if (isFullFontAlreadyActive(noSubsetting, dataAttribute, ownLink)) {
+      checkFontReady(null, iconsArray);
+      return;
+    }
+
+    // Build a URL covering own icons plus every other active provider's icons (union).
+    const mergedIcons = noSubsetting
+      ? iconsArray
+      : computeUnionIcons(iconsArray, dataAttribute, ownLink);
+
+    const url = buildUrl(mergedIcons);
 
     if (url === false) {
       if (noSubsetting) setFullyLoaded(true);
       return;
     }
 
-    if (existing?.getAttribute('data-url') === url) {
-      // Reuse existing stylesheet link: only check font readiness if there are new unloaded icons
-      if (noSubsetting && !fullyLoaded) {
+    if (ownLink?.getAttribute('data-url') === url) {
+      // Own link already serves the current union URL — only re-check readiness for new icons.
+      if (
+        shouldRecheckReadiness(
+          noSubsetting,
+          fullyLoaded,
+          iconsArray,
+          loadedIcons,
+        )
+      ) {
         checkFontReady(null, iconsArray);
-      } else {
-        const hasNewIcons = iconsArray.some((icon) => !loadedIcons.has(icon));
-        if (hasNewIcons) {
-          checkFontReady(null, iconsArray);
-        }
       }
       return;
     }
+
     const nonce = getNonce();
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = url;
     if (nonce) link.nonce = nonce;
-    link.setAttribute(`data-${dataAttribute}`, 'true');
+    // Use instanceId as the attribute value so each provider uniquely identifies its own link.
+    // `link[data-${dataAttribute}]`          → finds ALL providers' links (for union computation)
+    // `link[data-${dataAttribute}="${id}"]`  → finds only THIS provider's link
+    link.setAttribute(`data-${dataAttribute}`, instanceId);
     link.setAttribute('data-url', url);
+    // Store only this instance's own icons so other providers can read each provider's
+    // contribution separately when computing the union URL.
+    if (!noSubsetting) {
+      link.setAttribute('data-icons', iconsArray.join(','));
+    }
 
-    link.addEventListener('load', () => checkFontReady(existing, iconsArray));
+    // On load, remove only THIS instance's previous link. Never remove other providers'
+    // links — each instance is solely responsible for its own link's lifecycle.
+    link.addEventListener('load', () => checkFontReady(ownLink, iconsArray));
     link.addEventListener('error', () => handleFontError(iconsArray));
 
+    // Append to end of <head> so this link is last in document order — Firefox's CSS cascade
+    // picks the last @font-face rule for a given family, so the superset URL wins.
+    // NOTE: Other providers' earlier links are intentionally left in place. Each provider manages
+    // only its own link lifecycle. The earlier links become redundant (their @font-face rules are
+    // shadowed) but removing them could break the owning provider's load/error tracking.
     document.head.appendChild(link);
     currentLinkRef.current = link;
   }, [

@@ -8,6 +8,7 @@ import { type ControlledValue } from '@/hooks';
 import { type LabelValueMeta } from '@/interfaces';
 import { type ReactNode } from 'react';
 import { type IressInputProps } from '@/components/Input';
+import { type FloatingUIContainer } from '@/types';
 
 export interface IressSelectActivatorProps {
   /**
@@ -20,6 +21,13 @@ export interface IressSelectActivatorProps {
    * Placeholder, shown when there is nothing selected.
    */
   placeholder?: ReactNode;
+
+  /**
+   * The container element to render the multiselect tags actions popover into.
+   * Useful when rendering inside a Shadow DOM or a custom portal root.
+   * Defaults to `document.body`. Pass `null` to render the popover inline.
+   */
+  popoverContainer?: FloatingUIContainer;
 
   /**
    * Prepend content.
@@ -58,6 +66,7 @@ interface SelectActivatorProps<TMultiple extends boolean = false>
       | 'prepend'
       | 'selectedOptionsText'
     >,
+    Pick<IressSelectActivatorProps, 'popoverContainer'>,
     Omit<SelectLabelRenderProps<TMultiple>, 'close'> {
   async?: boolean;
   setShow: (show: boolean) => void;
@@ -74,6 +83,7 @@ export const SelectActivator = <TMultiple extends boolean = false>({
   multiSelectLimit,
   onChange,
   placeholder,
+  popoverContainer,
   prepend,
   renderLabel,
   selectedOptionsText,
@@ -120,6 +130,7 @@ export const SelectActivator = <TMultiple extends boolean = false>({
         }}
         onToggleActions={() => setShow(false)}
         placeholder={placeholder}
+        popoverContainer={popoverContainer}
         prepend={prepend}
         selected={value}
         selectedOptionsText={selectedOptionsText}

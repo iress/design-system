@@ -124,6 +124,8 @@ When mapping Figma components to IDS, read references/component-mapping.md for t
 | Table              | `IressTable`                                 | Data-driven: `rows`, `columns`, `caption` props |
 | Tag                | `IressTag`                                   | `bordered` for visible border; `element="button"` for clickable, `element="a"` for link; `onClick` alone also auto-renders as button |
 | Pill               | `IressPill`                                  |                            |
+| Avatar             | `IressAvatar`                                | `mode` for colour, `badge` for status indicator, `type` for secondary icon |
+| CompactAvatar      | `IressAvatarGroup` + `IressAvatar compact`   | `max` limits visible; `overflowLabel` render prop for overflow |
 | Tooltip            | `IressTooltip`                               |                            |
 | Icon               | `IressIcon name="..."`                       | Material Symbols name      |
 | Divider            | `IressDivider`                               |                            |
@@ -149,8 +151,8 @@ Map Figma fill/stroke colours to IDS colour tokens:
 | Neutral/10 `#FFFFFF`      | `colour.neutral.10`          | `--iress-colour-neutral-10`          |
 | Neutral/20 `#F5F6F8`      | `colour.neutral.20`          | `--iress-colour-neutral-20`          |
 | Neutral/30 `#E2E6EA`      | `colour.neutral.30`          | `--iress-colour-neutral-30`          |
-| Neutral/80 `#384666`      | `colour.neutral.80`          | `--iress-colour-neutral-80`          |
-| Neutral/90 `#141F4D`      | `colour.neutral.90`          | `--iress-colour-neutral-90`          |
+| Neutral/80 `#141F4D`      | `colour.neutral.80`          | `--iress-colour-neutral-80`          |
+| Neutral/90 `#141F4D`      | `colour.neutral.90` (alias)  | `--iress-colour-neutral-90`          |
 | Success/Fill `#37C49C`    | `colour.system.success.fill` | `--iress-colour-system-success-fill` |
 | Danger/Fill `#C21010`     | `colour.system.danger.fill`  | `--iress-colour-system-danger-fill`  |
 | Warning/Fill `#F0AD03`    | `colour.system.warning.fill` | `--iress-colour-system-warning-fill` |
@@ -175,6 +177,10 @@ IDS base spacing unit = 4px (0.25rem). Map Figma pixel values:
 | 40px     | `10`      | xl    |
 
 > For values not on the 4px grid, round to the nearest token value.
+
+> **Neutral alias note:** `colour.neutral.90` is a backwards-compatible alias
+> of `colour.neutral.80`. Prefer `colour.neutral.80` in generated IDS code, but
+> map either Figma `Neutral/80` or `Neutral/90` to the same `#141F4D` value.
 
 ## Border Radius
 
@@ -207,6 +213,11 @@ Prefer semantic HTML elements via the `element` prop — they convey meaning to 
 > **When to use `textStyle`:** Only when you need to visually override the default styling of a semantic element — e.g. making an `h2` look like an `h4` for visual hierarchy while keeping the correct heading level for accessibility: `<IressText element="h2" textStyle="typography.heading.4">`.
 
 > **Tip:** When translating Figma frames that contain mixed or unstructured text (e.g. CMS content, markdown, rich text blocks), wrap the content in `IressText` and nest native HTML elements (`<p>`, `<strong>`, `<a>`, `<ul>`, etc.) inside it. This is an allowed pattern that lets `IressText` apply consistent typography while preserving the original content structure.
+
+For neutral text colours, treat `colour.neutral.90` as a backwards-compatible
+alias of `colour.neutral.80` (both resolve to `#141F4D`). Prefer
+`colour.neutral.80` in new IDS implementations, but handle either token name
+when translating older Figma files.
 
 ## Translation Examples
 
@@ -2702,7 +2713,7 @@ Translate natural language UI descriptions into IDS (Iress Design System) compon
 | Description              | IDS Component                       | Example                                                                                                                        |
 | ------------------------ | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | Labelled text input      | `IressField` + `IressInput`         | See Form example below                                                                                                         |
-| Select dropdown (static or async) | `IressField` + `IressSelect` | `<IressField label="Country"><IressSelect>...</IressSelect></IressField>` — supports static options and async loading via an `options` function |
+| Select dropdown (static or async) | `IressField` + `IressSelect` | `<IressField label="Country"><IressSelect>...</IressSelect></IressField>` — supports static options and async loading via an `options` function. For async search field constraints or annotations, prefer `searchInputProps` (`className`, `data-testid`, `inputMode`, `maxLength`, `minLength`, `pattern`, `spellCheck`) instead of rebuilding the UI with `renderOptions`. |
 | Freetext input with suggestions  | `IressField` + `IressAutocomplete` | `<IressField label="Search"><IressAutocomplete /></IressField>` — allows any text input; suggestions are optional |
 | Currency input           | `IressField` + `IressInputCurrency` | `<IressField label="Amount"><IressInputCurrency /></IressField>`                                                               |
 | Checkbox                 | `IressCheckbox`                     | `<IressCheckbox value="agree">I agree</IressCheckbox>`                                                                         |
@@ -2714,7 +2725,7 @@ Translate natural language UI descriptions into IDS (Iress Design System) compon
 
 ### Select vs Autocomplete Decision Guide
 
-- **Need to restrict to valid options?** → `IressSelect` — supports static options and async loading via an `options` function. Use this for most selection use cases. Always read the component doc to understand filtering behaviour for your use case.
+- **Need to restrict to valid options?** → `IressSelect` — supports static options and async loading via an `options` function. For async selects, `searchInputProps` is only for safe passive search-input attributes; `IressSelect` still controls query state, placeholder text, and accessibility labels. Use this for most selection use cases. Always read the component doc to understand filtering behaviour for your use case.
 - **Need freetext with optional suggestions?** → `IressAutocomplete` — allows any text input; suggestions are offered but not enforced.
 
 ## Layout
@@ -2743,6 +2754,8 @@ Translate natural language UI descriptions into IDS (Iress Design System) compon
 | Icon                 | `IressIcon`                 | `<IressIcon name="settings" />`                                                                             |
 | Tag / badge          | `IressTag`                  | `<IressTag>New</IressTag>`; use `bordered` for visible-border style; use `element="button"` for clickable tag, `element="a"` for link tag; `onClick` alone also auto-renders as `<button>` |
 | Pill                 | `IressPill`                 | `<IressPill>Category</IressPill>`                                                                           |
+| Avatar               | `IressAvatar`               | `<IressAvatar aria-label="Jane Doe" mode={10}>JD</IressAvatar>`; use `badge` for status indicators, `type` for secondary icons |
+| Avatar group         | `IressAvatarGroup`          | `<IressAvatarGroup compact max={3}><IressAvatar>...</IressAvatar></IressAvatarGroup>`; stacks avatars with overlap and overflow |
 | Tooltip              | `IressTooltip`              | `<IressTooltip content="Help text"><IressButton>Hover me</IressButton></IressTooltip>`                      |
 
 ## Overlays & Navigation
@@ -2870,7 +2883,7 @@ When you need to find the right IDS component for a UI element, read references/
 | Description              | IDS Component                       | Example                                                                                                                        |
 | ------------------------ | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | Labelled text input      | `IressField` + `IressInput`         | See Form example below                                                                                                         |
-| Select dropdown (static or async) | `IressField` + `IressSelect` | `<IressField label="Country"><IressSelect>...</IressSelect></IressField>` — supports static options and async loading via an `options` function |
+| Select dropdown (static or async) | `IressField` + `IressSelect` | `<IressField label="Country"><IressSelect>...</IressSelect></IressField>` — supports static options and async loading via an `options` function. For async search field constraints or annotations, prefer `searchInputProps` (`className`, `data-testid`, `inputMode`, `maxLength`, `minLength`, `pattern`, `spellCheck`) instead of rebuilding the UI with `renderOptions`. |
 | Freetext input with suggestions  | `IressField` + `IressAutocomplete` | `<IressField label="Search"><IressAutocomplete /></IressField>` — allows any text input; suggestions are optional |
 | Currency input           | `IressField` + `IressInputCurrency` | `<IressField label="Amount"><IressInputCurrency /></IressField>`                                                               |
 | Checkbox                 | `IressCheckbox`                     | `<IressCheckbox value="agree">I agree</IressCheckbox>`                                                                         |
@@ -2882,7 +2895,7 @@ When you need to find the right IDS component for a UI element, read references/
 
 ### Select vs Autocomplete Decision Guide
 
-- **Need to restrict to valid options?** → `IressSelect` — supports static options and async loading via an `options` function. Use this for most selection use cases. Always read the component doc to understand filtering behaviour for your use case.
+- **Need to restrict to valid options?** → `IressSelect` — supports static options and async loading via an `options` function. For async selects, `searchInputProps` is only for safe passive search-input attributes; `IressSelect` still controls query state, placeholder text, and accessibility labels. Use this for most selection use cases. Always read the component doc to understand filtering behaviour for your use case.
 - **Need freetext with optional suggestions?** → `IressAutocomplete` — allows any text input; suggestions are offered but not enforced.
 
 ## Layout
@@ -2911,6 +2924,8 @@ When you need to find the right IDS component for a UI element, read references/
 | Icon                 | `IressIcon`                 | `<IressIcon name="settings" />`                                                                             |
 | Tag / badge          | `IressTag`                  | `<IressTag>New</IressTag>`; use `bordered` for visible-border style; use `element="button"` for clickable tag, `element="a"` for link tag; `onClick` alone also auto-renders as `<button>` |
 | Pill                 | `IressPill`                 | `<IressPill>Category</IressPill>`                                                                           |
+| Avatar               | `IressAvatar`               | `<IressAvatar aria-label="Jane Doe" mode={10}>JD</IressAvatar>`; use `badge` for status indicators, `type` for secondary icons |
+| Avatar group         | `IressAvatarGroup`          | `<IressAvatarGroup compact max={3}><IressAvatar>...</IressAvatar></IressAvatarGroup>`; stacks avatars with overlap and overflow |
 | Tooltip              | `IressTooltip`              | `<IressTooltip content="Help text"><IressButton>Hover me</IressButton></IressTooltip>`                      |
 
 ## Overlays & Navigation

@@ -22,6 +22,7 @@ import { GlobalCSSClass } from '@/enums';
 import { cx } from '@/styled-system/css';
 import { type FormControlValue } from '@/types';
 import { IressSelectHeading } from '../SelectHeading/SelectHeading';
+import { usePopover } from '@/components/Popover';
 
 export interface IressSelectMenuProps<
   TMultiple extends boolean = false,
@@ -109,11 +110,13 @@ export const IressSelectMenu = <TMultiple extends boolean = false>({
   multiSelect,
   noResults,
   onChange,
+  onMouseDown,
   role = 'listbox',
   selected,
   selectedFirst,
   ...restProps
 }: IressSelectMenuProps<TMultiple>) => {
+  const popover = usePopover();
   const id = useIdIfNeeded({ id: restProps.id });
   const labelId = `${id}--label`;
   const menuSelected = useMemo(
@@ -198,6 +201,16 @@ export const IressSelectMenu = <TMultiple extends boolean = false>({
       }
       multiSelect={multiSelect}
       onChange={handleMenuChange}
+      onMouseDown={(event) => {
+        onMouseDown?.(event);
+        if (
+          popover?.isVirtualFocus &&
+          event.target instanceof Element &&
+          event.target.closest(`.${GlobalCSSClass.MenuGroup}`)
+        ) {
+          event.preventDefault();
+        }
+      }}
       role={role}
       selected={menuSelected}
       className={cx(

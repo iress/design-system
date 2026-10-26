@@ -37,12 +37,14 @@ interface SelectOptionsProps<TMultiple extends boolean = false>
     Pick<
       IressSelectProps<TMultiple, false>,
       | 'autoHighlight'
+      | 'errorText'
       | 'minSearchLength'
       | 'multiSelect'
       | 'onChange'
       | 'options'
       | 'renderOptions'
       | 'initialOptions'
+      | 'searchInputProps'
     >,
     Omit<
       SelectOptionsRenderProps<TMultiple>,
@@ -53,6 +55,24 @@ interface SelectOptionsProps<TMultiple extends boolean = false>
   shouldShowNoResults?: boolean;
   'data-testid'?: string;
 }
+
+const getSearchInputProps = (
+  searchInputProps: SelectOptionsProps['searchInputProps'],
+) => {
+  if (!searchInputProps) {
+    return undefined;
+  }
+
+  return {
+    className: searchInputProps.className,
+    'data-testid': searchInputProps['data-testid'],
+    inputMode: searchInputProps.inputMode,
+    maxLength: searchInputProps.maxLength,
+    minLength: searchInputProps.minLength,
+    pattern: searchInputProps.pattern,
+    spellCheck: searchInputProps.spellCheck,
+  };
+};
 
 const SelectAsyncResults = <TMultiple extends boolean = false>({
   'data-testid': dataTestId,
@@ -116,11 +136,18 @@ const SelectAsyncResults = <TMultiple extends boolean = false>({
 
 SelectAsyncResults.displayName = 'SelectAsyncResults';
 
-const SelectAsyncError = ({ error }: Pick<SelectOptionsProps, 'error'>) => {
+const SelectAsyncError = ({
+  error,
+  errorText,
+}: Pick<SelectOptionsProps, 'error' | 'errorText'>) => {
   if (!error) return null;
 
+  if (errorText !== undefined) {
+    return typeof errorText === 'function' ? errorText(error) : errorText;
+  }
+
   return (
-    <IressAlert status="danger">
+    <IressAlert status="danger" variant="full-width" mb="none">
       {typeof error === 'string' ? (
         error
       ) : (
@@ -140,6 +167,7 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
   'data-testid': dataTestId,
   debouncedQuery,
   error,
+  errorText,
   loading,
   minSearchLength,
   multiSelect,
@@ -147,6 +175,7 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
   onClear,
   query,
   results,
+  searchInputProps,
   setQuery,
   show,
   value,
@@ -158,11 +187,13 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
   | 'data-testid'
   | 'debouncedQuery'
   | 'error'
+  | 'errorText'
   | 'loading'
   | 'minSearchLength'
   | 'multiSelect'
   | 'query'
   | 'results'
+  | 'searchInputProps'
   | 'setQuery'
   | 'show'
   | 'value'
@@ -184,6 +215,7 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
   const hasResultsAndSelected = hasResults && hasSelected;
   const inputRef = useRef<InputRef | null>(null);
   const headingId = useId();
+  const safeSearchInputProps = getSearchInputProps(searchInputProps);
 
   useEffect(() => {
     if (!show) {
@@ -200,6 +232,7 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
     <IressSelectSearch
       activator={
         <IressSelectSearchInput
+          {...safeSearchInputProps}
           aria-label="Search"
           onChange={(e) => setQuery?.(e.target.value)}
           ref={inputRef}
@@ -251,7 +284,7 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
           shouldShowNoResults={shouldShowNoResults}
         />
       )}
-      <SelectAsyncError error={error} />
+      <SelectAsyncError error={error} errorText={errorText} />
     </IressSelectSearch>
   );
 };
@@ -263,6 +296,7 @@ export const SelectOptions = <TMultiple extends boolean = false>({
   'data-testid': dataTestId,
   debouncedQuery,
   error,
+  errorText,
   initialOptions: initialOptionsProp,
   loading,
   minSearchLength,
@@ -272,6 +306,7 @@ export const SelectOptions = <TMultiple extends boolean = false>({
   query,
   renderOptions,
   results,
+  searchInputProps,
   setQuery,
   setShow,
   setValue,
@@ -346,6 +381,7 @@ export const SelectOptions = <TMultiple extends boolean = false>({
         data-testid={dataTestId}
         debouncedQuery={debouncedQuery}
         error={error}
+        errorText={errorText}
         loading={loading}
         minSearchLength={minSearchLength}
         multiSelect={multiSelect}
@@ -353,6 +389,7 @@ export const SelectOptions = <TMultiple extends boolean = false>({
         onClear={handleClear}
         query={query}
         results={results}
+        searchInputProps={searchInputProps}
         setQuery={setQuery}
         show={show}
         value={value}

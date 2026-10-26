@@ -118,6 +118,8 @@ When mapping Figma components to IDS, read references/component-mapping.md for t
 | Table              | `IressTable`                                 | Data-driven: `rows`, `columns`, `caption` props |
 | Tag                | `IressTag`                                   | `bordered` for visible border; `element="button"` for clickable, `element="a"` for link; `onClick` alone also auto-renders as button |
 | Pill               | `IressPill`                                  |                            |
+| Avatar             | `IressAvatar`                                | `mode` for colour, `badge` for status indicator, `type` for secondary icon |
+| CompactAvatar      | `IressAvatarGroup` + `IressAvatar compact`   | `max` limits visible; `overflowLabel` render prop for overflow |
 | Tooltip            | `IressTooltip`                               |                            |
 | Icon               | `IressIcon name="..."`                       | Material Symbols name      |
 | Divider            | `IressDivider`                               |                            |
@@ -143,8 +145,8 @@ Map Figma fill/stroke colours to IDS colour tokens:
 | Neutral/10 `#FFFFFF`      | `colour.neutral.10`          | `--iress-colour-neutral-10`          |
 | Neutral/20 `#F5F6F8`      | `colour.neutral.20`          | `--iress-colour-neutral-20`          |
 | Neutral/30 `#E2E6EA`      | `colour.neutral.30`          | `--iress-colour-neutral-30`          |
-| Neutral/80 `#384666`      | `colour.neutral.80`          | `--iress-colour-neutral-80`          |
-| Neutral/90 `#141F4D`      | `colour.neutral.90`          | `--iress-colour-neutral-90`          |
+| Neutral/80 `#141F4D`      | `colour.neutral.80`          | `--iress-colour-neutral-80`          |
+| Neutral/90 `#141F4D`      | `colour.neutral.90` (alias)  | `--iress-colour-neutral-90`          |
 | Success/Fill `#37C49C`    | `colour.system.success.fill` | `--iress-colour-system-success-fill` |
 | Danger/Fill `#C21010`     | `colour.system.danger.fill`  | `--iress-colour-system-danger-fill`  |
 | Warning/Fill `#F0AD03`    | `colour.system.warning.fill` | `--iress-colour-system-warning-fill` |
@@ -169,6 +171,10 @@ IDS base spacing unit = 4px (0.25rem). Map Figma pixel values:
 | 40px     | `10`      | xl    |
 
 > For values not on the 4px grid, round to the nearest token value.
+
+> **Neutral alias note:** `colour.neutral.90` is a backwards-compatible alias
+> of `colour.neutral.80`. Prefer `colour.neutral.80` in generated IDS code, but
+> map either Figma `Neutral/80` or `Neutral/90` to the same `#141F4D` value.
 
 ## Border Radius
 
@@ -201,6 +207,11 @@ Prefer semantic HTML elements via the `element` prop — they convey meaning to 
 > **When to use `textStyle`:** Only when you need to visually override the default styling of a semantic element — e.g. making an `h2` look like an `h4` for visual hierarchy while keeping the correct heading level for accessibility: `<IressText element="h2" textStyle="typography.heading.4">`.
 
 > **Tip:** When translating Figma frames that contain mixed or unstructured text (e.g. CMS content, markdown, rich text blocks), wrap the content in `IressText` and nest native HTML elements (`<p>`, `<strong>`, `<a>`, `<ul>`, etc.) inside it. This is an allowed pattern that lets `IressText` apply consistent typography while preserving the original content structure.
+
+For neutral text colours, treat `colour.neutral.90` as a backwards-compatible
+alias of `colour.neutral.80` (both resolve to `#141F4D`). Prefer
+`colour.neutral.80` in new IDS implementations, but handle either token name
+when translating older Figma files.
 
 ## Translation Examples
 

@@ -29,9 +29,9 @@ export const tab = cva({
   variants: {
     active: {
       true: {
-        borderBottomColor: 'colour.neutral.90',
+        borderBottomColor: 'colour.neutral.80',
         backgroundColor: 'colour.neutral.30',
-        color: 'colour.neutral.90',
+        color: 'colour.neutral.80',
       },
     },
     insideTabSet: {

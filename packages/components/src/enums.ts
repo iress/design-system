@@ -9,6 +9,8 @@ export enum GlobalCSSClass {
   // Version 6 - Components CSS classes
   // Since the move to utility first CSS, these classes are mainly used for targeting in custom styling and easier debugging.
   Alert = 'ids-alert',
+  Avatar = 'ids-avatar',
+  AvatarGroup = 'ids-avatar-group',
   Autocomplete = 'ids-autocomplete',
   Breadcrumbs = 'ids-breadcrumbs',
   Button = 'ids-button',

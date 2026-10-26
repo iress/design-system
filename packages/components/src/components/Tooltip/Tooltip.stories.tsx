@@ -149,3 +149,11 @@ export const Delay: Story = {
     tooltipText: 'Hello!',
   },
 };
+
+export const Rich: Story = {
+  args: {
+    children: <IressButton>Hover for details</IressButton>,
+    tooltipText: ['John Doe', 'New · Group'],
+    variant: 'rich',
+  },
+};

@@ -36,10 +36,12 @@ import { IressSelect } from '@iress-oss/ids-components';
 | renderHiddenInput | `((props: SelectHiddenInputRenderProps<TMultiple>) => ReactNode)` | — | Completely customise the rendering of the hidden input. |
 | renderLabel | `((props: SelectLabelRenderProps<TMultiple>) => ReactElement>)` | — | Completely customise the rendering of the select label. |
 | renderOptions | `((props: SelectOptionsRenderProps<TMultiple>) => ReactNode)` | — | Completely customise the rendering of the select options. |
+| searchInputProps | `SelectSearchInputProps` | — | Passive props to apply to the internal async search input shown when `options` is a function, such as input constraints and non-interactive presentation props. Supported keys are `className`, `data-testid`, `inputMode`, `maxLength`, `minLength`, `pattern`, and `spellCheck`. Selection state, query updates, built-in placeholder text, and accessibility labelling remain controlled by `IressSelect`. |
 | required | `boolean` | — | Whether its required. Will be passed to the hidden input. |
 | type | `dialog` , `grid` , `listbox`, `menu` , `tree`  | — |  |
 | value | `any` | — | Value of selected option for controlled select. |
 | virtualFocus | `boolean` | — |  |
+| errorText | `ReactNode , ((error: string , boolean) => ReactNode)` | `<IressAlert status="danger" variant="full-width" mb="none">An unknown error occurred. Please contact support if the error persists.</IressAlert>` | Text to be displayed when the options function errors out. It is not used when the options are provided as an array. Can be a ReactNode or a render function that receives the error value. |
 | header | `ReactNode` | — | Header showed in option panel when expanded. |
 | footer | `ReactNode` | — | Footer showed in option panel when expanded. |
 | width | `any` | — | The width of the select. |
@@ -174,7 +176,20 @@ Add a `multiSelectLimit` prop to restrict the number of selections visible to th
 
 #### Async Options
 
-Load options dynamically using the `onSearch` callback.
+Load options dynamically using an async function passed to `options`.
+
+Use `searchInputProps` to constrain or annotate the internal async search input.
+Supported keys are `className`, `data-testid`, `inputMode`, `maxLength`,
+`minLength`, `pattern`, and `spellCheck`.
+
+Do not pass interactive or controlled input props such as `value`, `onChange`,
+`placeholder`, `aria-label`, `disabled`, `readOnly`, or refs. `IressSelect`
+controls query state, placeholder text, and accessibility labelling. Use
+`renderOptions` only when replacing the full built-in async options UI.
+
+```tsx
+<IressSelect options={searchOptions} searchInputProps={{ maxLength: 100 }} />;
+```
 
 **Note:** When using async options inside `IressFormField`, you must store the full `{ label, value }` option object in form state (not just the primitive value). This is because `IressSelect` cannot resolve a primitive value back to a display label without re-fetching. See the [Form caveats](../patterns/form.md#storing-select-values-in-form-state) for examples.
 
@@ -303,6 +318,86 @@ export const SelectAsyncMinLength = () => (
           id="min-length-select"
           minSearchLength={3}
           placeholder="Type at least 3 characters..."
+        />
+      </IressField>
+    </IressCol>
+  </IressRow>
+);
+```
+
+#### Custom error text
+
+For async options, `errorText` customises the message shown when the options
+function throws. By default, a generic danger alert is displayed.
+
+Pass a `ReactNode` for a static message, or a render function
+`(error: boolean | string) => ReactNode` to use the error value.
+
+```tsx
+import {
+  IressAlert,
+  IressCol,
+  IressField,
+  IressRow,
+  IressSelect,
+} from '@iress-oss/ids-components';
+
+interface StarWarsCharacter {
+  name: string;
+  gender: string;
+}
+
+interface StarWarsCharacterApi {
+  results: StarWarsCharacter[];
+}
+
+const options = async (query: string) => {
+  if (!query) return [];
+
+  if (query === 'error') {
+    throw new Error('Failed to fetch results');
+  }
+
+  const data = await fetch(
+    `https://swapi.py4e.com/api/people/?search=${encodeURIComponent(query)}`,
+  ).then((response) => response.json() as Promise<StarWarsCharacterApi>);
+
+  return data.results.map((character: StarWarsCharacter) => ({
+    label: character.name,
+    value: character.name,
+    meta: character.gender,
+  }));
+};
+
+export const SelectAsyncErrorText = () => (
+  <IressRow gutter="md">
+    <IressCol>
+      <IressField label="Custom error (ReactNode)" htmlFor="error-node">
+        <IressSelect
+          container={document.body}
+          options={options}
+          id="error-node"
+          placeholder='Type "error" to see the custom error'
+          errorText={
+            <IressAlert status="danger" mb="none">
+              Something went wrong. Please try again later.
+            </IressAlert>
+          }
+        />
+      </IressField>
+    </IressCol>
+    <IressCol>
+      <IressField label="Custom error (render function)" htmlFor="error-fn">
+        <IressSelect
+          container={document.body}
+          options={options}
+          id="error-fn"
+          placeholder='Type "error" to see the render function'
+          errorText={(err) => (
+            <IressAlert status="warning" mb="none" variant="full-width">
+              Error: {String(err)}
+            </IressAlert>
+          )}
         />
       </IressField>
     </IressCol>

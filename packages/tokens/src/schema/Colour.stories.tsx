@@ -264,12 +264,6 @@ export const Neutral: Story = {
         bg="colour.neutral.80"
         token={colour.neutral[80]}
       />,
-
-      <ColourSwatch
-        title="90"
-        bg="colour.neutral.90"
-        token={colour.neutral[90]}
-      />,
     ],
   },
 };

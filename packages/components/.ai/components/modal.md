@@ -25,7 +25,7 @@ import { IressModal } from '@iress-oss/ids-components';
 | closeText | `string` | `Close` | Screenreader text for close button. |
 | container | `[FloatingUIContainer](../../dist/types.d.ts)` | — | The container element to render the modal into. By default, the modal will render at the end of the document body. |
 | defaultShow | `boolean` | `false` | When set to `true` the modal will be visible by default. Use for uncontrolled modals. |
-| disableBackdropClick | `boolean` | — | When set to `true`, users cannot exit the modal by clicking the backdrop or using the escape key. |
+| disableBackdropClick | `no-esc`, boolean  | — | When set to `true`, users cannot exit the modal by clicking the backdrop. When set to `"no-esc"`, users also cannot exit the modal using the escape key. |
 | fixedFooter | `boolean` | — | When set to `true` the modal's footer will always be visible and fixed to the bottom of the modal. |
 | footer | `ReactNode` | — | Content to be rendered in the modal footer. If `actions` are also provided, this content will be rendered below the actions. |
 | heading | `ReactElement>, string ` | — | Sets the heading for the modal. If passed an element, it will render the element with an id, to ensure its connection to the modal. |
@@ -743,7 +743,10 @@ export function ModalStatuses() {
 
 #### Disable closing
 
-Use `disableBackdropClick` and/or `noCloseButton` when you require the user to complete the task before closing. Ensure you provide an alternative way to close.
+Use `disableBackdropClick={true}` to disable backdrop clicks while still allowing
+Escape key dismissal. Set `disableBackdropClick="no-esc"` to disable both backdrop
+clicks and Escape dismissal. You can also hide the close button using
+`noCloseButton`. Ensure you provide an alternative way to close.
 
 ```tsx
 import {

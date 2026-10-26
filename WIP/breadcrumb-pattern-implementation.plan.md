@@ -313,7 +313,7 @@ Map Figma values to design tokens:
 | Font: Inter Semi Bold 12px  | `typography.body.sm.strong`             |
 | Font: Inter Medium 14px     | `typography.body.md.medium`             |
 | Color: neutral/70 (#5d6c7e) | `colour.neutral.70`                     |
-| Color: neutral/90 (#141f4d) | `colour.neutral.90`                     |
+| Color: neutral/80 (#141f4d) | `colour.neutral.80`                     |
 | Gap: 4px                    | `spacing.1` (4px)                       |
 | Focus ring: #005bff         | `colour.global.interactions.focus-ring` |
 | Border radius: 4px          | `radius.1` or `radius.system.form`      |

@@ -39,7 +39,7 @@ export const Sandbox: Story = {
               react: 'latest',
               'react-dom': 'latest',
               radash: 'latest',
-              '@iress-oss/ids-tokens': 'alpha',
+              '@iress-oss/ids-tokens': 'beta',
             },
           },
           null,

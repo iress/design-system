@@ -43,11 +43,11 @@ Neutral colours apply to most backgrounds, text, and shapes in our experiences. 
 | `colour.neutral.20` | `--iress-colour-neutral-20` | `#F5F6F8` | Used as the alternating background colour for components such as tables. Used as the background colour behind panels and cards for highly interactive screens. | `alt` | neutral.70, neutral.80, neutral.90 |
 | `colour.neutral.30` | `--iress-colour-neutral-30` | `#E2E6EA` | Used as the border colour for dividers, and the default divider colour for components with in-built headers and footers such as cards. | — | neutral.80, neutral.90 |
 | `colour.neutral.40` | `--iress-colour-neutral-40` | `#CFD5DA` | Used for borders in subtle interactive components, such as checkboxes and radios with hidden controls and the progress bar. | — | neutral.80, neutral.90 |
-| `colour.neutral.50` | `--iress-colour-neutral-50` | `#A8B2BB` | Used as the background colour for interactive components such as the slider. | — | neutral.90 |
-| `colour.neutral.60` | `--iress-colour-neutral-60` | `#828F9D` | Used for placeholder text in form controls and disabled states. | — | neutral.90 |
+| `colour.neutral.50` | `--iress-colour-neutral-50` | `#A8B2BB` | Used as the background colour for interactive components such as the slider. | — | neutral.80, neutral.90 |
+| `colour.neutral.60` | `--iress-colour-neutral-60` | `#828F9D` | Used for placeholder text in form controls and disabled states. | — | neutral.80, neutral.90 |
 | `colour.neutral.70` | `--iress-colour-neutral-70` | `#5D6C7E` | Used for muted text such as hints and descriptions to allow for content hierarchy. | `muted` | neutral.10, neutral.20 |
-| `colour.neutral.80` | `--iress-colour-neutral-80` | `#384666` | Used as the default text colour for most components. For tooltips, it is used as the background colour. | `text` | neutral.10, neutral.20, neutral.30, neutral.40 |
-| `colour.neutral.90` | `--iress-colour-neutral-90` | `#141F4D` | Used for very dark text or UI elements requiring maximum contrast. | — | neutral.10, neutral.20, neutral.30, neutral.40 |
+| `colour.neutral.80` | `--iress-colour-neutral-80` | `#141F4D` | Used as the default text colour for most components. For tooltips, it is used as the background colour. This token now uses the previous Neutral 90 value to improve visual hierarchy. | `text`, `colour.neutral.90` | neutral.10, neutral.20, neutral.30, neutral.40 |
+| `colour.neutral.90` | `--iress-colour-neutral-90` | `#141F4D` | Deprecated alias for colour.neutral.80. Resolves to the same value (#141F4D). | — | neutral.10, neutral.20, neutral.30, neutral.40 |
 
 ### Primary
 
@@ -84,8 +84,8 @@ Communicates that an action has been successful and inform a user that the actio
 | `colour.system.success.fill` | `--iress-colour-system-success-fill` | `#37C49C` | Used for the background colour of primary success buttons, as well as the border of alerts and badges. It is also used for the foreground colour of icons inside toasts and alerts. | system.success.onFill |
 | `colour.system.success.fillHover` | `--iress-colour-system-success-fill-hover` | `#2DAB88` | Used for the hover state of primary success buttons. | system.success.onFill |
 | `colour.system.success.onFill` | `--iress-colour-system-success-on-fill` | `#0A2E25` | Used for the foreground colour of primary success buttons and badges. | system.success.fill |
-| `colour.system.success.surface` | `--iress-colour-system-success-surface` | `#EBF9F5` | Used for the background colour of success alerts and toasts, and the background of secondary success buttons. | system.success.text, neutral.90 |
-| `colour.system.success.surfaceHover` | `--iress-colour-system-success-surface-hover` | `#D7F3EB` | Used for the hover state of secondary success buttons. | system.success.text, neutral.90 |
+| `colour.system.success.surface` | `--iress-colour-system-success-surface` | `#EBF9F5` | Used for the background colour of success alerts and toasts, and the background of secondary success buttons. | system.success.text, neutral.80 |
+| `colour.system.success.surfaceHover` | `--iress-colour-system-success-surface-hover` | `#D7F3EB` | Used for the hover state of secondary success buttons. | system.success.text, neutral.80 |
 | `colour.system.success.text` | `--iress-colour-system-success-text` | `#006b44` | Used for the text colour of success alerts and toasts, and success tertiary buttons. | system.success.surface |
 
 ### System — Danger
@@ -97,8 +97,8 @@ Communicates something went wrong or prevents the user from moving forward with 
 | `colour.system.danger.fill` | `--iress-colour-system-danger-fill` | `#c21010` | Used for the background colour of primary danger buttons, as well as the border of alerts and badges. It is also used for the foreground colour of icons inside toasts and alerts. | system.danger.onFill |
 | `colour.system.danger.fillHover` | `--iress-colour-system-danger-fill-hover` | `#B32727` | Used for the hover state of primary danger buttons. | system.danger.onFill |
 | `colour.system.danger.onFill` | `--iress-colour-system-danger-on-fill` | `#FFF4F3` | Used for the foreground colour of primary danger buttons and badges. | system.danger.fill |
-| `colour.system.danger.surface` | `--iress-colour-system-danger-surface` | `#FFEDEC` | Used for the background colour of danger alerts and toasts, and the background of secondary danger buttons. | system.danger.text, neutral.90 |
-| `colour.system.danger.surfaceHover` | `--iress-colour-system-danger-surface-hover` | `#FFD9D6` | Used for the hover state of secondary danger buttons. | system.danger.text, neutral.90 |
+| `colour.system.danger.surface` | `--iress-colour-system-danger-surface` | `#FFEDEC` | Used for the background colour of danger alerts and toasts, and the background of secondary danger buttons. | system.danger.text, neutral.80 |
+| `colour.system.danger.surfaceHover` | `--iress-colour-system-danger-surface-hover` | `#FFD9D6` | Used for the hover state of secondary danger buttons. | system.danger.text, neutral.80 |
 | `colour.system.danger.text` | `--iress-colour-system-danger-text` | `#c21010` | Used for the text colour of danger alerts and toasts, and danger tertiary buttons. | system.danger.surface |
 
 ### System — Warning
@@ -110,8 +110,8 @@ Communicates attention required but does not prevent the user from moving forwar
 | `colour.system.warning.fill` | `--iress-colour-system-warning-fill` | `#F0AD03` | Used for the border of warning alerts and the background of warning badges. | system.warning.onFill |
 | `colour.system.warning.fillHover` | `--iress-colour-system-warning-fill-hover` | `#DA9D00` | Used for the hover state of primary warning buttons. | system.warning.onFill |
 | `colour.system.warning.onFill` | `--iress-colour-system-warning-on-fill` | `#2B1F00` | Used for the foreground colour of warning badges. | system.warning.fill |
-| `colour.system.warning.surface` | `--iress-colour-system-warning-surface` | `#FFF8E6` | Used for the background colour of warning alerts. | system.warning.text, neutral.90 |
-| `colour.system.warning.surfaceHover` | `--iress-colour-system-warning-surface-hover` | `#FFEAA0` | Used for the hover state of secondary warning buttons. | system.warning.text, neutral.90 |
+| `colour.system.warning.surface` | `--iress-colour-system-warning-surface` | `#FFF8E6` | Used for the background colour of warning alerts. | system.warning.text, neutral.80 |
+| `colour.system.warning.surfaceHover` | `--iress-colour-system-warning-surface-hover` | `#FFEAA0` | Used for the hover state of secondary warning buttons. | system.warning.text, neutral.80 |
 | `colour.system.warning.text` | `--iress-colour-system-warning-text` | `#825400` | Used for the text colour of warning alerts. | system.warning.surface |
 
 ### System — Info
@@ -123,8 +123,8 @@ Provides additional helpful context.
 | `colour.system.info.fill` | `--iress-colour-system-info-fill` | `#669AFF` | Used for the border of info alerts and toasts and the background of info badges. | system.info.onFill |
 | `colour.system.info.fillHover` | `--iress-colour-system-info-fill-hover` | `#5685E1` | Used for the hover state of primary info buttons. | system.info.onFill |
 | `colour.system.info.onFill` | `--iress-colour-system-info-on-fill` | `#121D33` | Used for the foreground colour of info badges. | system.info.fill |
-| `colour.system.info.surface` | `--iress-colour-system-info-surface` | `#E5EEFF` | Used for the background colour of info alerts and toasts. | system.info.text, neutral.90 |
-| `colour.system.info.surfaceHover` | `--iress-colour-system-info-surface-hover` | `#CCDEFF` | Used for the hover state of secondary info buttons. | system.info.text, neutral.90 |
+| `colour.system.info.surface` | `--iress-colour-system-info-surface` | `#E5EEFF` | Used for the background colour of info alerts and toasts. | system.info.text, neutral.80 |
+| `colour.system.info.surfaceHover` | `--iress-colour-system-info-surface-hover` | `#CCDEFF` | Used for the hover state of secondary info buttons. | system.info.text, neutral.80 |
 | `colour.system.info.text` | `--iress-colour-system-info-text` | `#0047ab` | Used for the text colour of info alerts and toasts. | system.info.surface |
 
 ### Data — Subtle
@@ -133,15 +133,15 @@ Subtle data colours provide softer contrast for backgrounds and less prominent d
 
 | Token | CSS Variable | Value | Description | AA-Compliant Pairings |
 | --- | --- | --- | --- | --- |
-| `colour.data.subtle.10` | `--iress-colour-data-subtle-10` | `#FFE6F2` | First data visualisation colour in the subtle palette. | data.bold.10, neutral.90 |
-| `colour.data.subtle.20` | `--iress-colour-data-subtle-20` | `#FEEAFF` | Second data visualisation colour in the subtle palette. | data.bold.20, neutral.90 |
-| `colour.data.subtle.30` | `--iress-colour-data-subtle-30` | `#F1E6FF` | Third data visualisation colour in the subtle palette. | data.bold.30, neutral.90 |
-| `colour.data.subtle.40` | `--iress-colour-data-subtle-40` | `#E5F5FF` | Fourth data visualisation colour in the subtle palette. | data.bold.40, neutral.90 |
-| `colour.data.subtle.50` | `--iress-colour-data-subtle-50` | `#E6EEFF` | Fifth data visualisation colour in the subtle palette. | data.bold.50, neutral.90 |
-| `colour.data.subtle.60` | `--iress-colour-data-subtle-60` | `#C8D7FF` | Sixth data visualisation colour in the subtle palette. | data.bold.60, neutral.90 |
-| `colour.data.subtle.70` | `--iress-colour-data-subtle-70` | `#E4FFFD` | Seventh data visualisation colour in the subtle palette. | data.bold.70, neutral.90 |
-| `colour.data.subtle.80` | `--iress-colour-data-subtle-80` | `#BADFD4` | Eighth data visualisation colour in the subtle palette. | data.bold.80, neutral.90 |
-| `colour.data.subtle.90` | `--iress-colour-data-subtle-90` | `#ECECEC` | Ninth data visualisation colour in the subtle palette. | data.bold.90, neutral.90 |
+| `colour.data.subtle.10` | `--iress-colour-data-subtle-10` | `#FFE6F2` | First data visualisation colour in the subtle palette. | data.bold.10, neutral.80 |
+| `colour.data.subtle.20` | `--iress-colour-data-subtle-20` | `#FEEAFF` | Second data visualisation colour in the subtle palette. | data.bold.20, neutral.80 |
+| `colour.data.subtle.30` | `--iress-colour-data-subtle-30` | `#F1E6FF` | Third data visualisation colour in the subtle palette. | data.bold.30, neutral.80 |
+| `colour.data.subtle.40` | `--iress-colour-data-subtle-40` | `#E5F5FF` | Fourth data visualisation colour in the subtle palette. | data.bold.40, neutral.80 |
+| `colour.data.subtle.50` | `--iress-colour-data-subtle-50` | `#E6EEFF` | Fifth data visualisation colour in the subtle palette. | data.bold.50, neutral.80 |
+| `colour.data.subtle.60` | `--iress-colour-data-subtle-60` | `#C8D7FF` | Sixth data visualisation colour in the subtle palette. | data.bold.60, neutral.80 |
+| `colour.data.subtle.70` | `--iress-colour-data-subtle-70` | `#E4FFFD` | Seventh data visualisation colour in the subtle palette. | data.bold.70, neutral.80 |
+| `colour.data.subtle.80` | `--iress-colour-data-subtle-80` | `#BADFD4` | Eighth data visualisation colour in the subtle palette. | data.bold.80, neutral.80 |
+| `colour.data.subtle.90` | `--iress-colour-data-subtle-90` | `#ECECEC` | Ninth data visualisation colour in the subtle palette. | data.bold.90, neutral.80 |
 
 ### Data — Bold
 
@@ -421,8 +421,8 @@ import { convertReferencesToVariables } from '@iress-oss/ids-tokens/convertRefer
 | ----------------- | ---------------------------- | --------------------------- |
 | Page background   | `colour.neutral.10`          | `bg="colour.neutral.10"`    |
 | Subtle background | `colour.neutral.20`          | `bg="colour.neutral.20"`    |
-| Default text      | `colour.neutral.90`          | `color="colour.neutral.90"` |
-| Secondary text    | `colour.neutral.80`          | `color="colour.neutral.80"` |
+| Default text      | `colour.neutral.80`          | `color="colour.neutral.80"` |
+| Secondary text    | `colour.neutral.70`          | `color="colour.neutral.70"` |
 | Borders           | `colour.neutral.30`          | _Use component props_       |
 | Primary action    | `colour.primary.fill`        | _Use Button mode="primary"_ |
 | Success indicator | `colour.system.success.fill` | _Use Alert/Tag status_      |
@@ -614,7 +614,7 @@ import { cssVars } from '@iress-oss/ids-tokens';
   style={{
     background: cssVars.colour.neutral[10],
     border: `1px solid ${cssVars.colour.neutral[30]}`,
-    color: cssVars.colour.neutral[90],
+    color: cssVars.colour.neutral[80],
     padding: cssVars.spacing[4],
     gap: cssVars.spacing[2],
     borderRadius: cssVars.radius[3],
@@ -735,15 +735,15 @@ Layout components accept responsive objects for spacing props:
 
 ## Decision Table: Component Props vs CSS Variables vs cssVars
 
-| Situation                        | Use                                             |
-| -------------------------------- | ----------------------------------------------- |
-| Spacing on IDS layout components | Props: `gap`, `p`, `m`                          |
-| Colours on IDS components        | Props: `bg`, `color`                            |
+| Situation                        | Use                                                         |
+| -------------------------------- | ----------------------------------------------------------- |
+| Spacing on IDS layout components | Props: `gap`, `p`, `m`                                      |
+| Colours on IDS components        | Props: `bg`, `color`                                        |
 | Custom CSS / SCSS                | CSS variables (`var(--colour-*)`, `var(--spacing-*)`, etc.) |
-| Inline styles / CSS-in-JS        | `cssVars` object (`cssVars.colour.neutral[10]`) |
-| Custom CSS with Panda CSS        | `@iress-oss/ids-theme-preset` preset            |
-| Theming / overrides              | CSS variables on custom properties              |
-| Internal theme editors           | `mapTokensToCssVariables()` helper              |
+| Inline styles / CSS-in-JS        | `cssVars` object (`cssVars.colour.neutral[10]`)             |
+| Custom CSS with Panda CSS        | `@iress-oss/ids-theme-preset` preset                        |
+| Theming / overrides              | CSS variables on custom properties                          |
+| Internal theme editors           | `mapTokensToCssVariables()` helper                          |
 
 **General Rule:** Prefer component props when available. For custom styling, use CSS variables in stylesheets or `cssVars` in JavaScript. Only use `mapTokensToCssVariables` / `convertReferencesToVariables` for internal tooling like theme editors.
 
@@ -779,11 +779,11 @@ Neutral colours apply to most backgrounds, text, and shapes in our experiences. 
 | `colour.neutral.20` | `--iress-colour-neutral-20` | `#F5F6F8` | Used as the alternating background colour for components such as tables. Used as the background colour behind panels and cards for highly interactive screens. | `alt` | neutral.70, neutral.80, neutral.90 |
 | `colour.neutral.30` | `--iress-colour-neutral-30` | `#E2E6EA` | Used as the border colour for dividers, and the default divider colour for components with in-built headers and footers such as cards. | — | neutral.80, neutral.90 |
 | `colour.neutral.40` | `--iress-colour-neutral-40` | `#CFD5DA` | Used for borders in subtle interactive components, such as checkboxes and radios with hidden controls and the progress bar. | — | neutral.80, neutral.90 |
-| `colour.neutral.50` | `--iress-colour-neutral-50` | `#A8B2BB` | Used as the background colour for interactive components such as the slider. | — | neutral.90 |
-| `colour.neutral.60` | `--iress-colour-neutral-60` | `#828F9D` | Used for placeholder text in form controls and disabled states. | — | neutral.90 |
+| `colour.neutral.50` | `--iress-colour-neutral-50` | `#A8B2BB` | Used as the background colour for interactive components such as the slider. | — | neutral.80, neutral.90 |
+| `colour.neutral.60` | `--iress-colour-neutral-60` | `#828F9D` | Used for placeholder text in form controls and disabled states. | — | neutral.80, neutral.90 |
 | `colour.neutral.70` | `--iress-colour-neutral-70` | `#5D6C7E` | Used for muted text such as hints and descriptions to allow for content hierarchy. | `muted` | neutral.10, neutral.20 |
-| `colour.neutral.80` | `--iress-colour-neutral-80` | `#384666` | Used as the default text colour for most components. For tooltips, it is used as the background colour. | `text` | neutral.10, neutral.20, neutral.30, neutral.40 |
-| `colour.neutral.90` | `--iress-colour-neutral-90` | `#141F4D` | Used for very dark text or UI elements requiring maximum contrast. | — | neutral.10, neutral.20, neutral.30, neutral.40 |
+| `colour.neutral.80` | `--iress-colour-neutral-80` | `#141F4D` | Used as the default text colour for most components. For tooltips, it is used as the background colour. This token now uses the previous Neutral 90 value to improve visual hierarchy. | `text`, `colour.neutral.90` | neutral.10, neutral.20, neutral.30, neutral.40 |
+| `colour.neutral.90` | `--iress-colour-neutral-90` | `#141F4D` | Deprecated alias for colour.neutral.80. Resolves to the same value (#141F4D). | — | neutral.10, neutral.20, neutral.30, neutral.40 |
 
 ### Primary
 
@@ -820,8 +820,8 @@ Communicates that an action has been successful and inform a user that the actio
 | `colour.system.success.fill` | `--iress-colour-system-success-fill` | `#37C49C` | Used for the background colour of primary success buttons, as well as the border of alerts and badges. It is also used for the foreground colour of icons inside toasts and alerts. | system.success.onFill |
 | `colour.system.success.fillHover` | `--iress-colour-system-success-fill-hover` | `#2DAB88` | Used for the hover state of primary success buttons. | system.success.onFill |
 | `colour.system.success.onFill` | `--iress-colour-system-success-on-fill` | `#0A2E25` | Used for the foreground colour of primary success buttons and badges. | system.success.fill |
-| `colour.system.success.surface` | `--iress-colour-system-success-surface` | `#EBF9F5` | Used for the background colour of success alerts and toasts, and the background of secondary success buttons. | system.success.text, neutral.90 |
-| `colour.system.success.surfaceHover` | `--iress-colour-system-success-surface-hover` | `#D7F3EB` | Used for the hover state of secondary success buttons. | system.success.text, neutral.90 |
+| `colour.system.success.surface` | `--iress-colour-system-success-surface` | `#EBF9F5` | Used for the background colour of success alerts and toasts, and the background of secondary success buttons. | system.success.text, neutral.80 |
+| `colour.system.success.surfaceHover` | `--iress-colour-system-success-surface-hover` | `#D7F3EB` | Used for the hover state of secondary success buttons. | system.success.text, neutral.80 |
 | `colour.system.success.text` | `--iress-colour-system-success-text` | `#006b44` | Used for the text colour of success alerts and toasts, and success tertiary buttons. | system.success.surface |
 
 ### System — Danger
@@ -833,8 +833,8 @@ Communicates something went wrong or prevents the user from moving forward with 
 | `colour.system.danger.fill` | `--iress-colour-system-danger-fill` | `#c21010` | Used for the background colour of primary danger buttons, as well as the border of alerts and badges. It is also used for the foreground colour of icons inside toasts and alerts. | system.danger.onFill |
 | `colour.system.danger.fillHover` | `--iress-colour-system-danger-fill-hover` | `#B32727` | Used for the hover state of primary danger buttons. | system.danger.onFill |
 | `colour.system.danger.onFill` | `--iress-colour-system-danger-on-fill` | `#FFF4F3` | Used for the foreground colour of primary danger buttons and badges. | system.danger.fill |
-| `colour.system.danger.surface` | `--iress-colour-system-danger-surface` | `#FFEDEC` | Used for the background colour of danger alerts and toasts, and the background of secondary danger buttons. | system.danger.text, neutral.90 |
-| `colour.system.danger.surfaceHover` | `--iress-colour-system-danger-surface-hover` | `#FFD9D6` | Used for the hover state of secondary danger buttons. | system.danger.text, neutral.90 |
+| `colour.system.danger.surface` | `--iress-colour-system-danger-surface` | `#FFEDEC` | Used for the background colour of danger alerts and toasts, and the background of secondary danger buttons. | system.danger.text, neutral.80 |
+| `colour.system.danger.surfaceHover` | `--iress-colour-system-danger-surface-hover` | `#FFD9D6` | Used for the hover state of secondary danger buttons. | system.danger.text, neutral.80 |
 | `colour.system.danger.text` | `--iress-colour-system-danger-text` | `#c21010` | Used for the text colour of danger alerts and toasts, and danger tertiary buttons. | system.danger.surface |
 
 ### System — Warning
@@ -846,8 +846,8 @@ Communicates attention required but does not prevent the user from moving forwar
 | `colour.system.warning.fill` | `--iress-colour-system-warning-fill` | `#F0AD03` | Used for the border of warning alerts and the background of warning badges. | system.warning.onFill |
 | `colour.system.warning.fillHover` | `--iress-colour-system-warning-fill-hover` | `#DA9D00` | Used for the hover state of primary warning buttons. | system.warning.onFill |
 | `colour.system.warning.onFill` | `--iress-colour-system-warning-on-fill` | `#2B1F00` | Used for the foreground colour of warning badges. | system.warning.fill |
-| `colour.system.warning.surface` | `--iress-colour-system-warning-surface` | `#FFF8E6` | Used for the background colour of warning alerts. | system.warning.text, neutral.90 |
-| `colour.system.warning.surfaceHover` | `--iress-colour-system-warning-surface-hover` | `#FFEAA0` | Used for the hover state of secondary warning buttons. | system.warning.text, neutral.90 |
+| `colour.system.warning.surface` | `--iress-colour-system-warning-surface` | `#FFF8E6` | Used for the background colour of warning alerts. | system.warning.text, neutral.80 |
+| `colour.system.warning.surfaceHover` | `--iress-colour-system-warning-surface-hover` | `#FFEAA0` | Used for the hover state of secondary warning buttons. | system.warning.text, neutral.80 |
 | `colour.system.warning.text` | `--iress-colour-system-warning-text` | `#825400` | Used for the text colour of warning alerts. | system.warning.surface |
 
 ### System — Info
@@ -859,8 +859,8 @@ Provides additional helpful context.
 | `colour.system.info.fill` | `--iress-colour-system-info-fill` | `#669AFF` | Used for the border of info alerts and toasts and the background of info badges. | system.info.onFill |
 | `colour.system.info.fillHover` | `--iress-colour-system-info-fill-hover` | `#5685E1` | Used for the hover state of primary info buttons. | system.info.onFill |
 | `colour.system.info.onFill` | `--iress-colour-system-info-on-fill` | `#121D33` | Used for the foreground colour of info badges. | system.info.fill |
-| `colour.system.info.surface` | `--iress-colour-system-info-surface` | `#E5EEFF` | Used for the background colour of info alerts and toasts. | system.info.text, neutral.90 |
-| `colour.system.info.surfaceHover` | `--iress-colour-system-info-surface-hover` | `#CCDEFF` | Used for the hover state of secondary info buttons. | system.info.text, neutral.90 |
+| `colour.system.info.surface` | `--iress-colour-system-info-surface` | `#E5EEFF` | Used for the background colour of info alerts and toasts. | system.info.text, neutral.80 |
+| `colour.system.info.surfaceHover` | `--iress-colour-system-info-surface-hover` | `#CCDEFF` | Used for the hover state of secondary info buttons. | system.info.text, neutral.80 |
 | `colour.system.info.text` | `--iress-colour-system-info-text` | `#0047ab` | Used for the text colour of info alerts and toasts. | system.info.surface |
 
 ### Data — Subtle
@@ -869,15 +869,15 @@ Subtle data colours provide softer contrast for backgrounds and less prominent d
 
 | Token | CSS Variable | Value | Description | AA-Compliant Pairings |
 | --- | --- | --- | --- | --- |
-| `colour.data.subtle.10` | `--iress-colour-data-subtle-10` | `#FFE6F2` | First data visualisation colour in the subtle palette. | data.bold.10, neutral.90 |
-| `colour.data.subtle.20` | `--iress-colour-data-subtle-20` | `#FEEAFF` | Second data visualisation colour in the subtle palette. | data.bold.20, neutral.90 |
-| `colour.data.subtle.30` | `--iress-colour-data-subtle-30` | `#F1E6FF` | Third data visualisation colour in the subtle palette. | data.bold.30, neutral.90 |
-| `colour.data.subtle.40` | `--iress-colour-data-subtle-40` | `#E5F5FF` | Fourth data visualisation colour in the subtle palette. | data.bold.40, neutral.90 |
-| `colour.data.subtle.50` | `--iress-colour-data-subtle-50` | `#E6EEFF` | Fifth data visualisation colour in the subtle palette. | data.bold.50, neutral.90 |
-| `colour.data.subtle.60` | `--iress-colour-data-subtle-60` | `#C8D7FF` | Sixth data visualisation colour in the subtle palette. | data.bold.60, neutral.90 |
-| `colour.data.subtle.70` | `--iress-colour-data-subtle-70` | `#E4FFFD` | Seventh data visualisation colour in the subtle palette. | data.bold.70, neutral.90 |
-| `colour.data.subtle.80` | `--iress-colour-data-subtle-80` | `#BADFD4` | Eighth data visualisation colour in the subtle palette. | data.bold.80, neutral.90 |
-| `colour.data.subtle.90` | `--iress-colour-data-subtle-90` | `#ECECEC` | Ninth data visualisation colour in the subtle palette. | data.bold.90, neutral.90 |
+| `colour.data.subtle.10` | `--iress-colour-data-subtle-10` | `#FFE6F2` | First data visualisation colour in the subtle palette. | data.bold.10, neutral.80 |
+| `colour.data.subtle.20` | `--iress-colour-data-subtle-20` | `#FEEAFF` | Second data visualisation colour in the subtle palette. | data.bold.20, neutral.80 |
+| `colour.data.subtle.30` | `--iress-colour-data-subtle-30` | `#F1E6FF` | Third data visualisation colour in the subtle palette. | data.bold.30, neutral.80 |
+| `colour.data.subtle.40` | `--iress-colour-data-subtle-40` | `#E5F5FF` | Fourth data visualisation colour in the subtle palette. | data.bold.40, neutral.80 |
+| `colour.data.subtle.50` | `--iress-colour-data-subtle-50` | `#E6EEFF` | Fifth data visualisation colour in the subtle palette. | data.bold.50, neutral.80 |
+| `colour.data.subtle.60` | `--iress-colour-data-subtle-60` | `#C8D7FF` | Sixth data visualisation colour in the subtle palette. | data.bold.60, neutral.80 |
+| `colour.data.subtle.70` | `--iress-colour-data-subtle-70` | `#E4FFFD` | Seventh data visualisation colour in the subtle palette. | data.bold.70, neutral.80 |
+| `colour.data.subtle.80` | `--iress-colour-data-subtle-80` | `#BADFD4` | Eighth data visualisation colour in the subtle palette. | data.bold.80, neutral.80 |
+| `colour.data.subtle.90` | `--iress-colour-data-subtle-90` | `#ECECEC` | Ninth data visualisation colour in the subtle palette. | data.bold.90, neutral.80 |
 
 ### Data — Bold
 

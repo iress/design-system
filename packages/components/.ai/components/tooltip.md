@@ -25,6 +25,7 @@ import { IressTooltip } from '@iress-oss/ids-components';
 | delay | `number` | `500` | Sets the tooltip display delay in milliseconds. |
 | open | `boolean` | `false` | Only used for internal testing. |
 | **tooltipText** | `string , string[]` | — | Sets the tooltip text. Can accept a string or an array of strings - if given an array, will output each string on a new line. |
+| variant | `rich` | — | Visual variant of the tooltip. - When not set (default): renders plain text, with arrays shown as multiple lines separated by line breaks. - `rich`: Displays structured content with the first line as a prominent name and subsequent lines as muted metadata. |
 | data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
 
 📄 [Full type definition](../../dist/components/Tooltip/Tooltip.d.ts)
@@ -201,6 +202,18 @@ The `delay` prop sets milliseconds before the tooltip appears after `mouseEnter`
     </IressTooltip>
   </IressInline>
 </IressStyled>;
+```
+
+#### Rich variant
+
+Use `variant="rich"` for structured content. The first line is rendered as a
+prominent name and subsequent lines as muted, smaller text. This is useful for
+explaining avatar badges and indicators.
+
+```tsx
+<IressTooltip tooltipText={['John Doe', 'New · Group']} variant="rich">
+  <IressButton>Hover for details</IressButton>
+</IressTooltip>;
 ```
 
 ### Testing

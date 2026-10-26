@@ -23,7 +23,7 @@ import { IressTabSet } from '@iress-oss/ids-components';
 | append | `ReactNode` | — | Content rendered alongside the tablist in the tab bar row, but outside the tablist itself. Useful for placing action buttons (e.g. "Add tab") at the end of the tab bar. |
 | children | `ReactNode` | — | Content to be displayed inside the IressTabs, usually multiple `IressTab`. |
 | defaultSelected | `[FormControlValue](../../dist/types.d.ts)` | — | Set the selected tab for uncontrolled tabs. If the `IressTab` does not have a `value` prop, it will match by index. |
-| layout | `top-center` , `top-left` , `top-right` | `top-left` | Layout options for the positioning of tabs. |
+| layout | `top-center` , `top-left` , `top-right` , `top-stretch` | `top-left` | Layout options for the positioning of tabs. |
 | onChange | `((event: [IressTabSetChangedEventDetail](../../dist/components/TabSet/TabSet.d.ts)) => void)` | — | Emitted when a tab changes. |
 | panelStyle | `[IressCustomiseSlot](../../dist/interfaces.d.ts)` | — | Custom style for the panel (the area that contains the tab content). |
 | selected | `[FormControlValue](../../dist/types.d.ts)` | — | Set the selected tab for controlled tabs. If the `IressTab` does not have a `value` prop, it will match by index. |
@@ -182,7 +182,12 @@ export function TabsUsingState() {
 
 #### Layout
 
-`IressTabSet` controls the layout of the tab buttons. These can be aligned left (default), center, or right via the `layout` prop.
+`IressTabSet` controls the layout of the tab buttons via the `layout` prop:
+
+- `top-left` (default): tabs align to the start.
+- `top-center`: tabs align centrally.
+- `top-right`: tabs align to the end.
+- `top-stretch`: tabs stretch equally to fill the full available width.
 
 ```tsx
 import {
@@ -219,6 +224,16 @@ export function TabSetLayout() {
       <IressPanel>
         <IressText element="h2">top-right</IressText>
         <IressTabSet layout="top-right">
+          <IressTab label="Address">Address information goes here</IressTab>
+          <IressTab label="Employment">
+            Employment information goes here
+          </IressTab>
+          <IressTab label="History">Medical history goes here</IressTab>
+        </IressTabSet>
+      </IressPanel>
+      <IressPanel>
+        <IressText element="h2">top-stretch</IressText>
+        <IressTabSet layout="top-stretch">
           <IressTab label="Address">Address information goes here</IressTab>
           <IressTab label="Employment">
             Employment information goes here

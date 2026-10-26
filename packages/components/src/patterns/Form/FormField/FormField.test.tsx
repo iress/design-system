@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 
 import { IressFormField, IressFormFieldProps } from './FormField';
 import {
@@ -111,6 +111,89 @@ describe('IressFormField', () => {
       'Label: This field is required',
     );
     expect(formErrorMessage).toBeInTheDocument();
+  });
+
+  it('marks control as invalid and announces error to screen readers when validation fails', async () => {
+    render(
+      <IressForm id="iress-form">
+        <IressFormField
+          label="Label"
+          name="name"
+          render={(controlledProps) => <IressInput {...controlledProps} />}
+          rules={{ required: 'This field is required' }}
+        />
+        <IressButton type="submit">Submit</IressButton>
+      </IressForm>,
+    );
+
+    const input = await screen.findByRole('textbox', { name: 'RequiredLabel' });
+
+    // Before submit, input is valid with no error description
+    expect(input).toBeValid();
+    expect(input).not.toHaveAccessibleDescription();
+
+    const submit = screen.getByRole('button', { name: 'Submit' });
+    await userEvent.click(submit);
+
+    // After submit, screen readers should announce the input as invalid
+    // and the error message should be associated with the input
+    await screen.findByText('This field is required');
+    expect(input).toBeInvalid();
+    expect(input).toHaveAccessibleDescription('This field is required');
+  });
+
+  it('removes invalid state and error description once the error is resolved', async () => {
+    render(
+      <IressForm id="iress-form">
+        <IressFormField
+          label="Label"
+          name="name"
+          render={(controlledProps) => <IressInput {...controlledProps} />}
+          rules={{ required: 'This field is required' }}
+        />
+        <IressButton type="submit">Submit</IressButton>
+      </IressForm>,
+    );
+
+    const input = await screen.findByRole('textbox', { name: 'RequiredLabel' });
+    const submit = screen.getByRole('button', { name: 'Submit' });
+
+    await userEvent.click(submit);
+    await screen.findByText('This field is required');
+    expect(input).toBeInvalid();
+
+    // Correct the error by typing a value
+    await userEvent.type(input, 'Some value');
+
+    await userEvent.click(submit);
+
+    // Wait for validation to complete and error to be removed
+    await waitFor(() => {
+      expect(input).toBeValid();
+    });
+    expect(input).not.toHaveAccessibleDescription();
+  });
+
+  it('does not mark control as invalid when readOnly', async () => {
+    render(
+      <IressForm id="iress-form">
+        <IressFormField
+          label="Label"
+          name="name"
+          readOnly
+          render={(controlledProps) => <IressInput {...controlledProps} />}
+          rules={{ required: 'This field is required' }}
+        />
+        <IressButton type="submit">Submit</IressButton>
+      </IressForm>,
+    );
+
+    const input = await screen.findByRole('textbox', { name: 'Label' });
+    const submit = screen.getByRole('button', { name: 'Submit' });
+    await userEvent.click(submit);
+
+    expect(input).toBeValid();
+    expect(input).not.toHaveAccessibleDescription();
   });
 
   it('does not show or set error messages when readOnly is true', async () => {

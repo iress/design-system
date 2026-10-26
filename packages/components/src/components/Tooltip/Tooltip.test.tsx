@@ -65,6 +65,32 @@ describe('IressTooltip', () => {
       );
     });
 
+    it('renders each line in a span when variant is rich', () => {
+      const screen = renderComponent({
+        open: true,
+        tooltipText: ['John Doe', 'New · Group'],
+        variant: 'rich',
+      });
+
+      const content = screen.getByTestId(`${TEST_ID}__tooltip-text`);
+      const spans = content.querySelectorAll('span');
+      expect(spans).toHaveLength(2);
+      expect(content.querySelector('br')).toBeNull();
+    });
+
+    it('applies richName class to first line and richMeta class to subsequent lines when variant is rich', () => {
+      const screen = renderComponent({
+        open: true,
+        tooltipText: ['John Doe', 'New · Group'],
+        variant: 'rich',
+      });
+
+      const content = screen.getByTestId(`${TEST_ID}__tooltip-text`);
+      const spans = content.querySelectorAll('span');
+      expect(spans[0]).toHaveClass(tooltip({ variant: 'rich' }).richName!);
+      expect(spans[1]).toHaveClass(tooltip({ variant: 'rich' }).richMeta!);
+    });
+
     it('sets the correct data-testids', () => {
       const screen = renderComponent({
         open: true,

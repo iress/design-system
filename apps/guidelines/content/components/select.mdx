@@ -85,7 +85,23 @@ Add a `multiSelectLimit` prop to restrict the number of selections visible to th
 
 #### Async Options
 
-Load options dynamically using the `onSearch` callback.
+Load options dynamically using an async function passed to `options`.
+
+Use `searchInputProps` to constrain or annotate the internal async search input.
+Supported keys are `className`, `data-testid`, `inputMode`, `maxLength`,
+`minLength`, `pattern`, and `spellCheck`.
+
+Do not pass interactive or controlled input props such as `value`, `onChange`,
+`placeholder`, `aria-label`, `disabled`, `readOnly`, or refs. `IressSelect`
+controls query state, placeholder text, and accessibility labelling. Use
+`renderOptions` only when replacing the full built-in async options UI.
+
+```tsx
+<IressSelect
+  options={searchOptions}
+  searchInputProps={{ maxLength: 100 }}
+/>
+```
 
 **Note:** When using async options inside `IressFormField`, you must store the full `{ label, value }` option object in form state (not just the primitive value). This is because `IressSelect` cannot resolve a primitive value back to a display label without re-fetching. See the [Form caveats](/patterns/form#storing-select-values-in-form-state) for examples.
 
@@ -96,6 +112,16 @@ Load options dynamically using the `onSearch` callback.
 To avoid unnecessary API calls, use the `minSearchLength` prop to require a minimum number of characters before triggering the search.
 
 <StoryEmbed id="components-select--async-options-min-search-length"/>
+
+#### Custom error text
+
+For async options, `errorText` customises the message shown when the options
+function throws. By default, a generic danger alert is displayed.
+
+Pass a `ReactNode` for a static message, or a render function
+`(error: boolean | string) => ReactNode` to use the error value.
+
+<StoryEmbed id="components-select--error-text"/>
 
 #### Pre-selected Value
 

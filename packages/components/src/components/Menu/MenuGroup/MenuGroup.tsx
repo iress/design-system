@@ -1,7 +1,6 @@
 import {
   useContext,
   type ElementType,
-  type MouseEvent,
   type MouseEventHandler,
   type ReactNode,
 } from 'react';
@@ -28,7 +27,7 @@ type MenuGroupRestProps<
   TVariant extends MenuVariants = undefined,
 > = TVariant extends 'subdraw'
   ? Omit<IressPopoverProps, 'children' | 'activator'>
-  : Omit<IressMenuTextProps<TLabel>, 'children'>;
+  : Omit<IressMenuTextProps<TLabel>, 'children' | 'element'>;
 
 export type IressMenuGroupProps<
   TLabel extends TextElements = 'h2',
@@ -173,7 +172,7 @@ export const IressMenuGroup = <
             data-testid={propagateTestid(dataTestId, 'activator')}
             href={href}
             element={element}
-            onClick={(e: MouseEvent) => {
+            onClick={(e: Parameters<MouseEventHandler>[0]) => {
               setActive(!active);
               onClick?.(e);
             }}

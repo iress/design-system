@@ -2,6 +2,10 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressSelect } from './Select';
 import { SelectAsync } from './mocks/SelectAsync';
 import SelectAsyncSource from './mocks/SelectAsync.tsx?raw';
+import { SelectAsyncErrorText } from './mocks/SelectAsyncErrorText';
+import SelectAsyncErrorTextSource from './mocks/SelectAsyncErrorText.tsx?raw';
+import { SelectRequiredValidation } from './mocks/SelectRequiredValidation';
+import SelectRequiredValidationSource from './mocks/SelectRequiredValidation.tsx?raw';
 import { SelectAsyncMinLength } from './mocks/SelectAsyncMinLength';
 import SelectAsyncMinLengthSource from './mocks/SelectAsyncMinLength.tsx?raw';
 import { SelectCustomLabel } from './mocks/SelectCustomLabel';
@@ -48,6 +52,7 @@ export default {
   },
   ...componentStoryMeta(componentMeta, {
     argTypes: {
+      errorText: reactNodeArgType,
       footer: reactNodeArgType,
       header: reactNodeArgType,
       placeholder: reactNodeArgType,
@@ -67,6 +72,7 @@ export default {
       ),
     },
   }),
+  tags: ['updated'],
 } as Meta<typeof IressSelect>;
 
 export const SingleSelect: Story = {
@@ -79,6 +85,23 @@ export const SingleSelect: Story = {
       { label: 'Option 5', value: '5' },
     ],
   },
+};
+
+export const RequiredValidation: Story = {
+  parameters: {
+    controls: { disable: true },
+    ...withSource(SelectRequiredValidationSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
+    docs: {
+      description: {
+        story:
+          'Submit without selecting a gender, then move focus away from the select. The validation message and red border should remain visible, including while hovering. Previously the unfocused select kept its neutral border.',
+      },
+    },
+  },
+  render: (args) => <SelectRequiredValidation {...args} />,
 };
 
 export const PreSelectedValue: Story = {
@@ -185,6 +208,22 @@ export const AsyncOptionsMinSearchLength: Story = {
   parameters: {
     controls: { disable: true },
     ...withSource(SelectAsyncMinLengthSource, { stripImports: true }),
+  },
+};
+
+export const ErrorText: Story = {
+  render: (args) => <SelectAsyncErrorText {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(SelectAsyncErrorTextSource, { stripImports: true }),
+    docs: {
+      description: {
+        story: `Use the \`errorText\` prop to customise the error message shown when async
+options fail. It accepts a \`ReactNode\` or a render function
+\`(error: boolean | string) => ReactNode\` that receives the error value.
+Type "error" to trigger the error state.`,
+      },
+    },
   },
 };
 

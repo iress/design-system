@@ -439,7 +439,7 @@ import { IressAutocomplete } from '@iress-oss/ids-components';
 | append | `ReactNode` | `<IressIcon name="search" />` | Append content. |
 | autoSelect | `boolean` | `true` | If true, the selected option becomes the value of the input when the autocomplete loses focus. |
 | clearable | `boolean` | `true` | If `true`, then user can clear the value of the input. |
-| errorText | `ReactNode` | `( <IressAlert status="danger" mb="none" borderRadius="radius.system.form"> An unknown error occurred. Please contact support if the error persists. </IressAlert> )` | Text to be displayed when the options function errors out. It is not used when the options are provided as an array. |
+| errorText | `ReactNode` | `( <IressAlert status="danger" mb="none" variant="full-width"> An unknown error occurred. Please contact support if the error persists. </IressAlert> )` | Text to be displayed when the options function errors out. It is not used when the options are provided as an array. |
 | noResultsText | `ReactNode` | — | Text to be displayed when no results are found. |
 | onChange | `((e?: SyntheticEvent<HTMLInputElement, Event>, value?: string, option?: [LabelValueMeta](../../dist/interfaces.d.ts)<[FormControlValue](../../dist/types.d.ts)> , undefined) => void) | undefined` | — | Emitted when the user changes the input. The second and third arguments are only available when the options were selected from the `options` prop. |
 | popoverProps | `[IressAutocompletePopoverProps](../../dist/components/Autocomplete/Autocomplete.d.ts)` | `{}` | Customise the IressInputPopover props for your needs. |
@@ -457,8 +457,9 @@ import { IressAutocomplete } from '@iress-oss/ids-components';
 | alignRight | `boolean` | `false` | Set input content align to right, useful for numeric inputs. |
 | formatter | `((value?: string) => string | number)` | — | Bring your own formatter that will be used to format the value when the input is not focused, allowing you to display the value in a different format. e.g. User type in value="dsf 987kkk123" => result after formatter: $987,123 (string) |
 | onClear | `((e: ChangeEvent<HTMLInputElement, Element>) => void)` | — | Emitted when the input is manually cleared. |
-| debounceThreshold | `number` | `500` | Time in milliseconds to wait for before performing result search. Only applies to searchable options (function). |
+| debounceThreshold | `number` | `300` | Time in milliseconds to wait for before performing result search. Only applies to searchable options (function). |
 | initialOptions | `[LabelValueMeta](../../dist/interfaces.d.ts)<[FormControlValue](../../dist/types.d.ts)>[]` | — | Initial options data set, shown when the input is empty. |
+| loadingDelay | `number` | `250` | Time in milliseconds to wait before showing the loading spinner for async options. |
 | minSearchLength | `number` | `1` | Minimum number of characters required before triggering async search. Only applies to searchable options (function). Below this threshold, no search will be triggered and no loading state will be shown. |
 | **options** | `[LabelValueMeta](../../dist/interfaces.d.ts)<[FormControlValue](../../dist/types.d.ts)>[] , ((query: string) => Promise<[LabelValueMeta](../../dist/interfaces.d.ts)<[FormControlValue](../../dist/types.d.ts)>[]>)` | — | Options data set, shown when the input is not empty. |
 | limitMobile | `number` | `6` | Maximum number of results displayed on mobile screen sizes (< 768). |
@@ -3073,8 +3074,8 @@ import { IressCol } from '@iress-oss/ids-components';
 |------|------|---------|-------------|
 | alignSelf | `center`, `end` , `start` , `stretch`  | — | Individual alignment of column |
 | children | `ReactNode` | — | Any content you would like to be contained in a column. |
-| offset | `[ResponsiveProp](../../dist/types.d.ts)<0 | 4 | "1" | 6 | 1 | "0" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | 2 | 3 | 5 | 7 | 8 | 9 | 10 | 11>` | — | Number of columns to offset. |
-| span | `[ResponsiveProp](../../dist/types.d.ts)<4 | "1" | "auto" | 12 | 6 | 1 | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | 2 | 3 | 5 | 7 | 8 | 9 | 10 | 11 | "12">` | `auto` | Number of columns to span. |
+| offset | `[ResponsiveProp](../../dist/types.d.ts)<0 | 4 | "1" | 6 | 1 | 10 | "10" | "0" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "11" | 2 | 3 | 5 | 7 | 8 | 9 | 11>` | — | Number of columns to offset. |
+| span | `[ResponsiveProp](../../dist/types.d.ts)<4 | "1" | "auto" | 12 | 6 | 1 | 10 | "10" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "11" | 2 | 3 | 5 | 7 | 8 | 9 | 11 | "12">` | `auto` | Number of columns to span. |
 | data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
 
 📄 [Full type definition](../../dist/components/Col/Col.d.ts)
@@ -4055,6 +4056,7 @@ import { IressFieldGroup } from '@iress-oss/ids-components';
 | **label** | `ReactNode` | — | Text to be displayed in the label. |
 | error | `ReactNode` | — | Validation error to be displayed above the field. |
 | errorMessages | `[ValidationMessageObj](../../dist/interfaces.d.ts)[]` | — | Validation errors to be displayed above the field, an array of validation messages to be displayed in `IressValidationSummary`. |
+| errorId | `string` | — | ID for the error container element, used to associate the error message with the form control via `aria-describedby`. When `error` or `errorMessages` are present and `htmlFor` is set, this is automatically derived as `${htmlFor}-error`. Override only if you need a custom error container ID. |
 | readOnly | `[FormControlReadOnly](../../dist/types.d.ts)` | — | Renders the group in a read-only state (no asterisk symbol). Use `'locked'` when the control is read-only due to permissions. |
 | removeErrorMargin | `boolean` | — | Removes the reserved space for error messages, allowing fields to stack with narrower gaps. When true, no margin is reserved for potential error messages. |
 | supplementary | `ReactNode` | — | Supplementary content to be displayed below the field. Is only shown when the field is not in an error state. |
@@ -4324,6 +4326,7 @@ import { IressField } from '@iress-oss/ids-components';
 | **label** | `ReactNode` | — | Text to be displayed in the label. |
 | error | `ReactNode` | — | Validation error to be displayed above the field. |
 | errorMessages | `[ValidationMessageObj](../../dist/interfaces.d.ts)[]` | — | Validation errors to be displayed above the field, an array of validation messages to be displayed in `IressValidationSummary`. |
+| errorId | `string` | — | ID for the error container element, used to associate the error message with the form control via `aria-describedby`. When `error` or `errorMessages` are present and `htmlFor` is set, this is automatically derived as `${htmlFor}-error`. Override only if you need a custom error container ID. |
 | readOnly | `[FormControlReadOnly](../../dist/types.d.ts)` | — | Renders the group in a read-only state (no asterisk symbol). Use `'locked'` when the control is read-only due to permissions. |
 | removeErrorMargin | `boolean` | `false` | Removes the reserved space for error messages, allowing fields to stack with narrower gaps. When true, no margin is reserved for potential error messages. |
 | supplementary | `ReactNode` | — | Supplementary content to be displayed below the field. Is only shown when the field is not in an error state. |
@@ -7423,7 +7426,7 @@ Also accepts all [styling props](../styling-props/overview.md) ([type definition
 | children | `ReactNode` | — | Items within the group (typically menu items). |
 | defaultActive | `boolean` | — | Uncontrolled default for the active/expanded state. Only used when parent Menu has variant="side". |
 | divider | `boolean` | — | Adds a divider after the group. Adds a divider after any content. If you would like to add content before the menu item, use a `<hr />` instead. |
-| element | ... 164 more ..., `article` , `circle` , `code` , `details` , `div` , `filter` , `footer` , `html` , `iframe` , `image` , `input` , `object` , `p` , `slot` , `span` , `style` , `symbol` , `title`  | — | Custom element type for the activator (e.g. for third-party routing). Only used when parent Menu has variant="side". The HTML element that should be rendered. |
+| element | `ElementType` | — | Custom element type for the activator (e.g. for third-party routing). Only used when parent Menu has variant="side". |
 | href | `string` | — | URL for the group activator link. Only used when parent Menu has variant="side". |
 | onActiveChange | `((active?: boolean) => void)` | — | Callback fired when the active/expanded state changes. Only used when parent Menu has variant="side". |
 | variant | `[IressMenuVariants](../../dist/components/Menu/Menu.d.ts)` | — | Variant of the menu group. - `undefined` (default): Renders inline with label as heading and children below. - `'subdraw'`: Renders as a trigger that opens a fly-over submenu containing children. - `'side'`: Renders as a numbered header with an expandable drawer containing children. |
@@ -8125,7 +8128,7 @@ import { IressModal } from '@iress-oss/ids-components';
 | closeText | `string` | `Close` | Screenreader text for close button. |
 | container | `[FloatingUIContainer](../../dist/types.d.ts)` | — | The container element to render the modal into. By default, the modal will render at the end of the document body. |
 | defaultShow | `boolean` | `false` | When set to `true` the modal will be visible by default. Use for uncontrolled modals. |
-| disableBackdropClick | `boolean` | — | When set to `true`, users cannot exit the modal by clicking the backdrop or using the escape key. |
+| disableBackdropClick | `no-esc`, boolean  | — | When set to `true`, users cannot exit the modal by clicking the backdrop. When set to `"no-esc"`, users also cannot exit the modal using the escape key. |
 | fixedFooter | `boolean` | — | When set to `true` the modal's footer will always be visible and fixed to the bottom of the modal. |
 | footer | `ReactNode` | — | Content to be rendered in the modal footer. If `actions` are also provided, this content will be rendered below the actions. |
 | heading | `ReactElement>, string ` | — | Sets the heading for the modal. If passed an element, it will render the element with an id, to ensure its connection to the modal. |
@@ -8843,7 +8846,10 @@ export function ModalStatuses() {
 
 #### Disable closing
 
-Use `disableBackdropClick` and/or `noCloseButton` when you require the user to complete the task before closing. Ensure you provide an alternative way to close.
+Use `disableBackdropClick={true}` to disable backdrop clicks while still allowing
+Escape key dismissal. Set `disableBackdropClick="no-esc"` to disable both backdrop
+clicks and Escape dismissal. You can also hide the close button using
+`noCloseButton`. Ensure you provide an alternative way to close.
 
 ```tsx
 import {
@@ -9020,6 +9026,7 @@ Storybook provides an interactive playground for testing different prop combinat
 |-----------|-------------|
 | [IressAlert](alert.md) | The root element of the alert |
 | [IressAutocomplete](autocomplete.md) | The root wrapper element (no semantic role) |
+| [IressAvatar](avatar.md) | Avatars display user identity in a circular frame, with optional badge and type indicators. |
 | [IressBreadcrumbs](../patterns/breadcrumbs.md) | Shows the current location within a navigational hierarchy. |
 | [IressButton](button.md) | The root element of the button |
 | [IressButtonGroup](button-group.md) | The root element of the button group |
@@ -11751,10 +11758,12 @@ import { IressSelect } from '@iress-oss/ids-components';
 | renderHiddenInput | `((props: SelectHiddenInputRenderProps<TMultiple>) => ReactNode)` | — | Completely customise the rendering of the hidden input. |
 | renderLabel | `((props: SelectLabelRenderProps<TMultiple>) => ReactElement>)` | — | Completely customise the rendering of the select label. |
 | renderOptions | `((props: SelectOptionsRenderProps<TMultiple>) => ReactNode)` | — | Completely customise the rendering of the select options. |
+| searchInputProps | `SelectSearchInputProps` | — | Passive props to apply to the internal async search input shown when `options` is a function, such as input constraints and non-interactive presentation props. Supported keys are `className`, `data-testid`, `inputMode`, `maxLength`, `minLength`, `pattern`, and `spellCheck`. Selection state, query updates, built-in placeholder text, and accessibility labelling remain controlled by `IressSelect`. |
 | required | `boolean` | — | Whether its required. Will be passed to the hidden input. |
 | type | `dialog` , `grid` , `listbox`, `menu` , `tree`  | — |  |
 | value | `any` | — | Value of selected option for controlled select. |
 | virtualFocus | `boolean` | — |  |
+| errorText | `ReactNode , ((error: string , boolean) => ReactNode)` | `<IressAlert status="danger" variant="full-width" mb="none">An unknown error occurred. Please contact support if the error persists.</IressAlert>` | Text to be displayed when the options function errors out. It is not used when the options are provided as an array. Can be a ReactNode or a render function that receives the error value. |
 | header | `ReactNode` | — | Header showed in option panel when expanded. |
 | footer | `ReactNode` | — | Footer showed in option panel when expanded. |
 | width | `any` | — | The width of the select. |
@@ -11889,7 +11898,20 @@ Add a `multiSelectLimit` prop to restrict the number of selections visible to th
 
 #### Async Options
 
-Load options dynamically using the `onSearch` callback.
+Load options dynamically using an async function passed to `options`.
+
+Use `searchInputProps` to constrain or annotate the internal async search input.
+Supported keys are `className`, `data-testid`, `inputMode`, `maxLength`,
+`minLength`, `pattern`, and `spellCheck`.
+
+Do not pass interactive or controlled input props such as `value`, `onChange`,
+`placeholder`, `aria-label`, `disabled`, `readOnly`, or refs. `IressSelect`
+controls query state, placeholder text, and accessibility labelling. Use
+`renderOptions` only when replacing the full built-in async options UI.
+
+```tsx
+<IressSelect options={searchOptions} searchInputProps={{ maxLength: 100 }} />;
+```
 
 **Note:** When using async options inside `IressFormField`, you must store the full `{ label, value }` option object in form state (not just the primitive value). This is because `IressSelect` cannot resolve a primitive value back to a display label without re-fetching. See the [Form caveats](../patterns/form.md#storing-select-values-in-form-state) for examples.
 
@@ -12018,6 +12040,86 @@ export const SelectAsyncMinLength = () => (
           id="min-length-select"
           minSearchLength={3}
           placeholder="Type at least 3 characters..."
+        />
+      </IressField>
+    </IressCol>
+  </IressRow>
+);
+```
+
+#### Custom error text
+
+For async options, `errorText` customises the message shown when the options
+function throws. By default, a generic danger alert is displayed.
+
+Pass a `ReactNode` for a static message, or a render function
+`(error: boolean | string) => ReactNode` to use the error value.
+
+```tsx
+import {
+  IressAlert,
+  IressCol,
+  IressField,
+  IressRow,
+  IressSelect,
+} from '@iress-oss/ids-components';
+
+interface StarWarsCharacter {
+  name: string;
+  gender: string;
+}
+
+interface StarWarsCharacterApi {
+  results: StarWarsCharacter[];
+}
+
+const options = async (query: string) => {
+  if (!query) return [];
+
+  if (query === 'error') {
+    throw new Error('Failed to fetch results');
+  }
+
+  const data = await fetch(
+    `https://swapi.py4e.com/api/people/?search=${encodeURIComponent(query)}`,
+  ).then((response) => response.json() as Promise<StarWarsCharacterApi>);
+
+  return data.results.map((character: StarWarsCharacter) => ({
+    label: character.name,
+    value: character.name,
+    meta: character.gender,
+  }));
+};
+
+export const SelectAsyncErrorText = () => (
+  <IressRow gutter="md">
+    <IressCol>
+      <IressField label="Custom error (ReactNode)" htmlFor="error-node">
+        <IressSelect
+          container={document.body}
+          options={options}
+          id="error-node"
+          placeholder='Type "error" to see the custom error'
+          errorText={
+            <IressAlert status="danger" mb="none">
+              Something went wrong. Please try again later.
+            </IressAlert>
+          }
+        />
+      </IressField>
+    </IressCol>
+    <IressCol>
+      <IressField label="Custom error (render function)" htmlFor="error-fn">
+        <IressSelect
+          container={document.body}
+          options={options}
+          id="error-fn"
+          placeholder='Type "error" to see the render function'
+          errorText={(err) => (
+            <IressAlert status="warning" mb="none" variant="full-width">
+              Error: {String(err)}
+            </IressAlert>
+          )}
         />
       </IressField>
     </IressCol>
@@ -15063,7 +15165,7 @@ import { IressTabSet } from '@iress-oss/ids-components';
 | append | `ReactNode` | — | Content rendered alongside the tablist in the tab bar row, but outside the tablist itself. Useful for placing action buttons (e.g. "Add tab") at the end of the tab bar. |
 | children | `ReactNode` | — | Content to be displayed inside the IressTabs, usually multiple `IressTab`. |
 | defaultSelected | `[FormControlValue](../../dist/types.d.ts)` | — | Set the selected tab for uncontrolled tabs. If the `IressTab` does not have a `value` prop, it will match by index. |
-| layout | `top-center` , `top-left` , `top-right` | `top-left` | Layout options for the positioning of tabs. |
+| layout | `top-center` , `top-left` , `top-right` , `top-stretch` | `top-left` | Layout options for the positioning of tabs. |
 | onChange | `((event: [IressTabSetChangedEventDetail](../../dist/components/TabSet/TabSet.d.ts)) => void)` | — | Emitted when a tab changes. |
 | panelStyle | `[IressCustomiseSlot](../../dist/interfaces.d.ts)` | — | Custom style for the panel (the area that contains the tab content). |
 | selected | `[FormControlValue](../../dist/types.d.ts)` | — | Set the selected tab for controlled tabs. If the `IressTab` does not have a `value` prop, it will match by index. |
@@ -15222,7 +15324,12 @@ export function TabsUsingState() {
 
 #### Layout
 
-`IressTabSet` controls the layout of the tab buttons. These can be aligned left (default), center, or right via the `layout` prop.
+`IressTabSet` controls the layout of the tab buttons via the `layout` prop:
+
+- `top-left` (default): tabs align to the start.
+- `top-center`: tabs align centrally.
+- `top-right`: tabs align to the end.
+- `top-stretch`: tabs stretch equally to fill the full available width.
 
 ```tsx
 import {
@@ -15259,6 +15366,16 @@ export function TabSetLayout() {
       <IressPanel>
         <IressText element="h2">top-right</IressText>
         <IressTabSet layout="top-right">
+          <IressTab label="Address">Address information goes here</IressTab>
+          <IressTab label="Employment">
+            Employment information goes here
+          </IressTab>
+          <IressTab label="History">Medical history goes here</IressTab>
+        </IressTabSet>
+      </IressPanel>
+      <IressPanel>
+        <IressText element="h2">top-stretch</IressText>
+        <IressTabSet layout="top-stretch">
           <IressTab label="Address">Address information goes here</IressTab>
           <IressTab label="Employment">
             Employment information goes here
@@ -18713,6 +18830,7 @@ import { IressTooltip } from '@iress-oss/ids-components';
 | delay | `number` | `500` | Sets the tooltip display delay in milliseconds. |
 | open | `boolean` | `false` | Only used for internal testing. |
 | **tooltipText** | `string , string[]` | — | Sets the tooltip text. Can accept a string or an array of strings - if given an array, will output each string on a new line. |
+| variant | `rich` | — | Visual variant of the tooltip. - When not set (default): renders plain text, with arrays shown as multiple lines separated by line breaks. - `rich`: Displays structured content with the first line as a prominent name and subsequent lines as muted metadata. |
 | data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
 
 📄 [Full type definition](../../dist/components/Tooltip/Tooltip.d.ts)
@@ -18889,6 +19007,18 @@ The `delay` prop sets milliseconds before the tooltip appears after `mouseEnter`
     </IressTooltip>
   </IressInline>
 </IressStyled>;
+```
+
+#### Rich variant
+
+Use `variant="rich"` for structured content. The first line is rendered as a
+prominent name and subsequent lines as muted, smaller text. This is useful for
+explaining avatar badges and indicators.
+
+```tsx
+<IressTooltip tooltipText={['John Doe', 'New · Group']} variant="rich">
+  <IressButton>Hover for details</IressButton>
+</IressTooltip>;
 ```
 
 ### Testing
@@ -22918,8 +23048,9 @@ import { IressDropdownMenu } from '@iress-oss/ids-components';
 | onNavigate | `((activeIndex: number , null) => void)` | — | Is called when registered popover items are navigated using arrow keys. Only works with `type` listbox and menu. |
 | nested | `boolean` | — | Whether this popover uses nested navigation (ArrowRight to open, ArrowLeft to close). When not set, this is auto-detected based on whether the popover is inside another popover. |
 | disabled | `boolean` | `false` | Disables the hook from running any effects or search operations. When disabled, the hook returns empty results and default state. |
-| debounceThreshold | `number` | `500` | Time in milliseconds to wait for before performing result search. Only applies to searchable options (function). |
+| debounceThreshold | `number` | `300` | Time in milliseconds to wait for before performing result search. Only applies to searchable options (function). |
 | initialOptions | `[LabelValueMeta](../../dist/interfaces.d.ts)<[FormControlValue](../../dist/types.d.ts)>[]` | — | Initial options data set, shown when the input is empty. |
+| loadingDelay | `number` | `250` | Time in milliseconds to wait before showing the loading spinner for async options. |
 | minSearchLength | `number` | `1` | Minimum number of characters required before triggering async search. Only applies to searchable options (function). Below this threshold, no search will be triggered and no loading state will be shown. |
 | **options** | `[LabelValueMeta](../../dist/interfaces.d.ts)<[FormControlValue](../../dist/types.d.ts)>[] , ((query: string) => Promise<[LabelValueMeta](../../dist/interfaces.d.ts)<[FormControlValue](../../dist/types.d.ts)>[]>)` | — | Options data set, shown when the input is not empty. |
 | limitMobile | `number` | `6` | Maximum number of results displayed on mobile screen sizes (< 768). |
@@ -23735,6 +23866,7 @@ Also accepts all [styling props](../styling-props/overview.md) ([type definition
 | hint | `ReactNode` | — | Text to be displayed as supporting field description. |
 | horizontal | `boolean` | — | Displays the label and input field inline instead of stacked vertically. |
 | hiddenLabel | `boolean` | — | Visually hides the label text, but still available to screen readers. |
+| errorId | `string` | — | ID for the error container element, used to associate the error message with the form control via `aria-describedby`. When `error` or `errorMessages` are present and `htmlFor` is set, this is automatically derived as `${htmlFor}-error`. Override only if you need a custom error container ID. |
 | errorMessages | `[ValidationMessageObj](../../dist/interfaces.d.ts)[]` | — | Validation errors to be displayed above the field, an array of validation messages to be displayed in `IressValidationSummary`. |
 | labelWidth | `string` | — | Controls the width of the label container when in horizontal mode. Can be any valid CSS width value (e.g., '200px', '20%', 'auto'). Only applies when `horizontal` is true. |
 | removeErrorMargin | `boolean` | — | Removes the reserved space for error messages, allowing fields to stack with narrower gaps. When true, no margin is reserved for potential error messages. |
@@ -23759,6 +23891,7 @@ Also accepts all [styling props](../styling-props/overview.md) ([type definition
 | horizontal | `boolean` | — | Displays the label and input field inline instead of stacked vertically. |
 | readOnly | `[FormControlReadOnly](../../dist/types.d.ts)` | — | Renders the group in a read-only state (no asterisk symbol). Use `'locked'` when the control is read-only due to permissions. |
 | hiddenLabel | `boolean` | — | Visually hides the label text, but still available to screen readers. |
+| errorId | `string` | — | ID for the error container element, used to associate the error message with the form control via `aria-describedby`. When `error` or `errorMessages` are present and `htmlFor` is set, this is automatically derived as `${htmlFor}-error`. Override only if you need a custom error container ID. |
 | errorMessages | `[ValidationMessageObj](../../dist/interfaces.d.ts)[]` | — | Validation errors to be displayed above the field, an array of validation messages to be displayed in `IressValidationSummary`. |
 | labelWidth | `string` | — | Controls the width of the label container when in horizontal mode. Can be any valid CSS width value (e.g., '200px', '20%', 'auto'). Only applies when `horizontal` is true. |
 | removeErrorMargin | `boolean` | — | Removes the reserved space for error messages, allowing fields to stack with narrower gaps. When true, no margin is reserved for potential error messages. |
@@ -25171,6 +25304,38 @@ export const HookFormExample = () => {
 ```tsx
 <IressFormValidationSummary />;
 ```
+
+### Controlling screen reader announcements
+
+By default, `IressFormValidationSummary` uses `role="alert"` (an assertive live region), which causes screen readers to interrupt the user and read out the entire error list immediately. When using `mode="onBlur"`, a new error is added every time the user leaves a field — this can be disruptive.
+
+You have two options for a less intrusive experience:
+
+**Option 1 — Polite announcements via `aria-live`**
+
+Pass `aria-live="polite"` and `role="status"` to `IressFormValidationSummary` to switch to a polite live region. Screen readers will wait for a pause in user activity before announcing changes.
+
+```tsx
+<IressForm mode="onBlur">
+  <IressFormValidationSummary aria-live="polite" role="status" srOnly />
+  {/* fields */}
+</IressForm>;
+```
+
+**Option 2 — Only announce on submit via `updateErrorSummaryOnSubmit`**
+
+Pass `updateErrorSummaryOnSubmit` to `IressForm` (or `IressHookForm`) to prevent the summary from updating while the user is still filling in the form. The summary will only be populated — and announced — when the form is submitted.
+
+```tsx
+<IressForm mode="onBlur" updateErrorSummaryOnSubmit>
+  {/* fields */}
+</IressForm>;
+```
+
+| Approach | When to use |
+|---|---|
+| `aria-live="polite"` on `IressFormValidationSummary` | Real-time feedback is still desirable but should not interrupt the user |
+| `updateErrorSummaryOnSubmit` on `IressForm` | Errors should only be announced once the user tries to submit |
 
 #### With readonly data
 
@@ -28475,6 +28640,8 @@ When mapping Figma components to IDS, read references/component-mapping.md for t
 | Table              | `IressTable`                                 | Data-driven: `rows`, `columns`, `caption` props |
 | Tag                | `IressTag`                                   | `bordered` for visible border; `element="button"` for clickable, `element="a"` for link; `onClick` alone also auto-renders as button |
 | Pill               | `IressPill`                                  |                            |
+| Avatar             | `IressAvatar`                                | `mode` for colour, `badge` for status indicator, `type` for secondary icon |
+| CompactAvatar      | `IressAvatarGroup` + `IressAvatar compact`   | `max` limits visible; `overflowLabel` render prop for overflow |
 | Tooltip            | `IressTooltip`                               |                            |
 | Icon               | `IressIcon name="..."`                       | Material Symbols name      |
 | Divider            | `IressDivider`                               |                            |
@@ -28500,8 +28667,8 @@ Map Figma fill/stroke colours to IDS colour tokens:
 | Neutral/10 `#FFFFFF`      | `colour.neutral.10`          | `--iress-colour-neutral-10`          |
 | Neutral/20 `#F5F6F8`      | `colour.neutral.20`          | `--iress-colour-neutral-20`          |
 | Neutral/30 `#E2E6EA`      | `colour.neutral.30`          | `--iress-colour-neutral-30`          |
-| Neutral/80 `#384666`      | `colour.neutral.80`          | `--iress-colour-neutral-80`          |
-| Neutral/90 `#141F4D`      | `colour.neutral.90`          | `--iress-colour-neutral-90`          |
+| Neutral/80 `#141F4D`      | `colour.neutral.80`          | `--iress-colour-neutral-80`          |
+| Neutral/90 `#141F4D`      | `colour.neutral.90` (alias)  | `--iress-colour-neutral-90`          |
 | Success/Fill `#37C49C`    | `colour.system.success.fill` | `--iress-colour-system-success-fill` |
 | Danger/Fill `#C21010`     | `colour.system.danger.fill`  | `--iress-colour-system-danger-fill`  |
 | Warning/Fill `#F0AD03`    | `colour.system.warning.fill` | `--iress-colour-system-warning-fill` |
@@ -28526,6 +28693,10 @@ IDS base spacing unit = 4px (0.25rem). Map Figma pixel values:
 | 40px     | `10`      | xl    |
 
 > For values not on the 4px grid, round to the nearest token value.
+
+> **Neutral alias note:** `colour.neutral.90` is a backwards-compatible alias
+> of `colour.neutral.80`. Prefer `colour.neutral.80` in generated IDS code, but
+> map either Figma `Neutral/80` or `Neutral/90` to the same `#141F4D` value.
 
 ## Border Radius
 
@@ -28558,6 +28729,11 @@ Prefer semantic HTML elements via the `element` prop — they convey meaning to 
 > **When to use `textStyle`:** Only when you need to visually override the default styling of a semantic element — e.g. making an `h2` look like an `h4` for visual hierarchy while keeping the correct heading level for accessibility: `<IressText element="h2" textStyle="typography.heading.4">`.
 
 > **Tip:** When translating Figma frames that contain mixed or unstructured text (e.g. CMS content, markdown, rich text blocks), wrap the content in `IressText` and nest native HTML elements (`<p>`, `<strong>`, `<a>`, `<ul>`, etc.) inside it. This is an allowed pattern that lets `IressText` apply consistent typography while preserving the original content structure.
+
+For neutral text colours, treat `colour.neutral.90` as a backwards-compatible
+alias of `colour.neutral.80` (both resolve to `#141F4D`). Prefer
+`colour.neutral.80` in new IDS implementations, but handle either token name
+when translating older Figma files.
 
 ## Translation Examples
 
@@ -31057,7 +31233,7 @@ Translate natural language UI descriptions into IDS (Iress Design System) compon
 | Description              | IDS Component                       | Example                                                                                                                        |
 | ------------------------ | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | Labelled text input      | `IressField` + `IressInput`         | See Form example below                                                                                                         |
-| Select dropdown (static or async) | `IressField` + `IressSelect` | `<IressField label="Country"><IressSelect>...</IressSelect></IressField>` — supports static options and async loading via an `options` function |
+| Select dropdown (static or async) | `IressField` + `IressSelect` | `<IressField label="Country"><IressSelect>...</IressSelect></IressField>` — supports static options and async loading via an `options` function. For async search field constraints or annotations, prefer `searchInputProps` (`className`, `data-testid`, `inputMode`, `maxLength`, `minLength`, `pattern`, `spellCheck`) instead of rebuilding the UI with `renderOptions`. |
 | Freetext input with suggestions  | `IressField` + `IressAutocomplete` | `<IressField label="Search"><IressAutocomplete /></IressField>` — allows any text input; suggestions are optional |
 | Currency input           | `IressField` + `IressInputCurrency` | `<IressField label="Amount"><IressInputCurrency /></IressField>`                                                               |
 | Checkbox                 | `IressCheckbox`                     | `<IressCheckbox value="agree">I agree</IressCheckbox>`                                                                         |
@@ -31069,7 +31245,7 @@ Translate natural language UI descriptions into IDS (Iress Design System) compon
 
 ### Select vs Autocomplete Decision Guide
 
-- **Need to restrict to valid options?** → `IressSelect` — supports static options and async loading via an `options` function. Use this for most selection use cases. Always read the component doc to understand filtering behaviour for your use case.
+- **Need to restrict to valid options?** → `IressSelect` — supports static options and async loading via an `options` function. For async selects, `searchInputProps` is only for safe passive search-input attributes; `IressSelect` still controls query state, placeholder text, and accessibility labels. Use this for most selection use cases. Always read the component doc to understand filtering behaviour for your use case.
 - **Need freetext with optional suggestions?** → `IressAutocomplete` — allows any text input; suggestions are offered but not enforced.
 
 ## Layout
@@ -31098,6 +31274,8 @@ Translate natural language UI descriptions into IDS (Iress Design System) compon
 | Icon                 | `IressIcon`                 | `<IressIcon name="settings" />`                                                                             |
 | Tag / badge          | `IressTag`                  | `<IressTag>New</IressTag>`; use `bordered` for visible-border style; use `element="button"` for clickable tag, `element="a"` for link tag; `onClick` alone also auto-renders as `<button>` |
 | Pill                 | `IressPill`                 | `<IressPill>Category</IressPill>`                                                                           |
+| Avatar               | `IressAvatar`               | `<IressAvatar aria-label="Jane Doe" mode={10}>JD</IressAvatar>`; use `badge` for status indicators, `type` for secondary icons |
+| Avatar group         | `IressAvatarGroup`          | `<IressAvatarGroup compact max={3}><IressAvatar>...</IressAvatar></IressAvatarGroup>`; stacks avatars with overlap and overflow |
 | Tooltip              | `IressTooltip`              | `<IressTooltip content="Help text"><IressButton>Hover me</IressButton></IressTooltip>`                      |
 
 ## Overlays & Navigation
@@ -31225,7 +31403,7 @@ When you need to find the right IDS component for a UI element, read references/
 | Description              | IDS Component                       | Example                                                                                                                        |
 | ------------------------ | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | Labelled text input      | `IressField` + `IressInput`         | See Form example below                                                                                                         |
-| Select dropdown (static or async) | `IressField` + `IressSelect` | `<IressField label="Country"><IressSelect>...</IressSelect></IressField>` — supports static options and async loading via an `options` function |
+| Select dropdown (static or async) | `IressField` + `IressSelect` | `<IressField label="Country"><IressSelect>...</IressSelect></IressField>` — supports static options and async loading via an `options` function. For async search field constraints or annotations, prefer `searchInputProps` (`className`, `data-testid`, `inputMode`, `maxLength`, `minLength`, `pattern`, `spellCheck`) instead of rebuilding the UI with `renderOptions`. |
 | Freetext input with suggestions  | `IressField` + `IressAutocomplete` | `<IressField label="Search"><IressAutocomplete /></IressField>` — allows any text input; suggestions are optional |
 | Currency input           | `IressField` + `IressInputCurrency` | `<IressField label="Amount"><IressInputCurrency /></IressField>`                                                               |
 | Checkbox                 | `IressCheckbox`                     | `<IressCheckbox value="agree">I agree</IressCheckbox>`                                                                         |
@@ -31237,7 +31415,7 @@ When you need to find the right IDS component for a UI element, read references/
 
 ### Select vs Autocomplete Decision Guide
 
-- **Need to restrict to valid options?** → `IressSelect` — supports static options and async loading via an `options` function. Use this for most selection use cases. Always read the component doc to understand filtering behaviour for your use case.
+- **Need to restrict to valid options?** → `IressSelect` — supports static options and async loading via an `options` function. For async selects, `searchInputProps` is only for safe passive search-input attributes; `IressSelect` still controls query state, placeholder text, and accessibility labels. Use this for most selection use cases. Always read the component doc to understand filtering behaviour for your use case.
 - **Need freetext with optional suggestions?** → `IressAutocomplete` — allows any text input; suggestions are offered but not enforced.
 
 ## Layout
@@ -31266,6 +31444,8 @@ When you need to find the right IDS component for a UI element, read references/
 | Icon                 | `IressIcon`                 | `<IressIcon name="settings" />`                                                                             |
 | Tag / badge          | `IressTag`                  | `<IressTag>New</IressTag>`; use `bordered` for visible-border style; use `element="button"` for clickable tag, `element="a"` for link tag; `onClick` alone also auto-renders as `<button>` |
 | Pill                 | `IressPill`                 | `<IressPill>Category</IressPill>`                                                                           |
+| Avatar               | `IressAvatar`               | `<IressAvatar aria-label="Jane Doe" mode={10}>JD</IressAvatar>`; use `badge` for status indicators, `type` for secondary icons |
+| Avatar group         | `IressAvatarGroup`          | `<IressAvatarGroup compact max={3}><IressAvatar>...</IressAvatar></IressAvatarGroup>`; stacks avatars with overlap and overflow |
 | Tooltip              | `IressTooltip`              | `<IressTooltip content="Help text"><IressButton>Hover me</IressButton></IressTooltip>`                      |
 
 ## Overlays & Navigation
@@ -35908,11 +36088,11 @@ Neutral colours apply to most backgrounds, text, and shapes in our experiences. 
 | `colour.neutral.20` | `--iress-colour-neutral-20` | `#F5F6F8` | Used as the alternating background colour for components such as tables. Used as the background colour behind panels and cards for highly interactive screens. | `alt` | neutral.70, neutral.80, neutral.90 |
 | `colour.neutral.30` | `--iress-colour-neutral-30` | `#E2E6EA` | Used as the border colour for dividers, and the default divider colour for components with in-built headers and footers such as cards. | — | neutral.80, neutral.90 |
 | `colour.neutral.40` | `--iress-colour-neutral-40` | `#CFD5DA` | Used for borders in subtle interactive components, such as checkboxes and radios with hidden controls and the progress bar. | — | neutral.80, neutral.90 |
-| `colour.neutral.50` | `--iress-colour-neutral-50` | `#A8B2BB` | Used as the background colour for interactive components such as the slider. | — | neutral.90 |
-| `colour.neutral.60` | `--iress-colour-neutral-60` | `#828F9D` | Used for placeholder text in form controls and disabled states. | — | neutral.90 |
+| `colour.neutral.50` | `--iress-colour-neutral-50` | `#A8B2BB` | Used as the background colour for interactive components such as the slider. | — | neutral.80, neutral.90 |
+| `colour.neutral.60` | `--iress-colour-neutral-60` | `#828F9D` | Used for placeholder text in form controls and disabled states. | — | neutral.80, neutral.90 |
 | `colour.neutral.70` | `--iress-colour-neutral-70` | `#5D6C7E` | Used for muted text such as hints and descriptions to allow for content hierarchy. | `muted` | neutral.10, neutral.20 |
-| `colour.neutral.80` | `--iress-colour-neutral-80` | `#384666` | Used as the default text colour for most components. For tooltips, it is used as the background colour. | `text` | neutral.10, neutral.20, neutral.30, neutral.40 |
-| `colour.neutral.90` | `--iress-colour-neutral-90` | `#141F4D` | Used for very dark text or UI elements requiring maximum contrast. | — | neutral.10, neutral.20, neutral.30, neutral.40 |
+| `colour.neutral.80` | `--iress-colour-neutral-80` | `#141F4D` | Used as the default text colour for most components. For tooltips, it is used as the background colour. This token now uses the previous Neutral 90 value to improve visual hierarchy. | `text`, `colour.neutral.90` | neutral.10, neutral.20, neutral.30, neutral.40 |
+| `colour.neutral.90` | `--iress-colour-neutral-90` | `#141F4D` | Deprecated alias for colour.neutral.80. Resolves to the same value (#141F4D). | — | neutral.10, neutral.20, neutral.30, neutral.40 |
 
 ### Primary
 
@@ -35949,8 +36129,8 @@ Communicates that an action has been successful and inform a user that the actio
 | `colour.system.success.fill` | `--iress-colour-system-success-fill` | `#37C49C` | Used for the background colour of primary success buttons, as well as the border of alerts and badges. It is also used for the foreground colour of icons inside toasts and alerts. | system.success.onFill |
 | `colour.system.success.fillHover` | `--iress-colour-system-success-fill-hover` | `#2DAB88` | Used for the hover state of primary success buttons. | system.success.onFill |
 | `colour.system.success.onFill` | `--iress-colour-system-success-on-fill` | `#0A2E25` | Used for the foreground colour of primary success buttons and badges. | system.success.fill |
-| `colour.system.success.surface` | `--iress-colour-system-success-surface` | `#EBF9F5` | Used for the background colour of success alerts and toasts, and the background of secondary success buttons. | system.success.text, neutral.90 |
-| `colour.system.success.surfaceHover` | `--iress-colour-system-success-surface-hover` | `#D7F3EB` | Used for the hover state of secondary success buttons. | system.success.text, neutral.90 |
+| `colour.system.success.surface` | `--iress-colour-system-success-surface` | `#EBF9F5` | Used for the background colour of success alerts and toasts, and the background of secondary success buttons. | system.success.text, neutral.80 |
+| `colour.system.success.surfaceHover` | `--iress-colour-system-success-surface-hover` | `#D7F3EB` | Used for the hover state of secondary success buttons. | system.success.text, neutral.80 |
 | `colour.system.success.text` | `--iress-colour-system-success-text` | `#006b44` | Used for the text colour of success alerts and toasts, and success tertiary buttons. | system.success.surface |
 
 ### System — Danger
@@ -35962,8 +36142,8 @@ Communicates something went wrong or prevents the user from moving forward with 
 | `colour.system.danger.fill` | `--iress-colour-system-danger-fill` | `#c21010` | Used for the background colour of primary danger buttons, as well as the border of alerts and badges. It is also used for the foreground colour of icons inside toasts and alerts. | system.danger.onFill |
 | `colour.system.danger.fillHover` | `--iress-colour-system-danger-fill-hover` | `#B32727` | Used for the hover state of primary danger buttons. | system.danger.onFill |
 | `colour.system.danger.onFill` | `--iress-colour-system-danger-on-fill` | `#FFF4F3` | Used for the foreground colour of primary danger buttons and badges. | system.danger.fill |
-| `colour.system.danger.surface` | `--iress-colour-system-danger-surface` | `#FFEDEC` | Used for the background colour of danger alerts and toasts, and the background of secondary danger buttons. | system.danger.text, neutral.90 |
-| `colour.system.danger.surfaceHover` | `--iress-colour-system-danger-surface-hover` | `#FFD9D6` | Used for the hover state of secondary danger buttons. | system.danger.text, neutral.90 |
+| `colour.system.danger.surface` | `--iress-colour-system-danger-surface` | `#FFEDEC` | Used for the background colour of danger alerts and toasts, and the background of secondary danger buttons. | system.danger.text, neutral.80 |
+| `colour.system.danger.surfaceHover` | `--iress-colour-system-danger-surface-hover` | `#FFD9D6` | Used for the hover state of secondary danger buttons. | system.danger.text, neutral.80 |
 | `colour.system.danger.text` | `--iress-colour-system-danger-text` | `#c21010` | Used for the text colour of danger alerts and toasts, and danger tertiary buttons. | system.danger.surface |
 
 ### System — Warning
@@ -35975,8 +36155,8 @@ Communicates attention required but does not prevent the user from moving forwar
 | `colour.system.warning.fill` | `--iress-colour-system-warning-fill` | `#F0AD03` | Used for the border of warning alerts and the background of warning badges. | system.warning.onFill |
 | `colour.system.warning.fillHover` | `--iress-colour-system-warning-fill-hover` | `#DA9D00` | Used for the hover state of primary warning buttons. | system.warning.onFill |
 | `colour.system.warning.onFill` | `--iress-colour-system-warning-on-fill` | `#2B1F00` | Used for the foreground colour of warning badges. | system.warning.fill |
-| `colour.system.warning.surface` | `--iress-colour-system-warning-surface` | `#FFF8E6` | Used for the background colour of warning alerts. | system.warning.text, neutral.90 |
-| `colour.system.warning.surfaceHover` | `--iress-colour-system-warning-surface-hover` | `#FFEAA0` | Used for the hover state of secondary warning buttons. | system.warning.text, neutral.90 |
+| `colour.system.warning.surface` | `--iress-colour-system-warning-surface` | `#FFF8E6` | Used for the background colour of warning alerts. | system.warning.text, neutral.80 |
+| `colour.system.warning.surfaceHover` | `--iress-colour-system-warning-surface-hover` | `#FFEAA0` | Used for the hover state of secondary warning buttons. | system.warning.text, neutral.80 |
 | `colour.system.warning.text` | `--iress-colour-system-warning-text` | `#825400` | Used for the text colour of warning alerts. | system.warning.surface |
 
 ### System — Info
@@ -35988,8 +36168,8 @@ Provides additional helpful context.
 | `colour.system.info.fill` | `--iress-colour-system-info-fill` | `#669AFF` | Used for the border of info alerts and toasts and the background of info badges. | system.info.onFill |
 | `colour.system.info.fillHover` | `--iress-colour-system-info-fill-hover` | `#5685E1` | Used for the hover state of primary info buttons. | system.info.onFill |
 | `colour.system.info.onFill` | `--iress-colour-system-info-on-fill` | `#121D33` | Used for the foreground colour of info badges. | system.info.fill |
-| `colour.system.info.surface` | `--iress-colour-system-info-surface` | `#E5EEFF` | Used for the background colour of info alerts and toasts. | system.info.text, neutral.90 |
-| `colour.system.info.surfaceHover` | `--iress-colour-system-info-surface-hover` | `#CCDEFF` | Used for the hover state of secondary info buttons. | system.info.text, neutral.90 |
+| `colour.system.info.surface` | `--iress-colour-system-info-surface` | `#E5EEFF` | Used for the background colour of info alerts and toasts. | system.info.text, neutral.80 |
+| `colour.system.info.surfaceHover` | `--iress-colour-system-info-surface-hover` | `#CCDEFF` | Used for the hover state of secondary info buttons. | system.info.text, neutral.80 |
 | `colour.system.info.text` | `--iress-colour-system-info-text` | `#0047ab` | Used for the text colour of info alerts and toasts. | system.info.surface |
 
 ### Data — Subtle
@@ -35998,15 +36178,15 @@ Subtle data colours provide softer contrast for backgrounds and less prominent d
 
 | Token | CSS Variable | Value | Description | AA-Compliant Pairings |
 | --- | --- | --- | --- | --- |
-| `colour.data.subtle.10` | `--iress-colour-data-subtle-10` | `#FFE6F2` | First data visualisation colour in the subtle palette. | data.bold.10, neutral.90 |
-| `colour.data.subtle.20` | `--iress-colour-data-subtle-20` | `#FEEAFF` | Second data visualisation colour in the subtle palette. | data.bold.20, neutral.90 |
-| `colour.data.subtle.30` | `--iress-colour-data-subtle-30` | `#F1E6FF` | Third data visualisation colour in the subtle palette. | data.bold.30, neutral.90 |
-| `colour.data.subtle.40` | `--iress-colour-data-subtle-40` | `#E5F5FF` | Fourth data visualisation colour in the subtle palette. | data.bold.40, neutral.90 |
-| `colour.data.subtle.50` | `--iress-colour-data-subtle-50` | `#E6EEFF` | Fifth data visualisation colour in the subtle palette. | data.bold.50, neutral.90 |
-| `colour.data.subtle.60` | `--iress-colour-data-subtle-60` | `#C8D7FF` | Sixth data visualisation colour in the subtle palette. | data.bold.60, neutral.90 |
-| `colour.data.subtle.70` | `--iress-colour-data-subtle-70` | `#E4FFFD` | Seventh data visualisation colour in the subtle palette. | data.bold.70, neutral.90 |
-| `colour.data.subtle.80` | `--iress-colour-data-subtle-80` | `#BADFD4` | Eighth data visualisation colour in the subtle palette. | data.bold.80, neutral.90 |
-| `colour.data.subtle.90` | `--iress-colour-data-subtle-90` | `#ECECEC` | Ninth data visualisation colour in the subtle palette. | data.bold.90, neutral.90 |
+| `colour.data.subtle.10` | `--iress-colour-data-subtle-10` | `#FFE6F2` | First data visualisation colour in the subtle palette. | data.bold.10, neutral.80 |
+| `colour.data.subtle.20` | `--iress-colour-data-subtle-20` | `#FEEAFF` | Second data visualisation colour in the subtle palette. | data.bold.20, neutral.80 |
+| `colour.data.subtle.30` | `--iress-colour-data-subtle-30` | `#F1E6FF` | Third data visualisation colour in the subtle palette. | data.bold.30, neutral.80 |
+| `colour.data.subtle.40` | `--iress-colour-data-subtle-40` | `#E5F5FF` | Fourth data visualisation colour in the subtle palette. | data.bold.40, neutral.80 |
+| `colour.data.subtle.50` | `--iress-colour-data-subtle-50` | `#E6EEFF` | Fifth data visualisation colour in the subtle palette. | data.bold.50, neutral.80 |
+| `colour.data.subtle.60` | `--iress-colour-data-subtle-60` | `#C8D7FF` | Sixth data visualisation colour in the subtle palette. | data.bold.60, neutral.80 |
+| `colour.data.subtle.70` | `--iress-colour-data-subtle-70` | `#E4FFFD` | Seventh data visualisation colour in the subtle palette. | data.bold.70, neutral.80 |
+| `colour.data.subtle.80` | `--iress-colour-data-subtle-80` | `#BADFD4` | Eighth data visualisation colour in the subtle palette. | data.bold.80, neutral.80 |
+| `colour.data.subtle.90` | `--iress-colour-data-subtle-90` | `#ECECEC` | Ninth data visualisation colour in the subtle palette. | data.bold.90, neutral.80 |
 
 ### Data — Bold
 
@@ -36225,11 +36405,11 @@ Neutral colours apply to most backgrounds, text, and shapes in our experiences. 
 | `colour.neutral.20` | `--iress-colour-neutral-20` | `#F5F6F8` | Used as the alternating background colour for components such as tables. Used as the background colour behind panels and cards for highly interactive screens. | `alt` | neutral.70, neutral.80, neutral.90 |
 | `colour.neutral.30` | `--iress-colour-neutral-30` | `#E2E6EA` | Used as the border colour for dividers, and the default divider colour for components with in-built headers and footers such as cards. | — | neutral.80, neutral.90 |
 | `colour.neutral.40` | `--iress-colour-neutral-40` | `#CFD5DA` | Used for borders in subtle interactive components, such as checkboxes and radios with hidden controls and the progress bar. | — | neutral.80, neutral.90 |
-| `colour.neutral.50` | `--iress-colour-neutral-50` | `#A8B2BB` | Used as the background colour for interactive components such as the slider. | — | neutral.90 |
-| `colour.neutral.60` | `--iress-colour-neutral-60` | `#828F9D` | Used for placeholder text in form controls and disabled states. | — | neutral.90 |
+| `colour.neutral.50` | `--iress-colour-neutral-50` | `#A8B2BB` | Used as the background colour for interactive components such as the slider. | — | neutral.80, neutral.90 |
+| `colour.neutral.60` | `--iress-colour-neutral-60` | `#828F9D` | Used for placeholder text in form controls and disabled states. | — | neutral.80, neutral.90 |
 | `colour.neutral.70` | `--iress-colour-neutral-70` | `#5D6C7E` | Used for muted text such as hints and descriptions to allow for content hierarchy. | `muted` | neutral.10, neutral.20 |
-| `colour.neutral.80` | `--iress-colour-neutral-80` | `#384666` | Used as the default text colour for most components. For tooltips, it is used as the background colour. | `text` | neutral.10, neutral.20, neutral.30, neutral.40 |
-| `colour.neutral.90` | `--iress-colour-neutral-90` | `#141F4D` | Used for very dark text or UI elements requiring maximum contrast. | — | neutral.10, neutral.20, neutral.30, neutral.40 |
+| `colour.neutral.80` | `--iress-colour-neutral-80` | `#141F4D` | Used as the default text colour for most components. For tooltips, it is used as the background colour. This token now uses the previous Neutral 90 value to improve visual hierarchy. | `text`, `colour.neutral.90` | neutral.10, neutral.20, neutral.30, neutral.40 |
+| `colour.neutral.90` | `--iress-colour-neutral-90` | `#141F4D` | Deprecated alias for colour.neutral.80. Resolves to the same value (#141F4D). | — | neutral.10, neutral.20, neutral.30, neutral.40 |
 
 ### Primary
 
@@ -36266,8 +36446,8 @@ Communicates that an action has been successful and inform a user that the actio
 | `colour.system.success.fill` | `--iress-colour-system-success-fill` | `#37C49C` | Used for the background colour of primary success buttons, as well as the border of alerts and badges. It is also used for the foreground colour of icons inside toasts and alerts. | system.success.onFill |
 | `colour.system.success.fillHover` | `--iress-colour-system-success-fill-hover` | `#2DAB88` | Used for the hover state of primary success buttons. | system.success.onFill |
 | `colour.system.success.onFill` | `--iress-colour-system-success-on-fill` | `#0A2E25` | Used for the foreground colour of primary success buttons and badges. | system.success.fill |
-| `colour.system.success.surface` | `--iress-colour-system-success-surface` | `#EBF9F5` | Used for the background colour of success alerts and toasts, and the background of secondary success buttons. | system.success.text, neutral.90 |
-| `colour.system.success.surfaceHover` | `--iress-colour-system-success-surface-hover` | `#D7F3EB` | Used for the hover state of secondary success buttons. | system.success.text, neutral.90 |
+| `colour.system.success.surface` | `--iress-colour-system-success-surface` | `#EBF9F5` | Used for the background colour of success alerts and toasts, and the background of secondary success buttons. | system.success.text, neutral.80 |
+| `colour.system.success.surfaceHover` | `--iress-colour-system-success-surface-hover` | `#D7F3EB` | Used for the hover state of secondary success buttons. | system.success.text, neutral.80 |
 | `colour.system.success.text` | `--iress-colour-system-success-text` | `#006b44` | Used for the text colour of success alerts and toasts, and success tertiary buttons. | system.success.surface |
 
 ### System — Danger
@@ -36279,8 +36459,8 @@ Communicates something went wrong or prevents the user from moving forward with 
 | `colour.system.danger.fill` | `--iress-colour-system-danger-fill` | `#c21010` | Used for the background colour of primary danger buttons, as well as the border of alerts and badges. It is also used for the foreground colour of icons inside toasts and alerts. | system.danger.onFill |
 | `colour.system.danger.fillHover` | `--iress-colour-system-danger-fill-hover` | `#B32727` | Used for the hover state of primary danger buttons. | system.danger.onFill |
 | `colour.system.danger.onFill` | `--iress-colour-system-danger-on-fill` | `#FFF4F3` | Used for the foreground colour of primary danger buttons and badges. | system.danger.fill |
-| `colour.system.danger.surface` | `--iress-colour-system-danger-surface` | `#FFEDEC` | Used for the background colour of danger alerts and toasts, and the background of secondary danger buttons. | system.danger.text, neutral.90 |
-| `colour.system.danger.surfaceHover` | `--iress-colour-system-danger-surface-hover` | `#FFD9D6` | Used for the hover state of secondary danger buttons. | system.danger.text, neutral.90 |
+| `colour.system.danger.surface` | `--iress-colour-system-danger-surface` | `#FFEDEC` | Used for the background colour of danger alerts and toasts, and the background of secondary danger buttons. | system.danger.text, neutral.80 |
+| `colour.system.danger.surfaceHover` | `--iress-colour-system-danger-surface-hover` | `#FFD9D6` | Used for the hover state of secondary danger buttons. | system.danger.text, neutral.80 |
 | `colour.system.danger.text` | `--iress-colour-system-danger-text` | `#c21010` | Used for the text colour of danger alerts and toasts, and danger tertiary buttons. | system.danger.surface |
 
 ### System — Warning
@@ -36292,8 +36472,8 @@ Communicates attention required but does not prevent the user from moving forwar
 | `colour.system.warning.fill` | `--iress-colour-system-warning-fill` | `#F0AD03` | Used for the border of warning alerts and the background of warning badges. | system.warning.onFill |
 | `colour.system.warning.fillHover` | `--iress-colour-system-warning-fill-hover` | `#DA9D00` | Used for the hover state of primary warning buttons. | system.warning.onFill |
 | `colour.system.warning.onFill` | `--iress-colour-system-warning-on-fill` | `#2B1F00` | Used for the foreground colour of warning badges. | system.warning.fill |
-| `colour.system.warning.surface` | `--iress-colour-system-warning-surface` | `#FFF8E6` | Used for the background colour of warning alerts. | system.warning.text, neutral.90 |
-| `colour.system.warning.surfaceHover` | `--iress-colour-system-warning-surface-hover` | `#FFEAA0` | Used for the hover state of secondary warning buttons. | system.warning.text, neutral.90 |
+| `colour.system.warning.surface` | `--iress-colour-system-warning-surface` | `#FFF8E6` | Used for the background colour of warning alerts. | system.warning.text, neutral.80 |
+| `colour.system.warning.surfaceHover` | `--iress-colour-system-warning-surface-hover` | `#FFEAA0` | Used for the hover state of secondary warning buttons. | system.warning.text, neutral.80 |
 | `colour.system.warning.text` | `--iress-colour-system-warning-text` | `#825400` | Used for the text colour of warning alerts. | system.warning.surface |
 
 ### System — Info
@@ -36305,8 +36485,8 @@ Provides additional helpful context.
 | `colour.system.info.fill` | `--iress-colour-system-info-fill` | `#669AFF` | Used for the border of info alerts and toasts and the background of info badges. | system.info.onFill |
 | `colour.system.info.fillHover` | `--iress-colour-system-info-fill-hover` | `#5685E1` | Used for the hover state of primary info buttons. | system.info.onFill |
 | `colour.system.info.onFill` | `--iress-colour-system-info-on-fill` | `#121D33` | Used for the foreground colour of info badges. | system.info.fill |
-| `colour.system.info.surface` | `--iress-colour-system-info-surface` | `#E5EEFF` | Used for the background colour of info alerts and toasts. | system.info.text, neutral.90 |
-| `colour.system.info.surfaceHover` | `--iress-colour-system-info-surface-hover` | `#CCDEFF` | Used for the hover state of secondary info buttons. | system.info.text, neutral.90 |
+| `colour.system.info.surface` | `--iress-colour-system-info-surface` | `#E5EEFF` | Used for the background colour of info alerts and toasts. | system.info.text, neutral.80 |
+| `colour.system.info.surfaceHover` | `--iress-colour-system-info-surface-hover` | `#CCDEFF` | Used for the hover state of secondary info buttons. | system.info.text, neutral.80 |
 | `colour.system.info.text` | `--iress-colour-system-info-text` | `#0047ab` | Used for the text colour of info alerts and toasts. | system.info.surface |
 
 ### Data — Subtle
@@ -36315,15 +36495,15 @@ Subtle data colours provide softer contrast for backgrounds and less prominent d
 
 | Token | CSS Variable | Value | Description | AA-Compliant Pairings |
 | --- | --- | --- | --- | --- |
-| `colour.data.subtle.10` | `--iress-colour-data-subtle-10` | `#FFE6F2` | First data visualisation colour in the subtle palette. | data.bold.10, neutral.90 |
-| `colour.data.subtle.20` | `--iress-colour-data-subtle-20` | `#FEEAFF` | Second data visualisation colour in the subtle palette. | data.bold.20, neutral.90 |
-| `colour.data.subtle.30` | `--iress-colour-data-subtle-30` | `#F1E6FF` | Third data visualisation colour in the subtle palette. | data.bold.30, neutral.90 |
-| `colour.data.subtle.40` | `--iress-colour-data-subtle-40` | `#E5F5FF` | Fourth data visualisation colour in the subtle palette. | data.bold.40, neutral.90 |
-| `colour.data.subtle.50` | `--iress-colour-data-subtle-50` | `#E6EEFF` | Fifth data visualisation colour in the subtle palette. | data.bold.50, neutral.90 |
-| `colour.data.subtle.60` | `--iress-colour-data-subtle-60` | `#C8D7FF` | Sixth data visualisation colour in the subtle palette. | data.bold.60, neutral.90 |
-| `colour.data.subtle.70` | `--iress-colour-data-subtle-70` | `#E4FFFD` | Seventh data visualisation colour in the subtle palette. | data.bold.70, neutral.90 |
-| `colour.data.subtle.80` | `--iress-colour-data-subtle-80` | `#BADFD4` | Eighth data visualisation colour in the subtle palette. | data.bold.80, neutral.90 |
-| `colour.data.subtle.90` | `--iress-colour-data-subtle-90` | `#ECECEC` | Ninth data visualisation colour in the subtle palette. | data.bold.90, neutral.90 |
+| `colour.data.subtle.10` | `--iress-colour-data-subtle-10` | `#FFE6F2` | First data visualisation colour in the subtle palette. | data.bold.10, neutral.80 |
+| `colour.data.subtle.20` | `--iress-colour-data-subtle-20` | `#FEEAFF` | Second data visualisation colour in the subtle palette. | data.bold.20, neutral.80 |
+| `colour.data.subtle.30` | `--iress-colour-data-subtle-30` | `#F1E6FF` | Third data visualisation colour in the subtle palette. | data.bold.30, neutral.80 |
+| `colour.data.subtle.40` | `--iress-colour-data-subtle-40` | `#E5F5FF` | Fourth data visualisation colour in the subtle palette. | data.bold.40, neutral.80 |
+| `colour.data.subtle.50` | `--iress-colour-data-subtle-50` | `#E6EEFF` | Fifth data visualisation colour in the subtle palette. | data.bold.50, neutral.80 |
+| `colour.data.subtle.60` | `--iress-colour-data-subtle-60` | `#C8D7FF` | Sixth data visualisation colour in the subtle palette. | data.bold.60, neutral.80 |
+| `colour.data.subtle.70` | `--iress-colour-data-subtle-70` | `#E4FFFD` | Seventh data visualisation colour in the subtle palette. | data.bold.70, neutral.80 |
+| `colour.data.subtle.80` | `--iress-colour-data-subtle-80` | `#BADFD4` | Eighth data visualisation colour in the subtle palette. | data.bold.80, neutral.80 |
+| `colour.data.subtle.90` | `--iress-colour-data-subtle-90` | `#ECECEC` | Ninth data visualisation colour in the subtle palette. | data.bold.90, neutral.80 |
 
 ### Data — Bold
 

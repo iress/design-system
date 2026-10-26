@@ -3,6 +3,7 @@ import './styled-system/styles.css';
 /* Generator: React components */
 export * from './components/Alert';
 export * from './components/Autocomplete';
+export * from './components/Avatar';
 export * from './components/Button';
 export * from './components/ButtonGroup';
 export * from './components/Card';

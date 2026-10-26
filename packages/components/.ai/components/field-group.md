@@ -32,6 +32,7 @@ import { IressFieldGroup } from '@iress-oss/ids-components';
 | **label** | `ReactNode` | — | Text to be displayed in the label. |
 | error | `ReactNode` | — | Validation error to be displayed above the field. |
 | errorMessages | `[ValidationMessageObj](../../dist/interfaces.d.ts)[]` | — | Validation errors to be displayed above the field, an array of validation messages to be displayed in `IressValidationSummary`. |
+| errorId | `string` | — | ID for the error container element, used to associate the error message with the form control via `aria-describedby`. When `error` or `errorMessages` are present and `htmlFor` is set, this is automatically derived as `${htmlFor}-error`. Override only if you need a custom error container ID. |
 | readOnly | `[FormControlReadOnly](../../dist/types.d.ts)` | — | Renders the group in a read-only state (no asterisk symbol). Use `'locked'` when the control is read-only due to permissions. |
 | removeErrorMargin | `boolean` | — | Removes the reserved space for error messages, allowing fields to stack with narrower gaps. When true, no margin is reserved for potential error messages. |
 | supplementary | `ReactNode` | — | Supplementary content to be displayed below the field. Is only shown when the field is not in an error state. |

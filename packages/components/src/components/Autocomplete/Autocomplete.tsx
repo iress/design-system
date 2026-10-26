@@ -65,7 +65,7 @@ export interface IressAutocompleteProps<T extends FormControlValue = string>
 
   /**
    * Text to be displayed when the options function errors out. It is not used when the options are provided as an array.
-   * @default <IressAlert status="danger">An unknown error occurred. Please contact support if the error persists.</IressAlert>
+   * @default <IressAlert status="danger" mb="none" variant="full-width">An unknown error occurred. Please contact support if the error persists.</IressAlert>
    */
   errorText?: ReactNode;
 
@@ -134,12 +134,13 @@ export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
       debounceThreshold,
       defaultValue,
       errorText = (
-        <IressAlert status="danger" mb="none" borderRadius="radius.system.form">
+        <IressAlert status="danger" mb="none" variant="full-width">
           An unknown error occurred. Please contact support if the error
           persists.
         </IressAlert>
       ),
       initialOptions,
+      loadingDelay,
       limitDesktop = 12,
       limitMobile = 6,
       minSearchLength,
@@ -181,6 +182,7 @@ export const IressAutocomplete = forwardRef<InputRef, IressAutocompleteProps>(
     } = useAutocompleteSearch({
       debounceThreshold,
       initialOptions,
+      loadingDelay,
       minSearchLength,
       options,
       query: getFormControlValueAsStringIfDefined(value),

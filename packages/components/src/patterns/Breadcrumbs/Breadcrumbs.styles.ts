@@ -49,7 +49,7 @@ export const breadcrumbs = sva({
       },
     },
     current: {
-      color: 'colour.neutral.90',
+      color: 'colour.neutral.80',
       textStyle: 'typography.body.sm.strong',
     },
     overflowItem: {

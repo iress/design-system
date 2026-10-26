@@ -129,6 +129,31 @@ describe('IressExpander', () => {
   });
 
   describe('props', () => {
+    describe('section mode styles', () => {
+      it('uses the same grey background for focused and expanded activator states', () => {
+        const styles = expander.raw({ mode: 'section' });
+        const activatorStyles = styles.activator as
+          | {
+              _focusVisible?: { bg?: string; background?: string };
+              '&[aria-expanded="true"]'?: {
+                bg?: string;
+                background?: string;
+              };
+            }
+          | undefined;
+
+        const focusBg =
+          activatorStyles?._focusVisible?.bg ??
+          activatorStyles?._focusVisible?.background;
+        const expandedBg =
+          activatorStyles?.['&[aria-expanded="true"]']?.bg ??
+          activatorStyles?.['&[aria-expanded="true"]']?.background;
+
+        expect(focusBg).toBe('colour.neutral.20');
+        expect(expandedBg).toBe(focusBg);
+      });
+    });
+
     describe('activatorStyle', () => {
       it('adds additional classes and style to the activator', () => {
         render(

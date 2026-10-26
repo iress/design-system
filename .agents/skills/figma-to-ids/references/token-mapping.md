@@ -11,8 +11,8 @@ Map Figma fill/stroke colours to IDS colour tokens:
 | Neutral/10 `#FFFFFF`      | `colour.neutral.10`          | `--iress-colour-neutral-10`          |
 | Neutral/20 `#F5F6F8`      | `colour.neutral.20`          | `--iress-colour-neutral-20`          |
 | Neutral/30 `#E2E6EA`      | `colour.neutral.30`          | `--iress-colour-neutral-30`          |
-| Neutral/80 `#384666`      | `colour.neutral.80`          | `--iress-colour-neutral-80`          |
-| Neutral/90 `#141F4D`      | `colour.neutral.90`          | `--iress-colour-neutral-90`          |
+| Neutral/80 `#141F4D`      | `colour.neutral.80`          | `--iress-colour-neutral-80`          |
+| Neutral/90 `#141F4D`      | `colour.neutral.90` (alias)  | `--iress-colour-neutral-90`          |
 | Success/Fill `#37C49C`    | `colour.system.success.fill` | `--iress-colour-system-success-fill` |
 | Danger/Fill `#C21010`     | `colour.system.danger.fill`  | `--iress-colour-system-danger-fill`  |
 | Warning/Fill `#F0AD03`    | `colour.system.warning.fill` | `--iress-colour-system-warning-fill` |
@@ -37,6 +37,10 @@ IDS base spacing unit = 4px (0.25rem). Map Figma pixel values:
 | 40px     | `10`      | xl    |
 
 > For values not on the 4px grid, round to the nearest token value.
+
+> **Neutral alias note:** `colour.neutral.90` is a backwards-compatible alias
+> of `colour.neutral.80`. Prefer `colour.neutral.80` in generated IDS code, but
+> map either Figma `Neutral/80` or `Neutral/90` to the same `#141F4D` value.
 
 ## Border Radius
 

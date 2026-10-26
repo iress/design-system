@@ -125,6 +125,25 @@ describe('IressInput', () => {
       const styles = input({ width: '25%' });
       expect(wrapper).toHaveClass(styles.wrapper!);
     });
+
+    it('preserves clear button space for fixed width clearable inputs', async () => {
+      const screen = render(<IressInput width="10" clearable />);
+      const inputElement = screen.getByRole('textbox');
+      const clearButton = screen.container.querySelector(
+        `.${GlobalCSSClass.CloseButton}`,
+      );
+
+      expect(clearButton).toBeInTheDocument();
+      expect(clearButton).toHaveStyle({ visibility: 'hidden' });
+      expect(clearButton).toBeDisabled();
+
+      await userEvent.type(inputElement, 'a');
+
+      await waitFor(() => {
+        expect(clearButton).not.toHaveStyle({ visibility: 'hidden' });
+        expect(clearButton).toBeEnabled();
+      });
+    });
   });
 
   describe('readonly', () => {

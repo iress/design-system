@@ -24,7 +24,7 @@ export const tableRecipe = defineSlotRecipe({
     table: {
       textStyle: 'typography.body.md',
       bg: 'colour.neutral.10',
-      color: 'colour.neutral.90',
+      color: 'colour.neutral.80',
       borderRadius: 'radius.system.layout',
       borderSpacing: 'spacing.0',
       minWidth: '12/12',
@@ -73,7 +73,7 @@ export const tableRecipe = defineSlotRecipe({
       cursor: 'pointer',
     },
     sortIcon: {
-      fill: 'colour.neutral.90',
+      fill: 'colour.neutral.80',
       width: '[1.31em]',
       height: '[1.31em]',
       display: 'inline-block',

@@ -37,7 +37,7 @@ export const modal = sva({
     header: {
       textStyle: 'typography.heading.3',
       mb: 'spacing.4',
-      color: 'colour.neutral.90',
+      color: 'colour.neutral.80',
     },
     action: {
       flex: '1',

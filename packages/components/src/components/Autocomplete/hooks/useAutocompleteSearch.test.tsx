@@ -43,6 +43,72 @@ const waitDelay = (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms));
 
 describe('useAutocompleteSearch', () => {
+  it('uses a 300ms debounce threshold by default', async () => {
+    vi.useFakeTimers();
+    const options = vi.fn().mockResolvedValue([]);
+
+    try {
+      const hook = renderHook(
+        (props: AutocompleteSearchHookProps) => useAutocompleteSearch(props),
+        {
+          initialProps: {
+            options,
+            query: '',
+          },
+        },
+      );
+
+      expect(options).not.toHaveBeenCalled();
+
+      await act(async () => {
+        hook.rerender({
+          options,
+          query: 'cus',
+        });
+      });
+
+      expect(options).not.toHaveBeenCalled();
+
+      await act(async () => {
+        vi.advanceTimersByTime(299);
+      });
+      expect(options).not.toHaveBeenCalled();
+
+      await act(async () => {
+        vi.advanceTimersByTime(1);
+        await Promise.resolve();
+      });
+      expect(options).toHaveBeenCalledTimes(1);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it('supports overriding loading delay to show loading immediately', async () => {
+    const slowOptions = vi.fn(async () => {
+      await waitDelay(50);
+      return [{ label: 'Custom 1', value: '1' }];
+    });
+
+    const hook = renderAutocompleteSearchHook({
+      debounceThreshold: 0,
+      loadingDelay: 0,
+      options: slowOptions,
+    });
+
+    hook.rerender({
+      debounceThreshold: 0,
+      loadingDelay: 0,
+      options: slowOptions,
+      query: 'cus',
+    });
+
+    await waitFor(() => expect(slowOptions).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(hook.result.current.loading).toBe(true));
+    await waitFor(() => expect(hook.result.current.loading).toBe(false));
+    expect(hook.result.current.results).toHaveLength(1);
+  });
+
   it('returns results instantly when debounceThreshold is 0', async () => {
     const hook = renderAutocompleteSearchHook();
 

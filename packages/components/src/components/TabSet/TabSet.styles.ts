@@ -80,7 +80,7 @@ export const tabSet = sva({
         left: 'spacing.0',
         right: 'spacing.0',
         height: 'tab.indicator',
-        bg: 'colour.neutral.90',
+        bg: 'colour.neutral.80',
         transition: 'all',
         zIndex: '[2]',
       },
@@ -103,7 +103,7 @@ export const tabSet = sva({
         left: 'spacing.0',
         right: 'spacing.0',
         height: 'tab.indicator',
-        bg: 'colour.neutral.90',
+        bg: 'colour.neutral.80',
         transition: 'all',
         zIndex: '[2]',
       },
@@ -124,6 +124,26 @@ export const tabSet = sva({
       'top-right': {
         list: {
           justifyContent: 'flex-end',
+        },
+      },
+      'top-stretch': {
+        list: {
+          justifyContent: 'flex-start',
+
+          '& > *': {
+            flex: '1',
+          },
+
+          '& [role="tab"]': {
+            width: '12/12',
+            justifyContent: 'center',
+          },
+        },
+        activeIndicator: {
+          flex: 'none',
+        },
+        hoverIndicator: {
+          flex: 'none',
         },
       },
     },

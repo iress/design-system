@@ -1,7 +1,6 @@
 import {
   type CSSProperties,
   type ElementType,
-  type MouseEvent,
   type MouseEventHandler,
   type ReactNode,
   useMemo,
@@ -20,7 +19,6 @@ import { useSideNavState } from './hooks/useSideNavState';
 import { isSideNavGroup } from './SideNav.helpers';
 import type { IressStyledProps } from '@/types';
 import { IressText } from '@/components/Text';
-import type { IressTextElements } from '@/components/Text/Text';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -417,7 +415,7 @@ export const IressSideNav = ({
                       key={entry.key ?? index}
                       label={entry.label}
                       href={entry.href}
-                      element={entry.element as IressTextElements}
+                      element={entry.element}
                       onClick={entry.onClick}
                       active={openGroupKey === entry.key}
                       onActiveChange={(isOpen) =>
@@ -449,7 +447,7 @@ export const IressSideNav = ({
                       key={entry.key ?? index}
                       href={entry.href}
                       element={entry.element}
-                      onClick={(e: MouseEvent) => {
+                      onClick={(e: Parameters<MouseEventHandler>[0]) => {
                         setOpenGroupKey(undefined);
                         entry.onClick?.(e);
                       }}

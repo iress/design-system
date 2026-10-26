@@ -1,7 +1,7 @@
 import { sva } from '@/styled-system/css';
 
 export const tooltip = sva({
-  slots: ['root', 'activator', 'content'],
+  slots: ['root', 'activator', 'content', 'richName', 'richMeta'],
   base: {
     root: {
       display: 'inline-block',
@@ -23,7 +23,23 @@ export const tooltip = sva({
       color: 'colour.neutral.10',
       bg: 'colour.neutral.80',
     },
+    richName: {
+      textStyle: 'typography.body.md.medium',
+    },
+    richMeta: {
+      textStyle: 'typography.body.sm.regular',
+      opacity: '[0.75]',
+    },
   },
-  variants: {},
+  variants: {
+    variant: {
+      rich: {
+        content: {
+          display: 'flex',
+          flexDirection: 'column',
+        },
+      },
+    },
+  },
   compoundVariants: [],
 });

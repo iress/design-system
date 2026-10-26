@@ -144,7 +144,10 @@ The `status` prop (`danger`, `success`, `warning`) displays a contextual status 
 
 #### Disable closing
 
-Use `disableBackdropClick` and/or `noCloseButton` when you require the user to complete the task before closing. Ensure you provide an alternative way to close.
+Use `disableBackdropClick={true}` to disable backdrop clicks while still allowing
+Escape key dismissal. Set `disableBackdropClick="no-esc"` to disable both backdrop
+clicks and Escape dismissal. You can also hide the close button using
+`noCloseButton`. Ensure you provide an alternative way to close.
 
 <StoryEmbed id="components-modal--disable-closing"/>
 

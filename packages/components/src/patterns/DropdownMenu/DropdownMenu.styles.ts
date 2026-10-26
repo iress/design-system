@@ -18,7 +18,7 @@ export const dropdownMenu = sva({
     root: {},
     activator: {
       appearance: 'none',
-      color: 'colour.neutral.90',
+      color: 'colour.neutral.80',
       bg: 'colour.neutral.10',
       border: 'input',
       pl: 'spacing.3',

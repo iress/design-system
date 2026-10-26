@@ -32,8 +32,8 @@ export const readonly = sva({
 
       _active: {
         bg: 'colour.neutral.10',
-        borderColor: 'colour.neutral.90',
-        boxShadow: '{colors.colour.neutral.90} 0px 0px 0px 1px',
+        borderColor: 'colour.neutral.80',
+        boxShadow: '{colors.colour.neutral.80} 0px 0px 0px 1px',
       },
     },
     addon: {
@@ -76,7 +76,7 @@ export const readonly = sva({
       borderWidth: 0,
       borderRadius: 'radius.system.form',
       backgroundColor: 'colour.neutral.10',
-      color: 'colour.neutral.90',
+      color: 'colour.neutral.80',
       display: 'inline-flex',
       alignItems: 'center',
       boxSizing: 'border-box',
