@@ -31,15 +31,16 @@ export const Default: Story = {
   },
 };
 
-export const InlineLabel: Story = {
+export const InlineLayout: Story = {
   args: {
-    children: (
-      <IressInline horizontalAlign="between">
-        <span>Westpac Group</span>
-        <span>$142,000 p.a.</span>
-      </IressInline>
-    ),
+    children: 'Westpac Group',
   },
+  render: (args) => (
+    <IressInline horizontalAlign="between" verticalAlign="middle">
+      <IressCheckbox {...args} aria-describedby="westpac-income" />
+      <span id="westpac-income">$142,000 p.a.</span>
+    </IressInline>
+  ),
 };
 
 export const Checked: Story = {

@@ -35,38 +35,49 @@ describe('IressCheckbox', () => {
   });
 
   describe('props', () => {
-    describe('inline label', () => {
+    describe('inline layout', () => {
       it.each([undefined, 'touch', 'card'] as const)(
-        'fills the available label space for the %s variant',
+        'associates supplementary text without making it clickable for the %s variant',
         async (variant) => {
           const screen = render(
-            <IressCheckbox variant={variant}>
-              <IressInline horizontalAlign="between">
-                <span>Westpac Group</span>
-                <span>$142,000 p.a.</span>
-              </IressInline>
-            </IressCheckbox>,
+            <IressInline horizontalAlign="between" verticalAlign="middle">
+              <IressCheckbox
+                variant={variant}
+                aria-describedby="westpac-income"
+              >
+                Westpac Group
+              </IressCheckbox>
+              <span id="westpac-income">$142,000 p.a.</span>
+            </IressInline>,
           );
-          const styles = checkboxStyles.raw({ variant });
           const checkbox = screen.getByRole('checkbox', {
-            name: /Westpac Group\s*\$142,000 p\.a\./,
+            name: 'Westpac Group',
           });
 
-          expect(styles.label).toMatchObject({ flex: '1' });
-          expect(styles.content).toMatchObject({ flex: '1' });
+          expect(checkbox).toHaveAccessibleDescription('$142,000 p.a.');
 
           await userEvent.click(screen.getByText('$142,000 p.a.'));
-          expect(checkbox).toBeChecked();
+          expect(checkbox).not.toBeChecked();
 
           await userEvent.click(screen.getByText('Westpac Group'));
-          expect(checkbox).not.toBeChecked();
+          expect(checkbox).toBeChecked();
+        },
+      );
+
+      it.each([undefined, 'touch'] as const)(
+        'keeps the %s variant label and content sized to their contents',
+        (variant) => {
+          const styles = checkboxStyles.raw({ variant });
+
+          expect(styles.label?.flex).toBeUndefined();
+          expect(styles.content?.flex).toBeUndefined();
         },
       );
 
       it('keeps hidden labels compact', () => {
         const styles = checkboxStyles.raw({ hiddenLabel: true });
 
-        expect(styles.label).toMatchObject({ flex: 'initial' });
+        expect(styles.label?.flex).toBeUndefined();
         expect(styles.content).toMatchObject({ srOnly: true });
       });
     });
