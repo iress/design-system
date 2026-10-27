@@ -209,6 +209,12 @@ describe('IressField', () => {
     });
 
     describe('removeErrorMargin', () => {
+      it('removes the footer margin when enabled', () => {
+        expect(field.raw({ removeErrorMargin: true }).footer?.marginTop).toBe(
+          'none',
+        );
+      });
+
       it('applies compact margin when removeErrorMargin is true', () => {
         const screen = renderComponent({
           removeErrorMargin: true,
