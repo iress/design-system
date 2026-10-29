@@ -29,9 +29,23 @@ import { cx } from '@/styled-system/css';
 import { GlobalCSSClass } from '@/enums';
 import { propagateTestid } from '@/helpers/utility/propagateTestid';
 
+/**
+ * Structural contract for Zod 4 classic schemas, not a general schema adapter.
+ * Keeps Zod optional for consumers who use rules or a custom resolver.
+ */
+export interface FormSchema<TOutput = unknown, TInput = unknown> {
+  readonly _input: TInput;
+  readonly _output: TOutput;
+  readonly _zod: {
+    readonly version: { readonly major: 4 };
+  };
+  parseAsync: (data: unknown) => Promise<TOutput>;
+}
+
 export interface IressHookFormProps<
   T extends FieldValues,
   TContext = object,
+  TOutput = T,
 > extends Omit<
   IressStyledProps<'form'>,
   'defaultChecked' | 'defaultValue' | 'onSubmit' | 'onError'
@@ -50,7 +64,10 @@ export interface IressHookFormProps<
   /**
    * React hook form instance.
    */
-  form: UseFormReturn<T, TContext>;
+  form: UseFormReturn<T, TContext, TOutput>;
+
+  /** @internal Schema metadata supplied by IressForm, not a second resolver. */
+  schema?: FormSchema<TOutput, T>;
 
   /**
    * Emitted when any field has an error.
@@ -65,7 +82,7 @@ export interface IressHookFormProps<
    *
    * @see https://react-hook-form.com/docs/useform/handlesubmit
    */
-  onSubmit?: (data: T) => void;
+  onSubmit?: (data: TOutput) => void;
 
   /**
    * Emitted when the form state is valid.
@@ -87,13 +104,17 @@ export interface IressHookFormProps<
  * This is useful for cases where you need to programmatically control the form, such as submitting it from a button outside the form.
  * @param T - The type of the form values.
  */
-export interface FormRef<T extends FieldValues> {
+export interface FormRef<
+  T extends FieldValues,
+  TContext = object,
+  TOutput = T,
+> {
   /**
    * The `react-hook-form` instance, which provides methods to interact with the form.
    * This includes methods like `reset`, `setValue`, `getValues`, etc.
    * @see https://react-hook-form.com/docs/useform
    */
-  api: UseFormReturn<T>;
+  api: UseFormReturn<T, TContext, TOutput>;
 
   /**
    * The HTML form element, which can be used to access the DOM element directly.
@@ -118,11 +139,15 @@ export interface FormRef<T extends FieldValues> {
 /**
  * Common form pattern props, pretty much adding commentary to UseFormProps from `react-hook-form`.
  */
-export interface FormPatternProps<
+interface FormPatternOptions<
   T extends FieldValues,
   TContext = object,
+  TOutput = T,
 > extends Partial<
-  Omit<UseFormProps<T, TContext>, 'disabled' | 'errors' | 'shouldFocusError'>
+  Omit<
+    UseFormProps<T, TContext, TOutput>,
+    'disabled' | 'errors' | 'shouldFocusError' | 'resolver'
+  >
 > {
   /**
    * This context object is mutable and will be injected into the `resolver`'s second argument (eg. [Yup](https://github.com/jquense/yup) validation's context object).
@@ -168,12 +193,6 @@ export interface FormPatternProps<
   resetOptions?: UseFormProps<T, TContext>['resetOptions'];
 
   /**
-   * This function allows you to use any external validation library such as Yup, Zod, Joi, Vest, Ajv and many others.
-   * @see https://react-hook-form.com/docs/useform#resolver
-   */
-  resolver?: UseFormProps<T, TContext>['resolver'];
-
-  /**
    * Configure validation strategy when inputs with errors get re-validated **after** a user submits the form the first time.
    * @see https://react-hook-form.com/docs/useform#reValidateMode
    * @default 'onChange'
@@ -202,20 +221,43 @@ export interface FormPatternProps<
   values?: UseFormProps<T, TContext>['values'];
 }
 
-const HookForm = <T extends FieldValues, TContext = object>(
+export type FormPatternProps<
+  T extends FieldValues,
+  TContext = object,
+  TOutput = T,
+> = FormPatternOptions<T, TContext, TOutput> &
+  (
+    | {
+        /**
+         * Zod 4 classic schema. Validation is resolved internally; submitted data uses
+         * the schema output type, while defaultValues and form methods use input.
+         * Cannot be combined with resolver.
+         */
+        schema: FormSchema<TOutput, T>;
+        resolver?: never;
+      }
+    | {
+        schema?: never;
+        /** Custom React Hook Form resolver. Cannot be combined with schema. */
+        resolver?: UseFormProps<T, TContext, TOutput>['resolver'];
+      }
+  );
+
+const HookForm = <T extends FieldValues, TContext = object, TOutput = T>(
   {
     alert,
     children,
     className,
     'data-testid': testId,
     form: methods,
+    schema,
     onSubmit,
     onValidChange,
     onError,
     updateErrorSummaryOnSubmit,
     ...restProps
-  }: IressHookFormProps<T, TContext>,
-  ref: ForwardedRef<FormRef<T>>,
+  }: IressHookFormProps<T, TContext, TOutput>,
+  ref: ForwardedRef<FormRef<T, TContext, TOutput>>,
 ) => {
   const id = useIdIfNeeded({ id: restProps.id });
   const [errorMessages, setErrorMessages] = useState<
@@ -323,8 +365,9 @@ const HookForm = <T extends FieldValues, TContext = object>(
       errorMessages,
       setErrorMessage,
       setFocusOnError,
+      schema,
     }),
-    [errorMessages, id, setErrorMessage, setFocusOnError],
+    [errorMessages, id, setErrorMessage, setFocusOnError, schema],
   );
 
   return (
@@ -357,9 +400,10 @@ HookForm.displayName = 'IressHookForm';
 export const IressHookForm = forwardRef(HookForm) as (<
   T extends FieldValues,
   TContext = object,
+  TOutput = T,
 >(
-  props: IressHookFormProps<T, TContext> & {
-    ref?: Ref<FormRef<T>>;
+  props: IressHookFormProps<T, TContext, TOutput> & {
+    ref?: Ref<FormRef<T, TContext, TOutput>>;
   },
 ) => ReactElement) & {
   displayName: 'IressHookForm';

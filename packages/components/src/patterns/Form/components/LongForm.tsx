@@ -18,65 +18,68 @@ import {
 } from '../HookForm/HookForm';
 import { IressPanel, type IressPanelProps } from '@/components/Panel';
 import { IressInline } from '@/components/Inline';
+import { useSchemaResolver } from '../helpers/useSchemaResolver';
 
-export interface LongFormProps<T extends FieldValues, TContext = object>
-  extends
-    Omit<IressHookFormProps<T, TContext>, 'form'>,
-    FormPatternProps<T, TContext> {
-  /**
-   * The actions to be displayed at the top right of the form.
-   */
-  actions: ReactNode;
+export type LongFormProps<
+  T extends FieldValues,
+  TContext = object,
+  TOutput = T,
+> = Omit<IressHookFormProps<T, TContext, TOutput>, 'form' | 'schema'> &
+  FormPatternProps<T, TContext, TOutput> & {
+    /**
+     * The actions to be displayed at the top right of the form.
+     */
+    actions: ReactNode;
 
-  /**
-   * Footer to be displayed at the bottom of the form.
-   * This can be used for additional information, links, or actions that are relevant to the form but not part of the main content.
-   */
-  footer?: ReactNode;
+    /**
+     * Footer to be displayed at the bottom of the form.
+     * This can be used for additional information, links, or actions that are relevant to the form but not part of the main content.
+     */
+    footer?: ReactNode;
 
-  /**
-   * Title displayed at the top of the form, usually the purpose of the form.
-   */
-  heading: ReactNode;
+    /**
+     * Title displayed at the top of the form, usually the purpose of the form.
+     */
+    heading: ReactNode;
 
-  /**
-   * Configure the validation strategy **before** a user submits the form the first time.
-   * For long forms, it is recommended to use `onBlur` to avoid overwhelming the user with validation errors.
-   * This means that validation will occur when the user leaves a field, rather than on every change.
-   * @see https://react-hook-form.com/docs/useform#mode
-   * @default 'onBlur'
-   */
-  mode?: UseFormProps<T, TContext>['mode'];
+    /**
+     * Configure the validation strategy **before** a user submits the form the first time.
+     * For long forms, it is recommended to use `onBlur` to avoid overwhelming the user with validation errors.
+     * This means that validation will occur when the user leaves a field, rather than on every change.
+     * @see https://react-hook-form.com/docs/useform#mode
+     * @default 'onBlur'
+     */
+    mode?: UseFormProps<T, TContext>['mode'];
 
-  /**
-   * Style the panel that wraps the form fields.
-   * @default { bg: "alt" }
-   */
-  panelStyle?: IressPanelProps;
+    /**
+     * Style the panel that wraps the form fields.
+     * @default { bg: "alt" }
+     */
+    panelStyle?: IressPanelProps;
 
-  /**
-   * Use `pattern="long"` for the following use cases:
-   * - Forms that are used for data entry, such as creating or updating large datasets.
-   * - Forms that are longer than the viewport (usually more than 8-9 fields).
-   */
-  pattern?: 'long';
+    /**
+     * Use `pattern="long"` for the following use cases:
+     * - Forms that are used for data entry, such as creating or updating large datasets.
+     * - Forms that are longer than the viewport (usually more than 8-9 fields).
+     */
+    pattern?: 'long';
 
-  /**
-   * Configure the validation strategy **after** a user submits the form the first time.
-   * During this phase, it is recommended to use `onChange` to provide immediate feedback on field changes so users can correct errors as they go.
-   * @see https://react-hook-form.com/docs/useform#reValidateMode
-   * @default 'onChange'
-   */
-  reValidateMode?: UseFormProps<T, TContext>['reValidateMode'];
+    /**
+     * Configure the validation strategy **after** a user submits the form the first time.
+     * During this phase, it is recommended to use `onChange` to provide immediate feedback on field changes so users can correct errors as they go.
+     * @see https://react-hook-form.com/docs/useform#reValidateMode
+     * @default 'onChange'
+     */
+    reValidateMode?: UseFormProps<T, TContext>['reValidateMode'];
 
-  /**
-   * If set to `true`, the form will have a sticky header that remains at the top of the viewport when scrolling.
-   * This is useful for long forms where you want the header to always be visible.
-   */
-  sticky?: boolean;
-}
+    /**
+     * If set to `true`, the form will have a sticky header that remains at the top of the viewport when scrolling.
+     * This is useful for long forms where you want the header to always be visible.
+     */
+    sticky?: boolean;
+  };
 
-const LongFormPattern = <T extends FieldValues, TContext = object>(
+const LongFormPattern = <T extends FieldValues, TContext = object, TOutput = T>(
   {
     actions,
     alert,
@@ -95,16 +98,21 @@ const LongFormPattern = <T extends FieldValues, TContext = object>(
     progressive,
     resetOptions,
     resolver,
+    schema,
     reValidateMode = 'onChange',
     shouldUseNativeValidation,
     shouldUnregister,
     sticky = false,
     values,
     ...restProps
-  }: LongFormProps<T, TContext>,
-  ref: ForwardedRef<FormRef<T>>,
+  }: LongFormProps<T, TContext, TOutput>,
+  ref: ForwardedRef<FormRef<T, TContext, TOutput>>,
 ) => {
-  const reactHookForm = useForm({
+  const resolvedResolver = useSchemaResolver<T, TContext, TOutput>(
+    schema,
+    resolver,
+  );
+  const reactHookForm = useForm<T, TContext, TOutput>({
     criteriaMode,
     context,
     defaultValues,
@@ -112,7 +120,7 @@ const LongFormPattern = <T extends FieldValues, TContext = object>(
     mode,
     progressive,
     resetOptions,
-    resolver,
+    resolver: resolvedResolver,
     reValidateMode,
     shouldFocusError: !alert,
     shouldUseNativeValidation,
@@ -131,6 +139,7 @@ const LongFormPattern = <T extends FieldValues, TContext = object>(
   return (
     <IressHookForm
       form={reactHookForm}
+      schema={schema}
       {...restProps}
       className={cx(styles.root, className)}
       ref={ref}
@@ -161,9 +170,10 @@ const LongFormPattern = <T extends FieldValues, TContext = object>(
 export const LongForm = forwardRef(LongFormPattern) as (<
   T extends FieldValues,
   TContext = object,
+  TOutput = T,
 >(
-  props: LongFormProps<T, TContext> & {
-    ref?: Ref<FormRef<T>>;
+  props: LongFormProps<T, TContext, TOutput> & {
+    ref?: Ref<FormRef<T, TContext, TOutput>>;
   },
 ) => ReactElement) & {
   displayName: 'LongForm';

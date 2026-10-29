@@ -13,6 +13,13 @@
 
 ## Component Instances
 
+Within managed forms, map fields/groups to `IressFormField`/`IressFormFieldset`
+inside `IressForm`. A Zod 4 `schema` supplies validation and required indicators
+(install `zod@^4.6.6`); do not also pass `resolver`. For a required marker that
+cannot be inferred (conditional refinements or an external resolver), use
+`required={true}` or `required={false}` on the field/fieldset. This is a visual
+override, not validation. Otherwise indicators fall back to `rules.required`.
+
 | Figma Component    | IDS Component                                | Key Props                  |
 | ------------------ | -------------------------------------------- | -------------------------- |
 | Button / Primary   | `IressButton mode="primary"`                 |                            |

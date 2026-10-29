@@ -14,6 +14,14 @@
 
 ## Form Inputs
 
+For managed forms, use `IressForm` with `IressFormField`/`IressFormFieldset`.
+Pass a Zod 4 schema via `schema` (requires `zod@^4.6.6`) or a custom `resolver`,
+never both. Schema input types drive form state; transformed output drives
+`onSubmit`. Fields automatically derive required indicators from schema
+structure. Use `required={true|false}` to override presentation for conditional
+refinements or external resolver closures; it does not change validation.
+Without schema metadata, indicators fall back to `rules.required`.
+
 | Description              | IDS Component                       | Example                                                                                                                        |
 | ------------------------ | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | Labelled text input      | `IressField` + `IressInput`         | See Form example below                                                                                                         |

@@ -1,4 +1,5 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
+import type { FieldValues } from 'react-hook-form';
 import { IressForm } from './Form';
 import { WithReadonlyDataForm } from './mocks/WithReadonlyDataForm';
 import WithReadonlyDataFormSource from './mocks/WithReadonlyDataForm.tsx?raw';
@@ -36,7 +37,7 @@ const SanitisedInputForm = lazy(() =>
   })),
 );
 
-type Story = StoryObj<typeof IressForm>;
+type Story = StoryObj<typeof IressForm<FieldValues>>;
 
 export default {
   title: 'Patterns/Form/Recipes',

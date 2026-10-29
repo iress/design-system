@@ -1,6 +1,5 @@
 import { type ReactNode, useContext, useEffect, useMemo } from 'react';
 import {
-  type Control,
   type FieldPath,
   type FieldPathValue,
   type FieldValues,
@@ -22,23 +21,22 @@ import {
 } from './helpers/transformCustomRulesToValidateRule';
 import { type FormFieldRenderProps } from './FormField';
 import { useFieldRenderProps } from './hooks/useFieldRenderProps';
+import { getSchemaRequired } from '../helpers/getSchemaRequired';
 
 export interface IressFormFieldsetProps<
   T extends FieldValues = FieldValues,
   TName extends FieldPath<T> = FieldPath<T>,
+  TOutput = T,
 >
   extends
-    Omit<
-      IressFieldGroupProps,
-      'children' | 'htmlFor' | 'required' | 'join' | 'inline'
-    >,
-    Omit<UseControllerProps<T, FieldPath<T>>, 'disabled'> {
+    Omit<IressFieldGroupProps, 'children' | 'htmlFor' | 'join' | 'inline'>,
+    Omit<UseControllerProps<T, FieldPath<T>, TOutput>, 'disabled'> {
   /**
    * React Hook Form control object. It is used to register the field with the form.
    * It is automatically provided when used inside an `IressForm`, but it can be overridden if you are using a custom form control.
    * @see https://react-hook-form.com/ts#Control
    */
-  control?: Control<T>;
+  control?: UseControllerProps<T, FieldPath<T>, TOutput>['control'];
 
   /**
    * A default value for the field. Although this is provided here as it is part of the React Hook Form API, it is recommended to set the default value in the form's `defaultValues` prop, to ensure the form is correctly initialised.
@@ -62,6 +60,12 @@ export interface IressFormFieldsetProps<
   rules?: CustomRules<T>;
 
   /**
+   * Override the required indicator only (does not change validation).
+   * Otherwise inferred from the form schema, falling back to rules.required.
+   */
+  required?: boolean;
+
+  /**
    * Input will be unregistered after unmount and defaultValues will be removed as well (it will not be stored in the form state).
    * @see https://react-hook-form.com/docs/usecontroller
    */
@@ -72,15 +76,19 @@ export interface IressFormFieldsetProps<
  * A `IressFieldGroup` wrapper that can show error message and legend automatically inside an `IressForm`.
  * It uses the `useController` hook from `react-hook-form` for form management.
  */
-export const IressFormFieldset = <TFieldValues extends FieldValues>({
+export const IressFormFieldset = <
+  TFieldValues extends FieldValues,
+  TOutput = TFieldValues,
+>({
   control,
   defaultValue,
   name,
   render,
+  required,
   rules: withCustomRules,
   shouldUnregister,
   ...fieldGroupProps
-}: IressFormFieldsetProps<TFieldValues>) => {
+}: IressFormFieldsetProps<TFieldValues, FieldPath<TFieldValues>, TOutput>) => {
   const form = useContext(FormContext);
 
   if (!form) {
@@ -93,7 +101,11 @@ export const IressFormFieldset = <TFieldValues extends FieldValues>({
     ? transformCustomRulesToValidateRule(withCustomRules)
     : undefined;
 
-  const { field, fieldState } = useController<TFieldValues>({
+  const { field, fieldState } = useController<
+    TFieldValues,
+    FieldPath<TFieldValues>,
+    TOutput
+  >({
     control,
     defaultValue,
     name,
@@ -122,7 +134,13 @@ export const IressFormFieldset = <TFieldValues extends FieldValues>({
   return (
     <IressFieldGroup
       errorMessages={errorMessage ? [{ message: errorMessage }] : undefined}
-      required={!!rules?.required}
+      required={
+        required ??
+        getSchemaRequired(form.schema, name) ??
+        (typeof rules?.required === 'object'
+          ? !!rules.required.value
+          : !!rules?.required)
+      }
       {...fieldGroupProps}
     >
       {render({ ...renderField, id: `${form?.id}__${name}` })}

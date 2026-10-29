@@ -1,7 +1,11 @@
 import { createContext } from 'react';
 import type { FieldValues } from 'react-hook-form';
+import type { FormSchema } from './HookForm/HookForm';
 
 export interface FormContextValue {
+  /** Schema metadata for required indicators. Never parsed to discover metadata. */
+  schema?: FormSchema;
+
   /**
    * The error messages for each field in the form.
    * The keys are the field names, and the values are the error messages.

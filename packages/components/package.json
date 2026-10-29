@@ -72,11 +72,13 @@
     "vite-bundle-visualizer": "^1.2.1",
     "vite-plugin-dts": "5.0.3",
     "vite-plugin-static-copy": "4.1.1",
-    "vitest": "4.1.11"
+    "vitest": "4.1.11",
+    "zod": "4.6.6"
   },
   "dependencies": {
     "@floating-ui/react": "0.27.19",
     "@fortawesome/fontawesome-common-types": "0.2.36",
+    "@hookform/resolvers": "6.0.2",
     "@tanstack/react-table": "8.21.3",
     "@tanstack/react-virtual": "3.13.12",
     "@types/mdx": "^2.0.13",
@@ -88,7 +90,8 @@
   "peerDependencies": {
     "react": "^17 || ^18 || ^19",
     "react-dom": "^17 || ^18 || ^19",
-    "react-hook-form": "^7"
+    "react-hook-form": "^7.55.0",
+    "zod": "^4.6.6"
   },
   "peerDependenciesMeta": {
     "react": {
@@ -98,6 +101,9 @@
       "optional": true
     },
     "react-hook-form": {
+      "optional": true
+    },
+    "zod": {
       "optional": true
     }
   },
