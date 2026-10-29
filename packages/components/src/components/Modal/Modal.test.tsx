@@ -857,6 +857,26 @@ describe('IressModal', () => {
         ).toBeInTheDocument();
       });
 
+      it('forwards data and ARIA attributes to action buttons', async () => {
+        const screen = renderComponent({
+          show: true,
+          status: 'warning',
+          heading: 'Confirm',
+          actions: [
+            {
+              children: 'Yes, continue',
+              'data-analytics': 'confirm-button',
+              'aria-label': 'Confirm action',
+            },
+          ],
+        });
+
+        const button = await screen.findByRole('button', {
+          name: 'Confirm action',
+        });
+        expect(button).toHaveAttribute('data-analytics', 'confirm-button');
+      });
+
       it('does not render footer when actions is empty', async () => {
         const screen = renderComponent({
           defaultShow: true,

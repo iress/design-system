@@ -67,6 +67,33 @@ describe('IressAlert', () => {
   });
 
   describe('footer', () => {
+    it('forwards data and ARIA attributes to action buttons', () => {
+      const { getByRole } = render(
+        <IressAlert
+          status="warning"
+          actions={[
+            {
+              children: 'Continue',
+              'data-analytics': 'confirm-button',
+              'data-step': 2,
+              'data-confirm': true,
+              'aria-label': 'Confirm action',
+              'aria-describedby': 'confirmation-description',
+            },
+          ]}
+        />,
+      );
+
+      const button = getByRole('button', { name: 'Confirm action' });
+      expect(button).toHaveAttribute('data-analytics', 'confirm-button');
+      expect(button).toHaveAttribute('data-step', '2');
+      expect(button).toHaveAttribute('data-confirm', 'true');
+      expect(button).toHaveAttribute(
+        'aria-describedby',
+        'confirmation-description',
+      );
+    });
+
     describe('footer', () => {
       it('should not render footer when footer prop is undefined', () => {
         const screen = render(
