@@ -172,30 +172,27 @@ export const useDynamicFontSubsetting = ({
   const handleFontError = useCallback(
     (iconsToMerge: string[]) => {
       idsLogger(
-        `[useDynamicFontSubsetting] Failed to load font "${fontFamily}" for icons: ${iconsToMerge.join(', ')}. Icons will render as text after timeout.`,
+        `[useDynamicFontSubsetting] Failed to load font "${fontFamily}" for icons: ${iconsToMerge.join(', ')}. Icons will remain hidden until the font loads.`,
       );
-      setTimeout(() => {
-        mergeLoadedIcons(iconsToMerge);
-      }, 3000);
     },
-    [mergeLoadedIcons, fontFamily],
+    [fontFamily],
   );
 
   const checkFontReady = useCallback(
     (existing: Element | null, iconsToMerge: string[]) => {
       if ('fonts' in document) {
-        const fontPromise = document.fonts.check(`24px "${fontFamily}"`)
-          ? Promise.resolve()
-          : document.fonts.load(`24px "${fontFamily}"`);
-
-        fontPromise
-          .then(() => handleFontLoaded(existing, iconsToMerge))
+        // check() also returns true when no matching font faces exist.
+        document.fonts
+          .load(`24px "${fontFamily}"`)
+          .then((faces) => {
+            if (faces.length > 0) {
+              handleFontLoaded(existing, iconsToMerge);
+            }
+          })
           .catch(() => handleFontError(iconsToMerge));
-      } else {
-        setTimeout(() => mergeLoadedIcons(iconsToMerge), 1000);
       }
     },
-    [fontFamily, handleFontLoaded, handleFontError, mergeLoadedIcons],
+    [fontFamily, handleFontLoaded, handleFontError],
   );
 
   // Cleanup on unmount — removes ALL links owned by THIS instance, leaving other providers
