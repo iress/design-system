@@ -5,4 +5,8 @@ export * from './FormField/FormFieldset';
 export * from './FormValidationSummary/FormValidationSummary';
 
 export { IressHookForm } from './HookForm/HookForm';
-export type { IressHookFormProps, FormRef } from './HookForm/HookForm';
+export type {
+  IressHookFormProps,
+  FormRef,
+  FormSchema,
+} from './HookForm/HookForm';

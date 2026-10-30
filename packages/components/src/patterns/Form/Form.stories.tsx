@@ -1,4 +1,5 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
+import type { FieldValues } from 'react-hook-form';
 
 import { IressForm } from './Form';
 import { FormSubmission } from './mocks/FormSubmission';
@@ -11,6 +12,8 @@ import { DisableValidationForm } from './mocks/DisableValidationForm';
 import DisableValidationFormSource from './mocks/DisableValidationForm.tsx?raw';
 import { FormReset } from './mocks/FormReset';
 import FormResetSource from './mocks/FormReset.tsx?raw';
+import { SchemaForm } from './mocks/SchemaForm';
+import SchemaFormSource from './mocks/SchemaForm.tsx?raw';
 import { IressStack } from '@/components/Stack';
 import { IressText } from '@/components/Text';
 import { IressFormField, IressFormValidationSummary, IressInput } from '@/main';
@@ -26,7 +29,7 @@ import {
   withTransformedRawSource,
 } from '@iress-oss/ids-storybook-config';
 
-type Story = StoryObj<typeof IressForm>;
+type Story = StoryObj<typeof IressForm<FieldValues>>;
 
 export default {
   title: 'Patterns/Form',
@@ -69,6 +72,22 @@ export const Simple: Story = {
   args: {
     children: formArgTypes.children.mapping.simple,
     pattern: 'short',
+  },
+};
+
+export const SchemaValidation: Story = {
+  render: () => <SchemaForm />,
+  parameters: {
+    docs: {
+      source: {
+        code: SchemaFormSource,
+        language: 'tsx',
+      },
+      description: {
+        story:
+          'A Zod 4 schema provides validation and required indicators, including nested fields and a checkbox fieldset. Submit empty to see errors, then enter a valid profile: the submitted age is a number. Nickname is optional.',
+      },
+    },
   },
 };
 

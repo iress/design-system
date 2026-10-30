@@ -1,6 +1,5 @@
 import { type ReactNode, useContext, useEffect, useMemo } from 'react';
 import {
-  type Control,
   type ControllerFieldState,
   type ControllerRenderProps,
   type FieldPath,
@@ -22,20 +21,22 @@ import {
 import { IressField, type IressFieldProps } from '@/components/Field';
 import { useFieldRenderProps } from './hooks/useFieldRenderProps';
 import { type FormControlReadOnly } from '@/types';
+import { getSchemaRequired } from '../helpers/getSchemaRequired';
 
 export interface IressFormFieldProps<
   T extends FieldValues = FieldValues,
   TName extends FieldPath<T> = FieldPath<T>,
+  TOutput = T,
 >
   extends
-    Omit<IressFieldProps, 'children' | 'htmlFor' | 'required'>,
-    Omit<UseControllerProps<T, FieldPath<T>>, 'disabled'> {
+    Omit<IressFieldProps, 'children' | 'htmlFor'>,
+    Omit<UseControllerProps<T, FieldPath<T>, TOutput>, 'disabled'> {
   /**
    * React Hook Form control object. It is used to register the field with the form.
    * It is automatically provided when used inside an `IressForm`, but it can be overridden if you are using a custom form control.
    * @see https://react-hook-form.com/ts#Control
    */
-  control?: Control<T>;
+  control?: UseControllerProps<T, FieldPath<T>, TOutput>['control'];
 
   /**
    * A default value for the field. Although this is provided here as it is part of the React Hook Form API, it is recommended to set the default value in the form's `defaultValues` prop, to ensure the form is correctly initialised.
@@ -72,6 +73,12 @@ export interface IressFormFieldProps<
    * @see https://react-hook-form.com/api/useform/register)
    */
   rules?: CustomRules<T>;
+
+  /**
+   * Override the required indicator only (does not change validation).
+   * Otherwise inferred from the form schema, falling back to rules.required.
+   */
+  required?: boolean;
 
   /**
    * Input will be unregistered after unmount and defaultValues will be removed as well (it will not be stored in the form state).
@@ -129,18 +136,19 @@ export interface FormFieldRenderState<T extends FieldValues> {
  * A `IressField` wrapper that can show error message and label automatically inside an `IressForm`.
  * It uses the `useController` hook from `react-hook-form` for form management.
  */
-export const IressFormField = <T extends FieldValues>({
+export const IressFormField = <T extends FieldValues, TOutput = T>({
   control,
   defaultValue,
   name,
   render,
   renderSupplementary,
+  required,
   rules: withCustomRules,
   shouldUnregister,
   supplementary,
   readOnly,
   ...fieldProps
-}: IressFormFieldProps<T>) => {
+}: IressFormFieldProps<T, FieldPath<T>, TOutput>) => {
   const form = useContext(FormContext);
 
   if (!form) {
@@ -156,7 +164,11 @@ export const IressFormField = <T extends FieldValues>({
       : undefined;
   }, [readOnly, withCustomRules]);
 
-  const { field, formState, fieldState } = useController<T>({
+  const { field, formState, fieldState } = useController<
+    T,
+    FieldPath<T>,
+    TOutput
+  >({
     control,
     defaultValue,
     name,
@@ -205,7 +217,13 @@ export const IressFormField = <T extends FieldValues>({
       errorMessages={hasError ? [{ message: errorMessage }] : undefined}
       htmlFor={`${form.id}__${name}`}
       readOnly={readOnly}
-      required={!!rules?.required}
+      required={
+        required ??
+        getSchemaRequired(form.schema, name) ??
+        (typeof rules?.required === 'object'
+          ? !!rules.required.value
+          : !!rules?.required)
+      }
       supplementary={
         <>
           {renderSupplementary?.(controlProps, controlState)}

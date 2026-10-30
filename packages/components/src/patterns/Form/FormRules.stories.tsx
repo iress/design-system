@@ -82,7 +82,13 @@ export default {
 } as Meta<typeof IressForm>;
 
 const Default: Story = {
-  render: ({ element, field, rules, customRules, ...restProps }) => {
+  render: ({
+    element,
+    field,
+    rules,
+    customRules,
+    ...restProps
+  }: FormPropsAndCustomArgs) => {
     const selectedElement = SUPPORTED_FORM_FIELDS[element].formField;
 
     return (

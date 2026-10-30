@@ -81,17 +81,82 @@ See below an example comparing a version 4 and version 5 `IressForm` when managi
 
 ### Validation
 
-Validation is now done declaratively using the `rules` prop on the `IressFormField` component. This is based on the [rules available in React Hook Forms](https://www.react-hook-form.com/api/useform/register/#options). This change was made to allow for more complex validation rules to be implemented.
+Choose either a form-level `schema`, a custom `resolver`, or field-level
+`rules`. Without a schema/resolver, rules use the
+[React Hook Form validation options](https://www.react-hook-form.com/api/useform/register/#options).
+When using schema validation, define validation and error messages in the schema
+instead of duplicating them in field rules.
 
 Due to this change, there are a few things you should consider during development:
 
-- If you want validation messages to be shown on form controls, you need to use the `IressFormField` component to wrap around the form control and set the `rules` prop. This will allow the form to manage the validation state of the field.
+- Wrap controls in `IressFormField` or `IressFormFieldset` to display validation messages from the schema, resolver, or field rules.
 - Although you can still use props such as `maxLength` on `IressInput`, these no longer propagate to the form validation. You need to use the `rules` prop to set these validation rules as well, and rely on `maxLength` for the input to stop the user from entering more characters than allowed (a user experience improvement that we definitely recommend).
 - You can no longer override default error messages for the whole form. To override the default messages, you must specify them in the `rules` prop per `IressFormField`.
 
 See below an example comparing a version 4 and version 5 `IressForm` when adding validation rules.
 
 <ComponentExample of={ComponentStories.ValidationV4ToV5} />
+
+### Schema validation (Zod 4)
+
+Install Zod only when using schema validation:
+
+```bash
+yarn add zod@^4.6.6
+```
+
+Zod is optional: rule-based forms and custom resolvers do not require it,
+including when TypeScript's `skipLibCheck` is `false`. The public `FormSchema`
+type structurally describes Zod 4 classic schemas without importing Zod types;
+it is not an adapter for other schema libraries.
+
+Pass a Zod 4 classic schema directly to `IressForm schema={schema}` for short or
+long patterns. IDS creates the React Hook Form resolver internally, including
+asynchronous validation. `schema` and `resolver` are mutually exclusive in
+TypeScript and at runtime. Other schema libraries and Zod 3 are not supported by
+the `schema` prop; use a custom `resolver` for those. Zod Mini is not supported
+by the `schema` prop.
+
+<ComponentExample of={ComponentStories.SchemaValidation} />
+
+`defaultValues`, `values`, `reset`, and form methods use `z.input<typeof schema>`.
+`onSubmit` receives `z.output<typeof schema>`, including transforms and defaults.
+Schema defaults are applied during validation, not used to initialise controls;
+provide `defaultValues` to initialise the UI. A Zod default handles `undefined`,
+not an empty string.
+
+Normally both types are inferred. If specifying generic parameters explicitly,
+use `IressForm<Input, Context, Output>` and `FormRef<Input, Context, Output>`.
+For externally managed forms, `IressHookForm` also preserves the output of
+`useForm<Input, Context, Output>({ resolver })`.
+
+#### Required indicators
+
+Both `IressFormField` and `IressFormFieldset` derive required indicators from
+structural schema metadata, including nested object and numeric array paths
+(for example `contact.email` and `contacts.0.email`). Optional, nullable,
+defaulted, prefaulted, and catch-wrapped inputs are shown as optional, as are
+descendants of such containers. Read-only fields keep their existing behaviour
+and do not show required indicators.
+
+Read-only fields skip field-level rules and hide inline errors. Form-level
+schemas/resolvers still validate stored values, including read-only fields;
+provide valid values for them.
+
+Use `required={true}` or `required={false}` on the field/fieldset to override
+the indicator. This only changes presentation, **not validation**. In the
+absence of schema metadata, the indicator falls back to `rules.required`.
+
+Metadata inspection never runs validators, refinements, transforms, default
+factories, or async logic. Conditional requirements from `refine`/`superRefine`,
+unions, intersections, lazy/nonoptional schemas, and arbitrary preprocessing cannot be
+inferred reliably. Use an explicit `required` override for these cases. A plain
+`z.string()` is structurally required but still accepts `''`; add `.min(1)` when
+empty strings should fail validation.
+
+A schema hidden inside an external `useForm({ resolver })` closure cannot be
+inspected by IDS. That integration still validates and transforms normally;
+set the field/fieldset `required` indicator explicitly.
 
 ### Syncing state
 
@@ -570,10 +635,10 @@ Pass `updateErrorSummaryOnSubmit` to `IressForm` (or `IressHookForm`) to prevent
 </IressForm>
 ```
 
-| Approach | When to use |
-|---|---|
+| Approach                                             | When to use                                                             |
+| ---------------------------------------------------- | ----------------------------------------------------------------------- |
 | `aria-live="polite"` on `IressFormValidationSummary` | Real-time feedback is still desirable but should not interrupt the user |
-| `updateErrorSummaryOnSubmit` on `IressForm` | Errors should only be announced once the user tries to submit |
+| `updateErrorSummaryOnSubmit` on `IressForm`          | Errors should only be announced once the user tries to submit           |
 
 ## Migration to version 5 and beyond
 
