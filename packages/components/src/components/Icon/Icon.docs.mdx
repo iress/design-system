@@ -48,6 +48,10 @@ For more simpler applications, or if you need to customise the icon provider ind
 
 > **Note:** If you are already using `IressProvider` or `IressShadow`, you do not need to add `IressIconProvider` separately — it is already included.
 
+With automatic loading, icons remain hidden while their font is loading or if
+the download fails. Their space is reserved so icon names do not appear as text
+or overlap nearby content.
+
 <ComponentExample
   of={ProviderStories.IconProvider}
   refresh
