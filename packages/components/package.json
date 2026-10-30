@@ -90,8 +90,7 @@
   "peerDependencies": {
     "react": "^17 || ^18 || ^19",
     "react-dom": "^17 || ^18 || ^19",
-    "react-hook-form": "^7.55.0",
-    "zod": "^4.6.6"
+    "react-hook-form": "^7.55.0"
   },
   "peerDependenciesMeta": {
     "react": {
@@ -101,9 +100,6 @@
       "optional": true
     },
     "react-hook-form": {
-      "optional": true
-    },
-    "zod": {
       "optional": true
     }
   },
