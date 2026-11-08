@@ -145,8 +145,10 @@ const PopoverContentContainer = ({
 }: PopoverContentProps) => {
   const nodeId = useFloatingNodeId();
   const { container: providerContainer } = usePopoverContainer();
+  const defaultContainer =
+    restProps.displayMode === 'inline' ? undefined : providerContainer;
   const resolvedContainer =
-    container !== undefined ? container : providerContainer;
+    container !== undefined ? container : defaultContainer;
 
   // Resolve the observer target element reactively so that lazily-mounted
   // ref containers trigger a re-render once they become available.
