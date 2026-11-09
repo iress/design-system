@@ -31,7 +31,9 @@ import {
   IressMenuText,
   IressForm,
   IressFormField,
+  IressProvider,
 } from '@/main';
+import { useState } from 'react';
 import {
   reactNodeArgType,
   stylingProps,
@@ -77,6 +79,35 @@ export default {
 export const SingleSelect: Story = {
   args: {
     options: MOCK_LABEL_VALUE_META,
+  },
+};
+
+export const AsyncProviderContainer: Story = {
+  args: {
+    container: undefined,
+    options: () => Promise.resolve(MOCK_LABEL_VALUE_META),
+    placeholder: 'Search for an option',
+    matchActivatorWidth: false,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Open the select and type a search query. Async results should stay below the search field inside the dropdown. Previously, the provider container moved the results after the app content.',
+      },
+    },
+  },
+  render: function Render(args) {
+    const [container, setContainer] = useState<HTMLDivElement | null>(null);
+
+    return (
+      <div ref={setContainer}>
+        <IressProvider popoverContainer={container}>
+          <IressSelect {...args} />
+          <IressText mt="spacing.10">End of app content</IressText>
+        </IressProvider>
+      </div>
+    );
   },
 };
 

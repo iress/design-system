@@ -12,7 +12,7 @@ describe('useDynamicFontSubsetting', () => {
     // Mock document.fonts API
     mockDocumentFonts = {
       check: vi.fn(() => false),
-      load: vi.fn(() => Promise.resolve()),
+      load: vi.fn(() => Promise.resolve([{ family: 'Test Font' }])),
     };
 
     Object.defineProperty(document, 'fonts', {
@@ -31,6 +31,7 @@ describe('useDynamicFontSubsetting', () => {
   });
 
   afterEach(() => {
+    vi.useRealTimers();
     vi.clearAllMocks();
     // Clean up link elements and nonce meta tags
     document.querySelectorAll('link[data-test-font]').forEach((el) => {
@@ -160,14 +161,12 @@ describe('useDynamicFontSubsetting', () => {
       linkElement?.dispatchEvent(new Event('load'));
 
       await waitFor(() => {
-        expect(mockDocumentFonts.check).toHaveBeenCalledWith(
-          '24px "Test Font"',
-        );
+        expect(mockDocumentFonts.load).toHaveBeenCalledWith('24px "Test Font"');
       });
     });
 
-    it('calls fonts.load when check returns false', async () => {
-      mockDocumentFonts.check.mockReturnValue(false);
+    it('calls fonts.load even when check returns true', async () => {
+      mockDocumentFonts.check.mockReturnValue(true);
       const icons = new Set(['icon1']);
 
       renderHook(() =>
@@ -563,65 +562,68 @@ describe('useDynamicFontSubsetting', () => {
   });
 
   describe('Error handling', () => {
-    it('handles link error events gracefully', async () => {
-      vi.useFakeTimers();
-      const icons = new Set(['icon1']);
+    it.each([false, true])(
+      'keeps icons hidden after a stylesheet error with noSubsetting=%s',
+      async (noSubsetting) => {
+        vi.useFakeTimers();
+        const icons = new Set(['icon1']);
 
-      const { result } = renderHook(() =>
-        useDynamicFontSubsetting({
-          icons,
-          buildUrl: (icons) => `https://fonts.test/${icons.join(',')}`,
-          dataAttribute: 'test-font',
-          fontFamily: 'Test Font',
-        }),
-      );
+        const { result } = renderHook(() =>
+          useDynamicFontSubsetting({
+            icons,
+            buildUrl: (icons) => `https://fonts.test/${icons.join(',')}`,
+            dataAttribute: 'test-font',
+            fontFamily: 'Test Font',
+            noSubsetting,
+          }),
+        );
 
-      const linkElement = document.querySelector('link[data-test-font]');
-      linkElement?.dispatchEvent(new Event('error'));
+        const linkElement = document.querySelector('link[data-test-font]');
+        linkElement?.dispatchEvent(new Event('error'));
 
-      await act(async () => {
-        await vi.advanceTimersByTimeAsync(3000);
-      });
+        await act(async () => {
+          await vi.advanceTimersByTimeAsync(3000);
+        });
 
-      // Should mark icons as loaded after timeout
-      expect(result.current.isIconLoaded('icon1')).toBe(true);
+        expect(result.current.isIconLoaded('icon1')).toBe(false);
 
-      vi.useRealTimers();
-    });
+        vi.useRealTimers();
+      },
+    );
 
-    it('handles Font Loading API errors gracefully', async () => {
-      vi.useFakeTimers();
-      mockDocumentFonts.load.mockRejectedValueOnce(
-        new Error('Font load error'),
-      );
-      const icons = new Set(['icon1']);
+    it.each([false, true])(
+      'keeps icons hidden after a font download error with noSubsetting=%s',
+      async (noSubsetting) => {
+        vi.useFakeTimers();
+        mockDocumentFonts.load.mockRejectedValueOnce(
+          new Error('Font load error'),
+        );
+        const icons = new Set(['icon1']);
 
-      const { result } = renderHook(() =>
-        useDynamicFontSubsetting({
-          icons,
-          buildUrl: (icons) => `https://fonts.test/${icons.join(',')}`,
-          dataAttribute: 'test-font',
-          fontFamily: 'Test Font',
-        }),
-      );
+        const { result } = renderHook(() =>
+          useDynamicFontSubsetting({
+            icons,
+            buildUrl: (icons) => `https://fonts.test/${icons.join(',')}`,
+            dataAttribute: 'test-font',
+            fontFamily: 'Test Font',
+            noSubsetting,
+          }),
+        );
 
-      const linkElement = document.querySelector('link[data-test-font]');
-      linkElement?.dispatchEvent(new Event('load'));
+        const linkElement = document.querySelector('link[data-test-font]');
+        linkElement?.dispatchEvent(new Event('load'));
 
-      await act(async () => {
-        await vi.advanceTimersByTimeAsync(3000);
-      });
+        await act(async () => {
+          await vi.advanceTimersByTimeAsync(3000);
+        });
 
-      // Should still mark icons as loaded
-      expect(result.current.isIconLoaded('icon1')).toBe(true);
+        expect(result.current.isIconLoaded('icon1')).toBe(false);
 
-      vi.useRealTimers();
-    });
+        vi.useRealTimers();
+      },
+    );
 
-    it('falls back to setTimeout when Font Loading API is not available', async () => {
-      // Save original fonts API
-      const originalFonts = document.fonts;
-
+    it('keeps icons hidden when Font Loading API is not available', async () => {
       // Remove fonts API
       delete (document as unknown as { fonts: never }).fonts;
 
@@ -646,16 +648,50 @@ describe('useDynamicFontSubsetting', () => {
         await vi.advanceTimersByTimeAsync(2000);
       });
 
-      // Icons should now be loaded
-      expect(result.current.isIconLoaded('icon1')).toBe(true);
+      expect(result.current.isIconLoaded('icon1')).toBe(false);
 
       vi.useRealTimers();
+    });
 
-      // Restore original fonts API
-      Object.defineProperty(document, 'fonts', {
-        value: originalFonts,
-        writable: true,
-        configurable: true,
+    it('does not treat a missing font face as loaded on rerender', async () => {
+      mockDocumentFonts.check.mockReturnValue(true);
+      mockDocumentFonts.load.mockResolvedValue([]);
+      const icons = new Set(['icon1']);
+
+      const { result, rerender } = renderHook(() =>
+        useDynamicFontSubsetting({
+          icons,
+          buildUrl: (icons) => `https://fonts.test/${icons.join(',')}`,
+          dataAttribute: 'test-font',
+          fontFamily: 'Test Font',
+        }),
+      );
+
+      await act(async () => rerender());
+
+      expect(result.current.isIconLoaded('icon1')).toBe(false);
+    });
+
+    it('reveals icons when a later font load succeeds after a stylesheet error', async () => {
+      const icons = new Set(['icon1']);
+
+      const { result } = renderHook(() =>
+        useDynamicFontSubsetting({
+          icons,
+          buildUrl: (icons) => `https://fonts.test/${icons.join(',')}`,
+          dataAttribute: 'test-font',
+          fontFamily: 'Test Font',
+        }),
+      );
+
+      const linkElement = document.querySelector('link[data-test-font]');
+      linkElement?.dispatchEvent(new Event('error'));
+      expect(result.current.isIconLoaded('icon1')).toBe(false);
+
+      linkElement?.dispatchEvent(new Event('load'));
+
+      await waitFor(() => {
+        expect(result.current.isIconLoaded('icon1')).toBe(true);
       });
     });
   });

@@ -21,6 +21,7 @@ import { IressFormField } from '@/patterns/Form/FormField/FormField';
 import { IressButton } from '@/components/Button';
 import { type FormRef } from '@/patterns/Form';
 import { useRef } from 'react';
+import { IressProvider } from '@/components/Provider';
 
 describe('IressSelect', () => {
   const classes = select();
@@ -620,6 +621,57 @@ describe('IressSelect', () => {
     });
 
     describe('options (async)', () => {
+      it.each([false, true])(
+        'keeps async results inside the dropdown with a provider container and multiSelect=%s',
+        async (multiSelect) => {
+          const portalRoot = render(
+            <div data-testid="portal-root" />,
+          ).getByTestId('portal-root');
+          const onChange = vi.fn();
+
+          render(
+            <IressProvider
+              popoverContainer={portalRoot}
+              noDefaultFont
+              noIconProvider
+            >
+              <IressSelect
+                data-testid="test-component"
+                placeholder="Select an item"
+                options={async () => MOCK_LABEL_VALUES}
+                debounceThreshold={0}
+                matchActivatorWidth={false}
+                multiSelect={multiSelect}
+                onChange={onChange}
+              />
+            </IressProvider>,
+          );
+
+          const activator = multiSelect
+            ? screen.getByRole('combobox')
+            : screen.getByRole('button', { name: 'Select an item' });
+          await userEvent.click(activator);
+          const search = await screen.findByRole('combobox', {
+            name: 'Search',
+          });
+          await userEvent.type(search, 'op');
+
+          const option = await screen.findByRole('option', {
+            name: 'Option 1',
+          });
+          const dropdown = screen.getByTestId('test-component__content');
+          expect(portalRoot).toContainElement(dropdown);
+          expect(dropdown).toContainElement(search);
+          expect(dropdown).toContainElement(option);
+
+          await userEvent.click(option);
+          expect(onChange).toHaveBeenCalled();
+          expect(
+            screen.getByTestId('test-component__hidden-input'),
+          ).toHaveValue('1');
+        },
+      );
+
       it('renders single select asynchronous options', async () => {
         render(
           <IressSelect
