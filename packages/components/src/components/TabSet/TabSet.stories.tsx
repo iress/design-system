@@ -22,6 +22,7 @@ import {
   reactNodeArgType,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
+import { useState } from 'react';
 
 type Story = StoryObj<typeof IressTabSet>;
 
@@ -166,6 +167,43 @@ export const DynamicBadge: Story = {
       description: {
         story:
           'Toggle the pill on the active tab to see the active indicator resize and reposition automatically. This demonstrates that `ResizeObserver` correctly tracks tab size changes at runtime.',
+      },
+    },
+  },
+};
+
+export const DynamicLabels: Story = {
+  name: 'Bug: Label changes on selection',
+  render: function DynamicLabels(args) {
+    const [selected, setSelected] = useState(0);
+    return (
+      <IressTabSet
+        {...args}
+        selected={selected}
+        onChange={({ index }) => setSelected(index)}
+      >
+        {['Overview', 'Summary', 'Details'].map((label, index) => (
+          <IressTab
+            key={label}
+            label={selected === index ? `${label} (AUD)` : label}
+          />
+        ))}
+      </IressTabSet>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+**Problem:** Selecting a tab expands its label, leaving the hover indicator
+at the previous size and producing a split-colour appearance.
+
+**Expected:** Both indicators follow the resized tab.
+
+**How to test:** Click Summary or Details and keep the pointer over the tab.
+The indicators should align with the full label, including the currency suffix.
+Repeat with each layout using the layout control.
+        `,
       },
     },
   },
