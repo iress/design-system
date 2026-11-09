@@ -3,6 +3,58 @@ import { IressPopover } from '../Popover';
 import { IressButton } from '../../Button';
 import { IressText } from '../../Text';
 import userEvent from '@testing-library/user-event';
+import { IressPopoverProvider } from '../PopoverProvider';
+
+describe('PopoverContent container inheritance', () => {
+  it.each(['inline', 'overlay'] as const)(
+    'uses the provider container only for overlays with displayMode=%s',
+    async (displayMode) => {
+      const portalRoot = render(<div data-testid="portal-root" />).getByTestId(
+        'portal-root',
+      );
+      render(
+        <IressPopoverProvider container={portalRoot}>
+          <IressPopover
+            activator={<IressButton>Open</IressButton>}
+            data-testid="popover"
+            displayMode={displayMode}
+            defaultShow
+          >
+            Content
+          </IressPopover>
+        </IressPopoverProvider>,
+      );
+
+      const content = await screen.findByTestId('popover__content');
+      const expectedContainer =
+        displayMode === 'inline' ? screen.getByTestId('popover') : portalRoot;
+      expect(expectedContainer).toContainElement(content);
+    },
+  );
+
+  it('preserves an explicit container for inline popovers', async () => {
+    const portalRoot = render(<div data-testid="portal-root" />).getByTestId(
+      'portal-root',
+    );
+    render(
+      <IressPopoverProvider container={document.body}>
+        <IressPopover
+          activator={<IressButton>Open</IressButton>}
+          container={portalRoot}
+          data-testid="popover"
+          displayMode="inline"
+          defaultShow
+        >
+          Content
+        </IressPopover>
+      </IressPopoverProvider>,
+    );
+
+    expect(portalRoot).toContainElement(
+      await screen.findByTestId('popover__content'),
+    );
+  });
+});
 
 describe('PopoverContent Accessibility', () => {
   beforeEach(() => {
