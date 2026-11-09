@@ -36,6 +36,38 @@ export const Default: Story = {
   },
 };
 
+export const BugReproduction: Story = {
+  name: 'Bug: Unavailable icon font',
+  args: {
+    name: 'calendar_month',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+**Problem:** A failed icon font download used to reveal the icon name as text.
+
+**Expected:** The icon stays hidden with its space reserved.
+
+**How to test:**
+1. Block fonts.googleapis.com and fonts.gstatic.com in browser developer tools.
+2. Disable the browser cache and reload this story.
+3. Wait at least three seconds. No icon name should appear beside "Calendar".
+4. Unblock the requests and reload to see the icon.
+        `,
+      },
+    },
+  },
+  render: (args) => (
+    <IressIconProvider>
+      <IressInline gap="sm">
+        <IressIcon {...args} />
+        Calendar
+      </IressInline>
+    </IressIconProvider>
+  ),
+};
+
 export const Reference: Story = {
   parameters: {
     docs: {
