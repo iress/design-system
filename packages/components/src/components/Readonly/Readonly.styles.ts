@@ -207,6 +207,7 @@ export const readonly = sva({
           cursor: 'not-allowed',
         },
         formControl: {
+          minHeight: 'input.innerHeight',
           backgroundColor: 'transparent',
           color: 'colour.neutral.70',
           cursor: 'not-allowed',
