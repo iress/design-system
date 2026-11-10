@@ -160,6 +160,13 @@ describe('IressReadonly', () => {
     });
 
     describe('variant', () => {
+      it('uses the inner input height for the locked wrapper and control', () => {
+        const styles = readonly.raw({ locked: true });
+
+        expect(styles.wrapper?.minHeight).toBe('input.innerHeight');
+        expect(styles.formControl?.minHeight).toBe('input.innerHeight');
+      });
+
       it('applies locked styles when variant is "locked"', () => {
         renderReadonly({
           variant: 'locked',
