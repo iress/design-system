@@ -34,7 +34,11 @@ export const BugReproduction: StoryObj<typeof IressExpander> = {
   name: 'Bug: Inline activator alignment',
   args: {
     activator: (
-      <IressInline horizontalAlign="between" verticalAlign="middle">
+      <IressInline
+        horizontalAlign="between"
+        verticalAlign="middle"
+        pr="spacing.3"
+      >
         <IressCheckbox>Income</IressCheckbox>
         <IressText color="colour.neutral.70">3 selected</IressText>
       </IressInline>
