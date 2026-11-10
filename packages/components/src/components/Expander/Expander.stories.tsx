@@ -37,6 +37,7 @@ export const BugReproduction: StoryObj<typeof IressExpander> = {
       <IressInline
         horizontalAlign="between"
         verticalAlign="middle"
+        alignSelf="center"
         pr="spacing.3"
       >
         <IressCheckbox>Income</IressCheckbox>
