@@ -2,6 +2,8 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressSelect } from './Select';
 import { SelectAsync } from './mocks/SelectAsync';
 import SelectAsyncSource from './mocks/SelectAsync.tsx?raw';
+import { SelectAsyncProviderContainer } from './mocks/SelectAsyncProviderContainer';
+import SelectAsyncProviderContainerSource from './mocks/SelectAsyncProviderContainer.tsx?raw';
 import { SelectAsyncErrorText } from './mocks/SelectAsyncErrorText';
 import SelectAsyncErrorTextSource from './mocks/SelectAsyncErrorText.tsx?raw';
 import { SelectRequiredValidation } from './mocks/SelectRequiredValidation';
@@ -84,6 +86,22 @@ export const SingleSelect: Story = {
       { label: 'Option 4', value: '4' },
       { label: 'Option 5', value: '5' },
     ],
+  },
+};
+
+export const AsyncProviderContainer: Story = {
+  name: 'QA: Async provider container (#1076)',
+  tags: ['!autodocs'],
+  render: (args) => <SelectAsyncProviderContainer {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(SelectAsyncProviderContainerSource, { stripImports: true }),
+    docs: {
+      description: {
+        story:
+          '[#1076](https://github.com/iress/design-system/issues/1076) — hidden QA story for manual verification. Open the select and type a search query. Async results should stay below the search field inside the dropdown, not move after the app content when a provider container is set.',
+      },
+    },
   },
 };
 

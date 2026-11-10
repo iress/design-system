@@ -16,6 +16,8 @@ import { TabsWithDynamicBadge } from './mocks/TabsWithDynamicBadge';
 import TabsWithDynamicBadgeSource from './mocks/TabsWithDynamicBadge.tsx?raw';
 import { TabSetLayout } from './mocks/TabSetLayout';
 import TabSetLayoutSource from './mocks/TabSetLayout.tsx?raw';
+import { TabSetDynamicLabels } from './mocks/TabSetDynamicLabels';
+import TabSetDynamicLabelsSource from './mocks/TabSetDynamicLabels.tsx?raw';
 import {
   componentStoryMeta,
   disableArgTypes,
@@ -173,6 +175,30 @@ export const Append: Story = {
         Employment information goes here
       </IressTab>,
     ],
+  },
+};
+
+export const DynamicLabels: Story = {
+  name: 'QA: Dynamic labels (#1078)',
+  tags: ['!autodocs'],
+  render: (args) => <TabSetDynamicLabels {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(TabSetDynamicLabelsSource, { stripImports: true }),
+    docs: {
+      description: {
+        story: `
+[#1078](https://github.com/iress/design-system/issues/1078) — hidden QA story for manual verification.
+
+**Expected behaviour:** When a tab's label changes on selection (e.g. a currency
+suffix is appended), both the selection and hover indicators follow the resized
+tab — no split-colour appearance.
+
+**How to test:** Click Summary or Details and keep the pointer over the tab. The
+indicators should align with the full label, including the currency suffix.
+        `,
+      },
+    },
   },
 };
 

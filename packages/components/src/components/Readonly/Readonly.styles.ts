@@ -201,12 +201,14 @@ export const readonly = sva({
     locked: {
       true: {
         wrapper: {
+          minHeight: 'input.innerHeight',
           border: 'input',
           borderRadius: 'radius.system.form',
           backgroundColor: 'colour.neutral.20',
           cursor: 'not-allowed',
         },
         formControl: {
+          minHeight: 'input.innerHeight',
           backgroundColor: 'transparent',
           color: 'colour.neutral.70',
           cursor: 'not-allowed',

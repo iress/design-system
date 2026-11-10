@@ -18,6 +18,7 @@ export interface IressAlertButtonProps extends Omit<
   IressButtonProps,
   'mode' | 'status'
 > {
+  [attribute: `data-${string}`]: unknown;
   mode?: 'secondary' | 'tertiary';
 }
 

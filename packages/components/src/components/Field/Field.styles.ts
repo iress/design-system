@@ -135,6 +135,7 @@ export const field = sva({
         },
         footer: {
           position: 'static',
+          mt: 'none',
         },
       },
       false: {

@@ -87,9 +87,9 @@ const HoverIndicator = (props: IressUnstyledProps) => {
 
   useLayoutEffect(() => {
     const hoverTab = tabSet?.hover;
-    if (hoverTab && ref.current) {
-      const tabList = ref.current.parentElement;
-      if (tabList) {
+    const tabList = ref.current?.parentElement;
+    const updateStyle = () => {
+      if (hoverTab && tabList) {
         const tabListRect = tabList.getBoundingClientRect();
         const tabRect = hoverTab.getBoundingClientRect();
         const left = tabRect.left - tabListRect.left + tabList.scrollLeft;
@@ -100,11 +100,27 @@ const HoverIndicator = (props: IressUnstyledProps) => {
         };
         setStyle(newStyle);
         previousStyle.current = newStyle;
+      } else {
+        setStyle({ ...previousStyle.current, opacity: 0 });
       }
-    } else {
-      setStyle({ ...previousStyle.current, opacity: 0 });
+    };
+
+    updateStyle();
+
+    let resizeObserver: ResizeObserver | undefined;
+    if (hoverTab && tabList && typeof ResizeObserver !== 'undefined') {
+      resizeObserver = new ResizeObserver(updateStyle);
+      const observer = resizeObserver;
+      observer.observe(tabList);
+      tabList
+        .querySelectorAll('[role="tab"]')
+        .forEach((tab) => observer.observe(tab));
     }
-  }, [tabSet?.hover]);
+
+    return () => {
+      resizeObserver?.disconnect();
+    };
+  }, [tabSet?.hover, tabSet?.layoutVersion]);
 
   return <div {...props} ref={ref} style={style} />;
 };

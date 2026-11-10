@@ -47,6 +47,39 @@ export const Default: Story = {
   },
 };
 
+export const UnavailableIconFont: Story = {
+  name: 'QA: Unavailable icon font (#1072)',
+  tags: ['!autodocs'],
+  args: {
+    name: 'calendar_month',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+[#1072](https://github.com/iress/design-system/issues/1072) — hidden QA story for manual verification.
+
+**Expected behaviour:** When the icon font fails to download, the icon stays hidden with its space reserved — the icon name is never revealed as text.
+
+**How to test:**
+1. Block fonts.googleapis.com and fonts.gstatic.com in browser developer tools.
+2. Disable the browser cache and reload this story.
+3. Wait at least three seconds. No icon name should appear beside "Calendar".
+4. Unblock the requests and reload to see the icon.
+        `,
+      },
+    },
+  },
+  render: (args) => (
+    <IressIconProvider>
+      <IressInline gap="sm">
+        <IressIcon {...args} />
+        Calendar
+      </IressInline>
+    </IressIconProvider>
+  ),
+};
+
 export const Icons: Story = {
   parameters: {
     docs: {

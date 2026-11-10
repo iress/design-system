@@ -697,5 +697,124 @@ describe('IressTabs', () => {
 
       vi.unstubAllGlobals();
     });
+
+    describe('hover indicator resizing', () => {
+      const resizeCallbacks = new Set<(target?: Element) => void>();
+
+      beforeEach(() => {
+        vi.stubGlobal(
+          'ResizeObserver',
+          class MockResizeObserver {
+            targets = new Set<Element>();
+            observe = (target: Element) => this.targets.add(target);
+            unobserve = (target: Element) => this.targets.delete(target);
+            disconnect = () => resizeCallbacks.delete(this.notify);
+            notify: (target?: Element) => void;
+
+            constructor(callback: ResizeObserverCallback) {
+              this.notify = (target) => {
+                if (!target || this.targets.has(target)) {
+                  callback([], this);
+                }
+              };
+              resizeCallbacks.add(this.notify);
+            }
+          },
+        );
+      });
+
+      afterEach(() => {
+        resizeCallbacks.clear();
+        vi.unstubAllGlobals();
+      });
+
+      it('keeps both indicators aligned when selection expands the hovered label', async () => {
+        const DynamicLabels = () => {
+          const [selected, setSelected] = useState(0);
+          return (
+            <IressTabSet
+              selected={selected}
+              onChange={({ index }) => setSelected(index)}
+            >
+              <IressTab
+                label={selected === 0 ? 'Overview (AUD)' : 'Overview'}
+              />
+              <IressTab label={selected === 1 ? 'Summary (AUD)' : 'Summary'} />
+            </IressTabSet>
+          );
+        };
+        const screen = render(<DynamicLabels />);
+        const tablist = screen.getByRole('tablist');
+        const summary = screen.getByRole('tab', { name: 'Summary' });
+        const activeIndicator = tablist.children[0];
+        const hoverIndicator = tablist.children[1];
+
+        vi.spyOn(tablist, 'getBoundingClientRect').mockReturnValue(
+          new DOMRect(100, 0, 400, 40),
+        );
+        vi.spyOn(summary, 'getBoundingClientRect').mockImplementation(() =>
+          summary.textContent === 'Summary'
+            ? new DOMRect(240, 0, 80, 40)
+            : new DOMRect(180, 0, 160, 40),
+        );
+        tablist.scrollLeft = 25;
+
+        await userEvent.hover(summary);
+        expect(hoverIndicator).toHaveStyle({
+          left: '165px',
+          width: '80px',
+          opacity: '1',
+        });
+
+        await userEvent.click(summary);
+        expect(summary).toHaveTextContent('Summary (AUD)');
+        expect(summary).toHaveAttribute('aria-selected', 'true');
+        await act(async () => {
+          resizeCallbacks.forEach((notify) => notify());
+        });
+
+        for (const indicator of [activeIndicator, hoverIndicator]) {
+          expect(indicator).toHaveStyle({ left: '105px', width: '160px' });
+        }
+
+        await userEvent.unhover(summary);
+        expect(hoverIndicator).toHaveStyle({
+          left: '105px',
+          width: '160px',
+          opacity: '0',
+        });
+      });
+
+      it.each(['neighboring tab', 'container'])(
+        'repositions a stationary hover indicator after a %s resize',
+        async (resizedElement) => {
+          const screen = renderComponent({ layout: 'top-center' });
+          const tablist = screen.getByRole('tablist');
+          const hoveredTab = screen.getAllByRole('tab')[1];
+          const hoverIndicator = tablist.children[1];
+          const tabRect = vi
+            .spyOn(hoveredTab, 'getBoundingClientRect')
+            .mockReturnValue(new DOMRect(80, 0, 100, 40));
+
+          await userEvent.hover(hoveredTab);
+          expect(hoverIndicator).toHaveStyle({ left: '80px', width: '100px' });
+
+          tabRect.mockReturnValue(new DOMRect(120, 0, 100, 40));
+          await act(async () => {
+            resizeCallbacks.forEach((notify) =>
+              notify(
+                resizedElement === 'container'
+                  ? tablist
+                  : screen.getAllByRole('tab')[0],
+              ),
+            );
+          });
+          expect(hoverIndicator).toHaveStyle({ left: '120px', width: '100px' });
+
+          screen.unmount();
+          expect(resizeCallbacks.size).toBe(0);
+        },
+      );
+    });
   });
 });

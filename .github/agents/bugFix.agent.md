@@ -103,13 +103,17 @@ Fix bugs in both 5.x and main branches with precision, minimal changes, and comp
 
 #### Phase 4: Solution Strategy
 
-1. **Create Bug Reproduction Story**:
-   - Create story in the **main/root component's stories file** (e.g., `RichSelect.stories.tsx`)
+1. **Create a Hidden QA Story**:
+   - Create story in the **main/root component's stories file** (e.g., `Select.stories.tsx`)
    - NOT in subcomponent files
-   - Include problem summary in story description
-   - Document expected vs actual behavior
-   - Provide clear test steps
-   - Make the bug visually apparent
+   - **Tag it `['!autodocs']`** — hidden from the docs page, still reachable in the sidebar
+   - **Name it `QA: <behaviour> (#<issue>)`** (describe intended behaviour, include issue number)
+   - **Link the GitHub issue** as the first line of the story `docs.description`:
+     `[#<issue>](https://github.com/iress/design-system/issues/<issue>) — hidden QA story for manual verification.`
+   - Frame the description around **expected behaviour** + how to test
+   - **Stateful stories MUST use the P2 mock pattern** (`./mocks/<Name>.tsx` + `withSource`)
+   - See `.github/instructions/bugfixing.instructions.md` Section 1 and
+     `.github/instructions/story-patterns.instructions.md` for full rules
 
 2. **Assess Bug Complexity**:
    - **Skip formal documentation** for simple bugs:
@@ -279,36 +283,34 @@ Fix bugs in both 5.x and main branches with precision, minimal changes, and comp
    };
    ```
 
-#### Phase 7: Cleanup After Verification
+#### Phase 7: After Verification — Keep the Hidden QA Story
 
-**After the user/orchestrator has verified the fix is working:**
+**QA stories are kept permanently. Do NOT delete the reproduction story after verification.**
 
-1. **Ask for confirmation**:
-   - "The fix has been implemented and tested. Should I remove the bug reproduction story now that the issue is resolved?"
-   - Wait for user confirmation before proceeding
+1. **Confirm the QA story convention**:
+   - Tagged `['!autodocs']`, named `QA: <behaviour> (#<issue>)`, issue-linked in its description
+   - Stateful stories use the P2 mock pattern
 
-2. **Remove the reproduction story**:
-   - Delete the `BugReproduction` story export from the main component's stories file
-   - Remove any associated mock data specific to the bug reproduction
-   - Keep any useful test cases in the actual test files
+2. **Keep both artifacts**:
+   - The **regression test** is the primary, automated guard (runs in CI)
+   - The **hidden QA story** is the human-in-the-loop aid for manual/visual checks
 
-3. **Communicate removal**:
-   - "I've removed the bug reproduction story from [story file location]"
-   - "The fix and tests remain in place to prevent regression"
+3. **Communicate**:
+   - "The fix, regression test, and hidden QA story (`!autodocs`, linked to #<issue>) are all in place."
 
-**Why Remove Reproduction Stories:**
+**Why keep hidden QA stories:**
 
-- Reproduction stories serve a temporary purpose during bug investigation and fixing
-- Once the bug is fixed and verified, they clutter the Storybook UI
-- The actual regression tests in test files provide permanent protection
-- Keeping only production-ready stories in Storybook maintains clarity for users
+- Durable, human-checkable verification for autonomous (Copilot) changes
+- `!autodocs` keeps them in the sidebar without polluting consumer docs
+- Issue link gives traceability consistent with IDS maintenance
 
 **What to Keep:**
 
-- ✅ Regression tests in test files (these stay permanently)
+- ✅ Regression tests in test files (primary guard, runs in CI)
+- ✅ Hidden QA story (`!autodocs`, `QA: <behaviour> (#issue)`, issue-linked)
 - ✅ Production stories demonstrating proper usage
-- ✅ Documentation of the fix in PR/issue comments
-- ❌ Temporary bug reproduction stories (remove after verification)
+- ❌ Do NOT add a visible, consumer-facing "bug" story or a "Bugs" tab
+- ❌ Do NOT leave a QA story untagged
 
 ## GitHub Issue Integration
 
