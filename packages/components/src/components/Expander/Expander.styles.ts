@@ -56,6 +56,9 @@ export const expander = sva({
           borderRadius: 'radius.system.layout',
           transition: '[all 0.3s linear]',
           focusable: 'expander-activator',
+          '& > .ids-inline': {
+            flex: '1',
+          },
 
           _hover: {
             bg: 'colour.neutral.20',

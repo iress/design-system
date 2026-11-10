@@ -1,6 +1,8 @@
 import { IressExpander } from '.';
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressText } from '../Text';
+import { IressCheckbox } from '../Checkbox';
+import { IressInline } from '../Inline';
 import { MultipleExpander } from './mocks/MultipleExpander';
 import MultipleExpanderSource from './mocks/MultipleExpander.tsx?raw';
 import { IressStack } from '../Stack';
@@ -25,6 +27,32 @@ export const Default: StoryObj<typeof IressExpander> = {
   args: {
     activator: 'Expander activator',
     children: 'Expander content will go here',
+  },
+};
+
+export const BugReproduction: StoryObj<typeof IressExpander> = {
+  name: 'Bug: Inline activator alignment',
+  args: {
+    activator: (
+      <IressInline horizontalAlign="between" verticalAlign="middle">
+        <IressCheckbox>Income</IressCheckbox>
+        <IressText color="colour.neutral.70">3 selected</IressText>
+      </IressInline>
+    ),
+    children: 'Expander content will go here',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+**Problem Summary:** Inline content with \`horizontalAlign="between"\` inside the Expander activator does not use the available width.
+
+**Expected Behavior:** The checkbox is aligned to the left and the selected count to the right.
+
+**How to Test:** View the activator and confirm the two items are spaced across its width.
+        `,
+      },
+    },
   },
 };
 
