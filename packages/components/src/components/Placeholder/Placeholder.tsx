@@ -33,6 +33,16 @@ export interface IressPlaceholderProps extends Omit<IressStyledProps, 'width'> {
   width?: string | number;
 }
 
+/**
+ * Renders a visual placeholder to represent future or missing content.
+ *
+ * @example
+ * ```tsx
+ * import { IressPlaceholder } from '@iress-oss/ids-components';
+ *
+ * <IressPlaceholder heading="Coming soon" />
+ * ```
+ */
 export const IressPlaceholder = ({
   children,
   className,

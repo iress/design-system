@@ -2,7 +2,6 @@ import {
   IressButton,
   IressInline,
   IressToasterProvider,
-  type IressToasterProviderProps,
   useToaster,
 } from '@/main';
 import { useState } from 'react';
@@ -38,8 +37,10 @@ const ToastWithTrigger = () => {
   );
 };
 
-export const CloseToastViaProvider = (args: IressToasterProviderProps) => (
-  <IressToasterProvider {...args}>
-    <ToastWithTrigger />
-  </IressToasterProvider>
-);
+export function CloseToastViaProvider() {
+  return (
+    <IressToasterProvider container={document.body}>
+      <ToastWithTrigger />
+    </IressToasterProvider>
+  );
+}

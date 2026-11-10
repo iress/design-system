@@ -2,14 +2,28 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressExpanderChevron } from './ExpanderChevron';
 import { IressStack } from '../Stack';
 import { IressText } from '../Text';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
+import { stylingProps } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressExpanderChevron>;
 
+const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The root element of the expander chevron',
+    testId: 'expander-chevron',
+  },
+];
+
 export default {
-  title: 'Components/ExpanderChevron',
+  title: 'Components/Expander/ExpanderChevron',
   component: IressExpanderChevron,
   tags: ['updated'],
+  argTypes: {
+    ...stylingProps,
+  },
   parameters: {
+    idsConfig: { testMeta },
     docs: {
       description: {
         component: `
@@ -29,13 +43,6 @@ This is used internally by the \`IressExpander\` and \`IressTableBody\` componen
 
 export const Default: Story = {
   args: {},
-  render: (args) => (
-    <IressStack gap="md">
-      <IressText>
-        <IressExpanderChevron {...args} /> Closed (default)
-      </IressText>
-    </IressStack>
-  ),
 };
 
 export const States: Story = {
@@ -46,13 +53,13 @@ export const States: Story = {
       },
     },
   },
-  render: () => (
+  render: (args) => (
     <IressStack gap="md">
       <IressText>
-        <IressExpanderChevron open={false} /> Closed
+        <IressExpanderChevron {...args} open={false} /> Closed
       </IressText>
       <IressText>
-        <IressExpanderChevron open={true} /> Open
+        <IressExpanderChevron {...args} open={true} /> Open
       </IressText>
     </IressStack>
   ),

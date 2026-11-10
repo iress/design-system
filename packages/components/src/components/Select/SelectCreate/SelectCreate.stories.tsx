@@ -1,5 +1,6 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressSelectCreate, type IressSelectCreateProps } from './SelectCreate';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 import {
   addToStorybookCategory,
   reactNodeArgType,
@@ -7,6 +8,15 @@ import {
 } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressSelectCreate>;
+
+const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The root element of the select create',
+    query: <code>getByRole('menu')</code>,
+    testId: 'select-create',
+  },
+];
 
 export default {
   title: 'Components/Select/Subcomponents/Create',
@@ -24,6 +34,9 @@ export default {
       'layout',
       'noWrap',
     ]),
+  },
+  parameters: {
+    idsConfig: { testMeta },
   },
 } as Meta<typeof IressSelectCreate>;
 

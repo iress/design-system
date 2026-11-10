@@ -105,6 +105,9 @@ export interface IressAvatarProps extends IressStyledProps<'span'> {
     | false;
 }
 
+/**
+ * Displays a person's initials or image with optional badge, type, and tooltip.
+ */
 export const IressAvatar = ({
   children,
   badge = false,

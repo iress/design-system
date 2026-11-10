@@ -8,7 +8,7 @@ description: >
   or when the user says "review this page", "check a11y", or "is this
   accessible?"
 license: Apache-2.0
-compatibility: React 18+, TypeScript, @iress-oss/ids-components@beta
+compatibility: React 18+, TypeScript, @iress-oss/ids-components
 metadata:
   author: iress
   version: "1.0"
@@ -191,9 +191,9 @@ Scan for raw HTML, third-party components, and custom implementations that have 
 
 - **IressProvider must wrap the application root** — Required for fonts, CSS variables, and theming. `IressProvider` already includes `IressModalProvider`, `IressSlideoutProvider`, `IressToasterProvider`, `IressPopoverProvider`, and `IressIconProvider` — these should not be added separately. Similarly, `IressShadow` includes `IressProvider` internally, so no additional providers are needed when using `IressShadow`.
 - **The IDS component CSS must be imported** — `@iress-oss/ids-components/dist/style.css` contains all component styles
-- Users only need to install `@iress-oss/ids-components@beta` — the tokens are bundled within the component library and do not need to be installed separately. **IDS v6 is currently in beta**, so the `@beta` tag is required (e.g. `npm install @iress-oss/ids-components@beta`)
+- Users only need to install `@iress-oss/ids-components` — the tokens are bundled within the component library and do not need to be installed separately.
 - **CSP must allowlist IDS external origins** — If the app enforces a Content Security Policy, `fonts.googleapis.com` and `fonts.gstatic.com` must be in `style-src`/`font-src`. Add `cdn.iress.com` if using legacy Font Awesome icons or `IressTheme`. If using `IressShadow` and inline styles are blocked, add `<meta name="csp-nonce" content="...">` in `<head>`. See the CSP Guide at `node_modules/@iress-oss/ids-components/.ai/guides/get-started-content-security-policy.md` for details (requires `@iress-oss/ids-components` to be installed).
-- If using design tokens directly in application code (for custom styling), users should additionally install `@iress-oss/ids-tokens@beta` and import `@iress-oss/ids-tokens/build/css-vars.css`
+- If using design tokens directly in application code (for custom styling), users should additionally install `@iress-oss/ids-tokens` and import `@iress-oss/ids-tokens/build/css-vars.css`
 
 ```typescript
 // ✅ Minimum required setup (option A — standard)
@@ -239,10 +239,7 @@ import { IressProvider } from '@iress-oss/ids-components';
 // Components will render without styles!
 
 // ❌ Incorrect — installing tokens separately just for provider setup
-yarn add @iress-oss/ids-tokens@beta  // Not needed unless using tokens directly
-
-// ❌ Incorrect — installing without @beta tag (will not resolve to v6)
-yarn add @iress-oss/ids-components  // Must use @beta tag
+yarn add @iress-oss/ids-tokens  // Not needed unless using tokens directly
 ```
 
 #### b. Design Token Usage
@@ -359,16 +356,24 @@ Top Issues:
 
 ## Reference
 
-> **Note:** Component docs, pattern docs, and the manifest are within the package itself.
+> **Note:** Component docs, pattern docs, and the manifest are within the installed package itself.
 
-- **Component docs:** `node_modules/@iress-oss/ids-components/.ai/components/`
+**Discovery:**
+- **Start here:** `node_modules/@iress-oss/ids-components/llms.txt` — lists all available docs
+- **Component docs:** `node_modules/@iress-oss/ids-components/.ai/components/<name>.md`
 - **Pattern docs:** `node_modules/@iress-oss/ids-components/.ai/patterns/`
 - **Index (full component list):** `node_modules/@iress-oss/ids-components/.ai/index.json`
-- **Token usage skill:** `.agents/skills/token-usage/SKILL.md`
-- **Figma mapping skill:** `.agents/skills/figma-to-ids/SKILL.md`
-- **UI translation skill:** `.agents/skills/ui-translation/SKILL.md`
-- **Storybook and Guidelines:** https://main--691abcc79dfa560a36d0a74f.chromatic.com
-- **Common mistakes guide:** `node_modules/@iress-oss/ids-components/.ai/guides/foundations-common-mistakes.md` (requires `@iress-oss/ids-components` to be installed)
+- **Token docs:** `node_modules/@iress-oss/ids-tokens/llms.txt`
+
+**Verification:**
+- **Type definitions:** `node_modules/@iress-oss/ids-components/dist/components/<Name>/<Name>.d.ts`
+- **Never assume props exist** — always verify against the `.d.ts` before flagging missing usage
+
+**Related skills:**
+- **Token usage:** `.agents/skills/token-usage/SKILL.md`
+- **Figma mapping:** `.agents/skills/figma-to-ids/SKILL.md`
+- **UI translation:** `.agents/skills/ui-translation/SKILL.md`
+- **Common mistakes guide:** `node_modules/@iress-oss/ids-components/.ai/foundations/common-mistakes.md`
 
 ## Common Mistakes to Flag in Audits
 

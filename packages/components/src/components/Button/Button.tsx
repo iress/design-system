@@ -313,6 +313,16 @@ const Button = <
   );
 };
 
+/**
+ * A clickable element used to perform an action.
+ *
+ * @example
+ * ```tsx
+ * import { IressButton } from '@iress-oss/ids-components';
+ *
+ * <IressButton mode="primary">Submit</IressButton>
+ * ```
+ */
 export const IressButton = forwardRef(Button) as (<
   C extends ElementType | undefined = undefined,
   THref extends string | undefined = undefined,

@@ -1,36 +1,39 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import {
-  type IressSlideoutProps,
-  IressSlideoutProvider,
-  type IressSlideoutProviderProps,
-} from '.';
-import { App as AppWithSlideoutProvider } from './mocks/AppWithSlideoutProvider';
+import { IressSlideoutProvider, type IressSlideoutProviderProps } from '.';
+import { AppWithSlideoutProvider } from './mocks/AppWithSlideoutProvider';
 import AppWithSlideoutProviderSource from './mocks/AppWithSlideoutProvider.tsx?raw';
 import {
   disableArgTypes,
-  STORYBOOK_ONLY_CATEGORY,
-  withCustomSource,
+  stylingProps,
+  withSource,
 } from '@iress-oss/ids-storybook-config';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 
-type CustomArgs = Partial<IressSlideoutProviderProps> & {
-  slideout: Partial<IressSlideoutProps>;
-};
-type Story = StoryObj<CustomArgs>;
+type Story = StoryObj<IressSlideoutProviderProps>;
+
+const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The root element of the slideout provider',
+    testId: 'slideout-provider',
+  },
+];
 
 export default {
   title: 'Components/Slideout/Provider',
   component: IressSlideoutProvider,
   argTypes: {
     ...disableArgTypes(['children', 'container']),
-    slideout: {
-      control: 'object',
-      description: 'Settings for slideout to be opened by provider',
-      table: {
-        category: STORYBOOK_ONLY_CATEGORY,
-      },
-    },
+    ...stylingProps,
   },
   parameters: {
+    idsConfig: { testMeta },
+    docs: {
+      description: {
+        component:
+          'Provides a context-based API for managing slideouts declaratively via the useSlideout hook.',
+      },
+    },
     actions: {
       disable: true,
     },
@@ -39,14 +42,9 @@ export default {
 } as Meta<typeof IressSlideoutProvider>;
 
 export const Provider: Story = {
-  args: {
-    slideout: {
-      children:
-        'This slideout was opened via IressSlideoutProvider and the useSlideout hook.',
-    },
-  },
-  render: (args) => <AppWithSlideoutProvider {...args.slideout} />,
+  render: (_args) => <AppWithSlideoutProvider />,
   parameters: {
-    ...withCustomSource(AppWithSlideoutProviderSource),
+    controls: { disable: true },
+    ...withSource(AppWithSlideoutProviderSource, { stripImports: true }),
   },
 };

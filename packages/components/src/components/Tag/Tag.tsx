@@ -96,6 +96,16 @@ type ElementProps<E extends ElementType = 'span'> = Omit<
 export type IressTagProps<E extends ElementType = 'span'> = ElementProps<E> &
   InternalTagProps<E>;
 
+/**
+ * Displays a compact label for categorisation, filtering, or metadata.
+ *
+ * @example
+ * ```tsx
+ * import { IressTag } from '@iress-oss/ids-components';
+ *
+ * <IressTag>Category</IressTag>
+ * ```
+ */
 export const IressTag = <E extends ElementType = 'span'>({
   bordered = false,
   children,

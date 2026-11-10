@@ -2,11 +2,11 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { TableWithFilters } from './mocks/TableWithFilters';
 import TableWithFiltersSource from './mocks/TableWithFilters.tsx?raw';
 import {
-  withCustomSource,
-  withTransformedRawSource,
+  componentStoryMeta,
+  withSource,
   reactNodeArgType,
-  stylingProps,
 } from '@iress-oss/ids-storybook-config';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 import {
   IressAlert,
   IressDropdownMenu,
@@ -22,78 +22,121 @@ import { ControlledDropdownMenuMultiselect } from './mocks/ControlledDropdownMen
 import ControlledDropdownMenuMultiselectSource from './mocks/ControlledDropdownMenuMultiselect.tsx?raw';
 import { ControlledDropdownMenuAsync } from './mocks/ControlledDropdownMenuAsync';
 import ControlledDropdownMenuAsyncSource from './mocks/ControlledDropdownMenuAsync.tsx?raw';
+import componentMeta from './meta';
 
 type Story = StoryObj<IressDropdownMenuProps<true>>;
 type SingleStory = StoryObj<IressDropdownMenuProps<false>>;
 
+const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The root dropdown menu element',
+    testId: 'dropdown-menu',
+  },
+  {
+    part: 'activator',
+    description: 'The activator button',
+    query: <code>getByRole('button')</code>,
+    testId: 'dropdown-menu__activator-button__button',
+  },
+  {
+    part: 'input',
+    description: 'The search input',
+    query: <code>getByRole('searchbox')</code>,
+    testId: 'dropdown-menu__input',
+  },
+  {
+    part: 'menu',
+    description: 'The menu listbox',
+    query: <code>getByRole('listbox')</code>,
+    testId: 'dropdown-menu__menu',
+  },
+  {
+    part: 'reset button',
+    description: 'The reset filter button',
+    query: (
+      <code>
+        getByRole('button', {'{'} name: 'Reset filter' {'}'})
+      </code>
+    ),
+    testId: 'dropdown-menu__reset-button',
+  },
+];
+
 export default {
   title: 'Patterns/DropdownMenu',
   component: IressDropdownMenu,
-  tags: ['updated'],
-  argTypes: {
-    footer: reactNodeArgType,
-    header: reactNodeArgType,
-    searchNoResultsText: reactNodeArgType,
-    ...stylingProps,
-  },
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      footer: reactNodeArgType,
+      header: reactNodeArgType,
+      searchNoResultsText: reactNodeArgType,
+    },
+    idsConfig: {
+      testMeta,
+    },
+  }),
 } as Meta<typeof IressDropdownMenu>;
 
 export const Default: SingleStory = {
   args: {
     label: 'Select an option',
+    options: [
+      { label: 'Option 1', value: 'option-1' },
+      { label: 'Option 2', value: 'option-2' },
+      { label: 'Option 3', value: 'option-3' },
+    ],
+    container: document.body,
   },
 };
 
 export const Controlled: SingleStory = {
   render: (args) => <ControlledDropdownMenu {...args} />,
   parameters: {
-    ...withCustomSource(ControlledDropdownMenuSource),
+    ...withSource(ControlledDropdownMenuSource, { stripImports: true }),
   },
 };
 
 export const SearchTable: SingleStory = {
   render: (args) => <TableWithFilters {...args} />,
   parameters: {
-    ...withTransformedRawSource(
-      TableWithFiltersSource,
-      'IressDropdownMenuProps',
-    ),
+    ...withSource(TableWithFiltersSource, {
+      stripImports: true,
+      replacePropsType: 'IressDropdownMenuProps',
+    }),
   },
 };
 
 export const MultiSelect: Story = {
   render: (args) => <ControlledDropdownMenuMultiselect {...args} />,
   parameters: {
-    ...withCustomSource(ControlledDropdownMenuMultiselectSource),
-  },
-};
-
-export const Options: SingleStory = {
-  args: {
-    options: [
-      { label: 'Option 1', value: 'opt1' },
-      { label: 'Option 2', value: 'opt2' },
-      { label: 'Option 3', value: 'opt3' },
-    ],
-    label: 'Options',
+    ...withSource(ControlledDropdownMenuMultiselectSource, {
+      stripImports: true,
+    }),
   },
 };
 
 export const AsyncOptions: SingleStory = {
   render: (args) => <ControlledDropdownMenuAsync {...args} />,
   parameters: {
-    ...withCustomSource(ControlledDropdownMenuAsyncSource),
+    ...withSource(ControlledDropdownMenuAsyncSource, { stripImports: true }),
   },
 };
 
 export const InitialOptions: SingleStory = {
   args: {
-    ...Options.args,
     label: 'Select an option',
-    initialOptions: [...Array(3).keys()].map((number) => ({
-      label: `Favourite option ${number + 1}`,
-      value: `fav-${number + 1}`,
-    })),
+    options: [
+      { label: 'Option 1', value: 'option-1' },
+      { label: 'Option 2', value: 'option-2' },
+      { label: 'Option 3', value: 'option-3' },
+    ],
+    container: document.body,
+    initialOptions: [
+      { label: 'Favourite option 1', value: 'fav-1' },
+      { label: 'Favourite option 2', value: 'fav-2' },
+      { label: 'Favourite option 3', value: 'fav-3' },
+    ],
     searchable: true,
   },
 };
@@ -172,12 +215,19 @@ export const ComplexOptions: SingleStory = {
         ],
       },
     ],
+    container: document.body,
   },
 };
 
 export const InputProps: SingleStory = {
   args: {
-    ...Options.args,
+    label: 'Select an option',
+    options: [
+      { label: 'Option 1', value: 'option-1' },
+      { label: 'Option 2', value: 'option-2' },
+      { label: 'Option 3', value: 'option-3' },
+    ],
+    container: document.body,
     inputProps: {
       placeholder: 'Search some stuff...',
     },
@@ -187,21 +237,39 @@ export const InputProps: SingleStory = {
 
 export const Searchable: SingleStory = {
   args: {
-    ...Options.args,
+    label: 'Select an option',
+    options: [
+      { label: 'Option 1', value: 'option-1' },
+      { label: 'Option 2', value: 'option-2' },
+      { label: 'Option 3', value: 'option-3' },
+    ],
+    container: document.body,
     searchable: true,
   },
 };
 
 export const ResetFilters: SingleStory = {
   args: {
-    ...Options.args,
+    label: 'Select an option',
+    options: [
+      { label: 'Option 1', value: 'option-1' },
+      { label: 'Option 2', value: 'option-2' },
+      { label: 'Option 3', value: 'option-3' },
+    ],
+    container: document.body,
     visibleResetButton: true,
   },
 };
 
 export const NoResultsText: SingleStory = {
   args: {
-    ...Options.args,
+    label: 'Select an option',
+    options: [
+      { label: 'Option 1', value: 'option-1' },
+      { label: 'Option 2', value: 'option-2' },
+      { label: 'Option 3', value: 'option-3' },
+    ],
+    container: document.body,
     inputProps: {
       placeholder: 'Type "no" to see the no results text',
     },
@@ -216,7 +284,13 @@ export const NoResultsText: SingleStory = {
 
 export const PopoverProps: SingleStory = {
   args: {
-    ...Options.args,
+    label: 'Select an option',
+    options: [
+      { label: 'Option 1', value: 'option-1' },
+      { label: 'Option 2', value: 'option-2' },
+      { label: 'Option 3', value: 'option-3' },
+    ],
+    container: document.body,
     footer: (
       <>
         <IressMenuDivider />
@@ -228,7 +302,13 @@ export const PopoverProps: SingleStory = {
 
 export const SelectedOptionsText: Story = {
   args: {
-    ...(Options as Story).args,
+    label: 'Select an option',
+    options: [
+      { label: 'Option 1', value: 'option-1' },
+      { label: 'Option 2', value: 'option-2' },
+      { label: 'Option 3', value: 'option-3' },
+    ],
+    container: document.body,
     multiSelect: true,
     selectedOptionsText: ' - {{numOptions}}',
   },
@@ -236,8 +316,17 @@ export const SelectedOptionsText: Story = {
 
 export const StylingProps: SingleStory = {
   args: {
-    ...Options.args,
-    p: 'spacing.4',
+    ...Default.args,
+    activatorStyle: {
+      bg: 'colour.data.subtle.10',
+    },
   },
-  render: (args) => <IressDropdownMenu {...args} p="spacing.4" />,
+  render: (args) => (
+    <IressDropdownMenu
+      {...args}
+      p="spacing.2"
+      borderRadius="radius.system.button"
+      bg="colour.accent.surface"
+    />
+  ),
 };

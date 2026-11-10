@@ -1,6 +1,7 @@
 /**
- * These tests verify that the testing guidance in our Storybook docs is
- * accurate. If a test here fails, the corresponding .docs.mdx needs updating.
+ * These tests verify that the testing guidance in our testMeta arrays is
+ * accurate. If a test here fails, the corresponding meta/index.tsx or
+ * .stories.tsx testMeta needs updating.
  */
 import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -320,12 +321,13 @@ describe('Documented testid suffixes', () => {
     expect(screen.getByTestId('cb__checkboxMark')).toBeInTheDocument();
   });
 
-  it('Expander: activator, container', () => {
+  it('Expander: root, activator, container', () => {
     render(
       <IressExpander data-testid="ex" activator="Toggle">
         Content
       </IressExpander>,
     );
+    expect(screen.getByTestId('ex')).toBeInTheDocument();
     expect(screen.getByTestId('ex__activator')).toBeInTheDocument();
     expect(screen.getByTestId('ex__container')).toBeInTheDocument();
   });
@@ -436,6 +438,23 @@ describe('Documented testid suffixes', () => {
     expect(screen.getByTestId('sl__datalist')).toBeInTheDocument();
   });
 
+  it('Spinner: default is decorative, chatty has role="status"', () => {
+    const { unmount } = render(<IressSpinner data-testid="sp" />);
+    expect(screen.getByTestId('sp')).toBeInTheDocument();
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    unmount();
+
+    render(
+      <IressSpinner
+        data-testid="sp"
+        variant="chatty"
+        screenreaderText="Loading"
+      />,
+    );
+    expect(screen.getByTestId('sp')).toBeInTheDocument();
+    expect(screen.getByRole('status')).toBeInTheDocument();
+  });
+
   it('TabSet: panel', () => {
     render(
       <IressTabSet data-testid="ts">
@@ -451,12 +470,13 @@ describe('Documented testid suffixes', () => {
     expect(screen.getByTestId('tg__button__button')).toBeInTheDocument();
   });
 
-  it('Tooltip: activator, tooltip-text', async () => {
+  it('Tooltip: root wrapper, activator, tooltip-text', async () => {
     render(
       <IressTooltip data-testid="tt" tooltipText="Help">
         <button>Hover me</button>
       </IressTooltip>,
     );
+    expect(screen.getByTestId('tt')).toBeInTheDocument();
     expect(screen.getByTestId('tt__activator')).toBeInTheDocument();
 
     await userEvent.hover(screen.getByText('Hover me'));

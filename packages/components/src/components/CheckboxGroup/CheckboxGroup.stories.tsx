@@ -2,7 +2,10 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressCheckboxGroup } from '.';
 import { CheckboxGroupUsingState } from './mocks/CheckboxGroupUsingState';
 import CheckboxGroupUsingStateSource from './mocks/CheckboxGroupUsingState.tsx?raw';
-import { IressText } from '../Text';
+import { CheckboxGroupLayout } from './mocks/CheckboxGroupLayout';
+import CheckboxGroupLayoutSource from './mocks/CheckboxGroupLayout.tsx?raw';
+import { CheckboxGroupTable } from './mocks/CheckboxGroupTable';
+import CheckboxGroupTableSource from './mocks/CheckboxGroupTable.tsx?raw';
 import { IressField } from '../Field';
 import {
   getFinancialReviewCheckboxes,
@@ -10,27 +13,39 @@ import {
 } from './mocks/checkboxGroupChildren';
 import { IressCheckbox } from '../Checkbox/Checkbox';
 import {
+  componentStoryMeta,
   disableArgTypes,
-  withTransformedRawSource,
+  withSource,
   reactNodeArgType,
-  stylingProps,
 } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressCheckboxGroup>;
 
 export default {
   title: 'Components/CheckboxGroup',
   component: IressCheckboxGroup,
-  argTypes: {
-    children: reactNodeArgType,
-    ...stylingProps,
-  },
-  tags: ['updated'],
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      children: reactNodeArgType,
+    },
+  }),
 } as Meta<typeof IressCheckboxGroup>;
 
 export const Default: Story = {
   args: {
     name: 'preferences',
+    children: [
+      <IressCheckbox key={1} value="lemon-drizzle">
+        Lemon drizzle
+      </IressCheckbox>,
+      <IressCheckbox key={2} value="victoria-sponge">
+        Victoria Sponge
+      </IressCheckbox>,
+      <IressCheckbox key={3} value="carrot-cake">
+        Carrot Cake
+      </IressCheckbox>,
+    ],
   },
 };
 
@@ -53,74 +68,39 @@ export const CheckboxChildren: Story = {
 
 export const DefaultChecked: Story = {
   args: {
-    ...CheckboxChildren.args,
+    name: 'let-them-eat-cake',
+    children: [
+      <IressCheckbox key={1} value="lemon-drizzle">
+        Lemon drizzle
+      </IressCheckbox>,
+      <IressCheckbox key={2} value="victoria-sponge">
+        Victoria Sponge
+      </IressCheckbox>,
+      <IressCheckbox key={3} value="carrot-cake">
+        Carrot Cake
+      </IressCheckbox>,
+    ],
     defaultValue: ['lemon-drizzle', 'victoria-sponge'],
   },
 };
 
 export const Controlled: Story = {
-  args: {
-    ...CheckboxChildren.args,
-  },
-  argTypes: {
-    ...disableArgTypes(['children', 'value']),
-  },
   render: (args) => <CheckboxGroupUsingState {...args} />,
   parameters: {
-    ...withTransformedRawSource(
-      CheckboxGroupUsingStateSource,
-      'IressCheckboxGroupProps',
-      ['children'],
-    ),
+    controls: { disable: true },
+    ...withSource(CheckboxGroupUsingStateSource, { stripImports: true }),
   },
 };
 
 export const Layout: Story = {
-  args: {
-    children: [
-      <IressCheckbox
-        value="google"
-        key="google"
-        style={{ border: '1px dashed hsl(43deg 100% 45%)' }}
-      >
-        Google
-      </IressCheckbox>,
-      <IressCheckbox
-        value="newspaper"
-        key="newspaper"
-        style={{ border: '1px dashed hsl(43deg 100% 45%)' }}
-      >
-        Newspaper
-      </IressCheckbox>,
-      <IressCheckbox
-        value="friend"
-        key="friend"
-        style={{ border: '1px dashed hsl(43deg 100% 45%)' }}
-      >
-        Friend
-      </IressCheckbox>,
-      <IressCheckbox
-        value="other"
-        key="other"
-        style={{ border: '1px dashed hsl(43deg 100% 45%)' }}
-      >
-        Other
-      </IressCheckbox>,
-    ],
+  render: (args) => <CheckboxGroupLayout {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(CheckboxGroupLayoutSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
-  argTypes: {
-    ...disableArgTypes(['layout']),
-  },
-  render: (args) => (
-    <IressText>
-      <h3>block</h3>
-      <IressCheckboxGroup {...args} layout="block" />
-      <h3>inline</h3>
-      <IressCheckboxGroup {...args} layout="inline" />
-      <h3>stack</h3>
-      <IressCheckboxGroup {...args} layout="stack" />
-    </IressText>
-  ),
 };
 
 export const HiddenCheckboxes: Story = {
@@ -176,17 +156,54 @@ export const CustomCheckboxGroupLayout: Story = {
 };
 
 export const ReadOnly: Story = {
-  ...DefaultChecked,
   args: {
-    ...DefaultChecked.args,
+    name: 'let-them-eat-cake',
+    children: [
+      <IressCheckbox key={1} value="lemon-drizzle">
+        Lemon drizzle
+      </IressCheckbox>,
+      <IressCheckbox key={2} value="victoria-sponge">
+        Victoria Sponge
+      </IressCheckbox>,
+      <IressCheckbox key={3} value="carrot-cake">
+        Carrot Cake
+      </IressCheckbox>,
+    ],
+    defaultValue: ['lemon-drizzle', 'victoria-sponge'],
     readOnly: true,
   },
 };
 
 export const Touch: Story = {
-  ...DefaultChecked,
   args: {
-    ...DefaultChecked.args,
+    name: 'let-them-eat-cake',
+    children: [
+      <IressCheckbox key={1} value="lemon-drizzle">
+        Lemon drizzle
+      </IressCheckbox>,
+      <IressCheckbox key={2} value="victoria-sponge">
+        Victoria Sponge
+      </IressCheckbox>,
+      <IressCheckbox key={3} value="carrot-cake">
+        Carrot Cake
+      </IressCheckbox>,
+    ],
+    defaultValue: ['lemon-drizzle', 'victoria-sponge'],
     variant: 'touch',
+  },
+};
+
+export const Table: Story = {
+  tags: ['recipe'],
+  argTypes: {
+    ...disableArgTypes(['children', 'layout', 'name', 'onChange', 'value']),
+  },
+  render: (args) => <CheckboxGroupTable {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(CheckboxGroupTableSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };

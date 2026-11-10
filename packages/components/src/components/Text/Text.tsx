@@ -5,7 +5,7 @@ import { type FC, useMemo } from 'react';
 import { cx } from '@/styled-system/css';
 import { GlobalCSSClass } from '@/enums';
 
-export type TextElements =
+export type IressTextElements =
   | 'p'
   | 'div'
   | 'span'
@@ -23,9 +23,16 @@ export type TextElements =
   | 'em'
   | 'a'
   | 'blockquote'
+  | 'mark'
   | 'pre';
 
-export type IressTextProps<E extends TextElements = 'div'> =
+/**
+ * @deprecated Use `IressTextElements` instead. This type will be removed in a future release.
+ */
+// eslint-disable-next-line sonarjs/redundant-type-aliases
+export type TextElements = IressTextElements;
+
+export type IressTextProps<E extends IressTextElements = 'div'> =
   IressStyledProps<E> & {
     /**
      * The HTML element that should be rendered.
@@ -33,7 +40,17 @@ export type IressTextProps<E extends TextElements = 'div'> =
     element?: E;
   };
 
-export const IressText = <E extends TextElements = 'div'>({
+/**
+ * Renders styled text with consistent typography from the design system.
+ *
+ * @example
+ * ```tsx
+ * import { IressText } from '@iress-oss/ids-components';
+ *
+ * <IressText element="h2" textStyle="typography.heading.2">Hello world</IressText>
+ * ```
+ */
+export const IressText = <E extends IressTextElements = 'div'>({
   className,
   ...restProps
 }: IressTextProps<E>) => {

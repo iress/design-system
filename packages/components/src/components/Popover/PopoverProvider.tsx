@@ -12,6 +12,18 @@ export interface IressPopoverProviderProps extends PropsWithChildren {
   container?: FloatingUIContainer;
 }
 
+/**
+ * Provides a shared container context for nested popovers to render into.
+ *
+ * @example
+ * ```tsx
+ * import { IressPopoverProvider } from '@iress-oss/ids-components';
+ *
+ * <IressPopoverProvider container={document.getElementById('popover-root')}>
+ *   {children}
+ * </IressPopoverProvider>
+ * ```
+ */
 export const IressPopoverProvider = ({
   children,
   container,

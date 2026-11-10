@@ -39,6 +39,7 @@ src/
   helpers/          # utility functions (dom, formatting, form, etc.)
   styled-system/    # Panda CSS generated code — do not edit manually
   main.ts           # public API barrel export
+  meta.ts           # public documentation metadata and consumer-safe type contracts
   interfaces.ts     # shared interfaces
   enums.ts          # shared enums
   types.ts          # shared types
@@ -46,6 +47,10 @@ src/
 ```
 
 Each component folder contains: implementation, tests, stories, recipe (Panda CSS), and docs.
+
+Shared metadata types live in `helpers/meta/types.ts` and are exported through
+`/meta`. Storybook tooling reuses these types; published component declarations
+must not depend on Storybook packages.
 
 ## Styling
 

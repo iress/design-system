@@ -2,17 +2,15 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 
 import { IressInline } from '.';
 import { IressPlaceholder } from '../Placeholder';
-import { IressPanel } from '../Panel';
 import { IressStack } from '../Stack';
 import { IressText } from '../Text';
 import { IressContainer } from '../Container';
-import { HORIZONTAL_ALIGNS, VERTICAL_ALIGNS } from '@/constants';
-import { SPACING_AND_ALIAS_TOKENS } from '@theme-preset/tokens/spacing';
 import {
-  CurrentBreakpoint,
+  componentStoryMeta,
   disableArgTypes,
-  stylingProps,
+  withBreakpointLabel,
 } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressInline>;
 
@@ -72,17 +70,17 @@ const childrenOptions = {
 export default {
   title: 'Components/Inline',
   component: IressInline,
-  argTypes: {
-    children: {
-      control: {
-        type: 'select',
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      children: {
+        control: {
+          type: 'select',
+        },
+        options: Object.keys(childrenOptions),
+        mapping: childrenOptions,
       },
-      options: Object.keys(childrenOptions),
-      mapping: childrenOptions,
     },
-    ...stylingProps,
-  },
-  tags: ['updated'],
+  }),
 } as Meta<typeof IressInline>;
 
 export const Default: Story = {
@@ -90,6 +88,13 @@ export const Default: Story = {
     children: 'uneven',
     gap: 'spacing.4',
   },
+  render: (args) => (
+    <IressInline {...args}>
+      <IressPlaceholder width="50" style={{ minHeight: '30px' }} />
+      <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+      <IressPlaceholder width="50" style={{ minHeight: '40px' }} />
+    </IressInline>
+  ),
 };
 
 export const Gap: Story = {
@@ -103,12 +108,24 @@ export const Gap: Story = {
   },
   render: (args) => (
     <IressStack gap="spacing.10">
-      {SPACING_AND_ALIAS_TOKENS.map((spacing) => (
-        <IressText key={spacing}>
-          <h2>{spacing}</h2>
-          <IressInline {...args} gap={spacing as never} />
-        </IressText>
-      ))}
+      <IressText element="h3">spacing.1</IressText>
+      <IressInline {...args} gap="spacing.1">
+        <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+        <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+        <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+      </IressInline>
+      <IressText element="h3">spacing.4</IressText>
+      <IressInline {...args} gap="spacing.4">
+        <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+        <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+        <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+      </IressInline>
+      <IressText element="h3">spacing.8</IressText>
+      <IressInline {...args} gap="spacing.8">
+        <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+        <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+        <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+      </IressInline>
     </IressStack>
   ),
 };
@@ -124,18 +141,13 @@ export const ResponsiveGap: Story = {
     },
   },
   render: (args) => (
-    <IressStack gap="spacing.4">
-      <IressPanel>
-        <p>
-          Current breakpoint: <CurrentBreakpoint />.
-        </p>
-        <p>
-          <code>gap=&#123;{JSON.stringify(args.gap)}&#125;</code>
-        </p>
-      </IressPanel>
-      <IressInline {...args} />
-    </IressStack>
+    <IressInline {...args}>
+      <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+      <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+      <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+    </IressInline>
   ),
+  decorators: [withBreakpointLabel()],
 };
 
 export const HorizontalAlign: Story = {
@@ -151,12 +163,26 @@ export const HorizontalAlign: Story = {
   render: (args) => (
     <IressContainer>
       <IressStack gap="spacing.10">
-        {HORIZONTAL_ALIGNS.map((horizontalAlign) => (
-          <IressText key={horizontalAlign}>
-            <h2>{horizontalAlign}</h2>
-            <IressInline {...args} horizontalAlign={horizontalAlign} />
-          </IressText>
-        ))}
+        <IressText element="h3">left</IressText>
+        <IressInline {...args} horizontalAlign="left">
+          <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+          <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+        </IressInline>
+        <IressText element="h3">center</IressText>
+        <IressInline {...args} horizontalAlign="center">
+          <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+          <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+        </IressInline>
+        <IressText element="h3">right</IressText>
+        <IressInline {...args} horizontalAlign="right">
+          <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+          <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+        </IressInline>
+        <IressText element="h3">between</IressText>
+        <IressInline {...args} horizontalAlign="between">
+          <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+          <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+        </IressInline>
       </IressStack>
     </IressContainer>
   ),
@@ -176,12 +202,30 @@ export const VerticalAlign: Story = {
   render: (args) => (
     <IressContainer>
       <IressStack gap="spacing.10">
-        {VERTICAL_ALIGNS.map((verticalAlign) => (
-          <IressText key={verticalAlign} textAlign="center">
-            <h2>{verticalAlign}</h2>
-            <IressInline {...args} verticalAlign={verticalAlign} />
-          </IressText>
-        ))}
+        <IressText element="h3">top</IressText>
+        <IressInline {...args} verticalAlign="top">
+          <IressPlaceholder width="50" style={{ minHeight: '30px' }} />
+          <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+          <IressPlaceholder width="50" style={{ minHeight: '40px' }} />
+        </IressInline>
+        <IressText element="h3">middle</IressText>
+        <IressInline {...args} verticalAlign="middle">
+          <IressPlaceholder width="50" style={{ minHeight: '30px' }} />
+          <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+          <IressPlaceholder width="50" style={{ minHeight: '40px' }} />
+        </IressInline>
+        <IressText element="h3">bottom</IressText>
+        <IressInline {...args} verticalAlign="bottom">
+          <IressPlaceholder width="50" style={{ minHeight: '30px' }} />
+          <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+          <IressPlaceholder width="50" style={{ minHeight: '40px' }} />
+        </IressInline>
+        <IressText element="h3">stretch</IressText>
+        <IressInline {...args} verticalAlign="stretch">
+          <IressPlaceholder width="50" style={{ minHeight: '30px' }} />
+          <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+          <IressPlaceholder width="50" style={{ minHeight: '40px' }} />
+        </IressInline>
       </IressStack>
     </IressContainer>
   ),
@@ -190,8 +234,17 @@ export const VerticalAlign: Story = {
 export const NoWrap: Story = {
   ...Default,
   args: {
-    children: 'story',
-    gap: 'spacing.10',
+    children: 'even',
+    gap: 'spacing.4',
     noWrap: true,
   },
+  render: (args) => (
+    <IressInline {...args}>
+      <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+      <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+      <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+      <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+      <IressPlaceholder width="50" style={{ minHeight: '50px' }} />
+    </IressInline>
+  ),
 };

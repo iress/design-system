@@ -1,6 +1,7 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressSelectMenu, type IressSelectMenuProps } from './SelectMenu';
 import { MOCK_LABEL_VALUES } from '../../../mocks/generateLabelValues';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 import {
   addToStorybookCategory,
   reactNodeArgType,
@@ -8,6 +9,15 @@ import {
 } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressSelectMenu>;
+
+const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The root element of the select menu',
+    query: <code>getByRole('listbox')</code>,
+    testId: 'select-menu',
+  },
+];
 
 export default {
   title: 'Components/Select/Subcomponents/Menu',
@@ -23,6 +33,9 @@ export default {
       'noWrap',
     ]),
   },
+  parameters: {
+    idsConfig: { testMeta },
+  },
 } as Meta<typeof IressSelectMenu>;
 
 export const Results: Story = {
@@ -36,8 +49,10 @@ export const Results: Story = {
 
 export const NoResults: Story = {
   args: {
-    ...Results.args,
+    heading: 'Search results',
     items: [],
+    noResults: 'No results found',
+    fluid: true,
   },
 };
 
@@ -77,7 +92,35 @@ export const GroupedOptions: Story = {
 
 export const GroupedWithSelection: Story = {
   args: {
-    ...GroupedOptions.args,
+    heading: 'Select a food',
+    items: [
+      {
+        label: 'Fruits',
+        children: [
+          { label: 'Apple', value: 'apple' },
+          { label: 'Banana', value: 'banana' },
+          { label: 'Orange', value: 'orange' },
+          { label: 'Strawberry', value: 'strawberry' },
+        ],
+      },
+      {
+        label: 'Vegetables',
+        children: [
+          { label: 'Carrot', value: 'carrot' },
+          { label: 'Broccoli', value: 'broccoli' },
+          { label: 'Spinach', value: 'spinach' },
+        ],
+      },
+      {
+        label: 'Grains',
+        children: [
+          { label: 'Rice', value: 'rice' },
+          { label: 'Wheat', value: 'wheat' },
+          { label: 'Oats', value: 'oats' },
+        ],
+      },
+    ],
+    fluid: true,
     selected: { label: 'Apple', value: 'apple' },
   },
 };

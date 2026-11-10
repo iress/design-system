@@ -229,6 +229,7 @@ const TranscriptTextBox = ({
         mode="secondary"
         onClick={handleUploadClick}
         prepend={<IressIcon name="upload" />}
+        alignSelf="start"
       >
         Upload
       </IressButton>
@@ -313,30 +314,28 @@ export const CustomFormFieldComponents = () => {
         onSubmit={handleSubmit}
         defaultValues={{ transcript: { content: '', type: 'text' } }}
       >
-        <IressStack gap="md">
-          <IressFormField
-            label="Transcript"
-            name="transcript"
-            hint="Upload or copy and paste transcript here"
-            render={(controlledProps) => (
-              <TranscriptTextBox
-                {...controlledProps}
-                allowedExtensions={allowedExtensions}
-                maxSizeInMB={maxSizeInMB}
-              />
-            )}
-            rules={{
-              required: 'Transcript is required',
-              validate: {
-                file: validateFile(allowedExtensions, maxSizeInMB),
-              },
-            }}
-          />
-          <IressButton type="submit" mode="primary">
-            Submit
-          </IressButton>
-          <SubmittedValuesDisplay submittedValues={submittedValues} />
-        </IressStack>
+        <IressFormField
+          label="Transcript"
+          name="transcript"
+          hint="Upload or copy and paste transcript here"
+          render={(controlledProps) => (
+            <TranscriptTextBox
+              {...controlledProps}
+              allowedExtensions={allowedExtensions}
+              maxSizeInMB={maxSizeInMB}
+            />
+          )}
+          rules={{
+            required: 'Transcript is required',
+            validate: {
+              file: validateFile(allowedExtensions, maxSizeInMB),
+            },
+          }}
+        />
+        <IressButton type="submit" mode="primary">
+          Submit
+        </IressButton>
+        <SubmittedValuesDisplay submittedValues={submittedValues} />
       </IressForm>
     </>
   );

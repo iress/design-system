@@ -313,6 +313,18 @@ const Tab = <THref extends string | undefined = undefined>(
   );
 };
 
+/**
+ * A single tab within a tab set, with a label for the tab button and children for the panel content.
+ *
+ * @example
+ * ```tsx
+ * import { IressTabSet, IressTab } from '@iress-oss/ids-components';
+ *
+ * <IressTabSet>
+ *   <IressTab label="Details">Panel content</IressTab>
+ * </IressTabSet>
+ * ```
+ */
 export const IressTab = forwardRef(Tab) as (<
   THref extends string | undefined = undefined,
 >(

@@ -1,0 +1,525 @@
+# Button
+
+> A clickable element used to perform an action.
+
+## Import
+
+```tsx
+import { IressButton } from '@iress-oss/ids-components';
+```
+
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-button--docs)
+- [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=6201-26)
+- [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Button)
+- [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=button&title=[Button]+Bug:+)
+- [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=button,enhancement&title=[Button]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| active | `boolean` | — | Sets the active state of the button, usually used to indicate the button has activated a modal, popover or slideout. |
+| append | `ReactNode` | — | Content for the append slot. |
+| children | `ReactNode` | — | Content is placed between prepend and append if provided. Used to describe the expected action of this button. |
+| compact | `boolean` | — | Makes the button more compact by reducing padding and font size. Used for buttons with icon only or when space is limited. |
+| element | `ElementType` | — | Change the component that will be rendered as the button, used for third-party libraries that require a specific element type. By default, it will render a button or an anchor tag based on the `href` prop. |
+| fluid | `any` | — | If `true`, the button will stretch to fill it's container. The prop is responsive, so you can set the breakpoint(s) at which the button will be fluid.  All breakpoints: `fluid={true}` Up to a specific breakpoint: `fluid="md"` |
+| href | `string` | — | Contains a URL or a URL fragment that the hyperlink points to. If this property is set, an anchor tag will be rendered. |
+| icon | [MaterialSymbol](https://fonts.google.com/icons?icon.set=Material+Symbols) | — | The icon to be displayed in the button. If provided, the icon will be displayed and the `children` will be used as screen reader text (although you can explicitly override this with `aria-label`) |
+| loading | `boolean, string ` | `false` | When true, button is in loading state. If provided a string, will be used as the loading text for screen readers. |
+| mode | `muted` , `primary` , `quaternary`, `secondary` , `tertiary`  | `secondary` | Style of the button. - Primary: Used for the main action on a page. Usually only used once per screen. - Secondary: Used for secondary actions on a page, often an action on multiple `IressPanel`s. Can used multiple times per screen. - Tertiary: Used for tertiary actions on a page, often the secondary action on multiple `IressPanel`s. Can used multiple times per screen. - Quaternary: Used for less prominent actions, often used for preference toggles (eg. Collapse all). - Muted: Used for less prominent actions, often used inline with headings. They are mainly used with icons only.  **Migrating to version 6** - `link` mode has been removed. If it is an action, use the `tertiary` mode. If it is a link inside a paragraph, use the new `IressLink` component instead. - `danger` has been removed. Please use the `status` prop instead. - `positive` and `success` have been removed. Please use the `status` prop instead. |
+| onClick | `MouseEventHandler<Exclude<Parameters<Exclude<ButtonRef<C, THref>, undefined>>[0], null>>` | — | Emitted when the menu item is clicked. |
+| prepend | `ReactNode` | — | Content for the prepend slot. |
+| noWrap | `boolean` | `false` | Prevents text wrapping if set to true. |
+| status | `danger` , `success` | — | An optional status to assign to the button. - `success`: Indicates a successful or positive action. - `danger`: Indicates a dangerous or potentially negative action. |
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| value | `[FormControlValue](../../dist/types.d.ts)` | — | The value of the button, when used in `IressButtonGroup`. |
+
+📄 [Full type definition](../../dist/components/Button/Button.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
+
+A button is a clickable item used to perform an action.
+
+```tsx
+import { IressButton, IressInline } from '@iress-oss/ids-components';
+
+export function ButtonMode() {
+  return (
+    <IressInline gap="md">
+      <IressButton mode="primary">Primary button</IressButton>
+      <IressButton mode="secondary">Secondary button</IressButton>
+      <IressButton mode="tertiary">Tertiary button</IressButton>
+      <IressButton mode="quaternary">Quaternary button</IressButton>
+      <IressButton mode="muted" icon="share">
+        Share
+      </IressButton>
+    </IressInline>
+  );
+}
+```
+
+## Design
+
+### When to use
+
+- **Primary actions**: Submit forms, confirm dialogs, or trigger the main action on a page
+- **Secondary actions**: Provide alternative or supporting actions alongside a primary button
+- **Navigation**: Buttons for prominent navigation (e.g. wizard Next/Previous)
+- **Destructive actions**: Delete or remove items with appropriate confirmation
+- **Trigger non-navigational interactions**: Open modals, toggle popovers/tooltips, or load more content
+
+### When not to use
+
+- **Inline text links** — use `Link` instead for less prominent actions
+- **Toggle between states** — use a `Toggle` component
+
+### Do's and Don'ts
+
+| ✅ Do | ❌ Don't |
+|-------|----------|
+| Use one primary button per view | Use multiple primary buttons that compete for attention |
+| Keep button labels short and action-oriented | Use vague labels like "OK" or "Click here" |
+| Use `loading` state for async actions | Use `disabled` to prevent submission — validate on click instead |
+| Add confirmation for destructive actions | Allow irreversible actions without a confirmation step |
+
+#### Avoid using `disabled`
+
+IDS discourages using `disabled` on `IressButton`. Although the native HTML `disabled` attribute is supported via the underlying `<button>`/`<a>` element, it is an anti-pattern that should be avoided because:
+
+- Screen readers skip disabled elements, making them invisible to assistive technology users
+- Users cannot understand why a button is disabled or what they need to do to enable it
+- It creates a poor user experience with no path to resolution
+
+See below for recommended alternatives to common disabled button scenarios.
+
+| Scenario | Alternative |
+|----------|-------------|
+| Form is incomplete | Keep submit enabled. Use `IressForm` with `rules` — shows inline errors on submit. |
+| Action is in progress | Use the `loading` prop. Shows spinner, announces to screen readers, prevents duplicate clicks. |
+| User lacks permission | Hide the button entirely, or keep it enabled and show an explanation when clicked. |
+| Prerequisite step not completed | Guide the user to the prerequisite instead of silently disabling. |
+| Destructive action needs confirmation | Use `IressModal` with `status="danger"` for a confirmation step. |
+
+### Content guidelines
+
+- **Labels**: Use sentence case, start with a verb (e.g. "Save changes", "Delete item")
+- **Icon-only buttons**: Always provide accessible text via `aria-label` or hidden label
+- **Loading text**: Customise the announcement (e.g. "Submitting…") for clarity
+
+### Related patterns
+
+- [Button Group](../components/button-group.md) — for grouping related buttons
+- [Modal](../components/modal.md) — for destructive action confirmation
+- [Form](../patterns/form.md) — for form submission with validation
+
+## Develop
+
+### Quick Start
+
+```tsx
+import { IressButton } from '@iress-oss/ids-components';
+
+<IressButton>Button</IressButton>;
+```
+
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-button--docs#api-props)
+
+### Usage
+
+#### Modes
+
+The `mode` prop controls the visual appearance and priority of the button.
+
+- **Primary:** Use for the main call to action. Limit to one per view.
+- **Secondary:** Use for secondary calls to action.
+- **Tertiary:** Use when you need extra affordance between your secondary actions.
+- **Quaternary:** Use for less prominent actions, often used for preference toggles (eg. Collapse all).
+- **Muted:** Use for less prominent actions, often in toolbars or inline with headings. Mainly used for icon-only buttons.
+
+```tsx
+import { IressButton, IressInline } from '@iress-oss/ids-components';
+
+export function ButtonMode() {
+  return (
+    <IressInline gap="md">
+      <IressButton mode="primary">Primary button</IressButton>
+      <IressButton mode="secondary">Secondary button</IressButton>
+      <IressButton mode="tertiary">Tertiary button</IressButton>
+      <IressButton mode="quaternary">Quaternary button</IressButton>
+      <IressButton mode="muted" icon="share">
+        Share
+      </IressButton>
+    </IressInline>
+  );
+}
+```
+
+#### Status
+
+The `status` prop allows you to apply a visual status to the button.
+
+- **Success:** Usually used to indicate an action that should be perceived as positive, such as "Confirm" or "Buy".
+- **Danger:** Use for destructive actions, such as "Delete" or "Remove". Also used for actions that are perceived as negative, such as "Cancel" or "Sell".
+
+```tsx
+import {
+  IressButton,
+  IressInline,
+  IressStack,
+} from '@iress-oss/ids-components';
+
+export function ButtonStatus() {
+  return (
+    <IressStack gap="md">
+      <IressInline gap="md">
+        <IressButton mode="primary" status="success">
+          Primary
+        </IressButton>
+        <IressButton mode="secondary" status="success">
+          Secondary
+        </IressButton>
+        <IressButton mode="tertiary" status="success">
+          Tertiary
+        </IressButton>
+        <IressButton mode="quaternary" status="success">
+          Quaternary
+        </IressButton>
+        <IressButton mode="muted" status="success" icon="shopping_cart">
+          Add to cart
+        </IressButton>
+      </IressInline>
+      <IressInline gap="md">
+        <IressButton mode="primary" status="danger">
+          Primary
+        </IressButton>
+        <IressButton mode="secondary" status="danger">
+          Secondary
+        </IressButton>
+        <IressButton mode="tertiary" status="danger">
+          Tertiary
+        </IressButton>
+        <IressButton mode="quaternary" status="danger">
+          Quaternary
+        </IressButton>
+        <IressButton mode="muted" status="danger" icon="delete">
+          Delete
+        </IressButton>
+      </IressInline>
+    </IressStack>
+  );
+}
+```
+
+#### Types
+
+The `type` property controls the behaviour of the button. It defaults to `button`, which is the best option for most situations, but can also be set to `submit` or `reset`. `submit` should be used for buttons that submit forms, and `reset` should be used if the button clears form data and resets the form to its original state.
+
+**Please note:** this differs from a standard HTML button element, where the `type` defaults to submit.
+
+```tsx
+<IressInline gap="md">
+  <IressButton type="button">button</IressButton>
+  <IressButton type="submit">submit</IressButton>
+  <IressButton type="reset">reset</IressButton>
+</IressInline>;
+```
+
+#### Loading
+
+Loading buttons give the user an indication something is happening (eg. a form submission or extra content being loaded) after they have been triggered.
+
+The loading state can be activated by setting the `loading` prop to `true`. To customise the screen reader announcement, pass a string instead of `true` (e.g. `loading="Submitting…"`). The default announcement is "Loading".
+
+When the loading state is activated, any click events on the button are disabled.
+
+```tsx
+import { IressButton, IressInline } from '@iress-oss/ids-components';
+
+export function ButtonLoading() {
+  return (
+    <IressInline gap="md">
+      <IressButton mode="primary" loading>
+        Primary
+      </IressButton>
+      <IressButton mode="secondary" loading>
+        Secondary
+      </IressButton>
+      <IressButton mode="tertiary" loading>
+        Tertiary
+      </IressButton>
+      <IressButton mode="quaternary" loading>
+        Quaternary
+      </IressButton>
+      <IressButton mode="muted" loading icon="edit" />
+    </IressInline>
+  );
+}
+```
+
+#### Buttons as links
+
+The `href` prop allows you to create a link that looks like a button. When set, the component will render an HTML anchor element instead of an HTML button element.
+
+You can also use the link specific props `target` and `rel`.
+
+```tsx
+<IressButton
+  href="https://www.iress.com/"
+  rel="opener noreferrer"
+  target="_blank"
+>
+  This is a link (anchor tag)
+</IressButton>;
+```
+
+#### Delete confirmation
+
+> **Make sure that the user understands the consequences of clicking the button**
+>
+> You may want to add a confirmation step to prevent accidental data loss if the
+>   action is irreversible.
+
+The confirmation step should be a modal with a simple message, as with the example below. Use a delete button for the modal's primary call to action, and use a secondary button for the cancel action.
+
+```tsx
+import { IressButton, IressModal } from '@iress-oss/ids-components';
+import { useState } from 'react';
+
+export function ButtonDeleteConfirmation() {
+  const [showConfirm, setShowConfirm] = useState(false);
+
+  return (
+    <>
+      <IressButton status="danger" onClick={() => setShowConfirm(true)}>
+        Delete item
+      </IressButton>
+      <IressModal
+        heading="Confirm deletion"
+        status="danger"
+        show={showConfirm}
+        onShowChange={setShowConfirm}
+        actions={[
+          {
+            children: 'Cancel',
+            mode: 'tertiary',
+            onClick: () => setShowConfirm(false),
+          },
+          { children: 'Delete', onClick: () => setShowConfirm(false) },
+        ]}
+      >
+        Are you sure you want to delete this item? This action cannot be undone.
+      </IressModal>
+    </>
+  );
+}
+```
+
+#### Fluid
+
+If the `fluid` prop is set to true, the button will expand to be 100% of the width of its container.
+
+The `fluid` prop can also be set to a breakpoint size, which means the button will be fluid up until its breakpoint is passed.
+
+```tsx
+<IressInline gap="md">
+  <IressButton fluid>Always fluid</IressButton>
+  <IressButton fluid="md">Fluid on xs and sm</IressButton>
+</IressInline>;
+```
+
+#### Wrapping text
+
+Button text will wrap on to a new line if there's not enough space for the text to sit on a single line. If you want to prevent the text from wrapping, you can set the `noWrap` prop to `true`.
+
+```tsx
+<IressText style={{ width: 250 }}>
+  <p>
+    <IressButton>
+      Button with lots of text content that will wrap (default behaviour)
+    </IressButton>
+  </p>
+  <p>
+    <IressButton style={{ minWidth: 300 }}>
+      Button with lots of text content and a minimum width set via CSS
+    </IressButton>
+  </p>
+  <p>
+    <IressButton noWrap>
+      Button with lots of text content with the noWrap prop set to true
+    </IressButton>
+  </p>
+</IressText>;
+```
+
+#### Prepend & Append
+
+Use the `prepend` and `append` props to correctly position icons or badges inside buttons.
+
+- **`prepend`** — Places the element before the button text
+- **`append`** — Places the element after the button text
+- **`icon`** — Convenience prop for setting the icon name directly (useful for icon-only buttons)
+
+> ⚠️ **Do not use `slot` attributes on children** (e.g. `<IressIcon slot="start" />`). The `slot` attribute is a legacy v4 pattern that is no longer supported. Always use the `prepend` and `append` props.
+
+```tsx
+import {
+  IressButton,
+  IressIcon,
+  IressInline,
+  IressPill,
+  IressStack,
+} from '@iress-oss/ids-components';
+
+export function ButtonSlots() {
+  return (
+    <IressStack gap="md">
+      <IressInline gap="md">
+        <IressButton prepend={<IressIcon name="home" />}>
+          Prepend icon
+        </IressButton>
+      </IressInline>
+
+      <IressInline gap="md">
+        <IressButton append={<IressIcon name="home" />}>
+          Append icon
+        </IressButton>
+        <IressButton append={<IressPill>+999</IressPill>}>
+          Append pill
+        </IressButton>
+      </IressInline>
+
+      <IressInline gap="md">
+        <IressButton icon="home">Home</IressButton>
+      </IressInline>
+    </IressStack>
+  );
+}
+```
+
+#### Download button
+
+When a `href` is provided, the `download` prop can be used to indicate that the link should download a file instead of navigating to it.
+
+```tsx
+<IressButton
+  href="assets/iress-logo.png"
+  download
+  prepend={<IressIcon name="download" />}
+/>;
+```
+
+#### Element
+
+You can use the `element` prop to render a custom component as the button. This is useful for rendering a component from a third-party library, such as `react-router-dom`.
+
+```tsx
+import { IressButton } from '@iress-oss/ids-components';
+import { type HTMLAttributes, forwardRef } from 'react';
+
+/**
+ * This could be the `Link` component from `react-router-dom` or any other routing library.
+ */
+const Link = forwardRef<
+  HTMLAnchorElement,
+  HTMLAttributes<HTMLSpanElement> & { to: string }
+>(({ children, className, to, ...restProps }, ref) => (
+  <div className={className}>
+    <span onClick={() => console.log(to)} ref={ref} {...restProps}>
+      {children}
+    </span>
+  </div>
+));
+
+export const RoutingButton = () => (
+  <IressButton element={Link} to="https://iress.com">
+    Iress
+  </IressButton>
+);
+```
+
+### Close button
+
+`IressCloseButton` is a special variant of `IressButton` that is used to execute a close action. It is used in modals, slideouts, and other components that require a close button.
+
+It has one additional prop, `screenReaderText`, which is used to provide a screen reader only label for the close button.
+
+```tsx
+<IressCloseButton />;
+```
+
+### Testing
+
+Query buttons by their accessible role:
+
+```tsx
+const button = screen.getByRole('button', { name: 'Submit' });
+```
+
+When `href` is provided, the button renders as a link:
+
+```tsx
+const link = screen.getByRole('link', { name: 'Go to dashboard' });
+```
+
+[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-button--docs#testing)
+
+
+#### Test selectors
+
+| Part | Description | Recommended Query | Test ID |
+|------|-------------|-------------------|---------|
+| main | The root element of the button | `getByRole('button', { name: '...' })` | `button` |
+
+---
+
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
+
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-button--docs)
+
+## Specifications
+
+### Behaviour
+
+| State | Behaviour |
+|-------|-----------|
+| Default | Button is interactive and responds to click/keyboard activation |
+| Loading | Spinner shown, click events disabled, screen reader announces loading state |
+| Disabled | Pointer events disabled, element removed from tab order (anti-pattern) |
+| As link (`href`) | Renders as `<a>` element, supports `target` and `rel` attributes |
+| Fluid | Expands to 100% container width, or up to a breakpoint |
+
+### Accessibility
+
+**WCAG compliance:**
+
+- **4.1.2 Name, Role, Value** — Uses `role="button"` or `role="link"` based on whether `href` is set
+- **2.1.1 Keyboard** — All button actions are keyboard accessible
+- **1.4.1 Use of Color** — Status communicated via text and icon, not colour alone
+
+**Keyboard interaction:**
+
+| Key | Action |
+|-----|--------|
+| `Enter` | Activates the button |
+| `Space` | Activates the button |
+| `Tab` | Moves focus to the next focusable element |
+
+### Edge cases
+
+- **Loading prevents double-submit**: Click events are suppressed while `loading` is active
+- **Icon-only buttons**: Must have accessible text via `aria-label` or visually hidden label
+- **Button as link**: Role changes to `link` — test with `getByRole('link')` not `getByRole('button')`
+- **Wrapping text**: Long labels wrap by default; use `noWrap` to prevent
+
+---
+
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
+
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-button--docs)

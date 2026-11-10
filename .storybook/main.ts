@@ -22,6 +22,7 @@ function getCurrentBranch() {
 
 const config = getMainConfig({
   absolutePath: dirname(dirname(fileURLToPath(import.meta.url))),
+  stories: ['./docs/**/*.mdx', './docs/**/*.stories.@(ts|tsx)'],
 });
 
 const isProduction = process.env.NODE_ENV === 'production';

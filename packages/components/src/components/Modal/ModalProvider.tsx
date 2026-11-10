@@ -10,6 +10,18 @@ export interface IressModalProviderProps extends PropsWithChildren {
   container?: FloatingUIContainer;
 }
 
+/**
+ * Provides modal context to descendant components, managing open/close state for modals.
+ *
+ * @example
+ * ```tsx
+ * import { IressModalProvider, IressModal } from '@iress-oss/ids-components';
+ *
+ * <IressModalProvider>
+ *   <IressModal id="confirm" heading="Confirm">Are you sure?</IressModal>
+ * </IressModalProvider>
+ * ```
+ */
 export const IressModalProvider = ({
   children,
   container,

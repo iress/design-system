@@ -75,13 +75,13 @@ export interface IressIconProviderProps<P extends IconType = 'material'>
  *
  * @example
  * ```tsx
- * import { IconProvider } from '@iress-oss/ids-components';
+ * import { IressIconProvider } from '@iress-oss/ids-components';
  *
  * function App() {
  *   return (
- *     <IconProvider>
+ *     <IressIconProvider>
  *       <YourApp />
- *     </IconProvider>
+ *     </IressIconProvider>
  *   );
  * }
  * ```

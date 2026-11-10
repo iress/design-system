@@ -1,0 +1,178 @@
+# Label
+
+> Provides an accessible text label for a form control.
+
+## Import
+
+```tsx
+import { IressLabel } from '@iress-oss/ids-components';
+```
+
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-label--docs)
+- [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Label)
+- [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=label&title=[Label]+Bug:+)
+- [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=label,enhancement&title=[Label]+Feature:+)
+
+## Props
+
+> Required props are **bold**.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| data-testid | `string` | — | The data-testid attribute is used to target elements in automated tests if no identifier is available. In some components it is propagated to child elements.  Notes: - Please use this prop sparingly and only when no other identifier is available, as per the guiding principles of Testing Library. - Only use this prop for your tests @see https://testing-library.com/docs/queries/bytestid |
+| readOnly | `locked`, boolean  | — | Renders the label in a read-only state. Use `'locked'` to show a lock indicator when the related field is permission-locked. |
+| required | `boolean` | — | When set to true, the 'required asterisk (*)' is displayed next to the label text. |
+| append | `ReactNode` | — | Content to be appended to the label. This is not affected by the `hiddenLabel` prop. |
+| hiddenLabel | `boolean` | — | Visually hides the label text, but still available to screen readers. |
+| htmlFor | `string` | — | Used to connect it to the input element, it should be the input's id. If provided, the label will be rendered as a `<label>` element, otherwise it will be rendered as a `<strong>` element.  [Learn more](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/for) |
+
+📄 [Full type definition](../../dist/components/Label/Label.d.ts)
+
+Also accepts all [styling props](../styling-props/overview.md) ([type definition](../../dist/interfaces.d.ts), [token values](../tokens/tokens-reference.md)).
+
+Use the IressLabel component when building bespoke form inputs and IressField is too restrictive.
+
+```tsx
+<IressLabel required>This is a label for a required input</IressLabel>;
+```
+
+## Design
+
+### When to use
+
+- **Custom form controls**: When `IressField` is too opinionated for your layout
+- **Non-interactive content**: Label read-only data without a `htmlFor` association
+- **Required indicators**: Show an asterisk to indicate mandatory fields
+
+### When not to use
+
+- **Standard form fields** — use `IressField` which includes label, hint, and error support
+- **Standalone text** — use `IressText` for non-label content
+
+### Do's and Don'ts
+
+| ✅ Do | ❌ Don't |
+|-------|----------|
+| Pair with a form control using `htmlFor` | Place interactive elements (links, buttons) inside the label |
+| Use `hiddenLabel` for visually hidden but accessible labels | Omit labels entirely — screen readers need them |
+| Use `readOnly="locked"` for permission-based read-only | Use a label without any associated content |
+
+### Content guidelines
+
+- **Text**: Use sentence case, keep concise and descriptive
+- **Required**: Use the `required` prop to add an asterisk; don't manually add asterisks
+
+### Related patterns
+
+- [Field](../components/field.md) — full-featured form field wrapper with hint and error support
+
+## Develop
+
+### Quick Start
+
+```tsx
+import { IressLabel } from '@iress-oss/ids-components';
+
+<IressLabel>This is a label</IressLabel>;
+```
+
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-label--docs#api-props)
+
+### Usage
+
+#### Required
+
+Use the `required` prop to distinguish the label with an asterisk.
+
+```tsx
+<IressLabel required>This is a label for a required input</IressLabel>;
+```
+
+#### Hidden label
+
+Set `hiddenLabel` to visually hide the label while keeping it accessible.
+
+```tsx
+<IressLabel hiddenLabel>
+  This text is visible to screen readers only
+</IressLabel>;
+```
+
+#### Rich content
+
+Render custom content into the label.
+
+```tsx
+<IressLabel>
+  <IressInline gap="md" verticalAlign="middle">
+    <IressIcon name="home" />
+    Home settings
+    <IressIcon name="cog" />
+  </IressInline>
+</IressLabel>;
+```
+
+#### Locked readonly
+
+Use `readOnly="locked"` when the field is read-only due to permissions. Adds a lock indicator.
+
+```tsx
+<IressLabel readOnly="locked">This label is locked</IressLabel>;
+```
+
+### Testing
+
+Labels are typically queried indirectly through the form control they describe:
+
+```tsx
+const input = screen.getByLabelText('Email address');
+```
+
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-label--docs#testing)
+
+
+#### Test selectors
+
+| Part | Description | Recommended Query | Test ID |
+|------|-------------|-------------------|---------|
+| main | The root element of the label | `getByText('...')` | `label` |
+| text | The label text content | — | `label__text` |
+
+---
+
+### Storybook
+
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-label--docs)
+
+## Specifications
+
+### Behaviour
+
+| State | Behaviour |
+|-------|-----------|
+| Default | Renders as a `<label>` element associated via `htmlFor` |
+| Without `htmlFor` | Renders as a `<strong>` element for non-interactive content |
+| Required | Displays an asterisk before the label text |
+| Hidden | Visually hidden but remains in the accessibility tree |
+| Locked readonly | Displays a lock icon indicator |
+
+### Accessibility
+
+**WCAG compliance:**
+
+- **1.3.1 Info and Relationships** — Programmatically associates label with input via `htmlFor`
+- **2.5.3 Label in Name** — Visible label text matches the accessible name
+
+**Do not** place interactive elements (anchors, buttons) inside `IressLabel`. This makes it difficult to activate the associated form input. See [MDN Label accessibility](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label#accessibility_concerns).
+
+**Keyboard interaction:**
+
+| Key | Action |
+|-----|--------|
+| Click on label | Focuses the associated form control |
+
+### Edge cases
+
+- **Labelling non-interactive content**: Omit `htmlFor` to render as `<strong>` instead of `<label>`
+- **Nested test IDs**: `my-label__text` reaches the label text span
+- **Rich content**: Custom children are rendered inside the label element

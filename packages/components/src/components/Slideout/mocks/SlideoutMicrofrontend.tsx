@@ -368,8 +368,8 @@ const GrandparentApp = () => {
   );
 };
 
-export const SlideoutMicrofrontend = () => {
+export function SlideoutMicrofrontend() {
   // To avoid typescript issues, we have done it this way
   // But in your html it should be used as `<iress-microfrontend></iress-microfrontend>`
   return createElement('iress-grandparent');
-};
+}

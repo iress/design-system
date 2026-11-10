@@ -42,7 +42,14 @@ const FocusableAlert = styled(
 );
 
 /**
- * Validation summary messages based on the form context from react-hook-form
+ * Validation summary messages based on the form context from react-hook-form.
+ *
+ * @example
+ * ```tsx
+ * import { IressFormValidationSummary } from '@iress-oss/ids-components';
+ *
+ * <IressFormValidationSummary />
+ * ```
  */
 export const IressFormValidationSummary = ({
   actions,

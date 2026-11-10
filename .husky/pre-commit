@@ -8,3 +8,4 @@ yarn lint-staged --config lint-staged.pre-commit.config.cjs
 
 echo "🔒 Pre-commit: Scanning for secrets..."
 ggshield secret scan pre-commit "$@"
+

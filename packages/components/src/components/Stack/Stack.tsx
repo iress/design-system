@@ -42,6 +42,19 @@ export type IressStackProps<
   verticalAlign?: Exclude<VerticalAligns, 'stretch'>;
 };
 
+/**
+ * Lays out children vertically with consistent spacing between items.
+ *
+ * @example
+ * ```tsx
+ * import { IressStack } from '@iress-oss/ids-components';
+ *
+ * <IressStack gap="md">
+ *   <div>Item 1</div>
+ *   <div>Item 2</div>
+ * </IressStack>
+ * ```
+ */
 export const IressStack = <
   E extends keyof React.JSX.IntrinsicElements = 'div',
 >({

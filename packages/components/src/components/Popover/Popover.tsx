@@ -241,6 +241,16 @@ const Popover = (
   );
 };
 
+/**
+ * Displays floating content anchored to a trigger element.
+ *
+ * @example
+ * ```tsx
+ * import { IressPopover, IressButton } from '@iress-oss/ids-components';
+ *
+ * <IressPopover activator={<IressButton>Open</IressButton>}>Popover content</IressPopover>
+ * ```
+ */
 export const IressPopover = forwardRef(Popover);
 
 IressPopover.displayName = 'IressPopover';

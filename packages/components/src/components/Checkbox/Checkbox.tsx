@@ -31,11 +31,17 @@ import { splitCssProps, styled } from '@/styled-system/jsx';
 import { IressText } from '../Text';
 import { useNoDefaultValueInForms } from '@/patterns/Form/hooks/useNoDefaultValueInForms';
 
-export type CheckboxVariants = 'card' | 'touch' | undefined;
+export type IressCheckboxVariants = 'card' | 'touch' | undefined;
+
+/**
+ * @deprecated Use `IressCheckboxVariants` instead. This type will be removed in a future release.
+ */
+// eslint-disable-next-line sonarjs/redundant-type-aliases, no-restricted-syntax
+export type CheckboxVariants = IressCheckboxVariants;
 
 export interface IressCheckboxProps<
   T = FormControlValue,
-  TVariant extends CheckboxVariants = undefined,
+  TVariant extends IressCheckboxVariants = undefined,
 > extends Omit<
   IressStyledProps<'input'>,
   'defaultValue' | 'readOnly' | 'value'
@@ -126,7 +132,7 @@ export interface IressCheckboxProps<
 
 const Checkbox = <
   T = FormControlValue,
-  TVariant extends CheckboxVariants = undefined,
+  TVariant extends IressCheckboxVariants = undefined,
 >(
   {
     checked: checkedProp,
@@ -258,6 +264,7 @@ const Checkbox = <
         value={getFormControlValueAsString(value)}
         type="checkbox"
         id={inputId}
+        data-testid={propagateTestid(dataTestId, 'input')}
         defaultChecked={isControlled ? undefined : checked}
         checked={isControlled ? checked : undefined}
         onChange={handleChange}
@@ -290,9 +297,19 @@ const Checkbox = <
   );
 };
 
+/**
+ * Renders a checkbox input for toggling a boolean value.
+ *
+ * @example
+ * ```tsx
+ * import { IressCheckbox } from '@iress-oss/ids-components';
+ *
+ * <IressCheckbox>Accept terms</IressCheckbox>
+ * ```
+ */
 export const IressCheckbox = forwardRef(Checkbox) as (<
   T = FormControlValue,
-  TVariant extends CheckboxVariants = undefined,
+  TVariant extends IressCheckboxVariants = undefined,
 >(
   props: IressCheckboxProps<T, TVariant> & {
     ref?: ForwardedRef<ReactHookFormCompatibleRef<HTMLInputElement>>;

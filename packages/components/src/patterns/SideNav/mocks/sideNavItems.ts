@@ -1,4 +1,4 @@
-import type { SideNavItem, SideNavPanelItem } from '../SideNav';
+import type { SideNavItem, IressSideNavPanelItem } from '../SideNav';
 
 /**
  * Default mock navigation items with flat children (simple mode).
@@ -175,7 +175,7 @@ export const MOCK_RAIL_ONLY_ITEMS: SideNavItem[] = [
 /**
  * Mock sideMenuItems override with grouped content.
  */
-export const MOCK_SIDE_MENU_OVERRIDE: SideNavPanelItem[] = [
+export const MOCK_SIDE_MENU_OVERRIDE: IressSideNavPanelItem[] = [
   {
     key: 'client-details',
     label: 'Client Details',

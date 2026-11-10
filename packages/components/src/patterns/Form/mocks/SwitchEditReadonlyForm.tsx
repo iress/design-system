@@ -9,7 +9,6 @@ import {
   IressInput,
   IressRow,
   IressSelect,
-  IressStack,
   IressText,
   IressToasterProvider,
   useToaster,
@@ -52,74 +51,72 @@ const Form = () => {
       values={values}
     >
       <IressContainer>
-        <IressStack gap="md">
-          <IressText element="h2">User Details</IressText>
-          <IressRow gutter="md">
-            <IressCol>
-              <IressFormField
-                name="firstName"
-                label="First Name"
-                render={(controlledProps) => (
-                  <IressInput {...controlledProps} readOnly={!editable} />
-                )}
-              />
-            </IressCol>
-            <IressCol>
-              <IressFormField
-                name="lastName"
-                label="Last Name"
-                render={(controlledProps) => (
-                  <IressInput {...controlledProps} readOnly={!editable} />
-                )}
-              />
-            </IressCol>
-          </IressRow>
-          <IressRow gutter="md">
-            <IressCol>
-              <IressFormField
-                name="email"
-                label="Email"
-                render={(controlledProps) => (
-                  <IressInput
-                    {...controlledProps}
-                    readOnly={!editable}
-                    type="email"
-                  />
-                )}
-              />
-            </IressCol>
-            <IressCol>
-              <IressFormField
-                name="dependents"
-                label="Dependents"
-                render={(controlledProps) => (
-                  <IressSelect
-                    {...controlledProps}
-                    readOnly={!editable}
-                    options={dependentOptions}
-                  />
-                )}
-              />
-            </IressCol>
-          </IressRow>
-          {editable ? (
-            <IressInline gap="sm">
-              <IressButton type="submit" mode="primary">
-                Save
-              </IressButton>
-              <IressButton onClick={() => setEditable(false)}>
-                Cancel
-              </IressButton>
-            </IressInline>
-          ) : (
-            <IressButton
-              onClick={() => setEditable(true)}
-              prepend={<IressIcon name="pencil" />}
-            >
-              Edit
+        <IressText element="h2" mb="spacing.4">
+          User Details
+        </IressText>
+        <IressRow gutter="md">
+          <IressCol>
+            <IressFormField
+              name="firstName"
+              label="First Name"
+              render={(controlledProps) => (
+                <IressInput {...controlledProps} readOnly={!editable} />
+              )}
+            />
+          </IressCol>
+          <IressCol>
+            <IressFormField
+              name="lastName"
+              label="Last Name"
+              render={(controlledProps) => (
+                <IressInput {...controlledProps} readOnly={!editable} />
+              )}
+            />
+          </IressCol>
+        </IressRow>
+        <IressRow gutter="md">
+          <IressCol>
+            <IressFormField
+              name="email"
+              label="Email"
+              render={(controlledProps) => (
+                <IressInput
+                  {...controlledProps}
+                  readOnly={!editable}
+                  type="email"
+                />
+              )}
+            />
+          </IressCol>
+          <IressCol>
+            <IressFormField
+              name="dependents"
+              label="Dependents"
+              render={(controlledProps) => (
+                <IressSelect
+                  {...controlledProps}
+                  readOnly={!editable}
+                  options={dependentOptions}
+                />
+              )}
+            />
+          </IressCol>
+        </IressRow>
+        {editable ? (
+          <IressInline gap="sm">
+            <IressButton type="submit" mode="primary">
+              Save
             </IressButton>
-          )}
-        </IressStack>
+            <IressButton onClick={() => setEditable(false)}>Cancel</IressButton>
+          </IressInline>
+        ) : (
+          <IressButton
+            onClick={() => setEditable(true)}
+            prepend={<IressIcon name="pencil" />}
+          >
+            Edit
+          </IressButton>
+        )}
       </IressContainer>
     </IressForm>
   );

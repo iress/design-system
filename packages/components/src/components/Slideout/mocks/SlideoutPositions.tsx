@@ -23,8 +23,10 @@ const Slideouts = () => {
   );
 };
 
-export const SlideoutPositions = () => (
-  <IressSlideoutProvider>
-    <Slideouts />
-  </IressSlideoutProvider>
-);
+export function SlideoutPositions() {
+  return (
+    <IressSlideoutProvider>
+      <Slideouts />
+    </IressSlideoutProvider>
+  );
+}

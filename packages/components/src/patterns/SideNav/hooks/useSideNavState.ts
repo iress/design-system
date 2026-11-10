@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useControlledState } from '@/hooks/useControlledState';
-import type { SideNavItem, SideNavPanelItem } from '../SideNav';
+import type { SideNavItem, IressSideNavPanelItem } from '../SideNav';
 import type { ReactNode } from 'react';
 
 export interface UseSideNavStateProps {
@@ -18,7 +18,7 @@ export interface UseSideNavStateProps {
   onActiveItemKeyChange?: (key: string) => void;
 
   /** Override: content for the side panel (same type as children). */
-  sideMenuItems?: SideNavPanelItem[];
+  sideMenuItems?: IressSideNavPanelItem[];
 
   /** Override: label for the side panel heading. */
   sideMenuLabel?: ReactNode;
@@ -50,7 +50,7 @@ export interface UseSideNavStateReturn {
   activeItem: SideNavItem | undefined;
 
   /** Content entries to render in the side panel. */
-  panelContent: SideNavPanelItem[];
+  panelContent: IressSideNavPanelItem[];
 
   /** Resolved label for the side panel heading. */
   panelLabel: ReactNode;
@@ -102,7 +102,7 @@ export const useSideNavState = ({
     : undefined;
 
   // Resolve panel content: sideMenuItems overrides children
-  const panelContent: SideNavPanelItem[] =
+  const panelContent: IressSideNavPanelItem[] =
     sideMenuItems ?? activeItem?.children ?? [];
 
   // Resolve panel label

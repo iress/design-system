@@ -2,27 +2,35 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressShadow } from '.';
 import { IressIcon, IressPanel } from '@/main';
 import {
+  componentStoryMeta,
   reactNodeArgType,
-  stylingProps,
 } from '@iress-oss/ids-storybook-config';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressShadow>;
+
+const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The shadow DOM host element',
+    testId: 'shadow',
+  },
+];
 
 export default {
   title: 'Patterns/Shadow',
   component: IressShadow,
   tags: ['beta: '],
-  argTypes: {
-    children: reactNodeArgType,
-    ...stylingProps,
-  },
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      children: reactNodeArgType,
+    },
+    idsConfig: {
+      testMeta,
+    },
+  }),
 } as Meta<typeof IressShadow>;
-
-export const Default: Story = {
-  args: {
-    children: <IressPanel>Content inside shadow DOM</IressPanel>,
-  },
-};
 
 export const Shadow: Story = {
   args: {

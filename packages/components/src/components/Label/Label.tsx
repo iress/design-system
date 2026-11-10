@@ -21,6 +21,16 @@ export type IressLabelProps<THtmlFor extends string | undefined = undefined> =
     htmlFor?: THtmlFor;
   };
 
+/**
+ * Provides an accessible text label for a form control.
+ *
+ * @example
+ * ```tsx
+ * import { IressLabel } from '@iress-oss/ids-components';
+ *
+ * <IressLabel htmlFor="email">Email address</IressLabel>
+ * ```
+ */
 export const IressLabel = <THtmlFor extends string | undefined = undefined>(
   props: IressLabelProps<THtmlFor>,
 ) => <LabelBase {...props} element={props.htmlFor ? 'label' : 'strong'} />;

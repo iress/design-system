@@ -1,13 +1,51 @@
 import { lazy } from 'react';
-import type { TestId } from '@helpers/testing';
+import type { ComponentMeta, TestComponentMeta } from '@helpers/meta/types';
 
-export const testIds: TestId[] = [
-  { suffix: 'checkboxMark', description: 'The visual checkbox indicator' },
+export const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The root wrapper element',
+    testId: 'checkbox',
+  },
+  {
+    part: 'input',
+    description: 'The checkbox input element',
+    query: (
+      <code>
+        getByRole('checkbox', {'{'} name: '...' {'}'})
+      </code>
+    ),
+    testId: 'checkbox__input',
+  },
+  {
+    part: 'checkboxMark',
+    description: 'The visual checkbox indicator',
+    testId: 'checkbox__checkboxMark',
+  },
 ];
 
 export default {
   heading: 'Checkbox',
-  href: '/?path=/docs/components-checkbox--docs',
+  description: 'Renders a checkbox input for toggling a boolean value.',
   tags: ['form', 'selection', 'interactive'],
+  testMeta,
   Thumbnail: lazy(() => import('./Thumbnail')),
-};
+  import: "import { IressCheckbox } from '@iress-oss/ids-components';",
+  github: {
+    source:
+      'https://github.com/iress/design-system/tree/main/packages/components/src/components/Checkbox',
+    guidelines:
+      'https://github.com/iress/design-system/edit/main/apps/guidelines/content/components/checkbox.mdx',
+    storybook:
+      'https://github.com/iress/design-system/edit/main/packages/components/src/components/Checkbox/Checkbox.stories.tsx',
+    reportIssue:
+      'https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=checkbox&title=[Checkbox]+Bug:+',
+    requestFeature:
+      'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=checkbox,enhancement&title=[Checkbox]+Feature:+',
+  },
+  storybook:
+    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkbox--docs',
+  guidelines: 'https://iress.github.io/design-system/#/components/checkbox',
+  figma:
+    'https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-28220',
+} satisfies ComponentMeta;

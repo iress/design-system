@@ -15,42 +15,40 @@ import { TableSortingFn } from './mocks/TableSortingFn';
 import TableSortingFnSource from './mocks/TableSortingFn.tsx?raw';
 import { TableVirtualised } from './mocks/TableVirtualised';
 import TableVirtualisedSource from './mocks/TableVirtualised.tsx?raw';
+import { TableCompact } from './mocks/TableCompact';
+import TableCompactSource from './mocks/TableCompact.tsx?raw';
+import { TableColumnReference } from './mocks/TableColumnReference';
 import { type Row } from '@tanstack/react-table';
 import {
+  componentStoryMeta,
   withJsxTransformer,
   disableArgTypes,
-  withTransformedRawSource,
+  withSource,
   mergeStorybookConfig,
   reactNodeArgType,
-  stylingProps,
 } from '@iress-oss/ids-storybook-config';
 import { IressPill } from '../Pill';
+import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressTable>;
 
 export default {
   title: 'Components/Table',
   component: IressTable,
-  argTypes: {
-    ...mergeStorybookConfig(disableArgTypes(['children']), {
-      children: reactNodeArgType,
-    }),
-    empty: reactNodeArgType,
-    ...stylingProps,
-  },
-  parameters: {
-    ...withJsxTransformer({
-      sortProps: false,
-    }),
-  },
-  tags: ['updated'],
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      ...mergeStorybookConfig(disableArgTypes(['children']), {
+        children: reactNodeArgType,
+      }),
+      empty: reactNodeArgType,
+    },
+    parameters: {
+      ...withJsxTransformer({
+        sortProps: false,
+      }),
+    },
+  }),
 } as Meta<typeof IressTable>;
-
-export const Default: Story = {
-  args: {
-    caption: 'Data table',
-  },
-};
 
 export const AutomaticColumns: Story = {
   args: {
@@ -86,7 +84,8 @@ export const CustomColumns: Story = {
   },
   render: (args) => <TableCustomColumns {...args} />,
   parameters: {
-    ...withTransformedRawSource(TableCustomColumnsSource, 'Props'),
+    controls: { disable: true },
+    ...withSource(TableCustomColumnsSource, { stripImports: true }),
   },
 };
 
@@ -97,7 +96,8 @@ export const Formats: Story = {
   },
   render: (args) => <TableFormats {...args} />,
   parameters: {
-    ...withTransformedRawSource(TableFormatsSource, 'Props'),
+    controls: { disable: true },
+    ...withSource(TableFormatsSource, { stripImports: true }),
   },
 };
 
@@ -105,15 +105,17 @@ export const Sorting: Story = {
   ...CustomColumns,
   render: (args) => <TableSorting {...args} />,
   parameters: {
-    ...withTransformedRawSource(TableSortingSource, 'Props'),
+    controls: { disable: true },
+    ...withSource(TableSortingSource, { stripImports: true }),
   },
 };
 
 export const CustomSortingLogic: Story = {
   ...CustomColumns,
-  render: (args) => <TableSortingFn {...(args as object)} />,
+  render: (args) => <TableSortingFn {...args} />,
   parameters: {
-    ...withTransformedRawSource(TableSortingFnSource, 'Props'),
+    controls: { disable: true },
+    ...withSource(TableSortingFnSource, { stripImports: true }),
   },
 };
 
@@ -121,7 +123,8 @@ export const Filtering: Story = {
   ...CustomColumns,
   render: (args) => <TableFiltering {...args} />,
   parameters: {
-    ...withTransformedRawSource(TableFilteringSource, 'Props'),
+    controls: { disable: true },
+    ...withSource(TableFilteringSource, { stripImports: true }),
   },
 };
 
@@ -129,14 +132,35 @@ export const ServerSideFiltering: Story = {
   ...CustomColumns,
   render: (args) => <TableFilteringServerSide {...args} />,
   parameters: {
-    ...withTransformedRawSource(TableFilteringServerSideSource, 'Props'),
+    controls: { disable: true },
+    ...withSource(TableFilteringServerSideSource, { stripImports: true }),
   },
+  tags: ['recipe'],
 };
 
 export const Width: Story = {
-  ...AutomaticColumns,
   args: {
-    ...AutomaticColumns.args,
+    caption: 'My investments',
+    rows: [
+      {
+        investment_name: 'Artemis Fund Managers Limited',
+        cost: 23898,
+        investmentDate: '2019-09-23',
+        totalPercentage: 24.8,
+      },
+      {
+        investment_name: 'CASH.CASH',
+        cost: 49751.4,
+        investmentDate: '2020-06-28',
+        totalPercentage: 49,
+      },
+      {
+        investment_name: 'VODAFONE GRP',
+        cost: 26382.456,
+        investmentDate: '2019-02-05',
+        totalPercentage: 26.2,
+      },
+    ],
     columns: [
       {
         key: 'investment_name',
@@ -155,9 +179,28 @@ export const Width: Story = {
 };
 
 export const Alignment: Story = {
-  ...AutomaticColumns,
   args: {
-    ...AutomaticColumns.args,
+    caption: 'My investments',
+    rows: [
+      {
+        investment_name: 'Artemis Fund Managers Limited',
+        cost: 23898,
+        investmentDate: '2019-09-23',
+        totalPercentage: 24.8,
+      },
+      {
+        investment_name: 'CASH.CASH',
+        cost: 49751.4,
+        investmentDate: '2020-06-28',
+        totalPercentage: 49,
+      },
+      {
+        investment_name: 'VODAFONE GRP',
+        cost: 26382.456,
+        investmentDate: '2019-02-05',
+        totalPercentage: 26.2,
+      },
+    ],
     columns: [
       {
         key: 'investment_name',
@@ -188,7 +231,27 @@ export const Alignment: Story = {
 
 export const Dividers: Story = {
   args: {
-    ...AutomaticColumns.args,
+    caption: 'My investments',
+    rows: [
+      {
+        investment_name: 'Artemis Fund Managers Limited',
+        cost: 23898,
+        investmentDate: '2019-09-23',
+        totalPercentage: 24.8,
+      },
+      {
+        investment_name: 'CASH.CASH',
+        cost: 49751.4,
+        investmentDate: '2020-06-28',
+        totalPercentage: 49,
+      },
+      {
+        investment_name: 'VODAFONE GRP',
+        cost: 26382.456,
+        investmentDate: '2019-02-05',
+        totalPercentage: 26.2,
+      },
+    ],
     columns: [
       {
         key: 'investment_name',
@@ -216,21 +279,81 @@ export const Dividers: Story = {
 
 export const HighlightOnHover: Story = {
   args: {
-    ...AutomaticColumns.args,
+    caption: 'My investments',
+    rows: [
+      {
+        investment_name: 'Artemis Fund Managers Limited',
+        cost: 23898,
+        investmentDate: '2019-09-23',
+        totalPercentage: 24.8,
+      },
+      {
+        investment_name: 'CASH.CASH',
+        cost: 49751.4,
+        investmentDate: '2020-06-28',
+        totalPercentage: 49,
+      },
+      {
+        investment_name: 'VODAFONE GRP',
+        cost: 26382.456,
+        investmentDate: '2019-02-05',
+        totalPercentage: 26.2,
+      },
+    ],
     hover: true,
   },
 };
 
 export const Alternate: Story = {
   args: {
-    ...AutomaticColumns.args,
+    caption: 'My investments',
+    rows: [
+      {
+        investment_name: 'Artemis Fund Managers Limited',
+        cost: 23898,
+        investmentDate: '2019-09-23',
+        totalPercentage: 24.8,
+      },
+      {
+        investment_name: 'CASH.CASH',
+        cost: 49751.4,
+        investmentDate: '2020-06-28',
+        totalPercentage: 49,
+      },
+      {
+        investment_name: 'VODAFONE GRP',
+        cost: 26382.456,
+        investmentDate: '2019-02-05',
+        totalPercentage: 26.2,
+      },
+    ],
     alternate: true,
   },
 };
 
 export const RemoveRowBorders: Story = {
   args: {
-    ...AutomaticColumns.args,
+    caption: 'My investments',
+    rows: [
+      {
+        investment_name: 'Artemis Fund Managers Limited',
+        cost: 23898,
+        investmentDate: '2019-09-23',
+        totalPercentage: 24.8,
+      },
+      {
+        investment_name: 'CASH.CASH',
+        cost: 49751.4,
+        investmentDate: '2020-06-28',
+        totalPercentage: 49,
+      },
+      {
+        investment_name: 'VODAFONE GRP',
+        cost: 26382.456,
+        investmentDate: '2019-02-05',
+        totalPercentage: 26.2,
+      },
+    ],
     alternate: true,
     removeRowBorders: true,
   },
@@ -238,14 +361,54 @@ export const RemoveRowBorders: Story = {
 
 export const Scope: Story = {
   args: {
-    ...AutomaticColumns.args,
+    caption: 'My investments',
+    rows: [
+      {
+        investment_name: 'Artemis Fund Managers Limited',
+        cost: 23898,
+        investmentDate: '2019-09-23',
+        totalPercentage: 24.8,
+      },
+      {
+        investment_name: 'CASH.CASH',
+        cost: 49751.4,
+        investmentDate: '2020-06-28',
+        totalPercentage: 49,
+      },
+      {
+        investment_name: 'VODAFONE GRP',
+        cost: 26382.456,
+        investmentDate: '2019-02-05',
+        totalPercentage: 26.2,
+      },
+    ],
     scope: 'col',
   },
 };
 
 export const HiddenHeader: Story = {
   args: {
-    ...AutomaticColumns.args,
+    caption: 'My investments',
+    rows: [
+      {
+        investment_name: 'Artemis Fund Managers Limited',
+        cost: 23898,
+        investmentDate: '2019-09-23',
+        totalPercentage: 24.8,
+      },
+      {
+        investment_name: 'CASH.CASH',
+        cost: 49751.4,
+        investmentDate: '2020-06-28',
+        totalPercentage: 49,
+      },
+      {
+        investment_name: 'VODAFONE GRP',
+        cost: 26382.456,
+        investmentDate: '2019-02-05',
+        totalPercentage: 26.2,
+      },
+    ],
     hiddenHeader: true,
   },
 };
@@ -346,7 +509,27 @@ export const Static: Story = {
 
 export const RowProps: Story = {
   args: {
-    ...AutomaticColumns.args,
+    caption: 'My investments',
+    rows: [
+      {
+        investment_name: 'Artemis Fund Managers Limited',
+        cost: 23898,
+        investmentDate: '2019-09-23',
+        totalPercentage: 24.8,
+      },
+      {
+        investment_name: 'CASH.CASH',
+        cost: 49751.4,
+        investmentDate: '2020-06-28',
+        totalPercentage: 49,
+      },
+      {
+        investment_name: 'VODAFONE GRP',
+        cost: 26382.456,
+        investmentDate: '2019-02-05',
+        totalPercentage: 26.2,
+      },
+    ],
     rowProps: (row: Row<{ cost?: number }>) => ({
       bg:
         row.original.cost && row.original.cost > 30000
@@ -365,38 +548,12 @@ export const RowProps: Story = {
 };
 
 export const Compact: Story = {
-  ...AutomaticColumns,
-  args: {
-    ...AutomaticColumns.args,
-    scope: 'col',
-    compact: true,
-    columns: [
-      {
-        key: 'investment_name',
-        label: 'Investment',
-        divider: true,
-        sort: 'asc',
-      },
-      {
-        key: 'investmentDate',
-        label: 'Date',
-        format: 'date',
-        sort: true,
-      },
-      {
-        key: 'totalPercentage',
-        label: 'Share',
-        format: 'percent',
-        sort: true,
-      },
-    ],
-    alternate: true,
-    removeRowBorders: true,
-    rowProps: (row: Row<{ investment_name?: string }>) => ({
-      bg:
-        row.original.investment_name === 'VODAFONE GRP'
-          ? 'colour.data.subtle.30'
-          : undefined,
+  render: (args) => <TableCompact {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(TableCompactSource, {
+      stripImports: true,
+      stripExportFunction: true,
     }),
   },
 };
@@ -406,8 +563,17 @@ export const Virtualised: Story = {
   argTypes: {
     ...disableArgTypes(['caption', 'rows', 'columns']),
   },
-  render: () => <TableVirtualised />,
+  render: (args) => <TableVirtualised {...args} />,
   parameters: {
-    ...withTransformedRawSource(TableVirtualisedSource, 'Props'),
+    controls: { disable: true },
+    ...withSource(TableVirtualisedSource, { stripImports: true }),
+  },
+};
+
+export const ColumnAPI: Story = {
+  tags: ['reference'],
+  render: (_args) => <TableColumnReference />,
+  parameters: {
+    controls: { disable: true },
   },
 };

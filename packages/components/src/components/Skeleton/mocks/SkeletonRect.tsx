@@ -3,11 +3,10 @@ import {
   IressButton,
   IressPlaceholder,
   IressSkeleton,
-  type IressSkeletonProps,
   IressStack,
 } from '@/main';
 
-export const SkeletonRect = (args: IressSkeletonProps<'rect'>) => {
+export function SkeletonRect() {
   const [loading, setLoading] = useState(true);
 
   return (
@@ -15,8 +14,12 @@ export const SkeletonRect = (args: IressSkeletonProps<'rect'>) => {
       <IressButton onClick={() => setLoading(!loading)}>
         Toggle load
       </IressButton>
-      {loading && <IressSkeleton {...args} />}
-      {!loading && <IressPlaceholder {...args}>Image</IressPlaceholder>}
+      {loading && <IressSkeleton mode="rect" width="250" height="150" />}
+      {!loading && (
+        <IressPlaceholder width="250" height="150">
+          Image
+        </IressPlaceholder>
+      )}
     </IressStack>
   );
-};
+}

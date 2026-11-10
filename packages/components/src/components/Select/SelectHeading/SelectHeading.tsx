@@ -60,6 +60,18 @@ const ClearButton = forwardRef(
   },
 );
 
+/**
+ * A heading displayed within a select dropdown, with an optional clear-all button.
+ *
+ * @example
+ * ```tsx
+ * import { IressSelectHeading } from '@iress-oss/ids-components';
+ *
+ * <IressSelectHeading clearAll="Clear all" onClearAll={() => {}}>
+ *   Selected items
+ * </IressSelectHeading>
+ * ```
+ */
 export const IressSelectHeading = ({
   children,
   className,

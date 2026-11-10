@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react';
 import { PropsWithChildren } from 'react';
-import { TableColumn } from '../helpers/composeTableColumnDefs';
+import { IressTableColumn } from '../helpers/composeTableColumnDefs';
 import {
   TableColumnSortHookProps,
   useTableColumnSort,
@@ -16,7 +16,7 @@ const columnApi = {
   toggleSorting: () => undefined,
 };
 
-const columns: TableColumn<object, unknown>[] = [
+const columns: IressTableColumn<object, unknown>[] = [
   {
     key: 'test',
     sort: true,

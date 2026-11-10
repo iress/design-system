@@ -10,6 +10,8 @@ import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 import { idsLogger } from '@helpers/utility/idsLogger';
 import { App as AppWithModalProvider } from './mocks/AppWithModalProvider';
+import { ModalResponsiveSize } from './mocks/ModalResponsiveSize';
+import { ModalWithButton } from './mocks/ModalWithButton';
 import {
   GlobalCSSClass,
   IressModal,
@@ -60,6 +62,28 @@ function renderComponentInProvider(
 }
 
 describe('IressModal', () => {
+  it.each([
+    { Example: ModalWithButton, openLabel: 'Show modal' },
+    { Example: ModalResponsiveSize, openLabel: 'Show responsive modal' },
+  ])(
+    'dismisses the $openLabel example with its footer action',
+    async ({ Example, openLabel }) => {
+      const screen = render(
+        <IressModalProvider>
+          <Example />
+        </IressModalProvider>,
+      );
+
+      await userEvent.click(screen.getByRole('button', { name: openLabel }));
+      await screen.findByRole('dialog');
+      await userEvent.click(screen.getByRole('button', { name: 'Close' }));
+
+      await waitFor(() => {
+        expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+      });
+    },
+  );
+
   it('renders the component with the correct text and classes (hidden)', () => {
     const screen = renderComponent({
       children: 'Test text',

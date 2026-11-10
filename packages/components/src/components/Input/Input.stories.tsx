@@ -1,21 +1,30 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { capitalizeFirstLetter } from '@helpers/formatting/capitalizeFirstLetter';
 import { IressIcon } from '../Icon';
+import { IressInput, type IressInputProps } from '../../main';
 import {
-  IressInput,
-  IressStack,
-  IressToasterProvider,
-  useToaster,
-  type IressInputProps,
-} from '../../main';
-import { IressField } from '../Field';
-import { FORM_ELEMENT_WIDTHS } from '@/constants';
-import {
-  disableArgTypes,
+  componentStoryMeta,
   withJsxTransformer,
+  withSource,
   reactNodeArgType,
-  stylingProps,
 } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
+
+import { InputTypes } from './mocks/InputTypes';
+import InputTypesSource from './mocks/InputTypes.tsx?raw';
+import { InputModes } from './mocks/InputModes';
+import { InputFileType } from './mocks/InputFileType';
+import InputFileTypeSource from './mocks/InputFileType.tsx?raw';
+import InputModesSource from './mocks/InputModes.tsx?raw';
+import { InputSizing } from './mocks/InputSizing';
+import InputSizingSource from './mocks/InputSizing.tsx?raw';
+import { InputSlots } from './mocks/InputSlots';
+import InputSlotsSource from './mocks/InputSlots.tsx?raw';
+import { ReactHookFormsInput } from './mocks/ReactHookFormsInput';
+import ReactHookFormsInputSource from './mocks/ReactHookFormsInput.tsx?raw';
+import { InputPercentage } from './mocks/InputPercentage';
+import InputPercentageSource from './mocks/InputPercentage.tsx?raw';
+import { InputCurrencyFormatter } from './mocks/InputCurrencyFormatter';
+import InputCurrencyFormatterSource from './mocks/InputCurrencyFormatter.tsx?raw';
 
 type Story = StoryObj<IressInputProps>;
 type TextareaStory = StoryObj<IressInputProps<string, number>>;
@@ -23,115 +32,49 @@ type TextareaStory = StoryObj<IressInputProps<string, number>>;
 export default {
   title: 'Components/Input',
   component: IressInput,
-  tags: ['updated'],
-  argTypes: {
-    append: reactNodeArgType,
-    prepend: reactNodeArgType,
-    ...stylingProps,
-  },
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      append: reactNodeArgType,
+      prepend: reactNodeArgType,
+    },
+  }),
 } as Meta<typeof IressInput>;
 
 export const Default: Story = {
   args: {
     placeholder: 'Enter your name',
-    prepend: '',
-    append: '',
   },
 };
 
 export const Types: Story = {
-  argTypes: {
-    ...disableArgTypes(['type']),
+  render: (args) => <InputTypes {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(InputTypesSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
-  render: ({ placeholder, ...args }) => (
-    <IressStack gap="md">
-      {/* Copied from: HTMLInputTypeAttribute */}
-      {[
-        'text',
-        'color',
-        'date',
-        'datetime-local',
-        'email',
-        'file',
-        'month',
-        'number',
-        'password',
-        'search',
-        'tel',
-        'time',
-        'url',
-        'week',
-      ].map((type) => (
-        <IressInput
-          {...args}
-          placeholder={placeholder ?? `${capitalizeFirstLetter(type)} input`}
-          type={type}
-          key={type}
-        />
-      ))}
-    </IressStack>
-  ),
 };
 
-const inputModes: Exclude<IressInputProps['inputMode'], undefined>[] = [
-  'text',
-  'tel',
-  'url',
-  'email',
-  'numeric',
-  'decimal',
-  'search',
-];
-export const InputModes: Story = {
-  argTypes: {
-    ...disableArgTypes(['inputMode']),
+export const InputModesStory: Story = {
+  name: 'InputModes',
+  render: (args) => <InputModes {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(InputModesSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
-  render: ({ placeholder, ...args }) => (
-    <IressStack gap="md">
-      {inputModes.map((inputMode) => (
-        <IressInput
-          {...args}
-          placeholder={
-            placeholder ??
-            `${capitalizeFirstLetter(
-              inputMode,
-            )} mode, usually best used when type="${inputMode}" `
-          }
-          inputMode={inputMode}
-          key={inputMode}
-        />
-      ))}
-    </IressStack>
-  ),
 };
 
 export const FileType: Story = {
-  args: {
-    type: 'file',
-    required: true,
+  render: () => <InputFileType />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(InputFileTypeSource, { stripImports: true }),
   },
-  render: (args) => {
-    const { success } = useToaster();
-    return (
-      <IressField label="File upload">
-        <IressInput
-          {...args}
-          onChange={(e) =>
-            success({
-              content: `File uploaded: ${e.target.files?.[0].name}`,
-            })
-          }
-        />
-      </IressField>
-    );
-  },
-  decorators: [
-    (Story) => (
-      <IressToasterProvider>
-        <Story />
-      </IressToasterProvider>
-    ),
-  ],
 };
 
 export const Clearable: Story = {
@@ -143,21 +86,14 @@ export const Clearable: Story = {
 };
 
 export const Sizing: Story = {
-  argTypes: {
-    ...disableArgTypes(['width']),
+  render: (args) => <InputSizing {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(InputSizingSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
-  render: ({ placeholder, ...args }) => (
-    <IressStack gap="md">
-      {FORM_ELEMENT_WIDTHS.map((width) => (
-        <IressInput
-          {...args}
-          placeholder={placeholder ?? width}
-          width={width}
-          key={width}
-        />
-      ))}
-    </IressStack>
-  ),
 };
 
 export const TextAreas: TextareaStory = {
@@ -167,34 +103,14 @@ export const TextAreas: TextareaStory = {
 };
 
 export const Slots: Story = {
-  argTypes: {},
-  render: ({ placeholder, prepend, append, ...args }) => (
-    <IressStack gap="md">
-      <IressInput
-        {...args}
-        prepend={prepend ?? <IressIcon name="search" />}
-        placeholder={placeholder ?? 'Prepend slot'}
-      />
-
-      <IressInput
-        {...args}
-        append={append ?? <IressIcon name="search" />}
-        placeholder={placeholder ?? 'Append slot'}
-      />
-
-      <IressInput
-        {...args}
-        prepend={prepend ?? <IressIcon name="search" />}
-        placeholder={placeholder ?? 'Prepend slot'}
-      />
-
-      <IressInput
-        {...args}
-        append={append ?? <IressIcon name="search" />}
-        placeholder={placeholder ?? 'Append slot'}
-      />
-    </IressStack>
-  ),
+  render: (args) => <InputSlots {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(InputSlotsSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
+  },
 };
 
 export const Actions: Story = {
@@ -210,31 +126,26 @@ export const Actions: Story = {
     ],
     placeholder: 'Input with action button',
   },
-  argTypes: {},
 };
 
 export const ReadOnly: Story = {
-  ...Default,
   args: {
-    ...Default.args,
+    placeholder: 'Enter your name',
     readOnly: true,
     value: 'Value',
   },
 };
 
 export const Disabled: Story = {
-  ...Default,
   args: {
-    ...Default.args,
+    placeholder: 'Enter your name',
     disabled: true,
     value: 'Value',
   },
 };
 
 export const Formatter: Story = {
-  ...Default,
   args: {
-    ...Default.args,
     placeholder:
       'Enter a string and it will show in UPPERCASE when not focused, and show the raw value on focus',
     formatter: (value) => (value ? value.toString().toUpperCase() : ''),
@@ -247,30 +158,10 @@ export const Formatter: Story = {
 };
 
 export const CurrencyFormatter: Story = {
-  ...Default,
-  args: {
-    ...Default.args,
-    defaultValue: '0.00',
-    placeholder:
-      'Enter any number and it will show in currency format when the input is not focused',
-    type: 'number',
-    formatter: (value = '') => {
-      const numberValue = Number(value);
-
-      if (Number.isNaN(numberValue)) {
-        return value;
-      }
-
-      return new Intl.NumberFormat('en-AU', {
-        style: 'currency',
-        currency: 'AUD',
-      }).format(numberValue);
-    },
-  },
+  render: (args) => <InputCurrencyFormatter {...args} />,
   parameters: {
-    ...withJsxTransformer({
-      showFunctions: true,
-    }),
+    controls: { disable: true },
+    ...withSource(InputCurrencyFormatterSource, { stripImports: true }),
   },
 };
 
@@ -287,5 +178,29 @@ export const Variant: Story = {
     variant: 'search',
     placeholder: 'Start your search...',
     prepend: <IressIcon name="search" />,
+  },
+};
+
+export const ReactHookForms: Story = {
+  tags: ['recipe'],
+  render: (args) => <ReactHookFormsInput {...args} />,
+  parameters: {
+    controls: { disable: true },
+    actions: { disable: true },
+    IDS_Sandbox: { scopes: ['react-hook-form'] },
+    ...withSource(ReactHookFormsInputSource, { stripImports: true }),
+  },
+};
+
+export const Percentage: Story = {
+  tags: ['recipe'],
+  render: (args) => <InputPercentage {...args} />,
+  parameters: {
+    controls: { disable: true },
+    actions: { disable: true },
+    ...withSource(InputPercentageSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };

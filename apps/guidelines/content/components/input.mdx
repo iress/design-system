@@ -1,0 +1,236 @@
+import { inputMeta } from '@iress-oss/ids-components/meta';
+import { IressButton } from '@iress-oss/ids-components';
+
+# Input
+
+Inputs allow a user to input and interact with data. This component should be used as a child of the IressField component to ensure the correct placement of elements like label, error & hint text.
+
+<Metadata meta={inputMeta} />
+
+<StoryEmbed id="components-input--clearable"/>
+
+## Design
+
+### When to use
+
+- **Free text entry**: Names, emails, URLs, or any user-typed value
+- **Formatted values**: Currency, percentages, or dates with a `formatter`
+- **Multi-line text**: Textareas for longer content (via `rows` prop)
+- **File uploads**: Selecting files from the user's device
+
+### When not to use
+
+- **Selection from fixed options** — use Select or RadioGroup
+- **Rich text editing** — use a dedicated rich text editor
+- **Currency input** — use InputCurrency for locale-aware formatting
+
+### Do's and Don'ts
+
+| ✅ Do | ❌ Don't |
+|-------|----------|
+| Use appropriate `type` for the data (email, tel, url) | Default everything to `type="text"` |
+| Set `inputmode` for mobile keyboard hints | Rely on `type="number"` for all numeric input |
+| Use `sizing` to hint at expected input length | Make all inputs the same width regardless of content |
+| Wrap in `IressFormField` for label and validation | Use a standalone input without an accessible label |
+
+### Content guidelines
+
+- **Placeholder**: Use as a hint, not a replacement for labels (e.g. "e.g. john@example.com")
+- **Labels**: Always provide via `IressFormField`; keep concise and specific
+- **Error messages**: Explain what went wrong and how to fix it
+
+### Related patterns
+
+- [Form Field](/patterns/form) — for wrapping with label, hint, and validation
+- [Input Currency](/components/input-currency) — for locale-aware currency input
+- [Autocomplete](/components/autocomplete) — for input with suggestions
+
+## Develop
+
+### Quick Start
+
+```tsx
+import { IressInput } from '@iress-oss/ids-components';
+
+<IressInput placeholder="Enter your name" />
+```
+
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-input--docs#api-props">View all props</IressButton>
+
+### Usage
+
+#### Types
+
+The input component's `type` can be set to one of the following value: `text` (default), `date`, `email`, `number`, `password`, `search`, `tel`, `url`, `time`, `color` and `file`.
+
+<StoryEmbed id="components-input--types"/>
+
+#### Input modes
+
+The `inputmode` attribute provides a hint to browsers for devices with onscreen keyboards to help them decide which keyboard to display.
+
+<StoryEmbed id="components-input--input-modes-story"/>
+
+#### File uploads
+
+When using the `type="file"` attribute, the input allows users to select one or more files from their device.
+
+<StoryEmbed id="components-input--file-type"/>
+
+#### Clearable
+
+By setting the `clearable` prop to `true` a clear button will appear when the user has entered a value into the input.
+
+<StoryEmbed id="components-input--clearable"/>
+
+#### Sizing
+
+Inputs can be resized to suit a specific number of characters. Widths can also be set as a percentage.
+
+<StoryEmbed id="components-input--sizing"/>
+
+#### Textareas
+
+Set the `rows` prop to render a `textarea` instead of an `input`.
+
+<StoryEmbed id="components-input--text-areas"/>
+
+#### Prepend & Append
+
+Content (typically icons) can be added via the `prepend` and `append` props on `IressInput`.
+
+> ⚠️ **Do not use `slot` attributes on children** (e.g. `<IressIcon slot="start" />`). The `slot` attribute is a legacy v4 pattern that is no longer supported. Always use the `prepend` and `append` props.
+
+<StoryEmbed id="components-input--slots"/>
+
+#### Actions
+
+The `actions` prop allows you to add buttons to the input.
+
+<StoryEmbed id="components-input--actions"/>
+
+#### Read only
+
+The `readOnly` prop can be set to prevent the user from changing the value of the input.
+
+<StoryEmbed id="components-input--read-only"/>
+
+#### Formatter
+
+`formatter` allows you to display the value in a different format when the input is not focused.
+
+**Notes:**
+
+- When `formatter` is set, the `type` of the input is changed to `text` when not in focus.
+- The value of the native input will be the formatted value, not the raw value.
+
+<StoryEmbed id="components-input--formatter"/>
+
+##### Currency formatting example
+
+<StoryEmbed id="components-input--currency-formatter"/>
+
+#### Auto-growing textareas
+
+For textareas (when `rows` prop is set), you can enable the `autoGrow` prop to automatically expand the textarea height as the user types more lines.
+
+<StoryEmbed id="components-input--auto-grow"/>
+
+#### `variant`
+
+The `variant` prop allows you to apply different styles to the input.
+
+- `search`: Used for search inputs, you can use the `prepend` or `append` prop to add a search icon.
+
+<StoryEmbed id="components-input--variant"/>
+
+#### Percentage formatting
+
+You can use `IressInput` to display percentage formatting. When the field is focused, it can display the raw value, and when blurred, it can display the formatted percentage value.
+
+<StoryEmbed id="components-input--percentage"/>
+
+### Testing
+
+Query the input by its role:
+
+```tsx
+const input = screen.getByRole('textbox', { name: 'Email' });
+```
+
+For number inputs, use `spinbutton`:
+
+```tsx
+const input = screen.getByRole('spinbutton', { name: 'Quantity' });
+```
+
+#### Gotchas
+
+- **formatter changes the role**: When `formatter` is set on a `type="number"`
+  input, the role changes between `textbox` (blurred) and `spinbutton` (focused).
+- **readOnly removes the input role**: When `readOnly` is set, the textbox role
+  is removed. The value is displayed as plain text.
+- **Textarea vs Input test IDs**: When `rows` is set, the component renders a
+  `<textarea>` with a `__textarea` test ID suffix. Without `rows`, it renders an
+  `<input>` with a `__input` suffix.
+
+  ```tsx
+  screen.getByTestId('my-input__input');     // Single-line
+  screen.getByTestId('my-input__textarea');  // Textarea (rows > 0)
+  ```
+
+- **clearable inputs**: The clear button only appears when the input has a value.
+
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-input--docs#testing">View test roles/IDs</IressButton>
+
+---
+
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
+
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-input--docs">View in Storybook</IressButton>
+
+## Specifications
+
+### Behaviour
+
+| State | Behaviour |
+|-------|-----------|
+| Default | Input accepts text entry and fires `onChange`/`onInput` events |
+| Focused with formatter | Shows raw value; type reverts to original |
+| Blurred with formatter | Shows formatted value; type becomes `text` |
+| Read only | Renders as plain text with hidden input for form value |
+| Clearable | Clear button appears when input has a value |
+| Auto-grow textarea | Height expands as user types more lines |
+
+### Accessibility
+
+**WCAG compliance:**
+
+- **4.1.2 Name, Role, Value** — Uses `role="textbox"` or `role="spinbutton"` based on type
+- **1.3.1 Info and Relationships** — Must be associated with a label via `IressFormField`
+- **3.3.2 Labels or Instructions** — Placeholder is supplementary, not a label replacement
+
+**Keyboard interaction:**
+
+| Key | Action |
+|-----|--------|
+| `Tab` | Moves focus in/out of the input |
+| `Escape` | Clears input when `clearable` is set (after clear button focus) |
+| Standard text keys | Input characters as expected |
+
+### Edge cases
+
+- **formatter + type="number"**: Role changes between focus states — account for in tests
+- **readOnly**: No textbox role in DOM — cannot query by role
+- **File type**: Appearance controlled by browser; limited styling possible
+- **Empty clearable input**: Clear button is hidden until a value is entered
+
+---
+
+### Storybook
+
+Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
+
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-input--docs">View in Storybook</IressButton>

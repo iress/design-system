@@ -84,10 +84,17 @@ Node 22, Yarn 4 (Berry). The `packageManager` field in root `package.json` pins 
 Build order: `tokens` → `theme-preset` → `components`. Always respect this when building.
 
 `yarn build` runs all package builds in topological order, then runs `yarn translate` which generates:
-- AI component docs (`packages/*/.ai/`)
-- Token reference (`token-reference.md`)
-- Skills translations
-- `llms.txt` files for each package
+- AI component docs (`packages/*/.ai/`) — from `apps/guidelines/content/` MDX + component meta + stories
+- Token reference (`token-reference.md`) — from `@iress-oss/ids-tokens` schema
+- Skills translations — from `.agents/skills/` to package `.ai/skills/`
+- `llms.txt` discovery files for each package
+- `IDS-FULL-REFERENCE.md` — concatenation of all docs
+
+The translate pipeline (`scripts/translate.ts`) uses:
+- **StoryEmbed resolution** — extracts code from stories (P1 args, P2 mocks, P3 inline renders)
+- **Plugin system** — overrides for reference tables, decision trees, interactive stories
+- **react-docgen-typescript** — extracts props tables from component source
+- **ComponentMeta** — `subComponents` and `additionalProps` for documentation enrichment
 
 | Package | Path | Purpose |
 |---|---|---|
@@ -135,9 +142,9 @@ yarn build                                          # rebuild downstream (theme-
 ```
 
 Checklist:
-- New token category? Add entry to `packages/tokens/.ai/index.json` with `name`, `description`, `schemaSource`, `cssVariablePrefix`
+- New token category? Add the schema to `packages/tokens/src/schema/` and create a corresponding MDX at `apps/guidelines/content/tokens/<category>.mdx`. Run `yarn translate` — the index.json and references are auto-generated.
 - CSS variables follow `--iress-{category}-{name}` naming
-- Update `.agents/skills/token-usage/references/token-reference.md` if token values change
+- Run `yarn translate` to regenerate token reference and all derived docs
 - Run `yarn test:coverage` in tokens package to verify transforms
 
 ### 3. Running Validation
@@ -173,7 +180,7 @@ Budgets are defined in `.size-limit.json`:
 
 | Bundle | Limit |
 |---|---|
-| `@iress-oss/ids-components` JS | 377 kB gzip |
+| `@iress-oss/ids-components` JS | 420 kB gzip (including documentation metadata) |
 | `@iress-oss/ids-components` CSS | 46 kB gzip |
 | `@iress-oss/ids-tokens` JS | 20 kB gzip |
 | `@iress-oss/ids-tokens` CSS | 3 kB gzip |
@@ -318,7 +325,7 @@ When code changes, these docs must stay in sync. Flag missing updates as require
 
 | What changed | Update these |
 |---|---|
-| Token schema (`packages/tokens/src/schema/`) | `packages/tokens/.ai/index.json`, `.agents/skills/token-usage/` |
+| Token schema (`packages/tokens/src/schema/`) | `packages/tokens/.ai/` (auto-generated via `yarn translate`), `.agents/skills/token-usage/` |
 | Component API (new/renamed/removed props) | `.ai/components/<name>.md`, relevant agent skills |
 | New component | `main.ts` export, `.ai/components/`, skills (`ui-translation`, `figma-to-ids`, `ui-doctor`) |
 | Package scripts or setup steps | Root `AGENTS.md`, package-level `AGENTS.md` |

@@ -5,7 +5,6 @@ import {
   IressFormField,
   IressInputCurrency,
   IressPanel,
-  IressStack,
   IressText,
 } from '@/main';
 import { use, useDeferredValue, useEffect, useState } from 'react';
@@ -81,21 +80,19 @@ const Chart = () => {
   return (
     <IressLoadingSuspense pattern="component" update={updating}>
       {chart && <Graph />}
-      <IressPanel>
+      <IressPanel mt="spacing.4">
         <IressForm<ChartProps>
           onSubmit={(projectionData) => setMoney(projectionData.money)}
+          heading="Update projection"
         >
-          <IressStack gap="md">
-            <h3>Update projection</h3>
-            <IressFormField
-              name="money"
-              label="My money"
-              render={(controlledProps) => (
-                <IressInputCurrency {...controlledProps} />
-              )}
-            />
-            <IressButton type="submit">Update projection</IressButton>
-          </IressStack>
+          <IressFormField
+            name="money"
+            label="My money"
+            render={(controlledProps) => (
+              <IressInputCurrency {...controlledProps} />
+            )}
+          />
+          <IressButton type="submit">Update projection</IressButton>
         </IressForm>
       </IressPanel>
     </IressLoadingSuspense>

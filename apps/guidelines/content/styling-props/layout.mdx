@@ -1,0 +1,55 @@
+import { IressButton } from '@iress-oss/ids-components';
+export const meta = {
+  title: 'Layout',
+  description: 'These are all styling props related to modifying layout.',
+};
+
+# Layout
+
+These are all styling props related to modifying layout.
+
+## `alignSelf`
+
+The `alignSelf` prop allows you to override the alignItems value set by a parent flex container for individual components. This is useful when you want to adjust the alignment of a single item without affecting the entire container.
+
+
+<StoryEmbed id="styling-props-layout--align-self" />
+
+## `flex="1"`
+
+The `flex="1"` prop is used to make a component grow and fill available space in a flex container. Setting `flex` to `1` allows the component to take up one unit of available space, ensuring consistent behavior across components.
+
+Note: We only allow `1` as a value to maintain design consistency.
+
+<StoryEmbed id="styling-props-layout--flex-1" />
+
+## `hideFrom` and `hideBelow`
+
+The `hideFrom` and `hideBelow` props allow you to hide content from both visual users and screen readers at different breakpoints. This is useful when certain content is not relevant on smaller screens, and you want to ensure that screen reader users have the same experience as visual users.
+
+
+<StoryEmbed id="styling-props-layout--hide-from" />
+
+<StoryEmbed id="styling-props-layout--hide-below" />
+
+## `scrollable`
+
+The scrollable prop enables scrolling behavior for an element when its content
+overflows its bounds. It sets the `overflow` CSS property to `auto`, allowing
+scrollbars to appear as needed. The scrollbar has been styled to match the
+design system.
+
+You can set the value to `true` to enable scrolling on both axes, or specify `'x'` or `'y'` to restrict scrolling to a single axis.
+
+
+<StoryEmbed id="styling-props-layout--scrollable" />
+
+## `stretch`
+
+The `stretch` prop is used to stretch a component to fill the available space. It is used in components such as `IressPanel` to ensure each column in a layout takes up the same amount of space.
+
+<StoryEmbed id="styling-props-layout--stretch" />
+
+---
+
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_styling-props-layout--docs">View in Storybook →</IressButton>

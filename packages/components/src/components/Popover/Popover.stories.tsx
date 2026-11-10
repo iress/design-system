@@ -12,13 +12,19 @@ import { IressCol } from '../Col';
 import { IressText } from '../Text';
 import { PopoverParentContainer } from './mocks/PopoverParentContainer';
 import PopoverParentContainerSource from './mocks/PopoverParentContainer.tsx?raw';
+import { UsePopoverExample } from './mocks/UsePopoverExample';
+import UsePopoverExampleSource from './mocks/UsePopoverExample.tsx?raw';
+import { PopoverWithMenu } from './mocks/PopoverWithMenu';
+import PopoverWithMenuSource from './mocks/PopoverWithMenu.tsx?raw';
+import { PopoverWithListbox } from './mocks/PopoverWithListbox';
+import PopoverWithListboxSource from './mocks/PopoverWithListbox.tsx?raw';
 import {
+  componentStoryMeta,
   disableArgTypes,
-  withCustomSource,
-  withTransformedRawSource,
+  withSource,
   reactElementArgType,
-  stylingProps,
 } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressPopover>;
 
@@ -67,21 +73,22 @@ const childrenOptions = {
 export default {
   title: 'Components/Popover',
   component: IressPopover,
-  argTypes: {
-    ...disableArgTypes(['activator']),
-    activator: reactElementArgType,
-    children: {
-      control: {
-        type: 'select',
-        labels: {
-          Heading: 'With Custom Children',
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      ...disableArgTypes(['activator']),
+      activator: reactElementArgType,
+      children: {
+        control: {
+          type: 'select',
+          labels: {
+            Heading: 'With Custom Children',
+          },
         },
+        options: Object.keys(childrenOptions),
+        mapping: childrenOptions,
       },
-      options: Object.keys(childrenOptions),
-      mapping: childrenOptions,
     },
-    ...stylingProps,
-  },
+  }),
 } as Meta<typeof IressPopover>;
 
 export const Default: Story = {
@@ -99,18 +106,10 @@ export const Activator: Story = {
 };
 
 export const ShowWithState: Story = {
-  args: {
-    ...Activator.args,
-  },
-  argTypes: {
-    ...disableArgTypes(['activator', 'children', 'show']),
-  },
   render: (args) => <PopoverUsingState {...args} />,
   parameters: {
-    ...withTransformedRawSource(PopoverUsingStateSource, 'IressPopoverProps', [
-      'activator',
-      'children',
-    ]),
+    controls: { disable: true },
+    ...withSource(PopoverUsingStateSource, { stripImports: true }),
   },
 };
 
@@ -229,7 +228,9 @@ export const Width: Story = {
     ...disableArgTypes(['show', 'width']),
   },
   render: (args) => (
-    <IressPopover {...args} contentStyle={{ style: { maxWidth: '30rem' } }} />
+    <IressPopover {...args} contentStyle={{ style: { maxWidth: '30rem' } }}>
+      {args.children}
+    </IressPopover>
   ),
 };
 
@@ -245,12 +246,16 @@ export const Overflow: Story = {
       <IressPopover
         {...args}
         activator={<IressButton>Normal popover</IressButton>}
-      />
+      >
+        {args.children}
+      </IressPopover>
       <IressPopover
         {...args}
         activator={<IressButton>Fixed height popover</IressButton>}
         contentStyle={{ scrollable: 'y', style: { maxHeight: '200px' } }}
-      />
+      >
+        {args.children}
+      </IressPopover>
     </IressInline>
   ),
 };
@@ -269,23 +274,21 @@ export const Inline: Story = {
 };
 
 export const MatchActivatorWidth: Story = {
-  ...Activator,
   args: {
-    ...Activator.args,
     activator: (
       <IressButton>
         This popover will match the width of its activator
       </IressButton>
     ),
+    children: 'basic',
     align: 'bottom',
     matchActivatorWidth: true,
   },
 };
 
 export const VirtualFocus: Story = {
-  ...Activator,
   args: {
-    ...Activator.args,
+    activator: <IressButton>Toggle popover</IressButton>,
     children: 'menu',
     type: 'listbox',
     virtualFocus: true,
@@ -295,6 +298,37 @@ export const VirtualFocus: Story = {
 export const ParentContainer: Story = {
   render: (args) => <PopoverParentContainer {...args} />,
   parameters: {
-    ...withCustomSource(PopoverParentContainerSource),
+    controls: { disable: true },
+    ...withSource(PopoverParentContainerSource, { stripImports: true }),
+  },
+};
+
+export const FocusableChildren: Story = {
+  tags: ['recipe'],
+  render: (args) => <UsePopoverExample {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(UsePopoverExampleSource, { stripImports: true }),
+  },
+};
+
+export const WithMenu: Story = {
+  tags: ['recipe'],
+  render: (args) => <PopoverWithMenu {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(PopoverWithMenuSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
+  },
+};
+
+export const WithListbox: Story = {
+  tags: ['recipe'],
+  render: (args) => <PopoverWithListbox {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(PopoverWithListboxSource, { stripImports: true }),
   },
 };

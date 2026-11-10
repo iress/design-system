@@ -44,6 +44,19 @@ export interface IressValidationSummaryProps extends Omit<
   visiblePrefix?: boolean;
 }
 
+/**
+ * Displays a list of validation messages, optionally linking each to its related form field.
+ *
+ * @example
+ * ```tsx
+ * import { IressValidationSummary } from '@iress-oss/ids-components';
+ *
+ * <IressValidationSummary
+ *   messages={[{ linkToTarget: 'email', message: 'Email is required' }]}
+ *   status="danger"
+ * />
+ * ```
+ */
 export const IressValidationSummary = ({
   messages = [],
   linkToTarget,

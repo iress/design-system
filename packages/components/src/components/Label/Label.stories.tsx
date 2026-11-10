@@ -4,22 +4,23 @@ import { IressLabel } from './Label';
 import { IressIcon } from '../Icon';
 import { IressInline } from '../Inline';
 import {
+  componentStoryMeta,
   disableArgTypes,
   reactNodeArgType,
-  stylingProps,
 } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressLabel>;
 
 export default {
   title: 'Components/Label',
   component: IressLabel,
-  tags: ['updated'],
-  argTypes: {
-    children: reactNodeArgType,
-    append: reactNodeArgType,
-    ...stylingProps,
-  },
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      children: reactNodeArgType,
+      append: reactNodeArgType,
+    },
+  }),
 } as Meta<typeof IressLabel>;
 
 export const Default: Story = {
@@ -51,7 +52,6 @@ export const LockedReadonly: Story = {
 
 export const RichContent: Story = {
   args: {
-    hiddenLabel: false,
     children: (
       <IressInline gap="md" verticalAlign="middle">
         <IressIcon name="home" />

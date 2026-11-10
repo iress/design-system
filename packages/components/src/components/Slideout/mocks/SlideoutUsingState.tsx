@@ -1,7 +1,7 @@
-import { IressButton, IressSlideout, type IressSlideoutProps } from '@/main';
+import { IressButton, IressSlideout } from '@/main';
 import { useState } from 'react';
 
-export const SlideoutUsingState = (args: IressSlideoutProps) => {
+export function SlideoutUsingState() {
   const [show, setShow] = useState(false);
 
   return (
@@ -10,11 +10,13 @@ export const SlideoutUsingState = (args: IressSlideoutProps) => {
         Show slideout using state
       </IressButton>
       <IressSlideout
-        {...args}
         show={show}
         onShowChange={setShow}
+        heading="Slideout"
         footer={<IressButton onClick={() => setShow(false)}>Close</IressButton>}
-      />
+      >
+        This slideout was opened via state
+      </IressSlideout>
     </>
   );
-};
+}

@@ -62,6 +62,16 @@ export interface ProgressCustomCSSProperties extends CSSProperties {
   '--iress-background-image'?: string;
 }
 
+/**
+ * Visualises the completion status of a task or process as a progress bar.
+ *
+ * @example
+ * ```tsx
+ * import { IressProgress } from '@iress-oss/ids-components';
+ *
+ * <IressProgress value={75} max={100} />
+ * ```
+ */
 export const IressProgress = <TMin extends number | undefined = undefined>({
   backgroundImage,
   borderRadius,

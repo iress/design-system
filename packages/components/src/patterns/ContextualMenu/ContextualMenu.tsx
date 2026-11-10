@@ -14,7 +14,7 @@ import { contextualMenu } from './ContextualMenu.styles';
 import type { MaterialSymbol } from 'material-symbols';
 import { IressIcon } from '@/components/Icon';
 
-export interface ContextualMenuItem extends Omit<
+export interface IressContextualMenuItem extends Omit<
   IressMenuItemProps,
   | 'canToggle'
   | 'label'
@@ -40,6 +40,11 @@ export interface ContextualMenuItem extends Omit<
   icon?: MaterialSymbol;
 }
 
+/**
+ * @deprecated Use `IressContextualMenuItem` instead. This type will be removed in a future release.
+ */
+export type ConectualMenuItem = IressContextualMenuItem;
+
 export interface IressContextualMenuProps extends Omit<
   IressPopoverProps,
   'activator' | 'type'
@@ -47,7 +52,7 @@ export interface IressContextualMenuProps extends Omit<
   /**
    * The items rendered in the contextual menu.
    */
-  items?: ContextualMenuItem[];
+  items?: IressContextualMenuItem[];
 
   /**
    * Size for the menu trigger.
@@ -77,9 +82,21 @@ export interface IressContextualMenuProps extends Omit<
    * Emitted when a menu item is clicked.
    * Receives the clicked item as an argument.
    */
-  onAction?: (item: ContextualMenuItem) => void;
+  onAction?: (item: IressContextualMenuItem) => void;
 }
 
+/**
+ * Displays a context-sensitive menu of actions triggered by user interaction.
+ *
+ * @example
+ * ```tsx
+ * import { IressContextualMenu } from '@iress-oss/ids-components';
+ *
+ * <IressContextualMenu
+ *   items={[{ key: 'copy', label: 'Copy' }, { key: 'paste', label: 'Paste' }]}
+ * />
+ * ```
+ */
 export const IressContextualMenu = ({
   ariaLabel = 'More options',
   align = 'bottom-end',

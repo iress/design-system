@@ -73,7 +73,6 @@ export default defineConfig({
               'src/**/mock-data/**',
               'src/**/examples/**',
               'src/**/mocks/**',
-              'src/**/meta/**',
               'src/vite-env.d.ts',
               'src/styled-system/**/*',
               'src/sandbox/**/*',

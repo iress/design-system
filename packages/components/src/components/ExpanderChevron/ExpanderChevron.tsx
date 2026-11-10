@@ -3,14 +3,33 @@ import { cx } from '@/styled-system/css';
 import { expanderChevron } from './ExpanderChevron.styles';
 
 export interface IressExpanderChevronProps {
+  /**
+   * Additional class names to apply to the chevron.
+   */
   className?: string;
+
+  /**
+   * Whether the chevron is in the open state.
+   */
   open?: boolean;
+
+  /**
+   * Whether the chevron should be displayed inline.
+   */
   inline?: boolean;
 }
 
 /**
  * Internal chevron icon for expandable components.
  * Uses Material Symbols "keyboard_arrow_down" (filled, weight 300).
+ *
+ * @example
+ * ```tsx
+ * import { IressExpanderChevron } from '@iress-oss/ids-components';
+ *
+ * <IressExpanderChevron open />
+ * ```
+ *
  * @see https://fonts.google.com/icons?selected=Material+Symbols+Rounded:keyboard_arrow_down
  */
 export const IressExpanderChevron: FC<IressExpanderChevronProps> = ({

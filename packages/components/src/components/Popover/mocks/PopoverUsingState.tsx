@@ -1,12 +1,11 @@
-import { IressButton, IressPopover, type IressPopoverProps } from '@/main';
+import { IressButton, IressPopover } from '@/main';
 import { useState } from 'react';
 
-export const PopoverUsingState = (args: IressPopoverProps) => {
+export function PopoverUsingState() {
   const [show, setShow] = useState(false);
 
   return (
     <IressPopover
-      {...args}
       activator={
         <IressButton onClick={() => setShow(!show)}>
           Show popover using state
@@ -19,4 +18,4 @@ export const PopoverUsingState = (args: IressPopoverProps) => {
       A little more information about this area.
     </IressPopover>
   );
-};
+}

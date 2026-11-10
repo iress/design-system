@@ -4,28 +4,57 @@ import { LoadingSuspenseWizard } from './mocks/LoadingWizardWithSuspense';
 import LoadingSuspenseWizardSource from './mocks/LoadingWizardWithSuspense.tsx?raw';
 import { LoadingSuspenseWizardFast } from './mocks/LoadingWizardWithSuspenseFast';
 import LoadingSuspenseWizardFastSource from './mocks/LoadingWizardWithSuspenseFast.tsx?raw';
-import { withCustomSource } from '@iress-oss/ids-storybook-config';
+import { withSource, stylingProps } from '@iress-oss/ids-storybook-config';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 
 type Story = StoryObj<typeof IressLoadingSuspense>;
+
+const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The root loading element (delegates to IressLoading)',
+    testId: 'loading',
+  },
+  {
+    part: 'message',
+    description: 'The loading message text',
+    query: <code>getByText('...')</code>,
+    testId: 'loading__message',
+  },
+];
 
 export default {
   title: 'Patterns/Loading/Suspense',
   component: IressLoadingSuspense,
   tags: ['beta: '],
+  argTypes: {
+    ...stylingProps,
+  },
+  parameters: {
+    idsConfig: { testMeta },
+    docs: {
+      description: {
+        component:
+          'A Suspense-compatible loading boundary that displays IressLoading while async content resolves.',
+      },
+    },
+  },
 } as Meta<typeof IressLoadingSuspense>;
 
 export const Suspense: Story = {
-  render: () => <LoadingSuspenseWizard />,
   parameters: {
-    ...withCustomSource(LoadingSuspenseWizardSource),
+    controls: { disable: true },
+    ...withSource(LoadingSuspenseWizardSource, { stripImports: true }),
     layout: 'fullscreen',
   },
+  render: (args) => <LoadingSuspenseWizard {...args} />,
 };
 
 export const FastSuspense: Story = {
-  render: () => <LoadingSuspenseWizardFast />,
   parameters: {
-    ...withCustomSource(LoadingSuspenseWizardFastSource),
+    controls: { disable: true },
+    ...withSource(LoadingSuspenseWizardFastSource, { stripImports: true }),
     layout: 'fullscreen',
   },
+  render: (args) => <LoadingSuspenseWizardFast {...args} />,
 };

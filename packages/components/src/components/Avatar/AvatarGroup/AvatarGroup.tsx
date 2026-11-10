@@ -29,6 +29,9 @@ export interface IressAvatarGroupProps extends IressStyledProps<'div'> {
   overflowLabel?: (count: number) => ReactNode;
 }
 
+/**
+ * Stacks avatars with optional compact sizing and an overflow indicator.
+ */
 export const IressAvatarGroup = ({
   children,
   compact = false,

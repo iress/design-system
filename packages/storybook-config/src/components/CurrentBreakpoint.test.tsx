@@ -32,7 +32,7 @@ describe('CurrentBreakpoint', () => {
     const content = screen.getByText('xl').parentElement?.textContent;
 
     expect(content).toBe(
-      `${breakpoint} breakpoint (${breakpointDetail.screenWidthRange})`,
+      `You are currently viewing the ${breakpoint} breakpoint (${breakpointDetail.screenWidthRange}). Resize your screen to view different breakpoints.`,
     );
   });
 

@@ -130,6 +130,16 @@ export interface IressSlideoutProps extends IressStyledProps {
   size?: 'sm' | 'md';
 }
 
+/**
+ * Displays supplementary content in a panel that slides in from the edge of the viewport.
+ *
+ * @example
+ * ```tsx
+ * import { IressSlideout } from '@iress-oss/ids-components';
+ *
+ * <IressSlideout heading="Details" show>Slideout content</IressSlideout>
+ * ```
+ */
 export const IressSlideout = ({
   children,
   className,

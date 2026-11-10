@@ -121,6 +121,16 @@ const Readonly = <T extends FormControlValue = string | number>(
   );
 };
 
+/**
+ * Displays a form value in a non-editable, read-only format.
+ *
+ * @example
+ * ```tsx
+ * import { IressReadonly } from '@iress-oss/ids-components';
+ *
+ * <IressReadonly value="user@example.com" />
+ * ```
+ */
 export const IressReadonly = forwardRef(Readonly) as (<
   T extends FormControlValue = string | number,
 >(

@@ -73,9 +73,7 @@ export interface IressAlertProps extends Omit<IressTextProps, 'element'> {
   multiLine?: boolean;
 
   /**
-   * Icon to display in the alert.
-   * If set to `false`, no icon will be displayed.
-   * If not provided, the icon will be determined by the `status` prop.
+   * Emitted when the alert is dismissed by the user via the close button.
    **/
   onClose?: (e?: MouseEvent<HTMLButtonElement>) => void;
 
@@ -101,6 +99,16 @@ const ALERT_ICONS: Record<Statuses | 'neutral', IressIconProps['name']> = {
   neutral: 'info',
 };
 
+/**
+ * Communicates important information inline with page content, such as validation errors, warnings, or status messages.
+ *
+ * @example
+ * ```tsx
+ * import { IressAlert } from '@iress-oss/ids-components';
+ *
+ * <IressAlert status="success">Changes saved successfully.</IressAlert>
+ * ```
+ */
 export const IressAlert = ({
   actions,
   children,

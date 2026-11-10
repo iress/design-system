@@ -56,7 +56,7 @@ export const useEstimatedProgressValue = (
     return isLoaded ? estimatedFinishTime : progress;
   }
 
-  if (isLoaded || progressValue >= estimatedFinishTime) {
+  if (isLoaded) {
     return estimatedFinishTime;
   }
 

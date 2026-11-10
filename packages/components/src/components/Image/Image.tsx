@@ -26,6 +26,16 @@ export interface IressImageProps extends Omit<
 
 const Image = styled('img', image);
 
+/**
+ * Renders a responsive image with optional fallback and loading behaviour.
+ *
+ * @example
+ * ```tsx
+ * import { IressImage } from '@iress-oss/ids-components';
+ *
+ * <IressImage src="/photo.jpg" alt="Description" />
+ * ```
+ */
 export const IressImage = ({
   className,
   maxWidth = '100%',

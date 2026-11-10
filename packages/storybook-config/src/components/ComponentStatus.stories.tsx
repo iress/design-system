@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as StoryStub from './mocks/StoryStub.stories';
 import { disableArgTypes } from '../helpers/disableArgTypes';
 import { ComponentStatus } from './ComponentStatus';
-import { withCustomSource } from '~/helpers/withCustomSource';
+import { withSource } from '~/helpers/withSource';
 
 type Story = StoryObj<typeof ComponentStatus>;
 
@@ -14,7 +14,7 @@ const meta: Meta<typeof ComponentStatus> = {
   parameters: {
     ...disableArgTypes(['meta', 'of']),
     relativeCsfPaths: ['mocks/StoryStub.stories'],
-    ...withCustomSource('<ComponentStatus stories={StoryStub} />'),
+    ...withSource('<ComponentStatus stories={StoryStub} />'),
   },
 };
 

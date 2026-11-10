@@ -23,6 +23,7 @@ export const ControlledDropdownMenuMultiselect = () => {
       onChange={(newValue) => setSelected(newValue)}
       onReset={() => setSelected([ALL_OPTIONS[0]])}
       selected={selected}
+      container={document.body}
     />
   );
 };

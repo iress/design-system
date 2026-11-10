@@ -199,6 +199,19 @@ const CheckboxGroup = <T = FormControlValue,>(
   );
 };
 
+/**
+ * Groups related checkboxes so users can select multiple options from a set.
+ *
+ * @example
+ * ```tsx
+ * import { IressCheckboxGroup, IressCheckbox } from '@iress-oss/ids-components';
+ *
+ * <IressCheckboxGroup name="options">
+ *   <IressCheckbox value="a">Option A</IressCheckbox>
+ *   <IressCheckbox value="b">Option B</IressCheckbox>
+ * </IressCheckboxGroup>
+ * ```
+ */
 export const IressCheckboxGroup = forwardRef(CheckboxGroup) as (<
   T = FormControlValue,
 >(

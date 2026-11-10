@@ -2,14 +2,13 @@ import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressHide } from '.';
 import { IressStack } from '../Stack';
 import { IressText } from '../Text';
-import { IressPanel } from '../Panel';
-import { IressDivider } from '../Divider';
 import {
-  CurrentBreakpoint,
+  componentStoryMeta,
   disableArgTypes,
   reactNodeArgType,
-  stylingProps,
+  withBreakpointLabel,
 } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 import { BREAKPOINT_DETAILS, BREAKPOINTS, IressTable } from '@/main';
 
 type Story = StoryObj<typeof IressHide>;
@@ -18,10 +17,11 @@ export default {
   title: 'Components/Hide',
   component: IressHide,
   tags: ['caution:srOnly, hideFrom and hideBelow props'],
-  argsTypes: {
-    children: reactNodeArgType,
-    ...stylingProps,
-  },
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      children: reactNodeArgType,
+    },
+  }),
 } as Meta<typeof IressHide>;
 
 export const Default: Story = {
@@ -39,56 +39,68 @@ export const HiddenOn: Story = {
   argTypes: {
     ...disableArgTypes(['children', 'hiddenOn']),
   },
-  render: (args) => {
-    const description = args.visuallyHidden ? 'visually ' : 'totally ';
-
-    return (
-      <IressStack gap="spacing.1">
-        <IressPanel>
-          <CurrentBreakpoint />
-        </IressPanel>
-        <IressDivider />
-        <IressHide {...args} hiddenOn={{ xs: true }}>
-          <IressText>
-            This text is {description} hidden on xs screens and above.
-          </IressText>
-        </IressHide>
-        <IressHide {...args} hiddenOn={{ md: true }}>
-          <IressText color="colour.system.success.text">
-            This text is {description} hidden on md screens and above.
-          </IressText>
-        </IressHide>
-        <IressHide {...args} hiddenOn={{ xs: true, lg: false }}>
-          <IressText color="colour.system.danger.text">
-            This text is {description} hidden on md screens and below.
-          </IressText>
-        </IressHide>
-        <IressHide {...args} hiddenOn={{ xs: true, sm: false }}>
-          <IressText color="colour.system.info.text">
-            This text is {description} hidden on xs screens only.
-          </IressText>
-        </IressHide>
-        <IressHide {...args} hiddenOn={{ xl: true, xxl: false }}>
-          <IressText color="colour.neutral.70">
-            This text is {description} hidden on xl screens only.
-          </IressText>
-        </IressHide>
-      </IressStack>
-    );
-  },
+  decorators: [withBreakpointLabel()],
+  render: () => (
+    <IressStack gap="spacing.1">
+      <IressHide hiddenOn={{ xs: true }}>
+        <IressText>This text is hidden on xs screens and above.</IressText>
+      </IressHide>
+      <IressHide hiddenOn={{ md: true }}>
+        <IressText color="colour.system.success.text">
+          This text is hidden on md screens and above.
+        </IressText>
+      </IressHide>
+      <IressHide hiddenOn={{ xs: true, lg: false }}>
+        <IressText color="colour.system.danger.text">
+          This text is hidden on md screens and below.
+        </IressText>
+      </IressHide>
+      <IressHide hiddenOn={{ xs: true, sm: false }}>
+        <IressText color="colour.system.info.text">
+          This text is hidden on xs screens only.
+        </IressText>
+      </IressHide>
+      <IressHide hiddenOn={{ xl: true, xxl: false }}>
+        <IressText color="colour.neutral.70">
+          This text is hidden on xl screens only.
+        </IressText>
+      </IressHide>
+    </IressStack>
+  ),
 };
 
 export const VisuallyHidden: Story = {
   ...HiddenOn,
   args: {
-    ...HiddenOn.args,
     visuallyHidden: true,
   },
+  render: () => (
+    <IressStack gap="spacing.1">
+      <IressHide visuallyHidden hiddenOn={{ xs: true }}>
+        <IressText>
+          This text is visually hidden on xs screens and above.
+        </IressText>
+      </IressHide>
+      <IressHide visuallyHidden hiddenOn={{ md: true }}>
+        <IressText color="colour.system.success.text">
+          This text is visually hidden on md screens and above.
+        </IressText>
+      </IressHide>
+    </IressStack>
+  ),
 };
 
 export const BreakpointTable: Story = {
-  render: () => (
+  parameters: {
+    docs: {
+      description: {
+        component: 'This table shows the expected',
+      },
+    },
+  },
+  render: (args) => (
     <IressTable
+      {...args}
       caption="Hide breakpoints"
       rows={BREAKPOINTS.map((breakpoint) => ({
         breakpoint: <code>{breakpoint}</code>,
@@ -100,4 +112,6 @@ export const BreakpointTable: Story = {
       }))}
     />
   ),
+  decorators: [withBreakpointLabel()],
+  tags: ['reference'],
 };

@@ -1,14 +1,8 @@
-import {
-  IressStack,
-  IressButton,
-  IressText,
-  IressSlideout,
-  type IressSlideoutProps,
-} from '@/main';
+import { IressStack, IressButton, IressText, IressSlideout } from '@/main';
 import { useRef, useState } from 'react';
 import { cssVars } from '@iress-oss/ids-tokens';
 
-export const AbsolutePositionSlideout = (args: IressSlideoutProps) => {
+export function AbsolutePositionSlideout() {
   const [show, setShow] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -34,17 +28,20 @@ export const AbsolutePositionSlideout = (args: IressSlideoutProps) => {
           </p>
         </IressText>
         <IressSlideout
-          {...args}
           container={containerRef}
           show={show}
           onShowChange={setShow}
-          style={
-            {
-              position: 'absolute',
-            } as never
-          }
-        />
+          eleToPush="#contents"
+          position="left"
+          mode="push"
+          heading="Absolute slideout"
+          style={{
+            position: 'absolute',
+          }}
+        >
+          Slideout content
+        </IressSlideout>
       </div>
     </IressStack>
   );
-};
+}

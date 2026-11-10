@@ -8,7 +8,7 @@ description: >
   theme tokens, token values, or mentions @iress-oss/ids-tokens in an IDS
   application.
 license: Apache-2.0
-compatibility: React 18+, TypeScript, @iress-oss/ids-tokens@beta
+compatibility: React 18+, TypeScript, @iress-oss/ids-tokens
 metadata:
   author: iress
   version: '1.0'
@@ -39,13 +39,11 @@ Guide AI agents on correctly using IDS design tokens in React components and CSS
 
 ### Installation
 
-> **Important:** IDS v6 is currently in beta. Install with the `@beta` tag:
->
-> ```bash
-> npm install @iress-oss/ids-tokens@beta
-> # If also using IDS React components:
-> npm install @iress-oss/ids-components@beta
-> ```
+```bash
+npm install @iress-oss/ids-tokens
+# If also using IDS React components:
+npm install @iress-oss/ids-components
+```
 
 ### Prerequisites (React only)
 
@@ -403,6 +401,19 @@ Examples:
 <IressStack gap="spacing.8">...</IressStack>
 ```
 
+### 6. Hardcoding Breakpoint/Constant Values
+
+```tsx
+// ❌ Wrong — hardcoded breakpoint values
+<IressText>Min screen width: 0px</IressText>
+<IressText>Max screen width: 575px</IressText>
+
+// ✅ Correct — use BREAKPOINT_DETAILS constant
+import { BREAKPOINT_DETAILS } from '@iress-oss/ids-components';
+<IressText>{BREAKPOINT_DETAILS.xs.minScreenWidth}</IressText>
+<IressText>{BREAKPOINT_DETAILS.xs.maxScreenWidth}</IressText>
+```
+
 ## Responsive Patterns
 
 Layout components accept responsive objects for spacing props:
@@ -447,6 +458,10 @@ Every available colour, spacing, radius, and typography token with CSS variable 
 ## Theming
 
 How themes override tokens via CSS variables, scoped theming, and guidance for AI agents. See [references/theming.md](references/theming.md).
+
+## Constants
+
+Exported runtime constants (`BREAKPOINT_DETAILS`, `GRID_SIZE`, `Z_INDEX`, `FORM_ELEMENT_WIDTHS`, etc.) for use in application logic and documentation. **Never hardcode breakpoint values or z-index numbers** — always import these constants. See [references/constants-reference.md](references/constants-reference.md).
 
 ## Cross-References
 

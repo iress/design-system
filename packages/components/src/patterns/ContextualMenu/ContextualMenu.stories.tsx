@@ -1,29 +1,32 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressInline, IressStack, IressStyled } from '@/main';
-import { IressContextualMenu, type ContextualMenuItem } from './ContextualMenu';
-import { disableArgTypes } from '@iress-oss/ids-storybook-config';
+import { IressContextualMenu } from './ContextualMenu';
+import {
+  componentStoryMeta,
+  disableArgTypes,
+} from '@iress-oss/ids-storybook-config';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressContextualMenu>;
 
-const DEFAULT_ITEMS: ContextualMenuItem[] = [
+const testMeta: TestComponentMeta[] = [
   {
-    key: 'edit',
-    label: 'Edit',
-    icon: 'edit',
-    onClick: () => {
-      alert('Edit action');
-    },
+    part: 'main',
+    description: 'The root contextual menu element',
+    testId: 'contextual-menu',
   },
   {
-    key: 'lock',
-    label: 'Lock',
-    icon: 'lock',
-    divider: true,
+    part: 'activator',
+    description: 'The trigger button',
+    query: <code>getByRole('button')</code>,
+    testId: 'contextual-menu__activator',
   },
   {
-    key: 'delete',
-    label: 'Delete',
-    icon: 'delete',
+    part: 'menu',
+    description: 'The menu container',
+    query: <code>getByRole('menu')</code>,
+    testId: 'contextual-menu__menu',
   },
 ];
 
@@ -34,17 +37,30 @@ export default {
   args: {
     container: document.body,
   },
+  ...componentStoryMeta(componentMeta, {
+    idsConfig: {
+      testMeta,
+    },
+  }),
 } as Meta<typeof IressContextualMenu>;
 
 export const Default: Story = {
   args: {
-    items: DEFAULT_ITEMS,
+    items: [
+      { key: 'edit', label: 'Edit', icon: 'edit' },
+      { key: 'lock', label: 'Lock', icon: 'lock', divider: true },
+      { key: 'delete', label: 'Delete', icon: 'delete' },
+    ],
   },
 };
 
 export const Sizes: Story = {
   args: {
-    items: DEFAULT_ITEMS,
+    items: [
+      { key: 'edit', label: 'Edit', icon: 'edit' },
+      { key: 'lock', label: 'Lock', icon: 'lock', divider: true },
+      { key: 'delete', label: 'Delete', icon: 'delete' },
+    ],
   },
   render: (args) => (
     <IressStack gap="sm">
@@ -56,7 +72,11 @@ export const Sizes: Story = {
 
 export const Align: Story = {
   args: {
-    ...Default.args,
+    items: [
+      { key: 'edit', label: 'Edit', icon: 'edit' },
+      { key: 'lock', label: 'Lock', icon: 'lock', divider: true },
+      { key: 'delete', label: 'Delete', icon: 'delete' },
+    ],
   },
   argTypes: {
     ...disableArgTypes(['align']),
@@ -105,7 +125,11 @@ export const Align: Story = {
 
 export const Bordered: Story = {
   args: {
-    items: DEFAULT_ITEMS,
+    items: [
+      { key: 'edit', label: 'Edit', icon: 'edit' },
+      { key: 'lock', label: 'Lock', icon: 'lock', divider: true },
+      { key: 'delete', label: 'Delete', icon: 'delete' },
+    ],
   },
   render: (args) => (
     <IressInline gap="sm">
@@ -117,7 +141,11 @@ export const Bordered: Story = {
 
 export const Themes: Story = {
   args: {
-    items: DEFAULT_ITEMS,
+    items: [
+      { key: 'edit', label: 'Edit', icon: 'edit' },
+      { key: 'lock', label: 'Lock', icon: 'lock', divider: true },
+      { key: 'delete', label: 'Delete', icon: 'delete' },
+    ],
     theme: 'dark',
   },
   render: (args) => (

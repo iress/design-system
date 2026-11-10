@@ -560,6 +560,10 @@ export * from './ComponentName';
 - **Usage examples** - show how to implement common patterns
 - **Props documentation** - describe all available options
 - **Accessibility notes** - explain keyboard interactions and ARIA support
+- **AI translate pipeline** - ensure `.ai/` docs generate correctly:
+  - Add `additionalProps` to `meta/index.tsx` if the component has conditional/discriminated union types that `react-docgen-typescript` can't resolve
+  - Add `subComponents` to `meta/index.tsx` if sub-components need their props documented in the parent's doc
+  - Ensure stories referenced by `<StoryEmbed>` in guidelines MDX produce clean, standalone code examples
 
 ## Quality Checklist
 

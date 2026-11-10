@@ -81,6 +81,16 @@ const ToggleLabel = ({
 };
 ToggleLabel.displayName = 'ToggleLabel';
 
+/**
+ * Renders a switch control for toggling between on and off states.
+ *
+ * @example
+ * ```tsx
+ * import { IressToggle } from '@iress-oss/ids-components';
+ *
+ * <IressToggle>Dark mode</IressToggle>
+ * ```
+ */
 export const IressToggle = ({
   checked: checkedProp,
   disabled,

@@ -36,7 +36,7 @@ const BetaTag = ({ tag }: TagProps) => {
         <Badge status="positive">Beta</Badge>
       </div>
       <IressStack>
-        {oldComponent.trim() ? (
+        {oldComponent?.trim() ? (
           <>
             <IressText element="strong">Replaces {oldComponent}</IressText>
             <IressText color="colour.neutral.70">
@@ -48,8 +48,14 @@ const BetaTag = ({ tag }: TagProps) => {
           <>
             <IressText element="strong">New component</IressText>
             <IressText color="colour.neutral.70">
-              This component is new, please provide feedback to the Frontend
-              Enablement team if you encounter any issues.
+              This component is new, please{' '}
+              <a
+                href="https://github.com/iress/design-system/issues"
+                target="_blank"
+              >
+                provide feedback
+              </a>{' '}
+              if you encounter any issues.
             </IressText>
           </>
         )}
@@ -90,7 +96,15 @@ const UpdatedTag = () => {
         <IressText element="strong">Recently updated</IressText>
         <IressText color="colour.neutral.70">
           This component has been recently updated with new props. The props
-          have been marked as beta. Please tell us if there are any issues.
+          have been marked as beta.
+          <br />
+          <a
+            href="https://github.com/iress/design-system/issues"
+            target="_blank"
+          >
+            Please tell us if there are any issues
+          </a>
+          .
         </IressText>
       </IressStack>
     </>
@@ -143,7 +157,9 @@ export const ComponentStatus = ({
   const ofTags = (ofProp as StoryAnnotations)?.tags ?? [];
   const metaTags = (meta?.default as StoryAnnotations)?.tags ?? [];
   const storyTags = [...metaTags, ...ofTags];
-  const betaTag = storyTags.find((tag) => tag.startsWith('beta:'));
+  const betaTag = storyTags.find(
+    (tag) => tag.startsWith('beta:') || tag === 'beta',
+  );
   const cautionTag = storyTags.find((tag) => tag.startsWith('caution:'));
   const updatedTag = storyTags.find((tag) => tag === 'updated');
 
@@ -167,6 +183,7 @@ export const ComponentStatus = ({
         {updatedTag && <UpdatedTag />}
       </IressInline>
       {version && <VersionTag version={version} />}
+      <IressDivider my="md" />
     </>
   );
 };

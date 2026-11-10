@@ -1,10 +1,10 @@
 import type { StorybookConfig } from '@storybook/react-vite';
-import remarkGfm from 'remark-gfm';
 
 import { dirname, resolve } from 'path';
 import { loadEnv, mergeConfig, type Plugin, type UserConfig } from 'vite';
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
+import type { Indexer, IndexerOptions } from 'storybook/internal/types';
 
 // Get the directory name for ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -54,6 +54,17 @@ interface MainConfig extends Pick<Partial<StorybookConfig>, 'stories'> {
   viteFinal?: (config: UserConfig) => UserConfig;
 }
 
+/** Wraps an indexer's createIndex to inject 'autodocs' tag into all entries. */
+function addAutoDocsTag(indexer: Indexer) {
+  return async (fileName: string, options: IndexerOptions) => {
+    const entries = await indexer.createIndex(fileName, options);
+    return entries.map((entry) => ({
+      ...entry,
+      tags: [...(entry.tags ?? []), 'autodocs'],
+    }));
+  };
+}
+
 /**
  * Function to get the main Storybook configuration.
  * Used to centralise the configuration for all Storybook instances in multiple repositories.
@@ -70,6 +81,7 @@ export const getMainConfig = ({
     addons: [
       '@iress-oss/ids-storybook-okta',
       '@storybook/addon-links',
+      '@storybook/addon-docs',
       '@storybook/addon-a11y',
       '@vueless/storybook-dark-mode',
       '@chromatic-com/storybook',
@@ -79,30 +91,28 @@ export const getMainConfig = ({
       // 'storybook-addon-tag-badges', TODO: Does not work in Storybook 10, as it does not work in composition mode
       // '@storybook/addon-interactions', TODO: Enable when ready
       // 'storybook-addon-rtl', TODO: Create our own addon that works with Storybook 10
-      {
-        name: '@storybook/addon-docs',
-        options: {
-          mdxPluginOptions: {
-            mdxCompileOptions: {
-              remarkPlugins: [remarkGfm],
-            },
-          },
-        },
-      },
     ],
 
     core: {
       disableTelemetry: true,
+      disableWhatsNewNotifications: true,
     },
 
     framework: '@storybook/react-vite',
 
     staticDirs: [resolve(__dirname, '../public')],
 
-    stories: stories ?? [
-      '../docs/**/*.@(stories.ts|stories.tsx|mdx)',
-      '../src/**/*.@(stories.ts|stories.tsx|mdx)',
-    ],
+    stories: stories ?? ['../src/**/*.stories.@(ts|tsx)'],
+
+    // Inject 'autodocs' tag into all stories at index time so docs pages are generated
+    experimental_indexers: async (existingIndexers) => {
+      return Promise.resolve(
+        existingIndexers?.map((indexer) => ({
+          ...indexer,
+          createIndex: addAutoDocsTag(indexer),
+        })),
+      );
+    },
 
     viteFinal(config) {
       let modifiedConfig: UserConfig = {
@@ -203,6 +213,36 @@ export const getMainConfig = ({
 
     return [
       head,
+      `<style>
+        .docblock-source {
+          position: relative;
+        }
+
+        .docblock-source > div:last-child {
+          position: fixed;
+          bottom: 0;
+          right: 0;
+          z-index: 100;
+        }
+          
+        .docblock-source > div:last-child button {
+          padding: 6px 12px !important;
+          font-size: 13px !important;
+        }
+      </style>`,
+      `<script>
+      // Clear persisted layout from session storage when embedded so that
+      // the panel=0 URL param is respected on initial load.
+      if (new URLSearchParams(window.location.search).has('embedded')) {
+        try {
+          Object.keys(sessionStorage).forEach(function(k) {
+            if (k.includes('storybook') && k.includes('layout')) {
+              sessionStorage.removeItem(k);
+            }
+          });
+        } catch(e) {}
+      }
+</script>`,
       `<script>
   function broadcastHash() {
     const hash = window.location.hash;
@@ -211,10 +251,19 @@ export const getMainConfig = ({
       try {
         f.contentWindow?.postMessage({ type: 'UPDATE_HASH', hash }, '*');
       } catch (err) {
-        console.debug('[Storybook Host] Skipped frame broadcast:', err);
+        console.log('[Storybook Host] Skipped frame broadcast:', err);
       }
     });
   }
+
+  // Listen for UPDATE_HASH from child iframes (cross-origin composition)
+  window.addEventListener('message', function(event) {
+    if (!event.data || event.data.type !== 'UPDATE_HASH') return;
+    var hash = event.data.hash;
+    if (hash != null && window.location.hash !== '#' + hash) {
+      window.location.hash = hash;
+    }
+  });
 
   window.addEventListener('hashchange', broadcastHash);
   window.addEventListener('load', broadcastHash);
@@ -236,11 +285,241 @@ export const getMainConfig = ({
           try {
             f.contentWindow?.postMessage({ type: 'LOAD_THEME', ...data }, '*');
           } catch (err) {
-            console.debug('[Storybook Host] Skipped frame broadcast:', err);
+            console.log('[Storybook Host] Skipped frame broadcast:', err);
           }
         });
       });
     </script>`,
+      `<script>
+      const _queryForClosedPanel = '[aria-label="Show addon panel"], [aria-label="Exit full screen"]';
+      const _queryToOpenPanel = _queryForClosedPanel;
+      var _queryToClosePanel = '[aria-label="Hide addon panel"]';
+      const embedded = new URLSearchParams(window.location.search).has('embedded');
+
+      if (embedded) {
+        var _queryToClosePanel = '[aria-label="Hide addon panel"], [aria-label="Enter full screen"]';
+      }
+
+      window.addEventListener('message', function requestSize(event) {
+        if (!event.data) return;
+        var type = event.data.type;
+
+        if (type !== 'REQUEST_SIZE') {
+          return;
+        }
+
+        // Relay resize request down to preview iframe
+        var frames = document.querySelectorAll('iframe');
+        frames.forEach(function(f) {
+          try { f.contentWindow.postMessage(event.data, '*'); } catch(e) {}
+        });
+      });
+      </script>`,
+      `<script>
+      function _waitFor(sel, cb, t) {
+        var el = document.querySelector(sel);
+        if (el) {
+          cb(el);
+          return function() {};
+        }
+        var timer;
+        function cancel() {
+          o.disconnect();
+          clearTimeout(timer);
+        }
+        var o = new MutationObserver(function() {
+          el = document.querySelector(sel);
+          if (el) { cancel(); cb(el); }
+        });
+        o.observe(document.body, { childList: true, subtree: true, attributes: true });
+        if (t) timer = setTimeout(cancel, t);
+        return cancel;
+      }
+
+      var _embedCleanups = [];
+      window.addEventListener('message', function embedStorybook(event) {
+        if (!event.data) return;
+        const { type, ...params } = event.data;
+
+        if (type !== 'EMBED_STORYBOOK') {
+          return;
+        }
+
+        // A newer request supersedes all pending work from the previous one.
+        _embedCleanups.forEach(function(cancel) { cancel(); });
+        _embedCleanups = [];
+        function waitForEmbed(sel, cb, t) {
+          _embedCleanups.push(_waitFor(sel, cb, t));
+        }
+
+        window.postMessage({ type: 'REQUEST_SIZE' }, '*');
+        window.postMessage({ type: 'REQUEST_PANEL' }, '*');
+
+        if (params.panel && params.showPanel !== false || params.showPanel === true) {
+          waitForEmbed(_queryToOpenPanel + ', ' + _queryToClosePanel, function(toggle) {
+            if (toggle.matches(_queryToOpenPanel)) {
+              toggle.click();
+            }
+          }, 5000);
+        } else if (params.showPanel === false) {
+          if (params.panel) {
+            waitForEmbed(_queryToClosePanel, function(toggle) {
+              toggle.click();
+            }, 5000);
+          } else {
+            // Catch Storybook's initial SET_CONFIG, but never undo a later user request.
+            var closePanelCheck = setInterval(function() {
+              var panel = document.getElementById('storybook-panel-root');
+              var toggle = document.querySelector(_queryToClosePanel);
+              if (panel && panel.offsetHeight > 0 && toggle) {
+                toggle.click();
+              }
+            }, 500);
+            var closePanelTimeout = setTimeout(function() {
+              clearInterval(closePanelCheck);
+            }, 8000);
+            _embedCleanups.push(function() {
+              clearInterval(closePanelCheck);
+              clearTimeout(closePanelTimeout);
+            });
+          }
+        }
+
+        if (params.allowedPanels?.length > 0) {
+          var allowedPanels = params.allowedPanels;
+
+          waitForEmbed('[role="tablist"][aria-label="Available addons"]', function(tabList) {
+            tabList.querySelectorAll('[role="tab"]').forEach(function(tab) {
+              var key = tab.getAttribute('data-key');
+
+              if (allowedPanels.includes(key)) {
+                console.log('[Storybook Host] Keeping panel:', key);
+              } else {
+                tab.style.display = 'none';
+                console.log('[Storybook Host] Hiding panel:', key);
+              }
+            });
+          }, 5000);
+        }
+
+        if (params.panel && params.showPanel !== false) {
+          waitForEmbed('[role="tab"][data-key="' + params.panel + '"]', function(panelEl) {
+            panelEl.click();
+          }, 5000);
+        }
+
+        // Hide elements by CSS selector
+        if (params.selectorsToHide) {
+          params.selectorsToHide.forEach(function(sel) {
+            waitForEmbed(sel, function() {
+              document.querySelectorAll(sel).forEach(function(el) {
+                el.style.display = 'none';
+                console.log('[Storybook Host] Hiding:', sel);
+              });
+            }, 5000);
+          });
+        }
+      });
+    </script>`,
+      `<script>
+      document.addEventListener('click', function(e) {
+        const target = e.target;
+
+        if (!target) return;
+
+        // Send that panel is open when clicking the "Exit full screen" button in the addon panel
+        if (target.matches(_queryToOpenPanel) || target.closest(_queryToOpenPanel)) {
+          window.parent.postMessage({ 
+            type: 'RELAY_PANEL', 
+            flag: true, 
+            height: document.getElementById('storybook-panel-root').offsetHeight,
+          }, '*');
+          console.log('[Storybook Host] Opening panel');
+        }
+
+        // Send that panel is closed when clicking the "Enter full screen" button in the addon panel
+        if (target.matches(_queryToClosePanel) || target.closest(_queryToClosePanel)) {
+          window.parent.postMessage({ 
+            type: 'RELAY_PANEL', 
+            flag: false, 
+            height: document.getElementById('storybook-panel-root').offsetHeight,
+          }, '*');
+          console.log('[Storybook Host] Closing panel');
+        }
+      });
+
+      window.addEventListener('load', function(event) {
+        setTimeout(function() {
+          window.parent.postMessage({ 
+            type: 'RELAY_PANEL', 
+            flag: document.querySelector(_queryForClosedPanel) === null, 
+            height: document.getElementById('storybook-panel-root').offsetHeight,
+          }, '*');
+          console.log('[Storybook Host] Loading initial panel state');
+        }, 500);
+      });
+
+      window.addEventListener('message', function(event) {
+        if (!event.data) return;
+
+        if (event.data.type !== 'REQUEST_PANEL') {
+          return;
+        }
+
+        setTimeout(function() {
+          window.parent.postMessage({ 
+            type: 'RELAY_PANEL', 
+            flag: document.querySelector(_queryForClosedPanel) === null,
+            height: document.getElementById('storybook-panel-root').offsetHeight,
+          }, '*');
+        }, 500);
+        console.log('[Storybook Host] Loading panel state by request');
+      }); 
+    </script>`,
+      `<script>
+      var _managedSizeInit = false;
+      function _getManagerContentHeight(previewH = 300) {
+        // The preview iframe inside the manager reports its content height via RELAY_SIZE.
+        // We need to add the manager chrome (toolbar + panel) on top.
+        var toolbar = document.querySelector('[role="toolbar"]');
+        var panel = document.getElementById('storybook-panel-root');
+        var panelClosed = document.querySelector(_queryForClosedPanel) !== null;
+        
+        var toolbarH = toolbar ? toolbar.offsetHeight : 0;
+        var panelH = panel ? panel.offsetHeight : 0;
+        
+        console.log('[Storybook Host] Calculated content height', { toolbarH, panelH, previewH, panelClosed });
+
+        return toolbarH + previewH + panelH;
+      }
+
+      window.addEventListener('message', function(event) {
+        if (!event.data) return;
+
+        if (event.data.type !== 'RELAY_SIZE' || window.parent === window) {
+          return;
+        }
+
+        // Use the preview's reported height + manager chrome
+        setTimeout(function () {
+          var fullHeight = _getManagerContentHeight(event.data.height);
+          window.parent.postMessage({ type: 'RELAY_SIZE', height: fullHeight }, '*');
+          console.log('[Storybook Host] Relaying size to parent:', fullHeight);
+          _managedSizeInit = true;
+        }, _managedSizeInit ? 0 : 500);
+      }); 
+      </script>`,
+      `<script>
+      window.addEventListener('message', function(event) {
+        if (!event.data) return;
+
+        if (event.data.type !== 'OPEN_SANDBOX') {
+          return;
+        }
+
+        document.querySelector('[title="Open in CodeSandbox"]')?.click();
+      });
+      </script>`,
       env.BASE_PATH ? `<base href="${env.BASE_PATH}">` : false,
     ]
       .filter(Boolean)

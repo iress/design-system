@@ -23,6 +23,13 @@ export interface IressRadioMarkProps extends IressCSSProps {
 
 /**
  * RadioMark component renders the SVG circle used to indicate a selected radio button.
+ *
+ * @example
+ * ```tsx
+ * import { IressRadioMark } from '@iress-oss/ids-components';
+ *
+ * <IressRadioMark checked />
+ * ```
  */
 export const IressRadioMark = ({
   checked = false,

@@ -128,6 +128,18 @@ const InputPopover = (
   );
 };
 
+/**
+ * A popover designed for input-based interactions like autocomplete, rendering a dropdown list anchored to an input activator.
+ *
+ * @example
+ * ```tsx
+ * import { IressInputPopover, IressInput } from '@iress-oss/ids-components';
+ *
+ * <IressInputPopover activator={<IressInput />}>
+ *   <ul><li>Option 1</li></ul>
+ * </IressInputPopover>
+ * ```
+ */
 export const IressInputPopover = forwardRef(InputPopover);
 
 InputPopover.displayName = 'IressInputPopover';
