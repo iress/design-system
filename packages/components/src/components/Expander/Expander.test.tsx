@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { useState } from 'react';
 import { IressButton } from '../Button';
+import { IressInline } from '../Inline';
 import { expander } from './Expander.styles';
 import { css } from '@/styled-system/css';
 import { GlobalCSSClass } from '@/enums';
@@ -130,6 +131,30 @@ describe('IressExpander', () => {
 
   describe('props', () => {
     describe('section mode styles', () => {
+      it('allows inline activator content to fill the available width', () => {
+        render(
+          <IressExpander
+            data-testid="test-component"
+            activator={
+              <IressInline horizontalAlign="between">
+                <span>Income</span>
+                <span>3 selected</span>
+              </IressInline>
+            }
+          >
+            Test content
+          </IressExpander>,
+        );
+
+        const activator = screen.getByTestId('test-component__activator');
+        const inline = activator.querySelector(`.${GlobalCSSClass.Inline}`);
+
+        expect(inline).toBeInTheDocument();
+        expect(activator).toHaveClass(
+          css({ '& > .ids-inline': { flex: '1' } }),
+        );
+      });
+
       it('uses the same grey background for focused and expanded activator states', () => {
         const styles = expander.raw({ mode: 'section' });
         const activatorStyles = styles.activator as
