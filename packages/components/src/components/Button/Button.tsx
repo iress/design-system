@@ -218,7 +218,7 @@ const Button = <
     inButtonGroup: !!buttonGroupItem,
     mode: buttonMode,
     iconOnly: !!icon,
-    loading: !!loading || !!disabled,
+    disabled: !!loading || !!disabled,
     noWrap,
     status,
   });

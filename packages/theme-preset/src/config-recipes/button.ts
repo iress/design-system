@@ -145,16 +145,13 @@ export const buttonRecipe = defineSlotRecipe({
         },
       },
     },
-    loading: {
+    disabled: {
       true: {
         root: {
           cursor: 'not-allowed',
           bg: 'colour.neutral.30',
           color: 'colour.neutral.60',
           borderColor: 'colour.neutral.30',
-        },
-        spinner: {
-          color: 'colour.neutral.60',
         },
       },
     },
@@ -623,21 +620,18 @@ export const buttonRecipe = defineSlotRecipe({
     },
     {
       mode: 'primary',
-      loading: true,
+      disabled: true,
       css: {
         root: {
           bg: 'colour.neutral.20',
           borderColor: 'colour.neutral.20',
           color: 'colour.neutral.70',
         },
-        spinner: {
-          color: 'colour.neutral.70',
-        },
       },
     },
     {
       mode: ['secondary', 'quaternary'],
-      loading: true,
+      disabled: true,
       css: {
         root: {
           bg: 'colour.neutral.20',
@@ -648,35 +642,26 @@ export const buttonRecipe = defineSlotRecipe({
             boxShadow: 'none',
           },
         },
-        spinner: {
-          color: 'colour.neutral.70',
-        },
       },
     },
     {
       mode: 'tertiary',
-      loading: true,
+      disabled: true,
       css: {
         root: {
           bg: 'colour.neutral.20',
           borderColor: 'colour.neutral.70',
           color: 'colour.neutral.70',
         },
-        spinner: {
-          color: 'colour.neutral.70',
-        },
       },
     },
     {
       mode: 'muted',
-      loading: true,
+      disabled: true,
       css: {
         root: {
           bg: 'transparent',
           borderColor: 'transparent',
-          color: 'colour.neutral.60',
-        },
-        spinner: {
           color: 'colour.neutral.60',
         },
       },
@@ -711,7 +696,7 @@ export const buttonRecipe = defineSlotRecipe({
     { status: ['*'] },
     { compact: ['*'] },
     { fluid: ['true'] },
-    { loading: ['*'] },
+    { disabled: ['*'] },
     { iconOnly: ['*'] },
     { noWrap: ['*'] },
     { inButtonGroup: ['*'] },
@@ -728,7 +713,7 @@ export const buttonRecipe = defineSlotRecipe({
     { mode: ['secondary', 'tertiary'], status: ['warning'] },
     {
       mode: ['primary', 'secondary', 'tertiary', 'quaternary', 'muted'],
-      loading: ['true'],
+      disabled: ['true'],
     },
     { mode: ['tertiary'], inButtonGroup: ['true'] },
     {

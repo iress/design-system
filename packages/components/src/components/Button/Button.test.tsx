@@ -94,7 +94,10 @@ describe('IressButton', () => {
       it('renders loading spinner when loading is true', () => {
         render(<IressButton loading>Button</IressButton>);
         const spinner = screen.getByLabelText('Loading');
+        const button = screen.getByRole('button');
+
         expect(spinner).toBeVisible();
+        expect(button).toHaveClass(buttonStyles({ disabled: true }).root);
       });
 
       it('hides the prepend content when loading is true', () => {
@@ -159,7 +162,7 @@ describe('IressButton', () => {
 
         expect(button).toHaveAttribute('aria-disabled', 'true');
         expect(button).not.toHaveAttribute('disabled');
-        expect(button).toHaveClass(buttonStyles({ loading: true }).root);
+        expect(button).toHaveClass(buttonStyles({ disabled: true }).root);
       });
 
       it('prevents form submission and click events when disabled', async () => {
