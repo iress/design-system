@@ -151,6 +151,55 @@ describe('IressButton', () => {
       });
     });
 
+    describe('disabled', () => {
+      it('sets aria-disabled and applies disabled styling without the native disabled attribute', () => {
+        render(<IressButton disabled>Button</IressButton>);
+        const button = screen.getByRole('button');
+
+        expect(button).toHaveAttribute('aria-disabled', 'true');
+        expect(button).not.toHaveAttribute('disabled');
+        expect(button).toHaveClass(buttonStyles({ loading: true }).root);
+      });
+
+      it('prevents click events and default behavior when disabled', () => {
+        const clickSpy = vi.fn();
+        render(
+          <IressButton disabled onClick={clickSpy}>
+            Button
+          </IressButton>,
+        );
+        const button = screen.getByRole('button');
+        const event = new MouseEvent('click', {
+          bubbles: true,
+          cancelable: true,
+        });
+
+        button.dispatchEvent(event);
+
+        expect(clickSpy).not.toHaveBeenCalled();
+        expect(event.defaultPrevented).toBe(true);
+      });
+
+      it('prevents navigation when a disabled button renders as a link', () => {
+        const clickSpy = vi.fn();
+        render(
+          <IressButton disabled href="https://google.co.uk" onClick={clickSpy}>
+            Button
+          </IressButton>,
+        );
+        const link = screen.getByRole('link');
+        const event = new MouseEvent('click', {
+          bubbles: true,
+          cancelable: true,
+        });
+
+        link.dispatchEvent(event);
+
+        expect(clickSpy).not.toHaveBeenCalled();
+        expect(event.defaultPrevented).toBe(true);
+      });
+    });
+
     describe('href', () => {
       it('renders a link when the href prop is set', () => {
         render(<IressButton href="https://google.co.uk">Button</IressButton>);
