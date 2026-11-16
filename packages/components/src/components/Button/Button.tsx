@@ -178,6 +178,7 @@ const Button = <
     className,
     compact,
     disabled,
+    'aria-disabled': ariaDisabled,
     element,
     fluid,
     icon,
@@ -305,7 +306,7 @@ const Button = <
           {...renderProps}
           {...buttonGroupItem?.props}
           {...nonStyleProps}
-          aria-disabled={disabled ? true : undefined}
+          aria-disabled={disabled ? true : ariaDisabled}
           ref={elementRef}
         />
       </IressTooltip>
@@ -319,7 +320,7 @@ const Button = <
       {...renderProps}
       {...buttonGroupItem?.props}
       {...nonStyleProps}
-      aria-disabled={disabled ? true : undefined}
+      aria-disabled={disabled ? true : ariaDisabled}
       ref={elementRef}
     />
   );
