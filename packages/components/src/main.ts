@@ -71,6 +71,7 @@ export * from './types';
 
 export * from './helpers/formatting/toArray';
 export * from './helpers/styling/iressCss';
+export * from './helpers/utility/analytics';
 
 export * from './hooks';
 

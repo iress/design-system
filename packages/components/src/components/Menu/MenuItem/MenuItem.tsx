@@ -39,12 +39,14 @@ import {
 import { CompositeItem } from '@floating-ui/react';
 import { IressMenuDivider } from '../MenuDivider/MenuDivider';
 import type {
+  IressAnalyticsProps,
   IressCSSProps,
   IressCustomiseSlot,
   IressTestProps,
 } from '@/interfaces';
 import { GlobalCSSClass } from '@/enums';
 import { spreadUnlessUndefined } from '@/helpers/utility/spreadUnlessUndefined';
+import { resolveAnalyticsAttributeFromProps } from '@/helpers/utility/analytics';
 import { IressRadioMark } from '@/components/RadioMark';
 import type { MaterialSymbol } from 'material-symbols';
 import { IressIcon } from '@/components/Icon';
@@ -75,6 +77,11 @@ export interface MenuItemRenderProps<
   className?: string;
 
   /**
+   * The `data-analytics` attribute rendered on the interactive element.
+   */
+  'data-analytics'?: string;
+
+  /**
    * Handles the selection of the menu item.
    */
   onClick?: MouseEventHandler<ButtonInstance<C, THref>>;
@@ -94,6 +101,7 @@ export type IressMenuItemProps<
   C extends ElementType | undefined = undefined,
   THref extends string | undefined = undefined,
 > = IressCSSProps &
+  IressAnalyticsProps &
   IressTestProps &
   Omit<
     ComponentPropsWithoutRef<ButtonElement<C, THref>>,
@@ -200,6 +208,8 @@ const MenuItem = <
 >(
   {
     append,
+    analytics,
+    'data-analytics': dataAnalytics,
     canToggle,
     children,
     className,
@@ -417,6 +427,10 @@ const MenuItem = <
     () => splitCssProps(restProps),
     [restProps],
   );
+  const analyticsAttribute = resolveAnalyticsAttributeFromProps({
+    analytics,
+    'data-analytics': dataAnalytics,
+  });
 
   const renderProps = useMemo<MenuItemRenderProps<C, THref>>(
     () => ({
@@ -438,6 +452,7 @@ const MenuItem = <
         css(styleProps),
         GlobalCSSClass.MenuItem,
       ),
+      'data-analytics': analyticsAttribute,
       'data-testid': dataTestId,
       id: popoverItem.id,
       onClick: handleClick,
@@ -466,6 +481,7 @@ const MenuItem = <
       handleClick,
       handleKeyDown,
       icon,
+      analyticsAttribute,
       menu?.hasArrowKeyNav,
       menu?.isComposite,
       popoverItem,

@@ -21,13 +21,19 @@ import {
   type ButtonRef,
   type ButtonRenderProps,
 } from '../Button';
-import { type IressCSSProps, type IressTestProps } from '@/interfaces';
+import {
+  type IressAnalyticsProps,
+  type IressCSSProps,
+  type IressTestProps,
+} from '@/interfaces';
 import { GlobalCSSClass } from '@/enums';
+import { resolveAnalyticsAttributeFromProps } from '@/helpers/utility/analytics';
 
 export type IressLinkProps<
   C extends ElementType | undefined = undefined,
   THref extends string | undefined = undefined,
 > = IressCSSProps &
+  IressAnalyticsProps &
   IressTestProps &
   Omit<ComponentPropsWithoutRef<ButtonElement<C, THref>>, 'element'> & {
     /**
@@ -79,6 +85,8 @@ const Link = <
 >(
   {
     active,
+    analytics,
+    'data-analytics': dataAnalytics,
     append,
     children,
     className,
@@ -101,6 +109,10 @@ const Link = <
     () => splitCssProps(restProps),
     [restProps],
   );
+  const analyticsAttribute = resolveAnalyticsAttributeFromProps({
+    analytics,
+    'data-analytics': dataAnalytics,
+  });
 
   const handleClick = useCallback(
     (e: MouseEvent<ButtonInstance<C, THref>>) => {
@@ -161,6 +173,7 @@ const Link = <
   return (
     <Component
       aria-describedby={loading ? spinnerId : undefined}
+      data-analytics={analyticsAttribute}
       type={element || !nonStyleProps.href ? 'button' : undefined}
       {...renderProps}
       {...nonStyleProps}
