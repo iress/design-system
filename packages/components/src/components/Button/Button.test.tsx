@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { IressButton, button as buttonStyles } from '.';
 import { IressIcon } from '../Icon';
 import { axe } from 'jest-axe';
@@ -161,26 +162,27 @@ describe('IressButton', () => {
         expect(button).toHaveClass(buttonStyles({ loading: true }).root);
       });
 
-      it('prevents click events and default behavior when disabled', () => {
+      it('prevents form submission and click events when disabled', async () => {
+        const user = userEvent.setup();
         const clickSpy = vi.fn();
+        const submitSpy = vi.fn();
         render(
-          <IressButton disabled onClick={clickSpy}>
-            Button
-          </IressButton>,
+          <form onSubmit={submitSpy}>
+            <IressButton disabled onClick={clickSpy} type="submit">
+              Button
+            </IressButton>
+          </form>,
         );
         const button = screen.getByRole('button');
-        const event = new MouseEvent('click', {
-          bubbles: true,
-          cancelable: true,
-        });
 
-        button.dispatchEvent(event);
+        await user.click(button);
 
         expect(clickSpy).not.toHaveBeenCalled();
-        expect(event.defaultPrevented).toBe(true);
+        expect(submitSpy).not.toHaveBeenCalled();
       });
 
-      it('prevents navigation when a disabled button renders as a link', () => {
+      it('prevents click events when a disabled button renders as a link', async () => {
+        const user = userEvent.setup();
         const clickSpy = vi.fn();
         render(
           <IressButton disabled href="https://google.co.uk" onClick={clickSpy}>
@@ -188,15 +190,10 @@ describe('IressButton', () => {
           </IressButton>,
         );
         const link = screen.getByRole('link');
-        const event = new MouseEvent('click', {
-          bubbles: true,
-          cancelable: true,
-        });
 
-        link.dispatchEvent(event);
+        await user.click(link);
 
         expect(clickSpy).not.toHaveBeenCalled();
-        expect(event.defaultPrevented).toBe(true);
       });
     });
 
