@@ -229,15 +229,15 @@ const Button = <
 
   const handleClick = useCallback(
     (e: MouseEvent<ButtonInstance<C, THref>>) => {
-    if (disabled) {
-      e.preventDefault();
-      return;
-    }
-    if (loading) return;
-    onClick?.(e);
-    buttonGroupItem?.toggle();
-  },
-  [buttonGroupItem, disabled, loading, onClick],
+      if (disabled) {
+        e.preventDefault();
+        return;
+      }
+      if (loading) return;
+      onClick?.(e);
+      buttonGroupItem?.toggle();
+    },
+    [buttonGroupItem, disabled, loading, onClick],
   );
 
   const renderProps = useMemo<ButtonRenderProps<C, THref>>(
@@ -305,7 +305,7 @@ const Button = <
           {...renderProps}
           {...buttonGroupItem?.props}
           {...nonStyleProps}
-          aria-disabled={disabled || undefined}
+          aria-disabled={disabled ? true : undefined}
           ref={elementRef}
         />
       </IressTooltip>
@@ -319,7 +319,7 @@ const Button = <
       {...renderProps}
       {...buttonGroupItem?.props}
       {...nonStyleProps}
-      aria-disabled={disabled || undefined}
+      aria-disabled={disabled ? true : undefined}
       ref={elementRef}
     />
   );
