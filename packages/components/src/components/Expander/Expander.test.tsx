@@ -347,8 +347,92 @@ describe('IressExpander', () => {
       expect(results).toHaveNoViolations();
     });
 
-    it('hides collapsed content from the tab order and a11y tree via visibility', () => {
-      render(
+    it('removes collapsed content from the tab order so tabbing reaches the next expander', async () => {
+      // Inject the atomic visibility rules the Expander recipe relies on, so
+      // jsdom computes `visibility` from the rendered classes exactly as a
+      // browser would. Without the `visibility: hidden` declaration this test
+      // fails, because focus would land inside the collapsed content.
+      const style = document.createElement('style');
+      style.textContent =
+        '.vis_hidden{visibility:hidden}.vis_visible{visibility:visible}';
+      document.head.appendChild(style);
+
+      try {
+        render(
+          <>
+            <IressExpander data-testid="exp-one" activator="Expander one">
+              <IressButton>Inside one</IressButton>
+            </IressExpander>
+            <IressExpander data-testid="exp-two" activator="Expander two">
+              <IressButton>Inside two</IressButton>
+            </IressExpander>
+          </>,
+        );
+
+        const activatorOne = screen.getByRole('button', {
+          name: 'Expander one',
+        });
+        const activatorTwo = screen.getByRole('button', {
+          name: 'Expander two',
+        });
+
+        activatorOne.focus();
+        expect(activatorOne).toHaveFocus();
+
+        // Both expanders are collapsed, so tabbing forward must skip their
+        // hidden content and land on the next expander's activator.
+        await userEvent.tab();
+        expect(activatorTwo).toHaveFocus();
+      } finally {
+        document.head.removeChild(style);
+      }
+    });
+
+    it('keeps content in the tab order when the expander is open', async () => {
+      const style = document.createElement('style');
+      style.textContent =
+        '.vis_hidden{visibility:hidden}.vis_visible{visibility:visible}';
+      document.head.appendChild(style);
+
+      try {
+        render(
+          <IressExpander data-testid="exp-open" activator="Expander" open>
+            <IressButton>Inside content</IressButton>
+          </IressExpander>,
+        );
+
+        const activator = screen.getByRole('button', { name: 'Expander' });
+        const innerButton = screen.getByRole('button', {
+          name: 'Inside content',
+        });
+
+        activator.focus();
+        await userEvent.tab();
+
+        // Open content must remain reachable by keyboard.
+        expect(innerButton).toHaveFocus();
+      } finally {
+        document.head.removeChild(style);
+      }
+    });
+
+    it('applies visibility:hidden when collapsed and visibility:visible when open', () => {
+      // Assert the recipe's declared values (not just class names) so the test
+      // fails if the visibility suppression is removed while leaving the
+      // transition declarations in place.
+      const closed = expander.raw({ open: false }).containerInner as {
+        visibility?: string;
+      };
+      const open = expander.raw({ open: true }).containerInner as {
+        visibility?: string;
+      };
+
+      expect(closed.visibility).toBe('hidden');
+      expect(open.visibility).toBe('visible');
+    });
+
+    it('marks the container inert when collapsed and not when open', () => {
+      const { rerender } = render(
         <IressExpander
           data-testid="test-component"
           activator={'Activator content'}
@@ -357,18 +441,13 @@ describe('IressExpander', () => {
         </IressExpander>,
       );
 
-      const container = screen.getByTestId('test-component__container');
-      const inner = container.firstElementChild as HTMLElement;
+      // Collapsed: the whole subtree is inert, so it is suppressed regardless
+      // of any descendant's visibility (e.g. a nested open expander).
+      expect(screen.getByTestId('test-component__container')).toHaveAttribute(
+        'inert',
+      );
 
-      // Collapsed: the inner wrapper carries the closed-state class, which
-      // applies `visibility: hidden` — removing its content from the tab order
-      // and the accessibility tree.
-      expect(inner).toHaveClass(expander().containerInner!);
-      expect(inner).not.toHaveClass(expander({ open: true }).containerInner!);
-    });
-
-    it('reveals content to the tab order and a11y tree when open', () => {
-      render(
+      rerender(
         <IressExpander
           data-testid="test-component"
           activator={'Activator content'}
@@ -378,12 +457,31 @@ describe('IressExpander', () => {
         </IressExpander>,
       );
 
-      const container = screen.getByTestId('test-component__container');
-      const inner = container.firstElementChild as HTMLElement;
+      expect(
+        screen.getByTestId('test-component__container'),
+      ).not.toHaveAttribute('inert');
+    });
 
-      // Open: the inner wrapper carries the open-state class, which applies
-      // `visibility: visible` so the content is reachable.
-      expect(inner).toHaveClass(expander({ open: true }).containerInner!);
+    it('suppresses an open nested expander while its parent is collapsed', () => {
+      render(
+        <IressExpander data-testid="parent" activator="Parent">
+          <IressExpander data-testid="child" activator="Child" open>
+            <IressButton>Deeply nested</IressButton>
+          </IressExpander>
+        </IressExpander>,
+      );
+
+      // The child is open (its own container is not inert) ...
+      expect(screen.getByTestId('child__container')).not.toHaveAttribute(
+        'inert',
+      );
+      // ... but the collapsed parent's container is inert, which cascades to
+      // the entire subtree including the open child and its focusable content.
+      const parentContainer = screen.getByTestId('parent__container');
+      expect(parentContainer).toHaveAttribute('inert');
+      expect(parentContainer).toContainElement(
+        screen.getByRole('button', { name: 'Deeply nested' }),
+      );
     });
   });
 });
