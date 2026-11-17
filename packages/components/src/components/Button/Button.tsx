@@ -86,6 +86,11 @@ export interface InternalButtonProps<
   compact?: boolean;
 
   /**
+   * When true, the button is visually disabled, remains available to screen readers, and cannot be activated.
+   */
+  disabled?: boolean;
+
+  /**
    * Change the component that will be rendered as the button, used for third-party libraries that require a specific element type.
    * By default, it will render a button or an anchor tag based on the `href` prop.
    */
@@ -172,6 +177,8 @@ const Button = <
     children,
     className,
     compact,
+    disabled,
+    'aria-disabled': ariaDisabled,
     element,
     fluid,
     icon,
@@ -211,7 +218,7 @@ const Button = <
     inButtonGroup: !!buttonGroupItem,
     mode: buttonMode,
     iconOnly: !!icon,
-    loading: !!loading,
+    disabled: !!loading || !!disabled,
     noWrap,
     status,
   });
@@ -223,11 +230,16 @@ const Button = <
 
   const handleClick = useCallback(
     (e: MouseEvent<ButtonInstance<C, THref>>) => {
+      if (disabled) {
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
       if (loading) return;
       onClick?.(e);
       buttonGroupItem?.toggle();
     },
-    [buttonGroupItem, loading, onClick],
+    [buttonGroupItem, disabled, loading, onClick],
   );
 
   const renderProps = useMemo<ButtonRenderProps<C, THref>>(
@@ -295,6 +307,7 @@ const Button = <
           {...renderProps}
           {...buttonGroupItem?.props}
           {...nonStyleProps}
+          aria-disabled={disabled ? true : ariaDisabled}
           ref={elementRef}
         />
       </IressTooltip>
@@ -308,6 +321,7 @@ const Button = <
       {...renderProps}
       {...buttonGroupItem?.props}
       {...nonStyleProps}
+      aria-disabled={disabled ? true : ariaDisabled}
       ref={elementRef}
     />
   );

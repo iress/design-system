@@ -135,13 +135,13 @@ describe('IressInput', () => {
 
       expect(clearButton).toBeInTheDocument();
       expect(clearButton).toHaveStyle({ visibility: 'hidden' });
-      expect(clearButton).toBeDisabled();
+      expect(clearButton).toHaveAttribute('aria-disabled', 'true');
 
       await userEvent.type(inputElement, 'a');
 
       await waitFor(() => {
         expect(clearButton).not.toHaveStyle({ visibility: 'hidden' });
-        expect(clearButton).toBeEnabled();
+        expect(clearButton).not.toHaveAttribute('aria-disabled', 'true');
       });
     });
   });

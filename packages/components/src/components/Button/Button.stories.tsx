@@ -167,6 +167,35 @@ export const Loading: ButtonStory = {
   ),
 };
 
+export const Disabled: ButtonStory = {
+  args: {
+    disabled: true,
+    children: 'Button text',
+  },
+  argTypes: {
+    ...disableArgTypes(['mode']),
+  },
+  render: ({ children, ...args }) => (
+    <IressInline gap="md">
+      <IressButton {...args} mode="primary">
+        {children}
+      </IressButton>
+      <IressButton {...args} mode="secondary">
+        {children}
+      </IressButton>
+      <IressButton {...args} mode="tertiary">
+        {children}
+      </IressButton>
+      <IressButton {...args} mode="quaternary">
+        {children}
+      </IressButton>
+      <IressButton {...args} icon="edit" mode="muted">
+        Edit
+      </IressButton>
+    </IressInline>
+  ),
+};
+
 export const ButtonsAsLinks: AnchorStory = {
   args: {
     children: 'This is a link (anchor tag)',
