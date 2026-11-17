@@ -205,13 +205,17 @@ const Button = <
   const elementRef = useRef<ButtonInstance<C, THref> | null>(null);
   const buttonGroupItem = useButtonGroupItem({ value });
 
-  const buttonMode = useMemo(() => {
-    if (!buttonGroupItem) return mode;
-    return buttonGroupItem.active ? 'primary' : 'tertiary';
-  }, [buttonGroupItem, mode]);
-
   // Explicit `compact` prop wins; otherwise inherit from a compact button group.
   const isCompact = compact ?? buttonGroupItem?.compact;
+
+  const buttonMode = useMemo(() => {
+    if (!buttonGroupItem) return mode;
+    // In a compact (segmented control) group the selected state is rendered as
+    // a white "pill" by the button group styles, so keep segments tertiary and
+    // avoid the solid primary fill the default toggle uses when active.
+    if (buttonGroupItem.compact) return 'tertiary';
+    return buttonGroupItem.active ? 'primary' : 'tertiary';
+  }, [buttonGroupItem, mode]);
 
   const styles = button({
     active:

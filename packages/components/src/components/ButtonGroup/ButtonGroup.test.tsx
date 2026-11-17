@@ -167,6 +167,24 @@ describe('IressButtonGroup', () => {
         // than a default group, confirming the compact flag propagates.
         expect(compactClassName).not.toBe(defaultButton.className);
       });
+
+      it('keeps the selected segment in tertiary mode (segmented pill, not solid fill)', () => {
+        // In a compact segmented control the selected state is drawn as a white
+        // pill by the group styles, so the selected button must NOT switch to
+        // the solid primary fill the default toggle uses when active.
+        const screen = renderComponent({
+          compact: true,
+          defaultSelected: 'Option 1',
+        });
+
+        const selected = screen.getByRole('button', {
+          name: 'Option 1',
+          pressed: true,
+        });
+
+        expect(selected.className).toContain('button__root--mode_tertiary');
+        expect(selected.className).not.toContain('button__root--mode_primary');
+      });
     });
 
     describe('multiple', () => {
