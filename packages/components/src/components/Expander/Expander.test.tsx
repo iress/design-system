@@ -346,5 +346,44 @@ describe('IressExpander', () => {
       const results = await axe(container);
       expect(results).toHaveNoViolations();
     });
+
+    it('hides collapsed content from the tab order and a11y tree via visibility', () => {
+      render(
+        <IressExpander
+          data-testid="test-component"
+          activator={'Activator content'}
+        >
+          Test content
+        </IressExpander>,
+      );
+
+      const container = screen.getByTestId('test-component__container');
+      const inner = container.firstElementChild as HTMLElement;
+
+      // Collapsed: the inner wrapper carries the closed-state class, which
+      // applies `visibility: hidden` — removing its content from the tab order
+      // and the accessibility tree.
+      expect(inner).toHaveClass(expander().containerInner!);
+      expect(inner).not.toHaveClass(expander({ open: true }).containerInner!);
+    });
+
+    it('reveals content to the tab order and a11y tree when open', () => {
+      render(
+        <IressExpander
+          data-testid="test-component"
+          activator={'Activator content'}
+          open
+        >
+          Test content
+        </IressExpander>,
+      );
+
+      const container = screen.getByTestId('test-component__container');
+      const inner = container.firstElementChild as HTMLElement;
+
+      // Open: the inner wrapper carries the open-state class, which applies
+      // `visibility: visible` so the content is reachable.
+      expect(inner).toHaveClass(expander({ open: true }).containerInner!);
+    });
   });
 });
