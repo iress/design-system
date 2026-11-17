@@ -33,6 +33,13 @@ export const expander = sva({
     },
     containerInner: {
       overflow: 'hidden',
+      // When collapsed, hide the content from the tab order and the
+      // accessibility tree so keyboard/screen-reader users skip straight to
+      // the next expander. `visibility` is animatable, so we delay the hide
+      // until the grid-rows collapse animation has finished, keeping the
+      // content visible throughout the collapse.
+      visibility: 'hidden',
+      transition: '[visibility 0s linear 0.3s]',
     },
     content: {
       py: 'spacing.2',
@@ -97,6 +104,12 @@ export const expander = sva({
       true: {
         container: {
           gridTemplateRows: '1fr',
+        },
+        containerInner: {
+          // Reveal immediately on open so the content is reachable by keyboard
+          // and screen readers as it expands (no delay, unlike the hide).
+          visibility: 'visible',
+          transition: '[visibility 0s linear 0s]',
         },
       },
     },
