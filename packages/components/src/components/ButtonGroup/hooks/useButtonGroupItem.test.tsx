@@ -32,6 +32,16 @@ describe('useButtonGroupItem', () => {
     expect(hook.result.current?.toggle).toBeInstanceOf(Function);
   });
 
+  it('is not compact by default', () => {
+    const hook = renderHookInButtonGroup({});
+    expect(hook.result.current?.compact).toBeUndefined();
+  });
+
+  it('exposes compact from a compact button group', () => {
+    const hook = renderHookInButtonGroup({}, { compact: true });
+    expect(hook.result.current?.compact).toBe(true);
+  });
+
   it('does not call onChange if the button has no value', () => {
     const onChange = vi.fn();
     const hook = renderHookInButtonGroup(

@@ -140,6 +140,35 @@ describe('IressButtonGroup', () => {
       });
     });
 
+    describe('compact', () => {
+      it('applies the compact class to the values container', () => {
+        const screen = renderComponent({
+          compact: true,
+        });
+
+        const group = screen.getByRole('group', { name: TEST_LABEL });
+        expect(group).toHaveClass(buttonGroup({ compact: true }).values!);
+      });
+
+      it('renders child buttons in their compact size', () => {
+        const compactScreen = renderComponent({ compact: true });
+        const compactButton = compactScreen.getByRole('button', {
+          name: 'Option 1',
+        });
+        const compactClassName = compactButton.className;
+        compactScreen.unmount();
+
+        const defaultScreen = renderComponent();
+        const defaultButton = defaultScreen.getByRole('button', {
+          name: 'Option 1',
+        });
+
+        // A compact group renders its child buttons with a different class set
+        // than a default group, confirming the compact flag propagates.
+        expect(compactClassName).not.toBe(defaultButton.className);
+      });
+    });
+
     describe('multiple', () => {
       it('allows multiple buttons to be selected', async () => {
         const screen = renderComponent({

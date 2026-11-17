@@ -210,10 +210,13 @@ const Button = <
     return buttonGroupItem.active ? 'primary' : 'tertiary';
   }, [buttonGroupItem, mode]);
 
+  // Explicit `compact` prop wins; otherwise inherit from a compact button group.
+  const isCompact = compact ?? buttonGroupItem?.compact;
+
   const styles = button({
     active:
       active ?? popover?.isActiveActivator(elementRef.current as HTMLElement),
-    compact,
+    compact: isCompact,
     fluid: fluid === true ? 'true' : fluid,
     inButtonGroup: !!buttonGroupItem,
     mode: buttonMode,

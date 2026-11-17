@@ -21,6 +21,14 @@ export const buttonGroup = sva({
     },
   },
   variants: {
+    compact: {
+      true: {
+        values: {
+          p: 'none',
+          gap: 'none',
+        },
+      },
+    },
     hiddenLabel: {
       true: {
         label: {
