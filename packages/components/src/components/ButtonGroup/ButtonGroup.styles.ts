@@ -36,11 +36,10 @@ export const buttonGroup = sva({
 
           // Target the child IDS buttons that make up the segments.
           '& .ids-button': {
-            minHeight: '[unset]',
             minWidth: '[unset]',
-            height: '[24px]',
-            paddingInline: '[8px]',
-            paddingBlock: '[3px]',
+            minHeight: 'input.height.xs',
+            paddingInline: 'spacing.2',
+            paddingBlock: 'spacing.1',
             borderWidth: '[1px]',
             borderStyle: 'solid',
             borderColor: 'transparent',
