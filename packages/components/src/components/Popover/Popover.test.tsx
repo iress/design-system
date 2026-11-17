@@ -103,6 +103,22 @@ describe('IressPopover', () => {
       expect(content).not.toBeVisible();
     });
 
+    it('does not open when ArrowDown is pressed on a disabled activator', async () => {
+      renderComponent({
+        activator: <IressButton disabled>{TEST_ACTIVATOR}</IressButton>,
+      });
+
+      const activator = screen.getByRole('button');
+      const content = screen.getByText(TEST_ID);
+
+      await userEvent.tab();
+      expect(activator).toHaveFocus();
+      await userEvent.keyboard('{ArrowDown}');
+
+      expect(activator).toHaveAttribute('aria-expanded', 'false');
+      expect(content).not.toBeVisible();
+    });
+
     it('closes when user clicks outside the activator', async () => {
       renderComponent();
 

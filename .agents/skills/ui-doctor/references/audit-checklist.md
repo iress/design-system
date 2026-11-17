@@ -114,7 +114,7 @@ Use this checklist when performing a UI doctor audit.
 - [ ] Maximum one `mode="primary"` button per section
 - [ ] Destructive actions use `status="danger"` not custom red styling
 - [ ] Icon-only buttons include accessible text
-- [ ] No `disabled` attribute on `IressButton` — keep buttons enabled and validate on click instead (disabled buttons are invisible to screen readers and provide no path to resolution)
+- [ ] Avoid unexplained disabled states on `IressButton` — its `disabled` prop is announced to screen readers, but does not explain why the action is unavailable or how to enable it
 
 ## IressText Usage
 

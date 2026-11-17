@@ -165,6 +165,18 @@ describe('IressButton', () => {
         expect(button).toHaveClass(buttonStyles({ disabled: true }).root);
       });
 
+      it('provides an accessible name for a disabled icon button', () => {
+        render(
+          <IressButton disabled icon="edit">
+            Edit
+          </IressButton>,
+        );
+
+        expect(
+          screen.getByRole('button', { name: 'Edit' }),
+        ).toBeInTheDocument();
+      });
+
       it('prevents form submission and click events when disabled', async () => {
         const user = userEvent.setup();
         const clickSpy = vi.fn();
@@ -182,6 +194,20 @@ describe('IressButton', () => {
 
         expect(clickSpy).not.toHaveBeenCalled();
         expect(submitSpy).not.toHaveBeenCalled();
+      });
+
+      it('does not bubble click events when disabled', async () => {
+        const user = userEvent.setup();
+        const parentClickSpy = vi.fn();
+        render(
+          <div onClick={parentClickSpy}>
+            <IressButton disabled>Button</IressButton>
+          </div>,
+        );
+
+        await user.click(screen.getByRole('button'));
+
+        expect(parentClickSpy).not.toHaveBeenCalled();
       });
 
       it('prevents click events when a disabled button renders as a link', async () => {

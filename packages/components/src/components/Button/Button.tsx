@@ -232,6 +232,7 @@ const Button = <
     (e: MouseEvent<ButtonInstance<C, THref>>) => {
       if (disabled) {
         e.preventDefault();
+        e.stopPropagation();
         return;
       }
       if (loading) return;

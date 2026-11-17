@@ -80,6 +80,7 @@ export const InputPopoverActivator = ({
   const activatorInteractions = usePopoverActivatorInteractions(
     popover,
     childrenProps as InputBaseProps,
+    childrenProps.disabled,
   );
 
   return (

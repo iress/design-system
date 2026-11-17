@@ -177,9 +177,6 @@ export const buttonRecipe = defineSlotRecipe({
             color: 'colour.primary.text',
           },
         },
-        spinner: {
-          color: 'colour.primary.onFill',
-        },
       },
       secondary: {
         root: {
@@ -202,9 +199,6 @@ export const buttonRecipe = defineSlotRecipe({
             color: 'colour.primary.text',
           },
         },
-        spinner: {
-          color: 'colour.primary.text',
-        },
       },
       tertiary: {
         root: {
@@ -226,9 +220,6 @@ export const buttonRecipe = defineSlotRecipe({
             color: 'colour.primary.text',
           },
         },
-        spinner: {
-          color: 'colour.primary.text',
-        },
       },
       quaternary: {
         root: {
@@ -249,9 +240,6 @@ export const buttonRecipe = defineSlotRecipe({
             borderColor: 'colour.primary.fill',
             color: 'colour.primary.text',
           },
-        },
-        spinner: {
-          color: 'colour.primary.text',
         },
       },
       muted: {
@@ -275,9 +263,6 @@ export const buttonRecipe = defineSlotRecipe({
             borderColor: 'colour.primary.fill',
             color: 'colour.primary.text',
           },
-        },
-        spinner: {
-          color: 'colour.neutral.70',
         },
       },
     },
@@ -331,9 +316,6 @@ export const buttonRecipe = defineSlotRecipe({
             layerStyle: 'focusRing.danger.md',
           },
         },
-        spinner: {
-          color: 'colour.system.danger.onFill',
-        },
       },
     },
     {
@@ -356,9 +338,6 @@ export const buttonRecipe = defineSlotRecipe({
             layerStyle: 'focusRing.danger.surface',
           },
         },
-        spinner: {
-          color: 'colour.system.danger.text',
-        },
       },
     },
     {
@@ -376,9 +355,6 @@ export const buttonRecipe = defineSlotRecipe({
           _active: {
             layerStyle: 'focusRing.danger.surface',
           },
-        },
-        spinner: {
-          color: 'colour.system.danger.text',
         },
       },
     },
@@ -398,9 +374,6 @@ export const buttonRecipe = defineSlotRecipe({
             layerStyle: 'focusRing.danger.surface',
           },
         },
-        spinner: {
-          color: 'colour.system.danger.text',
-        },
       },
     },
     {
@@ -414,9 +387,6 @@ export const buttonRecipe = defineSlotRecipe({
             bg: 'colour.system.danger.surfaceHover',
             borderColor: 'colour.system.danger.surfaceHover',
           },
-        },
-        spinner: {
-          color: 'colour.system.danger.text',
         },
       },
     },
@@ -436,9 +406,6 @@ export const buttonRecipe = defineSlotRecipe({
           _active: {
             layerStyle: 'focusRing.success.md',
           },
-        },
-        spinner: {
-          color: 'colour.system.success.onFill',
         },
       },
     },
@@ -462,9 +429,6 @@ export const buttonRecipe = defineSlotRecipe({
             layerStyle: 'focusRing.success.surface',
           },
         },
-        spinner: {
-          color: 'colour.system.success.text',
-        },
       },
     },
     {
@@ -482,9 +446,6 @@ export const buttonRecipe = defineSlotRecipe({
           _active: {
             layerStyle: 'focusRing.success.surface',
           },
-        },
-        spinner: {
-          color: 'colour.system.success.text',
         },
       },
     },
@@ -504,9 +465,6 @@ export const buttonRecipe = defineSlotRecipe({
             layerStyle: 'focusRing.success.surface',
           },
         },
-        spinner: {
-          color: 'colour.system.success.text',
-        },
       },
     },
     {
@@ -520,9 +478,6 @@ export const buttonRecipe = defineSlotRecipe({
             bg: 'colour.system.success.surfaceHover',
             borderColor: 'colour.system.success.surfaceHover',
           },
-        },
-        spinner: {
-          color: 'colour.system.success.text',
         },
       },
     },
@@ -546,9 +501,6 @@ export const buttonRecipe = defineSlotRecipe({
             layerStyle: 'focusRing.info.surface',
           },
         },
-        spinner: {
-          color: 'colour.system.info.text',
-        },
       },
     },
     {
@@ -566,9 +518,6 @@ export const buttonRecipe = defineSlotRecipe({
           _active: {
             layerStyle: 'focusRing.info.surface',
           },
-        },
-        spinner: {
-          color: 'colour.system.info.text',
         },
       },
     },
@@ -592,9 +541,6 @@ export const buttonRecipe = defineSlotRecipe({
             layerStyle: 'focusRing.warning.surface',
           },
         },
-        spinner: {
-          color: 'colour.system.warning.text',
-        },
       },
     },
     {
@@ -612,9 +558,6 @@ export const buttonRecipe = defineSlotRecipe({
           _active: {
             layerStyle: 'focusRing.warning.surface',
           },
-        },
-        spinner: {
-          color: 'colour.system.warning.text',
         },
       },
     },

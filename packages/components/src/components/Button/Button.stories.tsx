@@ -189,8 +189,8 @@ export const Disabled: ButtonStory = {
       <IressButton {...args} mode="quaternary">
         {children}
       </IressButton>
-      <IressButton {...args} mode="muted">
-        <IressIcon name="edit" />
+      <IressButton {...args} icon="edit" mode="muted">
+        Edit
       </IressButton>
     </IressInline>
   ),
