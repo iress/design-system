@@ -15,6 +15,7 @@ export const usePopoverActivatorInteractions = <
 >(
   popover?: FloatingPopoverHookReturn,
   referenceProps?: Omit<IressUnstyledProps<E>, 'value'>,
+  isDisabled = false,
 ) => {
   // This will call the onBlur method of the currently virtual focused node.
   const handleBlur = useCallback(
@@ -31,12 +32,12 @@ export const usePopoverActivatorInteractions = <
       if (popover?.show) {
         handleKeyDownWhenShown(e, popover);
       } else if (popover) {
-        handleKeyDownWhenHidden(e, popover);
+        handleKeyDownWhenHidden(e, popover, isDisabled);
       }
 
       referenceProps?.onKeyDown?.(e as KeyboardEvent<never>);
     },
-    [referenceProps, popover],
+    [referenceProps, popover, isDisabled],
   );
 
   return {
@@ -93,9 +94,10 @@ const handleKeyDownWhenShown = (
 const handleKeyDownWhenHidden = (
   e: KeyboardEvent<HTMLElement>,
   popover?: FloatingPopoverHookReturn,
+  isDisabled = false,
 ) => {
   const openKey = popover?.nested ? 'ArrowRight' : 'ArrowDown';
-  if (e.key === openKey) {
+  if (!isDisabled && e.key === openKey) {
     popover?.setShowWithReason(true, e.nativeEvent, 'focus');
   }
 };

@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { IressButton, button as buttonStyles } from '.';
 import { IressIcon } from '../Icon';
 import { axe } from 'jest-axe';
@@ -93,7 +94,10 @@ describe('IressButton', () => {
       it('renders loading spinner when loading is true', () => {
         render(<IressButton loading>Button</IressButton>);
         const spinner = screen.getByLabelText('Loading');
+        const button = screen.getByRole('button');
+
         expect(spinner).toBeVisible();
+        expect(button).toHaveClass(buttonStyles({ disabled: true }).root);
       });
 
       it('hides the prepend content when loading is true', () => {
@@ -147,6 +151,77 @@ describe('IressButton', () => {
         const button = screen.getByRole('button');
 
         fireEvent.click(button);
+        expect(clickSpy).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('disabled', () => {
+      it('sets aria-disabled and applies disabled styling without the native disabled attribute', () => {
+        render(<IressButton disabled>Button</IressButton>);
+        const button = screen.getByRole('button');
+
+        expect(button).toHaveAttribute('aria-disabled', 'true');
+        expect(button).not.toHaveAttribute('disabled');
+        expect(button).toHaveClass(buttonStyles({ disabled: true }).root);
+      });
+
+      it('provides an accessible name for a disabled icon button', () => {
+        render(
+          <IressButton disabled icon="edit">
+            Edit
+          </IressButton>,
+        );
+
+        expect(
+          screen.getByRole('button', { name: 'Edit' }),
+        ).toBeInTheDocument();
+      });
+
+      it('prevents form submission and click events when disabled', async () => {
+        const user = userEvent.setup();
+        const clickSpy = vi.fn();
+        const submitSpy = vi.fn();
+        render(
+          <form onSubmit={submitSpy}>
+            <IressButton disabled onClick={clickSpy} type="submit">
+              Button
+            </IressButton>
+          </form>,
+        );
+        const button = screen.getByRole('button');
+
+        await user.click(button);
+
+        expect(clickSpy).not.toHaveBeenCalled();
+        expect(submitSpy).not.toHaveBeenCalled();
+      });
+
+      it('does not bubble click events when disabled', async () => {
+        const user = userEvent.setup();
+        const parentClickSpy = vi.fn();
+        render(
+          <div onClick={parentClickSpy}>
+            <IressButton disabled>Button</IressButton>
+          </div>,
+        );
+
+        await user.click(screen.getByRole('button'));
+
+        expect(parentClickSpy).not.toHaveBeenCalled();
+      });
+
+      it('prevents click events when a disabled button renders as a link', async () => {
+        const user = userEvent.setup();
+        const clickSpy = vi.fn();
+        render(
+          <IressButton disabled href="https://google.co.uk" onClick={clickSpy}>
+            Button
+          </IressButton>,
+        );
+        const link = screen.getByRole('link');
+
+        await user.click(link);
+
         expect(clickSpy).not.toHaveBeenCalled();
       });
     });
