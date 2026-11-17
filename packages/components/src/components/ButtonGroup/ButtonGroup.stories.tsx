@@ -155,5 +155,6 @@ export const Compact: Story = {
     compact: true,
     defaultSelected: 'list',
     label: 'View',
+    hiddenLabel: true,
   },
 };

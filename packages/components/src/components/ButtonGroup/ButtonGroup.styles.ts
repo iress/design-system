@@ -23,6 +23,10 @@ export const buttonGroup = sva({
   variants: {
     compact: {
       true: {
+        label: {
+          textStyle: 'typography.body.sm.strong',
+        },
+
         // Segmented control: a grey track holding flush segments. Selection is
         // shown via a white "pill" with a subtle border, not a solid fill, so
         // the segment text stays dark blue in both resting and selected states.
@@ -39,7 +43,7 @@ export const buttonGroup = sva({
             minWidth: '[unset]',
             minHeight: 'input.height.xs',
             paddingInline: 'spacing.2',
-            paddingBlock: 'spacing.1',
+            paddingBlock: 'spacing.0',
             borderWidth: '[1px]',
             borderStyle: 'solid',
             borderColor: 'transparent',
@@ -47,6 +51,7 @@ export const buttonGroup = sva({
             textStyle: 'typography.body.sm.medium',
             color: 'colour.primary.text',
             bg: 'transparent',
+            focusable: 'inset',
 
             // Resting hover (unselected segment).
             _hover: {
