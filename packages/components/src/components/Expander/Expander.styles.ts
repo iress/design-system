@@ -56,6 +56,9 @@ export const expander = sva({
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'flex-start',
+          // Keeps full-width activator content (e.g. an IressInline) from
+          // running into the chevron.
+          gap: 'spacing.3',
           width: '12/12',
           textStyle: 'typography.heading.3',
           px: 'spacing.4',

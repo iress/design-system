@@ -38,7 +38,6 @@ export const BugReproduction: StoryObj<typeof IressExpander> = {
         horizontalAlign="between"
         verticalAlign="middle"
         alignSelf="center"
-        pr="spacing.3"
       >
         <IressCheckbox>Income</IressCheckbox>
         <IressText color="colour.neutral.70">3 selected</IressText>
@@ -100,5 +99,21 @@ export const Multiple: StoryObj<typeof IressExpander> = {
   render: () => <MultipleExpander />,
   parameters: {
     ...withCustomSource(MultipleExpanderSource),
+  },
+};
+
+export const InlineActivator: StoryObj<typeof IressExpander> = {
+  args: {
+    activator: (
+      <IressInline
+        horizontalAlign="between"
+        verticalAlign="middle"
+        alignSelf="center"
+      >
+        <IressCheckbox>Income</IressCheckbox>
+        <IressText color="colour.neutral.70">3 selected</IressText>
+      </IressInline>
+    ),
+    children: 'Expander content will go here',
   },
 };
