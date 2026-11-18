@@ -31,6 +31,26 @@ describe('IressPill', () => {
           expect(badge).toHaveClass(pill({ mode: status }));
         },
       );
+
+      it('applies the neutral mode class', () => {
+        render(<IressPill mode="neutral">Badge</IressPill>);
+        const badge = screen.getByText('Badge');
+        expect(badge).toHaveClass(pill({ mode: 'neutral' }));
+      });
+    });
+
+    describe('compact', () => {
+      it('applies the compact class', () => {
+        render(<IressPill compact>Badge</IressPill>);
+        const badge = screen.getByText('Badge');
+        expect(badge).toHaveClass(pill({ compact: true }));
+      });
+
+      it('does not apply the compact class by default', () => {
+        render(<IressPill>Badge</IressPill>);
+        const badge = screen.getByText('Badge');
+        expect(badge).not.toHaveClass(pill({ compact: true }));
+      });
     });
   });
 
