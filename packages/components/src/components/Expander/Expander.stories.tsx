@@ -30,36 +30,6 @@ export const Default: StoryObj<typeof IressExpander> = {
   },
 };
 
-export const BugReproduction: StoryObj<typeof IressExpander> = {
-  name: 'Bug: Inline activator alignment',
-  args: {
-    activator: (
-      <IressInline
-        horizontalAlign="between"
-        verticalAlign="middle"
-        alignSelf="center"
-      >
-        <IressCheckbox>Income</IressCheckbox>
-        <IressText color="colour.neutral.70">3 selected</IressText>
-      </IressInline>
-    ),
-    children: 'Expander content will go here',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: `
-**Problem Summary:** Inline content with \`horizontalAlign="between"\` inside the Expander activator does not use the available width.
-
-**Expected Behavior:** The checkbox is aligned to the left and the selected count to the right.
-
-**How to Test:** View the activator and confirm the two items are spaced across its width.
-        `,
-      },
-    },
-  },
-};
-
 export const Mode: StoryObj<typeof IressExpander> = {
   args: {
     ...Default.args,
