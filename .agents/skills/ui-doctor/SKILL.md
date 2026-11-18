@@ -378,6 +378,13 @@ For the full list of common anti-patterns with code examples, read the Common Mi
 
 **Audit rule:** Search for `disabled` on any `<IressButton`. Every match is a finding.
 
+For each finding, explain why disabled buttons are discouraged, recommend an
+alternative for that use case, and link to the
+[IDS best practices and alternatives to disabled buttons](https://main--69166895eb243715fcd0d241.chromatic.com/?path=/docs/components-button--docs#avoid-using-disabled).
+Use validation on submit for incomplete forms, `loading` for actions in progress,
+and visible guidance for missing permissions or prerequisites. Supported disabled
+styling does not make disabling a recommended interaction pattern.
+
 ### Redundant `textStyle` on IressText — **Medium** priority
 
 **Audit rule:** Search for `IressText` with both `element` and `textStyle` where the textStyle matches the element's default styling (e.g. `element="h1" textStyle="typography.heading.1"`).

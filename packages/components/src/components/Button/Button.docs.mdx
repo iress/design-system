@@ -21,6 +21,13 @@ import * as CloseButtonStories from './CloseButton/CloseButton.stories';
 
 ### Avoid using `disabled`
 
+<IressAlert status="warning" heading="Disabled styling is not a recommendation">
+  Before using the `disabled` prop, review the alternatives below. Prefer an
+  enabled button with validation or clear feedback, and use `loading` while an
+  action is in progress. If disabling is unavoidable, provide a visible
+  explanation and a clear path forward.
+</IressAlert>
+
 IDS discourages using `disabled` on `IressButton`. When used, it sets
 `aria-disabled="true"` instead of the native HTML `disabled` attribute, keeping
 the button available to screen readers while preventing activation. Disabling a
