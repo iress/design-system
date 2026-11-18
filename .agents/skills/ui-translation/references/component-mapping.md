@@ -10,6 +10,7 @@
 | Icon-only action                 | `IressButton icon="edit" mode="muted"` | `<IressButton mode="muted" icon="edit">Edit</IressButton>`         |
 | Danger / delete action           | `IressButton status="danger"`          | `<IressButton mode="primary" status="danger">Delete</IressButton>` |
 | Link in text                     | `IressLink`                            | `<IressLink href="/about">About</IressLink>`                       |
+| Segmented control / view switcher (mutually exclusive views, e.g. List / Board) | `IressButtonGroup compact` + `IressButton`s | `<IressButtonGroup compact label="View" defaultSelected="list"><IressButton value="list">List</IressButton><IressButton value="board">Board</IressButton></IressButtonGroup>` |
 | Dropdown/context menu trigger    | `IressDropdownMenu`                    | See patterns docs                                                  |
 
 ## Form Inputs

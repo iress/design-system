@@ -85,6 +85,10 @@ The selected option is shown as a pill on a subtle track, and the child
 `IressButton` components are automatically rendered in their compact size, so
 you don't need to set `compact` on each button yourself.
 
+**Note:** The segmented control styling is applied to every `IressButton` inside
+a compact `IressButtonGroup`. Setting `compact={false}` on an individual child
+button is not supported and will not restore its default size.
+
 <ComponentExample of={ComponentStories.Compact} />
 
 ### Headings as labels

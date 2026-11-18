@@ -72,6 +72,29 @@ export const buttonGroup = sva({
                 color: 'colour.primary.text',
               },
             },
+
+            // Disabled and loading segments (the button recipe applies the
+            // disabled class to both). Declared last so it wins over the
+            // resting, hover and selected rules above.
+            '&.button__root--disabled_true': {
+              bg: 'colour.neutral.20',
+              borderColor: 'transparent',
+              color: 'colour.neutral.70',
+
+              _hover: {
+                bg: 'colour.neutral.20',
+                borderColor: 'transparent',
+                color: 'colour.neutral.70',
+              },
+
+              '&[aria-pressed="true"]': {
+                borderColor: 'colour.neutral.40',
+
+                _hover: {
+                  borderColor: 'colour.neutral.40',
+                },
+              },
+            },
           },
         },
       },
