@@ -29,6 +29,17 @@ Translate natural language UI descriptions into IDS (Iress Design System) compon
 6. **Apply styling** — Use [styling props](references/styling-props.md) for spacing, colour, and typography. Spacing tokens must include the category prefix: `gap="spacing.4"`, `p="spacing.6"`. Alias tokens (`"xs"`, `"sm"`, `"md"`, `"lg"`, `"xl"`) are also valid. Never use bare numbers like `gap="4"`.
 7. **Verify output** — Check that all imports resolve, no raw HTML is used where IDS components exist, grid layouts use responsive `span` values, and no common anti-patterns are present (disabled buttons, slot attributes, redundant textStyle)
 
+## Disabled Button Guidance
+
+Do not introduce `disabled` on `IressButton` as the default solution. When a user
+requests a disabled button, warn that it does not explain why the action is
+unavailable or how to proceed, and link to the
+[IDS best practices and alternatives to disabled buttons](https://main--69166895eb243715fcd0d241.chromatic.com/?path=/docs/components-button--docs#avoid-using-disabled).
+Recommend validation on submit for incomplete forms, `loading` for actions in
+progress, and visible guidance for missing permissions or prerequisites.
+If the user still requires `disabled`, include a visible explanation and a clear
+path forward; do not silently generate a disabled button.
+
 ## Setup
 
 > **Important:** IDS v6 is currently in beta. Install with the `@beta` tag:

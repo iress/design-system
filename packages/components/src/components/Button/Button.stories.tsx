@@ -168,6 +168,14 @@ export const Loading: ButtonStory = {
 };
 
 export const Disabled: ButtonStory = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          '**Disabled buttons are discouraged.** This story demonstrates the supported styling, not the recommended interaction pattern. Keep form submission enabled with validation, use `loading` for actions in progress, and explain missing permissions or prerequisites. Read the [IDS best practices and alternatives to disabled buttons](https://main--69166895eb243715fcd0d241.chromatic.com/?path=/docs/components-button--docs#avoid-using-disabled) before using `disabled`.',
+      },
+    },
+  },
   args: {
     disabled: true,
     children: 'Button text',
