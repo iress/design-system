@@ -94,7 +94,7 @@ import { cssVars } from '@iress-oss/ids-tokens';
 
 // Each leaf is a var() string with a fallback value
 cssVars.colour.primary.fill; // 'var(--iress-colour-primary-fill, #003271)'
-cssVars.spacing[4]; // 'var(--iress-spacing-4, calc(4 * var(--iress-spacing-100, .25rem)))'
+cssVars.spacing[4]; // 'var(--iress-spacing-4, calc(4 * var(--iress-spacing-1, .25rem)))'
 cssVars.radius[1]; // 'var(--iress-radius-1, 0.25rem)'
 cssVars.typography.heading[1]; // 'var(--iress-typography-heading-1, 500 calc(...) / 1.33 Ubuntu, ...)'
 
@@ -118,7 +118,7 @@ import { designTokens } from '@iress-oss/ids-tokens';
 
 // Each token is an IressDesignToken object with $value, $type, $description, etc.
 designTokens.colour.primary.fill.$value; // '#003271'
-designTokens.spacing[4].$value; // 'calc(4 * {spacing.100 || .25rem})'
+designTokens.spacing[4].$value; // 'calc(4 * {spacing.1 || .25rem})'
 designTokens.radius[1].$value; // '0.25rem'
 designTokens.typography.heading[1].$value; // { fontFamily, fontSize, fontWeight, lineHeight }
 ```
