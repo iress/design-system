@@ -1306,7 +1306,7 @@ __metadata:
     "@floating-ui/react": "npm:0.27.19"
     "@fortawesome/fontawesome-common-types": "npm:0.2.36"
     "@iress-oss/ids-theme-preset": "npm:^6.1.0"
-    "@iress-oss/ids-tokens": "npm:^6.0.0"
+    "@iress-oss/ids-tokens": "npm:^6.0.1"
     "@pandacss/dev": "npm:1.9.1"
     "@tanstack/react-table": "npm:8.21.3"
     "@tanstack/react-virtual": "npm:3.13.12"
@@ -1378,7 +1378,7 @@ __metadata:
     "@iress-oss/ids-storybook-sandbox": "npm:^0.2.2"
     "@iress-oss/ids-storybook-toggle-stories": "npm:^0.1.0"
     "@iress-oss/ids-storybook-version-badge": "npm:^0.1.1"
-    "@iress-oss/ids-tokens": "npm:^6.0.0"
+    "@iress-oss/ids-tokens": "npm:^6.0.1"
     "@mdx-js/react": "npm:3.1.1"
     "@storybook/addon-a11y": "npm:10.6.5"
     "@storybook/addon-docs": "npm:10.6.5"
@@ -1595,7 +1595,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@iress-oss/ids-theme-preset@workspace:packages/theme-preset"
   dependencies:
-    "@iress-oss/ids-tokens": "npm:^6.0.0"
+    "@iress-oss/ids-tokens": "npm:^6.0.1"
     "@pandacss/dev": "npm:1.9.1"
     "@pandacss/types": "npm:1.11.4"
     "@typescript-eslint/eslint-plugin": "npm:^8.62.1"
@@ -1617,7 +1617,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@iress-oss/ids-tokens@npm:^6.0.0, @iress-oss/ids-tokens@workspace:packages/tokens":
+"@iress-oss/ids-tokens@npm:^6.0.1, @iress-oss/ids-tokens@workspace:packages/tokens":
   version: 0.0.0-use.local
   resolution: "@iress-oss/ids-tokens@workspace:packages/tokens"
   dependencies:
