@@ -75,6 +75,19 @@ export const pill = cva({
         '--pill-bg': '{colors.colour.system.warning.fill}',
         '--pill-color': '{colors.colour.system.warning.onFill}',
       },
+      neutral: {
+        '--pill-bg': '{colors.colour.neutral.30}',
+        '--pill-color': '{colors.colour.neutral.80}',
+      },
+    },
+    compact: {
+      true: {
+        // Same text size, smaller container: no vertical padding, a 1.5 line
+        // height (18px at the 12px pill text) and 4px horizontal padding.
+        lineHeight: 1.5,
+        py: 'spacing.0',
+        px: 'spacing.1',
+      },
     },
   },
   defaultVariants: {

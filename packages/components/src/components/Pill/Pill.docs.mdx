@@ -43,6 +43,27 @@ System status colours provide semantic meaning for feedback and state indication
 
 <ComponentExample of={ComponentStories.Status} />
 
+### Neutral
+
+Use `mode="neutral"` for a subtle grey pill that doesn't carry a status or data
+colour, such as a count that isn't the main focus of the screen.
+
+<ComponentExample of={ComponentStories.Neutral} />
+
+### Compact
+
+Set the `compact` prop to render a smaller pill. Only the container shrinks; the
+text size stays the same. Compact pills work well for counts that sit alongside
+other text, such as inside a tab label, and save horizontal space.
+
+<ComponentExample of={ComponentStories.Compact} />
+
+When placing a compact pill next to a label, keep it close to the text (for
+example `ml="xs"`) so it reads as part of that label rather than a separate
+item.
+
+<ComponentExample of={ComponentStories.CompactInTabs} />
+
 ## Testing
 
 Query pills by their text content:
