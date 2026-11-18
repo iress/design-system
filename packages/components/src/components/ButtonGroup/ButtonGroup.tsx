@@ -18,6 +18,13 @@ export interface IressButtonGroupProps<
   children?: ReactNode;
 
   /**
+   * Renders the smallest variant of the button group, reducing the container
+   * padding and gap and rendering its child buttons in their compact size.
+   * Useful for segmented controls that toggle between mutually exclusive views.
+   */
+  compact?: boolean;
+
+  /**
    * Initially selected value, use for uncontrolled components.
    */
   defaultSelected?: ControlledValue<T, TMultiple>;
@@ -56,6 +63,7 @@ export const IressButtonGroup = <
   children,
   className,
   'data-testid': dataTestId,
+  compact,
   defaultSelected,
   hiddenLabel,
   label,
@@ -66,12 +74,13 @@ export const IressButtonGroup = <
 }: IressButtonGroupProps<T, TMultiple>) => {
   const id = useIdIfNeeded({ id: restProps.id });
   const labelId = `${id}--label`;
-  const classes = buttonGroup({ hiddenLabel });
-  const styles = buttonGroup.raw({ hiddenLabel });
+  const classes = buttonGroup({ compact, hiddenLabel });
+  const styles = buttonGroup.raw({ compact, hiddenLabel });
   const [styleProps, nonStyleProps] = splitCssProps(restProps);
 
   return (
     <ButtonGroupProvider
+      compact={compact}
       defaultSelected={defaultSelected}
       multiple={multiple}
       onChange={onChange}

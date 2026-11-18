@@ -75,6 +75,22 @@ If you would like to visually hide the label, you can use the `hiddenLabel` prop
 
 <ComponentExample of={ComponentStories.HiddenLabel} />
 
+### Compact (segmented control)
+
+Set the `compact` prop to render the smallest variant of the button group, a
+segmented control. It is best suited to switching between a small number of
+mutually exclusive views, such as a List / Board toggle.
+
+The selected option is shown as a pill on a subtle track, and the child
+`IressButton` components are automatically rendered in their compact size, so
+you don't need to set `compact` on each button yourself.
+
+**Note:** The segmented control styling is applied to every `IressButton` inside
+a compact `IressButtonGroup`. Setting `compact={false}` on an individual child
+button is not supported and will not restore its default size.
+
+<ComponentExample of={ComponentStories.Compact} />
+
 ### Headings as labels
 
 For semantic reasons, you may need the label to be rendered as a heading. In this case, you can pass the element directly to the `label` prop. The component will automatically add the `id` required to connect the button group to its label.

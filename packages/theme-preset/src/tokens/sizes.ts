@@ -45,6 +45,11 @@ const inputSizes = {
     description: 'input height based on typography size (sm)',
     value: `calc(${cssVars.typography.base.size} * (30 / 14))`,
   },
+  'input.height.xs': {
+    description:
+      'input height based on typography size (xs), used for the smallest controls such as the compact button group (segmented control)',
+    value: `calc(${cssVars.typography.base.size} * (24 / 14))`,
+  },
 };
 
 const gridSizes = Object.fromEntries(

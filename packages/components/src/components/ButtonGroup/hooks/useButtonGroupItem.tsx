@@ -11,6 +11,7 @@ export interface ButtonGroupItemProps {
 
 export interface ButtonGroupItemHook {
   active: boolean;
+  compact?: boolean;
   props: {
     'aria-pressed': boolean;
   };
@@ -28,6 +29,7 @@ export const useButtonGroupItem = ({
 
   return {
     active: isActive,
+    compact: buttonGroup.compact,
     props: {
       'aria-pressed': isActive,
     },

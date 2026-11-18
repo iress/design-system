@@ -141,3 +141,40 @@ export const HeadingLabel: Story = {
     label: <IressText element="h2">Heading as label</IressText>,
   },
 };
+
+export const Compact: Story = {
+  args: {
+    children: [
+      <IressButton key="list" value="list">
+        List
+      </IressButton>,
+      <IressButton key="board" value="board">
+        Board
+      </IressButton>,
+    ],
+    compact: true,
+    defaultSelected: 'list',
+    label: 'View',
+    hiddenLabel: true,
+  },
+};
+
+export const CompactDisabled: Story = {
+  args: {
+    children: [
+      <IressButton key="list" value="list">
+        List
+      </IressButton>,
+      <IressButton key="board" value="board">
+        Board
+      </IressButton>,
+      <IressButton key="calendar" value="calendar" disabled>
+        Calendar
+      </IressButton>,
+    ],
+    compact: true,
+    defaultSelected: 'list',
+    label: 'View',
+    hiddenLabel: true,
+  },
+};
