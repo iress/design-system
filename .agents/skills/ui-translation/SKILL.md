@@ -37,8 +37,17 @@ unavailable or how to proceed, and link to the
 [IDS best practices and alternatives to disabled buttons](https://main--69166895eb243715fcd0d241.chromatic.com/?path=/docs/components-button--docs#avoid-using-disabled).
 Recommend validation on submit for incomplete forms, `loading` for actions in
 progress, and visible guidance for missing permissions or prerequisites.
-If the user still requires `disabled`, include a visible explanation and a clear
-path forward; do not silently generate a disabled button.
+Keep primary submit buttons enabled on long or complex forms, validate on
+submit, and help users locate errors. If the user still requires `disabled`,
+include persistent text adjacent to the button explaining why and what to do
+next, associated using `aria-describedby`; do not silently generate a disabled
+button or rely on a tooltip alone.
+
+The default IDS button uses `aria-disabled` and remains keyboard-focusable;
+do not describe it as a native disabled button or switch it to native `disabled`.
+Activation and `onClick` are blocked, so do not attach an explanatory toast to a
+disabled button. Keep it enabled if clicking should provide feedback, and prefer
+persistent inline guidance for unavailable actions.
 
 ## Setup
 

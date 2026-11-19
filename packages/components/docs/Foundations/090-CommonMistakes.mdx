@@ -176,15 +176,25 @@ Always wrap inputs in `IressField` (or `IressFormField` inside an `IressForm`) f
 
 IDS discourages using the `disabled` pattern on `IressButton`. When set,
 `disabled` applies `aria-disabled="true"` rather than the native `disabled`
-attribute, so assistive technologies can announce the state. It still does not
-explain why the action is unavailable or how to enable it.
+attribute. The default button remains keyboard-focusable and assistive
+technologies can announce the state, but it still does not explain why the
+action is unavailable or how to proceed. Activation and `onClick` are blocked,
+so a disabled button cannot trigger an explanatory toast.
+
+Default to enabled, especially for primary submit buttons on long or complex
+forms. Validate on submit and help users locate errors instead of hiding the
+blocking condition behind a disabled action. Use `loading` for in-flight work.
+
+If disabling is unavoidable, show persistent text adjacent to the button
+explaining why and what to do next, associated using `aria-describedby`. Do not
+rely on a tooltip alone or hover to reveal essential guidance.
 
 | Use case | Anti-pattern | IDS alternative |
 | --- | --- | --- |
 | Form is incomplete | `disabled={!isValid}` | Use `IressForm` with `rules` validation — validates on submit with inline errors |
 | Action in progress | `disabled={isSubmitting}` | Use `loading={isSubmitting}` — shows spinner, announces to screen readers, prevents clicks |
-| User lacks permission | `disabled={!canEdit}` | Hide the button (`{canEdit && <IressButton>…</IressButton>}`), or keep enabled and explain on click |
-| Prerequisite not met | `disabled={!hasSelection}` | Keep enabled and show guidance on click (e.g. "Select an item first" via `IressAlert`) |
+| User lacks permission | `disabled={!canEdit}` | Hide the button (`{canEdit && <IressButton>…</IressButton>}`), or show adjacent text explaining the restriction and next step |
+| Prerequisite not met | `disabled={!hasSelection}` | Show adjacent guidance (e.g. "Select an item first"); keep enabled if clicking should provide feedback |
 
 ```tsx
 // ❌ disabled is an anti-pattern
@@ -203,6 +213,9 @@ explain why the action is unavailable or how to enable it.
 // ✅ Permission — hide or explain
 {canEdit && <IressButton onClick={handleEdit}>Edit</IressButton>}
 ```
+
+See [Button usage guidance](?path=/docs/components-button--docs#avoid-using-disabled)
+for an adjacent explanation example and disabled-state visual review criteria.
 
 ## Redundant `textStyle` on IressText
 

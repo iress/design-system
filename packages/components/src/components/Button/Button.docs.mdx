@@ -24,14 +24,18 @@ import * as CloseButtonStories from './CloseButton/CloseButton.stories';
 <IressAlert status="warning" heading="Disabled styling is not a recommendation">
   Before using the `disabled` prop, review the alternatives below. Prefer an
   enabled button with validation or clear feedback, and use `loading` while an
-  action is in progress. If disabling is unavoidable, provide a visible
-  explanation and a clear path forward.
+  action is in progress. If disabling is unavoidable, provide visible text
+  adjacent to the button explaining why and what to do next, not just a tooltip.
 </IressAlert>
 
 IDS discourages using `disabled` on `IressButton`. When used, it sets
-`aria-disabled="true"` instead of the native HTML `disabled` attribute, keeping
-the button available to screen readers while preventing activation. Disabling a
-button is still an anti-pattern that should be avoided because:
+`aria-disabled="true"` instead of the native HTML `disabled` attribute. The
+default button remains keyboard-focusable and available to screen readers while
+activation is blocked. Native disabled buttons are normally skipped in the tab
+order; that limitation does not apply to the default IDS button. Custom
+`element` components must preserve keyboard access and accessible semantics.
+
+Disabling a button is still an anti-pattern that should be avoided because:
 
 - Screen readers announce that the button is disabled, but not why it cannot be activated
 - Users may not understand what they need to do to enable it
@@ -40,6 +44,12 @@ button is still an anti-pattern that should be avoided because:
 <IressExpander activator="Alternatives by use case">
 
 **"Form is incomplete"** — Keep the submit button enabled. Use `IressForm` with `rules` validation — it will show inline errors on submit and prevent submission until the form is valid.
+
+This is especially important for long or complex forms: the blocking field may
+be off-screen, conditional, or depend on server-side validation. Show clear field
+errors and, where appropriate, a validation summary that helps users locate
+them. Do not disable the primary submit button merely because the form is
+incomplete or invalid.
 
 ```tsx
 // ❌ Disabling submit until form is valid
@@ -67,7 +77,7 @@ button is still an anti-pattern that should be avoided because:
 <IressButton loading={isSubmitting} mode="primary" type="submit">Save</IressButton>
 ```
 
-**"User lacks permission"** — Hide the button entirely, or keep it enabled and show an explanation when clicked.
+**"User lacks permission"** — Hide the button entirely, or provide visible adjacent text explaining the restriction and the next step. If clicking should provide further feedback, keep the button enabled.
 
 ```tsx
 // ❌ Showing a disabled button the user can never enable
@@ -78,27 +88,73 @@ button is still an anti-pattern that should be avoided because:
   canEdit && <IressButton onClick={handleEdit}>Edit</IressButton>;
 }
 
-// ✅ Option B — explain on click
-<IressButton onClick={() => (canEdit ? handleEdit() : showPermissionError())}>
-  Edit
-</IressButton>;
+// ✅ Option B — explain visibly, with further feedback on click
+<>
+  {!canEdit && (
+    <IressText>
+      Only licensee admins can edit. Ask your admin for help.
+    </IressText>
+  )}
+  <IressButton onClick={() => (canEdit ? handleEdit() : showPermissionError())}>
+    Edit
+  </IressButton>
+</>;
 ```
 
-**"Prerequisite step not completed"** — Guide the user to the prerequisite instead of silently disabling.
+**"Prerequisite step not completed"** — Provide visible guidance beside the action instead of silently disabling. Keep the button enabled if clicking should provide further feedback.
 
 ```tsx
 // ❌ Disabled with no explanation
 <IressButton disabled={!hasSelectedItem}>Delete</IressButton>
 
-// ✅ Explain what's needed
-<IressButton onClick={() => !hasSelectedItem ? showAlert('Select an item first') : confirmDelete()}>
-  Delete
-</IressButton>
+// ✅ Explain what's needed before the user clicks
+<>
+  {!hasSelectedItem && <IressText>Select an item before deleting.</IressText>}
+  <IressButton onClick={() => !hasSelectedItem ? showAlert('Select an item first') : confirmDelete()}>
+    Delete
+  </IressButton>
+</>
 ```
 
 **"Destructive action needs confirmation"** — Use `IressModal` with `status="danger"` for a confirmation step.
 
 </IressExpander>
+
+### If disabling is unavoidable
+
+Provide a persistent, visible explanation adjacent to the button and associate
+it using `aria-describedby`. State both the reason and the next step. Do not
+rely on hover or a tooltip alone: touch users have no hover, and the explanation
+must also be available to keyboard and screen reader users.
+
+```tsx
+<IressStack gap="sm">
+  <IressButton disabled aria-describedby="edit-permission">
+    Edit
+  </IressButton>
+  <IressText id="edit-permission">
+    Only licensee admins can edit. Ask your admin to make this change.
+  </IressText>
+</IressStack>
+```
+
+`IressButton disabled` suppresses `onClick`, so it cannot show an explanatory
+toast when clicked. If the action should respond with feedback, leave the button
+enabled and handle that response instead. Prefer persistent inline guidance to
+a transient toast for explaining an unavailable action.
+
+### Disabled-state visual review
+
+Disabled must not mean unreadable. Review label and icon legibility, background,
+border, and focus visibility across button modes, supported light and dark
+themes, and forced-colours/high-contrast mode. Document the tokens used for each
+state; do not assume that using tokens alone verifies contrast.
+
+[WCAG contrast minimum exempts text in inactive controls](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html),
+but that is not a recommendation to make labels hard to read. A proposed 3:1
+disabled-text target would be a design decision, not a WCAG requirement for
+inactive controls or an already verified IDS guarantee. Adjacent explanatory
+text must meet the applicable text contrast requirements.
 
 ## Examples
 

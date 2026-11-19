@@ -90,12 +90,13 @@ export interface InternalButtonProps<
    * Disabled buttons do not explain why an action is unavailable or how to proceed.
    *
    * Before using this prop, read the [IDS best practices and alternatives to disabled buttons](https://main--69166895eb243715fcd0d241.chromatic.com/?path=/docs/components-button--docs#avoid-using-disabled).
-   * - Incomplete forms: keep submit enabled and use `IressForm` validation on submit.
+   * - Incomplete forms, including long or complex forms: keep submit enabled and use `IressForm` validation on submit.
    * - Actions in progress: use `loading` to communicate progress and prevent duplicate clicks.
    * - Missing permissions or prerequisites: hide unavailable actions or explain what is needed.
    *
-   * When true, the button is visually disabled, remains available to screen readers, and cannot be activated.
-   * If unavoidable, provide a visible explanation and a clear path forward.
+   * When true, uses `aria-disabled` rather than native `disabled`. The default button remains keyboard-focusable and available to screen readers, but activation and `onClick` are blocked.
+   * If unavoidable, provide visible text adjacent to the button explaining why and what to do next, associated using `aria-describedby`.
+   * Do not rely on a tooltip or an `onClick` toast to explain a disabled button.
    */
   disabled?: boolean;
 
