@@ -385,6 +385,19 @@ Use validation on submit for incomplete forms, `loading` for actions in progress
 and visible guidance for missing permissions or prerequisites. Supported disabled
 styling does not make disabling a recommended interaction pattern.
 
+Require persistent, visible adjacent text explaining the reason and next step
+for unavoidable disabled actions, associated using `aria-describedby`. Flag
+tooltip-only explanations and `onClick` toasts on disabled buttons: IDS blocks
+activation and `onClick`. The default IDS button uses `aria-disabled` and remains
+keyboard-focusable; do not report the native disabled tab-order limitation as
+an IDS behaviour. Keep primary submit buttons enabled on long or complex forms,
+validate on submit, and help users locate errors.
+
+For visual review, check disabled text/icon legibility, background, border, and
+focus visibility across supported themes and forced-colours mode. Do not claim
+these are verified from token usage alone, or present a proposed 3:1
+disabled-text target as a WCAG requirement for inactive controls.
+
 ### Redundant `textStyle` on IressText — **Medium** priority
 
 **Audit rule:** Search for `IressText` with both `element` and `textStyle` where the textStyle matches the element's default styling (e.g. `element="h1" textStyle="typography.heading.1"`).
