@@ -7,7 +7,6 @@ import {
 } from '../../Menu';
 import { propagateTestid } from '@helpers/utility/propagateTestid';
 import { toArray } from '@helpers/formatting/toArray';
-import { getFormControlValueAsStringIfDefined } from '@helpers/form/getFormControlValueAsStringIfDefined';
 import { getFormControlValueAsString } from '@helpers/form/getFormControlValueAsString';
 import { useCallback, useMemo, type ReactNode } from 'react';
 import { getValueFromLabelValues } from '@helpers/label-value/getValueFromLabelValues';
@@ -23,6 +22,7 @@ import { cx } from '@/styled-system/css';
 import { type FormControlValue } from '@/types';
 import { IressSelectHeading } from '../SelectHeading/SelectHeading';
 import { usePopover } from '@/components/Popover';
+import { filterSelectedItems } from '../helpers/filterSelectedItems';
 
 export interface IressSelectMenuProps<
   TMultiple extends boolean = false,
@@ -117,37 +117,7 @@ export const IressSelectMenu = <TMultiple extends boolean = false>({
       : items;
 
     if (hideSelectedItems) {
-      const menuSelectedArray = toArray(menuSelected);
-      itemsToShow = itemsToShow
-        .map((item) => {
-          // Handle grouped items
-          if (item.children && item.children.length > 0) {
-            const filteredChildren = item.children.filter(
-              (child) =>
-                !menuSelectedArray.includes(
-                  getFormControlValueAsStringIfDefined(child.value) ??
-                    child.label,
-                ),
-            );
-
-            // Only include group if it has remaining children
-            if (filteredChildren.length > 0) {
-              return { ...item, children: filteredChildren };
-            }
-            return null;
-          }
-
-          // Handle flat items
-          if (
-            !menuSelectedArray.includes(
-              getFormControlValueAsStringIfDefined(item.value) ?? item.label,
-            )
-          ) {
-            return item;
-          }
-          return null;
-        })
-        .filter((item): item is LabelValueMeta => item !== null);
+      itemsToShow = filterSelectedItems(itemsToShow, menuSelected);
     }
 
     return addLimitsToItems(itemsToShow, limitDesktop, limitMobile);
