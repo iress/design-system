@@ -769,6 +769,71 @@ describe('IressSelect', () => {
         expect(combobox).toHaveValue('');
       });
 
+      it('excludes already selected options from the search results count', async () => {
+        render(
+          <IressSelect
+            data-testid="test-component"
+            options={() => mockAsyncSearchLabelValues()}
+            debounceThreshold={0}
+            defaultValue={[
+              MOCK_LABEL_VALUES[0],
+              MOCK_LABEL_VALUES[1],
+              { label: 'Not in results', value: 'not-in-results' },
+            ]}
+            multiSelect
+          />,
+        );
+
+        await userEvent.click(screen.getByRole('combobox'));
+        const combobox = await screen.findByRole('combobox', {
+          name: 'Search',
+        });
+        await userEvent.type(combobox, 'op');
+
+        expect(
+          await screen.findByText('Search results (3)'),
+        ).toBeInTheDocument();
+        expect(screen.getByText('Selected (3)')).toBeInTheDocument();
+
+        await userEvent.click(
+          screen.getByRole('option', { name: 'Option 1', selected: true }),
+        );
+
+        expect(
+          await screen.findByText('Search results (4)'),
+        ).toBeInTheDocument();
+        expect(screen.getByText('Selected (2)')).toBeInTheDocument();
+      });
+
+      it('does not render the search results heading when all results are selected', async () => {
+        const optionsPromise = Promise.resolve(MOCK_LABEL_VALUES);
+        const options = vi.fn(() => optionsPromise);
+
+        render(
+          <IressSelect
+            data-testid="test-component"
+            options={options}
+            debounceThreshold={0}
+            defaultValue={MOCK_LABEL_VALUES}
+            multiSelect
+          />,
+        );
+
+        await userEvent.click(screen.getByRole('combobox'));
+        const combobox = await screen.findByRole('combobox', {
+          name: 'Search',
+        });
+        await userEvent.type(combobox, 'op');
+
+        await waitFor(() => expect(options).toHaveBeenCalled());
+        await act(async () => {
+          await optionsPromise;
+        });
+
+        expect(screen.getByText('Selected (5)')).toBeInTheDocument();
+        expect(screen.queryByText(/Search results/)).not.toBeInTheDocument();
+      });
+
       it('allows the clear all to be navigated via keyboard', async () => {
         render(
           <IressSelect
