@@ -1,5 +1,6 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressCard, type IressCardProps } from './Card';
+import { IressTable } from '../Table';
 import { CardAllSlots } from './mocks/CardAllSlots';
 import CardAllSlotsSource from './mocks/CardAllSlots.tsx?raw';
 import {
@@ -85,4 +86,29 @@ export const AllSlots: Story = {
         .replace(`(args)`, '(supportedCardSlots)'),
     ),
   },
+};
+
+export const WideTable: Story = {
+  args: {
+    heading: <h2>Wide table</h2>,
+    children: (
+      <IressTable
+        caption="Wide table scrolls horizontally within the card"
+        rows={[{ a: 'One', b: 'Two', c: 'Three', d: 'Four' }]}
+        columns={[
+          { key: 'a', label: 'First', width: '300px' },
+          { key: 'b', label: 'Second', width: '300px' },
+          { key: 'c', label: 'Third', width: '300px' },
+          { key: 'd', label: 'Fourth', width: '300px' },
+        ]}
+      />
+    ),
+  },
+  decorators: [
+    (Story) => (
+      <div style={{ width: '400px' }}>
+        <Story />
+      </div>
+    ),
+  ],
 };
