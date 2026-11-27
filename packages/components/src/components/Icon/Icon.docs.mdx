@@ -42,6 +42,29 @@ The `IressProvider` component takes care of this for you when you use it with th
 
 </IressExpander>
 
+#### Embedded in Xplan
+
+When Xplan already loads the full Material Symbols Rounded font, disable the
+IDS icon provider in your embedded application. Loading an additional subset
+under the same font family can cause Xplan icons to appear as text in Safari.
+
+```tsx
+import { IressShadow } from '@iress-oss/ids-components';
+
+<IressShadow noIconProvider>
+  <App />
+</IressShadow>;
+```
+
+Use `noIconProvider` on `IressProvider` instead if you are not using
+`IressShadow`. Do not add a separate `IressIconProvider` in this setup.
+
+Confirm that the host provides the full Material Symbols Rounded font,
+including every icon your application uses. For standalone development, load
+the full font in the document head as shown under manual font loading below.
+Without an icon provider, IDS does not hide icons while the font loads or if
+loading fails.
+
 #### Option 2: Using the `IressIconProvider`
 
 For more simpler applications, or if you need to customise the icon provider independently, you can use the `IressIconProvider` directly.
