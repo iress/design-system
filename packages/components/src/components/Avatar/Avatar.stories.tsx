@@ -1,15 +1,14 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
-import { stylingProps } from '@iress-oss/ids-storybook-config';
+import { componentStoryMeta } from '@iress-oss/ids-storybook-config';
 import { IressAvatar, IressIcon, IressInline } from '@/main';
+import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressAvatar>;
 
 export default {
   title: 'Components/Avatar',
   component: IressAvatar,
-  argTypes: {
-    ...stylingProps,
-  },
+  ...componentStoryMeta(componentMeta),
 } as Meta<typeof IressAvatar>;
 
 export const Default: Story = {

@@ -238,6 +238,16 @@ const Slider = (
   );
 };
 
+/**
+ * Allows users to select a value from a range by dragging a handle.
+ *
+ * @example
+ * ```tsx
+ * import { IressSlider } from '@iress-oss/ids-components';
+ *
+ * <IressSlider min={0} max={100} defaultValue={50} />
+ * ```
+ */
 export const IressSlider = forwardRef(Slider);
 
 IressSlider.displayName = 'IressSlider';

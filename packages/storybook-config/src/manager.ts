@@ -19,6 +19,15 @@ interface ManagerProps {
   logo?: string;
 
   /**
+   * Guidelines site link shown in the toolbar.
+   */
+  guidelines?: {
+    title?: string;
+    description?: string;
+    url: string;
+  };
+
+  /**
    * The version to show in the version badge.
    */
   version?: string | ((ref?: string) => Promise<string> | string);
@@ -31,11 +40,39 @@ interface ManagerProps {
 export const setUpManager = ({
   title = 'Iress Design System',
   logo = './assets/ids-logo-wealth.png',
+  guidelines,
   version,
 }: ManagerProps) => {
   const config = addons.getConfig();
 
+  if (guidelines) {
+    const injectGuidelinesLink = () => {
+      const target = document.getElementById('storybook-checklist-widget');
+      if (!target || target.dataset.idsGuidelines) return;
+      target.dataset.idsGuidelines = 'true';
+      const container = target.parentElement ?? target;
+      container.innerHTML = '';
+      container.style.padding = '0';
+
+      const link = document.createElement('a');
+      link.href = guidelines.url;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.style.cssText = `display:flex;flex-direction:column;gap:4px;padding:8px 12px;font-size:13px;font-weight:600;text-decoration:none;color:${cssVars.colour.neutral[10]};background:color-mix(in srgb, ${cssVars.colour.neutral[80]}, transparent 10%);z-index:100;position:relative;border-radius:2px;margin:2px;`;
+      const descriptionHtml = guidelines.description
+        ? `<span style="font-size:11px;color:${cssVars.colour.neutral[20]};font-weight:400">${guidelines.description}</span>`
+        : '';
+      link.innerHTML = `<span style="display:flex;align-items:center;gap:8px"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>${guidelines.title ?? 'Guidelines'}<span style="background:${cssVars.colour.data.bold[10]};color:${cssVars.colour.data.subtle[10]};font-size:11px;padding:0px 4px;border-radius:4px">NEW</span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;opacity:0.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>${descriptionHtml}`;
+      container.appendChild(link);
+    };
+
+    injectGuidelinesLink();
+    const observer = new MutationObserver(injectGuidelinesLink);
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
+
   addons.setConfig({
+    selectedPanel: 'storybook/docs/panel',
     theme: create({
       base: 'light',
       brandTitle: title,

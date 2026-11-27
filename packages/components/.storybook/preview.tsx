@@ -5,9 +5,18 @@ import '../src/styled-system/styles.css';
 import componentVersions from './component-versions.json' with { type: 'json' };
 
 const basePreview = getPreview({
+  autodocsTemplate: 'component',
   docsProps: {
     componentMapping,
     noStyles: true,
+  },
+  guidelinesUrl: (title) => {
+    const slug = title
+      .toLowerCase()
+      .split('/')
+      .map((s) => s.trim())
+      .join('/');
+    return `https://iress.github.io/design-system/#/${slug}`;
   },
   sandboxConfig: {
     dependencies: {
@@ -24,11 +33,10 @@ const preview: Preview = {
     ...basePreview.parameters,
     options: {
       ...(basePreview.parameters?.options as Record<string, unknown>),
-      selectedPanel: 'controls',
+      selectedPanel: 'storybook/docs/panel',
       storySort: {
         order: [
           'Introduction',
-          'Get Started',
           'Foundations',
           'Patterns',
           'Components',

@@ -58,6 +58,7 @@ interface SelectOptionsProps<TMultiple extends boolean = false>
   setShow: (show: boolean) => void;
   shouldShowInstructions?: boolean;
   shouldShowNoResults?: boolean;
+  'data-testid'?: string;
 }
 
 const getSearchInputProps = (
@@ -79,6 +80,7 @@ const getSearchInputProps = (
 };
 
 const SelectAsyncResults = <TMultiple extends boolean = false>({
+  'data-testid': dataTestId,
   debouncedQuery,
   minSearchLength,
   multiSelect,
@@ -90,6 +92,7 @@ const SelectAsyncResults = <TMultiple extends boolean = false>({
   value,
 }: Pick<
   SelectOptionsProps<TMultiple>,
+  | 'data-testid'
   | 'debouncedQuery'
   | 'minSearchLength'
   | 'multiSelect'
@@ -130,6 +133,7 @@ const SelectAsyncResults = <TMultiple extends boolean = false>({
 
   return (
     <IressSelectMenu
+      data-testid={dataTestId}
       heading={heading}
       items={results}
       multiSelect={multiSelect}
@@ -171,6 +175,7 @@ SelectAsyncError.displayName = 'SelectAsyncError';
 
 const SelectAsyncOptions = <TMultiple extends boolean = false>({
   autoHighlight,
+  'data-testid': dataTestId,
   debouncedQuery,
   error,
   errorText,
@@ -190,6 +195,7 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
 }: Pick<
   SelectOptionsProps<TMultiple>,
   | 'autoHighlight'
+  | 'data-testid'
   | 'debouncedQuery'
   | 'error'
   | 'errorText'
@@ -277,6 +283,7 @@ const SelectAsyncOptions = <TMultiple extends boolean = false>({
       )}
       {hasResults && (
         <SelectAsyncResults
+          data-testid={dataTestId}
           debouncedQuery={debouncedQuery}
           minSearchLength={minSearchLength}
           multiSelect={multiSelect}
@@ -297,6 +304,7 @@ SelectAsyncOptions.displayName = 'SelectAsyncOptions';
 
 export const SelectOptions = <TMultiple extends boolean = false>({
   autoHighlight,
+  'data-testid': dataTestId,
   debouncedQuery,
   error,
   errorText,
@@ -381,6 +389,7 @@ export const SelectOptions = <TMultiple extends boolean = false>({
     return (
       <SelectAsyncOptions
         autoHighlight={autoHighlight}
+        data-testid={dataTestId}
         debouncedQuery={debouncedQuery}
         error={error}
         errorText={errorText}
@@ -403,6 +412,7 @@ export const SelectOptions = <TMultiple extends boolean = false>({
 
   return (
     <IressSelectMenu
+      data-testid={dataTestId}
       items={menuItems}
       multiSelect={multiSelect}
       onChange={handleMenuChange}

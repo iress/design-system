@@ -35,6 +35,16 @@ export type IressSpinnerProps =
   | IressSpinnerDefaultProps
   | IressSpinnerChattyProps;
 
+/**
+ * Displays an animated loading indicator to signal an ongoing process.
+ *
+ * @example
+ * ```tsx
+ * import { IressSpinner } from '@iress-oss/ids-components';
+ *
+ * <IressSpinner screenreaderText="Loading" />
+ * ```
+ */
 export const IressSpinner = (props: IressSpinnerProps) => {
   if (props.variant === 'chatty') {
     const { className, screenreaderText, ...restProps } = props;

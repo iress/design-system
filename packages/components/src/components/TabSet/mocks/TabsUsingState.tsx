@@ -1,13 +1,7 @@
-import {
-  IressButton,
-  IressStack,
-  IressTab,
-  IressTabSet,
-  type IressTabSetProps,
-} from '@/main';
+import { IressButton, IressStack, IressTab, IressTabSet } from '@/main';
 import { useState } from 'react';
 
-export const TabsUsingState = (args: IressTabSetProps) => {
+export function TabsUsingState() {
   const [selected, setSelected] = useState<number>();
 
   return (
@@ -19,7 +13,6 @@ export const TabsUsingState = (args: IressTabSetProps) => {
         {selected === 2 ? `Back to first tab` : `Change to last tab`}
       </IressButton>
       <IressTabSet
-        {...args}
         selected={selected}
         onChange={({ index }) => setSelected(index)}
       >
@@ -29,4 +22,4 @@ export const TabsUsingState = (args: IressTabSetProps) => {
       </IressTabSet>
     </IressStack>
   );
-};
+}

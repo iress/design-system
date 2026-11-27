@@ -17,6 +17,18 @@ export interface IressSelectBodyProps extends Omit<IressTextProps, 'element'> {
   header?: ReactNode;
 }
 
+/**
+ * Container for the select dropdown content, with optional fixed header and footer slots.
+ *
+ * @example
+ * ```tsx
+ * import { IressSelectBody } from '@iress-oss/ids-components';
+ *
+ * <IressSelectBody header={<span>Header</span>} footer={<span>Footer</span>}>
+ *   Content
+ * </IressSelectBody>
+ * ```
+ */
 export const IressSelectBody = ({
   children,
   className,

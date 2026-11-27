@@ -8,7 +8,7 @@ import {
 } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
-import { App as AppWithSlideoutProvider } from './mocks/AppWithSlideoutProvider';
+import { AppWithSlideoutProvider } from './mocks/AppWithSlideoutProvider';
 import { idsLogger } from '@helpers/utility/idsLogger';
 import {
   GlobalCSSClass,

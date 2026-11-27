@@ -26,13 +26,13 @@ export interface TabSetContextValue {
 export interface TabSetProviderProps extends PropsWithChildren {
   defaultSelected?: FormControlValue;
   hoverIndicator?: MutableRefObject<HTMLElement | null>;
-  onChange?: (event: TabSetChangedEventDetail) => void;
+  onChange?: (event: IressTabSetChangedEventDetail) => void;
   panel: HTMLDivElement | null;
   selected?: FormControlValue;
   type?: 'primary' | 'secondary';
 }
 
-export interface TabSetChangedEventDetail {
+export interface IressTabSetChangedEventDetail {
   /**
    * The index of the tab that was selected.
    */
@@ -44,6 +44,11 @@ export interface TabSetChangedEventDetail {
    */
   value?: FormControlValue;
 }
+
+/**
+ * @deprecated Use `IressTabSetChangedEventDetail` instead. This type will be removed in a future release.
+ */
+export type TabSetChangedEventDetail = IressTabSetChangedEventDetail;
 
 // eslint-disable-next-line react-refresh/only-export-components -- Keeps the context in the same place as the provider
 export const TabSetContext = createContext<TabSetContextValue | undefined>(

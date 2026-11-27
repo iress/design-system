@@ -1,0 +1,50 @@
+export const meta = {
+  title: 'Spacing Tokens',
+  description: 'The spacing scale based on a 4px (0.25rem) base unit, used for gaps, padding, and margins.',
+};
+
+# Spacing Tokens
+
+The spacing scale based on a 4px (0.25rem) base unit, used for gaps, padding, and margins.
+
+## Design
+
+<FigmaLink href="https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=6200-16" />
+
+<StoryEmbed id="spacing--spacing" type="tokens" controls={false} />
+
+## Develop
+
+You can use these tokens in your applications in three ways: via component props, CSS variables, or CSS-in-JS using the `cssVars` export from the `@iress-oss/ids-tokens` package.
+
+### Via component props
+
+```tsx
+import { IressStack, IressText } from '@iress-oss/ids-components';
+
+<IressStack gap="spacing.4" p="spacing.6">
+  <IressText>Spaced content</IressText>
+</IressStack>
+
+{/* Or use aliases */}
+<IressStack gap="md" p="lg">
+  <IressText>Spaced content</IressText>
+</IressStack>
+```
+
+### Responsive spacing
+
+```tsx
+import { IressStack } from '@iress-oss/ids-components';
+
+<IressStack gap={{ base: 'sm', md: 'md', lg: 'lg' }}>
+  Responsive gaps
+</IressStack>
+```
+
+### Via CSS variables
+
+```css
+.card { padding: var(--spacing-4); gap: var(--spacing-2); }
+```
+

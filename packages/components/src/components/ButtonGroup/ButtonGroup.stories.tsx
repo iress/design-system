@@ -3,13 +3,16 @@ import { IressButtonGroup, type IressButtonGroupProps } from '.';
 import { IressButton } from '../Button/Button';
 import { IressTooltip } from '../Tooltip';
 import { IressIcon } from '../Icon';
-import { IressToasterProvider, useToaster } from '../Toaster';
 import { IressText } from '../Text';
 import { IressDivider } from '../Divider';
 import {
+  componentStoryMeta,
   reactNodeArgType,
-  stylingProps,
+  withSource,
 } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
+import { ButtonGroupOnChange } from './mocks/ButtonGroupOnChange';
+import ButtonGroupOnChangeSource from './mocks/ButtonGroupOnChange.tsx?raw';
 
 type Story = StoryObj<IressButtonGroupProps<string>>;
 type MultipleStory = StoryObj<IressButtonGroupProps<string, true>>;
@@ -17,11 +20,11 @@ type MultipleStory = StoryObj<IressButtonGroupProps<string, true>>;
 export default {
   title: 'Components/ButtonGroup',
   component: IressButtonGroup,
-  argTypes: {
-    children: reactNodeArgType,
-    ...stylingProps,
-  },
-  tags: ['updated'],
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      children: reactNodeArgType,
+    },
+  }),
 } as Meta<typeof IressButtonGroup>;
 
 export const Default: Story = {
@@ -78,7 +81,12 @@ export const RichButtons: Story = {
 
 export const MultiSelect: MultipleStory = {
   args: {
-    ...(ButtonChildren as MultipleStory).args,
+    children: [
+      <IressButton key="1">Option 1</IressButton>,
+      <IressButton key="2">Option 2</IressButton>,
+      <IressButton key="3">Option 3</IressButton>,
+      <IressButton key="4">Option 4</IressButton>,
+    ],
     multiple: true,
     label: 'Multiple options can be selected',
   },
@@ -86,7 +94,12 @@ export const MultiSelect: MultipleStory = {
 
 export const SelectedSingle: Story = {
   args: {
-    ...ButtonChildren.args,
+    children: [
+      <IressButton key="1">Option 1</IressButton>,
+      <IressButton key="2">Option 2</IressButton>,
+      <IressButton key="3">Option 3</IressButton>,
+      <IressButton key="4">Option 4</IressButton>,
+    ],
     defaultSelected: 'Option 2',
     label: 'Selected option for single select',
   },
@@ -94,50 +107,47 @@ export const SelectedSingle: Story = {
 
 export const SelectedMultiple: MultipleStory = {
   args: {
-    ...MultiSelect.args,
+    children: [
+      <IressButton key="1">Option 1</IressButton>,
+      <IressButton key="2">Option 2</IressButton>,
+      <IressButton key="3">Option 3</IressButton>,
+      <IressButton key="4">Option 4</IressButton>,
+    ],
+    multiple: true,
     defaultSelected: ['Option 2', 'Option 4'],
     label: 'Selected option for multi-select',
   },
 };
 
 export const OnChange: Story = {
-  args: {
-    ...ButtonChildren.args,
-    label: 'Trigger toasts by selecting an option below',
+  render: (args) => <ButtonGroupOnChange {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(ButtonGroupOnChangeSource, { stripImports: true }),
   },
-  render: (args) => {
-    const { success } = useToaster();
-
-    return (
-      <IressButtonGroup
-        {...args}
-        onChange={(selected) => {
-          success({
-            content: `Selected: ${selected ? String(selected) : 'none'}`,
-          });
-        }}
-      />
-    );
-  },
-  decorators: [
-    (Story) => (
-      <IressToasterProvider>
-        <Story />
-      </IressToasterProvider>
-    ),
-  ],
 };
 
 export const HiddenLabel: Story = {
   args: {
-    ...ButtonChildren.args,
+    children: [
+      <IressButton key="1">Option 1</IressButton>,
+      <IressButton key="2">Option 2</IressButton>,
+      <IressButton key="3">Option 3</IressButton>,
+      <IressButton key="4">Option 4</IressButton>,
+    ],
+    label: 'Button group',
     hiddenLabel: true,
   },
 };
 
 export const HeadingLabel: Story = {
   args: {
-    ...ButtonChildren.args,
+    children: [
+      <IressButton key="1">Option 1</IressButton>,
+      <IressButton key="2">Option 2</IressButton>,
+      <IressButton key="3">Option 3</IressButton>,
+      <IressButton key="4">Option 4</IressButton>,
+    ],
     label: <IressText element="h2">Heading as label</IressText>,
   },
 };

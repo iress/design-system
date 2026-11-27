@@ -29,41 +29,94 @@ applyTo: '**'
 
 **Wait for confirmation before proceeding to investigation.**
 
-### Create Story for Visual Inspection
+### Create a Hidden QA Story for Verification
 
-**After confirming the analysis, create a Storybook story to reproduce the bug:**
+**After confirming the analysis, create a hidden QA story to reproduce and later verify the fix.**
 
-- **Create the story in the main/root component's stories file** (e.g., `RichSelect.stories.tsx`, not `SelectMenu.stories.tsx`)
-- This makes the bug reproduction more accessible and realistic for users
-- Include problem summary in the story description
-- Document expected vs actual behavior
-- Provide clear test steps
-- Make the bug visually apparent in the story
-- Use the actual component API that users would interact with
-- Create mock data that triggers the bug if needed
+These stories are **kept permanently** as a human-in-the-loop verification aid for
+autonomous changes — they are **not** consumer documentation and must **not** appear
+on the component's docs page. The durable regression guard is the test (Section 5);
+the QA story is for manual/visual checks that are hard to automate.
 
-**Template for bug reproduction story:**
+Follow `.github/instructions/story-patterns.instructions.md`. QA story rules:
+
+- **Tag it `['!autodocs']`** — hides it from the docs page but keeps it reachable in
+  the Storybook sidebar for manual inspection.
+- **Name it `QA: <behaviour> (#<issue>)`** — describe the intended behaviour, not the
+  bug, and include the GitHub issue number (e.g. `QA: Dynamic labels (#1078)`).
+- **Link the GitHub issue** in the story `docs.description` as the first line:
+  `[#<issue>](https://github.com/iress/design-system/issues/<issue>) — hidden QA story for manual verification.`
+- **Frame the description around expected behaviour** (what should happen), followed
+  by how to test — not "Problem/Actual" bug language.
+- **Create the story in the main/root component's stories file** (e.g.
+  `Select.stories.tsx`, not `SelectMenu.stories.tsx`).
+- **Stateful stories (use `useState`/`useEffect`) MUST use the P2 mock pattern** — put
+  the stateful component in a `./mocks/<Name>.tsx` file (named export, imports from
+  `@/main`, no args param), import it plus `?raw` source, and render with
+  `render: (args) => <Mock {...args} />` + `controls: { disable: true }` +
+  `withSource(Source, { stripImports: true })`.
+- **Stateless stories ≤10 lines / ≤3 components** may use the P3 inline render pattern.
+
+**Template — P3 (stateless) QA story:**
 
 ```typescript
-export const BugReproduction: Story = {
-  name: 'Bug: [Brief Description]',
+export const UnavailableIconFont: Story = {
+  name: 'QA: Unavailable icon font (#1072)',
+  tags: ['!autodocs'],
   args: {
-    // Props that trigger the bug
+    // Props that exercise the behaviour
   },
   parameters: {
     docs: {
       description: {
         story: `
-**Problem Summary:** [What goes wrong]
+[#1072](https://github.com/iress/design-system/issues/1072) — hidden QA story for manual verification.
 
-**Expected Behavior:** [What should happen]
+**Expected behaviour:** [What should happen]
 
-**Actual Behavior:** [What actually happens]
-
-**How to Test:**
+**How to test:**
 1. [Step by step instructions]
-2. [To reproduce the issue]
+        `,
+      },
+    },
+  },
+  render: (args) => (/* ≤3 components */),
+};
+```
 
+**Template — P2 (stateful) QA story + mock:**
+
+```typescript
+// ./mocks/TabSetDynamicLabels.tsx
+import { IressTab, IressTabSet } from '@/main';
+import { useState } from 'react';
+
+export function TabSetDynamicLabels() {
+  const [selected, setSelected] = useState(0);
+  return (/* stateful JSX */);
+}
+```
+
+```typescript
+// Component.stories.tsx
+import { TabSetDynamicLabels } from './mocks/TabSetDynamicLabels';
+import TabSetDynamicLabelsSource from './mocks/TabSetDynamicLabels.tsx?raw';
+
+export const DynamicLabels: Story = {
+  name: 'QA: Dynamic labels (#1078)',
+  tags: ['!autodocs'],
+  render: (args) => <TabSetDynamicLabels {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(TabSetDynamicLabelsSource, { stripImports: true }),
+    docs: {
+      description: {
+        story: `
+[#1078](https://github.com/iress/design-system/issues/1078) — hidden QA story for manual verification.
+
+**Expected behaviour:** [What should happen]
+
+**How to test:** [Steps]
         `,
       },
     },
@@ -73,8 +126,8 @@ export const BugReproduction: Story = {
 
 **Communicate story creation:**
 
-- "I've created a story to reproduce the bug at [story location]. Can you confirm this matches the issue you're seeing?"
-- "Please check the story shows the problem correctly before I proceed with the investigation."
+- "I've created a hidden QA story (`!autodocs`) linked to #<issue> at [story location]. Can you confirm it reproduces the issue?"
+- "Please check the QA story shows the problem before I proceed with the investigation."
 
 **Choosing the Right Component for Bug Stories:**
 
@@ -542,38 +595,39 @@ Bug: "Component X doesn't work when Y happens"
 - **Over-engineering simple problems**
 - **Adding complex workarounds** when simple deletion would work
 
-## 7. Cleanup After Verification
+## 7. After Verification — Keep the Hidden QA Story
 
-### Remove Reproduction Stories
+**QA stories are kept permanently.** Unlike the old workflow, do **not** delete the
+reproduction story after the fix is verified.
 
-**After the user/orchestrator has verified the fix is working:**
+1. **Confirm the story follows the QA convention** (Section 1):
+   - Tagged `['!autodocs']` so it stays out of the consumer docs page.
+   - Named `QA: <behaviour> (#<issue>)` and linked to the GitHub issue in its description.
+   - Stateful stories use the P2 mock pattern.
 
-1. **Ask for confirmation**:
-   - "The fix has been implemented and tested. Should I remove the bug reproduction story now that the issue is resolved?"
-   - Wait for user confirmation before proceeding
+2. **Keep both the QA story and the regression test**:
+   - The **regression test** (Section 5) is the primary, automated guard — it runs in CI.
+   - The **hidden QA story** is the human-in-the-loop aid for manual/visual checks that
+     are hard to automate (e.g. blocking a font CDN, overlay positioning). Because it is
+     `!autodocs`, it never clutters the published docs but remains clickable in Storybook.
 
-2. **Remove the reproduction story**:
-   - Delete the `BugReproduction` story export from the main component's stories file
-   - Remove any associated mock data specific to the bug reproduction
-   - Keep any useful test cases in the actual test files
+3. **Communicate**:
+   - "The fix, regression test, and hidden QA story (`!autodocs`, linked to #<issue>) are all in place."
 
-3. **Communicate removal**:
-   - "I've removed the bug reproduction story from [story file location]"
-   - "The fix and tests remain in place to prevent regression"
+**Why keep hidden QA stories instead of deleting them:**
 
-**Why Remove Reproduction Stories:**
-
-- Reproduction stories serve a temporary purpose during bug investigation and fixing
-- Once the bug is fixed and verified, they clutter the Storybook UI
-- The actual regression tests in test files provide permanent protection
-- Keeping only production-ready stories in Storybook maintains clarity for users
+- They provide durable, human-checkable verification for autonomous (Copilot) changes.
+- `!autodocs` keeps them reachable in the Storybook sidebar without polluting consumer docs.
+- The issue link gives traceability consistent with how IDS maintenance is tracked.
 
 **What to Keep:**
 
-- ✅ Regression tests in test files (these stay permanently)
+- ✅ Regression tests in test files (primary guard, runs in CI)
+- ✅ Hidden QA story (`!autodocs`, `QA: <behaviour> (#issue)`, issue-linked)
 - ✅ Production stories demonstrating proper usage
 - ✅ Documentation of the fix in PR/issue comments
-- ❌ Temporary bug reproduction stories (remove after verification)
+- ❌ Do NOT add a visible, consumer-facing "bug" story or a "Bugs" tab
+- ❌ Do NOT leave a QA story untagged (it would appear on the docs page)
 
 ## Success Criteria
 
@@ -584,4 +638,4 @@ Bug: "Component X doesn't work when Y happens"
 - ✅ **Maintained backward compatibility** and component contracts
 - ✅ **Provided clear explanation** of the problem and solution
 - ✅ **Considered similar cases** and potential side effects
-- ✅ **Removed reproduction story after verification** (cleanup completed)
+- ✅ **Kept a hidden QA story** (`!autodocs`, `QA: <behaviour> (#issue)`, issue-linked)

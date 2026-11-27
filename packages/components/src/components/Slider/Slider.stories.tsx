@@ -1,24 +1,22 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { IressSlider } from '.';
-import { IressStack } from '../Stack';
-import { IressPanel } from '../Panel';
-import { IressText } from '../Text';
 import {
-  CurrentBreakpoint,
+  componentStoryMeta,
   reactNodeArgType,
-  stylingProps,
+  withBreakpointLabel,
 } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressSlider>;
 
 export default {
   title: 'Components/Slider',
   component: IressSlider,
-  tags: ['updated'],
-  argTypes: {
-    label: reactNodeArgType,
-    ...stylingProps,
-  },
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      label: reactNodeArgType,
+    },
+  }),
 } as Meta<typeof IressSlider>;
 
 export const Default: Story = {};
@@ -136,16 +134,8 @@ export const HiddenLabels: Story = {
       { value: 200, label: 'All' },
     ],
   },
-  render: (args) => (
-    <IressStack gap="md">
-      <IressPanel bg="alt">
-        <IressText>
-          <CurrentBreakpoint />
-        </IressText>
-      </IressPanel>
-      <IressSlider {...args} />
-    </IressStack>
-  ),
+  render: (args) => <IressSlider {...args} />,
+  decorators: [withBreakpointLabel()],
 };
 
 export const ReadOnly: Story = {

@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react';
 import type { Table } from '@tanstack/react-table';
 import { PropsWithChildren } from 'react';
-import { TableColumn } from '../helpers/composeTableColumnDefs';
+import { IressTableColumn } from '../helpers/composeTableColumnDefs';
 import {
   TableColumnFilterHookProps,
   useTableColumnFilter,
@@ -26,7 +26,7 @@ const mockApi = {
   }),
 } as unknown as Table<object>;
 
-const columns: TableColumn<object, unknown>[] = [
+const columns: IressTableColumn<object, unknown>[] = [
   {
     key: 'test',
     filter: {

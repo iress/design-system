@@ -89,7 +89,7 @@ export interface InternalButtonProps<
    * **Discouraged: prefer an enabled button with clear feedback.**
    * Disabled buttons do not explain why an action is unavailable or how to proceed.
    *
-   * Before using this prop, read the [IDS best practices and alternatives to disabled buttons](https://main--69166895eb243715fcd0d241.chromatic.com/?path=/docs/components-button--docs#avoid-using-disabled).
+   * Before using this prop, read the [IDS best practices and alternatives to disabled buttons](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs#avoid-using-disabled).
    * - Incomplete forms, including long or complex forms: keep submit enabled and use `IressForm` validation on submit.
    * - Actions in progress: use `loading` to communicate progress and prevent duplicate clicks.
    * - Missing permissions or prerequisites: hide unavailable actions or explain what is needed.
@@ -344,6 +344,16 @@ const Button = <
   );
 };
 
+/**
+ * A clickable element used to perform an action.
+ *
+ * @example
+ * ```tsx
+ * import { IressButton } from '@iress-oss/ids-components';
+ *
+ * <IressButton mode="primary">Submit</IressButton>
+ * ```
+ */
 export const IressButton = forwardRef(Button) as (<
   C extends ElementType | undefined = undefined,
   THref extends string | undefined = undefined,

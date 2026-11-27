@@ -4,21 +4,41 @@ import {
   IressFormField,
   type IressFormFieldProps,
   IressInput,
-  IressText,
 } from '@/main';
 import {
   disableArgTypes,
   mergeStorybookConfig,
   addToStorybookCategory,
   reactNodeArgType,
+  withSource,
   stylingProps,
 } from '@iress-oss/ids-storybook-config';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
+import { FormFieldSupplementary } from './mocks/FormFieldSupplementary';
+import FormFieldSupplementarySource from './mocks/FormFieldSupplementary.tsx?raw';
 
 type Story = StoryObj<typeof IressFormField>;
+
+const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The root element wrapping the form field',
+    testId: 'form-field',
+  },
+  {
+    part: 'input',
+    description: 'The controlled input rendered by the render prop',
+    query: <code>getByLabelText('...')</code>,
+    testId: 'form-field__input',
+  },
+];
 
 export default {
   title: 'Patterns/Form/FormField',
   component: IressFormField,
+  parameters: {
+    idsConfig: { testMeta },
+  },
   args: {
     label: 'Label',
     name: 'field',
@@ -59,28 +79,9 @@ export const Default: Story = {};
 
 export const RenderSupplementary: Story = {
   name: 'Supplementary content',
-  args: {
-    label: 'Comment',
-    name: 'comment',
-    hint: 'Enter your feedback (max 200 characters)',
-    render: (controlledProps) => (
-      <IressInput
-        {...controlledProps}
-        rows={3}
-        maxLength={200}
-        placeholder="Type your comment here..."
-      />
-    ),
-    renderSupplementary: ({ value }) => (
-      <IressText textStyle="typography.body.sm" color="muted">
-        {(value as string)?.length || 0} / 200 characters
-      </IressText>
-    ),
-    rules: {
-      maxLength: {
-        value: 200,
-        message: 'Comment must not exceed 200 characters',
-      },
-    },
+  render: (args) => <FormFieldSupplementary {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(FormFieldSupplementarySource, { stripImports: true }),
   },
 };

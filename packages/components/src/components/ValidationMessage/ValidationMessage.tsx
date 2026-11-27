@@ -69,6 +69,16 @@ const isValidFormInputElement = (ele: HTMLElement): boolean =>
     (ele as HTMLInputElement).type !== 'submit' &&
     (ele as HTMLInputElement).type !== 'button');
 
+/**
+ * Displays a validation error or helper message associated with a form field.
+ *
+ * @example
+ * ```tsx
+ * import { IressValidationMessage } from '@iress-oss/ids-components';
+ *
+ * <IressValidationMessage status="danger">This field is required.</IressValidationMessage>
+ * ```
+ */
 export const IressValidationMessage = <
   TLinkToTarget extends string | undefined = undefined,
 >({

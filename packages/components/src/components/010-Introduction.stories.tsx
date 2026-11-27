@@ -10,8 +10,10 @@ import {
   IressField,
   IressDropdownMenu,
   IressInline,
+  IressButton,
   type LabelValueMeta,
   IressSkeleton,
+  IressContainer,
 } from '@/main';
 import { useState, useMemo, Suspense } from 'react';
 
@@ -28,6 +30,7 @@ import container from './Container/meta';
 import divider from './Divider/meta';
 import expander from './Expander/meta';
 import field from './Field/meta';
+import fieldGroup from './FieldGroup/meta';
 import hide from './Hide/meta';
 import icon from './Icon/meta';
 import image from './Image/meta';
@@ -43,6 +46,7 @@ import pill from './Pill/meta';
 import placeholder from './Placeholder/meta';
 import popover from './Popover/meta';
 import progress from './Progress/meta';
+import provider from './Provider/meta';
 import radio from './Radio/meta';
 import radioGroup from './RadioGroup/meta';
 import readonly from './Readonly/meta';
@@ -53,9 +57,11 @@ import slider from './Slider/meta';
 import slideout from './Slideout/meta';
 import skipLink from './SkipLink/meta';
 import stack from './Stack/meta';
+import styled from './Styled/meta';
 import table from './Table/meta';
 import tabSet from './TabSet/meta';
 import tag from './Tag/meta';
+import tagInput from './TagInput/meta';
 import text from './Text/meta';
 import toggle from './Toggle/meta';
 import tooltip from './Tooltip/meta';
@@ -63,12 +69,7 @@ import spinner from './Spinner/meta';
 import validationMessage from './ValidationMessage/meta';
 import toaster from './Toaster/meta';
 
-const components: {
-  heading: string;
-  href: string;
-  tags?: string[];
-  Thumbnail: React.FC;
-}[] = [
+const components = [
   alert,
   avatar,
   autocomplete,
@@ -82,6 +83,7 @@ const components: {
   divider,
   expander,
   field,
+  fieldGroup,
   hide,
   icon,
   image,
@@ -97,6 +99,7 @@ const components: {
   placeholder,
   popover,
   progress,
+  provider,
   radio,
   radioGroup,
   readonly,
@@ -108,9 +111,11 @@ const components: {
   slider,
   spinner,
   stack,
+  styled,
   table,
   tabSet,
   tag,
+  tagInput,
   text,
   toaster,
   toggle,
@@ -191,50 +196,77 @@ const Reference = () => {
   }, [searchQuery, results, selectedTags]);
 
   return (
-    <IressStack gap="lg" mt="lg">
-      <IressInline gap="md" horizontalAlign="between" verticalAlign="bottom">
-        <IressField label="Search components" mb="none" stretch>
-          <IressInput
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onClear={() => setSearchQuery('')}
-            clearable
-            prepend={<IressIcon name="search" />}
-            id="search-components"
-          />
-        </IressField>
-        <IressDropdownMenu
-          label="Filter by tags"
-          multiSelect
-          options={allTags}
-          selected={selectedTags}
-          onChange={setSelectedTags}
-          onReset={() => setSelectedTags([])}
-          visibleResetButton
-          limitDesktop={9999}
-        />
-      </IressInline>
-      <IressRow gutter="lg">
-        {filteredComponents.map(({ Thumbnail, ...component }) => (
-          <IressCol key={component.heading} span={{ md: 3 }}>
-            <IressCard
-              {...component}
-              element="a"
-              media={
-                <Suspense
-                  fallback={
-                    <IressSkeleton mode="rect" width="751px" height="184px" />
-                  }
-                >
-                  <Thumbnail />
-                </Suspense>
-              }
-              stretch
+    <IressContainer>
+      <IressStack gap="lg" my="lg" maxWidth="overlay.lg" mx="auto">
+        <IressInline gap="md" horizontalAlign="between" verticalAlign="bottom">
+          <IressField label="Search components" mb="none" stretch>
+            <IressInput
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onClear={() => setSearchQuery('')}
+              clearable
+              prepend={<IressIcon name="search" />}
+              id="search-components"
             />
-          </IressCol>
-        ))}
-      </IressRow>
-    </IressStack>
+          </IressField>
+          <IressDropdownMenu
+            label="Filter by tags"
+            multiSelect
+            options={allTags}
+            selected={selectedTags}
+            onChange={setSelectedTags}
+            onReset={() => setSelectedTags([])}
+            visibleResetButton
+            limitDesktop={9999}
+          />
+        </IressInline>
+        <IressRow gutter="lg">
+          {filteredComponents.map(({ Thumbnail, ...component }) => (
+            <IressCol key={component.heading} span={{ xs: 12, md: 4 }}>
+              <IressCard
+                heading={component.heading}
+                media={
+                  <Suspense
+                    fallback={
+                      <IressSkeleton mode="rect" width="751px" height="184px" />
+                    }
+                  >
+                    <Thumbnail />
+                  </Suspense>
+                }
+                footer={
+                  <IressInline gap="sm">
+                    {'storybook' in component && component.storybook && (
+                      <IressButton
+                        mode="secondary"
+                        compact
+                        href={component.storybook}
+                        target="_blank"
+                      >
+                        Storybook
+                      </IressButton>
+                    )}
+                    {'guidelines' in component && component.guidelines && (
+                      <IressButton
+                        mode="secondary"
+                        compact
+                        href={component.guidelines}
+                        target="_blank"
+                      >
+                        Guidelines
+                      </IressButton>
+                    )}
+                  </IressInline>
+                }
+                stretch
+              >
+                {component.description}
+              </IressCard>
+            </IressCol>
+          ))}
+        </IressRow>
+      </IressStack>
+    </IressContainer>
   );
 };
 
@@ -244,11 +276,11 @@ export default {
   title: 'Components/Introduction',
   component: Reference,
   parameters: {
-    chromatic: {
-      disableSnapshot: true,
-    },
-    controls: {
-      disable: true,
+    chromatic: { disableSnapshot: true },
+    controls: { disable: true },
+    layout: 'fullscreen',
+    idsConfig: {
+      autodocsTemplate: 'landing',
     },
   },
 } as Meta<typeof Reference>;

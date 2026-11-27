@@ -54,6 +54,13 @@ export type IressLoadingProps =
  *   - Saving a record
  *
  * If no `pattern` is provided, it will use the default experience, which only displays a message after a certain amount of time to help stop drop-offs due to uncommon loading times.
+ *
+ * @example
+ * ```tsx
+ * import { IressLoading } from '@iress-oss/ids-components';
+ *
+ * <IressLoading pattern="page" template="dashboard" />
+ * ```
  */
 export const IressLoading = ({ pattern, ...restProps }: IressLoadingProps) => {
   if (pattern === 'component') {

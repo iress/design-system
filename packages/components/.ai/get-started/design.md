@@ -1,0 +1,17 @@
+# Design
+
+Set up your environment to use the latest version of the Iress Design System (IDS). You can use this library to build React applications that align to IDS, and ensure a consistent and modern look and feel across all Iress products.
+
+## Requirements
+
+- [Figma](https://www.figma.com/)
+
+## Set up
+
+1. Request access to the [Figma design system file](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6).
+2. Set up the required fonts:
+    - [Inter](https://fonts.google.com/specimen/Inter) for UI text
+    - [Ubuntu](https://fonts.google.com/specimen/Ubuntu) for headings
+    - [Space Mono](https://fonts.google.com/specimen/Space+Mono) for code snippets
+3. Set up the required Figma plugins:
+    -  [Material Symbols](https://www.figma.com/community/plugin/1036040127479628855/Material-Symbols) for icons

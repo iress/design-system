@@ -27,6 +27,13 @@ Any `dev`, `test` (without `:coverage`), or `watch` command starts a persistent 
 yarn build           # builds all packages (topological order) then runs translate scripts
 ```
 
+The `yarn translate` command runs the unified `scripts/translate.ts` pipeline which generates all `.ai/` documentation:
+- `--tokens` — generates token reference from schema
+- `--components` — translates all `apps/guidelines/content/` MDX to `.ai/` markdown (components, patterns, foundations, tokens, styling-props, etc.)
+- `--skills` — copies skills to package `.ai/skills/` directories
+- `--llms-txt` — generates `llms.txt` discovery files
+- `--full-reference` — concatenates all docs into `IDS-FULL-REFERENCE.md`
+
 The `yarn monorepo` alias runs `yarn workspaces foreach -Ai --topological-dev --exclude=@iress/design-system-monorepo`. Use it for cross-package commands.
 
 ## Testing
@@ -61,6 +68,9 @@ yarn size:check              # same, but JSON output (useful for scripting)
 
 Budgets are defined in `.size-limit.json`. The `ci-cd.yml` workflow checks bundle sizes as part of the validation matrix on every push.
 
+The components JS budget is 420 kB gzipped, including documentation metadata and
+lazy thumbnails from the `/meta` export.
+
 ## Linting
 
 ```bash
@@ -93,7 +103,29 @@ Core packages (build order: tokens → theme-preset → components):
 - `packages/theme-preset/` — `@iress-oss/ids-theme-preset` — Panda CSS theme preset
 - `packages/components/` — `@iress-oss/ids-components` — React component library (Panda CSS)
 
+Apps:
+
+- `apps/guidelines/` — `@iress/ids-guidelines` — IDS documentation site (deployed to GitHub Pages)
+
 Supporting: `storybook-config/`, `storybook-okta/`, `storybook-sandbox/`, `storybook-toggle-stories/`, `storybook-version-badge/`
+
+## Documentation structure
+
+All narrative documentation lives in `apps/guidelines/content/`:
+
+- `components/*.mdx` — component documentation (Button, Alert, Modal, etc.)
+- `patterns/*.mdx` — pattern documentation (Form, Loading, etc.)
+- `tokens/*.mdx` — design token documentation (colour, spacing, typography, etc.)
+- `foundations/*.mdx` — design foundations (accessibility, responsive, consistency, etc.)
+- `get-started/*.mdx` — getting started guides (develop, design, etc.)
+- `styling-props/*.mdx` — styling prop documentation (spacing, sizing, layout, etc.)
+- `resources/*.mdx` — migration guides and other resources
+
+**Derived artifacts** (do not edit directly):
+
+- `packages/components/.ai/` — AI-optimized markdown derived from guidelines content, shipped in npm package
+- `packages/tokens/.ai/` — token reference and skills, shipped in npm package
+- `.ai/IDS-FULL-REFERENCE.md` — concatenated reference for AI assistants (Gemini Gem, etc.)
 
 ## File organization
 
@@ -112,6 +144,9 @@ Supporting: `storybook-config/`, `storybook-okta/`, `storybook-sandbox/`, `story
 
 GitHub Actions workflow in `.github/workflows/ci-cd.yml`. Runs on all pushes and merge groups. Supports canary releases via workflow_dispatch.
 
+The guidelines freshness check compares the built site and search index with
+`docs/`, excluding Pagefind's platform-specific vendor WASM binaries.
+
 ## Security
 
 - Never commit secrets or API keys
@@ -119,6 +154,18 @@ GitHub Actions workflow in `.github/workflows/ci-cd.yml`. Runs on all pushes and
 
 ## Additional context
 
-- `.github/instructions/` — domain-specific instructions for component creation, bug fixing, PR review, file organization, ESLint usage, and testing
+- `.github/instructions/` — domain-specific instructions for component creation, bug fixing, PR review, file organization, ESLint usage, testing, and **story patterns**
 - `.agents/skills/` — agent skills for Figma-to-IDS translation, token usage, UI auditing, UI translation, and version migration
 - `packages/components/.ai/` and `packages/tokens/.ai/` — package-level AI context
+
+## Story patterns
+
+When creating or modifying `.stories.tsx` files, follow `.github/instructions/story-patterns.instructions.md`. It defines the three allowed patterns (P1 args-only, P2 mock+withSource, P3 inline render), modifiers, and disallowed patterns. ESLint enforces the mechanical checks automatically.
+
+## UI work rules
+
+When writing or modifying React UI code that uses `@iress-oss/ids-components`:
+
+1. **Before writing**: Read `.agents/skills/ui-translation/SKILL.md` — it maps UI descriptions to correct IDS component usage, props, and patterns
+2. **After writing**: Validate with `.agents/skills/ui-doctor/SKILL.md` — it audits for correct prop usage, accessibility, and IDS compliance
+3. **Never guess props** — always verify against the component's TypeScript interface in `packages/components/src/components/`

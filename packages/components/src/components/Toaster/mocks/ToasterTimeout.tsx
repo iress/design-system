@@ -1,9 +1,4 @@
-import {
-  IressButton,
-  IressToasterProvider,
-  type IressToasterProviderProps,
-  useToaster,
-} from '@/main';
+import { IressButton, IressToasterProvider, useToaster } from '@/main';
 
 const ToastWithTrigger = () => {
   const toaster = useToaster();
@@ -22,8 +17,10 @@ const ToastWithTrigger = () => {
   );
 };
 
-export const ToasterTimeout = (args: IressToasterProviderProps) => (
-  <IressToasterProvider {...args}>
-    <ToastWithTrigger />
-  </IressToasterProvider>
-);
+export function ToasterTimeout() {
+  return (
+    <IressToasterProvider container={document.body}>
+      <ToastWithTrigger />
+    </IressToasterProvider>
+  );
+}

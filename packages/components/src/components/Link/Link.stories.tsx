@@ -6,24 +6,25 @@ import { IressPanel } from '../Panel';
 import { RoutingLink } from './mocks/RoutingLink';
 import RoutingLinkSource from './mocks/RoutingLink.tsx?raw';
 import {
+  componentStoryMeta,
   disableArgTypes,
-  withCustomSource,
+  withSource,
   reactNodeArgType,
-  stylingProps,
 } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 
 type Story = StoryObj<typeof IressLink>;
 
 export default {
   title: 'Components/Link',
   component: IressLink,
-  tags: ['updated'],
-  argTypes: {
-    append: reactNodeArgType,
-    children: reactNodeArgType,
-    prepend: reactNodeArgType,
-    ...stylingProps,
-  },
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      append: reactNodeArgType,
+      children: reactNodeArgType,
+      prepend: reactNodeArgType,
+    },
+  }),
 } as Meta<typeof IressLink>;
 
 export const Default: Story = {
@@ -77,8 +78,12 @@ export const ExternalLink: Story = {
 };
 
 export const Element: Story = {
-  render: () => <RoutingLink />,
+  render: (args) => <RoutingLink {...args} />,
   parameters: {
-    ...withCustomSource(RoutingLinkSource),
+    controls: { disable: true },
+    ...withSource(RoutingLinkSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
 };

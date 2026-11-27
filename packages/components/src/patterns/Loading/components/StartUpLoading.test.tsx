@@ -15,6 +15,29 @@ const shownMessageStyles = loading({
 });
 
 describe('IressLoading pattern="start-up"', () => {
+  it('shows messages beyond the estimate while keeping the progress bar capped', async () => {
+    vi.useFakeTimers();
+    try {
+      const { unmount } = render(
+        <StartUpLoading
+          pattern="start-up"
+          estimatedFinishTime={1000}
+          messageList={{ 1500: 'Still retrieving your data' }}
+          timeout={{ message: 0, progress: 0 }}
+        />,
+      );
+
+      await act(async () => vi.advanceTimersByTime(1700));
+
+      expect(screen.getByText('Still retrieving your data')).toBeVisible();
+      expect(screen.getByRole('progressbar')).toHaveAttribute('value', '1000');
+      expect(screen.getByRole('progressbar')).toHaveAttribute('max', '1000');
+      unmount();
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
   it('renders the correct defaults', async () => {
     vi.useFakeTimers();
 

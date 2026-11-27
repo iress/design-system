@@ -114,6 +114,8 @@ BreadcrumbOverflow.displayName = 'BreadcrumbOverflow';
  *
  * @example
  * ```tsx
+ * import { IressBreadcrumbs } from '@iress-oss/ids-components';
+ *
  * <IressBreadcrumbs
  *   items={[
  *     { label: 'Home', href: '/' },

@@ -25,5 +25,6 @@ export const ControlledDropdownMenuAsync = () => (
         meta: character.gender,
       }));
     }}
+    container={document.body}
   />
 );

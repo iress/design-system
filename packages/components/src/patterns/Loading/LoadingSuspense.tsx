@@ -98,6 +98,15 @@ const getStartFrom = (
  *   - Saving a record
  *
  * If no `pattern` is provided, it will use the default experience, which only displays a message after a certain amount of time to help stop drop-offs due to uncommon loading times.
+ *
+ * @example
+ * ```tsx
+ * import { IressLoadingSuspense } from '@iress-oss/ids-components';
+ *
+ * <IressLoadingSuspense pattern="page" template="dashboard">
+ *   <MyAsyncComponent />
+ * </IressLoadingSuspense>
+ * ```
  */
 export const IressLoadingSuspense = ({
   children,

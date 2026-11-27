@@ -4,7 +4,6 @@ import {
   IressDivider,
   IressForm,
   IressFormField,
-  type IressFormProps,
   IressInput,
   IressToasterProvider,
   useToaster,
@@ -16,14 +15,13 @@ interface FieldValues {
   email?: string;
 }
 
-const Form = (args: IressFormProps<FieldValues>) => {
+const Form = () => {
   const { success, error } = useToaster();
   const formRef = useRef<FormRef<FieldValues>>(null);
 
   return (
     <>
       <IressForm
-        {...args}
         onSubmit={() =>
           success({
             heading: 'Passed validation',
@@ -74,8 +72,10 @@ const Form = (args: IressFormProps<FieldValues>) => {
   );
 };
 
-export const DisableValidationForm = (args: IressFormProps<FieldValues>) => (
-  <IressToasterProvider>
-    <Form {...args} />
-  </IressToasterProvider>
-);
+export function DisableValidationForm() {
+  return (
+    <IressToasterProvider>
+      <Form />
+    </IressToasterProvider>
+  );
+}

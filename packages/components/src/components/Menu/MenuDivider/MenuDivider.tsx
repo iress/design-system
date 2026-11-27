@@ -9,6 +9,20 @@ export type IressMenuDividerProps = Omit<
   'vertical' | 'role'
 >;
 
+/**
+ * A visual divider used to separate groups of items within a menu.
+ *
+ * @example
+ * ```tsx
+ * import { IressMenu, IressMenuItem, IressMenuDivider } from '@iress-oss/ids-components';
+ *
+ * <IressMenu>
+ *   <IressMenuItem>Edit</IressMenuItem>
+ *   <IressMenuDivider />
+ *   <IressMenuItem>Delete</IressMenuItem>
+ * </IressMenu>
+ * ```
+ */
 export const IressMenuDivider = ({
   className,
   ...restProps

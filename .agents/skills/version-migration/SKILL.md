@@ -7,7 +7,7 @@ description: >
   common gotchas. Use when the user asks about upgrading, migrating, or updating
   IDS versions, or mentions OUI, v4, v5, or v6 migration.
 license: Apache-2.0
-compatibility: React 18+, TypeScript, @iress-oss/ids-components@beta
+compatibility: React 18+, TypeScript, @iress-oss/ids-components
 allowed-tools: Bash(grep:*) Bash(sed:*) Bash(find:*) Bash(scripts/*:*)
 metadata:
   author: iress
@@ -37,9 +37,9 @@ metadata:
 
 Full interactive guides with diff viewers are available in Storybook:
 
-- [v4→v5 guide](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/resources-migration-guides-from-v4-to-v5--docs)
-- [v5→v6 guide](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/resources-migration-guides-from-v5-to-v6--docs)
-- [OUI→v6 guide](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/resources-migration-guides-from-oui-to-v6--docs)
+- [v4→v5 guide](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_resources-migration-guides-from-v4-to-v5--docs)
+- [v5→v6 guide](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_resources-migration-guides-from-v5-to-v6--docs)
+- [OUI→v6 guide](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_resources-migration-guides-from-oui-to-v6--docs)
 
 ---
 
@@ -70,16 +70,14 @@ import { IressButton } from '@iress/components-react';
 // ❌ Old (OUI)
 import { Button, Input } from '@iress/oui';
 
-// ✅ IDS v6 (install with @beta tag: npm install @iress-oss/ids-components@beta)
+// ✅ IDS v6
 import { IressButton, IressInput } from '@iress-oss/ids-components';
 ```
 
-> **Important:** IDS v6 is currently in beta. Install with the `@beta` tag:
->
-> ```bash
-> npm install @iress-oss/ids-components@beta
-> npm install @iress-oss/ids-tokens@beta  # if using tokens directly
-> ```
+```bash
+npm install @iress-oss/ids-components
+npm install @iress-oss/ids-tokens  # if using tokens directly
+```
 
 ### CSS entry point
 

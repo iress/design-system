@@ -23,6 +23,18 @@ const Form = <T extends FieldValues, TContext = object>(
 
 Form.displayName = 'IressForm';
 
+/**
+ * Manages form state, validation, and submission for a group of input fields.
+ *
+ * @example
+ * ```tsx
+ * import { IressForm, IressFormField, IressInput } from '@iress-oss/ids-components';
+ *
+ * <IressForm onSubmit={handleSubmit}>
+ *   <IressFormField name="email" label="Email" render={(controlledProps) => <IressInput type="email" {...controlledProps} />} />
+ * </IressForm>
+ * ```
+ */
 export const IressForm = forwardRef(Form) as (<T extends FieldValues>(
   props: IressFormProps<T> & { ref?: Ref<FormRef<T>> },
 ) => React.ReactElement) & {

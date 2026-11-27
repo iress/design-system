@@ -1,5 +1,6 @@
 import { type SourceProps } from '@storybook/addon-docs/blocks';
 import type reactElementToJSXString from 'react-element-to-jsx-string';
+import { type TestComponentMeta } from './components/TestTable';
 
 export interface ParametersConfig {
   docs?: {
@@ -7,6 +8,36 @@ export interface ParametersConfig {
       code?: string;
       transform?: SourceProps['transform'];
     };
+  };
+
+  /**
+   * Optional configuration for IDs-specific Storybook features, such as testing metadata. This is not a standard Storybook parameter and is used internally by the Iress Storybook setup.
+   */
+  idsConfig?: {
+    /**
+     * Template to use for autodocs generation. 'default' uses the standard Storybook template, while 'component' uses a custom template designed for component documentation with enhanced prop tables and sections for guidelines and testing information.
+     */
+    autodocsTemplate?: 'default' | 'component' | 'landing';
+
+    /**
+     * URL or URL resolver for guidelines documentation. If provided, a "Guidelines" link
+     * is appended to the tab navigation in autodocs pages.
+     * - `string`: used as-is
+     * - `(title: string) => string | undefined`: called with the story title (e.g. "Components/Button"),
+     *   return a URL or `undefined` to hide the link for that component.
+     */
+    guidelinesUrl?: string | ((title: string) => string | undefined);
+
+    /**
+     * Optional metadata for component testing, used to generate test information in the documentation.
+     */
+    testMeta?: TestComponentMeta[];
+
+    /**
+     * Descriptions for custom tabs created via `tab:<name>` story tags.
+     * Key is the tab name (e.g. 'configuration'), value is the description shown at the top.
+     */
+    tabDescriptions?: Record<string, string>;
   };
 }
 
@@ -22,6 +53,41 @@ export type ReactElementToJSXStringOptions = Exclude<
 export interface BroadcastHashEvent {
   type: 'UPDATE_HASH';
   hash: string;
+}
+
+/**
+ * Event posted from a Storybook iframe to its parent with the current content height.
+ * Used by storybook embeds to auto-size the iframe.
+ */
+export interface RelaySizeEvent {
+  type: 'RELAY_SIZE';
+  height: number;
+}
+
+export interface RequestSizeEvent {
+  type: 'REQUEST_SIZE';
+}
+
+/**
+ * Event for controlling Storybook embeds via postMessage. Sent from the parent window to an iframe Storybook instance to configure the embed, such as which panels to show and which panel to select on load.
+ * This allows for dynamic customisation of Storybook embeds in contexts like the guidelines site.
+ */
+export interface EmbedStorybookEvent {
+  type: 'EMBED_STORYBOOK';
+  panel?: string;
+  allowedPanels?: string[];
+  showPanel?: boolean;
+  selectorsToHide?: string[];
+}
+
+/**
+ * Event posted from a Storybook iframe to its parent indicating panel status.
+ * Used to synchronize panel state between the iframe and parent, allowing the parent to react to changes in the embed's UI state.
+ */
+export interface RelayPanelEvent {
+  type: 'RELAY_PANEL';
+  flag: boolean;
+  height: number;
 }
 
 /**

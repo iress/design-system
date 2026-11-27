@@ -1,27 +1,29 @@
 import { type StoryObj, type Meta } from '@storybook/react-vite';
 import {
+  componentStoryMeta,
   disableArgTypes,
   mergeStorybookConfig,
   reactNodeArgType,
-  stylingProps,
 } from '@iress-oss/ids-storybook-config';
 import { IressTooltip } from '.';
 import { IressButton } from '../Button';
 import { IressStack } from '../Stack';
 import { IressInline } from '../Inline';
+import componentMeta from './meta';
+import { IressStyled } from '@/main';
 
 type Story = StoryObj<typeof IressTooltip>;
 
 export default {
   title: 'Components/Tooltip',
   component: IressTooltip,
-  argTypes: {
-    ...mergeStorybookConfig(disableArgTypes(['children', 'open']), {
-      children: reactNodeArgType,
-      ...stylingProps,
-    }),
-  },
-  tags: ['updated'],
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      ...mergeStorybookConfig(disableArgTypes(['children', 'open']), {
+        children: reactNodeArgType,
+      }),
+    },
+  }),
 } as Meta<typeof IressTooltip>;
 
 export const Default: Story = {
@@ -34,7 +36,7 @@ export const Default: Story = {
 
 export const TooltipText: Story = {
   render: (args) => (
-    <div style={{ paddingTop: '30px' }}>
+    <IressStyled pt="spacing.6">
       <IressInline gap="md">
         <IressTooltip
           {...args}
@@ -49,7 +51,7 @@ export const TooltipText: Story = {
           <IressButton>Multi line</IressButton>
         </IressTooltip>
       </IressInline>
-    </div>
+    </IressStyled>
   ),
 };
 
@@ -128,7 +130,7 @@ export const Align: Story = {
 
 export const Delay: Story = {
   render: (args) => (
-    <div style={{ paddingTop: '30px' }}>
+    <IressStyled pt="spacing.6">
       <IressInline horizontalAlign="center" gap="sm">
         <IressTooltip {...args} delay={0}>
           <IressButton>0ms (no delay)</IressButton>
@@ -141,7 +143,7 @@ export const Delay: Story = {
           <IressButton>2000ms</IressButton>
         </IressTooltip>
       </IressInline>
-    </div>
+    </IressStyled>
   ),
   args: {
     tooltipText: 'Hello!',

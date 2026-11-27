@@ -2,11 +2,11 @@ import userEvent from '@testing-library/user-event';
 import { act, render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { css } from '@/styled-system/css';
-import { type ContextualMenuItem, IressContextualMenu } from './ContextualMenu';
+import { type ConectualMenuItem, IressContextualMenu } from './ContextualMenu';
 import { contextualMenu } from './ContextualMenu.styles';
 import { GlobalCSSClass } from '@/enums';
 
-const ITEMS: ContextualMenuItem[] = [
+const ITEMS: ConectualMenuItem[] = [
   { key: 'edit', label: 'Edit', icon: 'edit' },
   { key: 'lock', label: 'Lock', icon: 'lock' },
 ];

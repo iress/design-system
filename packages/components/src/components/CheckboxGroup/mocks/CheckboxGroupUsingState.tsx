@@ -1,22 +1,17 @@
 import {
-  type FormControlValue,
   IressButton,
   IressCheckbox,
   IressCheckboxGroup,
-  type IressCheckboxGroupProps,
   IressStack,
 } from '@/main';
 import { useState } from 'react';
 
-export const CheckboxGroupUsingState = <T = FormControlValue,>(
-  args: IressCheckboxGroupProps<T>,
-) => {
-  const [value, setValue] = useState<T[]>([]);
+export function CheckboxGroupUsingState() {
+  const [value, setValue] = useState<string[]>([]);
 
   return (
     <IressStack gap="sm">
       <IressCheckboxGroup
-        {...args}
         value={value}
         onChange={(newValue) => setValue(newValue ?? [])}
       >
@@ -27,4 +22,4 @@ export const CheckboxGroupUsingState = <T = FormControlValue,>(
       <IressButton onClick={() => setValue([])}>Clear</IressButton>
     </IressStack>
   );
-};
+}

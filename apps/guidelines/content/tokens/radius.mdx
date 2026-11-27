@@ -1,0 +1,44 @@
+export const meta = {
+  title: 'Radius Tokens',
+  description: 'Border radius tokens for consistent rounded corners across components.',
+};
+
+# Radius Tokens
+
+Border radius tokens for consistent rounded corners across components.
+
+## Design
+
+Border radius scale based on `0.25rem` (4px) base unit.
+
+### Scale Tokens
+
+<StoryEmbed id="radius--radius" type="tokens" controls={false} />
+
+### System Tokens
+
+<StoryEmbed id="radius--system" type="tokens" controls={false} />
+
+## Develop
+
+You can use these tokens in your applications in three ways: via component props, CSS variables, or CSS-in-JS using the `cssVars` export from the `@iress-oss/ids-tokens` package.
+
+> **Note:** Most IDS components already have correct border radius built in.
+> Only use radius tokens when building custom layout elements.
+
+### Via component props
+
+```tsx
+import { IressStack } from '@iress-oss/ids-components';
+
+<IressStack borderRadius="radius.3">
+  Rounded container
+</IressStack>
+```
+
+### Via CSS variables
+
+```css
+.card { border-radius: var(--radius-3); }
+```
+

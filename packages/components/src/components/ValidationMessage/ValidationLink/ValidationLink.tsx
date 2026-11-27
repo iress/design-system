@@ -22,6 +22,15 @@ export interface IressValidationLinkProps extends IressValidationMessageProps<st
 }
 
 /**
+ * Displays a validation message as a link that scrolls to the associated form field.
+ *
+ * @example
+ * ```tsx
+ * import { IressValidationLink } from '@iress-oss/ids-components';
+ *
+ * <IressValidationLink linkToTarget="email" status="danger">Invalid email</IressValidationLink>
+ * ```
+ *
  * @deprecated Use `IressValidationMessage` instead.
  */
 export const IressValidationLink = ({

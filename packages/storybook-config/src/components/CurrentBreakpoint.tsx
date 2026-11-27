@@ -20,7 +20,6 @@ export interface CurrentBreakpointProps {
     | 'max-width'
     | 'container'
     | 'and-above'
-    | 'viewing'
     | 'container-fluid';
 }
 
@@ -93,16 +92,11 @@ export const CurrentBreakpoint = ({
           above)
         </>
       )}
-      {renderLabel === 'viewing' && (
+      {!renderLabel && (
         <>
           You are currently viewing the <strong>{breakpoint}</strong> breakpoint
           ({detail.screenWidthRange}). Resize your screen to view different
           breakpoints.
-        </>
-      )}
-      {!renderLabel && (
-        <>
-          <strong>{breakpoint}</strong> breakpoint ({detail.screenWidthRange})
         </>
       )}
     </Tag>

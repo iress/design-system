@@ -40,7 +40,9 @@ export const checkboxGroup = cva({
       },
     },
     readOnly: {
-      true: {},
+      true: {
+        rowGap: 'spacing.0',
+      },
     },
   },
   compoundVariants: [

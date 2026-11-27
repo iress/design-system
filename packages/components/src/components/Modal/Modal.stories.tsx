@@ -1,17 +1,6 @@
-import {
-  type Meta,
-  type ReactRenderer,
-  type StoryObj,
-} from '@storybook/react-vite';
-import { type ArgsStoryFn } from 'storybook/internal/types';
-import {
-  IressModal,
-  type IressModalProps,
-  IressModalProvider,
-  type ModalStatus,
-} from '.';
+import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { IressModal, type IressModalProps, IressModalProvider } from '.';
 import { IressButton } from '../Button';
-import { useModal } from './hooks/useModal';
 import { ModalUsingState } from './mocks/ModalUsingState';
 import ModalUsingStateSource from './mocks/ModalUsingState.tsx?raw';
 import {
@@ -28,36 +17,24 @@ import { ModalSizes } from './mocks/ModalSizes';
 import ModalSizesSource from './mocks/ModalSizes.tsx?raw';
 import { ModalStatuses } from './mocks/ModalStatuses';
 import ModalStatusesSource from './mocks/ModalStatuses.tsx?raw';
+import { ModalWithButton } from './mocks/ModalWithButton';
+import ModalWithButtonSource from './mocks/ModalWithButton.tsx?raw';
+import { ModalFixedFooter } from './mocks/ModalFixedFooter';
+import ModalFixedFooterSource from './mocks/ModalFixedFooter.tsx?raw';
+import { ModalResponsiveSize } from './mocks/ModalResponsiveSize';
+import ModalResponsiveSizeSource from './mocks/ModalResponsiveSize.tsx?raw';
+import { ModalDisableClosing } from './mocks/ModalDisableClosing';
+import ModalDisableClosingSource from './mocks/ModalDisableClosing.tsx?raw';
 import {
-  CurrentBreakpoint,
-  DiffViewer,
+  componentStoryMeta,
   disableArgTypes,
-  withCustomSource,
-  withJsxTransformer,
-  withTransformedProviderSource,
-  withTransformedRawSource,
+  withSource,
   reactNodeArgType,
-  stylingProps,
+  withBreakpointLabel,
 } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 
 const MODAL_ID = 'storybook-modal';
-
-const renderWithButtonFn = <TStatus extends ModalStatus>(
-  buttonTitle = 'Show modal',
-): ArgsStoryFn<ReactRenderer, IressModalProps<TStatus>> => {
-  return (args) => {
-    const { showModal } = useModal();
-
-    return (
-      <>
-        <IressButton onClick={() => showModal(MODAL_ID)}>
-          {buttonTitle}
-        </IressButton>
-        <IressModal {...args} show={false} />
-      </>
-    );
-  };
-};
 
 type Story = StoryObj<IressModalProps>;
 type StatusStory = StoryObj<IressModalProps<'danger' | 'success' | 'warning'>>;
@@ -65,13 +42,13 @@ type StatusStory = StoryObj<IressModalProps<'danger' | 'success' | 'warning'>>;
 export default {
   title: 'Components/Modal',
   component: IressModal,
-  tags: ['updated'],
-  argTypes: {
-    children: reactNodeArgType,
-    footer: reactNodeArgType,
-    heading: reactNodeArgType,
-    ...stylingProps,
-  },
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      children: reactNodeArgType,
+      footer: reactNodeArgType,
+      heading: reactNodeArgType,
+    },
+  }),
 } as Meta<typeof IressModal>;
 
 export const Default: Story = {
@@ -140,28 +117,17 @@ export const Default: Story = {
       </IressModalProvider>
     ),
   ],
-  render: renderWithButtonFn(),
+  render: (args) => <ModalWithButton {...args} />,
   parameters: {
-    ...withTransformedProviderSource(
-      `<IressModalProvider>
-        <Story />
-      </IressModalProvider>`,
-      `const { showModal } = useModal();
-
-const MODAL_ID = '${MODAL_ID}';
-
-return (
-  <Story />
-);`,
-    ),
-    ...withJsxTransformer({
-      showFunctions: true,
-      useFragmentShortSyntax: true,
+    controls: { disable: true },
+    ...withSource(ModalWithButtonSource, {
+      stripImports: true,
     }),
   },
 };
 
 export const DefaultShow: Story = {
+  tags: ['!autodocs'],
   args: {
     children: 'Modal content',
     footer: 'Footer slot',
@@ -171,23 +137,21 @@ export const DefaultShow: Story = {
 };
 
 export const ShowWithState: Story = {
-  args: {
-    children: 'This modal was opened via state',
-  },
-  argTypes: {
-    ...disableArgTypes(['footer', 'show']),
-  },
   render: (args) => <ModalUsingState {...args} />,
   parameters: {
-    ...withTransformedRawSource(ModalUsingStateSource, 'IressModalProps'),
+    controls: { disable: true },
+    ...withSource(ModalUsingStateSource, {
+      stripImports: true,
+    }),
   },
 };
 
 export const Heading: Story = {
   ...Default,
   args: {
-    ...Default.args,
     heading: 'Modal heading',
+    children: 'Modal content goes here.',
+    id: MODAL_ID,
   },
   argTypes: {
     ...disableArgTypes(['show', 'heading']),
@@ -205,130 +169,16 @@ export const FooterSlot: Story = {
   argTypes: {
     ...disableArgTypes(['show', 'footer']),
   },
-  render: renderWithButtonFn('Footer slot modal'),
+  render: (args) => <ModalWithButton {...args} />,
 };
 
 export const FixedFooter: Story = {
   ...Default,
-  args: {
-    heading: 'Modal Header',
-    id: MODAL_ID,
-    children: (
-      <>
-        <IressText element="h2">
-          Next Saturday night, we&apos;re sending you back to the future
-        </IressText>
-        <IressText>
-          <p>
-            I still don&apos;t understand, how am I supposed to go to the dance
-            with her, if she&apos;s already going to the dance with you.
-            Alright, okay Jennifer. What if I send in the tape and they
-            don&apos;t like it. I mean, what if they say I&apos;m no good. What
-            if they say, &apos;Get out of here, kid, you got no future.&apos; I
-            mean, I just don&apos;t think I can take that kind of rejection.
-            Jesus, I&apos;m beginning to sound like my old man. Ahh. Alright,
-            take it up, go. Doc. This is it. This is the answer. It says here
-            that a bolt of lightning is gonna strike the clock tower precisely
-            at 10:04 p.m. next Saturday night. If we could somehow harness this
-            bolt of lightning, channel it into the flux capacitor, it just might
-            work. Next Saturday night, we&apos;re sending you back to the
-            future.
-          </p>
-          <p>
-            Go. Yeah, it&apos;s in the back. The future, it&apos;s where
-            you&apos;re going? Mother, with Marty&apos;s parents out of town,
-            don&apos;t you think he oughta spend the night, after all, Dad
-            almost killed him with the car. What&apos;s going on? Where have you
-            been all week?
-          </p>
-          <p>
-            But I can&apos;t go to the dance, I&apos;ll miss my favorite
-            television program, Science Fiction Theater. Well uh, good, fine.
-            Ahh. Ahh. Right, okay, so right around 9:00 she&apos;s gonna get
-            very angry with me. That&apos;s right.
-          </p>
-          <h3>I just don&apos;t think I can take that kind of rejection</h3>
-          <p>
-            I still don&apos;t understand, how am I supposed to go to the dance
-            with her, if she&apos;s already going to the dance with you.
-            Alright, okay Jennifer. What if I send in the tape and they
-            don&apos;t like it. I mean, what if they say I&apos;m no good. What
-            if they say, &apos;Get out of here, kid, you got no future.&apos; I
-            mean, I just don&apos;t think I can take that kind of rejection.
-            Jesus, I&apos;m beginning to sound like my old man. Ahh. Alright,
-            take it up, go. Doc. This is it. This is the answer. It says here
-            that a bolt of lightning is gonna strike the clock tower precisely
-            at 10:04 p.m. next Saturday night. If we could somehow harness this
-            bolt of lightning, channel it into the flux capacitor, it just might
-            work. Next Saturday night, we&apos;re sending you back to the
-            future.
-          </p>
-          <p>
-            Go. Yeah, it&apos;s in the back. The future, it&apos;s where
-            you&apos;re going? Mother, with Marty&apos;s parents out of town,
-            don&apos;t you think he oughta spend the night, after all, Dad
-            almost killed him with the car. What&apos;s going on? Where have you
-            been all week?
-          </p>
-          <p>
-            But I can&apos;t go to the dance, I&apos;ll miss my favorite
-            television program, Science Fiction Theater. Well uh, good, fine.
-            Ahh. Ahh. Right, okay, so right around 9:00 she&apos;s gonna get
-            very angry with me. That&apos;s right.
-          </p>
-          <p>
-            I still don&apos;t understand, how am I supposed to go to the dance
-            with her, if she&apos;s already going to the dance with you.
-            Alright, okay Jennifer. What if I send in the tape and they
-            don&apos;t like it. I mean, what if they say I&apos;m no good. What
-            if they say, &apos;Get out of here, kid, you got no future.&apos; I
-            mean, I just don&apos;t think I can take that kind of rejection.
-            Jesus, I&apos;m beginning to sound like my old man. Ahh. Alright,
-            take it up, go. Doc. This is it. This is the answer. It says here
-            that a bolt of lightning is gonna strike the clock tower precisely
-            at 10:04 p.m. next Saturday night. If we could somehow harness this
-            bolt of lightning, channel it into the flux capacitor, it just might
-            work. Next Saturday night, we&apos;re sending you back to the
-            future.
-          </p>
-          <p>
-            Go. Yeah, it&apos;s in the back. The future, it&apos;s where
-            you&apos;re going? Mother, with Marty&apos;s parents out of town,
-            don&apos;t you think he oughta spend the night, after all, Dad
-            almost killed him with the car. What&apos;s going on? Where have you
-            been all week?
-          </p>
-          <p>
-            But I can&apos;t go to the dance, I&apos;ll miss my favorite
-            television program, Science Fiction Theater. Well uh, good, fine.
-            Ahh. Ahh. Right, okay, so right around 9:00 she&apos;s gonna get
-            very angry with me. That&apos;s right.
-          </p>
-          <p>
-            I still don&apos;t understand, how am I supposed to go to the dance
-            with her, if she&apos;s already going to the dance with you.
-            Alright, okay Jennifer. What if I send in the tape and they
-            don&apos;t like it. I mean, what if they say I&apos;m no good. What
-            if they say, &apos;Get out of here, kid, you got no future.&apos; I
-            mean, I just don&apos;t think I can take that kind of rejection.
-            Jesus, I&apos;m beginning to sound like my old man. Ahh. Alright,
-            take it up, go. Doc. This is it. This is the answer. It says here
-            that a bolt of lightning is gonna strike the clock tower precisely
-            at 10:04 p.m. next Saturday night. If we could somehow harness this
-            bolt of lightning, channel it into the flux capacitor, it just might
-            work. Next Saturday night, we&apos;re sending you back to the
-            future.
-          </p>
-        </IressText>
-      </>
-    ),
-    footer: <IressButton>Button in footer</IressButton>,
-    fixedFooter: true,
+  render: (args) => <ModalFixedFooter {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(ModalFixedFooterSource, { stripImports: true }),
   },
-  argTypes: {
-    ...disableArgTypes(['show', 'footer', 'children']),
-  },
-  render: renderWithButtonFn('Fixed footer modal'),
 };
 
 export const Size: Story = {
@@ -341,108 +191,39 @@ export const Size: Story = {
   },
   render: (args) => <ModalSizes {...args} />,
   parameters: {
-    ...withCustomSource(ModalSizesSource),
+    controls: { disable: true },
+    ...withSource(ModalSizesSource, {
+      stripImports: true,
+    }),
   },
 };
 
 export const ResponsiveSize: Story = {
   ...Default,
-  args: {
-    children: <CurrentBreakpoint />,
-    footer: '',
-    id: MODAL_ID,
-    width: {
-      xs: 'overlay.sm',
-      md: 'overlay.md',
-      xxl: 'overlay.lg',
-    },
+  render: (args) => <ModalResponsiveSize {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(ModalResponsiveSizeSource, { stripImports: true }),
   },
-  argTypes: {
-    ...disableArgTypes(['show', 'children']),
-  },
-  render: renderWithButtonFn('Responsive modal'),
+  decorators: [withBreakpointLabel()],
 };
 
 export const DisableClosing: Story = {
   ...Default,
-  argTypes: {
-    ...disableArgTypes(['disableBackdropClick', 'noCloseButton', 'show', 'id']),
-  },
-  render: (args) => {
-    const { showModal } = useModal();
-
-    const noCloseButtonModal = (
-      <IressModal
-        {...args}
-        id="no-close-button"
-        noCloseButton
-        footer={
-          <IressButton onClick={() => showModal('no-close-button', false)}>
-            Close
-          </IressButton>
-        }
-      />
-    );
-
-    const bothModal = (
-      <IressModal
-        {...args}
-        id="both"
-        disableBackdropClick
-        noCloseButton
-        footer={
-          <IressButton onClick={() => showModal('both', false)}>
-            Close
-          </IressButton>
-        }
-      />
-    );
-
-    return (
-      <IressStack gap="md">
-        <IressButton onClick={() => showModal('disable-backdrop-click')} fluid>
-          Disable backdrop click
-        </IressButton>
-        <IressModal
-          {...args}
-          id="disable-backdrop-click"
-          disableBackdropClick
-        />
-
-        <IressButton onClick={() => showModal('no-close-button')} fluid>
-          No close button (please provide one, if you decide to hide the close
-          button)
-        </IressButton>
-        {noCloseButtonModal}
-
-        <IressButton onClick={() => showModal('both')} fluid>
-          Both (If you hide the close button, ensure you provide another way to
-          close the modal)
-        </IressButton>
-        {bothModal}
-      </IressStack>
-    );
+  render: (args) => <ModalDisableClosing {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(ModalDisableClosingSource, { stripImports: true }),
   },
 };
 
 export const Status: StatusStory = {
-  args: {
-    children: (
-      <IressText element="p">
-        Optional contextual information added here, this can be introductory
-        text or any other relevant copy.
-      </IressText>
-    ),
-    actions: [{ children: 'Button', mode: 'tertiary' }, { children: 'Button' }],
-    heading: 'Modal Header',
-    status: 'danger',
-  },
-  argTypes: {
-    ...disableArgTypes(['show', 'status', 'size', 'id']),
-  },
   render: (args) => <ModalStatuses {...args} />,
   parameters: {
-    ...withCustomSource(ModalStatusesSource),
+    controls: { disable: true },
+    ...withSource(ModalStatusesSource, {
+      stripImports: true,
+    }),
   },
 };
 
@@ -453,52 +234,7 @@ export const Static: Story = {
     show: true,
     static: true,
   },
-};
-
-export const V5ModalDiff: Story = {
-  render: () => (
-    <DiffViewer
-      allowModeChange
-      oldValue={`import { render, waitFor, screen } from '@testing-library/react';
-import { idsFireEvent, componentLoad } from '@iress/ids-react-test-utils';
-  
-test('opening and closing a modal', async () => {
-  await componentLoad([
-    'modal-trigger',
-    'modal',
-  ]);
-
-  const trigger = screen.getByTestId('modal-trigger');
-  const modal = screen.getByTestId('modal');
-
-  // In version 4, you can already interact with the modal here as its in the DOM at this stage.
-
-  // activate modal
-  idsFireEvent.click(trigger);
-  await waitFor(() => expect(modal).toBeVisible());
-
-  // close modal
-  const closeButton = screen.getByTestId('modal__close-button');
-  idsFireEvent.click(closeButton);
-  await waitFor(() => expect(modal).not.toBeVisible());
-});`}
-      newValue={`import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
-import { userEvent } from '@testing-library/user-event';
-
-test('opening and closing a modal', async () => {
-  const trigger = screen.getByRole('button', { name: /open modal/i });
-
-  // activate modal
-  await userEvent.click(trigger);
-  const modal = await screen.findByRole('dialog');
-
-  // In version 5, you can only interact with the modal once it has been loaded here.
-
-  // close modal
-  const closeButton = screen.getByRole('button', { name: /close/i });
-  await userEvent.click(closeButton);
-  await waitForElementToBeRemoved(modal);
-});`}
-    />
-  ),
+  parameters: {
+    layout: 'fullscreen',
+  },
 };

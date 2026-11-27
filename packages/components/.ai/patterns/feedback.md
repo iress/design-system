@@ -1,0 +1,93 @@
+# Feedback
+
+> Displays transient feedback messages to communicate the result of an action.
+
+- [Source](https://github.com/iress/design-system/tree/main/packages/components/src/patterns/Feedback)
+- [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=feedback&title=[Feedback]+Bug:+)
+- [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=feedback,enhancement&title=[Feedback]+Feature:+)
+
+Feedback components communicate information to users about actions, states, and processes. Choosing the right feedback component ensures users receive the right level of information at the right time without unnecessary disruption.
+
+**Choose the right feedback component:**
+
+| Scenario | Component | Example |
+|----------|-----------|---------|
+| Brief confirmation (auto-dismisses) | Toast | `success({ content: 'Record saved' })` |
+| Persistent page-level info | Alert | `<IressAlert status="info">Session info</IressAlert>` |
+| Blocking decision required | Modal | `<IressModal heading="Confirm">Are you sure?</IressModal>` |
+| Inline field-level error | ValidationMessage | `<IressValidationMessage status="danger">Required</IressValidationMessage>` |
+
+```tsx
+// Toast — transient confirmation
+const { success } = useToaster();
+success({ content: 'Record saved' });
+
+// Alert — persistent inline message
+<IressAlert status="warning">Session expires in 5 minutes</IressAlert>
+
+// Modal — blocking decision
+<IressModal heading="Delete record?" show={showModal}>
+  Are you sure you want to delete this?
+</IressModal>
+```
+
+## Design
+
+### Decision guide
+
+| Criteria             | Alert                  | Toast                         | Modal                          |
+| -------------------- | ---------------------- | ----------------------------- | ------------------------------ |
+| Interrupts the user  | No                     | No                            | Yes                            |
+| Requires user action | Optional (dismissable) | No                            | Sometimes (confirmation, form) |
+| Persists on screen   | Yes (inline)           | No (auto-dismisses after ~6s) | Yes (until dismissed)          |
+| Placement            | Inline with content    | Overlay, corner of screen     | Overlay, centre of screen      |
+| Blocks interaction   | No                     | No                            | Yes (backdrop)                 |
+
+### When to use each component
+
+#### Alert (`IressAlert`)
+
+Use an alert for contextual, non-blocking messages that relate to the content around them.
+
+- **Form validation**: Display errors or warnings near the relevant form section
+- **Page-level status**: Inform users about the state of the current page (e.g. "This record is read-only")
+- **Informational banners**: Provide tips, guidance, or announcements inline with content
+- **Persistent warnings**: Messages that should remain visible until the condition changes
+
+Alerts stay in the page flow and do not steal focus, making them ideal for information the user can act on at their own pace.
+
+[Alert documentation →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-alert--docs)
+
+#### Toaster (`IressToasterProvider` + `useToaster`)
+
+Use a toast for brief, transient confirmations of background processes or completed actions.
+
+- **Action confirmations**: "Record saved", "Email sent", "Item deleted"
+- **Background process updates**: "File uploaded successfully", "Data synced"
+- **Non-critical status changes**: Information the user should see but does not need to act on
+
+Toasts auto-dismiss and should not contain critical information or actions the user must take. If the user needs to act on the message, use an Alert or Modal instead.
+
+[Toaster documentation →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toaster--docs)
+
+#### Modal (`IressModal`)
+
+Use a modal for tasks that require the user's full attention or an explicit decision before continuing.
+
+- **Confirmations**: "Are you sure you want to delete this?" or "Discard unsaved changes?"
+- **Subtasks**: Completing a short form or workflow without leaving the current page
+- **Critical information**: Content that must be acknowledged before proceeding
+- **Focused input**: Gathering information that requires concentration without distraction
+
+Modals block interaction with the underlying page. Avoid using them for simple messages that could be an Alert or Toast.
+
+[Modal documentation →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-modal--docs)
+
+### Quick reference
+
+- **Something happened in the background?** → Toast
+- **The user needs to know something about this page?** → Alert
+- **The user must decide or complete a task before continuing?** → Modal
+- **The message should persist until a condition changes?** → Alert
+- **The message is a brief confirmation?** → Toast
+- **The content requires full attention?** → Modal

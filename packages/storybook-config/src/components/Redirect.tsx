@@ -24,8 +24,13 @@ export const Redirect = ({ title, to }: RedirectProps) => {
   const { IressPanel } = use(IressStorybookContext);
 
   useEffect(() => {
-    const redirect = window.top ?? window;
-    redirect.location.href = to;
+    try {
+      const redirect = window.top ?? window;
+      redirect.location.href = to;
+    } catch {
+      // Cross-origin: fall back to current window navigation
+      window.location.href = to;
+    }
   }, [to]);
 
   return (

@@ -28,6 +28,19 @@ export interface IressFieldGroupProps extends IressFieldProps<
   join?: boolean;
 }
 
+/**
+ * Groups multiple fields together with a shared label, hint, and error state rendered as a fieldset.
+ *
+ * @example
+ * ```tsx
+ * import { IressFieldGroup, IressField, IressInput } from '@iress-oss/ids-components';
+ *
+ * <IressFieldGroup label="Contact details" inline>
+ *   <IressField label="First name"><IressInput /></IressField>
+ *   <IressField label="Last name"><IressInput /></IressField>
+ * </IressFieldGroup>
+ * ```
+ */
 export const IressFieldGroup = ({
   children,
   className,

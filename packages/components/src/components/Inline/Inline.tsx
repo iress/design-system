@@ -52,6 +52,19 @@ const Component = styled('div', inline) as FC<
   }
 >;
 
+/**
+ * Lays out children horizontally with consistent spacing between items.
+ *
+ * @example
+ * ```tsx
+ * import { IressInline } from '@iress-oss/ids-components';
+ *
+ * <IressInline gap="sm">
+ *   <span>Item 1</span>
+ *   <span>Item 2</span>
+ * </IressInline>
+ * ```
+ */
 export const IressInline = ({
   className,
   horizontalAlign,

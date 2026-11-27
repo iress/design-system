@@ -5,22 +5,24 @@ import { IressCheckbox } from '../Checkbox';
 import { IressInline } from '../Inline';
 import { MultipleExpander } from './mocks/MultipleExpander';
 import MultipleExpanderSource from './mocks/MultipleExpander.tsx?raw';
-import { IressStack } from '../Stack';
+import { ExpanderMode } from './mocks/ExpanderMode';
+import ExpanderModeSource from './mocks/ExpanderMode.tsx?raw';
 import {
+  componentStoryMeta,
   disableArgTypes,
-  withCustomSource,
+  withSource,
   reactNodeArgType,
-  stylingProps,
 } from '@iress-oss/ids-storybook-config';
+import componentMeta from './meta';
 
 export default {
   title: 'Components/Expander',
   component: IressExpander,
-  tags: ['updated'],
-  argTypes: {
-    children: reactNodeArgType,
-    ...stylingProps,
-  },
+  ...componentStoryMeta(componentMeta, {
+    argTypes: {
+      children: reactNodeArgType,
+    },
+  }),
 } as Meta<typeof IressExpander>;
 
 export const Default: StoryObj<typeof IressExpander> = {
@@ -31,34 +33,25 @@ export const Default: StoryObj<typeof IressExpander> = {
 };
 
 export const Mode: StoryObj<typeof IressExpander> = {
-  args: {
-    ...Default.args,
+  render: (args) => <ExpanderMode {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(ExpanderModeSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
   },
-  argTypes: {
-    ...disableArgTypes(['mode', 'activator', 'children']),
-  },
-  render: (args) => (
-    <IressStack gap="lg">
-      <IressStack gap="xs">
-        <IressText element="h2">Section (default)</IressText>
-        <IressExpander {...args} mode="section" />
-      </IressStack>
-      <IressStack gap="xs">
-        <IressText element="h2">Link</IressText>
-        <IressExpander {...args} mode="link" />
-      </IressStack>
-    </IressStack>
-  ),
 };
 
 export const Open: StoryObj<typeof IressExpander> = {
   args: {
-    ...Default.args,
+    activator: 'Expander activator',
+    children: 'Expander content will go here',
     open: true,
   },
 };
 
-export const Multiple: StoryObj<typeof IressExpander> = {
+export const Accordion: StoryObj<typeof IressExpander> = {
   argTypes: disableArgTypes([
     'open',
     'mode',
@@ -66,9 +59,10 @@ export const Multiple: StoryObj<typeof IressExpander> = {
     'onChange',
     'children',
   ]),
-  render: () => <MultipleExpander />,
+  render: (args) => <MultipleExpander {...args} />,
   parameters: {
-    ...withCustomSource(MultipleExpanderSource),
+    controls: { disable: true },
+    ...withSource(MultipleExpanderSource, { stripImports: true }),
   },
 };
 

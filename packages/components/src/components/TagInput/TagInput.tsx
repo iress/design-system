@@ -126,6 +126,16 @@ const Tags = ({
 
 Tags.displayName = 'Tags';
 
+/**
+ * An input field that allows users to add and remove tags, with support for tag limits and duplicate detection.
+ *
+ * @example
+ * ```tsx
+ * import { IressTagInput } from '@iress-oss/ids-components';
+ *
+ * <IressTagInput value={['Tag 1', 'Tag 2']} onChange={(e, value) => {}} />
+ * ```
+ */
 export const IressTagInput = forwardRef(
   (
     {

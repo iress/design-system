@@ -1,5 +1,6 @@
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { FORM_ELEMENT_WIDTHS } from '@/constants';
+import type { TestComponentMeta } from '@iress-oss/ids-storybook-config';
 import {
   disableArgTypes,
   mergeStorybookConfig,
@@ -11,6 +12,20 @@ import { IressSelect } from '../Select';
 
 type Story = StoryObj<typeof IressSelect>;
 
+const testMeta: TestComponentMeta[] = [
+  {
+    part: 'main',
+    description: 'The root element of the native select',
+    query: <code>getByRole('combobox')</code>,
+    testId: 'native-select',
+  },
+  {
+    part: 'select',
+    description: 'The native select element',
+    testId: 'native-select__select',
+  },
+];
+
 export default {
   title: 'Components/Select/Native',
   component: IressSelect,
@@ -21,6 +36,9 @@ export default {
     ...stylingProps,
   },
   tags: ['updated'],
+  parameters: {
+    idsConfig: { testMeta },
+  },
 } as Meta<typeof IressSelect>;
 
 export const Options: Story = {
@@ -66,14 +84,28 @@ export const OptionGroups: Story = {
 
 export const Placeholder: Story = {
   args: {
-    ...Options.args,
+    options: [
+      { label: 'Option 1', value: '1' },
+      { label: 'Option 2', value: 2 },
+      { label: 'Option 3', value: '3' },
+      { label: 'Option 4', value: 4 },
+      { label: 'Option 5', value: '5' },
+    ],
+    native: true,
     placeholder: 'Please select an option',
   },
 };
 
 export const SelectedOption: Story = {
   args: {
-    ...Options.args,
+    options: [
+      { label: 'Option 1', value: '1' },
+      { label: 'Option 2', value: 2 },
+      { label: 'Option 3', value: '3' },
+      { label: 'Option 4', value: 4 },
+      { label: 'Option 5', value: '5' },
+    ],
+    native: true,
     value: { label: 'Option 2', value: 2 },
   },
 };
@@ -96,7 +128,15 @@ export const Sizing: Story = {
 
 export const Disabled: Story = {
   args: {
-    ...SelectedOption.args,
+    options: [
+      { label: 'Option 1', value: '1' },
+      { label: 'Option 2', value: 2 },
+      { label: 'Option 3', value: '3' },
+      { label: 'Option 4', value: 4 },
+      { label: 'Option 5', value: '5' },
+    ],
+    native: true,
+    value: { label: 'Option 2', value: 2 },
     disabled: true,
   },
 };

@@ -198,6 +198,19 @@ const RadioGroup = <T = FormControlValue,>(
   );
 };
 
+/**
+ * Groups related radio buttons so users can select one option from a set.
+ *
+ * @example
+ * ```tsx
+ * import { IressRadioGroup, IressRadio } from '@iress-oss/ids-components';
+ *
+ * <IressRadioGroup name="choice">
+ *   <IressRadio value="a">Option A</IressRadio>
+ *   <IressRadio value="b">Option B</IressRadio>
+ * </IressRadioGroup>
+ * ```
+ */
 export const IressRadioGroup = forwardRef(RadioGroup) as (<
   T = FormControlValue,
 >(

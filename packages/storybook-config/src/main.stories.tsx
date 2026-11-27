@@ -3,10 +3,16 @@ import {
   IressInline,
   IressPanel,
   IressStack,
+  IressToggle,
 } from '@iress-oss/ids-components';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useEffect, useState } from 'react';
-import { type BroadcastHashEvent } from './types';
+import {
+  type RelaySizeEvent,
+  type BroadcastHashEvent,
+  type EmbedStorybookEvent,
+  type RelayPanelEvent,
+} from './types';
 
 const MainStub = () => null;
 
@@ -149,4 +155,159 @@ export const PassAndLoadTheme: Story = {
       </IressPanel>
     </IressStack>
   ),
+};
+
+const Size = () => {
+  const [size, setSize] = useState(0);
+
+  useEffect(() => {
+    const saveSize = (event: MessageEvent<RelaySizeEvent>) => {
+      if (event.data?.type !== 'RELAY_SIZE') {
+        return;
+      }
+
+      setSize(event.data.height);
+    };
+
+    window.parent.addEventListener('message', saveSize);
+
+    return () => {
+      window.parent.removeEventListener('message', saveSize);
+    };
+  }, []);
+
+  return (
+    <IressPanel>
+      <p>
+        This story is to test the main Storybook configuration which passes the
+        storybook preview iframe height via postMessage. This is used to adjust
+        the height of the iframe in Storybook embeds to better show case the
+        content without excessive whitespace or scrollbars.
+      </p>
+      <p>
+        Height of story: <strong>{size || 'N/A'}</strong>
+      </p>
+      <p>
+        <IressButton
+          onClick={() => {
+            // eslint-disable-next-line sonarjs/post-message
+            window.parent.postMessage({ type: 'REQUEST_SIZE' }, '*');
+          }}
+        >
+          Parent can re-request the size if needed via REQUEST_SIZE message
+        </IressButton>
+      </p>
+    </IressPanel>
+  );
+};
+
+export const RelaySize: Story = {
+  render: () => <Size />,
+};
+
+const Embed = () => {
+  const [showPanel, setShowPanel] = useState(true);
+
+  const updateEmbed = (params: Omit<EmbedStorybookEvent, 'type'>) => {
+    // eslint-disable-next-line sonarjs/post-message
+    window.parent.postMessage(
+      {
+        type: 'EMBED_STORYBOOK',
+        ...params,
+      },
+      '*',
+    );
+  };
+
+  useEffect(() => {
+    updateEmbed({
+      panel: 'storybook/docs/panel',
+      allowedPanels: ['storybook/docs/panel', 'storybook/a11y/panel'],
+      selectorsToHide: ['[title="Hide stories"]', '[title="Show stories"]'],
+    });
+  }, []);
+
+  return (
+    <IressStack gap="md">
+      <IressPanel>
+        <p>
+          This story is to test the main Storybook configuration which allows us
+          to customise the Storybook embed via postMessage. This is used to
+          control Storybook embeds in the guidelines, allowing us to hide
+          certain panels and set the initial panel when the story is loaded.
+        </p>
+        <IressInline gap="md">
+          <IressButton
+            onClick={() => {
+              updateEmbed({
+                panel: 'storybook/a11y/panel',
+                allowedPanels: ['storybook/a11y/panel'],
+                showPanel,
+              });
+            }}
+          >
+            Show stories controller with a11y panel
+          </IressButton>
+          <IressToggle checked={showPanel} onChange={setShowPanel}>
+            Show/hide
+          </IressToggle>
+        </IressInline>
+      </IressPanel>
+    </IressStack>
+  );
+};
+
+export const StorybookEmbed: Story = {
+  render: () => <Embed />,
+};
+
+const Panel = () => {
+  const [openPanel, setOpenPanel] = useState('');
+  const [panelHeight, setPanelHeight] = useState(0);
+
+  useEffect(() => {
+    const savePanelOpen = (event: MessageEvent<RelayPanelEvent>) => {
+      if (event.data?.type !== 'RELAY_PANEL') {
+        return;
+      }
+
+      setOpenPanel(event.data.flag ? 'yes' : 'no');
+      setPanelHeight(event.data.height);
+    };
+
+    window.parent.addEventListener('message', savePanelOpen);
+
+    // eslint-disable-next-line sonarjs/post-message
+    window.parent.postMessage({ type: 'REQUEST_PANEL' }, '*');
+
+    return () => {
+      window.parent.removeEventListener('message', savePanelOpen);
+    };
+  }, []);
+
+  return (
+    <IressStack gap="md">
+      <IressPanel>
+        <p>
+          This story is to test the main Storybook configuration which
+          broadcasts panel open/close state via postMessage. This is used to
+          communicate when the addon panel is opened or closed in Storybook
+          embeds, allowing the parent window to react to these changes in the
+          embed's UI state.
+        </p>
+        <p>
+          <strong>Is the panel open?</strong> {openPanel}
+        </p>
+        {openPanel === 'yes' && (
+          <p>
+            The height of the panel is: <strong>{panelHeight}</strong>
+          </p>
+        )}
+      </IressPanel>
+    </IressStack>
+  );
+};
+
+export const RelayPanel: Story = {
+  render: () => <Panel />,
 };

@@ -6,11 +6,13 @@ export const icon = cva({
     type: {
       fontawesome: {},
       material: {
-        fontSize: 'inherit',
         lineHeight: 'inherit',
         materialSymbols: 'true',
         scale: '[1.5]',
         textTransform: 'none',
+        '&:not([class*="textStyle_typography"])': {
+          fontSize: 'inherit',
+        },
       },
     },
     filled: {
