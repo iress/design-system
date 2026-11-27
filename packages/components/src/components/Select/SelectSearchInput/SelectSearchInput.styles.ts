@@ -7,7 +7,9 @@ export const selectSearchInput = sva({
       // Performance: CSS containment limits style recalculation scope
       contain: 'layout style paint',
       zIndex: '[100]',
-      overflow: 'hidden',
+      // `clip` (not `hidden`) so the browser can't scroll this element when the
+      // input is focused in a narrow popover, which would push the icon out.
+      overflow: 'clip',
 
       '& > div:first-child': {
         borderRadius: 'radius.0',
