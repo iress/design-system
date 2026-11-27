@@ -1,0 +1,11 @@
+{
+  "name": "ids-cross-browser-checks",
+  "private": true,
+  "description": "Standalone Playwright checks that run built Storybook stories in Windows, macOS and Linux browsers. Not part of the Yarn workspaces; install with npm.",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0"
+  }
+}
