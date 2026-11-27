@@ -17,7 +17,7 @@ This repository uses labels to track bugs that affect multiple branches.
 
 - `affects-5.x` - Bug exists in the 5.x branch
 - `affects-main` - Bug exists in the main branch
-- `affects-both-branches` - Bug exists in both 5.x and main branches
+- `affects-both-branches` - Bug exists in both 5.x and main branches (maintainers: create this label if it does not exist yet)
 
 ## Workflow
 

@@ -1,0 +1,97 @@
+name: Cross-browser checks
+
+# Runs Playwright against the built Storybook on Windows, macOS and Linux so
+# OS-specific rendering bugs (e.g. the IressSelect search icon clipping on
+# Windows) can be caught and compared. Kept separate from ci-cd.yml.
+#
+# When it runs:
+#   - pull requests that change component, theme or e2e code (informational,
+#     not a required check)
+#   - nightly on the default branch, to catch browser updates (the Edge job uses
+#     whatever Edge the runner ships)
+#   - manually via workflow_dispatch
+on:
+  pull_request:
+    paths:
+      - 'packages/components/src/**'
+      - 'packages/theme-preset/src/**'
+      - 'packages/tokens/src/**'
+      - 'e2e/cross-browser/**'
+      - '.github/workflows/cross-browser.yml'
+  schedule:
+    - cron: '0 18 * * *' # 18:00 UTC, early morning in Sydney
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: '22'
+
+jobs:
+  build-storybook:
+    name: Build Storybook
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Enable Corepack
+        run: corepack enable
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Build packages
+        run: yarn build
+      - name: Build Storybook
+        run: yarn workspace @iress-oss/ids-components run build-storybook
+      - name: Upload Storybook
+        uses: actions/upload-artifact@v4
+        with:
+          name: storybook-static
+          path: packages/components/storybook-static
+          retention-days: 3
+
+  browser-tests:
+    name: ${{ matrix.os }}
+    needs: build-storybook
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+    defaults:
+      run:
+        shell: bash
+        working-directory: e2e/cross-browser
+    steps:
+      - uses: actions/checkout@v7
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Download Storybook
+        uses: actions/download-artifact@v4
+        with:
+          name: storybook-static
+          path: packages/components/storybook-static
+      - name: Install Playwright
+        run: npm ci --no-audit --no-fund
+      - name: Install browsers
+        run: npx playwright install --with-deps chromium firefox webkit
+      - name: Run tests
+        run: npx playwright test
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-${{ matrix.os }}
+          path: e2e/cross-browser/playwright-report
+          retention-days: 7

@@ -8,6 +8,7 @@ This guide explains how to set up and use GitHub Copilot agents in the Iress Des
 - [Prerequisites](#prerequisites)
 - [Available Agents](#available-agents)
 - [Bug-Fixing Agent](#bug-fixing-agent)
+- [Automatic Assignment](#automatic-assignment)
 - [Slack Integration](#slack-integration)
 - [Best Practices](#best-practices)
 - [Troubleshooting](#troubleshooting)
@@ -46,7 +47,7 @@ To use GitHub Copilot agents in this repository, you need:
 
 ### How It Works
 
-The bug-fixing agent follows a six-phase methodology:
+The bug-fixing agent follows a seven-phase methodology:
 
 1. **Initial Analysis**: Understand the bug and determine target branch(es) before proposing solutions
 2. **Investigation**: Use workspace search to locate relevant code in target branch(es)
@@ -54,6 +55,7 @@ The bug-fixing agent follows a six-phase methodology:
 4. **Solution Strategy**: Propose multiple approaches with trade-offs and branch-specific considerations
 5. **Implementation**: Apply targeted fixes with tests to appropriate branch(es)
 6. **Documentation**: Generate PR-ready documentation with cross-branch tracking
+7. **Cleanup**: Remove temporary reproduction stories once the fix is verified
 
 ### Branch Management
 
@@ -165,7 +167,7 @@ I've implemented the fix on both branches:
 
 All tests pass on both branches. The fixes are ready for review.
 
-```
+````
 
 ### Cross-Branch Tracking with Labels
 
@@ -187,16 +189,15 @@ The repository uses a simple label-based system for tracking cross-branch bug fi
 
 **You don't need to know the label system** - just report where you saw the bug, and the agent figures out the rest!
 
-#### Bug Fix PR Template
+#### Bug Fix PR Description
 
-Use the simple bug fix PR template (`.github/PULL_REQUEST_TEMPLATE/bug_fix.md`):
+Include in the PR description:
 
 - What was broken?
-- Related issue number
+- Related issue (`Fixes #123`)
 - What changed?
 - Testing checklist
-
-To use: Add `?template=bug_fix.md` to your PR URL.
+- Which version bumps were made (see below)
 
 See [Cross-Branch Labels Guide](.github/CROSS_BRANCH_LABELS.md) for complete workflow details.
 
@@ -215,6 +216,35 @@ For complex bugs:
 - ✅ Code fixes
 - ✅ Updated/added tests
 - ✅ Bug fix documentation (`bugfixing-[topic].docs.md`)
+
+### Versioning
+
+Releases are triggered by a version change on `main` or `5.x`, so a bug fix that is not bumped is never published. The agent bumps the **patch** version of each package whose published output changed:
+
+```bash
+yarn workspace @iress-oss/ids-components version patch
+````
+
+The command also updates dependent packages and `yarn.lock`. Do not edit `package.json` by hand. Skip the bump for tests, stories, docs or CI-only changes. A fix that needs a minor or major bump goes to the maintainers.
+
+## Automatic Assignment
+
+Adding the **`copilot-fix`** label to an issue assigns it to the Copilot coding agent using the Bug-Fixing Agent (`.github/workflows/assign-copilot.yml`).
+
+- **Who can trigger it**: anyone who can add labels (triage access or above). It deliberately does **not** run when an issue is opened, because anyone can open an issue. That would let outside text drive an agent that can open PRs, and it would use a Copilot request on every report.
+- **Branch**: the PR targets `5.x` if the issue has `affects-5.x` and not `affects-main`; otherwise `main`.
+- **Autonomous mode**: nobody is watching live, so the agent does not wait for confirmations. It opens a draft PR, records its assumptions and the alternatives it considered, and comments on the issue if it cannot proceed safely.
+- **What it is given**: a fixed instruction that points at the agent file. The issue text is read by the agent from GitHub, never pasted into a shell command by the workflow.
+- **Review**: PRs are always reviewed by a person. The agent does not merge.
+
+### One-time setup
+
+1. Create the labels `copilot-fix` and `affects-both-branches` (the latter is referenced throughout these docs but may not exist yet).
+2. Create a repository secret `COPILOT_ASSIGN_TOKEN`: a fine-grained personal access token (or GitHub App user token) from an account with a Copilot seat and write access. Required permissions: read metadata; read and write actions, contents, issues and pull requests. `GITHUB_TOKEN` cannot assign Copilot.
+3. Prefer a dedicated service account over a personal one, so the token does not depend on one person staying at the company.
+4. Enable the Copilot coding agent for the repository.
+
+Each run uses Copilot premium requests from the token owner's plan.
 
 ## Slack Integration
 
@@ -250,6 +280,7 @@ login
 3. Authorize the app to access your GitHub account when prompted
 
 4. Click **Configure settings** to set your default repository:
+
 - Repository: `iress/design-system-public`
 - Click **Save changes**
 
@@ -495,4 +526,7 @@ For issues or questions:
 ---
 
 **Happy bug fixing with GitHub Copilot!** 🐛→✨
+
+```
+
 ```
