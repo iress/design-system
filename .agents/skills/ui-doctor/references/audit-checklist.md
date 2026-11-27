@@ -114,7 +114,10 @@ Use this checklist when performing a UI doctor audit.
 - [ ] Maximum one `mode="primary"` button per section
 - [ ] Destructive actions use `status="danger"` not custom red styling
 - [ ] Icon-only buttons include accessible text
-- [ ] No `disabled` attribute on `IressButton` — keep buttons enabled and validate on click instead (disabled buttons are invisible to screen readers and provide no path to resolution)
+- [ ] Unavoidable disabled actions have persistent, visible adjacent text explaining why and what to do next, associated using `aria-describedby` — a tooltip alone is insufficient
+- [ ] Do not attach explanatory `onClick` toasts to `IressButton disabled` — activation is blocked; its default button remains keyboard-focusable via `aria-disabled`
+- [ ] Primary submit buttons remain enabled on long or complex forms, with validation on submit and guidance to locate errors; use `loading` for in-flight work
+- [ ] Disabled text/icons remain legible across supported themes and forced-colours mode; review background, border, and focus visibility rather than assuming tokens guarantee contrast
 
 ## IressText Usage
 

@@ -64,7 +64,7 @@ const spacing = {
   2: {
     $description: '2x spacing',
     $type: Type.Dimension,
-    $value: `calc(2 * {spacing.100 || ${baseSpacing}})`, // 8px
+    $value: `calc(2 * {spacing.1 || ${baseSpacing}})`, // 8px
     $extensions: {
       'iress.aliases': ['sm'],
       'styler.hide': true,
@@ -73,7 +73,7 @@ const spacing = {
   3: {
     $description: '3x spacing',
     $type: Type.Dimension,
-    $value: `calc(3 * {spacing.100 || ${baseSpacing}})`, // 12px
+    $value: `calc(3 * {spacing.1 || ${baseSpacing}})`, // 12px
     $extensions: {
       'styler.hide': true,
     },
@@ -81,7 +81,7 @@ const spacing = {
   4: {
     $description: '4x spacing',
     $type: Type.Dimension,
-    $value: `calc(4 * {spacing.100 || ${baseSpacing}})`, // 16px
+    $value: `calc(4 * {spacing.1 || ${baseSpacing}})`, // 16px
     $extensions: {
       'iress.aliases': ['md'],
       'styler.hide': true,
@@ -90,7 +90,7 @@ const spacing = {
   5: {
     $description: '5x spacing',
     $type: Type.Dimension,
-    $value: `calc(5 * {spacing.100 || ${baseSpacing}})`, // 20px
+    $value: `calc(5 * {spacing.1 || ${baseSpacing}})`, // 20px
     $extensions: {
       'styler.hide': true,
     },
@@ -98,7 +98,7 @@ const spacing = {
   6: {
     $description: '6x spacing',
     $type: Type.Dimension,
-    $value: `calc(6 * {spacing.100 || ${baseSpacing}})`, // 24px
+    $value: `calc(6 * {spacing.1 || ${baseSpacing}})`, // 24px
     $extensions: {
       'iress.aliases': ['lg'],
       'styler.hide': true,
@@ -107,7 +107,7 @@ const spacing = {
   7: {
     $description: '7x spacing',
     $type: Type.Dimension,
-    $value: `calc(7 * {spacing.100 || ${baseSpacing}})`, // 28px
+    $value: `calc(7 * {spacing.1 || ${baseSpacing}})`, // 28px
     $extensions: {
       'styler.hide': true,
     },
@@ -115,7 +115,7 @@ const spacing = {
   8: {
     $description: '8x spacing',
     $type: Type.Dimension,
-    $value: `calc(8 * {spacing.100 || ${baseSpacing}})`, // 32px
+    $value: `calc(8 * {spacing.1 || ${baseSpacing}})`, // 32px
     $extensions: {
       'styler.hide': true,
     },
@@ -123,7 +123,7 @@ const spacing = {
   10: {
     $description: '10x spacing',
     $type: Type.Dimension,
-    $value: `calc(10 * {spacing.100 || ${baseSpacing}})`, // 40px
+    $value: `calc(10 * {spacing.1 || ${baseSpacing}})`, // 40px
     $extensions: {
       'iress.aliases': ['xl'],
       'styler.hide': true,

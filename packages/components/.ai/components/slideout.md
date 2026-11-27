@@ -8,7 +8,7 @@
 import { IressSlideout } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-slideout--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slideout--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Slideout)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=slideout&title=[Slideout]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=slideout,enhancement&title=[Slideout]+Feature:+)
@@ -123,7 +123,7 @@ import { IressSlideout } from '@iress-oss/ids-components';
 <IressSlideout footer="Footer slot">Slideout content</IressSlideout>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-slideout--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slideout--docs#api-props)
 
 ### Usage
 
@@ -462,7 +462,7 @@ await waitForElementToBeRemoved(slideout);
 - **Conditional rendering**: Use `findByRole` (async) — content isn't in the DOM until shown
 - **Animation timing**: Animations can affect test timing — disable in test environments if needed
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-slideout--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slideout--docs#testing)
 
 
 #### Test selectors
@@ -481,7 +481,7 @@ await waitForElementToBeRemoved(slideout);
 
 Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-slideout--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slideout--docs)
 
 ## Specifications
 
@@ -532,7 +532,7 @@ Storybook provides an interactive playground for testing different prop combinat
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-slideout--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slideout--docs)
 
 ## Recipes
 

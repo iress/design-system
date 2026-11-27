@@ -8,7 +8,7 @@
 import { IressRadioGroup } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-radio-group--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radiogroup--docs)
 - [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-28220)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/RadioGroup)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=radio-group&title=[RadioGroup]+Bug:+)
@@ -84,7 +84,7 @@ import { IressRadioGroup, IressRadio } from '@iress-oss/ids-components';
 </IressRadioGroup>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-radiogroup--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radiogroup--docs#api-props)
 
 ### Usage
 
@@ -312,7 +312,7 @@ await user.click(yes);
 - **Focus behaviour**: Focusing the `radiogroup` element moves focus to the
   first radio child. The group needs `tabIndex` to be focusable programmatically.
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-radiogroup--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radiogroup--docs#testing)
 
 
 #### Test selectors
@@ -325,7 +325,7 @@ await user.click(yes);
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-radiogroup--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radiogroup--docs)
 
 ## Specifications
 

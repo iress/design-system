@@ -8,7 +8,7 @@
 import { IressCheckbox } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkbox--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox--docs)
 - [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-28220)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Checkbox)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=checkbox&title=[Checkbox]+Bug:+)
@@ -92,7 +92,7 @@ import { IressCheckbox } from '@iress-oss/ids-components';
 <IressCheckbox>A checkbox</IressCheckbox>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkbox--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox--docs#api-props)
 
 ### Usage
 
@@ -244,7 +244,7 @@ const checkbox = screen.getByRole('checkbox', { name: 'Accept terms' });
 - **indeterminate state**: An indeterminate checkbox starts unchecked
   (`not.toBeChecked()`). Clicking it transitions to checked.
 
-[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkbox--docs#testing)
+[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox--docs#testing)
 
 
 #### Test selectors
@@ -261,7 +261,7 @@ const checkbox = screen.getByRole('checkbox', { name: 'Accept terms' });
 
 Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkbox--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox--docs)
 
 ## Specifications
 
@@ -303,7 +303,7 @@ Storybook provides an interactive playground for testing different prop combinat
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkbox--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox--docs)
 
 ## Recipes
 

@@ -2,7 +2,7 @@
 
 > Decision guide for choosing between Autocomplete, Select, DropdownMenu, InputPopover, and Popover.
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-search-selection--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-search-selection--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/patterns/SearchSelection)
 
 Choosing between InputPopover, Autocomplete, Select, DropdownMenu, and Popover depends on whether users need to navigate to results, pick a form value, or trigger actions.

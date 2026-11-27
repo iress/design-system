@@ -30,6 +30,6 @@ export default {
       'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=row,enhancement&title=[Row]+Feature:+',
   },
   storybook:
-    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-row--docs',
+    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-row--docs',
   guidelines: 'https://iress.github.io/design-system/#/components/row',
 } satisfies ComponentMeta;

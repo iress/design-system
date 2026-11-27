@@ -8,7 +8,7 @@
 import { IressRow } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-row--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-row--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Row)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=row&title=[Row]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=row,enhancement&title=[Row]+Feature:+)
@@ -77,7 +77,7 @@ import { IressRow, IressCol } from '@iress-oss/ids-components';
 </IressRow>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-row--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-row--docs#api-props)
 
 ### Usage
 
@@ -405,7 +405,7 @@ const row = screen.getByTestId('my-row');
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-row--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-row--docs)
 
 ## Specifications
 

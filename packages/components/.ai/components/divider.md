@@ -8,7 +8,7 @@
 import { IressDivider } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-divider--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-divider--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Divider)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=divider&title=[Divider]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=divider,enhancement&title=[Divider]+Feature:+)
@@ -68,7 +68,7 @@ import { IressDivider } from '@iress-oss/ids-components';
 <IressDivider />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-divider--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-divider--docs#api-props)
 
 ### Vertical divider
 
@@ -173,7 +173,7 @@ const divider = screen.getByRole('separator');
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-divider--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-divider--docs)
 
 ## Specifications
 
@@ -201,4 +201,4 @@ Dividers are not interactive and do not receive focus.
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-divider--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-divider--docs)

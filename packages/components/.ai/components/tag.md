@@ -8,7 +8,7 @@
 import { IressTag } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tag--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tag--docs)
 - [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-29810)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Tag)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=tag&title=[Tag]+Bug:+)
@@ -70,7 +70,7 @@ Tags are **interactive** — they can be clicked and deleted by users.
 
 ### When not to use
 
-- **Status indicators** — use [Pill](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-pill--docs) for non-interactive status badges or category labels
+- **Status indicators** — use [Pill](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-pill--docs) for non-interactive status badges or category labels
 - **Action buttons** — use [Button](../components/button.md) or [ButtonGroup](../components/button-group.md) for triggering actions
 - **Navigation items** — use [Link](../components/link.md) or navigation patterns
 
@@ -92,7 +92,7 @@ Tags are **interactive** — they can be clicked and deleted by users.
 ### Related patterns
 
 - [Select](../components/select.md) — for selecting from an existing list (use `multiple` prop for multi-select with tags)
-- [Pill](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-pill--docs) — for non-interactive status/category display
+- [Pill](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-pill--docs) — for non-interactive status/category display
 - [TagInput](#iresstagsinput) — for free-form tag entry
 
 ## Develop
@@ -105,7 +105,7 @@ import { IressTag } from '@iress-oss/ids-components';
 <IressTag>Label</IressTag>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tag--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tag--docs#api-props)
 
 ### Mode
 
@@ -358,7 +358,7 @@ When you pass a `data-testid` to `IressTag`, the following nested test IDs are g
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tag--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tag--docs)
 
 ## Specifications
 
@@ -399,4 +399,4 @@ Storybook provides an interactive playground for testing different prop combinat
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tag--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tag--docs)

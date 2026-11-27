@@ -30,6 +30,6 @@ export default {
       'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=stack,enhancement&title=[Stack]+Feature:+',
   },
   storybook:
-    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-stack--docs',
+    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-stack--docs',
   guidelines: 'https://iress.github.io/design-system/#/components/stack',
 } satisfies ComponentMeta;

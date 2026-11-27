@@ -8,7 +8,7 @@
 import { IressCheckboxGroup } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkbox-group--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkboxgroup--docs)
 - [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-28220)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/CheckboxGroup)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=checkbox-group&title=[CheckboxGroup]+Bug:+)
@@ -95,7 +95,7 @@ import { IressCheckboxGroup } from '@iress-oss/ids-components';
 <IressCheckboxGroup name="preferences" />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkboxgroup--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkboxgroup--docs#api-props)
 
 ### Usage
 
@@ -465,7 +465,7 @@ const option = within(group).getByRole('checkbox', { name: 'Music' });
 - **onChange returns an array**: The `onChange` callback receives the full array
   of selected values, not just the changed item.
 
-[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkboxgroup--docs#testing)
+[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkboxgroup--docs#testing)
 
 
 #### Test selectors
@@ -480,7 +480,7 @@ const option = within(group).getByRole('checkbox', { name: 'Music' });
 
 Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkboxgroup--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkboxgroup--docs)
 
 ## Specifications
 
@@ -521,4 +521,4 @@ Storybook provides an interactive playground for testing different prop combinat
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkboxgroup--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkboxgroup--docs)

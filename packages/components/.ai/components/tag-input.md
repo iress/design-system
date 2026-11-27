@@ -8,7 +8,7 @@
 import { IressTagInput } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-taginput--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-taginput--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/TagInput)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=tag-input&title=[TagInput]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=tag-input,enhancement&title=[TagInput]+Feature:+)
@@ -104,7 +104,7 @@ import { IressTagInput } from '@iress-oss/ids-components';
 />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-taginput--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-taginput--docs#api-props)
 
 ### Controlled usage
 

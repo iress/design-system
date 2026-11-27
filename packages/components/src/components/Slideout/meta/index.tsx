@@ -68,6 +68,6 @@ export default {
       'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=slideout,enhancement&title=[Slideout]+Feature:+',
   },
   storybook:
-    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-slideout--docs',
+    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slideout--docs',
   guidelines: 'https://iress.github.io/design-system/#/components/slideout',
 } satisfies ComponentMeta;

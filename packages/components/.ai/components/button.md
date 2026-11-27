@@ -8,7 +8,7 @@
 import { IressButton } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-button--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs)
 - [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=6201-26)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Button)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=button&title=[Button]+Bug:+)
@@ -24,6 +24,7 @@ import { IressButton } from '@iress-oss/ids-components';
 | append | `ReactNode` | — | Content for the append slot. |
 | children | `ReactNode` | — | Content is placed between prepend and append if provided. Used to describe the expected action of this button. |
 | compact | `boolean` | — | Makes the button more compact by reducing padding and font size. Used for buttons with icon only or when space is limited. |
+| disabled | `boolean` | — | **Discouraged: prefer an enabled button with clear feedback.** Disabled buttons do not explain why an action is unavailable or how to proceed.  Before using this prop, read the [IDS best practices and alternatives to disabled buttons](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs#avoid-using-disabled). - Incomplete forms, including long or complex forms: keep submit enabled and use `IressForm` validation on submit. - Actions in progress: use `loading` to communicate progress and prevent duplicate clicks. - Missing permissions or prerequisites: hide unavailable actions or explain what is needed.  When true, uses `aria-disabled` rather than native `disabled`. The default button remains keyboard-focusable and available to screen readers, but activation and `onClick` are blocked. If unavoidable, provide visible text adjacent to the button explaining why and what to do next, associated using `aria-describedby`. Do not rely on a tooltip or an `onClick` toast to explain a disabled button. |
 | element | `ElementType` | — | Change the component that will be rendered as the button, used for third-party libraries that require a specific element type. By default, it will render a button or an anchor tag based on the `href` prop. |
 | fluid | `any` | — | If `true`, the button will stretch to fill it's container. The prop is responsive, so you can set the breakpoint(s) at which the button will be fluid.  All breakpoints: `fluid={true}` Up to a specific breakpoint: `fluid="md"` |
 | href | `string` | — | Contains a URL or a URL fragment that the hyperlink points to. If this property is set, an anchor tag will be rendered. |
@@ -87,21 +88,37 @@ export function ButtonMode() {
 
 #### Avoid using `disabled`
 
-IDS discourages using `disabled` on `IressButton`. Although the native HTML `disabled` attribute is supported via the underlying `<button>`/`<a>` element, it is an anti-pattern that should be avoided because:
+> ⚠️ **Disabled styling is not a recommendation.** Before using the `disabled` prop, review the alternatives below. Prefer an enabled button with validation or clear feedback, and use `loading` while an action is in progress. If disabling is unavoidable, provide visible text adjacent to the button explaining why and what to do next, not just a tooltip.
 
-- Screen readers skip disabled elements, making them invisible to assistive technology users
-- Users cannot understand why a button is disabled or what they need to do to enable it
+IDS discourages using `disabled` on `IressButton`. When used, it sets `aria-disabled="true"` instead of the native HTML `disabled` attribute. The default button remains keyboard-focusable and available to screen readers while activation is blocked. Custom `element` components must preserve keyboard access and accessible semantics.
+
+Disabling a button is still an anti-pattern that should be avoided because:
+
+- Screen readers announce that the button is disabled, but not why it cannot be activated
+- Users may not understand what they need to do to enable it
 - It creates a poor user experience with no path to resolution
 
 See below for recommended alternatives to common disabled button scenarios.
 
 | Scenario | Alternative |
 |----------|-------------|
-| Form is incomplete | Keep submit enabled. Use `IressForm` with `rules` — shows inline errors on submit. |
+| Form is incomplete | Keep submit enabled. Use `IressForm` with `rules` — shows inline errors on submit and prevents submission until the form is valid. Do not disable the primary submit button merely because the form is incomplete or invalid. |
 | Action is in progress | Use the `loading` prop. Shows spinner, announces to screen readers, prevents duplicate clicks. |
-| User lacks permission | Hide the button entirely, or keep it enabled and show an explanation when clicked. |
-| Prerequisite step not completed | Guide the user to the prerequisite instead of silently disabling. |
+| User lacks permission | Hide the button entirely, or provide visible adjacent text explaining the restriction and the next step. If clicking should provide further feedback, keep the button enabled. |
+| Prerequisite step not completed | Provide visible guidance beside the action instead of silently disabling. Keep the button enabled if clicking should provide further feedback. |
 | Destructive action needs confirmation | Use `IressModal` with `status="danger"` for a confirmation step. |
+
+#### If disabling is unavoidable
+
+Provide a persistent, visible explanation adjacent to the button and associate it using `aria-describedby`. State both the reason and the next step. Do not rely on hover or a tooltip alone: touch users have no hover, and the explanation must also be available to keyboard and screen reader users.
+
+`IressButton disabled` suppresses `onClick`, so it cannot show an explanatory toast when clicked. If the action should respond with feedback, leave the button enabled and handle that response instead. Prefer persistent inline guidance to a transient toast for explaining an unavailable action.
+
+#### Disabled-state visual review
+
+Disabled must not mean unreadable. Review label and icon legibility, background, border, and focus visibility across button modes, supported light and dark themes, and forced-colours/high-contrast mode. Document the tokens used for each state; do not assume that using tokens alone verifies contrast.
+
+[WCAG contrast minimum exempts text in inactive controls](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html), but that is not a recommendation to make labels hard to read. Adjacent explanatory text must meet the applicable text contrast requirements.
 
 ### Content guidelines
 
@@ -125,7 +142,7 @@ import { IressButton } from '@iress-oss/ids-components';
 <IressButton>Button</IressButton>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-button--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs#api-props)
 
 ### Usage
 
@@ -225,6 +242,36 @@ The `type` property controls the behaviour of the button. It defaults to `button
   <IressButton type="submit">submit</IressButton>
   <IressButton type="reset">reset</IressButton>
 </IressInline>;
+```
+
+#### Disabled
+
+Disabled buttons are discouraged. This example shows the supported styling only, see [Avoid using `disabled`](#avoid-using-disabled) before using it.
+
+```tsx
+import { IressButton, IressInline } from '@iress-oss/ids-components';
+
+export function ButtonDisabled() {
+  return (
+    <IressInline gap="md">
+      <IressButton disabled mode="primary">
+        Button text
+      </IressButton>
+      <IressButton disabled mode="secondary">
+        Button text
+      </IressButton>
+      <IressButton disabled mode="tertiary">
+        Button text
+      </IressButton>
+      <IressButton disabled mode="quaternary">
+        Button text
+      </IressButton>
+      <IressButton disabled icon="edit" mode="muted">
+        Edit
+      </IressButton>
+    </IressInline>
+  );
+}
 ```
 
 #### Loading
@@ -464,7 +511,7 @@ When `href` is provided, the button renders as a link:
 const link = screen.getByRole('link', { name: 'Go to dashboard' });
 ```
 
-[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-button--docs#testing)
+[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs#testing)
 
 
 #### Test selectors
@@ -479,7 +526,7 @@ const link = screen.getByRole('link', { name: 'Go to dashboard' });
 
 Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-button--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs)
 
 ## Specifications
 
@@ -489,7 +536,7 @@ Storybook provides an interactive playground for testing different prop combinat
 |-------|-----------|
 | Default | Button is interactive and responds to click/keyboard activation |
 | Loading | Spinner shown, click events disabled, screen reader announces loading state |
-| Disabled | Pointer events disabled, element removed from tab order (anti-pattern) |
+| Disabled | Activation blocked and `aria-disabled="true"` set; stays keyboard-focusable (anti-pattern) |
 | As link (`href`) | Renders as `<a>` element, supports `target` and `rel` attributes |
 | Fluid | Expands to 100% container width, or up to a breakpoint |
 
@@ -522,4 +569,4 @@ Storybook provides an interactive playground for testing different prop combinat
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-button--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs)

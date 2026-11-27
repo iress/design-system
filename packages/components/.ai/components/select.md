@@ -8,7 +8,7 @@
 import { IressSelect } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-select--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-select--docs)
 - [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-23433)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Select)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=select&title=[Select]+Bug:+)
@@ -118,7 +118,7 @@ import { IressSelect } from '@iress-oss/ids-components';
 />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-select--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-select--docs#api-props)
 
 ### Usage
 
@@ -920,7 +920,7 @@ const menu = screen.getByRole('listbox');
 const option = screen.getByRole('option', { name: 'Option 1' });
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-select--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-select--docs#testing)
 
 
 #### Test selectors
@@ -941,7 +941,7 @@ const option = screen.getByRole('option', { name: 'Option 1' });
 
 Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-select--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-select--docs)
 
 ## Specifications
 
@@ -996,4 +996,4 @@ Storybook provides an interactive playground for testing different prop combinat
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-select--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-select--docs)

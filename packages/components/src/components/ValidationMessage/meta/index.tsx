@@ -37,7 +37,7 @@ export default {
       'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=validation-message,enhancement&title=[ValidationMessage]+Feature:+',
   },
   storybook:
-    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-validation-message--docs',
+    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-validationmessage--docs',
   guidelines:
     'https://iress.github.io/design-system/#/components/validation-message',
 } satisfies ComponentMeta;

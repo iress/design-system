@@ -8,7 +8,7 @@
 import { IressPopover } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-popover--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Popover)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=popover&title=[Popover]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=popover,enhancement&title=[Popover]+Feature:+)
@@ -113,7 +113,7 @@ import { IressPopover, IressButton } from '@iress-oss/ids-components';
 </IressPopover>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-popover--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs#api-props)
 
 ### Usage
 
@@ -427,7 +427,7 @@ await user.click(trigger);
 expect(screen.getByText('Popover content')).toBeVisible();
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-popover--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs#testing)
 
 
 #### Test selectors
@@ -444,7 +444,7 @@ expect(screen.getByText('Popover content')).toBeVisible();
 
 Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-popover--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs)
 
 ## Specifications
 
@@ -496,7 +496,7 @@ Storybook provides an interactive playground for testing different prop combinat
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-popover--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs)
 
 ## Recipes
 

@@ -52,7 +52,7 @@ export default {
       'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=tag,enhancement&title=[Tag]+Feature:+',
   },
   storybook:
-    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tag--docs',
+    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tag--docs',
   guidelines: 'https://iress.github.io/design-system/#/components/tag',
   figma:
     'https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-29810',

@@ -8,7 +8,7 @@
 import { IressImage } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-image--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-image--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Image)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=image&title=[Image]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=image,enhancement&title=[Image]+Feature:+)
@@ -81,7 +81,7 @@ import { IressImage } from '@iress-oss/ids-components';
 <IressImage src="https://example.com/photo.webp" alt="Placeholder image" />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-image--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-image--docs#api-props)
 
 ### Usage
 
@@ -143,7 +143,7 @@ const image = screen.getByRole('img', { name: 'Company logo' });
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-image--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-image--docs)
 
 ## Specifications
 
@@ -172,4 +172,4 @@ Images are not interactive. When wrapped in a link or button, the parent element
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-image--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-image--docs)

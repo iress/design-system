@@ -8,7 +8,7 @@
 import { IressExpander } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-expander--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-expander--docs)
 - [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-30530)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Expander)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=expander&title=[Expander]+Bug:+)
@@ -107,7 +107,7 @@ import { IressExpander } from '@iress-oss/ids-components';
 </IressExpander>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-expander--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-expander--docs#api-props)
 
 ### Usage
 
@@ -191,6 +191,29 @@ export const MultipleExpander = () => {
 };
 ```
 
+#### Custom activator layout
+
+The `activator` can contain layout components such as `IressInline`, for example a checkbox with a count on the right. A direct `IressInline` child fills the available width, and the activator keeps a `spacing.3` (12px) gap between its content and the chevron, so you don't need to add padding yourself.
+
+The chevron is aligned to the top of the activator. To vertically centre the `IressInline` against the chevron, set `alignSelf="center"` on it.
+
+```tsx
+<IressExpander
+  activator={
+    <IressInline
+      horizontalAlign="between"
+      verticalAlign="middle"
+      alignSelf="center"
+    >
+      <IressCheckbox>Income</IressCheckbox>
+      <IressText color="colour.neutral.70">3 selected</IressText>
+    </IressInline>
+  }
+>
+  Expander content will go here
+</IressExpander>;
+```
+
 ### Testing
 
 Query the expander trigger by its button role:
@@ -202,7 +225,7 @@ expect(trigger).toHaveAttribute('aria-expanded', 'true');
 expect(screen.getByText('Expanded content')).toBeVisible();
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-expander--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-expander--docs#testing)
 
 
 #### Test selectors
@@ -217,7 +240,7 @@ expect(screen.getByText('Expanded content')).toBeVisible();
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-expander--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-expander--docs)
 
 ## Specifications
 

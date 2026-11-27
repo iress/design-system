@@ -8,7 +8,7 @@
 import { IressStyled } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-styled--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-styled--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Styled)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=styled&title=[Styled]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=styled,enhancement&title=[Styled]+Feature:+)
@@ -82,7 +82,7 @@ import { IressStyled } from '@iress-oss/ids-components';
 </IressStyled>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-styled--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-styled--docs#api-props)
 
 ### Usage
 
@@ -257,7 +257,7 @@ Combine multiple styling properties to create rich, semantic HTML structures. Th
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-styled--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-styled--docs)
 
 ## Specifications
 

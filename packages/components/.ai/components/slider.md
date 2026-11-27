@@ -8,7 +8,7 @@
 import { IressSlider } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-slider--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slider--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Slider)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=slider&title=[Slider]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=slider,enhancement&title=[Slider]+Feature:+)
@@ -85,7 +85,7 @@ import { IressSlider } from '@iress-oss/ids-components';
 <IressSlider min={0} max={100} defaultValue={50} />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-slider--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slider--docs#api-props)
 
 ### Usage
 
@@ -231,7 +231,7 @@ import { fireEvent } from '@testing-library/react';
 fireEvent.change(screen.getByRole('slider'), { target: { value: '5' } });
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-slider--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slider--docs#testing)
 
 
 #### Test selectors
@@ -247,7 +247,7 @@ fireEvent.change(screen.getByRole('slider'), { target: { value: '5' } });
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-slider--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slider--docs)
 
 ## Specifications
 

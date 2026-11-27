@@ -8,7 +8,7 @@
 import { IressPanel } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-panel--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-panel--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Panel)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=panel&title=[Panel]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=panel,enhancement&title=[Panel]+Feature:+)
@@ -69,7 +69,7 @@ import { IressPanel } from '@iress-oss/ids-components';
 <IressPanel heading="Panel Heading">Panel content</IressPanel>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-panel--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-panel--docs#api-props)
 
 ### Usage
 
@@ -95,7 +95,7 @@ const panel = screen.getByTestId('my-panel');
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-panel--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-panel--docs)
 
 ## Specifications
 

@@ -8,7 +8,7 @@
 import { IressSpinner } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-spinner--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-spinner--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Spinner)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=spinner&title=[Spinner]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=spinner,enhancement&title=[Spinner]+Feature:+)
@@ -80,7 +80,7 @@ import { IressSpinner } from '@iress-oss/ids-components';
 <IressSpinner screenreaderText="Loading..." />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-spinner--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-spinner--docs#api-props)
 
 ### Standalone
 
@@ -139,7 +139,7 @@ const spinner = screen.getByRole('status');
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-spinner--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-spinner--docs)
 
 ## Specifications
 
@@ -173,4 +173,4 @@ Spinners are not interactive and do not receive focus.
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-spinner--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-spinner--docs)

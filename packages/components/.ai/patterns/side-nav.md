@@ -8,7 +8,7 @@
 import { IressSideNav } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-side-nav--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-sidenav--docs)
 - [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=6201-24)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/patterns/SideNav)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=side-nav&title=[Side Nav]+Bug:+)
@@ -170,7 +170,7 @@ import { IressSideNav } from '@iress-oss/ids-components';
 />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-side-nav--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-sidenav--docs#api-props)
 
 ### Usage
 
@@ -702,4 +702,4 @@ const activeSection = useLocation().pathname.split('/')[1];
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-side-nav--docs)
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-sidenav--docs)

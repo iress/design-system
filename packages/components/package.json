@@ -1,6 +1,6 @@
 {
   "name": "@iress-oss/ids-components",
-  "version": "6.4.7",
+  "version": "6.5.3",
   "description": "Iress React Component Library",
   "license": "Apache-2.0",
   "type": "module",
@@ -42,8 +42,8 @@
     "typecheck:node": "tsc --noEmit -p tsconfig.node.json"
   },
   "devDependencies": {
-    "@iress-oss/ids-theme-preset": "^6.0.1",
-    "@iress-oss/ids-tokens": "^6.0.0",
+    "@iress-oss/ids-theme-preset": "^6.1.0",
+    "@iress-oss/ids-tokens": "^6.0.1",
     "@pandacss/dev": "1.9.1",
     "@testing-library/dom": "10.4.1",
     "@testing-library/jest-dom": "6.9.1",

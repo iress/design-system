@@ -5,6 +5,11 @@ import {
 } from '../Select';
 import { toPrimitiveValue } from '../helpers/toPrimitiveValue';
 import {
+  countItems,
+  filterSelectedItems,
+} from '../helpers/filterSelectedItems';
+import { getValueFromLabelValues } from '@helpers/label-value/getValueFromLabelValues';
+import {
   type UIEventHandler,
   useCallback,
   useEffect,
@@ -115,9 +120,15 @@ const SelectAsyncResults = <TMultiple extends boolean = false>({
     return undefined;
   };
 
+  const visibleCount = multiSelect
+    ? countItems(
+        filterSelectedItems(results, getValueFromLabelValues(value, true)),
+      )
+    : results.length;
+
   const heading =
-    multiSelect && results.length && debouncedQuery
-      ? `Search results (${results.length})`
+    multiSelect && visibleCount > 0 && debouncedQuery
+      ? `Search results (${visibleCount})`
       : undefined;
 
   return (

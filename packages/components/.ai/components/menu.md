@@ -8,7 +8,7 @@
 import { IressMenu } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-menu--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Menu)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=menu&title=[Menu]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=menu,enhancement&title=[Menu]+Feature:+)
@@ -188,7 +188,7 @@ import { IressMenu, IressMenuItem } from '@iress-oss/ids-components';
 </IressMenu>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-menu--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu--docs#api-props)
 
 ### Usage
 
@@ -643,7 +643,7 @@ import { IressMenu, IressMenuItem } from '@iress-oss/ids-components';
 </IressMenu>;
 ```
 
-[View MenuItem props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-menu-menuitem--docs#api-props)
+[View MenuItem props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu-menuitem--docs#api-props)
 
 #### Selected
 
@@ -708,7 +708,7 @@ Query menu items by their role:
 const menuItem = screen.getByRole('menuitem', { name: 'Settings' });
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-menu--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu--docs#testing)
 
 
 #### Test selectors
@@ -726,7 +726,7 @@ const menuItem = screen.getByRole('menuitem', { name: 'Settings' });
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-menu--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu--docs)
 
 ## Specifications
 

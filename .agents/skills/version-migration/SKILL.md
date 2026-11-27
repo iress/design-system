@@ -37,9 +37,9 @@ metadata:
 
 Full interactive guides with diff viewers are available in Storybook:
 
-- [v4→v5 guide](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/resources-migration-guides-from-v4-to-v5--docs)
-- [v5→v6 guide](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/resources-migration-guides-from-v5-to-v6--docs)
-- [OUI→v6 guide](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/resources-migration-guides-from-oui-to-v6--docs)
+- [v4→v5 guide](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_resources-migration-guides-from-v4-to-v5--docs)
+- [v5→v6 guide](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_resources-migration-guides-from-v5-to-v6--docs)
+- [OUI→v6 guide](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_resources-migration-guides-from-oui-to-v6--docs)
 
 ---
 

@@ -8,7 +8,7 @@
 import { IressText } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-text--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-text--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Text)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=text&title=[Text]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=text,enhancement&title=[Text]+Feature:+)
@@ -103,7 +103,7 @@ import { IressText } from '@iress-oss/ids-components';
 <IressText element="h1">Page Title</IressText>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-text--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-text--docs#api-props)
 
 ### The `element` prop
 
@@ -291,7 +291,7 @@ const paragraph = screen.getByText('Some content');
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-text--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-text--docs)
 
 ## Specifications
 
@@ -322,4 +322,4 @@ Text is not interactive. When content within text is interactive, those elements
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-text--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-text--docs)

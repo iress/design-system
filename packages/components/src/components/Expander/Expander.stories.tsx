@@ -1,5 +1,8 @@
 import { IressExpander } from '.';
 import { type Meta, type StoryObj } from '@storybook/react-vite';
+import { IressText } from '../Text';
+import { IressCheckbox } from '../Checkbox';
+import { IressInline } from '../Inline';
 import { MultipleExpander } from './mocks/MultipleExpander';
 import MultipleExpanderSource from './mocks/MultipleExpander.tsx?raw';
 import { ExpanderMode } from './mocks/ExpanderMode';
@@ -60,5 +63,21 @@ export const Accordion: StoryObj<typeof IressExpander> = {
   parameters: {
     controls: { disable: true },
     ...withSource(MultipleExpanderSource, { stripImports: true }),
+  },
+};
+
+export const InlineActivator: StoryObj<typeof IressExpander> = {
+  args: {
+    activator: (
+      <IressInline
+        horizontalAlign="between"
+        verticalAlign="middle"
+        alignSelf="center"
+      >
+        <IressCheckbox>Income</IressCheckbox>
+        <IressText color="colour.neutral.70">3 selected</IressText>
+      </IressInline>
+    ),
+    children: 'Expander content will go here',
   },
 };

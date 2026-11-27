@@ -8,7 +8,7 @@
 import { IressInline } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-inline--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-inline--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Inline)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=inline&title=[Inline]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=inline,enhancement&title=[Inline]+Feature:+)
@@ -72,7 +72,7 @@ import { IressInline } from '@iress-oss/ids-components';
 </IressInline>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-inline--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-inline--docs#api-props)
 
 ### Usage
 
@@ -253,7 +253,7 @@ const inline = screen.getByTestId('my-inline');
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-inline--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-inline--docs)
 
 ## Specifications
 

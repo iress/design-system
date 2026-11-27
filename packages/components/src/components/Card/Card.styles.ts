@@ -121,7 +121,8 @@ export const card = sva({
         root: {
           display: 'grid',
           gridTemplateAreas: '"prepend body topRight" "footer footer footer"',
-          gridAutoColumns: '[minmax(0, min-content) auto min-content]',
+          gridAutoColumns:
+            '[minmax(0, min-content) minmax(0, 1fr) min-content]',
           gridAutoRows: '[auto min-content]',
           padding: 'spacing.0',
         },
@@ -156,7 +157,8 @@ export const card = sva({
         root: {
           gridTemplateAreas:
             '"prepend heading topRight" "prepend body body" "footer footer footer"',
-          gridAutoColumns: '[minmax(0, min-content) auto min-content]',
+          gridAutoColumns:
+            '[minmax(0, min-content) minmax(0, 1fr) min-content]',
           gridAutoRows: '[min-content auto min-content]',
         },
         heading: {
@@ -176,7 +178,7 @@ export const card = sva({
         root: {
           gridTemplateAreas:
             '"prepend media media" "prepend body topRight" "footer footer footer"',
-          gridAutoColumns: '[minmax(0, min-content) auto]',
+          gridAutoColumns: '[minmax(0, min-content) minmax(0, 1fr)]',
           gridAutoRows: '[min-content auto min-content]',
           position: 'relative',
           padding: 'spacing.0',
@@ -191,7 +193,7 @@ export const card = sva({
         root: {
           gridTemplateAreas:
             '"prepend media media" "prepend heading topRight" "prepend body body" "footer footer footer"',
-          gridAutoColumns: '[minmax(0, min-content) auto]',
+          gridAutoColumns: '[minmax(0, min-content) minmax(0, 1fr)]',
           gridAutoRows: '[min-content min-content auto min-content]',
         },
         topRight: {

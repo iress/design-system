@@ -14,7 +14,7 @@
 import { IressBreadcrumbs } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-breadcrumbs--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-breadcrumbs--docs)
 - [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-29259)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/patterns/Breadcrumbs)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=breadcrumbs&title=[Breadcrumbs]+Bug:+)
@@ -87,7 +87,7 @@ import { IressBreadcrumbs } from '@iress-oss/ids-components';
 />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-breadcrumbs--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-breadcrumbs--docs#api-props)
 
 ### Usage
 
@@ -236,7 +236,7 @@ import Link from 'next/link';
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-breadcrumbs--docs)
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-breadcrumbs--docs)
 
 ---
 
@@ -250,7 +250,7 @@ import Link from 'next/link';
 import { IressContextualMenu } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-contextual-menu--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-contextualmenu--docs)
 - [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-26780)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/patterns/ContextualMenu)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=contextual-menu&title=[Contextual Menu]+Bug:+)
@@ -354,7 +354,7 @@ import { IressContextualMenu } from '@iress-oss/ids-components';
 />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-contextual-menu--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-contextualmenu--docs#api-props)
 
 ### Usage
 
@@ -593,7 +593,7 @@ Use `theme="dark"` on panels using `colour.neutral.20` or darker backgrounds.
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-contextual-menu--docs)
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-contextualmenu--docs)
 
 ---
 
@@ -607,7 +607,7 @@ Use `theme="dark"` on panels using `colour.neutral.20` or darker backgrounds.
 import { IressDropdownMenu } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-dropdown-menu--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-dropdownmenu--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/patterns/DropdownMenu)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=dropdown-menu&title=[Filter]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=dropdown-menu,enhancement&title=[Filter]+Feature:+)
@@ -723,7 +723,7 @@ import { IressDropdownMenu } from '@iress-oss/ids-components';
 />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-dropdown-menu--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-dropdownmenu--docs#api-props)
 
 ### Usage
 
@@ -1293,7 +1293,7 @@ In `multiSelect` mode, the selections options are displayed using the `selectedO
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-dropdown-menu--docs)
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-dropdownmenu--docs)
 
 ---
 
@@ -1403,7 +1403,7 @@ Modals block interaction with the underlying page. Avoid using them for simple m
 import { IressForm } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-form--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/patterns/Form)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=form&title=[Form]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=form,enhancement&title=[Form]+Feature:+)
@@ -1618,7 +1618,7 @@ import { IressForm } from '@iress-oss/ids-components';
 </IressForm>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-form--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs#api-props)
 
 ### Key concepts
 
@@ -4224,7 +4224,7 @@ const summaryError = await screen.findByText(
 expect(summaryError).toBeInTheDocument();
 ```
 
-[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-form--docs#testing)
+[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs#testing)
 
 ### Caveats
 
@@ -4303,7 +4303,7 @@ If you see the warning _"A primitive value was passed but cannot be resolved bec
 
 ---
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-form--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs)
 
 ## Specifications
 
@@ -4329,7 +4329,7 @@ Automated validation is now solely contained in `IressForm` and `IressFormField`
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-form--docs)
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs)
 
 ## Recipes
 
@@ -4543,7 +4543,7 @@ export const HiddenInputsForm = () => {
 import { IressLoading } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-loading--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-loading--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/patterns/Loading)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=loading&title=[Loading]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=loading,enhancement&title=[Loading]+Feature:+)
@@ -4822,7 +4822,7 @@ import { IressLoading } from '@iress-oss/ids-components';
 <IressLoading pattern="page" />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-loading--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-loading--docs#api-props)
 
 ### Behaviour timing
 
@@ -4993,7 +4993,7 @@ The loading component uses `aria-live` regions for accessibility. Query by the m
 const message = screen.getByText('Loading...');
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-loading--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-loading--docs#testing)
 
 ## Specifications
 
@@ -5022,7 +5022,7 @@ const message = screen.getByText('Loading...');
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-loading--docs)
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-loading--docs)
 
 ---
 
@@ -5097,7 +5097,7 @@ orchestration is custom, not the building blocks.
 
 > Decision guide for choosing between Autocomplete, Select, DropdownMenu, InputPopover, and Popover.
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-search-selection--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-search-selection--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/patterns/SearchSelection)
 
 Choosing between InputPopover, Autocomplete, Select, DropdownMenu, and Popover depends on whether users need to navigate to results, pick a form value, or trigger actions.
@@ -5295,7 +5295,7 @@ import { IressSelect, IressField } from '@iress-oss/ids-components';
 import { IressShadow } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-shadow--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-shadow--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/patterns/Shadow)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=shadow&title=[Shadow]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=shadow,enhancement&title=[Shadow]+Feature:+)
@@ -5392,7 +5392,7 @@ Agents see "Shadow" in `IressShadow` and incorrectly assume the application uses
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-shadow--docs)
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-shadow--docs)
 
 ---
 
@@ -5406,7 +5406,7 @@ Agents see "Shadow" in `IressShadow` and incorrectly assume the application uses
 import { IressSideNav } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-side-nav--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-sidenav--docs)
 - [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=6201-24)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/patterns/SideNav)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=side-nav&title=[Side Nav]+Bug:+)
@@ -5568,7 +5568,7 @@ import { IressSideNav } from '@iress-oss/ids-components';
 />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-side-nav--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-sidenav--docs#api-props)
 
 ### Usage
 
@@ -6100,4 +6100,4 @@ const activeSection = useLocation().pathname.split('/')[1];
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-side-nav--docs)
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-sidenav--docs)

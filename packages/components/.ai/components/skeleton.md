@@ -8,7 +8,7 @@
 import { IressSkeleton } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-skeleton--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Skeleton)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=skeleton&title=[Skeleton]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=skeleton,enhancement&title=[Skeleton]+Feature:+)
@@ -80,7 +80,7 @@ export function SkeletonMode() {
 
 - [Spinner](../components/spinner.md) — for indeterminate loading without layout structure
 - [Progress](../components/progress.md) — for determinate progress indicators
-- [Loading pattern](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-loading--docs) — for full loading patterns
+- [Loading pattern](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-loading--docs) — for full loading patterns
 
 ## Develop
 
@@ -92,7 +92,7 @@ import { IressSkeleton } from '@iress-oss/ids-components';
 <IressSkeleton />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-skeleton--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs#api-props)
 
 ### Usage
 
@@ -332,7 +332,7 @@ await waitFor(() => {
 
 The skeleton has `aria-hidden="true"` and cannot be queried by role. Query by test ID if needed, or assert on the loaded content appearing.
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-skeleton--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs#testing)
 
 
 #### Test selectors
@@ -347,7 +347,7 @@ The skeleton has `aria-hidden="true"` and cannot be queried by role. Query by te
 
 Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-skeleton--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs)
 
 ## Specifications
 
@@ -387,4 +387,4 @@ No keyboard interaction — skeletons are non-interactive placeholder elements.
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-skeleton--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs)

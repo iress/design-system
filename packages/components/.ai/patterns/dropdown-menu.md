@@ -8,7 +8,7 @@
 import { IressDropdownMenu } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-dropdown-menu--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-dropdownmenu--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/patterns/DropdownMenu)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=dropdown-menu&title=[Filter]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=dropdown-menu,enhancement&title=[Filter]+Feature:+)
@@ -124,7 +124,7 @@ import { IressDropdownMenu } from '@iress-oss/ids-components';
 />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-dropdown-menu--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-dropdownmenu--docs#api-props)
 
 ### Usage
 
@@ -694,4 +694,4 @@ In `multiSelect` mode, the selections options are displayed using the `selectedO
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-dropdown-menu--docs)
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-dropdownmenu--docs)

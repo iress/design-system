@@ -8,7 +8,7 @@
 import { IressButtonGroup } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-button-group--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-buttongroup--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/ButtonGroup)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=button-group&title=[ButtonGroup]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=button-group,enhancement&title=[ButtonGroup]+Feature:+)
@@ -20,6 +20,7 @@ import { IressButtonGroup } from '@iress-oss/ids-components';
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | children | `ReactNode` | — | Content of the button group, usually multiple `IressButton`. |
+| compact | `boolean` | — | Renders the smallest variant of the button group, reducing the container padding and gap and rendering its child buttons in their compact size. Useful for segmented controls that toggle between mutually exclusive views. |
 | defaultSelected | `[ControlledValue](../../dist/hooks/useControlledState.d.ts)<T, TMultiple>` | — | Initially selected value, use for uncontrolled components. |
 | hiddenLabel | `boolean` | — | Hides the label if set; label will still be read out by screen readers. |
 | **label** | `ReactNode` | — | Sets the label text for the button group. If passed an element, it will render the element with an id, to ensure its connection to the button group. |
@@ -81,7 +82,7 @@ import { IressButtonGroup, IressButton } from '@iress-oss/ids-components';
 </IressButtonGroup>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-buttongroup--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-buttongroup--docs#api-props)
 
 ### Usage
 
@@ -236,6 +237,21 @@ If you would like to visually hide the label, you can use the `hiddenLabel` prop
 </IressButtonGroup>;
 ```
 
+#### Compact (segmented control)
+
+Set the `compact` prop to render the smallest variant of the button group, a segmented control. It is best suited to switching between a small number of mutually exclusive views, such as a List / Board toggle.
+
+The selected option is shown as a pill on a subtle track, and the child `IressButton` components are automatically rendered in their compact size, so you don't need to set `compact` on each button yourself.
+
+**Note:** The segmented control styling is applied to every `IressButton` inside a compact `IressButtonGroup`. Setting `compact={false}` on an individual child button is not supported and will not restore its default size.
+
+```tsx
+<IressButtonGroup compact defaultSelected="list" label="View" hiddenLabel>
+  <IressButton value="list">List</IressButton>
+  <IressButton value="board">Board</IressButton>
+</IressButtonGroup>;
+```
+
 #### Headings as labels
 
 For semantic reasons, you may need the label to be rendered as a heading. In this case, you can pass the element directly to the `label` prop. The component will automatically add the `id` required to connect the button group to its label.
@@ -257,7 +273,7 @@ Query the button group by its `group` role:
 const group = screen.getByRole('group', { name: 'Alignment' });
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-buttongroup--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-buttongroup--docs#testing)
 
 
 #### Test selectors
@@ -271,7 +287,7 @@ const group = screen.getByRole('group', { name: 'Alignment' });
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-buttongroup--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-buttongroup--docs)
 
 ## Specifications
 

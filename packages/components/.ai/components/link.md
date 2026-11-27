@@ -8,7 +8,7 @@
 import { IressLink } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-link--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-link--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Link)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=link&title=[Link]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=link,enhancement&title=[Link]+Feature:+)
@@ -88,7 +88,7 @@ import { IressLink } from '@iress-oss/ids-components';
 <IressLink href="//iress.com">IressLink</IressLink>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-link--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-link--docs#api-props)
 
 ### Usage
 
@@ -181,7 +181,7 @@ const button = screen.getByRole('button', { name: 'Show details' });
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-link--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-link--docs)
 
 ## Specifications
 
@@ -219,4 +219,4 @@ Storybook provides an interactive playground for testing different prop combinat
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-link--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-link--docs)

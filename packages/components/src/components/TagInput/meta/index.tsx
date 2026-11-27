@@ -21,6 +21,6 @@ export default {
       'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=tag-input,enhancement&title=[TagInput]+Feature:+',
   },
   storybook:
-    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-taginput--docs',
+    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-taginput--docs',
   guidelines: 'https://iress.github.io/design-system/#/components/tag-input',
 } satisfies ComponentMeta;

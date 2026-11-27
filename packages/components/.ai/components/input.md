@@ -8,7 +8,7 @@
 import { IressInput } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-input--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs)
 - [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=6201-23)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Input)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=input&title=[Input]+Bug:+)
@@ -99,7 +99,7 @@ import { IressInput } from '@iress-oss/ids-components';
 <IressInput placeholder="Enter your name" />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-input--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs#api-props)
 
 ### Usage
 
@@ -403,7 +403,7 @@ screen.getByTestId('my-input__textarea'); // Textarea (rows > 0)
 
 - **clearable inputs**: The clear button only appears when the input has a value.
 
-[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-input--docs#testing)
+[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs#testing)
 
 
 #### Test selectors
@@ -418,7 +418,7 @@ screen.getByTestId('my-input__textarea'); // Textarea (rows > 0)
 
 Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-input--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs)
 
 ## Specifications
 
@@ -462,7 +462,7 @@ Storybook provides an interactive playground for testing different prop combinat
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-input--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs)
 
 ## Recipes
 

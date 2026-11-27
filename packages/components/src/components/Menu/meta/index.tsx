@@ -71,7 +71,7 @@ export default {
       'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=menu,enhancement&title=[Menu]+Feature:+',
   },
   storybook:
-    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-menu--docs',
+    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu--docs',
   guidelines: 'https://iress.github.io/design-system/#/components/menu',
   subComponents: [
     'IressMenuItem',

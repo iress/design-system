@@ -8,7 +8,7 @@
 import { IressToasterProvider, useToaster } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-toaster--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toaster--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Toaster)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=toaster&title=[Toaster]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=toaster,enhancement&title=[Toaster]+Feature:+)
@@ -111,7 +111,7 @@ function App() {
 </IressToasterProvider>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-toaster--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toaster--docs#api-props)
 
 ### Usage
 
@@ -441,7 +441,7 @@ await waitForElementToBeRemoved(toast);
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-toaster--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toaster--docs)
 
 ## Specifications
 
@@ -483,4 +483,4 @@ Storybook provides an interactive playground for testing different prop combinat
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-toaster--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toaster--docs)

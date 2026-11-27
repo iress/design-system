@@ -8,7 +8,7 @@
 import { IressSkipLink } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-skip-link--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skiplink--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/SkipLink)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=skip-link&title=[SkipLink]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=skip-link,enhancement&title=[SkipLink]+Feature:+)
@@ -23,6 +23,7 @@ import { IressSkipLink } from '@iress-oss/ids-components';
 | append | `ReactNode` | — | Content for the append slot. |
 | children | `ReactNode` | `Skip to content` | Content is placed between prepend and append if provided. Used to describe the expected action of this button. Description of where the skip link jumps to. |
 | compact | `boolean` | — | Makes the button more compact by reducing padding and font size. Used for buttons with icon only or when space is limited. |
+| disabled | `boolean` | — | **Discouraged: prefer an enabled button with clear feedback.** Disabled buttons do not explain why an action is unavailable or how to proceed.  Before using this prop, read the [IDS best practices and alternatives to disabled buttons](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs#avoid-using-disabled). - Incomplete forms, including long or complex forms: keep submit enabled and use `IressForm` validation on submit. - Actions in progress: use `loading` to communicate progress and prevent duplicate clicks. - Missing permissions or prerequisites: hide unavailable actions or explain what is needed.  When true, uses `aria-disabled` rather than native `disabled`. The default button remains keyboard-focusable and available to screen readers, but activation and `onClick` are blocked. If unavoidable, provide visible text adjacent to the button explaining why and what to do next, associated using `aria-describedby`. Do not rely on a tooltip or an `onClick` toast to explain a disabled button. |
 | element | `ElementType` | — | Change the component that will be rendered as the button, used for third-party libraries that require a specific element type. By default, it will render a button or an anchor tag based on the `href` prop. |
 | fluid | `any` | — | If `true`, the button will stretch to fill it's container. The prop is responsive, so you can set the breakpoint(s) at which the button will be fluid.  All breakpoints: `fluid={true}` Up to a specific breakpoint: `fluid="md"` |
 | href | `string` | — | Contains a URL or a URL fragment that the hyperlink points to. If this property is set, an anchor tag will be rendered. Contains a URL or a URL fragment that the skip link points to. If this property is set, an anchor tag will be rendered. |
@@ -98,7 +99,7 @@ import { IressSkipLink } from '@iress-oss/ids-components';
 <IressSkipLink href="#main" />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-skiplink--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skiplink--docs#api-props)
 
 ### Usage
 
@@ -124,7 +125,7 @@ const skipLink = screen.getByRole('link', { name: 'Skip to content' });
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-skiplink--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skiplink--docs)
 
 ## Specifications
 

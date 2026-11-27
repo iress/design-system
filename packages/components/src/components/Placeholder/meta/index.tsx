@@ -31,6 +31,6 @@ export default {
       'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=placeholder,enhancement&title=[Placeholder]+Feature:+',
   },
   storybook:
-    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-placeholder--docs',
+    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-placeholder--docs',
   guidelines: 'https://iress.github.io/design-system/#/components/placeholder',
 } satisfies ComponentMeta;

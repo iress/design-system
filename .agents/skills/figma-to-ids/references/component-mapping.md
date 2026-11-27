@@ -28,6 +28,7 @@
 | Checkbox Group     | `IressCheckboxGroup` + `IressCheckbox`s      | Wrap in `IressField` for label |
 | Radio Group        | `IressRadioGroup` + `IressRadio`s            | Wrap in `IressField` for label |
 | Toggle             | `IressToggle`                                | `children` for label       |
+| Small Segmented Control | `IressButtonGroup compact` + `IressButton`s | `label`; `defaultSelected` for the initial option; give each `IressButton` a `value` |
 | Card               | `IressCard`                                  | `heading`, `footer` props; `children` for body |
 | Panel              | `IressPanel`                                 |                            |
 | Alert / Success    | `IressAlert status="success"`                |                            |

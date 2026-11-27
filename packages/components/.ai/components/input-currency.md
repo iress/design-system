@@ -8,7 +8,7 @@
 import { IressInputCurrency } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-input-currency--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-inputcurrency--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/InputCurrency)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=input-currency&title=[InputCurrency]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=input-currency,enhancement&title=[InputCurrency]+Feature:+)
@@ -102,7 +102,7 @@ import { IressInputCurrency } from '@iress-oss/ids-components';
 />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-inputcurrency--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-inputcurrency--docs#api-props)
 
 ### Usage
 
@@ -295,7 +295,7 @@ const input = screen.getByRole('textbox', { name: 'Amount' });
 - **readOnly removes the input role**: When `readOnly` is set, the textbox role
   is removed and the formatted value is displayed as plain text.
 
-[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-inputcurrency--docs#testing)
+[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-inputcurrency--docs#testing)
 
 
 #### Test selectors
@@ -310,7 +310,7 @@ const input = screen.getByRole('textbox', { name: 'Amount' });
 
 Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-inputcurrency--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-inputcurrency--docs)
 
 ## Specifications
 
@@ -353,7 +353,7 @@ Storybook provides an interactive playground for testing different prop combinat
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-inputcurrency--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-inputcurrency--docs)
 
 ## Recipes
 

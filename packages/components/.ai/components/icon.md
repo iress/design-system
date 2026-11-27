@@ -8,7 +8,7 @@
 import { IressIcon } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-icon--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-icon--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Icon)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=icon&title=[Icon]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=icon,enhancement&title=[Icon]+Feature:+)
@@ -100,7 +100,7 @@ import { IressIcon } from '@iress-oss/ids-components';
 <IressIcon name="home" />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-icon--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-icon--docs#api-props)
 
 ### Installation
 
@@ -438,7 +438,7 @@ Decorative icons (without `screenreaderText`) are hidden from the accessibility 
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-icon--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-icon--docs)
 
 ## Specifications
 
@@ -475,4 +475,4 @@ Icons are not interactive on their own. When used inside buttons or links, the p
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-icon--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-icon--docs)

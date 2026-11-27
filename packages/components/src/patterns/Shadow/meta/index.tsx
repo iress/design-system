@@ -21,6 +21,6 @@ export default {
       'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=shadow,enhancement&title=[Shadow]+Feature:+',
   },
   storybook:
-    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-shadow--docs',
+    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-shadow--docs',
   guidelines: 'https://iress.github.io/design-system/#/patterns/shadow',
 } satisfies ComponentMeta;

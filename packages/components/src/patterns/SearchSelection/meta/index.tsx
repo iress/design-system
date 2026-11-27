@@ -16,7 +16,7 @@ export default {
       'https://github.com/iress/design-system/edit/main/packages/components/src/patterns/SearchSelection/SearchSelection.stories.tsx',
   },
   storybook:
-    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-search-selection--docs',
+    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-search-selection--docs',
   guidelines:
     'https://iress.github.io/design-system/#/patterns/search-selection',
 } satisfies ComponentMeta;

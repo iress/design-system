@@ -8,7 +8,7 @@
 import { IressReadonly } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-readonly--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-readonly--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Readonly)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=readonly&title=[Readonly]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=readonly,enhancement&title=[Readonly]+Feature:+)
@@ -92,7 +92,7 @@ import { IressReadonly } from '@iress-oss/ids-components';
 <IressReadonly value="AU" />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-readonly--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-readonly--docs#api-props)
 
 ### Usage
 
@@ -210,7 +210,7 @@ const value = screen.getByText('Read-only value');
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-readonly--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-readonly--docs)
 
 ## Specifications
 
@@ -249,4 +249,4 @@ Storybook provides an interactive playground for testing different prop combinat
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-readonly--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-readonly--docs)

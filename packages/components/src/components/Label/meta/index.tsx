@@ -35,6 +35,6 @@ export default {
       'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=label,enhancement&title=[Label]+Feature:+',
   },
   storybook:
-    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-label--docs',
+    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-label--docs',
   guidelines: 'https://iress.github.io/design-system/#/components/label',
 } satisfies ComponentMeta;

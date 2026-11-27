@@ -8,7 +8,7 @@
 import { IressCard } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-card--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-card--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Card)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=card&title=[Card]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=card,enhancement&title=[Card]+Feature:+)
@@ -175,7 +175,7 @@ import { IressCard } from '@iress-oss/ids-components';
 <IressCard heading="Card title">Card content goes here.</IressCard>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-card--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-card--docs#api-props)
 
 ### Usage
 
@@ -204,6 +204,33 @@ import { IressCard } from '@iress-oss/ids-components';
 <IressCard noBorder>I'm a card</IressCard>;
 ```
 
+#### Wide content
+
+Wide content such as a table scrolls horizontally within the card instead of overflowing it.
+
+```tsx
+import { IressCard, IressTable } from '@iress-oss/ids-components';
+
+export function CardWideTable() {
+  return (
+    <div style={{ width: '400px' }}>
+      <IressCard heading={<h2>Wide table</h2>}>
+        <IressTable
+          caption="Wide table scrolls horizontally within the card"
+          rows={[{ a: 'One', b: 'Two', c: 'Three', d: 'Four' }]}
+          columns={[
+            { key: 'a', label: 'First', width: '300px' },
+            { key: 'b', label: 'Second', width: '300px' },
+            { key: 'c', label: 'Third', width: '300px' },
+            { key: 'd', label: 'Fourth', width: '300px' },
+          ]}
+        />
+      </IressCard>
+    </div>
+  );
+}
+```
+
 ### Testing
 
 Query the card by its test ID:
@@ -212,7 +239,7 @@ Query the card by its test ID:
 const card = screen.getByTestId('my-card');
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-card--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-card--docs#testing)
 
 
 #### Test selectors
@@ -253,4 +280,4 @@ const card = screen.getByTestId('my-card');
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-card--docs)
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-card--docs)

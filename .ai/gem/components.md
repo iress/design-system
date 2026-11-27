@@ -14,7 +14,7 @@
 import { IressAlert } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-alert--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-alert--docs)
 - [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-31616)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Alert)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=alert&title=[Alert]+Bug:+)
@@ -106,7 +106,7 @@ import { IressAlert } from '@iress-oss/ids-components';
 <IressAlert status="info">This is a simple info alert</IressAlert>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-alert--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-alert--docs#api-props)
 
 ### Status
 
@@ -317,7 +317,7 @@ Override with the `role` prop if the default doesn't fit your use case:
 
 For test roles, IDs and sub-parts, see the Testing tab in Storybook:
 
-[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-alert--docs#testing)
+[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-alert--docs#testing)
 
 
 #### Test selectors
@@ -334,7 +334,7 @@ For test roles, IDs and sub-parts, see the Testing tab in Storybook:
 
 Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-alert--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-alert--docs)
 
 ## Specifications
 
@@ -387,7 +387,7 @@ Storybook provides an interactive playground for testing different prop combinat
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes. Use the "Testing" tab to find test roles, IDs, and sub-parts for querying in automated tests.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-alert--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-alert--docs)
 
 ---
 
@@ -401,7 +401,7 @@ Storybook provides an interactive playground for testing different prop combinat
 import { IressAutocomplete } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-autocomplete--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Autocomplete)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=autocomplete&title=[Autocomplete]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=autocomplete,enhancement&title=[Autocomplete]+Feature:+)
@@ -505,7 +505,7 @@ import { IressAutocomplete } from '@iress-oss/ids-components';
 <IressAutocomplete />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-autocomplete--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs#api-props)
 
 ### Usage
 
@@ -915,7 +915,7 @@ const server = setupServer(
 server.listen();
 ```
 
-[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-autocomplete--docs#testing)
+[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs#testing)
 
 
 #### Test selectors
@@ -932,7 +932,7 @@ server.listen();
 
 Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-autocomplete--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs)
 
 ## Specifications
 
@@ -980,7 +980,7 @@ Storybook provides an interactive playground for testing different prop combinat
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-autocomplete--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs)
 
 ## Recipes
 
@@ -1057,7 +1057,7 @@ export const AutocompleteSearchTable = () => {
 import { IressButtonGroup } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-button-group--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-buttongroup--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/ButtonGroup)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=button-group&title=[ButtonGroup]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=button-group,enhancement&title=[ButtonGroup]+Feature:+)
@@ -1069,6 +1069,7 @@ import { IressButtonGroup } from '@iress-oss/ids-components';
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | children | `ReactNode` | — | Content of the button group, usually multiple `IressButton`. |
+| compact | `boolean` | — | Renders the smallest variant of the button group, reducing the container padding and gap and rendering its child buttons in their compact size. Useful for segmented controls that toggle between mutually exclusive views. |
 | defaultSelected | `[ControlledValue](../../dist/hooks/useControlledState.d.ts)<T, TMultiple>` | — | Initially selected value, use for uncontrolled components. |
 | hiddenLabel | `boolean` | — | Hides the label if set; label will still be read out by screen readers. |
 | **label** | `ReactNode` | — | Sets the label text for the button group. If passed an element, it will render the element with an id, to ensure its connection to the button group. |
@@ -1130,7 +1131,7 @@ import { IressButtonGroup, IressButton } from '@iress-oss/ids-components';
 </IressButtonGroup>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-buttongroup--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-buttongroup--docs#api-props)
 
 ### Usage
 
@@ -1285,6 +1286,21 @@ If you would like to visually hide the label, you can use the `hiddenLabel` prop
 </IressButtonGroup>;
 ```
 
+#### Compact (segmented control)
+
+Set the `compact` prop to render the smallest variant of the button group, a segmented control. It is best suited to switching between a small number of mutually exclusive views, such as a List / Board toggle.
+
+The selected option is shown as a pill on a subtle track, and the child `IressButton` components are automatically rendered in their compact size, so you don't need to set `compact` on each button yourself.
+
+**Note:** The segmented control styling is applied to every `IressButton` inside a compact `IressButtonGroup`. Setting `compact={false}` on an individual child button is not supported and will not restore its default size.
+
+```tsx
+<IressButtonGroup compact defaultSelected="list" label="View" hiddenLabel>
+  <IressButton value="list">List</IressButton>
+  <IressButton value="board">Board</IressButton>
+</IressButtonGroup>;
+```
+
 #### Headings as labels
 
 For semantic reasons, you may need the label to be rendered as a heading. In this case, you can pass the element directly to the `label` prop. The component will automatically add the `id` required to connect the button group to its label.
@@ -1306,7 +1322,7 @@ Query the button group by its `group` role:
 const group = screen.getByRole('group', { name: 'Alignment' });
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-buttongroup--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-buttongroup--docs#testing)
 
 
 #### Test selectors
@@ -1320,7 +1336,7 @@ const group = screen.getByRole('group', { name: 'Alignment' });
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-buttongroup--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-buttongroup--docs)
 
 ## Specifications
 
@@ -1357,7 +1373,7 @@ const group = screen.getByRole('group', { name: 'Alignment' });
 import { IressButton } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-button--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs)
 - [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=6201-26)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Button)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=button&title=[Button]+Bug:+)
@@ -1373,6 +1389,7 @@ import { IressButton } from '@iress-oss/ids-components';
 | append | `ReactNode` | — | Content for the append slot. |
 | children | `ReactNode` | — | Content is placed between prepend and append if provided. Used to describe the expected action of this button. |
 | compact | `boolean` | — | Makes the button more compact by reducing padding and font size. Used for buttons with icon only or when space is limited. |
+| disabled | `boolean` | — | **Discouraged: prefer an enabled button with clear feedback.** Disabled buttons do not explain why an action is unavailable or how to proceed.  Before using this prop, read the [IDS best practices and alternatives to disabled buttons](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs#avoid-using-disabled). - Incomplete forms, including long or complex forms: keep submit enabled and use `IressForm` validation on submit. - Actions in progress: use `loading` to communicate progress and prevent duplicate clicks. - Missing permissions or prerequisites: hide unavailable actions or explain what is needed.  When true, uses `aria-disabled` rather than native `disabled`. The default button remains keyboard-focusable and available to screen readers, but activation and `onClick` are blocked. If unavoidable, provide visible text adjacent to the button explaining why and what to do next, associated using `aria-describedby`. Do not rely on a tooltip or an `onClick` toast to explain a disabled button. |
 | element | `ElementType` | — | Change the component that will be rendered as the button, used for third-party libraries that require a specific element type. By default, it will render a button or an anchor tag based on the `href` prop. |
 | fluid | `any` | — | If `true`, the button will stretch to fill it's container. The prop is responsive, so you can set the breakpoint(s) at which the button will be fluid.  All breakpoints: `fluid={true}` Up to a specific breakpoint: `fluid="md"` |
 | href | `string` | — | Contains a URL or a URL fragment that the hyperlink points to. If this property is set, an anchor tag will be rendered. |
@@ -1436,21 +1453,37 @@ export function ButtonMode() {
 
 #### Avoid using `disabled`
 
-IDS discourages using `disabled` on `IressButton`. Although the native HTML `disabled` attribute is supported via the underlying `<button>`/`<a>` element, it is an anti-pattern that should be avoided because:
+> ⚠️ **Disabled styling is not a recommendation.** Before using the `disabled` prop, review the alternatives below. Prefer an enabled button with validation or clear feedback, and use `loading` while an action is in progress. If disabling is unavoidable, provide visible text adjacent to the button explaining why and what to do next, not just a tooltip.
 
-- Screen readers skip disabled elements, making them invisible to assistive technology users
-- Users cannot understand why a button is disabled or what they need to do to enable it
+IDS discourages using `disabled` on `IressButton`. When used, it sets `aria-disabled="true"` instead of the native HTML `disabled` attribute. The default button remains keyboard-focusable and available to screen readers while activation is blocked. Custom `element` components must preserve keyboard access and accessible semantics.
+
+Disabling a button is still an anti-pattern that should be avoided because:
+
+- Screen readers announce that the button is disabled, but not why it cannot be activated
+- Users may not understand what they need to do to enable it
 - It creates a poor user experience with no path to resolution
 
 See below for recommended alternatives to common disabled button scenarios.
 
 | Scenario | Alternative |
 |----------|-------------|
-| Form is incomplete | Keep submit enabled. Use `IressForm` with `rules` — shows inline errors on submit. |
+| Form is incomplete | Keep submit enabled. Use `IressForm` with `rules` — shows inline errors on submit and prevents submission until the form is valid. Do not disable the primary submit button merely because the form is incomplete or invalid. |
 | Action is in progress | Use the `loading` prop. Shows spinner, announces to screen readers, prevents duplicate clicks. |
-| User lacks permission | Hide the button entirely, or keep it enabled and show an explanation when clicked. |
-| Prerequisite step not completed | Guide the user to the prerequisite instead of silently disabling. |
+| User lacks permission | Hide the button entirely, or provide visible adjacent text explaining the restriction and the next step. If clicking should provide further feedback, keep the button enabled. |
+| Prerequisite step not completed | Provide visible guidance beside the action instead of silently disabling. Keep the button enabled if clicking should provide further feedback. |
 | Destructive action needs confirmation | Use `IressModal` with `status="danger"` for a confirmation step. |
+
+#### If disabling is unavoidable
+
+Provide a persistent, visible explanation adjacent to the button and associate it using `aria-describedby`. State both the reason and the next step. Do not rely on hover or a tooltip alone: touch users have no hover, and the explanation must also be available to keyboard and screen reader users.
+
+`IressButton disabled` suppresses `onClick`, so it cannot show an explanatory toast when clicked. If the action should respond with feedback, leave the button enabled and handle that response instead. Prefer persistent inline guidance to a transient toast for explaining an unavailable action.
+
+#### Disabled-state visual review
+
+Disabled must not mean unreadable. Review label and icon legibility, background, border, and focus visibility across button modes, supported light and dark themes, and forced-colours/high-contrast mode. Document the tokens used for each state; do not assume that using tokens alone verifies contrast.
+
+[WCAG contrast minimum exempts text in inactive controls](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html), but that is not a recommendation to make labels hard to read. Adjacent explanatory text must meet the applicable text contrast requirements.
 
 ### Content guidelines
 
@@ -1474,7 +1507,7 @@ import { IressButton } from '@iress-oss/ids-components';
 <IressButton>Button</IressButton>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-button--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs#api-props)
 
 ### Usage
 
@@ -1574,6 +1607,36 @@ The `type` property controls the behaviour of the button. It defaults to `button
   <IressButton type="submit">submit</IressButton>
   <IressButton type="reset">reset</IressButton>
 </IressInline>;
+```
+
+#### Disabled
+
+Disabled buttons are discouraged. This example shows the supported styling only, see [Avoid using `disabled`](#avoid-using-disabled) before using it.
+
+```tsx
+import { IressButton, IressInline } from '@iress-oss/ids-components';
+
+export function ButtonDisabled() {
+  return (
+    <IressInline gap="md">
+      <IressButton disabled mode="primary">
+        Button text
+      </IressButton>
+      <IressButton disabled mode="secondary">
+        Button text
+      </IressButton>
+      <IressButton disabled mode="tertiary">
+        Button text
+      </IressButton>
+      <IressButton disabled mode="quaternary">
+        Button text
+      </IressButton>
+      <IressButton disabled icon="edit" mode="muted">
+        Edit
+      </IressButton>
+    </IressInline>
+  );
+}
 ```
 
 #### Loading
@@ -1813,7 +1876,7 @@ When `href` is provided, the button renders as a link:
 const link = screen.getByRole('link', { name: 'Go to dashboard' });
 ```
 
-[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-button--docs#testing)
+[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs#testing)
 
 
 #### Test selectors
@@ -1828,7 +1891,7 @@ const link = screen.getByRole('link', { name: 'Go to dashboard' });
 
 Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-button--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs)
 
 ## Specifications
 
@@ -1838,7 +1901,7 @@ Storybook provides an interactive playground for testing different prop combinat
 |-------|-----------|
 | Default | Button is interactive and responds to click/keyboard activation |
 | Loading | Spinner shown, click events disabled, screen reader announces loading state |
-| Disabled | Pointer events disabled, element removed from tab order (anti-pattern) |
+| Disabled | Activation blocked and `aria-disabled="true"` set; stays keyboard-focusable (anti-pattern) |
 | As link (`href`) | Renders as `<a>` element, supports `target` and `rel` attributes |
 | Fluid | Expands to 100% container width, or up to a breakpoint |
 
@@ -1871,7 +1934,7 @@ Storybook provides an interactive playground for testing different prop combinat
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-button--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs)
 
 ---
 
@@ -1885,7 +1948,7 @@ Storybook provides an interactive playground for testing different prop combinat
 import { IressCard } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-card--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-card--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Card)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=card&title=[Card]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=card,enhancement&title=[Card]+Feature:+)
@@ -2052,7 +2115,7 @@ import { IressCard } from '@iress-oss/ids-components';
 <IressCard heading="Card title">Card content goes here.</IressCard>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-card--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-card--docs#api-props)
 
 ### Usage
 
@@ -2081,6 +2144,33 @@ import { IressCard } from '@iress-oss/ids-components';
 <IressCard noBorder>I'm a card</IressCard>;
 ```
 
+#### Wide content
+
+Wide content such as a table scrolls horizontally within the card instead of overflowing it.
+
+```tsx
+import { IressCard, IressTable } from '@iress-oss/ids-components';
+
+export function CardWideTable() {
+  return (
+    <div style={{ width: '400px' }}>
+      <IressCard heading={<h2>Wide table</h2>}>
+        <IressTable
+          caption="Wide table scrolls horizontally within the card"
+          rows={[{ a: 'One', b: 'Two', c: 'Three', d: 'Four' }]}
+          columns={[
+            { key: 'a', label: 'First', width: '300px' },
+            { key: 'b', label: 'Second', width: '300px' },
+            { key: 'c', label: 'Third', width: '300px' },
+            { key: 'd', label: 'Fourth', width: '300px' },
+          ]}
+        />
+      </IressCard>
+    </div>
+  );
+}
+```
+
 ### Testing
 
 Query the card by its test ID:
@@ -2089,7 +2179,7 @@ Query the card by its test ID:
 const card = screen.getByTestId('my-card');
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-card--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-card--docs#testing)
 
 
 #### Test selectors
@@ -2130,7 +2220,7 @@ const card = screen.getByTestId('my-card');
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-card--docs)
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-card--docs)
 
 ---
 
@@ -2144,7 +2234,7 @@ const card = screen.getByTestId('my-card');
 import { IressCheckboxGroup } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkbox-group--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkboxgroup--docs)
 - [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-28220)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/CheckboxGroup)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=checkbox-group&title=[CheckboxGroup]+Bug:+)
@@ -2231,7 +2321,7 @@ import { IressCheckboxGroup } from '@iress-oss/ids-components';
 <IressCheckboxGroup name="preferences" />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkboxgroup--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkboxgroup--docs#api-props)
 
 ### Usage
 
@@ -2601,7 +2691,7 @@ const option = within(group).getByRole('checkbox', { name: 'Music' });
 - **onChange returns an array**: The `onChange` callback receives the full array
   of selected values, not just the changed item.
 
-[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkboxgroup--docs#testing)
+[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkboxgroup--docs#testing)
 
 
 #### Test selectors
@@ -2616,7 +2706,7 @@ const option = within(group).getByRole('checkbox', { name: 'Music' });
 
 Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkboxgroup--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkboxgroup--docs)
 
 ## Specifications
 
@@ -2657,7 +2747,7 @@ Storybook provides an interactive playground for testing different prop combinat
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkboxgroup--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkboxgroup--docs)
 
 ---
 
@@ -2671,7 +2761,7 @@ Storybook provides an interactive playground for testing different prop combinat
 import { IressCheckbox } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkbox--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox--docs)
 - [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-28220)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Checkbox)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=checkbox&title=[Checkbox]+Bug:+)
@@ -2755,7 +2845,7 @@ import { IressCheckbox } from '@iress-oss/ids-components';
 <IressCheckbox>A checkbox</IressCheckbox>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkbox--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox--docs#api-props)
 
 ### Usage
 
@@ -2907,7 +2997,7 @@ const checkbox = screen.getByRole('checkbox', { name: 'Accept terms' });
 - **indeterminate state**: An indeterminate checkbox starts unchecked
   (`not.toBeChecked()`). Clicking it transitions to checked.
 
-[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkbox--docs#testing)
+[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox--docs#testing)
 
 
 #### Test selectors
@@ -2924,7 +3014,7 @@ const checkbox = screen.getByRole('checkbox', { name: 'Accept terms' });
 
 Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkbox--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox--docs)
 
 ## Specifications
 
@@ -2966,7 +3056,7 @@ Storybook provides an interactive playground for testing different prop combinat
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-checkbox--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-checkbox--docs)
 
 ## Recipes
 
@@ -3026,7 +3116,7 @@ export function CheckboxWithTable() {
 import { IressCol } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-col--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-col--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Col)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=col&title=[Col]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=col,enhancement&title=[Col]+Feature:+)
@@ -3104,7 +3194,7 @@ import { IressRow, IressCol } from '@iress-oss/ids-components';
 </IressRow>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-col--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-col--docs#api-props)
 
 ### Usage
 
@@ -3361,7 +3451,7 @@ const col = screen.getByTestId('my-col');
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-col--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-col--docs)
 
 ## Specifications
 
@@ -3390,7 +3480,7 @@ A CSS grid column wrapper. Supports `span`, `offset`, and `alignSelf` props with
 import { IressContainer } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-container--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-container--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Container)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=container&title=[Container]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=container,enhancement&title=[Container]+Feature:+)
@@ -3451,7 +3541,7 @@ import { IressContainer } from '@iress-oss/ids-components';
 </IressContainer>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-container--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-container--docs#api-props)
 
 ### Usage
 
@@ -3496,7 +3586,7 @@ const container = screen.getByTestId('my-container');
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-container--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-container--docs)
 
 ## Specifications
 
@@ -3525,7 +3615,7 @@ Centres content with horizontal padding. Snaps to fixed max-widths at each break
 import { IressDivider } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-divider--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-divider--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Divider)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=divider&title=[Divider]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=divider,enhancement&title=[Divider]+Feature:+)
@@ -3585,7 +3675,7 @@ import { IressDivider } from '@iress-oss/ids-components';
 <IressDivider />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-divider--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-divider--docs#api-props)
 
 ### Vertical divider
 
@@ -3690,7 +3780,7 @@ const divider = screen.getByRole('separator');
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-divider--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-divider--docs)
 
 ## Specifications
 
@@ -3718,7 +3808,7 @@ Dividers are not interactive and do not receive focus.
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-divider--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-divider--docs)
 
 ---
 
@@ -3732,7 +3822,7 @@ Storybook provides an interactive playground for testing different prop combinat
 import { IressExpander } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-expander--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-expander--docs)
 - [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-30530)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Expander)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=expander&title=[Expander]+Bug:+)
@@ -3831,7 +3921,7 @@ import { IressExpander } from '@iress-oss/ids-components';
 </IressExpander>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-expander--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-expander--docs#api-props)
 
 ### Usage
 
@@ -3915,6 +4005,29 @@ export const MultipleExpander = () => {
 };
 ```
 
+#### Custom activator layout
+
+The `activator` can contain layout components such as `IressInline`, for example a checkbox with a count on the right. A direct `IressInline` child fills the available width, and the activator keeps a `spacing.3` (12px) gap between its content and the chevron, so you don't need to add padding yourself.
+
+The chevron is aligned to the top of the activator. To vertically centre the `IressInline` against the chevron, set `alignSelf="center"` on it.
+
+```tsx
+<IressExpander
+  activator={
+    <IressInline
+      horizontalAlign="between"
+      verticalAlign="middle"
+      alignSelf="center"
+    >
+      <IressCheckbox>Income</IressCheckbox>
+      <IressText color="colour.neutral.70">3 selected</IressText>
+    </IressInline>
+  }
+>
+  Expander content will go here
+</IressExpander>;
+```
+
 ### Testing
 
 Query the expander trigger by its button role:
@@ -3926,7 +4039,7 @@ expect(trigger).toHaveAttribute('aria-expanded', 'true');
 expect(screen.getByText('Expanded content')).toBeVisible();
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-expander--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-expander--docs#testing)
 
 
 #### Test selectors
@@ -3941,7 +4054,7 @@ expect(screen.getByText('Expanded content')).toBeVisible();
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-expander--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-expander--docs)
 
 ## Specifications
 
@@ -3989,7 +4102,7 @@ expect(screen.getByText('Expanded content')).toBeVisible();
 import { IressFieldGroup } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-fieldgroup--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-fieldgroup--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/FieldGroup)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=field-group&title=[FieldGroup]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=field-group,enhancement&title=[FieldGroup]+Feature:+)
@@ -4081,7 +4194,7 @@ import {
 </IressFieldGroup>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-fieldgroup--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-fieldgroup--docs#api-props)
 
 ### Usage
 
@@ -4212,13 +4325,13 @@ Query the field group by its `group` role:
 const group = screen.getByRole('group', { name: 'Full name' });
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-fieldgroup--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-fieldgroup--docs#testing)
 
 ---
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-fieldgroup--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-fieldgroup--docs)
 
 ## Specifications
 
@@ -4260,7 +4373,7 @@ const group = screen.getByRole('group', { name: 'Full name' });
 import { IressField } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-field--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-field--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Field)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=field&title=[Field]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=field,enhancement&title=[Field]+Feature:+)
@@ -4350,7 +4463,7 @@ import { IressField, IressInput } from '@iress-oss/ids-components';
 </IressField>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-field--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-field--docs#api-props)
 
 ### Usage
 
@@ -4653,7 +4766,7 @@ const input = screen.getByRole('textbox', { name: 'Email' });
 expect(input).toBeInTheDocument();
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-field--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-field--docs#testing)
 
 
 #### Test selectors
@@ -4669,7 +4782,7 @@ expect(input).toBeInTheDocument();
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-field--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-field--docs)
 
 ## Specifications
 
@@ -4718,7 +4831,7 @@ expect(input).toBeInTheDocument();
 import { IressHide } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-hide--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-hide--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Hide)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=hide&title=[Hide]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=hide,enhancement&title=[Hide]+Feature:+)
@@ -4810,7 +4923,7 @@ import { IressHide } from '@iress-oss/ids-components';
 </IressHide>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-hide--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-hide--docs#api-props)
 
 ### Usage
 
@@ -4875,7 +4988,7 @@ expect(screen.queryByText('Hidden content')).not.toBeInTheDocument();
 const srContent = screen.getByText('Screen reader only');
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-hide--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-hide--docs#testing)
 
 
 #### Test selectors
@@ -4917,7 +5030,7 @@ const srContent = screen.getByText('Screen reader only');
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-hide--docs)
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-hide--docs)
 
 ---
 
@@ -4931,7 +5044,7 @@ const srContent = screen.getByText('Screen reader only');
 import { IressIcon } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-icon--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-icon--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Icon)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=icon&title=[Icon]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=icon,enhancement&title=[Icon]+Feature:+)
@@ -5023,7 +5136,7 @@ import { IressIcon } from '@iress-oss/ids-components';
 <IressIcon name="home" />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-icon--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-icon--docs#api-props)
 
 ### Installation
 
@@ -5361,7 +5474,7 @@ Decorative icons (without `screenreaderText`) are hidden from the accessibility 
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-icon--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-icon--docs)
 
 ## Specifications
 
@@ -5398,7 +5511,7 @@ Icons are not interactive on their own. When used inside buttons or links, the p
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-icon--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-icon--docs)
 
 ---
 
@@ -5412,7 +5525,7 @@ Storybook provides an interactive playground for testing different prop combinat
 import { IressImage } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-image--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-image--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Image)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=image&title=[Image]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=image,enhancement&title=[Image]+Feature:+)
@@ -5485,7 +5598,7 @@ import { IressImage } from '@iress-oss/ids-components';
 <IressImage src="https://example.com/photo.webp" alt="Placeholder image" />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-image--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-image--docs#api-props)
 
 ### Usage
 
@@ -5547,7 +5660,7 @@ const image = screen.getByRole('img', { name: 'Company logo' });
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-image--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-image--docs)
 
 ## Specifications
 
@@ -5576,7 +5689,7 @@ Images are not interactive. When wrapped in a link or button, the parent element
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-image--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-image--docs)
 
 ---
 
@@ -5590,7 +5703,7 @@ Storybook provides an interactive playground for testing different prop combinat
 import { IressInline } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-inline--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-inline--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Inline)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=inline&title=[Inline]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=inline,enhancement&title=[Inline]+Feature:+)
@@ -5654,7 +5767,7 @@ import { IressInline } from '@iress-oss/ids-components';
 </IressInline>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-inline--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-inline--docs#api-props)
 
 ### Usage
 
@@ -5835,7 +5948,7 @@ const inline = screen.getByTestId('my-inline');
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-inline--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-inline--docs)
 
 ## Specifications
 
@@ -5855,7 +5968,7 @@ A CSS flexbox row wrapper with configurable gap, alignment, and wrapping behavio
 import { IressInputCurrency } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-input-currency--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-inputcurrency--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/InputCurrency)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=input-currency&title=[InputCurrency]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=input-currency,enhancement&title=[InputCurrency]+Feature:+)
@@ -5949,7 +6062,7 @@ import { IressInputCurrency } from '@iress-oss/ids-components';
 />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-inputcurrency--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-inputcurrency--docs#api-props)
 
 ### Usage
 
@@ -6142,7 +6255,7 @@ const input = screen.getByRole('textbox', { name: 'Amount' });
 - **readOnly removes the input role**: When `readOnly` is set, the textbox role
   is removed and the formatted value is displayed as plain text.
 
-[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-inputcurrency--docs#testing)
+[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-inputcurrency--docs#testing)
 
 
 #### Test selectors
@@ -6157,7 +6270,7 @@ const input = screen.getByRole('textbox', { name: 'Amount' });
 
 Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-inputcurrency--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-inputcurrency--docs)
 
 ## Specifications
 
@@ -6200,7 +6313,7 @@ Storybook provides an interactive playground for testing different prop combinat
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-inputcurrency--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-inputcurrency--docs)
 
 ## Recipes
 
@@ -6307,7 +6420,7 @@ export const ValidValueOnChage = () => {
 import { IressInput } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-input--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs)
 - [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=6201-23)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Input)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=input&title=[Input]+Bug:+)
@@ -6398,7 +6511,7 @@ import { IressInput } from '@iress-oss/ids-components';
 <IressInput placeholder="Enter your name" />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-input--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs#api-props)
 
 ### Usage
 
@@ -6702,7 +6815,7 @@ screen.getByTestId('my-input__textarea'); // Textarea (rows > 0)
 
 - **clearable inputs**: The clear button only appears when the input has a value.
 
-[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-input--docs#testing)
+[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs#testing)
 
 
 #### Test selectors
@@ -6717,7 +6830,7 @@ screen.getByTestId('my-input__textarea'); // Textarea (rows > 0)
 
 Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-input--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs)
 
 ## Specifications
 
@@ -6761,7 +6874,7 @@ Storybook provides an interactive playground for testing different prop combinat
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-input--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-input--docs)
 
 ## Recipes
 
@@ -6872,7 +6985,7 @@ export const ReactHookFormsInput = () => {
 import { IressLabel } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-label--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-label--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Label)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=label&title=[Label]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=label,enhancement&title=[Label]+Feature:+)
@@ -6940,7 +7053,7 @@ import { IressLabel } from '@iress-oss/ids-components';
 <IressLabel>This is a label</IressLabel>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-label--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-label--docs#api-props)
 
 ### Usage
 
@@ -6992,7 +7105,7 @@ Labels are typically queried indirectly through the form control they describe:
 const input = screen.getByLabelText('Email address');
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-label--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-label--docs#testing)
 
 
 #### Test selectors
@@ -7006,7 +7119,7 @@ const input = screen.getByLabelText('Email address');
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-label--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-label--docs)
 
 ## Specifications
 
@@ -7053,7 +7166,7 @@ const input = screen.getByLabelText('Email address');
 import { IressLink } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-link--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-link--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Link)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=link&title=[Link]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=link,enhancement&title=[Link]+Feature:+)
@@ -7133,7 +7246,7 @@ import { IressLink } from '@iress-oss/ids-components';
 <IressLink href="//iress.com">IressLink</IressLink>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-link--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-link--docs#api-props)
 
 ### Usage
 
@@ -7226,7 +7339,7 @@ const button = screen.getByRole('button', { name: 'Show details' });
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-link--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-link--docs)
 
 ## Specifications
 
@@ -7264,7 +7377,7 @@ Storybook provides an interactive playground for testing different prop combinat
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-link--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-link--docs)
 
 ---
 
@@ -7278,7 +7391,7 @@ Storybook provides an interactive playground for testing different prop combinat
 import { IressMenu } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-menu--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Menu)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=menu&title=[Menu]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=menu,enhancement&title=[Menu]+Feature:+)
@@ -7458,7 +7571,7 @@ import { IressMenu, IressMenuItem } from '@iress-oss/ids-components';
 </IressMenu>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-menu--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu--docs#api-props)
 
 ### Usage
 
@@ -7913,7 +8026,7 @@ import { IressMenu, IressMenuItem } from '@iress-oss/ids-components';
 </IressMenu>;
 ```
 
-[View MenuItem props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-menu-menuitem--docs#api-props)
+[View MenuItem props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu-menuitem--docs#api-props)
 
 #### Selected
 
@@ -7978,7 +8091,7 @@ Query menu items by their role:
 const menuItem = screen.getByRole('menuitem', { name: 'Settings' });
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-menu--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu--docs#testing)
 
 
 #### Test selectors
@@ -7996,7 +8109,7 @@ const menuItem = screen.getByRole('menuitem', { name: 'Settings' });
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-menu--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-menu--docs)
 
 ## Specifications
 
@@ -8046,7 +8159,7 @@ const menuItem = screen.getByRole('menuitem', { name: 'Settings' });
 import { IressModal } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-modal--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-modal--docs)
 - [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-32822)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Modal)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=modal&title=[Modal]+Bug:+)
@@ -8164,7 +8277,7 @@ import { IressModal } from '@iress-oss/ids-components';
 </IressModal>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-modal--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-modal--docs#api-props)
 
 ### Usage
 
@@ -8882,7 +8995,7 @@ DOM until shown. Use `findByRole` when waiting for a modal to appear.
 - **Backdrop click closes modal**: Use `disableBackdropClick` if your test needs to prevent this
 - **Focus management**: Focus moves inside on open, returns to trigger on close
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-modal--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-modal--docs#testing)
 
 
 #### Test selectors
@@ -8904,7 +9017,7 @@ DOM until shown. Use `findByRole` when waiting for a modal to appear.
 
 Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-modal--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-modal--docs)
 
 ## Specifications
 
@@ -8955,7 +9068,7 @@ Storybook provides an interactive playground for testing different prop combinat
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-modal--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-modal--docs)
 
 ---
 
@@ -9089,7 +9202,7 @@ Browse the component list in the sidebar, or jump to:
 import { IressPanel } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-panel--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-panel--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Panel)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=panel&title=[Panel]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=panel,enhancement&title=[Panel]+Feature:+)
@@ -9150,7 +9263,7 @@ import { IressPanel } from '@iress-oss/ids-components';
 <IressPanel heading="Panel Heading">Panel content</IressPanel>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-panel--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-panel--docs#api-props)
 
 ### Usage
 
@@ -9176,7 +9289,7 @@ const panel = screen.getByTestId('my-panel');
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-panel--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-panel--docs)
 
 ## Specifications
 
@@ -9196,7 +9309,7 @@ A semantic wrapper around `IressCard` for grouping related content. Inherits all
 import { IressPill } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-pill--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-pill--docs)
 - [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-29810)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Pill)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=pill&title=[Pill]+Bug:+)
@@ -9276,7 +9389,7 @@ import { IressPill } from '@iress-oss/ids-components';
 <IressPill>Label</IressPill>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-pill--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-pill--docs#api-props)
 
 ### Usage
 
@@ -9342,7 +9455,7 @@ const pill = screen.getByText('Active');
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-pill--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-pill--docs)
 
 ## Specifications
 
@@ -9370,7 +9483,7 @@ const pill = screen.getByText('Active');
 import { IressPlaceholder } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-placeholder--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-placeholder--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Placeholder)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=placeholder&title=[Placeholder]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=placeholder,enhancement&title=[Placeholder]+Feature:+)
@@ -9428,7 +9541,7 @@ import { IressPlaceholder } from '@iress-oss/ids-components';
 </IressPlaceholder>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-placeholder--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-placeholder--docs#api-props)
 
 ### Usage
 
@@ -9455,7 +9568,7 @@ const placeholder = screen.getByTestId('my-placeholder');
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-placeholder--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-placeholder--docs)
 
 ## Specifications
 
@@ -9475,7 +9588,7 @@ Renders a visual box with configurable width, height, heading, and description t
 import { IressPopover } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-popover--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Popover)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=popover&title=[Popover]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=popover,enhancement&title=[Popover]+Feature:+)
@@ -9580,7 +9693,7 @@ import { IressPopover, IressButton } from '@iress-oss/ids-components';
 </IressPopover>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-popover--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs#api-props)
 
 ### Usage
 
@@ -9894,7 +10007,7 @@ await user.click(trigger);
 expect(screen.getByText('Popover content')).toBeVisible();
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-popover--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs#testing)
 
 
 #### Test selectors
@@ -9911,7 +10024,7 @@ expect(screen.getByText('Popover content')).toBeVisible();
 
 Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-popover--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs)
 
 ## Specifications
 
@@ -9963,7 +10076,7 @@ Storybook provides an interactive playground for testing different prop combinat
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-popover--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-popover--docs)
 
 ## Recipes
 
@@ -10062,7 +10175,7 @@ export function PopoverWithListbox() {
 import { IressProgress } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-progress--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-progress--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Progress)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=progress&title=[Progress]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=progress,enhancement&title=[Progress]+Feature:+)
@@ -10135,7 +10248,7 @@ import { IressProgress } from '@iress-oss/ids-components';
 <IressProgress min={0} max={100} value={50} />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-progress--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-progress--docs#api-props)
 
 ### Usage
 
@@ -10221,7 +10334,7 @@ expect(progress).toHaveValue(75);
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-progress--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-progress--docs)
 
 ## Specifications
 
@@ -10257,7 +10370,7 @@ Progress bars are not interactive and do not receive focus.
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-progress--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-progress--docs)
 
 ---
 
@@ -10271,7 +10384,7 @@ Storybook provides an interactive playground for testing different prop combinat
 import { IressProvider } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-provider--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-provider--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Provider)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=provider&title=[Provider]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=provider,enhancement&title=[Provider]+Feature:+)
@@ -10323,7 +10436,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 );
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-provider--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-provider--docs#api-props)
 
 ### Usage
 
@@ -10397,7 +10510,7 @@ export const AppWithProvider = () => (
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-provider--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-provider--docs)
 
 ## Specifications
 
@@ -10417,7 +10530,7 @@ Wraps the application and sets up icon fonts, CSS variables, and container provi
 import { IressRadioGroup } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-radio-group--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radiogroup--docs)
 - [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-28220)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/RadioGroup)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=radio-group&title=[RadioGroup]+Bug:+)
@@ -10493,7 +10606,7 @@ import { IressRadioGroup, IressRadio } from '@iress-oss/ids-components';
 </IressRadioGroup>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-radiogroup--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radiogroup--docs#api-props)
 
 ### Usage
 
@@ -10721,7 +10834,7 @@ await user.click(yes);
 - **Focus behaviour**: Focusing the `radiogroup` element moves focus to the
   first radio child. The group needs `tabIndex` to be focusable programmatically.
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-radiogroup--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radiogroup--docs#testing)
 
 
 #### Test selectors
@@ -10734,7 +10847,7 @@ await user.click(yes);
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-radiogroup--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radiogroup--docs)
 
 ## Specifications
 
@@ -10773,7 +10886,7 @@ await user.click(yes);
 import { IressRadio } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-radio--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio--docs)
 - [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-28220)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Radio)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=radio&title=[Radio]+Bug:+)
@@ -10833,7 +10946,7 @@ import { IressRadio } from '@iress-oss/ids-components';
 <IressRadio>Radio button</IressRadio>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-radio--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio--docs#api-props)
 
 ### Usage
 
@@ -10916,7 +11029,7 @@ const yes = within(group).getByRole('radio', { name: 'Yes' });
 - **Unchecked readOnly radios render nothing**: If a radio is `readOnly` and not
   checked, it renders no output at all.
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-radio--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio--docs#testing)
 
 
 #### Test selectors
@@ -10931,7 +11044,7 @@ const yes = within(group).getByRole('radio', { name: 'Yes' });
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-radio--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio--docs)
 
 ## Specifications
 
@@ -10968,7 +11081,7 @@ const yes = within(group).getByRole('radio', { name: 'Yes' });
 import { IressReadonly } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-readonly--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-readonly--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Readonly)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=readonly&title=[Readonly]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=readonly,enhancement&title=[Readonly]+Feature:+)
@@ -11052,7 +11165,7 @@ import { IressReadonly } from '@iress-oss/ids-components';
 <IressReadonly value="AU" />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-readonly--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-readonly--docs#api-props)
 
 ### Usage
 
@@ -11170,7 +11283,7 @@ const value = screen.getByText('Read-only value');
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-readonly--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-readonly--docs)
 
 ## Specifications
 
@@ -11209,7 +11322,7 @@ Storybook provides an interactive playground for testing different prop combinat
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-readonly--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-readonly--docs)
 
 ---
 
@@ -11223,7 +11336,7 @@ Storybook provides an interactive playground for testing different prop combinat
 import { IressRow } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-row--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-row--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Row)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=row&title=[Row]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=row,enhancement&title=[Row]+Feature:+)
@@ -11292,7 +11405,7 @@ import { IressRow, IressCol } from '@iress-oss/ids-components';
 </IressRow>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-row--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-row--docs#api-props)
 
 ### Usage
 
@@ -11620,7 +11733,7 @@ const row = screen.getByTestId('my-row');
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-row--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-row--docs)
 
 ## Specifications
 
@@ -11649,7 +11762,7 @@ A CSS grid row container. Supports `gutter`, `horizontalAlign`, and `verticalAli
 import { IressSelect } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-select--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-select--docs)
 - [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-23433)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Select)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=select&title=[Select]+Bug:+)
@@ -11759,7 +11872,7 @@ import { IressSelect } from '@iress-oss/ids-components';
 />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-select--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-select--docs#api-props)
 
 ### Usage
 
@@ -12561,7 +12674,7 @@ const menu = screen.getByRole('listbox');
 const option = screen.getByRole('option', { name: 'Option 1' });
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-select--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-select--docs#testing)
 
 
 #### Test selectors
@@ -12582,7 +12695,7 @@ const option = screen.getByRole('option', { name: 'Option 1' });
 
 Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-select--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-select--docs)
 
 ## Specifications
 
@@ -12637,7 +12750,7 @@ Storybook provides an interactive playground for testing different prop combinat
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-select--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-select--docs)
 
 ---
 
@@ -12651,7 +12764,7 @@ Storybook provides an interactive playground for testing different prop combinat
 import { IressSkeleton } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-skeleton--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Skeleton)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=skeleton&title=[Skeleton]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=skeleton,enhancement&title=[Skeleton]+Feature:+)
@@ -12723,7 +12836,7 @@ export function SkeletonMode() {
 
 - [Spinner](../components/spinner.md) — for indeterminate loading without layout structure
 - [Progress](../components/progress.md) — for determinate progress indicators
-- [Loading pattern](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-loading--docs) — for full loading patterns
+- [Loading pattern](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-loading--docs) — for full loading patterns
 
 ## Develop
 
@@ -12735,7 +12848,7 @@ import { IressSkeleton } from '@iress-oss/ids-components';
 <IressSkeleton />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-skeleton--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs#api-props)
 
 ### Usage
 
@@ -12975,7 +13088,7 @@ await waitFor(() => {
 
 The skeleton has `aria-hidden="true"` and cannot be queried by role. Query by test ID if needed, or assert on the loaded content appearing.
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-skeleton--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs#testing)
 
 
 #### Test selectors
@@ -12990,7 +13103,7 @@ The skeleton has `aria-hidden="true"` and cannot be queried by role. Query by te
 
 Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-skeleton--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs)
 
 ## Specifications
 
@@ -13030,7 +13143,7 @@ No keyboard interaction — skeletons are non-interactive placeholder elements.
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-skeleton--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skeleton--docs)
 
 ---
 
@@ -13044,7 +13157,7 @@ Storybook provides an interactive playground for testing different prop combinat
 import { IressSkipLink } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-skip-link--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skiplink--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/SkipLink)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=skip-link&title=[SkipLink]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=skip-link,enhancement&title=[SkipLink]+Feature:+)
@@ -13059,6 +13172,7 @@ import { IressSkipLink } from '@iress-oss/ids-components';
 | append | `ReactNode` | — | Content for the append slot. |
 | children | `ReactNode` | `Skip to content` | Content is placed between prepend and append if provided. Used to describe the expected action of this button. Description of where the skip link jumps to. |
 | compact | `boolean` | — | Makes the button more compact by reducing padding and font size. Used for buttons with icon only or when space is limited. |
+| disabled | `boolean` | — | **Discouraged: prefer an enabled button with clear feedback.** Disabled buttons do not explain why an action is unavailable or how to proceed.  Before using this prop, read the [IDS best practices and alternatives to disabled buttons](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs#avoid-using-disabled). - Incomplete forms, including long or complex forms: keep submit enabled and use `IressForm` validation on submit. - Actions in progress: use `loading` to communicate progress and prevent duplicate clicks. - Missing permissions or prerequisites: hide unavailable actions or explain what is needed.  When true, uses `aria-disabled` rather than native `disabled`. The default button remains keyboard-focusable and available to screen readers, but activation and `onClick` are blocked. If unavoidable, provide visible text adjacent to the button explaining why and what to do next, associated using `aria-describedby`. Do not rely on a tooltip or an `onClick` toast to explain a disabled button. |
 | element | `ElementType` | — | Change the component that will be rendered as the button, used for third-party libraries that require a specific element type. By default, it will render a button or an anchor tag based on the `href` prop. |
 | fluid | `any` | — | If `true`, the button will stretch to fill it's container. The prop is responsive, so you can set the breakpoint(s) at which the button will be fluid.  All breakpoints: `fluid={true}` Up to a specific breakpoint: `fluid="md"` |
 | href | `string` | — | Contains a URL or a URL fragment that the hyperlink points to. If this property is set, an anchor tag will be rendered. Contains a URL or a URL fragment that the skip link points to. If this property is set, an anchor tag will be rendered. |
@@ -13134,7 +13248,7 @@ import { IressSkipLink } from '@iress-oss/ids-components';
 <IressSkipLink href="#main" />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-skiplink--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skiplink--docs#api-props)
 
 ### Usage
 
@@ -13160,7 +13274,7 @@ const skipLink = screen.getByRole('link', { name: 'Skip to content' });
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-skiplink--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-skiplink--docs)
 
 ## Specifications
 
@@ -13197,7 +13311,7 @@ const skipLink = screen.getByRole('link', { name: 'Skip to content' });
 import { IressSlideout } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-slideout--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slideout--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Slideout)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=slideout&title=[Slideout]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=slideout,enhancement&title=[Slideout]+Feature:+)
@@ -13312,7 +13426,7 @@ import { IressSlideout } from '@iress-oss/ids-components';
 <IressSlideout footer="Footer slot">Slideout content</IressSlideout>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-slideout--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slideout--docs#api-props)
 
 ### Usage
 
@@ -13651,7 +13765,7 @@ await waitForElementToBeRemoved(slideout);
 - **Conditional rendering**: Use `findByRole` (async) — content isn't in the DOM until shown
 - **Animation timing**: Animations can affect test timing — disable in test environments if needed
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-slideout--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slideout--docs#testing)
 
 
 #### Test selectors
@@ -13670,7 +13784,7 @@ await waitForElementToBeRemoved(slideout);
 
 Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-slideout--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slideout--docs)
 
 ## Specifications
 
@@ -13721,7 +13835,7 @@ Storybook provides an interactive playground for testing different prop combinat
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-slideout--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slideout--docs)
 
 ## Recipes
 
@@ -14118,7 +14232,7 @@ export function SlideoutMicrofrontend() {
 import { IressSlider } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-slider--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slider--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Slider)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=slider&title=[Slider]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=slider,enhancement&title=[Slider]+Feature:+)
@@ -14195,7 +14309,7 @@ import { IressSlider } from '@iress-oss/ids-components';
 <IressSlider min={0} max={100} defaultValue={50} />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-slider--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slider--docs#api-props)
 
 ### Usage
 
@@ -14341,7 +14455,7 @@ import { fireEvent } from '@testing-library/react';
 fireEvent.change(screen.getByRole('slider'), { target: { value: '5' } });
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-slider--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slider--docs#testing)
 
 
 #### Test selectors
@@ -14357,7 +14471,7 @@ fireEvent.change(screen.getByRole('slider'), { target: { value: '5' } });
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-slider--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-slider--docs)
 
 ## Specifications
 
@@ -14408,7 +14522,7 @@ fireEvent.change(screen.getByRole('slider'), { target: { value: '5' } });
 import { IressSpinner } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-spinner--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-spinner--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Spinner)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=spinner&title=[Spinner]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=spinner,enhancement&title=[Spinner]+Feature:+)
@@ -14480,7 +14594,7 @@ import { IressSpinner } from '@iress-oss/ids-components';
 <IressSpinner screenreaderText="Loading..." />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-spinner--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-spinner--docs#api-props)
 
 ### Standalone
 
@@ -14539,7 +14653,7 @@ const spinner = screen.getByRole('status');
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-spinner--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-spinner--docs)
 
 ## Specifications
 
@@ -14573,7 +14687,7 @@ Spinners are not interactive and do not receive focus.
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-spinner--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-spinner--docs)
 
 ---
 
@@ -14587,7 +14701,7 @@ Storybook provides an interactive playground for testing different prop combinat
 import { IressStack } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-stack--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-stack--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Stack)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=stack&title=[Stack]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=stack,enhancement&title=[Stack]+Feature:+)
@@ -14649,7 +14763,7 @@ import { IressStack } from '@iress-oss/ids-components';
 </IressStack>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-stack--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-stack--docs#api-props)
 
 ### Usage
 
@@ -14764,7 +14878,7 @@ const stack = screen.getByTestId('my-stack');
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-stack--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-stack--docs)
 
 ## Specifications
 
@@ -14784,7 +14898,7 @@ A CSS flexbox column wrapper with configurable gap, vertical alignment, and opti
 import { IressStyled } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-styled--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-styled--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Styled)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=styled&title=[Styled]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=styled,enhancement&title=[Styled]+Feature:+)
@@ -14858,7 +14972,7 @@ import { IressStyled } from '@iress-oss/ids-components';
 </IressStyled>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-styled--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-styled--docs#api-props)
 
 ### Usage
 
@@ -15033,7 +15147,7 @@ Combine multiple styling properties to create rich, semantic HTML structures. Th
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-styled--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-styled--docs)
 
 ## Specifications
 
@@ -15053,7 +15167,7 @@ Renders a configurable HTML element (`div` by default) with full design token su
 import { IressTabSet } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tab-set--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tabset--docs)
 - [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-28714)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/TabSet)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=tab-set&title=[TabSet]+Bug:+)
@@ -15150,7 +15264,7 @@ import { IressTabSet, IressTab } from '@iress-oss/ids-components';
 </IressTabSet>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tabset--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tabset--docs#api-props)
 
 ### Usage
 
@@ -15385,7 +15499,7 @@ await user.click(tab);
 const panel = screen.getByRole('tabpanel');
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tabset--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tabset--docs#testing)
 
 
 #### Test selectors
@@ -15401,7 +15515,7 @@ const panel = screen.getByRole('tabpanel');
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tabset--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tabset--docs)
 
 ## Specifications
 
@@ -15450,7 +15564,7 @@ const panel = screen.getByRole('tabpanel');
 import { IressTable } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-table--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-table--docs)
 - [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-33833)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Table)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=table&title=[Table]+Bug:+)
@@ -15543,7 +15657,7 @@ Data driven component for displaying tabular data.
 ### Related patterns
 
 - [Skeleton](../components/skeleton.md) — for table loading placeholders
-- [Loading pattern](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-loading--docs) — for loading states with tables
+- [Loading pattern](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-loading--docs) — for loading states with tables
 
 ## Develop
 
@@ -15555,7 +15669,7 @@ import { IressTable } from '@iress-oss/ids-components';
 <IressTable caption="Data table" rows={[{ name: 'Alice', age: 30 }]} />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-table--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-table--docs#api-props)
 
 ### Usage
 
@@ -16851,7 +16965,7 @@ Query the table by its role:
 const table = screen.getByRole('table', { name: 'Users' });
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-table--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-table--docs#testing)
 
 
 #### Test selectors
@@ -16874,7 +16988,7 @@ const table = screen.getByRole('table', { name: 'Users' });
 
 Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-table--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-table--docs)
 
 ## Specifications
 
@@ -16927,7 +17041,7 @@ Storybook provides an interactive playground for testing different prop combinat
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-table--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-table--docs)
 
 ## Recipes
 
@@ -17088,7 +17202,7 @@ export function TableFilteringServerSide() {
 import { IressTagInput } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-taginput--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-taginput--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/TagInput)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=tag-input&title=[TagInput]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=tag-input,enhancement&title=[TagInput]+Feature:+)
@@ -17184,7 +17298,7 @@ import { IressTagInput } from '@iress-oss/ids-components';
 />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-taginput--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-taginput--docs#api-props)
 
 ### Controlled usage
 
@@ -17242,7 +17356,7 @@ Restrict the number of tags a user can add:
 import { IressTag } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tag--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tag--docs)
 - [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-29810)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Tag)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=tag&title=[Tag]+Bug:+)
@@ -17304,7 +17418,7 @@ Tags are **interactive** — they can be clicked and deleted by users.
 
 ### When not to use
 
-- **Status indicators** — use [Pill](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-pill--docs) for non-interactive status badges or category labels
+- **Status indicators** — use [Pill](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-pill--docs) for non-interactive status badges or category labels
 - **Action buttons** — use [Button](../components/button.md) or [ButtonGroup](../components/button-group.md) for triggering actions
 - **Navigation items** — use [Link](../components/link.md) or navigation patterns
 
@@ -17326,7 +17440,7 @@ Tags are **interactive** — they can be clicked and deleted by users.
 ### Related patterns
 
 - [Select](../components/select.md) — for selecting from an existing list (use `multiple` prop for multi-select with tags)
-- [Pill](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-pill--docs) — for non-interactive status/category display
+- [Pill](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-pill--docs) — for non-interactive status/category display
 - [TagInput](#iresstagsinput) — for free-form tag entry
 
 ## Develop
@@ -17339,7 +17453,7 @@ import { IressTag } from '@iress-oss/ids-components';
 <IressTag>Label</IressTag>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tag--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tag--docs#api-props)
 
 ### Mode
 
@@ -17592,7 +17706,7 @@ When you pass a `data-testid` to `IressTag`, the following nested test IDs are g
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tag--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tag--docs)
 
 ## Specifications
 
@@ -17633,7 +17747,7 @@ Storybook provides an interactive playground for testing different prop combinat
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tag--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tag--docs)
 
 ---
 
@@ -17647,7 +17761,7 @@ Storybook provides an interactive playground for testing different prop combinat
 import { IressText } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-text--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-text--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Text)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=text&title=[Text]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=text,enhancement&title=[Text]+Feature:+)
@@ -17742,7 +17856,7 @@ import { IressText } from '@iress-oss/ids-components';
 <IressText element="h1">Page Title</IressText>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-text--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-text--docs#api-props)
 
 ### The `element` prop
 
@@ -17930,7 +18044,7 @@ const paragraph = screen.getByText('Some content');
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-text--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-text--docs)
 
 ## Specifications
 
@@ -17961,7 +18075,7 @@ Text is not interactive. When content within text is interactive, those elements
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-text--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-text--docs)
 
 ---
 
@@ -17975,7 +18089,7 @@ Storybook provides an interactive playground for testing different prop combinat
 import { IressToasterProvider, useToaster } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-toaster--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toaster--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Toaster)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=toaster&title=[Toaster]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=toaster,enhancement&title=[Toaster]+Feature:+)
@@ -18078,7 +18192,7 @@ function App() {
 </IressToasterProvider>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-toaster--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toaster--docs#api-props)
 
 ### Usage
 
@@ -18408,7 +18522,7 @@ await waitForElementToBeRemoved(toast);
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-toaster--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toaster--docs)
 
 ## Specifications
 
@@ -18450,7 +18564,7 @@ Storybook provides an interactive playground for testing different prop combinat
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-toaster--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toaster--docs)
 
 ---
 
@@ -18464,7 +18578,7 @@ Storybook provides an interactive playground for testing different prop combinat
 import { IressToggle } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-toggle--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toggle--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Toggle)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=toggle&title=[Toggle]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=toggle,enhancement&title=[Toggle]+Feature:+)
@@ -18536,7 +18650,7 @@ import { IressToggle } from '@iress-oss/ids-components';
 <IressToggle>Toggle</IressToggle>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-toggle--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toggle--docs#api-props)
 
 ### Usage
 
@@ -18640,7 +18754,7 @@ await user.click(toggle);
 expect(toggle).toBeChecked();
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-toggle--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toggle--docs#testing)
 
 
 #### Test selectors
@@ -18655,7 +18769,7 @@ expect(toggle).toBeChecked();
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-toggle--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toggle--docs)
 
 ## Specifications
 
@@ -18702,7 +18816,7 @@ expect(toggle).toBeChecked();
 import { IressTooltip } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tooltip--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tooltip--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Tooltip)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=tooltip&title=[Tooltip]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=tooltip,enhancement&title=[Tooltip]+Feature:+)
@@ -18787,7 +18901,7 @@ import { IressTooltip, IressButton } from '@iress-oss/ids-components';
 </IressTooltip>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tooltip--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tooltip--docs#api-props)
 
 ### Usage
 
@@ -18920,7 +19034,7 @@ await user.hover(trigger);
 expect(screen.getByRole('tooltip')).toHaveTextContent('Tooltip text');
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tooltip--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tooltip--docs#testing)
 
 
 #### Test selectors
@@ -18935,7 +19049,7 @@ expect(screen.getByRole('tooltip')).toHaveTextContent('Tooltip text');
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tooltip--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tooltip--docs)
 
 ## Specifications
 
@@ -18983,7 +19097,7 @@ expect(screen.getByRole('tooltip')).toHaveTextContent('Tooltip text');
 import { IressValidationMessage } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-validation-message--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-validationmessage--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/ValidationMessage)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=validation-message&title=[ValidationMessage]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=validation-message,enhancement&title=[ValidationMessage]+Feature:+)
@@ -19059,7 +19173,7 @@ import { IressValidationMessage } from '@iress-oss/ids-components';
 <IressValidationMessage>This field is required</IressValidationMessage>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-validationmessage--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-validationmessage--docs#api-props)
 
 ### Usage
 
@@ -19183,7 +19297,7 @@ Query validation messages by their text content or `data-testid`:
 const error = screen.getByText('This field is required');
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-validationmessage--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-validationmessage--docs#testing)
 
 
 #### Test selectors
@@ -19197,7 +19311,7 @@ const error = screen.getByText('This field is required');
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-validationmessage--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-validationmessage--docs)
 
 ## Specifications
 

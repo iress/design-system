@@ -8,7 +8,7 @@
 import { IressStack } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-stack--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-stack--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Stack)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=stack&title=[Stack]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=stack,enhancement&title=[Stack]+Feature:+)
@@ -70,7 +70,7 @@ import { IressStack } from '@iress-oss/ids-components';
 </IressStack>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-stack--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-stack--docs#api-props)
 
 ### Usage
 
@@ -185,7 +185,7 @@ const stack = screen.getByTestId('my-stack');
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-stack--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-stack--docs)
 
 ## Specifications
 

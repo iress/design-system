@@ -8,7 +8,7 @@
 import { IressTable } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-table--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-table--docs)
 - [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-33833)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Table)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=table&title=[Table]+Bug:+)
@@ -101,7 +101,7 @@ Data driven component for displaying tabular data.
 ### Related patterns
 
 - [Skeleton](../components/skeleton.md) — for table loading placeholders
-- [Loading pattern](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-loading--docs) — for loading states with tables
+- [Loading pattern](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-loading--docs) — for loading states with tables
 
 ## Develop
 
@@ -113,7 +113,7 @@ import { IressTable } from '@iress-oss/ids-components';
 <IressTable caption="Data table" rows={[{ name: 'Alice', age: 30 }]} />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-table--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-table--docs#api-props)
 
 ### Usage
 
@@ -1409,7 +1409,7 @@ Query the table by its role:
 const table = screen.getByRole('table', { name: 'Users' });
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-table--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-table--docs#testing)
 
 
 #### Test selectors
@@ -1432,7 +1432,7 @@ const table = screen.getByRole('table', { name: 'Users' });
 
 Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-table--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-table--docs)
 
 ## Specifications
 
@@ -1485,7 +1485,7 @@ Storybook provides an interactive playground for testing different prop combinat
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-table--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-table--docs)
 
 ## Recipes
 

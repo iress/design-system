@@ -1299,14 +1299,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@iress-oss/ids-components@npm:^6.4.7, @iress-oss/ids-components@workspace:packages/components":
+"@iress-oss/ids-components@npm:^6.5.3, @iress-oss/ids-components@workspace:packages/components":
   version: 0.0.0-use.local
   resolution: "@iress-oss/ids-components@workspace:packages/components"
   dependencies:
     "@floating-ui/react": "npm:0.27.19"
     "@fortawesome/fontawesome-common-types": "npm:0.2.36"
-    "@iress-oss/ids-theme-preset": "npm:^6.0.1"
-    "@iress-oss/ids-tokens": "npm:^6.0.0"
+    "@iress-oss/ids-theme-preset": "npm:^6.1.0"
+    "@iress-oss/ids-tokens": "npm:^6.0.1"
     "@pandacss/dev": "npm:1.9.1"
     "@tanstack/react-table": "npm:8.21.3"
     "@tanstack/react-virtual": "npm:3.13.12"
@@ -1373,12 +1373,12 @@ __metadata:
   resolution: "@iress-oss/ids-storybook-config@workspace:packages/storybook-config"
   dependencies:
     "@chromatic-com/storybook": "npm:^5.2.1"
-    "@iress-oss/ids-components": "npm:^6.4.7"
+    "@iress-oss/ids-components": "npm:^6.5.3"
     "@iress-oss/ids-storybook-okta": "npm:^0.1.2"
     "@iress-oss/ids-storybook-sandbox": "npm:^0.2.2"
     "@iress-oss/ids-storybook-toggle-stories": "npm:^0.1.0"
     "@iress-oss/ids-storybook-version-badge": "npm:^0.1.1"
-    "@iress-oss/ids-tokens": "npm:^6.0.0"
+    "@iress-oss/ids-tokens": "npm:^6.0.1"
     "@mdx-js/react": "npm:3.1.1"
     "@storybook/addon-a11y": "npm:10.6.5"
     "@storybook/addon-docs": "npm:10.6.5"
@@ -1591,11 +1591,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@iress-oss/ids-theme-preset@npm:^6.0.1, @iress-oss/ids-theme-preset@workspace:packages/theme-preset":
+"@iress-oss/ids-theme-preset@npm:^6.1.0, @iress-oss/ids-theme-preset@workspace:packages/theme-preset":
   version: 0.0.0-use.local
   resolution: "@iress-oss/ids-theme-preset@workspace:packages/theme-preset"
   dependencies:
-    "@iress-oss/ids-tokens": "npm:^6.0.0"
+    "@iress-oss/ids-tokens": "npm:^6.0.1"
     "@pandacss/dev": "npm:1.9.1"
     "@pandacss/types": "npm:1.11.4"
     "@typescript-eslint/eslint-plugin": "npm:^8.62.1"
@@ -1617,7 +1617,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@iress-oss/ids-tokens@npm:^6.0.0, @iress-oss/ids-tokens@workspace:packages/tokens":
+"@iress-oss/ids-tokens@npm:^6.0.1, @iress-oss/ids-tokens@workspace:packages/tokens":
   version: 0.0.0-use.local
   resolution: "@iress-oss/ids-tokens@workspace:packages/tokens"
   dependencies:
@@ -1668,7 +1668,7 @@ __metadata:
   resolution: "@iress/design-system-monorepo@workspace:."
   dependencies:
     "@chromatic-com/storybook": "npm:^5.2.1"
-    "@iress-oss/ids-components": "npm:^6.4.7"
+    "@iress-oss/ids-components": "npm:^6.5.3"
     "@iress-oss/ids-storybook-config": "npm:^0.6.0"
     "@iress-oss/ids-storybook-okta": "npm:^0.1.2"
     "@iress-oss/ids-storybook-sandbox": "npm:^0.2.2"

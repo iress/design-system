@@ -8,7 +8,7 @@
 import { IressTabSet } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tab-set--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tabset--docs)
 - [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-28714)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/TabSet)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=tab-set&title=[TabSet]+Bug:+)
@@ -105,7 +105,7 @@ import { IressTabSet, IressTab } from '@iress-oss/ids-components';
 </IressTabSet>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tabset--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tabset--docs#api-props)
 
 ### Usage
 
@@ -340,7 +340,7 @@ await user.click(tab);
 const panel = screen.getByRole('tabpanel');
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tabset--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tabset--docs#testing)
 
 
 #### Test selectors
@@ -356,7 +356,7 @@ const panel = screen.getByRole('tabpanel');
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tabset--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tabset--docs)
 
 ## Specifications
 

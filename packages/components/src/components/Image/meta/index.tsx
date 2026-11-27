@@ -36,6 +36,6 @@ export default {
       'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=image,enhancement&title=[Image]+Feature:+',
   },
   storybook:
-    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-image--docs',
+    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-image--docs',
   guidelines: 'https://iress.github.io/design-system/#/components/image',
 } satisfies ComponentMeta;

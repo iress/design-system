@@ -8,7 +8,7 @@
 import { IressAlert } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-alert--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-alert--docs)
 - [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-31616)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Alert)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=alert&title=[Alert]+Bug:+)
@@ -100,7 +100,7 @@ import { IressAlert } from '@iress-oss/ids-components';
 <IressAlert status="info">This is a simple info alert</IressAlert>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-alert--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-alert--docs#api-props)
 
 ### Status
 
@@ -311,7 +311,7 @@ Override with the `role` prop if the default doesn't fit your use case:
 
 For test roles, IDs and sub-parts, see the Testing tab in Storybook:
 
-[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-alert--docs#testing)
+[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-alert--docs#testing)
 
 
 #### Test selectors
@@ -328,7 +328,7 @@ For test roles, IDs and sub-parts, see the Testing tab in Storybook:
 
 Storybook provides an interactive playground for testing different prop combinations, more complex recipes, all prop details, and accessibility attributes.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-alert--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-alert--docs)
 
 ## Specifications
 
@@ -381,4 +381,4 @@ Storybook provides an interactive playground for testing different prop combinat
 
 Storybook provides an interactive playground for testing different prop combinations and viewing accessibility attributes. Use the "Testing" tab to find test roles, IDs, and sub-parts for querying in automated tests.
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-alert--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-alert--docs)

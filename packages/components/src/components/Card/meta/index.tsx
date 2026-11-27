@@ -57,6 +57,6 @@ export default {
       'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=card,enhancement&title=[Card]+Feature:+',
   },
   storybook:
-    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-card--docs',
+    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-card--docs',
   guidelines: 'https://iress.github.io/design-system/#/components/card',
 } satisfies ComponentMeta;

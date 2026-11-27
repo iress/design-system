@@ -21,7 +21,7 @@ export default {
       'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=contextual-menu,enhancement&title=[Contextual Menu]+Feature:+',
   },
   storybook:
-    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-contextual-menu--docs',
+    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-contextualmenu--docs',
   guidelines:
     'https://iress.github.io/design-system/#/patterns/contextual-menu',
   figma:

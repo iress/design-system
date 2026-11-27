@@ -47,7 +47,7 @@ import { IressButtonGroup, IressButton } from '@iress-oss/ids-components';
 </IressButtonGroup>
 ```
 
-<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-buttongroup--docs#api-props">View all props</IressButton>
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-buttongroup--docs#api-props">View all props</IressButton>
 
 ### Usage
 
@@ -101,6 +101,16 @@ If you would like to visually hide the label, you can use the `hiddenLabel` prop
 
 <StoryEmbed id="components-buttongroup--hidden-label"/>
 
+#### Compact (segmented control)
+
+Set the `compact` prop to render the smallest variant of the button group, a segmented control. It is best suited to switching between a small number of mutually exclusive views, such as a List / Board toggle.
+
+The selected option is shown as a pill on a subtle track, and the child `IressButton` components are automatically rendered in their compact size, so you don't need to set `compact` on each button yourself.
+
+**Note:** The segmented control styling is applied to every `IressButton` inside a compact `IressButtonGroup`. Setting `compact={false}` on an individual child button is not supported and will not restore its default size.
+
+<StoryEmbed id="components-buttongroup--compact"/>
+
 #### Headings as labels
 
 For semantic reasons, you may need the label to be rendered as a heading. In this case, you can pass the element directly to the `label` prop. The component will automatically add the `id` required to connect the button group to its label.
@@ -115,13 +125,13 @@ Query the button group by its `group` role:
 const group = screen.getByRole('group', { name: 'Alignment' });
 ```
 
-<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-buttongroup--docs#testing">View test IDs</IressButton>
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-buttongroup--docs#testing">View test IDs</IressButton>
 
 ---
 
 ### Storybook
 
-<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-buttongroup--docs">View in Storybook</IressButton>
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-buttongroup--docs">View in Storybook</IressButton>
 
 ## Specifications
 

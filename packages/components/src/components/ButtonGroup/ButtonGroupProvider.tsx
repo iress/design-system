@@ -15,6 +15,7 @@ export interface ButtonGroupProviderProps<
   T = FormControlValue,
   TMultiple extends boolean = false,
 > extends PropsWithChildren {
+  compact?: boolean;
   defaultSelected?: ControlledValue<T, TMultiple>;
   multiple?: boolean;
   onChange?: (newSelected?: ControlledValue<T, TMultiple>) => void;
@@ -25,6 +26,7 @@ interface ButtonGroupContextValue<
   T = FormControlValue,
   TMultiple extends boolean = false,
 > {
+  compact?: boolean;
   isActive: (value?: T) => boolean;
   selected?: ControlledValue<T, TMultiple>;
   toggle?: (value?: T, flag?: boolean) => void;
@@ -57,6 +59,7 @@ export const ButtonGroupProvider = <
   TMultiple extends boolean = false,
 >({
   children,
+  compact,
   defaultSelected,
   multiple = false,
   onChange,
@@ -73,11 +76,12 @@ export const ButtonGroupProvider = <
 
   const context = useMemo(
     () => ({
+      compact,
       isActive: (item?: T) => !!(item && toArray<T>(selected).includes(item)),
       toggle,
       selected,
     }),
-    [toggle, selected],
+    [compact, toggle, selected],
   );
 
   const { Provider } = getButtonGroupContext<T, TMultiple>();

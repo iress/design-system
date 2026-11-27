@@ -25,6 +25,8 @@ import {
 import componentMeta from './meta';
 import { CardAllSlots } from './mocks/CardAllSlots';
 import CardAllSlotsSource from './mocks/CardAllSlots.tsx?raw';
+import { CardWideTable } from './mocks/CardWideTable';
+import CardWideTableSource from './mocks/CardWideTable.tsx?raw';
 
 type Story = StoryObj<IressCardProps>;
 type ButtonStory = StoryObj<IressButtonCardProps>;
@@ -246,6 +248,17 @@ export const AllSlots: Story = {
     controls: { disable: true },
     ...withSource(CardAllSlotsSource, {
       stripImports: true,
+    }),
+  },
+};
+
+export const WideTable: Story = {
+  render: (args) => <CardWideTable {...args} />,
+  parameters: {
+    controls: { disable: true },
+    ...withSource(CardWideTableSource, {
+      stripImports: true,
+      stripExportFunction: true,
     }),
   },
 };

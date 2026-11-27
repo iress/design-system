@@ -119,6 +119,12 @@ export const IressExpander = ({
         id={`${id}__container`}
         className={classes.container}
         data-testid={propagateTestid(testid, 'container')}
+        // When collapsed, mark the whole subtree inert so it is removed from
+        // the tab order and the accessibility tree. Unlike `visibility`, this
+        // cannot be overridden by a descendant (e.g. an open nested Expander),
+        // guaranteeing collapsed content is never keyboard- or AT-reachable.
+        // Spread conditionally so the boolean attribute is omitted when open.
+        {...(!isOpen && { inert: true })}
       >
         <div className={classes.containerInner}>
           <IressText className={classes.content} noGutter={noGutter}>

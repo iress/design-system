@@ -109,6 +109,7 @@ When mapping Figma components to IDS, read references/component-mapping.md for t
 | Checkbox Group     | `IressCheckboxGroup` + `IressCheckbox`s      | Wrap in `IressField` for label |
 | Radio Group        | `IressRadioGroup` + `IressRadio`s            | Wrap in `IressField` for label |
 | Toggle             | `IressToggle`                                | `children` for label       |
+| Small Segmented Control | `IressButtonGroup compact` + `IressButton`s | `label`; `defaultSelected` for the initial option; give each `IressButton` a `value` |
 | Card               | `IressCard`                                  | `heading`, `footer` props; `children` for body |
 | Panel              | `IressPanel`                                 |                            |
 | Alert / Success    | `IressAlert status="success"`                |                            |
@@ -697,7 +698,10 @@ Use this checklist when performing a UI doctor audit.
 - [ ] Maximum one `mode="primary"` button per section
 - [ ] Destructive actions use `status="danger"` not custom red styling
 - [ ] Icon-only buttons include accessible text
-- [ ] No `disabled` attribute on `IressButton` — keep buttons enabled and validate on click instead (disabled buttons are invisible to screen readers and provide no path to resolution)
+- [ ] Unavoidable disabled actions have persistent, visible adjacent text explaining why and what to do next, associated using `aria-describedby` — a tooltip alone is insufficient
+- [ ] Do not attach explanatory `onClick` toasts to `IressButton disabled` — activation is blocked; its default button remains keyboard-focusable via `aria-disabled`
+- [ ] Primary submit buttons remain enabled on long or complex forms, with validation on submit and guidance to locate errors; use `loading` for in-flight work
+- [ ] Disabled text/icons remain legible across supported themes and forced-colours mode; review background, border, and focus visibility rather than assuming tokens guarantee contrast
 
 ## IressText Usage
 
@@ -940,7 +944,10 @@ Use this checklist when performing a UI doctor audit.
 - [ ] Maximum one `mode="primary"` button per section
 - [ ] Destructive actions use `status="danger"` not custom red styling
 - [ ] Icon-only buttons include accessible text
-- [ ] No `disabled` attribute on `IressButton` — keep buttons enabled and validate on click instead (disabled buttons are invisible to screen readers and provide no path to resolution)
+- [ ] Unavoidable disabled actions have persistent, visible adjacent text explaining why and what to do next, associated using `aria-describedby` — a tooltip alone is insufficient
+- [ ] Do not attach explanatory `onClick` toasts to `IressButton disabled` — activation is blocked; its default button remains keyboard-focusable via `aria-disabled`
+- [ ] Primary submit buttons remain enabled on long or complex forms, with validation on submit and guidance to locate errors; use `loading` for in-flight work
+- [ ] Disabled text/icons remain legible across supported themes and forced-colours mode; review background, border, and focus visibility rather than assuming tokens guarantee contrast
 
 ## IressText Usage
 
@@ -1177,7 +1184,10 @@ Use this checklist when performing a UI doctor audit.
 - [ ] Maximum one `mode="primary"` button per section
 - [ ] Destructive actions use `status="danger"` not custom red styling
 - [ ] Icon-only buttons include accessible text
-- [ ] No `disabled` attribute on `IressButton` — keep buttons enabled and validate on click instead (disabled buttons are invisible to screen readers and provide no path to resolution)
+- [ ] Unavoidable disabled actions have persistent, visible adjacent text explaining why and what to do next, associated using `aria-describedby` — a tooltip alone is insufficient
+- [ ] Do not attach explanatory `onClick` toasts to `IressButton disabled` — activation is blocked; its default button remains keyboard-focusable via `aria-disabled`
+- [ ] Primary submit buttons remain enabled on long or complex forms, with validation on submit and guidance to locate errors; use `loading` for in-flight work
+- [ ] Disabled text/icons remain legible across supported themes and forced-colours mode; review background, border, and focus visibility rather than assuming tokens guarantee contrast
 
 ## IressText Usage
 
@@ -1702,7 +1712,10 @@ Use this checklist when performing a UI doctor audit.
 - [ ] Maximum one `mode="primary"` button per section
 - [ ] Destructive actions use `status="danger"` not custom red styling
 - [ ] Icon-only buttons include accessible text
-- [ ] No `disabled` attribute on `IressButton` — keep buttons enabled and validate on click instead (disabled buttons are invisible to screen readers and provide no path to resolution)
+- [ ] Unavoidable disabled actions have persistent, visible adjacent text explaining why and what to do next, associated using `aria-describedby` — a tooltip alone is insufficient
+- [ ] Do not attach explanatory `onClick` toasts to `IressButton disabled` — activation is blocked; its default button remains keyboard-focusable via `aria-disabled`
+- [ ] Primary submit buttons remain enabled on long or complex forms, with validation on submit and guidance to locate errors; use `loading` for in-flight work
+- [ ] Disabled text/icons remain legible across supported themes and forced-colours mode; review background, border, and focus visibility rather than assuming tokens guarantee contrast
 
 ## IressText Usage
 
@@ -1959,7 +1972,10 @@ Use this checklist when performing a UI doctor audit.
 - [ ] Maximum one `mode="primary"` button per section
 - [ ] Destructive actions use `status="danger"` not custom red styling
 - [ ] Icon-only buttons include accessible text
-- [ ] No `disabled` attribute on `IressButton` — keep buttons enabled and validate on click instead (disabled buttons are invisible to screen readers and provide no path to resolution)
+- [ ] Unavoidable disabled actions have persistent, visible adjacent text explaining why and what to do next, associated using `aria-describedby` — a tooltip alone is insufficient
+- [ ] Do not attach explanatory `onClick` toasts to `IressButton disabled` — activation is blocked; its default button remains keyboard-focusable via `aria-disabled`
+- [ ] Primary submit buttons remain enabled on long or complex forms, with validation on submit and guidance to locate errors; use `loading` for in-flight work
+- [ ] Disabled text/icons remain legible across supported themes and forced-colours mode; review background, border, and focus visibility rather than assuming tokens guarantee contrast
 
 ## IressText Usage
 
@@ -2672,6 +2688,26 @@ For the full list of common anti-patterns with code examples, read the Common Mi
 
 **Audit rule:** Search for `disabled` on any `<IressButton`. Every match is a finding.
 
+For each finding, explain why disabled buttons are discouraged, recommend an
+alternative for that use case, and link to the
+[IDS best practices and alternatives to disabled buttons](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs#avoid-using-disabled).
+Use validation on submit for incomplete forms, `loading` for actions in progress,
+and visible guidance for missing permissions or prerequisites. Supported disabled
+styling does not make disabling a recommended interaction pattern.
+
+Require persistent, visible adjacent text explaining the reason and next step
+for unavoidable disabled actions, associated using `aria-describedby`. Flag
+tooltip-only explanations and `onClick` toasts on disabled buttons: IDS blocks
+activation and `onClick`. The default IDS button uses `aria-disabled` and remains
+keyboard-focusable; do not report the native disabled tab-order limitation as
+an IDS behaviour. Keep primary submit buttons enabled on long or complex forms,
+validate on submit, and help users locate errors.
+
+For visual review, check disabled text/icon legibility, background, border, and
+focus visibility across supported themes and forced-colours mode. Do not claim
+these are verified from token usage alone, or present a proposed 3:1
+disabled-text target as a WCAG requirement for inactive controls.
+
 ### Redundant `textStyle` on IressText — **Medium** priority
 
 **Audit rule:** Search for `IressText` with both `element` and `textStyle` where the textStyle matches the element's default styling (e.g. `element="h1" textStyle="typography.heading.1"`).
@@ -2706,6 +2742,7 @@ Translate natural language UI descriptions into IDS (Iress Design System) compon
 | Icon-only action                 | `IressButton icon="edit" mode="muted"` | `<IressButton mode="muted" icon="edit">Edit</IressButton>`         |
 | Danger / delete action           | `IressButton status="danger"`          | `<IressButton mode="primary" status="danger">Delete</IressButton>` |
 | Link in text                     | `IressLink`                            | `<IressLink href="/about">About</IressLink>`                       |
+| Segmented control / view switcher (mutually exclusive views, e.g. List / Board) | `IressButtonGroup compact` + `IressButton`s | `<IressButtonGroup compact label="View" defaultSelected="list"><IressButton value="list">List</IressButton><IressButton value="board">Board</IressButton></IressButtonGroup>` |
 | Dropdown/context menu trigger    | `IressDropdownMenu`                    | See patterns docs                                                  |
 
 ## Form Inputs
@@ -2820,6 +2857,26 @@ Most IDS components accept styling props for layout adjustments:
 | `width`        | Element width                   | Size tokens: `"input.2"` – `"input.16"`, `"3/12"` – `"12/12"` (grid), `"auto"` (responsive)                                                                                            |
 7. **Verify output** — Check that all imports resolve, no raw HTML is used where IDS components exist, grid layouts use responsive `span` values, and no common anti-patterns are present (disabled buttons, slot attributes, redundant textStyle)
 
+## Disabled Button Guidance
+
+Do not introduce `disabled` on `IressButton` as the default solution. When a user
+requests a disabled button, warn that it does not explain why the action is
+unavailable or how to proceed, and link to the
+[IDS best practices and alternatives to disabled buttons](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs#avoid-using-disabled).
+Recommend validation on submit for incomplete forms, `loading` for actions in
+progress, and visible guidance for missing permissions or prerequisites.
+Keep primary submit buttons enabled on long or complex forms, validate on
+submit, and help users locate errors. If the user still requires `disabled`,
+include persistent text adjacent to the button explaining why and what to do
+next, associated using `aria-describedby`; do not silently generate a disabled
+button or rely on a tooltip alone.
+
+The default IDS button uses `aria-disabled` and remains keyboard-focusable;
+do not describe it as a native disabled button or switch it to native `disabled`.
+Activation and `onClick` are blocked, so do not attach an explanatory toast to a
+disabled button. Keep it enabled if clicking should provide feedback, and prefer
+persistent inline guidance for unavailable actions.
+
 ## Setup
 
 ```bash
@@ -2876,6 +2933,7 @@ When you need to find the right IDS component for a UI element, read references/
 | Icon-only action                 | `IressButton icon="edit" mode="muted"` | `<IressButton mode="muted" icon="edit">Edit</IressButton>`         |
 | Danger / delete action           | `IressButton status="danger"`          | `<IressButton mode="primary" status="danger">Delete</IressButton>` |
 | Link in text                     | `IressLink`                            | `<IressLink href="/about">About</IressLink>`                       |
+| Segmented control / view switcher (mutually exclusive views, e.g. List / Board) | `IressButtonGroup compact` + `IressButton`s | `<IressButtonGroup compact label="View" defaultSelected="list"><IressButton value="list">List</IressButton><IressButton value="board">Board</IressButton></IressButtonGroup>` |
 | Dropdown/context menu trigger    | `IressDropdownMenu`                    | See patterns docs                                                  |
 
 ## Form Inputs
@@ -4775,9 +4833,9 @@ v5 used FontAwesome icons. v6 uses Material Symbols.
 
 Full interactive guides with diff viewers are available in Storybook:
 
-- [v4→v5 guide](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/resources-migration-guides-from-v4-to-v5--docs)
-- [v5→v6 guide](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/resources-migration-guides-from-v5-to-v6--docs)
-- [OUI→v6 guide](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/resources-migration-guides-from-oui-to-v6--docs)
+- [v4→v5 guide](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_resources-migration-guides-from-v4-to-v5--docs)
+- [v5→v6 guide](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_resources-migration-guides-from-v5-to-v6--docs)
+- [OUI→v6 guide](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_resources-migration-guides-from-oui-to-v6--docs)
 
 ---
 

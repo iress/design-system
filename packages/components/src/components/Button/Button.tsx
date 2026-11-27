@@ -86,6 +86,21 @@ export interface InternalButtonProps<
   compact?: boolean;
 
   /**
+   * **Discouraged: prefer an enabled button with clear feedback.**
+   * Disabled buttons do not explain why an action is unavailable or how to proceed.
+   *
+   * Before using this prop, read the [IDS best practices and alternatives to disabled buttons](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs#avoid-using-disabled).
+   * - Incomplete forms, including long or complex forms: keep submit enabled and use `IressForm` validation on submit.
+   * - Actions in progress: use `loading` to communicate progress and prevent duplicate clicks.
+   * - Missing permissions or prerequisites: hide unavailable actions or explain what is needed.
+   *
+   * When true, uses `aria-disabled` rather than native `disabled`. The default button remains keyboard-focusable and available to screen readers, but activation and `onClick` are blocked.
+   * If unavoidable, provide visible text adjacent to the button explaining why and what to do next, associated using `aria-describedby`.
+   * Do not rely on a tooltip or an `onClick` toast to explain a disabled button.
+   */
+  disabled?: boolean;
+
+  /**
    * Change the component that will be rendered as the button, used for third-party libraries that require a specific element type.
    * By default, it will render a button or an anchor tag based on the `href` prop.
    */
@@ -172,6 +187,8 @@ const Button = <
     children,
     className,
     compact,
+    disabled,
+    'aria-disabled': ariaDisabled,
     element,
     fluid,
     icon,
@@ -198,20 +215,27 @@ const Button = <
   const elementRef = useRef<ButtonInstance<C, THref> | null>(null);
   const buttonGroupItem = useButtonGroupItem({ value });
 
+  // Explicit `compact` prop wins; otherwise inherit from a compact button group.
+  const isCompact = compact ?? buttonGroupItem?.compact;
+
   const buttonMode = useMemo(() => {
     if (!buttonGroupItem) return mode;
+    // In a compact (segmented control) group the selected state is rendered as
+    // a white "pill" by the button group styles, so keep segments tertiary and
+    // avoid the solid primary fill the default toggle uses when active.
+    if (buttonGroupItem.compact) return 'tertiary';
     return buttonGroupItem.active ? 'primary' : 'tertiary';
   }, [buttonGroupItem, mode]);
 
   const styles = button({
     active:
       active ?? popover?.isActiveActivator(elementRef.current as HTMLElement),
-    compact,
+    compact: isCompact,
     fluid: fluid === true ? 'true' : fluid,
     inButtonGroup: !!buttonGroupItem,
     mode: buttonMode,
     iconOnly: !!icon,
-    loading: !!loading,
+    disabled: !!loading || !!disabled,
     noWrap,
     status,
   });
@@ -223,11 +247,16 @@ const Button = <
 
   const handleClick = useCallback(
     (e: MouseEvent<ButtonInstance<C, THref>>) => {
+      if (disabled) {
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
       if (loading) return;
       onClick?.(e);
       buttonGroupItem?.toggle();
     },
-    [buttonGroupItem, loading, onClick],
+    [buttonGroupItem, disabled, loading, onClick],
   );
 
   const renderProps = useMemo<ButtonRenderProps<C, THref>>(
@@ -295,6 +324,7 @@ const Button = <
           {...renderProps}
           {...buttonGroupItem?.props}
           {...nonStyleProps}
+          aria-disabled={disabled ? true : ariaDisabled}
           ref={elementRef}
         />
       </IressTooltip>
@@ -308,6 +338,7 @@ const Button = <
       {...renderProps}
       {...buttonGroupItem?.props}
       {...nonStyleProps}
+      aria-disabled={disabled ? true : ariaDisabled}
       ref={elementRef}
     />
   );

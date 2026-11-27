@@ -8,7 +8,7 @@
 import { IressHide } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-hide--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-hide--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Hide)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=hide&title=[Hide]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=hide,enhancement&title=[Hide]+Feature:+)
@@ -100,7 +100,7 @@ import { IressHide } from '@iress-oss/ids-components';
 </IressHide>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-hide--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-hide--docs#api-props)
 
 ### Usage
 
@@ -165,7 +165,7 @@ expect(screen.queryByText('Hidden content')).not.toBeInTheDocument();
 const srContent = screen.getByText('Screen reader only');
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-hide--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-hide--docs#testing)
 
 
 #### Test selectors
@@ -207,4 +207,4 @@ const srContent = screen.getByText('Screen reader only');
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-hide--docs)
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-hide--docs)

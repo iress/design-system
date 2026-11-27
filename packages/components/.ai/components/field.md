@@ -8,7 +8,7 @@
 import { IressField } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-field--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-field--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Field)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=field&title=[Field]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=field,enhancement&title=[Field]+Feature:+)
@@ -98,7 +98,7 @@ import { IressField, IressInput } from '@iress-oss/ids-components';
 </IressField>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-field--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-field--docs#api-props)
 
 ### Usage
 
@@ -401,7 +401,7 @@ const input = screen.getByRole('textbox', { name: 'Email' });
 expect(input).toBeInTheDocument();
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-field--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-field--docs#testing)
 
 
 #### Test selectors
@@ -417,7 +417,7 @@ expect(input).toBeInTheDocument();
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-field--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-field--docs)
 
 ## Specifications
 

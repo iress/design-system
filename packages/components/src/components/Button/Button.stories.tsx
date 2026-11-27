@@ -16,6 +16,8 @@ import { ButtonMode } from './mocks/ButtonMode';
 import ButtonModeSource from './mocks/ButtonMode.tsx?raw';
 import { ButtonStatus } from './mocks/ButtonStatus';
 import ButtonStatusSource from './mocks/ButtonStatus.tsx?raw';
+import { ButtonDisabled } from './mocks/ButtonDisabled';
+import ButtonDisabledSource from './mocks/ButtonDisabled.tsx?raw';
 import { ButtonLoading } from './mocks/ButtonLoading';
 import ButtonLoadingSource from './mocks/ButtonLoading.tsx?raw';
 import { ButtonSlots } from './mocks/ButtonSlots';
@@ -105,6 +107,23 @@ export const Loading: ButtonStory = {
   parameters: {
     controls: { disable: true },
     ...withSource(ButtonLoadingSource, {
+      stripImports: true,
+      stripExportFunction: true,
+    }),
+  },
+};
+
+export const Disabled: ButtonStory = {
+  render: (args) => <ButtonDisabled {...args} />,
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story:
+          '**Disabled buttons are discouraged.** This story demonstrates the supported styling, not the recommended interaction pattern. Keep form submission enabled with validation, use `loading` for actions in progress, and explain missing permissions or prerequisites. Read the [IDS best practices and alternatives to disabled buttons](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs#avoid-using-disabled) before using `disabled`.',
+      },
+    },
+    ...withSource(ButtonDisabledSource, {
       stripImports: true,
       stripExportFunction: true,
     }),

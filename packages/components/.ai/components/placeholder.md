@@ -8,7 +8,7 @@
 import { IressPlaceholder } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-placeholder--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-placeholder--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Placeholder)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=placeholder&title=[Placeholder]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=placeholder,enhancement&title=[Placeholder]+Feature:+)
@@ -66,7 +66,7 @@ import { IressPlaceholder } from '@iress-oss/ids-components';
 </IressPlaceholder>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-placeholder--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-placeholder--docs#api-props)
 
 ### Usage
 
@@ -93,7 +93,7 @@ const placeholder = screen.getByTestId('my-placeholder');
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-placeholder--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-placeholder--docs)
 
 ## Specifications
 

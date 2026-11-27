@@ -8,7 +8,7 @@
 import { IressToggle } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-toggle--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toggle--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Toggle)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=toggle&title=[Toggle]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=toggle,enhancement&title=[Toggle]+Feature:+)
@@ -80,7 +80,7 @@ import { IressToggle } from '@iress-oss/ids-components';
 <IressToggle>Toggle</IressToggle>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-toggle--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toggle--docs#api-props)
 
 ### Usage
 
@@ -184,7 +184,7 @@ await user.click(toggle);
 expect(toggle).toBeChecked();
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-toggle--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toggle--docs#testing)
 
 
 #### Test selectors
@@ -199,7 +199,7 @@ expect(toggle).toBeChecked();
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-toggle--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-toggle--docs)
 
 ## Specifications
 

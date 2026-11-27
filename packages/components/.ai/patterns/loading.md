@@ -8,7 +8,7 @@
 import { IressLoading } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-loading--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-loading--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/patterns/Loading)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=loading&title=[Loading]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=loading,enhancement&title=[Loading]+Feature:+)
@@ -287,7 +287,7 @@ import { IressLoading } from '@iress-oss/ids-components';
 <IressLoading pattern="page" />;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-loading--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-loading--docs#api-props)
 
 ### Behaviour timing
 
@@ -458,7 +458,7 @@ The loading component uses `aria-live` regions for accessibility. Query by the m
 const message = screen.getByText('Loading...');
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-loading--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-loading--docs#testing)
 
 ## Specifications
 
@@ -487,4 +487,4 @@ const message = screen.getByText('Loading...');
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-loading--docs)
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-loading--docs)

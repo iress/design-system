@@ -8,7 +8,7 @@
 import { IressLabel } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-label--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-label--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Label)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=label&title=[Label]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=label,enhancement&title=[Label]+Feature:+)
@@ -76,7 +76,7 @@ import { IressLabel } from '@iress-oss/ids-components';
 <IressLabel>This is a label</IressLabel>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-label--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-label--docs#api-props)
 
 ### Usage
 
@@ -128,7 +128,7 @@ Labels are typically queried indirectly through the form control they describe:
 const input = screen.getByLabelText('Email address');
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-label--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-label--docs#testing)
 
 
 #### Test selectors
@@ -142,7 +142,7 @@ const input = screen.getByLabelText('Email address');
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-label--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-label--docs)
 
 ## Specifications
 

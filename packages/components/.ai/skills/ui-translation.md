@@ -21,6 +21,7 @@ Translate natural language UI descriptions into IDS (Iress Design System) compon
 | Icon-only action                 | `IressButton icon="edit" mode="muted"` | `<IressButton mode="muted" icon="edit">Edit</IressButton>`         |
 | Danger / delete action           | `IressButton status="danger"`          | `<IressButton mode="primary" status="danger">Delete</IressButton>` |
 | Link in text                     | `IressLink`                            | `<IressLink href="/about">About</IressLink>`                       |
+| Segmented control / view switcher (mutually exclusive views, e.g. List / Board) | `IressButtonGroup compact` + `IressButton`s | `<IressButtonGroup compact label="View" defaultSelected="list"><IressButton value="list">List</IressButton><IressButton value="board">Board</IressButton></IressButtonGroup>` |
 | Dropdown/context menu trigger    | `IressDropdownMenu`                    | See patterns docs                                                  |
 
 ## Form Inputs
@@ -135,6 +136,26 @@ Most IDS components accept styling props for layout adjustments:
 | `width`        | Element width                   | Size tokens: `"input.2"` – `"input.16"`, `"3/12"` – `"12/12"` (grid), `"auto"` (responsive)                                                                                            |
 7. **Verify output** — Check that all imports resolve, no raw HTML is used where IDS components exist, grid layouts use responsive `span` values, and no common anti-patterns are present (disabled buttons, slot attributes, redundant textStyle)
 
+## Disabled Button Guidance
+
+Do not introduce `disabled` on `IressButton` as the default solution. When a user
+requests a disabled button, warn that it does not explain why the action is
+unavailable or how to proceed, and link to the
+[IDS best practices and alternatives to disabled buttons](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-button--docs#avoid-using-disabled).
+Recommend validation on submit for incomplete forms, `loading` for actions in
+progress, and visible guidance for missing permissions or prerequisites.
+Keep primary submit buttons enabled on long or complex forms, validate on
+submit, and help users locate errors. If the user still requires `disabled`,
+include persistent text adjacent to the button explaining why and what to do
+next, associated using `aria-describedby`; do not silently generate a disabled
+button or rely on a tooltip alone.
+
+The default IDS button uses `aria-disabled` and remains keyboard-focusable;
+do not describe it as a native disabled button or switch it to native `disabled`.
+Activation and `onClick` are blocked, so do not attach an explanatory toast to a
+disabled button. Keep it enabled if clicking should provide feedback, and prefer
+persistent inline guidance for unavailable actions.
+
 ## Setup
 
 ```bash
@@ -191,6 +212,7 @@ When you need to find the right IDS component for a UI element, read references/
 | Icon-only action                 | `IressButton icon="edit" mode="muted"` | `<IressButton mode="muted" icon="edit">Edit</IressButton>`         |
 | Danger / delete action           | `IressButton status="danger"`          | `<IressButton mode="primary" status="danger">Delete</IressButton>` |
 | Link in text                     | `IressLink`                            | `<IressLink href="/about">About</IressLink>`                       |
+| Segmented control / view switcher (mutually exclusive views, e.g. List / Board) | `IressButtonGroup compact` + `IressButton`s | `<IressButtonGroup compact label="View" defaultSelected="list"><IressButton value="list">List</IressButton><IressButton value="board">Board</IressButton></IressButtonGroup>` |
 | Dropdown/context menu trigger    | `IressDropdownMenu`                    | See patterns docs                                                  |
 
 ## Form Inputs

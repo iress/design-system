@@ -58,6 +58,6 @@ export default {
       'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=field,enhancement&title=[Field]+Feature:+',
   },
   storybook:
-    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-field--docs',
+    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-field--docs',
   guidelines: 'https://iress.github.io/design-system/#/components/field',
 } satisfies ComponentMeta;

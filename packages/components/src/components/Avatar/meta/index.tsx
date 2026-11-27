@@ -6,7 +6,7 @@ export default {
   description:
     'Avatars display user identity in a circular frame, with optional badge and type indicators.',
   storybook:
-    'https://main--69166895eb243715fcd0d241.chromatic.com/?path=/docs/components-avatar--docs',
+    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-avatar--docs',
   tags: ['data-display', 'user', 'profile', 'initials'],
   testMeta: [
     {

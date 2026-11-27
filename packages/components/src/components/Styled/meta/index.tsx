@@ -19,6 +19,6 @@ export default {
       'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=styled,enhancement&title=[Styled]+Feature:+',
   },
   storybook:
-    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-styled--docs',
+    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-styled--docs',
   guidelines: 'https://iress.github.io/design-system/#/components/styled',
 } satisfies ComponentMeta;

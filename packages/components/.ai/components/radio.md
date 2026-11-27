@@ -8,7 +8,7 @@
 import { IressRadio } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-radio--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio--docs)
 - [Figma](https://www.figma.com/design/youFqYT4CgpKxfLJQv80hf/WIP-Iress-Design-System-V6?node-id=7305-28220)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Radio)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=radio&title=[Radio]+Bug:+)
@@ -68,7 +68,7 @@ import { IressRadio } from '@iress-oss/ids-components';
 <IressRadio>Radio button</IressRadio>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-radio--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio--docs#api-props)
 
 ### Usage
 
@@ -151,7 +151,7 @@ const yes = within(group).getByRole('radio', { name: 'Yes' });
 - **Unchecked readOnly radios render nothing**: If a radio is `readOnly` and not
   checked, it renders no output at all.
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-radio--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio--docs#testing)
 
 
 #### Test selectors
@@ -166,7 +166,7 @@ const yes = within(group).getByRole('radio', { name: 'Yes' });
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-radio--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-radio--docs)
 
 ## Specifications
 

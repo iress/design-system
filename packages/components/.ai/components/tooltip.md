@@ -8,7 +8,7 @@
 import { IressTooltip } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tooltip--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tooltip--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/Tooltip)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=tooltip&title=[Tooltip]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=tooltip,enhancement&title=[Tooltip]+Feature:+)
@@ -93,7 +93,7 @@ import { IressTooltip, IressButton } from '@iress-oss/ids-components';
 </IressTooltip>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tooltip--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tooltip--docs#api-props)
 
 ### Usage
 
@@ -226,7 +226,7 @@ await user.hover(trigger);
 expect(screen.getByRole('tooltip')).toHaveTextContent('Tooltip text');
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tooltip--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tooltip--docs#testing)
 
 
 #### Test selectors
@@ -241,7 +241,7 @@ expect(screen.getByRole('tooltip')).toHaveTextContent('Tooltip text');
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-tooltip--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-tooltip--docs)
 
 ## Specifications
 

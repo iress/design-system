@@ -21,6 +21,6 @@ export default {
       'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=provider,enhancement&title=[Provider]+Feature:+',
   },
   storybook:
-    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-provider--docs',
+    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-provider--docs',
   guidelines: 'https://iress.github.io/design-system/#/components/provider',
 } satisfies ComponentMeta;

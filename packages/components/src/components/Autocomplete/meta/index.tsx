@@ -52,6 +52,6 @@ export default {
       'https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=autocomplete,enhancement&title=[Autocomplete]+Feature:+',
   },
   storybook:
-    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-autocomplete--docs',
+    'https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-autocomplete--docs',
   guidelines: 'https://iress.github.io/design-system/#/components/autocomplete',
 } satisfies ComponentMeta;

@@ -8,7 +8,7 @@
 import { IressForm } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-form--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/patterns/Form)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=form&title=[Form]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=form,enhancement&title=[Form]+Feature:+)
@@ -223,7 +223,7 @@ import { IressForm } from '@iress-oss/ids-components';
 </IressForm>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-form--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs#api-props)
 
 ### Key concepts
 
@@ -2829,7 +2829,7 @@ const summaryError = await screen.findByText(
 expect(summaryError).toBeInTheDocument();
 ```
 
-[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-form--docs#testing)
+[View test roles/IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs#testing)
 
 ### Caveats
 
@@ -2908,7 +2908,7 @@ If you see the warning _"A primitive value was passed but cannot be resolved bec
 
 ---
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-form--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs)
 
 ## Specifications
 
@@ -2934,7 +2934,7 @@ Automated validation is now solely contained in `IressForm` and `IressFormField`
 
 ---
 
-[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/patterns-form--docs)
+[View in Storybook →](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_patterns-form--docs)
 
 ## Recipes
 

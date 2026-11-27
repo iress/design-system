@@ -55,7 +55,7 @@ import { IressExpander } from '@iress-oss/ids-components';
 </IressExpander>
 ```
 
-<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-expander--docs#api-props">View all props</IressButton>
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-expander--docs#api-props">View all props</IressButton>
 
 ### Usage
 
@@ -80,6 +80,14 @@ Use multiple expanders with controlled state for accordion behaviour.
 
 <StoryEmbed id="components-expander--accordion"/>
 
+#### Custom activator layout
+
+The `activator` can contain layout components such as `IressInline`, for example a checkbox with a count on the right. A direct `IressInline` child fills the available width, and the activator keeps a `spacing.3` (12px) gap between its content and the chevron, so you don't need to add padding yourself.
+
+The chevron is aligned to the top of the activator. To vertically centre the `IressInline` against the chevron, set `alignSelf="center"` on it.
+
+<StoryEmbed id="components-expander--inline-activator"/>
+
 ### Testing
 
 Query the expander trigger by its button role:
@@ -91,13 +99,13 @@ expect(trigger).toHaveAttribute('aria-expanded', 'true');
 expect(screen.getByText('Expanded content')).toBeVisible();
 ```
 
-<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-expander--docs#testing">View test IDs</IressButton>
+<IressButton mode="secondary" href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-expander--docs#testing">View test IDs</IressButton>
 
 ---
 
 ### Storybook
 
-<IressButton href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-expander--docs">View in Storybook</IressButton>
+<IressButton href="https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-expander--docs">View in Storybook</IressButton>
 
 ## Specifications
 

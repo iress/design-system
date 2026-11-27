@@ -54,6 +54,7 @@ export const PopoverActivator = ({
   const activatorInteractions = usePopoverActivatorInteractions<'button'>(
     popover,
     childrenProps,
+    Boolean(childrenProps.disabled) || childrenProps['aria-disabled'] === true,
   );
 
   const ariaControls = useMemo(() => {

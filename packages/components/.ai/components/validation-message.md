@@ -8,7 +8,7 @@
 import { IressValidationMessage } from '@iress-oss/ids-components';
 ```
 
-- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-validation-message--docs)
+- [Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-validationmessage--docs)
 - [Source](https://github.com/iress/design-system/tree/main/packages/components/src/components/ValidationMessage)
 - [Report issue](https://github.com/iress/design-system/issues/new?template=bug_report.md&labels=validation-message&title=[ValidationMessage]+Bug:+)
 - [Request feature](https://github.com/iress/design-system/issues/new?template=feature_request.md&labels=validation-message,enhancement&title=[ValidationMessage]+Feature:+)
@@ -84,7 +84,7 @@ import { IressValidationMessage } from '@iress-oss/ids-components';
 <IressValidationMessage>This field is required</IressValidationMessage>;
 ```
 
-[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-validationmessage--docs#api-props)
+[View all props](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-validationmessage--docs#api-props)
 
 ### Usage
 
@@ -208,7 +208,7 @@ Query validation messages by their text content or `data-testid`:
 const error = screen.getByText('This field is required');
 ```
 
-[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-validationmessage--docs#testing)
+[View test IDs](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-validationmessage--docs#testing)
 
 
 #### Test selectors
@@ -222,7 +222,7 @@ const error = screen.getByText('This field is required');
 
 ### Storybook
 
-[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components-validationmessage--docs)
+[View in Storybook](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-validationmessage--docs)
 
 ## Specifications
 
