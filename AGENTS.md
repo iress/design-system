@@ -124,6 +124,7 @@ Supporting: `storybook-config/`, `storybook-okta/`, `storybook-sandbox/`, `story
 - Follow existing patterns and conventions in the codebase
 - Prefer minimal, targeted changes over over-engineering
 - **Never bump package versions manually** — always use `yarn workspace <package-name> version <new-version>` (e.g. `yarn workspace @iress-oss/ids-components version 6.0.0-beta.9`). This updates the package version and all dependent packages in the monorepo atomically.
+- **Bug fixes bump the patch version** of each package whose published output changed (`yarn workspace <package-name> version patch`). Releases to npm are triggered by a version change on `main`/`5.x`, so an unbumped fix is not released. Skip the bump for tests, stories, docs or CI-only changes.
 
 ## CI/CD
 
