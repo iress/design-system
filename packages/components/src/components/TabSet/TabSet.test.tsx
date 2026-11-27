@@ -373,14 +373,37 @@ describe('IressTabs', () => {
     });
 
     it('does not auto-scroll tabs on initial mount', () => {
-      const screen = renderComponent({ defaultSelected: 1 });
-      const tabs = screen.getAllByRole('tab');
+      vi.spyOn(Element.prototype, 'scrollWidth', 'get').mockReturnValue(2000);
+      vi.spyOn(Element.prototype, 'clientWidth', 'get').mockReturnValue(400);
+      const originalScrollTo = Object.getOwnPropertyDescriptor(
+        Element.prototype,
+        'scrollTo',
+      );
+      const scrollTo = vi.fn();
+      Object.defineProperty(Element.prototype, 'scrollTo', {
+        configurable: true,
+        value: scrollTo,
+      });
 
-      // Tab should be selected
-      expect(tabs[1]).toHaveAttribute('aria-selected', 'true');
-
-      // But nothing should have scrolled on initial mount
-      expect(Element.prototype.scrollIntoView).not.toHaveBeenCalled();
+      try {
+        const screen = renderComponent({ defaultSelected: 1 });
+        expect(screen.getAllByRole('tab')[1]).toHaveAttribute(
+          'aria-selected',
+          'true',
+        );
+        expect(scrollTo).not.toHaveBeenCalled();
+        expect(Element.prototype.scrollIntoView).not.toHaveBeenCalled();
+      } finally {
+        if (originalScrollTo) {
+          Object.defineProperty(
+            Element.prototype,
+            'scrollTo',
+            originalScrollTo,
+          );
+        } else {
+          Reflect.deleteProperty(Element.prototype, 'scrollTo');
+        }
+      }
     });
   });
 
