@@ -17552,7 +17552,7 @@ Tags are **interactive** — they can be clicked and deleted by users.
 
 - [Select](../components/select.md) — for selecting from an existing list (use `multiple` prop for multi-select with tags)
 - [Pill](https://main--691abcc79dfa560a36d0a74f.chromatic.com/?path=/docs/components_components-pill--docs) — for non-interactive status/category display
-- [TagInput](#iresstagsinput) — for free-form tag entry
+- [TagInput](../components/tag-input.md) — for free-form tag entry
 
 ## Develop
 
@@ -22340,9 +22340,9 @@ Some components have additional testing requirements. The changed testing requir
 
 These include:
 
-- [Form](../docs/components-form--docs.md#testing)
-- [Modal](../docs/components-modal--docs.md#testing)
-- [Slideout](../docs/components-slideout--docs.md#testing)
+- [Form](../patterns/form.md#testing)
+- [Modal](../components/modal.md#testing)
+- [Slideout](../components/slideout.md#testing)
 
 ### Styling
 

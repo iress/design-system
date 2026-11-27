@@ -1,5 +1,23 @@
 import { createElement } from 'react';
-import { stripLeadingEmoji } from './mdx-components';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { MdxLink, stripLeadingEmoji } from './mdx-components';
+import { SECTION_EVENT } from './sectionLinks';
+
+vi.mock('@tanstack/react-router', () => ({
+  Link: ({
+    to,
+    search,
+    children,
+  }: {
+    to: string;
+    search?: Record<string, string>;
+    children: React.ReactNode;
+  }) => (
+    <a data-to={to} data-search={search ? JSON.stringify(search) : ''}>
+      {children}
+    </a>
+  ),
+}));
 
 describe('stripLeadingEmoji', () => {
   it('returns null when children is empty', () => {
@@ -52,5 +70,70 @@ describe('stripLeadingEmoji', () => {
     const children = createElement('div', null, 'No emoji here');
     const result = stripLeadingEmoji(children);
     expect(result).toBeNull();
+  });
+});
+
+describe('MdxLink', () => {
+  beforeEach(() => {
+    window.history.replaceState(null, '', '/#/components/button?tab=develop');
+  });
+
+  afterEach(() => {
+    window.history.replaceState(null, '', '/');
+  });
+
+  it('keeps same-page heading links on the current route', () => {
+    render(<MdxLink href="#avoid-using-disabled">Avoid</MdxLink>);
+    const link = screen.getByRole('link', { name: 'Avoid' });
+
+    expect(link).toHaveAttribute(
+      'href',
+      '#/components/button?section=avoid-using-disabled',
+    );
+    expect(link).not.toHaveAttribute('target');
+  });
+
+  it('navigates to the section without changing route on click', () => {
+    const listener = vi.fn();
+    window.addEventListener(SECTION_EVENT, listener);
+    render(<MdxLink href="#avoid-using-disabled">Avoid</MdxLink>);
+
+    fireEvent.click(screen.getByRole('link', { name: 'Avoid' }));
+
+    expect(window.location.hash).toBe(
+      '#/components/button?section=avoid-using-disabled',
+    );
+    expect(listener).toHaveBeenCalledTimes(1);
+    window.removeEventListener(SECTION_EVENT, listener);
+  });
+
+  it('passes the heading of internal links as a section search param', () => {
+    render(
+      <MdxLink href="/components/button#avoid-using-disabled">Button</MdxLink>,
+    );
+    const link = screen.getByText('Button');
+
+    expect(link).toHaveAttribute('data-to', '/components/button');
+    expect(link).toHaveAttribute(
+      'data-search',
+      JSON.stringify({ section: 'avoid-using-disabled' }),
+    );
+  });
+
+  it('does not add a search param to internal links without a heading', () => {
+    render(<MdxLink href="/components/button">Button</MdxLink>);
+    const link = screen.getByText('Button');
+
+    expect(link).toHaveAttribute('data-to', '/components/button');
+    expect(link).toHaveAttribute('data-search', '');
+  });
+
+  it('opens external links in a new tab', () => {
+    render(<MdxLink href="https://example.com">External</MdxLink>);
+    const link = screen.getByRole('link', { name: 'External' });
+
+    expect(link).toHaveAttribute('href', 'https://example.com');
+    expect(link).toHaveAttribute('target', '_blank');
+    expect(link).toHaveAttribute('rel', 'noopener noreferrer');
   });
 });

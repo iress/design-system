@@ -18,23 +18,65 @@ import { Link } from '@tanstack/react-router';
 import { Metadata } from './components/Metadata';
 import { Pre } from './components/Pre';
 import { StoryEmbed } from './components/StoryEmbed';
+import {
+  SECTION_PARAM,
+  getSectionHref,
+  navigateToSection,
+  parseMdxHref,
+} from './sectionLinks';
 
-function MdxLink({
+export function MdxLink({
   href,
   children,
+  onClick,
   ...props
 }: AnchorHTMLAttributes<HTMLAnchorElement>) {
-  // Internal links (start with /) use the router
-  if (href?.startsWith('/') && !href.startsWith('//')) {
+  const parsed = parseMdxHref(href);
+
+  // Same-page heading links (#heading-id). A native fragment would replace the
+  // hash route, so store the heading in the `section` param instead.
+  if (parsed.type === 'section') {
     return (
-      <Link to={href} {...props}>
+      <a
+        href={getSectionHref(parsed.section)}
+        onClick={(e) => {
+          onClick?.(e);
+          if (e.defaultPrevented) return;
+          e.preventDefault();
+          navigateToSection(parsed.section);
+        }}
+        {...props}
+      >
+        {children}
+      </a>
+    );
+  }
+
+  // Internal links (start with /) use the router
+  if (parsed.type === 'internal') {
+    return (
+      <Link
+        to={parsed.to}
+        search={
+          parsed.section ? { [SECTION_PARAM]: parsed.section } : undefined
+        }
+        onClick={onClick}
+        {...props}
+      >
         {children}
       </Link>
     );
   }
+
   // External links open in new tab
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={onClick}
+      {...props}
+    >
       {children}
     </a>
   );

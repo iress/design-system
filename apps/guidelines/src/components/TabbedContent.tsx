@@ -6,6 +6,11 @@ import {
   IressTab,
   IressIcon,
 } from '@iress-oss/ids-components';
+import {
+  SECTION_EVENT,
+  getSectionFromUrl,
+  scrollToSection,
+} from '../sectionLinks';
 
 const TAB_HEADINGS = ['Design', 'Develop', 'Specifications'];
 
@@ -22,10 +27,44 @@ function getTabFromUrl(): string | undefined {
 }
 
 /**
+ * Find the index of the tab containing a heading.
+ * Returns undefined if the heading is not on the page, or -1 if it is not in a tab.
+ */
+function getSectionTabIndex(
+  container: HTMLElement | null,
+  section: string,
+  tabNames: string[],
+): number | undefined {
+  const el = container?.querySelector<HTMLElement>(`#${CSS.escape(section)}`);
+  if (!el) return undefined;
+  const tabSection =
+    el.closest<HTMLElement>('[data-tab-section]')?.dataset.tabSection;
+  return tabSection ? tabNames.indexOf(tabSection) : -1;
+}
+
+/** Pick the initial tab: the section's tab, then the URL tab, then the first tab. */
+function getInitialTabIndex(
+  container: HTMLElement | null,
+  tabNames: string[],
+  section: string | undefined,
+): number {
+  const sectionIdx = section
+    ? getSectionTabIndex(container, section, tabNames)
+    : undefined;
+  if (sectionIdx !== undefined && sectionIdx >= 0) return sectionIdx;
+
+  const urlTab = getTabFromUrl();
+  const urlIdx = urlTab ? tabNames.indexOf(urlTab) : 0;
+  return urlIdx >= 0 ? urlIdx : 0;
+}
+
+/**
  * Renders MDX content with tabs when `## Design`, `## Develop`, or `## Specifications`
  * headings are detected. Content before any tab heading renders above the tabs.
  * Uses CSS visibility to preserve React component lifecycle in all sections.
  * Selected tab syncs with URL hash (e.g. ?tab=design).
+ * A `?section=<heading-id>` param selects the tab containing that heading and
+ * scrolls to it.
  */
 export function TabbedContent({ children }: { children: ReactNode }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -33,6 +72,10 @@ export function TabbedContent({ children }: { children: ReactNode }) {
   const [tabs, setTabs] = useState<string[]>([]);
   const [storybookUrl, setStorybookUrl] = useState<string | undefined>();
   const [selectedTab, setSelectedTab] = useState<number | undefined>(undefined);
+  // A new object per request so repeated clicks on the same link still scroll
+  const [sectionRequest, setSectionRequest] = useState<
+    { id: string } | undefined
+  >(undefined);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -53,13 +96,17 @@ export function TabbedContent({ children }: { children: ReactNode }) {
       TAB_HEADINGS.includes(h.textContent?.trim() ?? ''),
     );
 
+    const urlSection = getSectionFromUrl();
+
     if (tabHeadings.length === 0) {
       setTabs([]);
       setSelectedTab(undefined);
+      if (urlSection) setSectionRequest({ id: urlSection });
       return;
     }
 
-    setTabs(tabHeadings.map((h) => h.textContent.trim()));
+    const tabNames = tabHeadings.map((h) => h.textContent.trim());
+    setTabs(tabNames);
 
     // Extract storybook URL from Metadata component's rendered link
     const sbLink = container.querySelector<HTMLAnchorElement>(
@@ -87,12 +134,8 @@ export function TabbedContent({ children }: { children: ReactNode }) {
       }
     }
 
-    // Set initial tab from URL or first tab
-    const urlTab = getTabFromUrl();
-    const idx = urlTab
-      ? tabHeadings.findIndex((h) => h.textContent?.trim() === urlTab)
-      : 0;
-    setSelectedTab(idx >= 0 ? idx : 0);
+    setSelectedTab(getInitialTabIndex(container, tabNames, urlSection));
+    if (urlSection) setSectionRequest({ id: urlSection });
   }, [children]);
 
   // Apply visibility based on selected tab
@@ -112,6 +155,37 @@ export function TabbedContent({ children }: { children: ReactNode }) {
       }
     }
   }, [selectedTab, tabs]);
+
+  // Scroll to a requested section once its tab is visible
+  useEffect(() => {
+    if (!sectionRequest) return;
+    if (tabs.length > 0 && selectedTab === undefined) return;
+    const frame = requestAnimationFrame(() => {
+      scrollToSection(sectionRequest.id);
+      setSectionRequest(undefined);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [sectionRequest, selectedTab, tabs]);
+
+  // Same-page section links, and section params added to the URL directly
+  useEffect(() => {
+    const goToSection = (section: string | undefined) => {
+      if (!section) return;
+      const idx = getSectionTabIndex(containerRef.current, section, tabs);
+      if (idx === undefined) return;
+      if (idx >= 0) setSelectedTab(idx);
+      setSectionRequest({ id: section });
+    };
+    const onSection = (e: Event) =>
+      goToSection((e as CustomEvent<string>).detail);
+    const onHashChange = () => goToSection(getSectionFromUrl());
+    window.addEventListener(SECTION_EVENT, onSection);
+    window.addEventListener('hashchange', onHashChange);
+    return () => {
+      window.removeEventListener(SECTION_EVENT, onSection);
+      window.removeEventListener('hashchange', onHashChange);
+    };
+  }, [tabs]);
 
   // Listen for hash changes
   useEffect(() => {
