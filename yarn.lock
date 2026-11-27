@@ -1679,7 +1679,7 @@ __metadata:
     "@storybook/addon-a11y": "npm:10.6.5"
     "@storybook/addon-docs": "npm:10.6.5"
     "@storybook/react-vite": "npm:10.6.5"
-    "@types/ws": "npm:^8.18.1"
+    "@types/ws": "npm:^8.18.2"
     "@typescript-eslint/eslint-plugin": "npm:^8.62.1"
     "@typescript-eslint/parser": "npm:^8.62.1"
     "@vitest/mocker": "npm:4.1.12"
@@ -1709,7 +1709,7 @@ __metadata:
     typescript: "npm:^6.0.3"
     vite: "npm:8.3.5"
     wait-on: "npm:^9.0.10"
-    ws: "npm:^8.21.3"
+    ws: "npm:^8.23.0"
     zx: "npm:^8.8.5"
   languageName: unknown
   linkType: soft
@@ -4372,6 +4372,15 @@ __metadata:
   dependencies:
     "@types/node": "npm:*"
   checksum: 10c0/61aff1129143fcc4312f083bc9e9e168aa3026b7dd6e70796276dcfb2c8211c4292603f9c4864fae702f2ed86e4abd4d38aa421831c2fd7f856c931a481afbab
+  languageName: node
+  linkType: hard
+
+"@types/ws@npm:^8.18.2":
+  version: 8.18.2
+  resolution: "@types/ws@npm:8.18.2"
+  dependencies:
+    "@types/node": "npm:*"
+  checksum: 10c0/8cf79499d26df06ffc27109fc86f1400371a5932082a4c1269be3f11e22b9e5a403a4ba2c1a3245d5fae420c270571aa833142a3d7fdce8f6cd24a45c52a98e4
   languageName: node
   linkType: hard
 

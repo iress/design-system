@@ -57,7 +57,7 @@
     "@storybook/addon-a11y": "10.6.5",
     "@storybook/addon-docs": "10.6.5",
     "@storybook/react-vite": "10.6.5",
-    "@types/ws": "^8.18.1",
+    "@types/ws": "^8.18.2",
     "@typescript-eslint/eslint-plugin": "^8.62.1",
     "@typescript-eslint/parser": "^8.62.1",
     "@vitest/mocker": "4.1.12",
@@ -87,7 +87,7 @@
     "typescript": "^6.0.3",
     "vite": "8.3.5",
     "wait-on": "^9.0.10",
-    "ws": "^8.21.3",
+    "ws": "^8.23.0",
     "zx": "^8.8.5"
   },
   "scripts": {
