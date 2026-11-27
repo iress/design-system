@@ -1,0 +1,98 @@
+name: Assign Copilot to bug
+
+# Assigns an issue to the Copilot coding agent, using the Bug Fixing Agent
+# (.github/agents/bugFix.agent.md), when a maintainer adds the `copilot-fix`
+# label.
+#
+# Deliberately NOT triggered by `opened` or by the `bug` label that the bug
+# report template applies: anyone can open an issue, and the issue text would
+# then drive an agent that can open PRs.
+#
+# Assigning Copilot needs a user token (not GITHUB_TOKEN). See
+# docs/COPILOT-AGENT-SETUP.md for the one-time setup.
+on:
+  issues:
+    types: [labeled]
+
+permissions: {}
+
+concurrency:
+  group: assign-copilot-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+env:
+  # Custom agent name: the file name without `.agent.md`.
+  COPILOT_CUSTOM_AGENT: bugFix
+
+jobs:
+  assign:
+    name: Assign issue to Copilot
+    if: github.repository == 'iress/design-system' && github.event.label.name == 'copilot-fix'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Assign issue to Copilot (Bug Fixing Agent)
+        env:
+          # User token from an account with a Copilot seat and write access.
+          GH_TOKEN: ${{ secrets.COPILOT_ASSIGN_TOKEN }}
+          ISSUE_ID: ${{ github.event.issue.node_id }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          REPO_ID: ${{ github.event.repository.node_id }}
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.event.repository.name }}
+          LABELS: ${{ join(github.event.issue.labels.*.name, ',') }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "${GH_TOKEN:-}" ]; then
+            echo "::error::Secret COPILOT_ASSIGN_TOKEN is not set. See docs/COPILOT-AGENT-SETUP.md."
+            exit 1
+          fi
+
+          # Base branch: 5.x only when the issue affects 5.x and not main.
+          BASE=main
+          if [[ ",$LABELS," == *",affects-5.x,"* && ",$LABELS," != *",affects-main,"* ]]; then
+            BASE=5.x
+          fi
+
+          # Fixed instruction. Issue text is never put in here; the agent reads
+          # the issue itself and treats it as untrusted data.
+          INSTRUCTIONS="Work autonomously on this issue using the Bug Fixing Agent in autonomous mode. Open a draft PR against ${BASE}. Follow AGENTS.md and .github/agents/bugFix.agent.md."
+
+          BOT_ID=$(gh api graphql \
+            -f owner="$OWNER" -f repo="$REPO" \
+            -f query='query($owner: String!, $repo: String!) {
+              repository(owner: $owner, name: $repo) {
+                suggestedActors(capabilities: [CAN_BE_ASSIGNED], first: 100) {
+                  nodes { login ... on Bot { id } }
+                }
+              }
+            }' \
+            --jq '.data.repository.suggestedActors.nodes[] | select(.login == "copilot-swe-agent") | .id')
+
+          if [ -z "$BOT_ID" ]; then
+            echo "::error::Copilot coding agent is not available for this repository or token owner."
+            exit 1
+          fi
+
+          gh api graphql \
+            -H 'GraphQL-Features: coding_agent_model_selection' \
+            -f issue="$ISSUE_ID" -f bot="$BOT_ID" -f repo="$REPO_ID" \
+            -f base="$BASE" -f instructions="$INSTRUCTIONS" \
+            -f agent="$COPILOT_CUSTOM_AGENT" \
+            -f query='mutation($issue: ID!, $bot: ID!, $repo: ID!, $base: String!, $instructions: String!, $agent: String!) {
+              addAssigneesToAssignable(input: {
+                assignableId: $issue,
+                assigneeIds: [$bot],
+                agentAssignment: {
+                  targetRepositoryId: $repo,
+                  baseRef: $base,
+                  customInstructions: $instructions,
+                  customAgent: $agent
+                }
+              }) {
+                assignable { ... on Issue { number assignees(first: 10) { nodes { login } } } }
+              }
+            }'
+
+          echo "Assigned issue #${ISSUE_NUMBER} to Copilot (base: ${BASE})" >> "$GITHUB_STEP_SUMMARY"
