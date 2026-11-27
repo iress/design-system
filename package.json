@@ -83,9 +83,9 @@
     "storybook": "10.6.5",
     "storybook-addon-tag-badges": "^3.1.0",
     "ts-dedent": "^2.2.0",
-    "tsx": "^4.23.0",
+    "tsx": "^4.23.15",
     "typescript": "^6.0.3",
-    "vite": "8.3.5",
+    "vite": "8.3.8",
     "wait-on": "^9.0.10",
     "ws": "^8.21.3",
     "zx": "^8.8.5"
