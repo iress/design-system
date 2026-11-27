@@ -1338,7 +1338,7 @@ __metadata:
     jsdom: "npm:29.1.1"
     lightningcss: "npm:^1.32.0"
     material-symbols: "npm:0.45.6"
-    postcss: "npm:8.5.26"
+    postcss: "npm:8.5.33"
     prettier: "npm:^3.8.2"
     query-selector-shadow-dom: "npm:1.0.1"
     react: "npm:^19.2.6"
