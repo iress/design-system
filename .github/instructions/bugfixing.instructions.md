@@ -382,6 +382,20 @@ it('handles [bug scenario] without [bug symptom]', () => {
 - "All existing tests pass, confirming no regressions."
 - "Can you test this fix and confirm it resolves the original issue?"
 
+### Versioning
+
+Releases are triggered by a version change. When a PR merges to `main` or `5.x`, CI publishes any package whose `version` differs from the published one, so a bug fix that is not bumped is never released.
+
+- Bump the **patch** version of each package whose published output changed: `yarn workspace <package-name> version patch`. Never edit `package.json` by hand, and do not run `yarn install`.
+- The command also updates dependent packages' ranges and `yarn.lock`. Commit everything it changes.
+- Skip the bump for tests, stories, docs or CI-only changes.
+- On a dual-branch fix, bump each branch in its own PR.
+- A fix that needs a minor or major bump (new API, breaking change) goes to the maintainers.
+
+### Browser and OS Specific Bugs
+
+jsdom cannot see clipping, scrolling, focus or overflow differences between browsers and operating systems. For these bugs, also add a spec in `e2e/cross-browser/tests` that fails before the fix and passes after (see the Cross-browser checks section in `AGENTS.md`). Keep the logic tests in Vitest.
+
 ## 6. Documentation and Communication
 
 ### Explain Your Investigation Process

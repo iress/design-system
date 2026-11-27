@@ -257,7 +257,7 @@ sequenceDiagram
 **Process:**
 
 1. Make your changes and commit them
-2. Bump the version in `package.json` following semantic versioning:
+2. Bump the version with Yarn (never edit `package.json` by hand) following semantic versioning:
    - **Major** (1.0.0 → 2.0.0): Breaking changes
    - **Minor** (1.0.0 → 1.1.0): New features (backward compatible)
    - **Patch** (1.0.0 → 1.0.1): Bug fixes
@@ -267,12 +267,12 @@ sequenceDiagram
 **Example:**
 
 ```bash
-# Update version in package.json
-vim packages/components/package.json  # Change version to 1.2.3
+# Bump the version (updates dependents and yarn.lock too)
+yarn workspace @iress-oss/ids-components version patch   # or minor / major / an explicit version
 
-# Commit and push
-git add packages/components/package.json
-git commit -m "chore: bump components to v1.2.3"
+# Commit everything the command changed, then push
+git add -A
+git commit -m "chore: bump components version"
 git push origin main
 
 # CI automatically detects version change and publishes
@@ -379,7 +379,14 @@ The following packages can be published individually or all together:
 - `@iress-oss/ids-storybook-sandbox`
 - `@iress-oss/ids-storybook-toggle-stories`
 - `@iress-oss/ids-storybook-version-badge`
+- `@iress-oss/ids-theme-preset`
 - `@iress-oss/ids-tokens`
+
+## Other Workflows
+
+- `cross-browser.yml`: Playwright checks against the built Storybook on Windows, macOS and Linux. Runs on pull requests that touch component, theme or e2e code, nightly, and manually. Informational, not a required check.
+- `assign-copilot.yml`: assigns an issue to the Copilot coding agent (Bug-Fixing Agent) when the `copilot-fix` label is added. See `docs/COPILOT-AGENT-SETUP.md`.
+- `copilot-setup-steps.yml`: environment setup used by the Copilot coding agent.
 
 ## Best Practices
 
