@@ -81,6 +81,22 @@ updates:
           - 'react'
           - 'react-dom'
 
+  # Cross-browser Playwright checks (standalone npm project, not a workspace)
+  - package-ecosystem: 'npm'
+    directory: '/e2e/cross-browser'
+    schedule:
+      interval: 'weekly'
+    cooldown:
+      default-days: 10
+    open-pull-requests-limit: 3
+    reviewers:
+      - 'iress/frontend-enablement'
+    labels:
+      - 'dependencies'
+    commit-message:
+      prefix: 'chore'
+      include: 'scope'
+
   # GitHub Actions workflows - main branch
   - package-ecosystem: 'github-actions'
     directory: '/'

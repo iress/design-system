@@ -46,6 +46,23 @@ Tests use Vitest. Test startup can take 30+ seconds — this is normal, not a fa
 
 Test files must live inside each package's `src/` directory. Do not create tests for pure interface/type files with no runtime behavior.
 
+## Cross-browser checks
+
+`e2e/cross-browser/` holds Playwright specs that run against the built Storybook in Chromium, Firefox, WebKit and (on Windows) Edge. It is a standalone npm project, not a Yarn workspace.
+
+Add a spec there only for bugs jsdom cannot see: clipping, scrolling, focus, overflow, or anything that differs by browser or OS. Keep logic tests in Vitest under each package's `src/`. When fixing such a bug, add a spec that fails before the fix.
+
+```bash
+yarn workspace @iress-oss/ids-components run build-storybook   # builds packages/components/storybook-static
+
+cd e2e/cross-browser
+npm ci                       # use npm here, not Yarn
+npx playwright install       # first run only
+npx playwright test          # runs once and exits
+```
+
+`.github/workflows/cross-browser.yml` runs it on Windows, macOS and Ubuntu. It runs on pull requests that touch `packages/components/src`, `theme-preset/src`, `tokens/src` or `e2e/cross-browser`, nightly on the default branch, and via workflow_dispatch. It is informational (not a required check). Do not add test retries: a failure that passes on retry would hide the intermittent bugs this exists to catch.
+
 ## Type checking
 
 ```bash
@@ -111,6 +128,8 @@ Supporting: `storybook-config/`, `storybook-okta/`, `storybook-sandbox/`, `story
 ## CI/CD
 
 GitHub Actions workflow in `.github/workflows/ci-cd.yml`. Runs on all pushes and merge groups. Supports canary releases via workflow_dispatch.
+
+Cross-browser Playwright checks run separately in `.github/workflows/cross-browser.yml` (see Cross-browser checks above).
 
 ## Security
 
