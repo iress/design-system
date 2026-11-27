@@ -166,7 +166,6 @@ const Tab = <THref extends string | undefined = undefined>(
   const tabSet = useContext(TabSetContext);
   const { register, unregister, setHover } = tabSet ?? {};
   const { onMouseEnter, onMouseLeave } = restProps;
-  const isInitialMount = useRef(true);
 
   useImperativeHandle(ref, () => element.current!);
 
@@ -180,23 +179,33 @@ const Tab = <THref extends string | undefined = undefined>(
 
   const isActive = tabSet ? tabSet.isActive(element.current) : active;
 
-  // Scroll into view when tab becomes active (for keyboard navigation)
+  // Centre this tab within an overflowing tab list when the selection moves to
+  // it from another tab (e.g. keyboard navigation). Ignores the initial
+  // selection and unrelated tab set updates such as hover. Only the tab list is
+  // scrolled horizontally; scrollIntoView would also scroll the page.
+  const activeTab = tabSet?.active;
+  const previousActiveTab = useRef(activeTab);
   useEffect(() => {
-    if (isActive && element.current && tabSet) {
-      // Skip scrolling on initial mount
-      if (isInitialMount.current) {
-        isInitialMount.current = false;
-        return;
-      }
+    const previous = previousActiveTab.current;
+    previousActiveTab.current = activeTab;
 
-      // Made optional so it doesnt crash jsdom tests
-      element.current.scrollIntoView?.({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'center',
-      });
-    }
-  }, [isActive, tabSet]);
+    const node = element.current;
+    if (!node || activeTab !== node || !previous || previous === node) return;
+
+    const tabList = node.closest<HTMLElement>('[role="tablist"]');
+    if (!tabList || tabList.scrollWidth <= tabList.clientWidth) return;
+
+    const tabRect = node.getBoundingClientRect();
+    const tabListRect = tabList.getBoundingClientRect();
+    const left =
+      tabList.scrollLeft +
+      tabRect.left -
+      tabListRect.left -
+      (tabListRect.width - tabRect.width) / 2;
+
+    // Made optional so it doesnt crash jsdom tests
+    tabList.scrollTo?.({ left, behavior: 'smooth' });
+  }, [activeTab]);
 
   const className = cx(
     classNameProp,

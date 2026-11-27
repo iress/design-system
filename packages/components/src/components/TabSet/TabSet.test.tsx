@@ -14,6 +14,10 @@ beforeEach(() => {
   Element.prototype.scrollIntoView = vi.fn();
 });
 
+afterEach(() => {
+  vi.restoreAllMocks();
+});
+
 const TEST_TABLIST = [
   <IressTab key={1} label="Tab 1" />,
   <IressTab key={2} label="Tab 2" />,
@@ -308,11 +312,7 @@ describe('IressTabs', () => {
       await waitFor(() => expect(tabs[2]).toHaveFocus()); // no looping, it should still be focused on last element
     });
 
-    it('has scrollIntoView functionality for keyboard navigation', async () => {
-      // This test verifies that the scrollIntoView logic is present in the component.
-      // The actual scrollIntoView behavior is tested manually/visually since it depends
-      // on specific DOM layout conditions that are difficult to mock reliably.
-
+    it('scrolls an overflowing tab list horizontally to centre the active tab', async () => {
       const manyTabs = Array.from({ length: 20 }, (_, i) => (
         <IressTab key={i} label={`Tab ${i + 1}`}>
           Content {i + 1}
@@ -320,16 +320,71 @@ describe('IressTabs', () => {
       ));
 
       const screen = renderComponent({ children: manyTabs });
+      const tablist = screen.getByRole('tablist');
       const tabs = screen.getAllByRole('tab');
-
-      // Verify tabs are rendered
       expect(tabs.length).toBe(20);
 
-      // Click on a tab far to the right to trigger scrollIntoView
+      Object.defineProperty(tablist, 'scrollWidth', { value: 2000 });
+      Object.defineProperty(tablist, 'clientWidth', { value: 400 });
+      tablist.scrollTo = vi.fn();
+      vi.spyOn(Element.prototype, 'getBoundingClientRect').mockImplementation(
+        function (this: Element) {
+          if (this === tablist) return { left: 0, width: 400 } as DOMRect;
+          if (this.contains(tabs[10]) || tabs[10].contains(this)) {
+            return { left: 1000, width: 100 } as DOMRect;
+          }
+          return { left: 0, width: 0 } as DOMRect;
+        },
+      );
+
       await userEvent.click(tabs[10]);
 
-      // Verify that scrollIntoView was called
-      expect(tabs[10].scrollIntoView).toHaveBeenCalled();
+      expect(tablist.scrollTo).toHaveBeenCalledWith({
+        left: 850,
+        behavior: 'smooth',
+      });
+      // Never scroll the page vertically
+      expect(Element.prototype.scrollIntoView).not.toHaveBeenCalled();
+    });
+
+    it('does not scroll the active tab again on unrelated updates such as hover', async () => {
+      const manyTabs = Array.from({ length: 20 }, (_, i) => (
+        <IressTab key={i} label={`Tab ${i + 1}`}>
+          Content {i + 1}
+        </IressTab>
+      ));
+      const screen = renderComponent({ children: manyTabs });
+      const tablist = screen.getByRole('tablist');
+      const tabs = screen.getAllByRole('tab');
+      Object.defineProperty(tablist, 'scrollWidth', { value: 2000 });
+      Object.defineProperty(tablist, 'clientWidth', { value: 400 });
+      tablist.scrollTo = vi.fn();
+
+      await userEvent.hover(tabs[5]);
+      await userEvent.unhover(tabs[5]);
+      await userEvent.hover(tabs[6]);
+
+      expect(tablist.scrollTo).not.toHaveBeenCalled();
+
+      await userEvent.click(tabs[3]);
+      await userEvent.hover(tabs[8]);
+
+      expect(tablist.scrollTo).toHaveBeenCalledTimes(1);
+    });
+
+    it('does not scroll when the tab list does not overflow', async () => {
+      const screen = renderComponent();
+      const tablist = screen.getByRole('tablist');
+      tablist.scrollTo = vi.fn();
+
+      await userEvent.click(screen.getAllByRole('tab')[2]);
+
+      expect(screen.getAllByRole('tab')[2]).toHaveAttribute(
+        'aria-selected',
+        'true',
+      );
+      expect(tablist.scrollTo).not.toHaveBeenCalled();
+      expect(Element.prototype.scrollIntoView).not.toHaveBeenCalled();
     });
 
     it('does not auto-scroll tabs on initial mount', () => {
@@ -339,7 +394,7 @@ describe('IressTabs', () => {
       // Tab should be selected
       expect(tabs[1]).toHaveAttribute('aria-selected', 'true');
 
-      // But scrollIntoView should not have been called on initial mount
+      // But nothing should have scrolled on initial mount
       expect(Element.prototype.scrollIntoView).not.toHaveBeenCalled();
     });
   });
